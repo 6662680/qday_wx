@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>积分记录</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <section class="app-wrap">
+            <div class="inner">
+                <div class="m-integral">
+                    <div class="wrap">
+                        <div class="coupons">
+							<table  class="jifenjilu" > 
+								<tr class="jifentoubu"><td>积分详情</td><td>积分</td><td>日期</td></tr>
+								{loop $creditlogs $c}
+									<tr class="jifenshenti">
+										<td>
+											{if $c['flag']==0}签到获得积分{/if}
+											{if $c['flag']==1}消费获得积分{/if}
+										</td>
+										<td>+{$c['credit']}分</td>
+										<td>{php echo date('Y-m-d', $c['createtime'])}</td>
+									</tr>
+								{/loop}								
+							</table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<style type="text/css">
+	#foot{position:absolute;z-index:11;bottom:10px;width:100%;}
+</style>
+		<footer id="foot" class="m-cprt">
+			<a href="{$setting['gzurl']}">关注微信</a>
+			{if empty($setting['helpurl'])}{else}<a href="{$setting['helpurl']}">使用帮助</a>{/if}
+			<a href="{php echo $this->createMobileurl('myshop');}">免费开店</a>
+		</footer>
+</body>
+</html>

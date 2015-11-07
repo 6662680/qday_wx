@@ -1,0 +1,7 @@
+{loop $list $row}
+<li style="">
+	<a href="{php echo toimage($row['attachment'])}">
+		<img src="{php echo toimage($row['attachment'])}" alt="{$row['title']}">
+	</a>
+</li>
+{/loop}

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="no-js login-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta chaset="utf-8">
+<title>投稿报名表</title>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="cache-control" content="must-revalidate">
+<link rel="stylesheet" href="../addons/xhw_picvote/template/mobile/reg/m.min.css">
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/reg/ga.js"></script>
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/reg/m.min.js"></script>
+	<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/reg/jquery-1.6.2.min.js"></script>
+<link type="text/css" rel="stylesheet" href="../addons/xhw_picvote/css/style.css">	
+
+<link type="text/css" rel="stylesheet" href="../addons/xhw_picvote/css/xzw.css">
+<link type="text/css" rel="stylesheet" href="../addons/xhw_picvote/css/style.css">
+
+
+
+
+</head>
+<style>
+	#exec_target{display:none;width:0;height:0;}
+	#feedback{width:80%;margin:0 auto;}
+	#feedback img{float:left;width:150px;height:150px;}	
+  .p4 {left:0px;height: 49px;background-color: #444;width: 100%;text-align: center;position: fixed;bottom: 0px;}
+.p4 a{line-height:49px; color:#fff; font-size:14px; text-decoration:none; }
+body { margin-bottom:60px !important; }
+a, button, input { -webkit-tap-highlight-color:rgba(255, 0, 0, 0); }
+ul, li { list-style:none; margin:0; padding:0 }
+.top_bar { position: fixed; z-index: 900; bottom: 0; left: 0; right: 0; margin: auto; font-family: Helvetica, Tahoma, Arial, Microsoft YaHei, sans-serif; }
+.top_menu { display:-webkit-box; border-top: 1px solid #3D3D46; display: block; width: 100%; background: rgba(255, 255, 255, 0.7); height: 48px; display: -webkit-box; display: box; margin:0; padding:0; -webkit-box-orient: horizontal; background: -webkit-gradient(linear, 0 0, 0 100%, from(#697077), to(#3F434E), color-stop(60%, #464A53)); box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.3) inset; }
+.top_bar .top_menu>li { -webkit-box-flex:1; background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.1)), color-stop(50%, rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.4))), -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 255, 255, 0.1)), color-stop(50%, rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0.15))); ; -webkit-background-size:1px 100%, 1px 100%; background-size:1px 100%, 1px 100%; background-position: 1px center, 2px center; background-repeat: no-repeat; position:relative; text-align:center; }
+.top_menu li:first-child { background:none; }
+.top_bar .top_menu>li>a { height:48px; display:block; text-align:center; color:#FFF; text-decoration:none; text-shadow: 0 1px rgba(0, 0, 0, 0.3); -webkit-box-flex:1; }
+.top_bar .top_menu>li>a label { overflow:hidden; margin: 0 0 0 0; font-size: 12px; display: block !important; line-height: 18px; text-align: center; }
+.top_bar .top_menu>li>a img { padding: 3px 0 0 0; height: 24px; width: 24px; color: #fff; line-height: 48px; vertical-align:middle; }
+.top_bar li:first-child a { display: block; }
+.menu_font { text-align:left; position:absolute; right:10px; z-index:500; background: -webkit-gradient(linear, 0 0, 0 100%, from(#697077), to(#3F434E), color-stop(60%, #464A53)); border-radius: 5px; width: 120px; margin-top: 10px; padding: 0; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); }
+.menu_font.hidden { display:none; }
+.menu_font { top:inherit !important; bottom:60px; }
+.menu_font li a { height:40px; margin-right: 1px; display:block; text-align:center; color:#FFF; text-decoration:none; text-shadow: 0 1px rgba(0, 0, 0, 0.3); -webkit-box-flex:1; }
+.menu_font li a { text-align: left !important; }
+.top_menu li:last-of-type a { background: none; }
+.top_menu img{margin:0 auto;}
+.menu_font:after { top: inherit!important; bottom: -6px; border-color: #3F434E rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-width: 6px 6px 0; position: absolute; content: ""; display: inline-block; width: 0; height: 0; border-style: solid; left: 80%; }
+.menu_font li { border-top: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+.menu_font li:first-of-type { border-top: 0; }
+.menu_font li:last-of-type { border-bottom: 0; }
+.menu_font li a { height: 40px; line-height: 40px !important; position: relative; color: #fff; display: block; width: 100%; text-indent: 10px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.menu_font li a img { width: 20px; height:20px; display: inline-block; margin-top:-2px; color: #fff; line-height: 40px; vertical-align:middle; }
+.menu_font>li>a label { padding:3px 0 0 3px; font-size:14px; overflow:hidden; margin: 0; }
+#menu_list0 { right:0; left:10px; }
+#menu_list0:after { left: 20%; }
+#sharemcover { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; z-index: 20000; }
+#sharemcover img { position: fixed; right: 18px; top: 5px; width: 260px; height: 180px; z-index: 20001; border:0; }
+.top_bar .top_menu>li>a:hover, .top_bar .top_menu>li>a:active { background-color:#333; }
+.menu_font li a:hover, .menu_font li a:active { background-color:#333; }
+.menu_font li:first-of-type a { border-radius:5px 5px 0 0; }
+.menu_font li:last-of-type a { border-radius:0 0 5px 5px; }
+#plug-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0); z-index:800; }
+#cate18 .device {bottom: 49px;}
+#cate18 #indicator {bottom: 240px;}
+#cate19 .device {bottom: 49px;}
+#cate19 #indicator {bottom: 330px;}
+#cate19 .pagination {bottom: 60px;}
+
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#upfile").change(function(){
+		if($("#upfile").val() != ''){
+			$('#upfile').hide();
+			$('#loaderimg').show();
+			$("#submit_form").submit();
+		}
+	});
+	$("#exec_target").load(function(){
+		var data = $(window.frames['exec_target'].document.body).find("textarea").html();
+		if(data != null){
+			$('#upfile').show();
+			$('#loaderimg').hide();
+			$("#feedback").append(data.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+			//$("#upfile").val('');
+		}
+	});
+
+	$("#submit").bind("click",function(){
+		var fb = $('#feedback').html();
+		var up = $("#upfile").val();
+		var img = "{php echo $img['0'];}";
+		if(up == '' && img == ''){
+			alert('请先选择需要上传的照片');
+			return false;
+		}else if(fb == ''){
+			alert('照片正在上传中...请耐心等待');
+			return false;
+		}
+		$("#submit_post").form.submit();
+	});
+	
+	
+});
+
+</script>
+<body style='background-color:#3A0255'>
+<!-- 头部 start -->
+<section class="header">
+      <header style='background: url("http://img.ccoo.cn/wx/vote/images/bg_x.png") repeat-x scroll -7px 0px / auto 100% transparent;' class="clearfix">
+<font size="4" color="#fff"><b>投稿报名表</b></font>
+      </header>
+</section>
+<section class="mt-20 account-form" id="login-form">
+<form id="submit_form" method="post" action="" target="exec_target" enctype="multipart/form-data">
+<input type="hidden" name="c" value="entry" />
+<input type="hidden" value="upimg" name="do">
+<input type="hidden" value="xhw_picvote" name="m">
+<input type="hidden" name="id" value="{$id}" />
+<font color="#F00"><b>请选择需要上传的照片：</b></font>(请耐心等待上传完成，可传多{$imgnum}张)<input type="file" name="upfile" id="upfile" style='display:inline;'><span id='loaderimg' style='display:none;'><img src='../addons/xhw_picvote/template/mobile/skimages/loader.gif'></span>
+</form>
+<iframe id="exec_target" name="exec_target"></iframe>	<!-- 提交表单处理iframe框架 -->
+	<div class="blank10"></div>
+<div style='padding-left: 18%;' id="feedback">{if $img['0']!=''}{php for($i=0; $i<count($img);$i++)echo"<img style='border:2px solid #fff; border-radius: 2px;' src=\"".$img[$i]."\">";}{/if}</div>	<!-- 响应返回数据容器 -->
+	<div class="blank10"></div>
+
+
+<form method="post" action="" id="submit_post">
+<input type="hidden" name="c" value="entry" />
+<input type="hidden" value="post" name="do">
+<input type="hidden" value="xhw_picvote" name="m">
+<input type="hidden" name="id" value="{$id}" />
+    <div class="input-group">
+            {if $title != ''}
+			<label class="col-xs-12 item-label">请在上栏填写您的参赛宣言</label>
+            <input style="background-color: rgba(253, 253, 253, 0.15);color: #E1AF6E;font-size:16px;" type="text" data-validate="true" data-required="true" data-text="简介" name="title" autocapitalize="off" autocorrect="off" placeholder="{$title}" value="{$title}">
+            {else}
+			<label class="col-xs-12 item-label">请在上栏填写您的参赛宣言</label>
+            <input style="background-color: rgba(253, 253, 253, 0.15);color: #E1AF6E;font-size:16px;"type="text" data-validate="true" data-required="true" data-text="简介" name="title" autocapitalize="off" autocorrect="off" placeholder="">
+            {/if}
+			<div class="blank10"></div>
+			
+            {if $nickname != ''}
+			<label class="col-xs-12 item-label">请输入参赛者名字</label>
+            <input style="background-color: rgba(253, 253, 253, 0.15);color: #E1AF6E;font-size:16px;"type="text" data-validate="true" data-required="true" data-text="昵称" name="nickname" autocapitalize="off" autocorrect="off" placeholder="{$nickname}" value="{$nickname}">
+            {else}
+			<label class="col-xs-12 item-label">请输入参赛者名字</label>
+            <input style="background-color: rgba(253, 253, 253, 0.15);color: #E1AF6E;font-size:16px;"type="text" data-validate="true" data-required="true" data-text="昵称" name="nickname" autocapitalize="off" autocorrect="off" placeholder="">
+            {/if}
+			<div class="blank10"></div>
+			
+            {if $phone != '0' && $phone != ''}
+			<label class="col-xs-12 item-label">请输入您的手机号码</label>
+            <input style="background-color: rgba(253, 253, 253, 0.15);color: #E1AF6E;font-size:16px;"type="text" data-validate="true" data-required="true" data-text="手机" name="phone" autocapitalize="off" autocorrect="off" placeholder="{$phone}" value="{$phone}"> 
+            {else}
+			<label class="col-xs-12 item-label">请输入您的手机号码"</label>
+            <input style="background-color: rgba(253, 253, 253, 0.15);color: #E1AF6E;font-size:16px;"type="text" data-validate="true" data-required="true" data-text="手机" name="phone" autocapitalize="off" autocorrect="off" placeholder="">
+			
+            {/if}
+      
+     
+
+    </div>
+<input name="submit" type="submit" id="submit" value="提交报名信息" class="mt-20 btn-block btn-state-avail">
+  </form>
+ 
+
+ <div class="login-action-tip clearfix">
+
+    <div class="pull-right">
+     注：4M带宽的WIFI上传一张手机照片可能需要60秒。
+    </div>
+  </div> 
+	<div class="blank20"></div>
+	<div class="blank20"></div>
+	<div class="blank20"></div>	
+</section>	
+
+
+<ul class="nav">
+	<li class="cur"><a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$id))}">返回首页</a></li>
+	<li><a href="{$submit_url}">活动说明</a></li>
+	<li><a href="{php echo $this->createmobileUrl('top',array('do'=>'top', 'id'=>$id))}">人气排行</a></li>
+	<li><a href="{php echo $this->createmobileUrl('my',array('do'=>'my', 'id'=>$id))}">我的主页</a></li>
+    <div id="mcover" onclick="weChat()" style="display:none;">
+    <img src="http://img.pccoo.cn/wx/vote/images//guide.png">
+    </div>
+</ul>	
+
+
+
+<script>
+function displayit(n){
+	var count = document.getElementById("top_menu").getElementsByTagName("ul").length;	
+	for(i=0;i<count;i++){
+		if(i==n){
+		 if(document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display=='none'){
+			 document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display='';
+			 document.getElementById("plug-wrap").style.display='';
+			}else{
+				 document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display='none';
+				  document.getElementById("plug-wrap").style.display='none';
+			}
+		}else{
+			document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display='none';
+		}
+	}
+}
+function closeall(){
+	var count = document.getElementById("top_menu").getElementsByTagName("ul").length;	
+	for(i=0;i<count;i++){
+		 document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display='none';
+	}
+	 document.getElementById("plug-wrap").style.display='none';
+}
+
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+WeixinJSBridge.call('hideToolbar');
+});
+</script> 
+
+<script type="text/javascript">
+	$(function(){
+		$('.do_vote').live('click', function(e){
+			e.preventDefault();
+			var self = $(this);
+			$.ajax({
+				type: "GET",
+				url: "mobile.php?act=module&name=popvote&do=ajax&weid=6",
+				data: {baby_id:self.data('baby_id'),rule_id:self.data('rule_id')},
+				beforeSend: function() {
+					$('#voting_content').empty();
+					$('#voting_content').html("亲，正在提交中～");
+					$('#voting').show();
+				},
+				success: function(data) {
+					var res = JSON.parse(data);
+					var msg = res.msg;
+					if (res.status == 101) {
+						$('#voting').hide();
+						$('#guanzhu').show();
+					} else if (res.status == 102) {
+						$('#subcontent').empty();
+						$('#subcontent').append(msg);
+						$('#voting').hide();
+						$('#voted').show();
+					} else if (res.status == 100) {
+						$('#voting_content').empty();
+						$('#voting_content').html(res.msg);
+						$('#voting').show();
+					}
+
+				}
+			});
+		});
+		var $container = $('#pageCon ul');
+
+		$container.imagesLoaded(function(){
+			$container.masonry({
+				itemSelector: '.picCon'
+			});
+		});
+	});
+</script>
+
+
+
+
+</body></html>

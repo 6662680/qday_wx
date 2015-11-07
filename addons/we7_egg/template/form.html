@@ -1,0 +1,144 @@
+<input type="hidden" name="reply_id" value="{$reply['id']}" />
+<div class="panel panel-default">
+	<div class="panel-heading">
+        活动设置
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+           <label class="col-xs-12 col-sm-3 col-md-2 control-label">查看内容</label>
+           <div class="col-sm-9 col-xs-12">
+               <p class="form-control-static"><a href="{php echo $this->createWebUrl('awardlist', array('id' => $reply['rid']))}" target="_blank">查看中奖名单</a></p>
+           </div>
+     	</div>
+ 	<div class="form-group">
+        <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 活动图片</label>
+        <div class="col-sm-9 col-xs-12">
+         	{php echo tpl_form_field_image('picture',$reply['picture']);}
+        </div>
+    </div>
+    <div class="form-group">
+    	<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 活动简介</label>
+		<div class="col-sm-9 col-xs-12">
+        	<textarea style="height:60px;" id='description' name="description" class="form-control" cols="60">{$reply['description']}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+    	<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 活动规则</label>
+        <div class="col-sm-9 col-xs-12">
+        	<textarea style="height:60px;" id='rule' name="rule" class="form-control" cols="60">{$reply['rule']}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+    	<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 未中奖提示</label>
+        <div class="col-sm-9 col-xs-12">
+        	<textarea style="height:150px;" name="default_tips" class="form-control" cols="60">{$reply['default_tips']}</textarea>
+			<div class="help-block">当用户未中奖时，返回给用户的提示信息。</div>
+   		</div>
+	</div>
+    <div class="form-group">
+    	<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 重复砸蛋周期</label>
+        <div class="col-sm-3 col-xs-12">
+        	<div class="input-group">
+            	<div class="input-group-addon">每</div>
+                <input type="text" value="{$reply['periodlottery']}" class="form-control" name="periodlottery" placeholder="填天数">
+                <div class="input-group-addon">天，抽奖</div>
+                <input type="text" value="{$reply['maxlottery']}" class="form-control" name="maxlottery" placeholder="填次数">
+	    		<div class="input-group-addon">次</div>
+            </div>
+        </div>
+        <div class="help-block">天数为0，永远只能砸N次（这里N为设置的次数）。</div>
+    </div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-3 col-md-2 control-label">中奖奖励积分</label>
+		<div class="col-sm-9 col-xs-12">
+			<input type="text" value="{$reply['hitcredit']}" class="form-control" name="hitcredit">
+			<div class="help-block">当用户砸蛋砸中奖时，给予用户的积分。为0时表示不给。</div>
+		</div>
+	</div>
+    <div class="form-group">
+    	<label class="col-xs-12 col-sm-3 col-md-2 control-label">未中奖奖励积分</label>
+        <div class="col-sm-9 col-xs-12"><input type="text" value="{$reply['misscredit']}" class="form-control" name="misscredit">
+	 		<div class="help-block">当用户砸蛋未中任何奖时，给予用户的积分。为0时表示不给。</div>
+        </div>
+    </div>
+	<div class="form-group">
+		<label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+		<div class="col-sm-9 col-xs-12">
+			<div id="append-list" class="list">
+				{if !empty($award)}
+				{php $prize = 1;}
+				{loop $award $item}
+				<div class="item" id="egg-item-{$item['id']}">
+					{php include $this->template('item');}
+				</div>
+				{php $prize++;}
+				{/loop}
+				{/if}
+			</div>
+			<div class="reply-news-edit-button"><a class="btn btn-default" href="javascript:;" onclick="eggHandler.buildAddForm('egg-form-html', $('#append-list'))" class="btn"><i class="icon-plus"></i> 添加奖品</a></div>
+		</div>
+	</div>
+    </div>
+</div>
+<script type="text/html" id="egg-form-html">
+{php unset($item); include $this->template('item');}
+</script>
+<script type="text/javascript">
+    function doDeleteItem(itemid, deleteurl) {
+	if (confirm('删除操作不可恢复，确认删除吗？')){
+		if (deleteurl) {
+			ajaxopen(deleteurl, function(){
+				$('#' + itemid).remove();
+			});
+		} else {
+			$('#' + itemid).remove();
+		}	
+	}
+	return false;
+}
+function buildAddForm(id, targetwrap) {
+	var sourceobj = $('#' + id);
+	var html = $('<div class="item">');
+	id = id.split('-')[0];
+	var size = $('.item').size();
+	var htmlid = id + '-item-' + size;
+	while (targetwrap.find('#' + htmlid).size() >= 1) {
+		var htmlid = id + '-item-' + size++;
+	}
+	html.html(sourceobj.html().replace(/\(itemid\)/gm, htmlid));
+	html.attr('id', htmlid);
+	targetwrap.append(html);
+	return html;
+}
+require(['jquery', 'util'], function($, u){
+	$(function(){
+		u.editor($('#rule')[0]);
+	});
+});
+var eggHandler = {
+	'buildAddForm' : function(id, targetwrap) {
+		var obj = buildAddForm(id, targetwrap);
+		obj.html(obj.html().replace(/\(wrapitemid\)/gm, obj.attr('id')));
+	}
+};
+
+function add_row() {
+	$.getJSON('{php echo create_url('site/module/formdisplay', array('name' => 'egg'))}', function(data){
+		if (data.error === 0 && data.content.html != '') {
+			$('#append-list').append(data.content.html);
+			row = $('#'+data.content.id);
+		}
+	});
+}
+//奖品类型切换
+$("#append-list").delegate("#award-inkind input", "click", function(){
+	if($(this).val() == 0) {
+		$(this).parents(".item").find(".num").css("display", "none");
+		$(this).parents(".item").find("tr:eq(3),tr:eq(4)").show();
+	} else {
+		$(this).parents(".item").find(".num").css("display", "inline-block");
+		$(this).parents(".item").find("tr:eq(3),tr:eq(4)").hide();
+	}
+});
+</script>
+

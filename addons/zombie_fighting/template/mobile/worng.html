@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="format-detection" content="telephone=no"/>
+<link href="../addons/zombie_fighting/template/style/css/common.css" rel="stylesheet" type="text/css">
+<link href="../addons/zombie_fighting/template/style/css/exam.css" rel="stylesheet" type="text/css">
+
+<style>
+body{background-color: #A19A8C}
+.top,.question{z-index: 2;position: relative;}
+.top{position: relative;height: 130px;}
+.time{font-size: 40px;color: #b40000;text-align: center;width: 100%;position: absolute;top: 20px;}
+.index{position: absolute;color: #b40000;top: 75px;left: 80px;font-size: 10px;}
+.index strong{font-size: 12px;}
+.score{position: absolute;top: 70px;left: 126px;font-size: 20px;}
+.question .title{
+	font-size: 20px;
+	text-align: left;
+	max-height: 77px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 10px;
+	line-height: 26px;
+}
+.question .options{margin-top: 10px;}
+.question .option{position: relative;height: 40px;}
+.question .option .text{position: relative;line-height: 40px;overflow: hidden;}
+.question .option .i{float: left;margin-left: 20px;}
+.question .option .otext{
+	margin-left: 40px;
+	overflow: hidden;
+	max-width: 260px;
+	height: 40px;
+}
+.question .option .oimg,.question .option .oimg-sel{position: absolute;top: 4px;left: 10px;width: 300px;}
+.question .option .oimg-sel{display: none;}
+.question .option-sel .oimg{display: none;}
+.question .option-sel .oimg-sel{display: block;}
+.result-timeout .timg{
+	margin-left: -40px;
+}
+#submit{
+	width: 100px;
+	margin: 10px auto 0px;
+	display: none;
+}
+.container {
+    border-color: #ebebeb;
+    border-style: solid;
+    border-width: 1px;
+    float: none;
+    height: 30%;
+    margin-top: 0;
+    overflow: hidden;
+    padding: 1px 20px 1px 38px;
+    position: relative;
+}
+</style>
+</head>
+ 
+<body> 
+	<div class="wrapper"> 
+		<img class="bg" src="../addons/zombie_fighting/template/style/images/bg_exam.jpg" />
+		<div class="top">
+			<div class="time"></div>
+			<div class="score">错误题目</div>
+		</div>
+		
+		<div class="question">
+		{loop $list $row}
+			<div class="title">{$row['qname']}</div>
+			<div class="options">
+				<div class="option" data-value="A">
+					{if ($row['answer']=='A')}
+						<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg_green.png" />
+						<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg_green.png" />
+					{/if}	
+					
+					{if ($row['wornganswer']=='A')}
+						<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg.png" />
+						<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg.png" />
+					{/if}
+					
+					<div class="text">
+					<div class="i">A</div>
+					<div class="otext"> 
+						{php echo mb_strcut($row['optionA'], 0, 30) . ".." }   
+						{if ($row['answer']=='A')}
+							<img  src="../addons/zombie_fighting/template/style/images/check.png 	 " />
+						{/if}	
+						 	
+						{if ($row['wornganswer']=='A')}
+						 	<img src="../addons/zombie_fighting/template/style/images/icon_close.png" />
+						{/if}
+					</div>
+					</div>
+				</div>
+				
+				<div class="option" data-value="B">
+					{if ($row['answer']=='B')}
+						<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg_green.png" />
+						<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg_green.png" />
+					{/if}	
+					
+					{if ($row['wornganswer']=='B')}
+						<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg.png" />
+						<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg.png" />
+					{/if}
+					<div class="text">
+					<div class="i">B</div>
+					<div class="otext"> 
+					{php echo mb_strcut($row['optionB'], 0,  30) . ".." }   
+						{if ($row['answer']=='B')}
+						 	<img  src="../addons/zombie_fighting/template/style/images/check.png 	 " />
+						 {/if}	
+						 	
+						 {if ($row['wornganswer']=='B')}
+						 	<img src="../addons/zombie_fighting/template/style/images/icon_close.png" />
+						 {/if}
+					</div>
+					</div>
+				</div>
+				
+				 {if !empty($row['optionC'])}
+					 <div class="option" data-value="C">
+						{if ($row['answer']=='C')}
+							<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg_green.png" />
+							<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg_green.png" />
+						{/if}	
+						
+						{if ($row['wornganswer']=='C')}
+							<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg.png" />
+							<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg.png" />
+						{/if}
+						<div class="text">
+						<div class="i">C</div>
+						<div class="otext">{php echo mb_strcut($row['optionC'], 0,  30) . ".." }  
+							{if ($row['answer']=='C')}
+							 	<img  src="../addons/zombie_fighting/template/style/images/check.png 	 " />
+							 {/if}	
+							 	
+							 {if ($row['wornganswer']=='C')}
+							 	<img src="../addons/zombie_fighting/template/style/images/icon_close.png" />
+							 {/if}
+						</div>
+						</div>
+					</div>
+				 {/if}
+				 
+				 {if !empty($row['optionD'])}
+					 <div class="option" data-value="D">
+						{if ($row['answer']=='D')}
+							<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg_green.png" />
+							<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg_green.png" />
+						{/if}	
+						
+						{if ($row['wornganswer']=='D')}
+							<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg.png" />
+							<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg.png" />
+						{/if}
+						<div class="text">
+						<div class="i">D</div>
+						<div class="otext"> {php echo mb_strcut($row['optionD'], 0,  30) . ".." }   
+							{if ($row['answer']=='D')}
+							 	<img  src="../addons/zombie_fighting/template/style/images/check.png" />
+							 {/if}	
+							 	
+							 {if ($row['wornganswer']=='D')}
+							 	<img src="../addons/zombie_fighting/template/style/images/icon_close.png" />
+							 {/if}
+						</div>
+						</div>
+					</div>
+				 {/if}
+				 
+				 {if !empty($row['optionE'])}
+					 <div class="option" data-value="E">
+						{if ($row['answer']=='E')}
+							<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg_green.png" />
+							<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg_green.png" />
+						{/if}	
+						
+						{if ($row['wornganswer']=='E')}
+							<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg.png" />
+							<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg.png" />
+						{/if}
+						<div class="text">
+						<div class="i">E</div>
+						<div class="otext">{php echo mb_strcut($row['optionE'], 0,  30) . ".." }   
+							{if ($row['answer']=='E')}
+							 	<img  src="../addons/zombie_fighting/template/style/images/check.png" />
+							 {/if}	
+							 	
+							 {if ($row['wornganswer']=='E')}
+							 	<img src="../addons/zombie_fighting/template/style/images/icon_close.png" />
+							 {/if}
+						</div>
+						</div>
+					</div>
+				 {/if}
+				 {if !empty($row['optionF'])}
+					 <div class="option" data-value="F">
+						<img class="oimg" src=".../addons/zombie_fighting/template/style/images/option_bg_green.png" />
+						<img class="oimg-sel" src="../addons/zombie_fighting/template/style/images/option_sel_bg_green.png" />
+						<div class="text">
+						<div class="i">F</div>
+						<div class="otext"> {php echo mb_strcut($row['optionE'], 0,  30) . ".." }   
+						
+						</div>
+						</div>
+					</div>
+				 {/if}
+			</div>
+		{/loop}
+			
+		</div>
+		
+	</div>
+	
+	<div id="loading" class="loading-mask">
+		<img class="gimg" src="../addons/zombie_fighting/template/style/images/ajax-loader.gif">
+	</div>
+</body>
+</html>

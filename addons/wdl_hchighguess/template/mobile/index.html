@@ -1,0 +1,140 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="shortcut icon" href="../addons/wdl_hchighguess/style/images/favicon.ico">
+	<link rel="stylesheet" href="../addons/wdl_hchighguess/style/css/draw.css" type="text/css" media="screen" />
+	<link rel="prefetch" href="../addons/wdl_hchighguess/style/images/app.jpg"/>
+	<title>我画你猜</title>
+	<script>
+		window.noBanner = true;
+	</script>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/template" id="coverTemplate">
+        <div class="cover">
+            <div class="main">
+                <div class="inner">
+                    <img src="../addons/wdl_hchighguess/style/images/cover-21.png">
+                    <p>
+                        让朋友们来猜猜看你画的是什么<br>
+                        看看朋友圈里谁和你最心有灵犀
+                    </p>
+                </div>
+            </div>
+            <footer>
+                <div class="inner">
+                    <a href="#descriptions" class="btn btn-btn btn-start"></a>
+                    <i class="icon icon-pen"></i>
+                    <i class="icon icon-ruler"></i>
+                    <i class="icon icon-pencil"></i>
+                </div>
+            </footer>
+        </div>
+    </script>
+    <script type="text/template" id="descriptionsTemplate">
+        <div class="descriptions">
+            <header>
+                <div class="inner">
+                    <h1>想要画什么？</h1>
+                    <a href="javascript:;" class="random j-random"><i class="icon icon-refresh"></i>换一批</a>
+                </div>
+            </header>
+            <div class="main">
+                <div class="inner">
+                    <ul>
+                        {loop $words $w}
+						<li>
+							{if $reply['level']==0}
+							<a class="btn btn-description" href="#description/{$w['id']}/{$w['word']}">{$w['word']}</a>
+							{else}
+							<a class="btn btn-description" href="{php echo $this->createMobileUrl('index', array('wid'=>$w['id'], 'op'=>'drawword', 'rid'=>$rid))}">{$w['word']}</a>
+							{/if}
+						</li>
+						{/loop}
+                    </ul>
+                    <i class="icon icon-pencil-2"></i>
+                    <i class="icon icon-ruler-2"></i>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id="drawTemplate">
+        <div class="draw">
+            <header>
+                <div class="inner">
+                    <div class="board">
+                        <h3>题目</h3>
+                        <h2>{{ content }}</h2>
+                    </div>
+                    <a href="javascript:;" class="btn btn-btn btn-done j-done"></a>
+                </div>
+            </header>
+            <div class="main">
+                <canvas>您的浏览器不支持画图</canvas>
+            </div>
+            <footer>
+                <div class="inner">
+                    <a href="javascript:;" class="btn btn-2 btn-clear j-clear">清空重画</a>
+                    <a href="#descriptions" class="random-2 j-random-2"><i class="icon icon-refresh-2"></i>重新选题</a>
+                </div>
+            </footer>
+        </div>
+    </script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/zepto.min.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/underscore-min.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/backbone-min.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/hidpi-canvas.min.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/canvas.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/description_app.js"></script>
+<script>
+	function getUrl(){
+		var url = "{php echo $this->createMobileUrl('index', array('op'=>'finish', 'qid'=>$wid, 'rid'=>$rid));}";
+		return url;
+	}
+	function myImage(imgid){
+		var url = "{php echo $this->createMobileUrl('index', array('op'=>'myimage', 'rid'=>$rid, 'mid'=>$mid), true);}&imgid="+imgid;
+		return url;
+	}
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+{php $signPackage=$_W['account']['jssdkconfig'];}	
+<script>
+wx.config({
+	debug: false,   
+	appId: '<?php echo $signPackage["appId"];?>',
+	timestamp: '<?php echo $signPackage["timestamp"];?>',
+	nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+	signature: '<?php echo $signPackage["signature"];?>',
+	jsApiList: ['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo',]
+});
+
+wx.ready(function () {
+	var shareData = {
+		appid: '{$_W['account']['key']}',
+		title: '{$reply['sharetitle']}',
+		desc: '{$reply['sharedescription']}',
+		link: '{$wx['url']}',
+		imgUrl: '{$_W['attachurl']}{$reply['sharecover']}',
+		trigger: function (res) {},
+		complete: function (res) {},
+		success: function (res) {
+		},
+		cancel: function (res) {
+		},
+		fail: function (res) {
+		}
+	};
+	wx.onMenuShareAppMessage(shareData);
+	wx.onMenuShareQQ(shareData);
+	wx.onMenuShareWeibo(shareData);
+	wx.onMenuShareTimeline(shareData);
+});
+</script>
+</body>
+</html>

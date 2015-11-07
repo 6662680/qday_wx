@@ -1,0 +1,41 @@
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/we7_research/template/mobile/common.mobile.css" />
+{if $operation == 'display'}
+<div class="mobile-div img-rounded">
+	<div class="mobile-hd" style="border-bottom:0;">我的预约</div>
+	{loop $rows $item}
+	<a class="mobile-li" href="{php echo $this->createMobileUrl('myresearch', array('id' => $item['rerid'], 'op' => 'detail'))}">
+		<span class="pull-right muted">{php echo date('Y-m-d H:i:s', $item['createtime'])}</span>
+		{$research[$item['reid']]['title']}
+	</a>
+	{/loop}
+</div>
+{elseif $operation == 'detail'}
+<div class="mobile-div img-rounded">
+	<div class="mobile-hd">{$research['title']}</div>
+	<div class="mobile-content">{$research['content']}</div>
+</div>
+<div class="mobile-div img-rounded">
+	<div class="mobile-hd">我们的回复</div>
+	<div class="mobile-content">{$research['information']}</div>
+</div>
+<div class="mobile-div img-rounded">
+	<div class="mobile-hd">我的预约资料</div>
+	<div class="mobile-content">
+		<table class="form-table">
+			{loop $research['fields'] $item}
+			<tr>
+				<td>{$item['title']}</td>
+				{if $item['type'] == 'image'}
+				<td><a target="_blank" href="{php echo tomedia($item['data']);}" class="btn">点击查看附件</a></td>
+				{else}
+				<td><span class="label label-success">{if !empty($item['data'])}{$item['data']}{else}无{/if}</span></td>
+				{/if}
+			</tr>
+			{/loop}
+		</table>
+	</div>
+</div>
+{/if}
+
+{template 'footer'}

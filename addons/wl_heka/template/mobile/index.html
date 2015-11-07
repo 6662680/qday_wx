@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<meta name="format-detection" content="telephone=no">
+
+<title>选择贺卡</title>
+
+<link rel="stylesheet" type="text/css" href="../addons/wl_heka/style/css/common.css">
+
+<script>
+
+var $=function(id){return document.getElementById(id);};
+
+var _fromCode="{$_W['siteroot']}";
+
+var dataForWeixin={
+
+   appId:"",
+
+   MsgImg:_fromCode+"./addons/wl_heka/style/images/share_msg.png",
+
+   TLImg:_fromCode+"./addons/wl_heka/style/images/share.png",
+
+   path:"",
+
+   title:"情天助手",
+
+   desc:"使用情天助手可以在朋友圈或聊天对话框发送更丰富的情天类型",
+
+   fakeid:"",
+
+   callback:function(){}
+
+};
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div id="card_focus" onclick="location.href='{php echo $this->createMobileUrl('show', array('card' => 'tt','id'=>$_GET['id']));}'">
+
+	<img id="focus_pic" src="../addons/wl_heka/style/images/newyear_focus.jpg" onerror="this.parentNode.removeChild(this)">
+
+</div>
+
+<div class="area3" onclick="location.href='{php echo $this->createMobileUrl('show', array('card' => 'tt','id'=>$_GET['id']));}'">
+
+   <div class="card_icon"><img src="../addons/wl_heka/style/images/tt.jpg"></div>
+
+   <div class="card_title">新春祝福</div>
+
+   <div class="card_button"><button class="button2">发送</button></div>
+
+   <div class="clear"></div>
+
+</div>
+
+<div class="area3" onclick="location.href='{php echo $this->createMobileUrl('show', array('card' => 'newyear','id'=>$_GET['id']));}'">
+
+   <div class="card_icon"><img src="../addons/wl_heka/style/images/newyear.jpg"></div>
+
+   <div class="card_title">迎春纳福</div>
+
+   <div class="card_button"><button class="button2">发送</button></div>
+
+   <div class="clear"></div>
+
+</div>
+
+<div class="area3" onclick="location.href='{php echo $this->createMobileUrl('show', array('card' => 'onlyyou','id'=>$_GET['id']));}'">
+
+   <div class="card_icon"><img src="../addons/wl_heka/style/images/onlyyou.jpg"></div>
+
+   <div class="card_title">我的心里只有你</div>
+
+   <div class="card_button"><button class="button2">发送</button></div>
+
+   <div class="clear"></div>
+
+</div>
+
+<div class="area3" onclick="location.href='{php echo $this->createMobileUrl('show', array('card' => 'birthday','id'=>$_GET['id']));}'">
+
+   <div class="card_icon"><img src="../addons/wl_heka/style/images/birthday.jpg"></div>
+
+   <div class="card_title">祝你生日快乐</div>
+
+   <div class="card_button"><button class="button2">发送</button></div>
+
+   <div class="clear"></div>
+
+</div>
+
+<div class="area3" onclick="location.href='{php echo $this->createMobileUrl('show', array('card' => 'classmate','id'=>$_GET['id']));}'">
+
+   <div class="card_icon"><img src="../addons/wl_heka/style/images/classmate.jpg"></div>
+
+   <div class="card_title">难忘同窗</div>
+
+   <div class="card_button"><button class="button2">发送</button></div>
+
+   <div class="clear"></div>
+
+</div>
+
+<div class="area3" onclick="location.href='{php echo $this->createMobileUrl('show', array('card' => 'flower','id'=>$_GET['id']));}'">
+
+   <div class="card_icon"><img src="../addons/wl_heka/style/images/flower.jpg"></div>
+
+   <div class="card_title">给你最美的鲜花</div>
+
+   <div class="card_button"><button class="button2">发送</button></div>
+
+   <div class="clear"></div>
+
+</div>
+
+<script>
+
+var siteurl = "{php echo $_W['siteroot']}app";
+
+var _pic=function(){
+
+   $("focus_pic").style.width=_system._client().bw+"px";
+
+}
+
+window.onload=_pic;
+
+window.onresize=_pic;
+
+(function(){
+
+   dataForWeixin.path="{php echo $this->createMobileUrl('index', array('id' => $_GPC['id']));}";
+
+   dataForWeixin.title="使用情天助手在微信发送贺卡";
+
+   dataForWeixin.desc="生日、节日、纪念日，少不了祝福；爱情、友情、亲情，少不了问候";
+
+})();
+
+</script>
+
+<div id="ok"><img src="../addons/wl_heka/style/images/ok.png"><div id="ok_text"></div></div>
+
+<div id="cover"></div>
+
+<div id="loading"><img src="../addons/wl_heka/style/images/loading.gif"><div id="loading_text"></div></div>
+
+<div id="guide"><div><img src="../addons/wl_heka/style/images/guide.png"></div><div id="guide_button">
+
+<div class="left"><button class="button2" onclick="location.href=dataForWeixin.path+'&pre=true'">预览</button></div><div class="left"><button class="button2" onclick="location.href=location.href">再发一条</button></div><div class="left"><button class="button2" onclick="location.href='/Messagehelper/index?wid=13777'">放弃</button></div><div class="clear"></div></div><div id="guide_button2"><button class="button2" onclick="_system._guideHide()">取消</button></div></div>
+
+<div id="guide2"><img src="../addons/wl_heka/style/images/guide2.png"></div>
+
+<div id="guide3"><img src="../addons/wl_heka/style/images/guide3.png"></div>
+
+<div id="toast"></div>
+
+<script src="../addons/wl_heka/style/js/common.js?v={php echo TIMESTAMP;}"></script>
+
+ </body></html>

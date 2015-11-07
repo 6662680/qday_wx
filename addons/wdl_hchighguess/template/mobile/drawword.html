@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我画你猜</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+<meta name="format-detection" content="telephone=no,email=no,address=no" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" href="../addons/wdl_hchighguess/style/css/style.css" type="text/css" />
+</head>
+<body>
+	<div id="wrap" class="wrapper">
+		<div class="pad-h">
+            &nbsp;<font color="#000">{$myinfo['realname']}</font>
+        </div>
+        <div id="pad">
+            <canvas id="sketch"><p class="no-canvas">您的浏览器不支持canvas，无法运行</p></canvas>
+        </div>
+        <div id="pad-tools">
+            <button class="button pen-w" _trace="button,click,选择笔画">
+                笔画 <i></i><i class="active"></i><i></i>
+            </button>
+            <button class="button pen-c" _trace="button,click,选择颜色"></button>
+            <button class="button pen-cancel" _trace="button,click,上一步">上一步</button>
+            <button class="button pen-clear" _trace="button,click,重画">重画</button>
+            <button class="button pen-upload" _trace="button,click,画好了">画好了</button>
+        </div>
+    </div>
+<script>
+	function getUrl(){
+		var url = "{php echo $this->createMobileUrl('index', array('op'=>'finish', 'qid'=>$wid, 'rid'=>$rid));}";
+		return url;
+	}
+	function myImage(imgid){
+		var url = "{php echo $this->createMobileUrl('index', array('op'=>'myimage', 'rid'=>$rid, 'mid'=>$mid), true);}&imgid="+imgid;
+		return url;
+	}
+</script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/core.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/pad.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+{php $signPackage=$_W['account']['jssdkconfig'];}	
+<script>
+wx.config({
+	debug: false,   
+	appId: '<?php echo $signPackage["appId"];?>',
+	timestamp: '<?php echo $signPackage["timestamp"];?>',
+	nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+	signature: '<?php echo $signPackage["signature"];?>',
+	jsApiList: ['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo',]
+});
+
+wx.ready(function () {
+	var shareData = {
+		title: "{$reply['sharetitle']}",
+		desc: "{$reply['sharedescription']}",
+		link: "{$wx['url']}",
+		imgUrl: '{$_W['attachurl']}{$reply['sharecover']}',
+		trigger: function (res) {},
+		complete: function (res) {},
+		success: function (res) {
+		},
+		cancel: function (res) {
+		},
+		fail: function (res) {
+		}
+	};
+	wx.onMenuShareAppMessage(shareData);
+	wx.onMenuShareQQ(shareData);
+	wx.onMenuShareWeibo(shareData);
+	wx.onMenuShareTimeline(shareData);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+﻿/*通用样式开始*/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+	margin:0;
+	padding:0;
+}
+body, button, input, select, textarea {
+	font-family: "宋体";
+ 	font:12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+}
+
+ul, ol {
+ 	list-style:none;
+}
+a {
+ 	text-decoration:none;
+}
+a:hover {
+ 	text-decoration:none;
+}
+.fixbox{
+	clear: all;
+}
+input{border: 0;}
+article,#loginform,#loginform .loginbutton,.tryonline a,.other .codelink a,#weixin{
+	transition: all 0.30s ease-in-out;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+}
+/*页面结构基础*/
+article{
+	text-align: center;
+	padding-top: 105px;
+}
+footer{
+	margin: 0 auto;
+	padding: 10px 0;
+	margin-top: 60px;
+	color: #adadad;
+	text-align: center;
+}
+/*------------------------------页面样式从此开始-------------------------------*/
+#content{
+	margin: 0 auto;
+}
+/*输入验证码标题*/
+.logintitle{
+	margin-top: 90px;
+	color: #666;
+	font-size: 1.3em;
+	font-weight: 900;
+	font-family: "Microsoft YaHei","微软雅黑";
+}
+/*验证码输入框*/
+#loginform{
+	max-width: 350px;
+	min-width: 264px;
+	margin: 20px auto 10px auto;
+	height: 40px;
+	line-height: 40px;
+	background-color: #fff;
+	border: 1px solid #CFCFCF;
+	overflow: hidden;
+	box-shadow: 0px 1px 1px 0px #eaeaea inset;
+	-webkit-box-shadow: 0px 1px 1px 0px #eaeaea inset;
+}
+#loginform .logininput{
+	width: 84%;
+	margin-top: 3px;
+	padding-top: 4px;
+	height: 26px;
+	line-height: 26px;
+	background-color: #fff;
+	color: #666;
+	font-size: 16px;
+	outline: none;
+}
+#loginform .loginbutton{
+	float: right;
+	margin: 10px 15px 0 0;
+	width: 20px;
+	height: 20px;
+	line-height: 1000px;
+	background-color: #fff;
+	background-image: url(../images/loginbutton.png);
+	background-repeat: no-repeat;
+	border:none;
+	overflow: hidden;
+	outline: none;
+	cursor: pointer;
+}
+#loginform .loginbutton:hover{
+	margin: 10px 8px 0 0;
+}
+/*微信认证和试用5分钟*/
+.tryonline{
+	margin: 60px auto;
+}
+.wx-button{
+	margin: 40px auto;
+}
+
+.wx-button p{
+	color: #888;
+	margin: 10px auto;
+}
+.tryonline a{
+	width: 174px;
+	height: 40px;
+	line-height: 40px;
+	margin: 5px 0;
+	color: #fff;
+	border-radius: 3px;
+	font-weight: bold;
+	display: inline-block;
+}
+/*按钮样式*/
+.try-on1{
+	background-color: #3897E7;
+}
+.try-on1:hover{
+	text-shadow: 1px 1px 1px #153B59;
+	background-color: #2B8BD9;
+}
+.try-on2{
+	background-color: #37AF72;
+}
+.try-on2:hover{
+	text-shadow: 1px 1px 1px #1B5437;
+	background-color: #2F9962;
+}
+/*第三方登录和二维码*/
+.other{
+	margin-top:10px;
+}
+/*二维码*/
+.other .codelink a{
+	display: block;
+	color: #333;
+	font-size: 12px;
+	text-decoration: none;
+}
+.other .codelink a:hover{
+	color: #1979FE;
+}
+/*第三方登录*/
+.otherlogin,.o-lg{
+	margin: 0 auto;
+	padding-top: 2px;
+	overflow: hidden;
+}
+.otherlogin span,.o-lg span{
+	color: #888;
+	font-family: "宋体";
+	font-size: 1em;
+}
+.otherlogin a,.o-lg a{
+	margin-right: 10px;
+	display: inline-block;
+	vertical-align:middle;
+}
+.o-lg{
+	margin-top: 30px;
+	padding-bottom:5px;
+}
+.o-lg .qq{
+		margin: 0 auto;
+		width: 40px;
+		height: 45px;
+		background-image: url(../images/qq.png);
+		background-repeat: no-repeat;
+		background-position:0;
+	}
+.o-lg .sinaweibo{
+		margin: 0 auto;
+		width: 40px;
+		height: 45px;
+		background-image: url(../images/weibo.png);
+		background-repeat: no-repeat;
+	}
+.o-lg p{
+		margin-top: 10px;
+		display: block;
+	}
+.o-lg a{
+		width: 169px;
+		margin: 10px 3px 0 3px;
+		padding: 20px 0;
+		color: #333;
+		border: 1px solid #CFCFCF;
+	}
+.o-lg a:hover{
+	background-color: #F5FFF8;
+	border:1px solid #99C9A7;
+	color: #70947A;
+	box-shadow: 0 0 5px #4F6E58;
+	}
+/*浏览器宽度没有低于980px的时候第三方登录图标*/
+.otherlogin .qq{
+	margin: 0 auto;
+	width: 40px;
+	height: 45px;
+	background-image: url(../images/qq.png);
+	background-repeat: no-repeat;
+	background-position:0;
+}
+.otherlogin .sinaweibo{
+	width: 20px;
+	height: 18px;
+	background-image: url(../images/login-img.png);
+	background-repeat: no-repeat;
+	background-position:0 -1px;
+}
+.other .codelink{
+	margin: 60px 0 20px 0;
+}
+/*QQ帐号和新浪微博帐号登录提示文字,默认隐藏*/
+.otherlogin p{
+		display: none;
+}
+#weixin{
+	background-color: #555;
+}
+
+#weixinimg:hover{
+	box-shadow: 1px 5px 20px #333;
+}
+/*----------------------------------------------可适应样式----------------------------------*/
+
+/*浏览器宽度低于980px,高于500px*/
+@media screen and (max-width: 980px) and (min-width: 500px) {
+	article{
+		padding-top: 50px;
+	}
+	#content .logintitle{
+		margin-top: 60px;
+		font-size: 1.6em;
+	}
+	.tryonline a{
+		width: 220px;
+		display: block;
+		margin: 5px auto;
+	}
+	.otherlogin span{
+		display: none!important;
+	}
+	.otherlogin .qq{
+		margin: 0 auto;
+		width: 40px;
+		height: 45px;
+		background-image: url(../images/qq.png);
+		background-repeat: no-repeat;
+		background-position:0;
+	}
+	.otherlogin .sinaweibo{
+		margin: 0 auto;
+		width: 40px;
+		height: 45px;
+		background-image: url(../images/weibo.png);
+		background-repeat: no-repeat;
+	}
+	.otherlogin p{
+		margin-top: 10px;
+		display: block;
+	}
+	.otherlogin a{
+		width: 169px;
+		margin: 10px 3px 0 3px;
+		padding: 20px 0;
+		color: #333;
+		border: 1px solid #CFCFCF;
+	}
+	.otherlogin a:hover{
+		color: #1979FE;
+	}
+	.other .codelink{
+		margin-top: 30px;
+	}
+}
+/*浏览器宽度低于980px*/
+@media screen and (max-width: 500px){
+	article{
+		padding-top: 30px;
+	}
+	#content .logintitle{
+		margin-top: 50px;
+		font-size: 1.5em;
+	}
+	#loginform{
+		width: 200px;
+	}
+	#loginform .logininput{
+		width: 80%;
+	}
+	.tryonline a{
+		width: 266px;
+		display: block;
+		margin: 5px auto;
+	}
+	.otherlogin a{
+		width: 125px;
+		margin: 10px 3px 0 3px;
+		padding: 20px 0;
+		color: #333;
+		border: 1px solid #CFCFCF;
+	}
+	.otherlogin a:hover{
+		color: #1979FE;
+	}
+	.otherlogin span{
+		display: none!important;
+	}
+	.otherlogin .qq{
+		margin: 0 auto;
+		width: 40px;
+		height: 45px;
+		background-image: url(../images/qq.png);
+		background-repeat: no-repeat;
+		background-position:0;
+	}
+	.otherlogin .sinaweibo{
+		margin: 0 auto;
+		width: 40px;
+		height: 45px;
+		background-image: url(../images/weibo.png);
+		background-repeat: no-repeat;
+	}
+	.otherlogin p{
+		margin-top: 10px;
+		display: block;
+	}
+	.other .codelink{
+		margin-top: 20px;
+	}
+}

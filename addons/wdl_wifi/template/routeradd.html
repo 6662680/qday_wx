@@ -1,0 +1,150 @@
+{template 'common/header'}
+<script type="text/javascript">
+	$(function(){
+		$(':radio[name="weixin_login"]').click(function(){
+			if(this.checked) {
+				if($(this).val() == '1') {
+					$('.mod1').show();
+				}else{
+					$('.mod1').hide();
+				}
+			}
+		});
+	});
+</script>
+<ul class="nav nav-tabs">
+  <li{if $_GPC['do'] == 'routerlist'} class="active"{/if}><a href="{php echo  $this->createWebUrl('routerlist');}">路由器管理</a>
+  </li>
+  <li{if $_GPC['do'] == 'routeradd'} class="active"{/if}><a href="{php echo $this->createWebUrl('routeradd');}">添加路由器</a>
+  </li>
+</ul>
+
+        
+        
+        <div class="panel panel-default">
+    <div class="panel-heading">
+       <h4>路由器配置</h4>
+    </div>
+    <div class="panel-body">
+        
+        <form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="node" value="{$item['node']}">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">路由名：</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="rname" name="rname" value="{$item['description']['0']}"  class="form-control" />
+			<span class="help-block">*填写名称用于识别指定路由器</span>
+            </div>
+        </div>
+        
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">节点名称：</label>
+            <div class="col-sm-9 col-xs-12">
+                  <input type="text" id="nodename" name="nodename" value="{$item['name']}"  class="form-control" />
+	<span class="help-block">节点名字，只能包含数字，大小写英文字符及下划线。长度为1-255个字符。</span>
+            </div>
+        </div>
+        
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">认证后使用时间：</label>
+            <div class="col-sm-9 col-xs-12">
+                 <input type="text" id="login_timeout" name="login_timeout" value="{$item['login_timeout']}"  class="form-control" />
+	<span class="help-block">登陆认证成功后，用户在无线网络范围内可以使用网络的时间。该值的范围为 0–1440 (分钟)。默认为1440</span>
+            </div>
+        </div>
+        
+           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">认证登陆页面地址：</label>
+            <div class="col-sm-9 col-xs-12">
+                 <input type="text" id="login_url" name="login_url"  class="form-control" value="{if $item['login_url']}{$item['login_url']}{else}{$_W['siteroot']}app/{php echo str_replace('./','', $this->createMobileUrl('auth'));}{/if}" />
+	<span class="help-block">系统默认为：<a href="{$_W['siteroot']}app/{php echo str_replace('./','', $this->createMobileUrl('auth'));}" target="_blank">{$_W['siteroot']}app/{php echo str_replace('./','', $this->createMobileUrl('auth'));}</a></span>
+            </div>
+        </div>
+           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">认证成功页面地址：</label>
+            <div class="col-sm-9 col-xs-12">
+               <input type="text" id="success_url" name="success_url" class="form-control" value="{if $item['success_url']}{$item['success_url']}{else}{$_W['siteroot']}app/{php echo str_replace('./','', $this->createMobileUrl('index'));}{/if}"  />
+               <span class="help-block">系统默认为：<a href="{$_W['siteroot']}app/{php echo str_replace('./','', $this->createMobileUrl('index'));}" target="_blank">{$_W['siteroot']}app/{php echo str_replace('./','', $this->createMobileUrl('index'));}</a></span>
+            </div>
+        </div>
+        
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否开启认证：</label>
+            <div class="col-sm-9 col-xs-12">
+              <label class="radio-inline"><input type="radio" name="is_portal" value="1" {if $item['is_portal']=='1'||empty($item['is_portal'])} checked="checked" {/if}> 是</label>&nbsp;&nbsp;&nbsp;
+              <label class="radio-inline"><input type="radio" name="is_portal" value="0" {if $item['is_portal']=='0'} checked="checked" {/if} > 否</label>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否开启QQ认证：</label>
+            <div class="col-sm-9 col-xs-12">
+             <label class="radio-inline"><input type="radio" name="qq_login" value="1" {if $item['qq_login']=='1'} checked="checked" {/if}> 是</label>&nbsp;&nbsp;&nbsp;
+             <label class="radio-inline"><input type="radio" name="qq_login" value="0" {if $item['qq_login']=='0'||empty($item['qq_login'])} checked="checked" {/if} > 否</label>
+            </div>
+        </div>
+        
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否开启微博认证：</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class="radio-inline"><input type="radio" name="weibo_login" value="1" {if $item['weibo_login']=='1'} checked="checked" {/if}> 是</label>&nbsp;&nbsp;&nbsp;
+                <label class="radio-inline"><input type="radio" name="weibo_login" value="0" {if $item['weibo_login']=='0'||empty($item['weibo_login'])} checked="checked" {/if} > 否</label>
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信号：</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="wx_id" name="wx_id" value="{$_W['account']['account']}"  class="form-control" />
+                <span class="help-block">绑定的微信号。长度为1-255个字符。</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信名称：</label>
+            <div class="col-sm-9 col-xs-12">
+               <input type="text" id="wx_name" name="wx_name" value="{$_W['account']['name']}"  class="form-control" />
+               <span class="help-block">绑定的微信号。长度为1-255个字符。</span>
+            </div>
+        </div>
+        
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">仅允许有微信终端的手机认证：</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class="radio-inline"><input type="radio" name="wx_phone_only" value="1" {if $item['wx_phone_only']=='1'} checked="checked" {/if}> 是</label>&nbsp;&nbsp;&nbsp;
+                <label class="radio-inline"><input type="radio" name="wx_phone_only" value="0" {if $item['wx_phone_only']=='0'||empty($item['wx_phone_only'])} checked="checked" {/if} > 否</label>
+            </div>
+        </div>
+        
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">开启ios不主动弹出弹窗：</label>
+            <div class="col-sm-9 col-xs-12">
+               <label class="radio-inline"><input type="radio" name="hide_cp" value="1" {if $item['hide_cp']=='1'||empty($item['hide_cp'])} checked="checked" {/if}> 是</label>&nbsp;&nbsp;&nbsp;
+              <label class="radio-inline"><input type="radio" name="hide_cp" value="0" {if $item['hide_cp']=='0'} checked="checked" {/if} > 否</label>
+            </div>
+        </div>
+        
+           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">第二次认证方式：</label>
+            <div class="col-sm-9 col-xs-12">
+              <label class="radio-inline"><input type="radio" name="auth2nd" value="0" {if $item['auth2nd']=='0'||empty($item['auth2nd'])} checked="checked" {/if}> 与第一次相同</label>&nbsp;&nbsp;&nbsp;
+              <label class="radio-inline"><input type="radio" name="auth2nd" value="1" {if $item['auth2nd']=='1'} checked="checked" {/if} > 无需认证（用户无感知上网）</label>
+              <label class="radio-inline"><input type="radio" name="auth2nd" value="2" {if $item['auth2nd']=='2'} checked="checked" {/if} > 简易认证（需要看成功页面）</label>
+            </div>
+        </div>
+        
+            <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">网址白名单：</label>
+            <div class="col-sm-9 col-xs-12">
+                     <input type="text" id="white_list" name="white_list" value="{if $item['white_list']}{$item['white_list']}{else}www.baidu.com,{/if}"  class="form-control" />
+	  <span class="help-block">用户自定义的网址白名单。名单中网址列表是以“,”分割的一组域名或IP地址。该参数长度为1-2047 个字符。建议添加微官网的域名,该项不能为空</span>
+            </div>
+        </div>
+ 
+</div> 
+        <div class="form-group col-sm-12">
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+</form>
+</div>
+{template 'common/footer'}

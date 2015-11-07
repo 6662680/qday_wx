@@ -1,0 +1,286 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>{$title}</title>
+<meta name="format-detection" content="telephone=no">
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="../addons/xhw_picvote/template/mobile/static/images/touch.png" rel="apple-touch-icon-precomposed"/>
+<link href="../addons/xhw_picvote/template/mobile/static/images/startup.png" rel="apple-touch-startup-image"/>
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/skjs/jquery.js"></script>
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/skjs/common.js"></script>
+<link href="../addons/xhw_picvote/template/mobile/skcss/style.css" type="text/css" rel="stylesheet"/>
+
+<link type="text/css" rel="stylesheet" href="../addons/xhw_picvote/css/style.css">
+<link href="http://img.pccoo.cn/wx/vote/css/main.css?v1" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="../addons/xhw_picvote/css/xzw.css">
+<link type="text/css" rel="stylesheet" href="../addons/xhw_picvote/css/style.css">
+
+<style type="text/css">
+#mbutton{padding:15px 10px 15px 10px; overflow:hidden; border-bottom:1px #DDD solid;}
+#mbutton > span{float:right; display:inline-block; background:#58a3ff; border:1px #63a0eb solid; color:#FFF; height:30px; line-height:30px; padding:0 10px; margin-left:10px;}
+#mcover{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0, 0, 0, 0.7);display:none;z-index:20000;}
+#mcover img{position:fixed;right: 18px;top:5px;width:260px;height:180px;z-index:20001;}
+.p4 {left:0px;height: 49px;background-color: #444;width: 100%;text-align: center;position: fixed;bottom: 0px;}
+.p4 a{line-height:49px; color:#fff; font-size:14px; text-decoration:none; }
+body { margin-bottom:60px !important; }
+a, button, input { -webkit-tap-highlight-color:rgba(255, 0, 0, 0); }
+ul, li { list-style:none; margin:0; padding:0 }
+.top_bar { position: fixed; z-index: 900; bottom: 0; left: 0; right: 0; margin: auto; font-family: Helvetica, Tahoma, Arial, Microsoft YaHei, sans-serif; }
+.top_menu { display:-webkit-box; border-top: 1px solid #3D3D46; display: block; width: 100%; background: rgba(255, 255, 255, 0.7); height: 48px; display: -webkit-box; display: box; margin:0; padding:0; -webkit-box-orient: horizontal; background: -webkit-gradient(linear, 0 0, 0 100%, from(#697077), to(#3F434E), color-stop(60%, #464A53)); box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.3) inset; }
+.top_bar .top_menu>li { -webkit-box-flex:1; background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.1)), color-stop(50%, rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.4))), -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 255, 255, 0.1)), color-stop(50%, rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0.15))); ; -webkit-background-size:1px 100%, 1px 100%; background-size:1px 100%, 1px 100%; background-position: 1px center, 2px center; background-repeat: no-repeat; position:relative; text-align:center; }
+.top_menu li:first-child { background:none; }
+.top_bar .top_menu>li>a { height:48px; display:block; text-align:center; color:#FFF; text-decoration:none; text-shadow: 0 1px rgba(0, 0, 0, 0.3); -webkit-box-flex:1; }
+.top_bar .top_menu>li>a label { overflow:hidden; margin: 0 0 0 0; font-size: 12px; display: block !important; line-height: 18px; text-align: center; }
+.top_bar .top_menu>li>a img { padding: 3px 0 0 0; height: 24px; width: 24px; color: #fff; line-height: 48px; vertical-align:middle; }
+.top_bar li:first-child a { display: block; }
+.menu_font { text-align:left; position:absolute; right:10px; z-index:500; background: -webkit-gradient(linear, 0 0, 0 100%, from(#697077), to(#3F434E), color-stop(60%, #464A53)); border-radius: 5px; width: 120px; margin-top: 10px; padding: 0; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); }
+.menu_font.hidden { display:none; }
+.menu_font { top:inherit !important; bottom:60px; }
+.menu_font li a { height:40px; margin-right: 1px; display:block; text-align:center; color:#FFF; text-decoration:none; text-shadow: 0 1px rgba(0, 0, 0, 0.3); -webkit-box-flex:1; }
+.menu_font li a { text-align: left !important; }
+.top_menu li:last-of-type a { background: none; }
+.top_menu img{margin:0 auto;}
+.menu_font:after { top: inherit!important; bottom: -6px; border-color: #3F434E rgba(0, 0, 0, 0) rgba(0, 0, 0, 0); border-width: 6px 6px 0; position: absolute; content: ""; display: inline-block; width: 0; height: 0; border-style: solid; left: 80%; }
+.menu_font li { border-top: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+.menu_font li:first-of-type { border-top: 0; }
+.menu_font li:last-of-type { border-bottom: 0; }
+.menu_font li a { height: 40px; line-height: 40px !important; position: relative; color: #fff; display: block; width: 100%; text-indent: 10px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.menu_font li a img { width: 20px; height:20px; display: inline-block; margin-top:-2px; color: #fff; line-height: 40px; vertical-align:middle; }
+.menu_font>li>a label { padding:3px 0 0 3px; font-size:14px; overflow:hidden; margin: 0; }
+#menu_list0 { right:0; left:10px; }
+#menu_list0:after { left: 20%; }
+#sharemcover { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; z-index: 20000; }
+#sharemcover img { position: fixed; right: 18px; top: 5px; width: 260px; height: 180px; z-index: 20001; border:0; }
+.top_bar .top_menu>li>a:hover, .top_bar .top_menu>li>a:active { background-color:#333; }
+.menu_font li a:hover, .menu_font li a:active { background-color:#333; }
+.menu_font li:first-of-type a { border-radius:5px 5px 0 0; }
+.menu_font li:last-of-type a { border-radius:0 0 5px 5px; }
+#plug-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0); z-index:800; }
+#cate18 .device {bottom: 49px;}
+#cate18 #indicator {bottom: 240px;}
+#cate19 .device {bottom: 49px;}
+#cate19 #indicator {bottom: 330px;}
+#cate19 .pagination {bottom: 60px;}
+
+</style>
+
+</head>
+
+<body style='background-color:#3A0255'>
+
+	<div id="main">
+		<div class="adb_0">
+			<script>step_ad(0)</script>
+		</div>
+        {if $num== '0'}
+		
+	<div class="con">	
+        <div class="adb_3">
+        <!--广告 -->
+        <div align="center"> 
+      {if $arr['0']['adpass']}{php echo htmlspecialchars_decode($arr['0']['ad']);} {elseif $arr['0']['adpic']!=""}
+       <a href="{$arr['0']['adlink']}"><img src="../attachment/{$arr['0']['adpic']}" width="100%"/></a>{/if}
+        </div>
+         <!--广告 -->
+        </div>		
+	</div>	
+	
+	
+	
+        <h1 style="color: #E1AF6E;font-size:18px;" class="ptitle fc1"><strong class="">你还没有参加，是否现在报名？</strong></h1>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+     <div style="padding-bottom: 20px; text-align: center; padding-left: 15%; padding-top: 0px; margin-top: -40px;" class="btns clearfix">
+		 <a style="width: 40%; height: 35px;" href="{php echo $this->createmobileUrl('reg',array('do'=>'reg', 'id'=>$id))}"<b>点击报名</b></a>
+         <a style="width: 40%; height: 35px;" href="{$submit_url}">活动说明</a>
+     </div>
+		
+		
+        <div id="mcover" onclick="$(this).hide()"><img src="../addons/site/template/image/guide.png"></div>
+        {else}
+        {/if}
+
+		</div>
+
+         {if $num!= '0'}
+
+<div class="con">
+
+    <div style="background: none repeat scroll 0% 0% rgba(255, 255, 255, 0.11); border: 1px solid rgba(142, 135, 147, 0.54);" class="detail">
+        <ul class="wenzi">
+		
+		
+	{loop $list $row}
+	
+	    <div class="swipe" id="swipe">
+    	<div class="pic_img"><img src="../attachment/{$row['avatar']}"></div>
+    	<div class="zongshu">&nbsp;{$row['nickname']}总票数：{$row['num']}</div>
+
+    </div>
+		{/loop}	
+		
+		
+		{loop $list $row}
+		
+        	<li>
+
+			<br style="color: rgb(51, 51, 51); font-family: 宋体; font-size: 16.363636016845703px; line-height: 24.545454025268555px;" />
+			<a href="{php echo $this->createmobileUrl('item',array('do'=>'item', 'id'=>$row['id']))}" target="_blank" style="color: rgb(0, 66, 119); text-decoration: none; font-family: 宋体; font-size: 16.363636016845703px; line-height: 24.545454025268555px;">
+			<img border="0" src="../attachment/{$row['avatar']}" width="635" style="border: 0px; margin: 0px 0px;border-radius: 5px;" alt="" />
+			</a>
+			</li>
+		{/loop}	
+			
+        </ul>
+      </br>
+	  </br>
+
+<div class="zong" style="padding: 10px;  width: 100px;  background: rgba(226,33,111,0.5);  border-radius: 15px 0px 15px 0px;  color: #fff; margin-left: 35%;
+">编号：{$row['id']}</div>
+		
+		
+    </div>
+ 
+{loop $list $row}
+  <p style="padding-left: 30%;" class="tips"><i>人气指数：{$row['sharenum']}</i></p>
+{/loop}	  
+  
+	<script>(function(){var A=$('#menu');$('#header dd span').click(function(){if(A.css('display')=='none') A.show();else A.hide()})})();</script>
+
+{/if}
+
+
+
+
+		
+<script>
+$(function() {
+	if(!navigator.userAgent.match(/Android/i)) {
+		$(".contacts").click(function() {
+			$('#mcover').show();
+			return false;
+		});
+	}
+});
+</script>
+{php require_once IA_ROOT."/addons/xhw_picvote/jssdk.class.php";$weixin = new jssdk($jie='0',$url='');$wx = $weixin->get_sign();}
+ <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>     
+<script type="text/javascript">
+  wx.config({
+      appId: "{$wx['appId']}",
+      timestamp: {$wx['timestamp']},
+      nonceStr: "{$wx['nonceStr']}",
+      signature: "{$wx['signature']}",
+      jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+      ]
+  });
+  wx.ready(function () {
+  //分享朋友
+  wx.onMenuShareAppMessage({
+      title: '{$nickname}正在参加{$title},投票ID:{$id}',
+      desc: '{$nickname}正在参加{$title},投票ID:{$id},赶快为TA投上一票吧！',
+      link: "{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}",
+      imgUrl: '{php echo $_W['siteroot'];}{$photo}',
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        window.location.href ='{php echo $this->createmobileUrl('share',array('do'=>'share', 'id'=>$id, 'rid'=>$id, 'from'=>'index'));}';//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: '{$nickname}正在参加{$title},投票ID:{$id},赶快为TA投上一票吧！',
+      link:"{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}",
+      imgUrl:'{php echo $_W['siteroot'];}{$photo}',
+      trigger: function (res) {
+        //alert('用户点击分享到朋友圈');
+      },
+      success: function (res) {
+        window.location.href ='{php echo $this->createmobileUrl('share',array('do'=>'share', 'id'=>$id, 'rid'=>$id, 'from'=>'index'));}';//分享成功回调
+      },
+      cancel: function (res) {
+          //window.location.href =adurl;
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });   
+    
+    
+  });
+</script>
+
+
+		
+ </div>
+
+
+
+        <div style="display:none">
+{php echo htmlspecialchars_decode($cnzz);}
+        </div>
+<div id="sharemcover" onClick="document.getElementById('sharemcover').style.display='';" style=" display:none"><img src="vifnnimg/vifnnmenu/MgnnofmleM.png"></div>
+		
+<ul class="nav">
+	<li class="cur"><a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$id))}">返回首页</a></li>
+	<li><a href="{php echo $this->createmobileUrl('top',array('do'=>'top', 'id'=>$id))}">人气排行</a></li>
+	<li><a href="{$submit_url}">活动说明</a></li>
+	<li><a href="{php echo $this->createmobileUrl('reg',array('do'=>'reg', 'id'=>$id))}">活动报名</a></li>
+    <div id="mcover" onclick="weChat()" style="display:none;">
+    <img src="http://img.pccoo.cn/wx/vote/images//guide.png">
+    </div>
+</ul>		
+		
+		
+<div id="plug-wrap" onClick="closeall()" style="display: none;"></div>
+<script>
+function displayit(n){
+	var count = document.getElementById("top_menu").getElementsByTagName("ul").length;	
+	for(i=0;i<count;i++){
+		if(i==n){
+		 if(document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display=='none'){
+			 document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display='';
+			 document.getElementById("plug-wrap").style.display='';
+			}else{
+				 document.getElementById("top_menu").getElementsByTagName("ul").item(n).style.display='none';
+				  document.getElementById("plug-wrap").style.display='none';
+			}
+		}else{
+			document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display='none';
+		}
+	}
+}
+function closeall(){
+	var count = document.getElementById("top_menu").getElementsByTagName("ul").length;	
+	for(i=0;i<count;i++){
+		 document.getElementById("top_menu").getElementsByTagName("ul").item(i).style.display='none';
+	}
+	 document.getElementById("plug-wrap").style.display='none';
+}
+
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+WeixinJSBridge.call('hideToolbar');
+});
+</script> 
+
+
+		</body>
+		</html>

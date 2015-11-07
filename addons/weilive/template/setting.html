@@ -1,0 +1,45 @@
+{template 'common/header'}
+<div class="main">
+	<form class="form-horizontal form" id="form2" action="" method="post">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				借用高级认证设置：<small>如果你的公众号不是微信认证服务号，可以借用别人的接口权限使用。</small>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">AppId：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="appid" value="{$settings['appid']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">AppSecret：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="secret" value="{$settings['secret']}" />
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel-heading">
+				1.使用的AppId和AppSecret在 [开发者中心]，可以找到。
+			</div>
+			<div class="panel-heading">
+				<img src="../addons/weilive/style/images/appkey.jpg" width="395">
+			</div>
+			
+			<div class="panel-heading">
+				<b>2.借用说明：必需设置借用高级认证号的OAuth2.0网页授权的回调域名为你公众号第三方平台的全域名。
+					如：你的域名为：wx.weixin.com ，你必需让借用高级认证号设置OAuth2.0网页授权的回调域名为:wx.weixin.com<br>
+					只是为了完善一下头像和呢称,性别,要不很多功能没法完成</b>
+			</div>
+			<div class="panel-heading">
+				<img src="../addons/weilive/style/images/help.jpg" width="395">
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input name="token" type="hidden" value="{$_W['token']}" />
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+		</div>
+	</form>
+</div>
+{template 'common/footer'}

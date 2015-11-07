@@ -1,0 +1,104 @@
+{template 'common/header'}
+{php load()->func('tpl')}
+<style>
+.template-style{display:block;}
+.template-style li{float:left; width:19.4%; max-width:180px; margin:0 2px 10px 2px;}
+.template-style .template-style-pic .title{position:absolute; z-index:100; top:0; width:100%; height:25px; line-height:25px; filter:Alpha(opacity=70);background:#000;background:rgba(0, 0, 0, 0.7); color:#FFF; overflow:hidden;}
+.title .icon-remove{position:absolute; right:0; background:#000; border-left:1px #333 solid; height:25px;line-height:26px;width:20px;text-align:center;cursor:pointer; text-decoration:none;}
+.title .pull-left{margin-left:5px;}
+.template-style .template-style-pic img{width:100%;}
+.template-style .template-style-pic{border:3px #EEE solid;position:relative;overflow:hidden;}
+.template-style .template-style-pic .icon-ok{display:none;}
+.template-style .on.template-style-pic{border:3px #009CD6 solid;}
+.template-style .on.template-style-pic .icon-ok{display:inline-block;position: absolute;bottom:0;right:0;color:#FFF;background:#009CD6;padding:5px;font-size:14px;}
+.template-style .template-style-button{height:50px; line-height:25px;text-align: center;}
+.template{padding:15px;}
+.template li{margin-right:10px;}
+</style>
+<div class="main">
+<ul class="nav nav-tabs">
+  <li  class="active"><a href="{php echo  $this->createWebUrl('moban',array('type'=>'auth'));}">认证页面</a>
+  </li>
+  <li><a href="{php echo $this->createWebUrl('moban',array('type'=>'portal'));}">成功页面</a>
+  </li>
+</ul>
+	<form action="" method="post" class="form-horizontal form">
+                   <div class="panel panel-default">
+    <div class="panel-heading">
+       <h4>自定义认证页面</h4>
+    </div>
+                       <div class='panel-body'>
+    <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">模板选择</label>
+            <div class="col-sm-9 col-xs-12">
+                <ul class="unstyled template-style clearfix">
+						<li>
+							<div class="template-style-pic">
+								<div class="title"><span class="pull-left">样式1</span></div>
+								<img src="../addons/wdl_wifi/template/style/images/auth/mb1.png">
+								<span class="icon-ok"></span>
+							</div>
+							<div class="template-style-button">
+								选择1：<input type="radio" name="style" value="mb1" checked="">
+							</div>
+						</li>
+					</ul>	
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">页面title</label>
+            <div class="col-sm-9 col-xs-12">
+                   <input type="text" name="title" class="form-control" value="{$item['title']}" /> 
+	<div class="help-block">页面title</div>
+            </div>
+        </div>
+                           
+                             <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">门店名称：</label>
+            <div class="col-sm-9 col-xs-12">
+                  <input type="text" name="shopname" class="form-control" value="{$item['shopname']}" /> 
+					<div class="help-block">门店名称</div>
+            </div>
+        </div>
+                           
+                               <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">门店地址：</label>
+            <div class="col-sm-9 col-xs-12">
+                  <input type="text" name="shopaddress" class="form-control" value="{$item['shopaddress']}" /> 
+					<div class="help-block">门店地址</div>
+            </div>
+        </div>
+                            <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">门店电话：</label>
+            <div class="col-sm-9 col-xs-12">
+                 <input type="text" name="shoptel" class="form-control" value="{$item['shoptel']}" /> 
+					<div class="help-block">门店电话</div>
+            </div>
+        </div>
+                              <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">logo：</label>
+            <div class="col-sm-9 col-xs-12">
+                  {php echo tpl_form_field_image('logo',$item['logo'])}<div class="help-block">替换页面上的logo图片</div>
+            </div>
+        </div>
+                             <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">二维码：</label>
+            <div class="col-sm-9 col-xs-12">
+              {php echo tpl_form_field_image('qrcode', $item['qrcode'])}<div class="help-block">替换页面上的二维码</div>
+            </div>
+        </div>
+                                           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">底部版权：</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" name="copyright" class="form-control" value="{$item['copyright']}" /> 
+					<div class="help-block">底部版权设置</div>
+            </div>
+       </div>                                             
+</div>        
+</div> 
+        <div class="form-group col-sm-12">
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+   </form>
+</div>

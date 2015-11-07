@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>{$store['title']}</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+	<script>
+	
+	function shop_map(){
+		document.location.href="http://api.map.baidu.com/marker?location={$store['lat']},{$store['lng']}&title={$store['title']}&name={$store['title']}&content={$store['place']}&output=html&src=wzj|wzj";
+	}
+	
+	</script>
+		<style>
+	a{
+		-webkit-border-radius: 4px 0 4px 0;
+		border-radius: 5px 5px 5px 5px;
+	}
+	</style>
+	<style>
+	.pagination li{
+		margin-left:7px;
+		background-color: rgba(47, 150, 76, 0.94);
+		display: inline-block;
+		padding: 0 5px;
+		border-radius: 5px;
+		width:22%;
+		text-align:center;
+	}
+	.pagination li .pager-nav{
+		color: #fff;
+	}
+	</style>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+                <a class="link app-back" href="{php echo $this->createMobileUrl('index')}">
+                    <i class="icon-back"></i>
+                </a>
+
+                <h1 class="title sliding">{$store['title']}</h1>
+                <a class="link user" href="{php echo $this->createMobileUrl('home');}">
+                    <i class="icon-user"></i>
+                </a>
+            </div>
+        </header>
+        <section class="app-wrap">
+            <div class="inner">
+
+                <div class="m-shop">
+                    <div class="cover">
+                        <div style="height:225px; overflow:hidden;"><img src="{$_W['attachurl']}{$store['logo']}"/></div>
+
+                        <div class="title">
+                            <div class="row">
+                               {$store['title']}<span class="right">营业时间</span>
+                            </div>
+
+                            <div class="row">
+                                <div class="u-grade s-small">
+                                    <div class="value" style="width: {php echo $store['level']*20}%;"></div>
+                                    <!--<span class="text">4分</span>-->
+                                </div>
+                                <span class="right">{$store['business_time']}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab" id="js_tab">
+                        <div class="toggle">
+                            <a class='z-sel' href="javascript:;">商家首页</a>
+                            <a  href="javascript:;">微友评论</a>
+                        </div>
+                        <ol class="content">
+                            <li class='z-show'>
+                                <div class="contactWay"><a href="javascript:shop_map();">
+                                        <i class="icon-site"></i>
+
+                                        <div class="f-toe">{$store['place']}</div>
+                                    </a>
+                                    <a href="tel:{$store['tel']}">
+                                        <i class="icon-phone"></i>
+
+                                        <div class="f-toe">{$store['tel']}</div>
+                                    </a>
+                                </div>
+									{loop $type $key $t}
+                                <dl class="list u-wrap">
+										<dt class="title">
+											{if $t[$key]['type']==1}折扣券{/if}
+											{if $t[$key]['type']==2}现金券{/if}
+											{if $t[$key]['type']==3}体验券{/if}
+											{if $t[$key]['type']==4}礼品券{/if}
+											{if $t[$key]['type']==5}特价券{/if}
+											{if $t[$key]['type']==6}换购券{/if}
+											{if $t[$key]['type']==7}团购券{/if}
+											<span class="number">{php echo sizeof($t)}张</span>
+										</dt>
+										{loop $t $act}
+										<dd>
+											<a class="f-cb" href="{php echo $this->createMobileurl('activity', array('id'=>$act['id'], 'op'=>'detail'));}">
+												<img class="pic" src="{$_W['attachurl']}{$act['thumb']}" />
+												<div class="box">
+													<div class="content">
+														<div class="name f-toe">{$act['title']}</div>
+														<p>
+															<span class="money">{$act['kill_price']}元</span>
+															<i class="old">￥{$act['price']}</i>
+															<span class="number">{$act['catch']}人领取</span>
+														</p>
+													</div>
+												</div>
+											</a>
+										</dd>
+										{/loop}
+                                </dl>
+									{/loop}
+                                <dl class="list u-wrap">
+                                    <dt class="title">
+                                        活动<span class="number">{php echo sizeof($activities)}弹</span>
+                                    </dt>
+									{loop $activities $act}
+									<dd>
+                                        <a class="f-cb" href="{php echo $this->createMobileurl('kill', array('id'=>$act['id'], 'op'=>'detail'));}">
+                                            <img class="pic" src="{$_W['attachurl']}{$act['thumb']}" alt="暂无图片"/>
+                                            <div class="box">
+                                                <div class="content">
+                                                    <div class="name f-toe">{$act['title']}</div>
+                                                    <p class="intro">最低<span>{$act['kill_price']}</span>元 / 原价{$act['price']}<span></span>元</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </dd> 
+									{/loop}
+									</dl>
+                                <article class="info u-wrap">
+                                    <h2 class="title">商家介绍</h2>
+
+                                    <div class="content">
+                                        <p>
+											{$store['description']}
+										</p>
+									</div>
+                                </article>
+                            </li>
+                            <li>
+                                <div class="detail u-wrap">
+                                    <h2 class="title">微友点评</h2>
+                                    <ul>
+										{loop $comments $com}
+										<li>{php echo haha($com['mobile'])}：{$com['comment']}</li>
+										{/loop}
+										<!--<li>136****2543：生，容易。活，容易。生活不容易。</li>
+                                        <li>136****2543：如果我能够看到我的背影，我想它一定很忧伤，因为我把快乐都留在了前面！</li>
+                                        <li>136****2543：工作QQ，谢绝闲聊，若要强聊，每字伍毛；标点符号，半价收费，千字以上，八折优惠；表情图片，十块包月，语音视频
+                                            ，暂未开通；先款后聊，款到即聊，在线支付，提供发票； 免付月租，单项收费，节假双休，照常营业；诚征代理
+                                        </li>-->
+                                    </ul>
+                                </div>
+								<br/>{$pager}
+                            </li>
+                        </ol>
+						<br/><br/>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style type="text/css">
+	#foot{position:absolute;z-index:11;bottom:10px;width:100%;}
+</style>
+		<footer id="foot" class="m-cprt">
+			<a href="{$setting['gzurl']}">关注微信</a>
+			{if empty($setting['helpurl'])}{else}<a href="{$setting['helpurl']}">使用帮助</a>{/if}
+			<a href="{php echo $this->createMobileurl('myshop');}">免费开店</a>
+		</footer>
+</body>
+<script src="../addons/weilive/style/js/zepto.min.js"></script>
+<script src="../addons/weilive/style/js/app.js"></script>
+<script>
+    $(function () {
+        var $toggles = $('#js_tab .toggle').children();
+        var $boxs = $('#js_tab .content').children();
+        $toggles.on(app.clickEvent, function () {
+            var self = $(this);
+            if (!self.hasClass('z-sel')) {
+                $toggles.removeClass('z-sel');
+                self.addClass('z-sel');
+                $boxs.removeClass('z-show');
+                $boxs.eq(self.index()).addClass('z-show');
+            }
+        });
+
+        $('#js_grade').grade();
+    });
+
+</script>
+<script>
+var imgUrl = "{$_W['attachurl']}{$store['logo']}";
+var lineLink = "{$_W['siteroot']}{php echo $this->createMobileUrl('activity', array('op'=>'more', 'id'=>$store['id']));}";
+var descContent = '{$store['description']}';
+var shareTitle = '{$store['title']}';
+var appid = '';
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+        "appid": appid,
+        "img_url": imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": lineLink,
+        "desc": descContent,
+        "title": shareTitle
+    }, function(res) {
+    })
+}
+
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+        "img_url": imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": lineLink,
+        "desc": descContent,
+        "title": shareTitle
+    }, function(res) {
+    });
+
+}
+
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+        "content": descContent,
+        "url": lineLink,
+    }, function(res) {
+    });
+}
+
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    // 发送给好友
+    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+        shareFriend();
+    });
+    // 分享到朋友圈
+    WeixinJSBridge.on('menu:share:timeline', function(argv){
+        shareTimeline();
+    });
+    // 分享到微博
+    WeixinJSBridge.on('menu:share:weibo', function(argv){
+        shareWeibo();
+    });
+}, false);
+</script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>店铺会员</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/shop.css"/>
+	<style>
+	a{
+		-webkit-border-radius: 4px 0 4px 0;
+		border-radius: 5px 5px 5px 5px;
+	}
+	</style>
+	<style>
+	.pagination li{
+		margin-left:7px;
+		background-color: #fa614b;
+		display: inline-block;
+		padding: 0 5px;
+		border-radius: 5px;
+		width:22%;
+		text-align:center;
+	}
+	.pagination li .pager-nav{
+		color: #fff;
+	}
+	</style>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+			 <a class="link app-back" href="javascript:history.back();">
+                    <i class="icon-back"></i>
+                </a>
+			<p style=" float:right;"><a href="{php echo $this->createMobileUrl('myshop', array('op'=>'exit'))}" class=""><input type="button" value="退出" name="" style="color:#666; width:60px; height:28px;"/></a></p>
+                <h1 class="title sliding">用户列表</h1>
+            </div>
+        </header>
+        <section class="app-wrap" id="js_wrap">
+            <div class="inner">
+                <div class="m-list s-pdt">
+                    <nav id="js_fix" class="nav">
+                        <a href="{php echo $this->createMobileUrl('myshop', array('op'=>'couponlist', 'storeid'=>$storeid))}"><span>优惠券</span></a>
+                        <a href="{php echo $this->createMobileUrl('myshop', array('op'=>'activitylist', 'storeid'=>$storeid))}"><span>活动</span></a>
+                        <a class="z-sel" href="{php echo $this->createMobileUrl('myshop', array('op'=>'memberlist', 'storeid'=>$storeid))}"><span>会员</span></a>
+                    </nav>
+                    <table class="users">
+                        <tr>
+                            <th>序号</th>
+                            <th>姓名</th>
+                            <th>手机</th>
+                        </tr>
+						{if !empty($members)}
+						{loop $members $key $m}
+						{php $key++}
+						<tr>
+							<td>{$key}</td>
+							<td>{$m['realname']}</td>
+							<td>{$m['mobile']}</td>
+						</tr>
+						{/loop}
+						{else}
+						<tr>
+							<td colspan='3'>暂无会员……</td>
+						</tr>
+						{/if}
+					</table>
+                </div>
+				<br/>{$pager}
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+
+</html>

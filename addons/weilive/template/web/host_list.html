@@ -1,0 +1,125 @@
+{template 'common/header'}
+{if $op=='display'}
+<ul class="nav nav-tabs">
+	<li><a>管理店主</a></li>
+</ul>
+<div class="main">
+	<form action="" method="post">
+		<input type="hidden" name="c" value="site" />
+		<input type="hidden" name="a" value="entry" />
+		<input type="hidden" name="m" value="weilive" />
+		<input type="hidden" name="do" value="host" />
+		<input type="hidden" name="op" value="sort" />
+		<table class="table sub-search">
+		<table class="table sub-search">
+			<tbody>
+				<tr>
+					<th style="width:100px;">真实姓名</th>
+					<td>
+						<input name="realname" type="text" value="{$sort['realname']}" />
+					</td>
+				</tr>
+				<tr>
+					<th style="width:100px;">手机号码</th>
+					<td>
+						<input name="mobile" type="text" value="{$sort['mobile']}" />
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>
+						<input type="submit" name="" value="搜索" class="btn btn-primary">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+    <form action="" method="post" class="form-horizontal form" onsubmit="return formcheck(this)">
+	<div style="padding-top: 15px;">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:120px;text-align:center;">姓名</th>
+                <th style="width:120px;text-align:center;">电话</th>
+                <th style="width:120px;text-align:center;">时间</th>
+                <th style="width:120px;text-align:center;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="level-list">
+            {loop $list $item}
+            <tr>
+                <td style="text-align:center;">{$item['realname']}</td>
+                <td style="text-align:center;">{$item['mobile']}</td>
+				<td style="text-align:center;">{php echo date('Y-m-d',$item['createtime'])}</td>
+                <td style="text-align:center;">
+					<a class="btn" href="{php echo $this->createWebUrl('host', array('id'=>$item['id'], 'op'=>'detail'))}" title="编辑">编辑</a>
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+		{$pager}
+	</div>
+    </form>
+</div>
+{else}
+<ul class="nav nav-tabs">
+	<li><a>{$item['realname']}详细信息</a></li>
+</ul>
+<div class="main">
+    <div style="padding-top: 15px;">
+	<form class="form-horizontal form" id="form2" action="" method="post" onSubmit="return checkdata();">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				基本设置
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">姓名</label>
+					<div class="col-sm-5">
+						<input type="text" name="realname" class="form-control" value="{$item['realname']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">电话</label>
+					<div class="col-sm-5">
+						<input type="text" name="mobile" class="form-control" value="{$item['mobile']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">密码</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="pwd" value="{$item['pwd']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-1 control-label">注册时间</label>
+					<div class="col-sm-5">
+						<input disabled type="text" name="createtime" class="form-control" value="{php echo date('Y-m-d H:m:s', $item['createtime'])}" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+			<input type="hidden" name="id" value="{$item['id']}" />
+			<input type="submit" class="btn btn-primary col-lg-1" style="left:40%;" name="submit" value="提交" />
+		</div>
+	</form>
+    </div>
+</div>
+<script>
+function checkdata(){
+	var pwd = document.getElementById('pwd').value;
+	if(pwd != '{$item['pwd']}'){
+		if(confirm('密码已改变，请谨慎操作，确认提交吗？')){
+			return true;
+		} else{
+			return false;
+		}
+	}
+	return true;
+}
+</script>
+{/if}
+{template 'common/footer'}

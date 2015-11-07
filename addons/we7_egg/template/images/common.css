@@ -1,0 +1,28 @@
+.main{padding:0 10px;}
+.list_table{border-collapse:collapse;border-spacing:0;}
+.list_table tr{height:35px; line-height:35px;}
+.list_table tbody tr{border-top:1px #E1E1E1 solid;}
+.list_table thead tr{border-bottom:1px #CCC solid;}
+.list_table th,.list_table td{text-align:left;padding:0 10px;}
+
+/*砸蛋页面*/
+.egg{width:290px;padding-left:10px;padding-bottom:20px;margin:0 auto; overflow:hidden;}
+.egg ul li{z-index:999;}
+.eggList{margin:0;padding:0;padding-top:80px;position:relative;overflow:hidden;}
+.eggList li{list-style:none;float:left;background:url(egg_1.png) no-repeat bottom;width:80px;height:95px;margin-right:10px;cursor:pointer;position:relative;}
+.eggList li span{position:absolute; width:30px; height:60px; left:32px; top:23px; color:#ff0; font-size:30px; font-weight:bold}
+.eggList li.curr{background:url(egg_2.png) no-repeat bottom;cursor:default;z-index:300;}
+.eggList li.curr sup{position:absolute;background:url(img-4.png) no-repeat;width:102px; height:64px;top:-36px;left:-10px;z-index:800;}
+.hammer{background:url(img-6.png) no-repeat;width:50px;height:59px;position:absolute; text-indent:-9999px;z-index:150;left:140px;top:15px;}
+.resultTip{position:absolute;width:100%;top:180px; left:0; margin-left:-10px;text-align:center;overflow:hidden;display:none;z-index:500;}
+.resultTip b{font-size:14px;margin:0 auto;}
+/*规则页面*/
+.eggs_prize{overflow:hidden; background:#FFF !important; padding:10px 10px 0 10px; margin-bottom:10px;}
+.eggs_prize .hd{overflow:hidden; font-weight:600; margin-bottom:10px;}
+.eggs_prize .con{margin-bottom:10px;}
+.eggs_prize .percentage{position:absolute;font-style:normal;margin-left:-30px;margin-top:6px;}
+.eggs_prize label.fl{width:70px;}
+.eggs_prize_0{border-top:2px red solid;}
+.eggs_prize_1{border-top:2px green solid;}
+#item-form th{width:110px !important;}
+.grid-5{width:400px !important;}

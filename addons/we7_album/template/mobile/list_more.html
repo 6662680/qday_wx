@@ -1,0 +1,24 @@
+{if !empty($category)}
+	{loop $category $row}
+		{if empty($row['parentid'])}
+		<li style="">
+			<a href="{$row['url']}">
+            	{if !empty($row['thumb'])}<img src="{php echo toimage($row['thumb'])}" alt="{$row['name']}">{/if}
+                <p>{$row['name']}</p>
+                {if !empty($row['description'])}<p>{$row['description']}</p>{/if}
+            </a>
+        {/if}
+        {loop $row['children'] $row1}
+        <p style='width:100%;border-top:1px solid #ccc;padding-top:5px;'>
+        	<a href="{$row1['url']}">
+            {if !empty($row1['thumb'])}<img src="{php echo toimage($row1['thumb'])}" alt="{$row1['name']}" class='pull-left' style='width:40px;height:40px;' >{/if}
+            <span class='pull-left' style="padding-top:5px;margin-left:10px;">
+            	{$row1['name']}{if !empty($row1['description'])}<br/>{$row1['description']}{/if}
+            </span>
+       		</a>
+        </p>
+        {/loop}
+        </li>
+    {/loop}
+{/if}
+               

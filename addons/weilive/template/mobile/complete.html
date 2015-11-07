@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en" xml:lang="en">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>个人中心</title>
+	<script src=""></script>
+    <style>
+    
+/*手机个人中心*/
+.XGZL {width:100%; list-style-type:none; font-family:微软雅黑;}
+.Xtoubu {width:100%; height:50px; font-size:18px; font-family:微软雅黑; color:#15C2CC; background-color:#EAF2F1; line-height:48px; text-align:center;}
+.Xtoubu img{vertical-align:middle; border:0px;}
+.Xziliao {background-color:#FFF; font-size:16px; padding:10px; color:#404040; font-family:微软雅黑; }
+.Xziliao input {width:98%; height:40px; background-color:#EEE; color:#9B9B9B; font-family:微软雅黑; border:#E6E6E6 1px solid; -moz-border-radius:5px; -webkit-bordr-radius:5px; border-radius:5px; padding-left:5px; margin-top:5px; font-size:15px;}
+.Xziliao .ziliao1 {margin-top:10px; }
+.Gtijiao {width:100%; height:40px; text-align:center; line-height:40px; background-color:#18B1C2; list-style-type:none; font-family:微软雅黑; font-size:18px; margin-top:10px; -moz-bordr-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
+a{text-decoration:none; color:#fff; }
+.Gtijiao:active{background-color:#3CC;}
+    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /></head>
+<body bgcolor="#CBEFED">
+        	<div class="XGZL">
+            	<li class="Xtoubu"><img src="../addons/weilive/style/images/touxiang.png" width="30" /> 完善个人资料</li>
+                <div class="Xziliao">
+                	<li>姓名：<br/>
+                	<input type="text" id="realname" name="realname" value="{$info['realname']}" placeholder="请输入姓名" />
+                    </li>
+                    <li class="ziliao1">手机：<br />
+                	<input type="text" id="mobile" name="mobile" value="{$info['mobile']}" placeholder="请输入手机号码" />
+                    </li>
+                    <li class="ziliao1">联系地址：<br />
+                	<input type="text" id="address" name="address" value="{$info['address']}" placeholder="请输入联系地址" />
+                    </li>
+                </div>
+            </div>
+            <a id="xggrxx" href="javascript:submit_user();"><li class="Gtijiao">提　交</li></a>
+</body>
+<script src="../addons/weilive/style/js/zepto.min.js"></script>
+<script>
+function submit_user(){
+	var reg = /^1[3458]\d{9}$/;
+	var realname = $('#realname').val();
+	var mobile = $('#mobile').val();
+	var address = $('#address').val();
+	if (realname == "") {
+		alert("姓名不能为空!");
+		return;
+	}
+	if (!reg.test(mobile)) {
+		alert("手机格式不正确!");
+		return;
+	} else if (address == "") {
+		alert("地址不能为空!");
+		return;
+	}else {
+		$.ajax({
+			type: "POST",
+			url: "{php echo $this->createMobileurl('home', array('op'=>'complete', 'opp'=>'post'))}",
+			data: {realname: realname, mobile: mobile, address: address},
+			dataType: "text",
+			
+			success: function (d) {
+				if(d==1){
+					alert('更新成功！');
+					window.document.location.href = "{php echo $this->createMobileurl('home')}";
+				} else {
+					alert('更新失败！');
+				}
+			},
+			
+			error: function (xml, text, thrown){
+				alert("出错啦!");
+			}
+		});
+	}
+}
+
+</script>
+
+</html>

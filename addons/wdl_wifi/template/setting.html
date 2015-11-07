@@ -1,0 +1,49 @@
+{template 'common/header'}
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                微路由参数设置（rippletek平台API信息） 
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">节点ID：</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="nodeid" class="form-control" value="{$settings['nodeid']}" /> 
+	      <div class="help-block"><a href="http://my.rippletek.com/" target="_blank">点击申请rippletek平台API</a></div>
+                    </div>
+                </div>
+                
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">节点KEY：</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="nodekey" class="form-control" value="{$settings['nodekey']}" /> 
+	      <div class="help-block"><a href="http://my.rippletek.com/" target="_blank">点击申请rippletek平台API</a></div>
+                    </div>
+                </div>
+                
+                    <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认证ID：</label>
+                    <div class="col-xs-12 col-sm-9">
+                           <input type="text" name="authid" class="form-control" value="{$settings['authid']}" /> 
+	         <div class="help-block"><a href="http://my.rippletek.com/" target="_blank">点击申请rippletek平台API</a></div>
+                    </div>
+                </div>
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认证KEY：</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="authkey" class="form-control" value="{$settings['authkey']}" /> 
+	      <div class="help-block"><a href="http://my.rippletek.com/" target="_blank">点击申请rippletek平台API</a></div>
+                    </div>
+                </div>
+          
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+{template 'common/footer'}
+ 

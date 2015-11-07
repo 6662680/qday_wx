@@ -1,0 +1,48 @@
+{template 'common/header'}
+<div class="main">
+<ul class="nav nav-tabs">
+  <li class="active"><a href="{php echo $this->createWebUrl('authlist');}">认证记录</a>
+  </li>
+</ul>
+       <div class="panel panel-default">
+    <div class="panel-heading">
+       <h4>认证记录</h4>
+    </div>
+  
+        
+    <div class="panel-body">
+	<div style="padding:15px;">
+	 
+        <table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th  >路由器名称</th>
+					<th >微信OPENID</th>
+					<th >认证结果</th>
+					<th >接口信息 </th>
+					<th >认证时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				{php $router = $this->getnode_info($item['routerid']);}
+				<tr>
+					<td>{$router['description']}</td>
+					<td>{$item['fromuser']}</td>
+					<td><span class="label">{if $item['result']==1}成功{else}失败{/if}</span></td>
+					<td>{$item['resultmemo']}</td>
+					<td>{php echo date('Y-m-d H:i:s',$item['createtime'])}</td>
+					<td><a onclick="return confirm('确认强制下线？');return false;" href="{php echo $this->createWebUrl('Unauth_user', array('id'=>$item['id'],'node' => $item['routerid'],'openid' => $item['fromuser']))}" class="btn btn-small" title="强制下线"><i class="fa fa-remove"></i> 强制下线</a></td>
+				</tr>
+				{/loop}
+
+				<td colspan="6">
+					<input name="token" type="hidden" value="{$_W['token']}" /></td>
+			</tr>
+		</table>
+		{$pager}
+	</div>
+</div>
+       </div>
+{template 'common/footer'}

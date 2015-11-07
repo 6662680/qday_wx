@@ -1,0 +1,179 @@
+{template 'common/header'}
+<div class="main">
+    <ul class="nav nav-tabs">
+        <li><a href="{php echo $this->createWebUrl('project');}">项目管理</a></li>
+        <li class="active"><a href="{php echo $this->createWebUrl('addproject');}">添加项目</a></li>
+    </ul>
+<style>
+.table td span{display:inline-block;margin-top:4px;}
+.table td input{margin-bottom:0;}
+</style>
+<div class="clearfix">
+<form class="form-horizontal form" action="" method="post" enctype="multipart/form-data">
+    <div class="panel panel-default">
+        <div class="panel-heading">基本信息</div>
+        <div class="panel-body">
+                <input type="hidden" name="id" value="{$_GPC['id']}">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">活动标题</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="title" value="{$subject['title']}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">活动图片</label>
+                    <div class="col-sm-8 col-xs-12">
+                       {php echo tpl_form_field_image('photo',$subject['photo']);}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-sm-9 col-xs-12">
+                        <div class="help-block">活动封面图片 建议700*300</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">活动描述</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <textarea id="smalltext" name="smalltext" class="form-control" rows="5" cols="60">{$subject['smalltext']}</textarea>
+                    </div>
+                </div>
+        <!--<div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动时间</label>
+            <div class="col-sm-9 col-xs-12">
+    {php echo tpl_form_field_daterange('datelimit', array('starttime'=>$subject['starttime'],'endtime'=>$subject['endtime']),true)}
+            </div>
+        </div>-->
+        <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">活动图片</label>
+                    <div class="col-sm-8 col-xs-12">
+                       {php echo tpl_form_field_image('logo',$subject['logo']);}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-sm-9 col-xs-12">
+                   <div class="help-block">LOGO图片，建议222*45，透明白字（参考xhw_voice文件夹下的logo.png）</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">分享时的标题</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="share_title" value="{$subject['share_title']}">
+                         <div class="help-block">活动首页分享时的标题</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">分享时的摘要</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="share_desc" value="{$subject['share_desc']}">
+                         <div class="help-block">活动首页分享时的摘要</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">引导关注素材</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="follow_url" value="{$subject['follow_url']}">
+                         <div class="help-block">建议做一条引导关注的图文素材。例：<a href="http://mp.weixin.qq.com/s?__biz=MzA3NDc3NzgyNQ==&mid=201294640&idx=1&sn=e36d516bd3696c2619700bb709be568a#rd" target="_black">点击查看</a></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">人气规则说明</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="rule_url" value="{$subject['rule_url']}">
+                         <div class="help-block">建议做一条朋友圈人气榜规则说明的图文素材。例：<a href="http://mp.weixin.qq.com/s?__biz=MzA3NDc3NzgyNQ==&mid=201294640&idx=2&sn=cc137110f8a516cc07cabc00ff522c5d#rd" target="_black">点击查看</a></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">投稿引导素材</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="submit_url" value="{$subject['submit_url']}">
+                         <div class="help-block">建议做一条投稿引导的图文素材。例：<a href="http://mp.weixin.qq.com/s?__biz=MzA3NDc3NzgyNQ==&mid=201294640&idx=3&sn=24f493ff8edb02c0963b299cf1633481#rd" target="_black">点击查看</a></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">活动介绍说明</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="rules_url" value="{$subject['rules_url']}">
+                         <div class="help-block">建议做一条活动介绍的图文素材，可详细说明规则和奖品等细节。</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">每日投票数限制</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="mynum" value="{$subject['mynum']}">
+                         <div class="help-block">同一用户每天可投给多少人，如50：每天每个用户可给50个选手投票</div>
+                    </div>
+                </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否可重复投票</label>
+            <div class="col-sm-9 col-xs-12">
+              <label class="radio-inline">
+             <input type="radio" name="day" value="1" {if $subject['day'] == 1} checked="checked"{/if}/>不可重复</label>
+        <label class="radio-inline">
+             <input type="radio" name="day" value="0" {if $subject['day'] == 0} checked="checked"{/if}/>可重复</label>
+              <span class="help-block">如果勾选可重复，则第二天可继续投票给同一用户，既今天我投票给1号明天还可以投票给1号。</span>
+            </div>
+        </div>
+
+<div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">首页列表显示数</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="anum" value="{$subject['anum']}">
+                         <div class="help-block">首页显示歌手的数量，请填写3的倍数，切勿过大影响打开速度</div>
+                    </div>
+                </div>
+<div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">人气榜显示个数</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="bnum" value="{$subject['bnum']}">
+                         <div class="help-block">人气榜显示歌手的数量，请填写3的倍数，切勿过大影响打开速度</div>
+                    </div>
+                </div>
+ <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">站长统计代码</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <textarea id="cnzz" name="cnzz" class="form-control" rows="5" cols="60">{$subject['cnzz']}</textarea>
+                        <div class="help-block">填写站长统计代码，不需要就留空</div>
+                    </div>
+                </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动首页显示</label>
+            <div class="col-sm-9 col-xs-12">
+              <label class="radio-inline">
+           <input type="radio" name="hot" value="1" {if $subject['hot'] == 1} checked="checked"{/if}/>按最新排序</label>
+         <label class="radio-inline">
+             <input type="radio" name="hot" value="0" {if $subject['hot'] == 0} checked="checked"{/if}/>按最热排序</label>
+               <div class="help-block">活动首页列表排序规则，如果勾选最新则最新加入的显示在最前面，最热则是票数高在首页。</div>
+            </div>
+        </div>
+
+
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="submit" type="submit" value="提交" class="btn btn-primary col-lg-1">
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+    var category = {php echo json_encode($children)};
+    require(['jquery', 'util'], function($, u){
+        $(function(){
+            u.editor($('.richtext')[0]);
+        });
+        $('#credit1').click(function(){
+            $('#credit-status1').show();
+        });
+        $('#credit0').click(function(){
+            $('#credit-status1').hide();
+        });
+    });
+</script>
+{template 'common/footer'}

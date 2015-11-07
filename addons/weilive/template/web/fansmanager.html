@@ -1,0 +1,117 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li class="active"><a>粉丝管理</a></li>
+</ul>
+<div class="main">
+    <div class="search">
+		<form action="" method="post" class="form-horizontal" role="form">
+			<input type="hidden" name="c" value="site" />
+			<input type="hidden" name="a" value="entry" />
+			<input type="hidden" name="m" value="weilive" />
+			<input type="hidden" name="do" value="fansmanager" />
+			<input type="hidden" name="op" value="sort" />
+			<table class="table table-bordered tb">
+				<tbody>
+					<tr>
+						<th style="text-align:center; width:80px;">姓名</th>
+						<td style="width:200px; text-align:center;">
+							<input name="realname" type="text" value="{$sort['realname']}" />
+						</td>
+						<td>
+							<input type="radio" value="1" name="ischeck" {if $ischeck == 1}checked{/if}/><font color="purple">&nbsp;勾选后为多条件搜索：填写条件以英文的逗号','分隔</font>
+						</td>
+					</tr>
+					<tr>
+						<th style="text-align:center; width:80px;">昵称</th>
+						<td style="width:200px; text-align:center;">
+							<input name="nickname" type="text" value="{$sort['nickname']}" />
+						</td>
+						<td>
+							<input type="radio" value="2" name="ischeck" {if $ischeck == 2}checked{/if}/>
+						</td>
+					</tr>
+					<tr>
+						<th style="text-align:center; width:80px;">手机</th>
+						<td style="width:200px; text-align:center;">
+							<input name="mobile" type="text" value="{$sort['mobile']}" />
+						</td>
+						<td>
+							<input type="radio" value="3" name="ischeck" {if $ischeck == 3}checked{/if}/>
+						</td>
+					</tr>
+					<tr class="search-submit">
+						<td colspan="2"><button class="btn btn-primary pull-left span2" style='margin-left:95px;'><i class="icon-search icon-large"></i> 搜索</button></td>
+						<td>
+							<input type="radio" value="0" name="ischeck" {if $ischeck == 0}checked{/if}/><font color="purple">&nbsp;取消多条件搜索功能</font>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+    </div>
+    <div>
+        <form action="" method="post" class="form-horizontal form">
+			<table class="table table-hover">
+				<thead class="navbar-inner">
+				<tr>
+					<th>姓名</th>
+					<th>昵称</th>
+					<th>手机</th>
+					<th>积分</th>
+					<th>余额</th>
+					<th style="width:200px;">操作</th>
+				</tr>
+				</thead>
+				<tbody id="level-list">
+				{loop $fans $f}
+				<tr>
+					<td>{if empty($f['realname'])}--{else}{$f['realname']}{/if}</td>
+					<td>{if empty($f['nickname'])}--{else}{$f['nickname']}{/if}</td>
+					<td>{if empty($f['mobile'])}--{else}{$f['mobile']}{/if}</td>
+					<td><input class="form-control" style="width:100px;" type="text" id="credit1{$f['uid']}" name="credit1[{$f['uid']}]" value="{$f['credit1']}"></td>
+					<td><input class="form-control" style="width:100px;" type="text" id="credit2{$f['uid']}" name="credit2[{$f['uid']}]" value="{$f['credit2']}"></td>
+					<td>
+						<a onclick="save({$f['uid']}, {$f['credit1']}, {$f['credit2']});" title="修改">修改</a><span style="color:purple;" id="span{$f['uid']}"><span/>
+					</td>
+				</tr>
+				{/loop}
+				<tr>
+					<td colspan="6">
+						<input type="hidden" name="token" value="{$_W['token']}" />
+						<input name="submit" type="submit" class="btn btn-primary" value="批量更新">
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</form>
+        {$pager}
+    </div>
+
+</div>
+<script>
+function save(id){
+	var credit1 = 'credit1'+id;
+	var credit2 = 'credit2'+id;
+	var span = 'span'+id;
+	var credit1 = document.getElementById(credit1).value;
+	var credit2 = document.getElementById(credit2).value;
+	var span = document.getElementById(span);
+	$.post("{php echo $this->createWebUrl('fansmanager', array('op'=>'save'))}"
+		,{id:id, credit1:credit1, credit2: credit2}
+		,function(d){
+			if(d!=0){
+				span.innerHTML = '修改成功！';
+				setTimeout("cancel("+id+")", 2000);
+			} else {
+				span.style.color = 'red';
+				span.innerHTML = '修改失败！';
+			}
+	},"json");
+}
+
+function cancel(id){
+	var span = 'span'+id;
+	document.getElementById(span).innerHTML = '';
+}
+</script>
+{template 'common/footer'}

@@ -1,0 +1,544 @@
+@charset "utf-8";
+/*通用样式开始*/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td,a,span{
+	margin:0;
+	padding:0;
+}
+body, button, input, select, textarea{
+ 	font:12px/1.5 "Microsoft YaHei","SimSun","微软雅黑","宋体",tahoma, arial, \5b8b\4f53, sans-serif;
+}
+a{
+	color: #10419F;
+	text-decoration:none;
+}
+a:hover{
+	color: #407CEC;
+	text-decoration: none;
+}
+img{
+	border: 0;
+	vertical-align: middle;
+}
+p{
+	color: #666;
+	font-size: 2em;
+}
+.fam-fix{
+	font-family: "宋体";
+}
+/*通用样式结束*/
+img, object, embed, video {
+	max-width: 100%;
+}
+/*定义动画*/
+@-moz-keyframes fadeIn{
+	0%{opacity: 0;top: -20px;} /*初始状态 透明度为0*/
+	100%{opacity: 1;top:20px;}
+}
+@-webkit-keyframes fadeIn{
+	0%{opacity: 0;top: -20px;}
+	100%{opacity: 1;top: 20px;}
+}
+@-o-keyframes fadeIn{
+	0%{opacity: 0;top: -20px;}
+	100%{opacity: 1;top: 20px;}
+}
+@keyframes fadeIn{
+	0%{opacity: 0;top: -20px;}
+	100%{opacity: 1;top: 20px;}
+}
+/*调用动画*/
+.test{
+	-webkit-animation-name:fadeIn; /*动画名称*/
+	-webkit-animation-duration: 1s; /*动画持续时间*/
+	-webkit-animation-iteration-count: 1; /*动画次数*/
+	-webkit-animation-delay: 0s; /*延迟时间*/
+	-moz-animation-name:fadeIn;
+	-moz-animation-duration: 3s;
+	-moz-animation-iteration-count: 1;
+	-moz-animation-delay: 0s;
+	-o-animation-name:fadeIn;
+	-o-animation-duration: 3s;
+	-o-animation-iteration-count: 1;
+	-o-animation-delay: 0s;
+}
+
+/* IE 6 does not support max-width so default to width 100% */
+.ie6 img {
+	width:100%;
+}
+.fluid {
+	clear: both;
+	margin-left: 0;
+	width: 100%;
+	float: left;
+	display: block;
+}
+
+.fluidList {
+    list-style:none;
+    list-style-image:none;
+    margin:0;
+    padding:0;
+}
+
+/* Mobile Layout: 480px and below. */
+/*
+.gridContainer {
+	margin-left: auto;
+	margin-right: auto;
+	width: 86.45%;
+	padding-left: 2.275%;
+	padding-right: 2.275%;
+	clear: none;
+	float: none;
+}*/
+#div1 {
+}
+.zeroMargin_mobile {
+    margin-left: 0;
+}
+.hide_mobile {
+    display: none;
+}
+
+/* Tablet Layout: 481px to 768px. Inherits styles from: Mobile Layout. */
+
+@media only screen and (min-width: 481px) {
+/*
+.gridContainer {
+	width: 90.675%;
+	padding-left: 1.1625%;
+	padding-right: 1.1625%;
+	clear: none;
+	float: none;
+	margin-left: auto;
+}*/
+#div1 {
+}
+
+.zeroMargin_tablet {
+    margin-left: 0;
+}
+.hide_tablet {
+    display: none;
+}
+}
+
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+
+@media only screen and (min-width: 769px) {
+/*
+.gridContainer {
+	width: 88.5%;
+	max-width: 1232px;
+	padding-left: 0.75%;
+	padding-right: 0.75%;
+	margin: auto;
+	clear: none;
+	float: none;
+	margin-left: auto;
+}*/
+.zeroMargin_desktop {
+    margin-left: 0;
+}
+.hide_desktop {
+    display: none;
+}
+}
+
+/*页面样式开始*/
+.wrapper{
+	text-align: center;
+	margin-top: 80px;
+}
+/*header*/
+#logo{
+	position: relative;
+	top: 20px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	font-weight: normal;
+}
+#logo a{
+	color: #262626;
+	font-size: 1.2em;
+}
+#logo .lo_ico{
+	width: 104px;
+	height: 104px;
+	max-width: 104px;
+	max-height: 104px;
+}
+.sand_ico{
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 1s;
+	-moz-transition-property: -moz-transform;
+	-moz-transition-duration: 1s;
+	-webkit-animation: beat 4s linear infinite;
+	-moz-animation: beat 4s linear infinite;
+	-o-animation: beat 4s linear infinite;
+	animation: beat 4s linear infinite;
+}
+/*content*/
+#content{
+	width: 570px;
+	margin: 80px auto 0 auto;
+	overflow: hidden;/*解决左右浮动影响的高度自适应*/
+}
+.notecont{
+	width: 100%;
+	margin: 80px auto 0 auto;
+}
+#content .content-login{
+	float: left;
+	padding-right: 30px;
+	margin-right: 30px;
+	border-right: 1px solid #E1E1E1;
+}
+#content .friend-login{
+	float: left;
+	text-align: left;
+	margin-top: 50px;
+}
+.notecont h2{
+	margin-bottom: 20px;
+	color: #333;
+	font-size: 3em;
+	text-align: center;
+}
+.notecont .nextline{
+	margin: 20px 0 30px 0;
+	color: #333;
+	font-size: 1.4em;
+	text-align: center;
+}
+.golink{
+	font-size: 16px;
+}
+.transition{
+	-webkit-transition-duration: 0.2s,0.2s,0.2s;
+	-moz-transition-duration: 0.2s,0.2s,0.2s;
+	-o-transition-duration: 0.2s,0.2s,0.2s;
+	transition-duration: 0.2s,0.2s,0.2s;
+}
+.radius{
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	-o-border-radius:3px;
+	border-radius: 3px;
+}
+.w-input{
+	padding: 0 6px;
+	font-size: 14px;
+	border:1px solid #AEAEAE;
+	display: block;
+	outline: none;
+	resize:none;
+	vertical-align: middle;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.05) inset;
+}
+.w-input:hover{
+	border:1px solid #9EBADE;
+	background-color: #F7F7F7;
+}
+.w-input:focus{
+	border: 1px solid #2677DD;
+	background-color: #fff;
+}
+.w-input-resize{
+	width: 286px;
+	height: 40px;
+}
+/*验证码*/
+.w-captcode{
+	display: none;
+}
+.w-input-captcode{
+	display: inline-block;
+	width: 140px;
+	height: 40px;
+}
+#captcode{
+	width: 140px;
+	height: 40px;
+}
+/*合作方帐号登录*/
+.friend-login p{
+	margin-bottom: 10px;
+	color: #838383;
+}
+#sina-weibo{
+	background-color: #D93B3B;
+}
+#sina-weibo:hover{
+	text-shadow: 1px 1px 1px #630811;
+	background-color: #CF2929;
+}
+#qq{
+	background-color: #3897E7;
+}
+#qq:hover{
+	text-shadow: 1px 1px 1px #153B59;
+	background-color: #2B8BD9;
+}
+.login-list a{
+	margin-bottom: 10px;
+	padding-left: 8px;
+	width: 180px;
+	height: 40px;
+	line-height: 40px;
+	display: block;
+	color: #fff;
+}
+.login-list span{
+	margin-right: 8px;
+	width: 24px;
+	background-image: url(../images/ico.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	vertical-align: middle;
+}
+.a-ico-weibo{
+	height: 19px;
+	background-position: 0 -21px;
+}
+.a-ico-qq{
+	height: 21px;
+	background-position: 0 0;
+}
+/*登录*/
+.w-control-group{
+	text-align: left;
+	margin-bottom: 10px;
+	width: 300px;
+	height: 40px;
+	line-height: 40px;
+	color: #333;
+}
+#login-error{
+	color: #FF3838;
+	display: none;
+}
+#pw-cb{
+	vertical-align: middle;
+}
+#rm-pw{
+	vertical-align: middle;
+	margin-left: 5px;
+}
+#pass-fgtpwd{
+	float: right;
+}
+.w-btn{
+	width: 160px;
+	color: #fdfdfd;
+	font-size: 16px;
+	height: 40px;
+	line-height: 18px;
+	padding: 10px 15px;
+	background-color: #3897E7;
+	cursor: pointer;
+	border: none;
+	outline: none;
+}
+.w-btn:hover{
+	text-shadow: 1px 1px 1px #153B59;
+	background-color: #2B8BD9;
+}
+.sign{
+	color: #888;
+	margin-left: 20px;
+}
+/*footer*/
+#footer{
+	text-align: center;
+	width: 100%;
+	margin: 60px 0 10px 0;
+}
+#footer p{
+	color: #adadad;
+	font-size: 12px;
+}
+
+/*登录成功和失败*/
+.alertbody{
+	margin: 60px auto;
+	padding: 20px;
+	width: 500px;
+}
+#sucbody{
+	display: none;
+}
+#wrobody{
+	display: block;
+}
+.alert_right{
+	padding: 6px 0;
+	min-height: 70px;
+	height: auto !important;
+	line-height: 190%;
+	font-size: 18px;
+	text-align: left;
+}
+.alertico{
+	float: left;
+	margin-right: 10px;
+	width: 70px;
+	height: 70px;
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+.sucico{
+	background: url(../images/success.png);
+}
+.wrongico{
+	background: url(../images/wrong.png);
+}
+.alert01{
+	color: #333;
+	font-size: 18px;
+}
+.alert01 em{
+	font-style: normal;
+	font-weight: 900;
+}
+.alert02 a{
+	font-family: "SimSun","宋体";
+	font-size: 14px;
+}
+/*定义动画*/
+/* Webkit, Chrome and Safari */
+@-webkit-keyframes boost{
+	0% {
+		-webkit-transform:scale(0,0);
+	}
+	100%{
+		-webkit-transform:scale(1,1);
+	}
+}
+@-moz-keyframes boost{
+	0% {
+		-moz-transform:scale(0,0);
+	}
+	100%{
+		-moz-transform:scale(1,1);
+	}
+}
+@-o-keyframes boost{
+	0% {
+		-o-transform:scale(0,0);
+	}
+	100%{
+		-o-transform:scale(1,1);
+	}
+}
+@keyframes boost{
+	0% {
+		transform:scale(0,0);
+	}
+	100%{
+		transform:scale(1,1);
+	}
+}
+/*调用*/
+.sucboost{
+	-webkit-animation: boost 600ms ease-out;
+	-moz-animation: boost 800ms ease-out;
+	-o-animation: boost 800ms ease-out;
+	animation: boost 800ms ease-out
+}
+/*响应式node*/
+@media screen and (max-width: 700px) and (min-width: 600px) {
+	.notecont h2{
+		font-size: 2.0em;
+	}
+	p{
+		font-size: 1.5em;
+	}
+	.golink{
+	font-size: 14px;
+	}
+	.notecont .nextline{
+		font-size: 1.2em;
+	}
+	.wrapper{
+	margin-top: 40px;
+	}
+	.notecont .alert01{
+		font-size: 16px;
+	}
+	.notecont .alert02 a{
+		font-size: 12px;
+	}
+
+}
+@media screen and (max-width: 600px) {
+	#div1 .notecont{
+		margin: 60px auto 0 auto;
+	}
+	.notecont h2{
+		font-size: 1.5em;
+	}
+	p{
+		font-size: 1.1em;
+	}
+	.golink{
+	font-size: 12px;
+	}
+	.notecont .nextline{
+		font-size: 1em;
+	}
+	.wrapper{
+	margin-top: 35px;
+	}
+	.notecont .alert01{
+		font-size: 14px;
+	}
+	.notecont .alert02 a{
+		font-size: 12px;
+	}
+	.alert_right {
+		text-align: center;
+	}
+	.alertbody{
+		width: 80%;
+	}
+	.alertico{
+		float: none;
+	}
+}
+/*定义*/
+/* Webkit, Chrome and Safari */
+@-webkit-keyframes beat{
+	0%{-webkit-transform:scale(1)}
+	25%{-webkit-transform:scale(0.8)}
+	50%{-webkit-transform:scale(1)}
+	75%{-webkit-transform:scale(0.8)}
+	100%{-webkit-transform:scale(1)}
+}
+@-moz-keyframes beat{
+	0%{-moz-transform:scale(1)}
+	25%{-moz-transform:scale(0.8)}
+	50%{-moz-transform:scale(1)}
+	50%{-moz-transform:scale(1)}
+	75%{-moz-transform:scale(0.8)}
+	100%{-moz-transform:scale(1)}
+}
+@-o-keyframes beat{
+	0%{-o-transform:scale(1)}
+	25%{-o-transform:scale(0.8)}
+	50%{-o-transform:scale(1)}
+	75%{-o-transform:scale(0.8)}
+	100%{-o-transform:scale(1)}
+}
+@keyframes beat{
+	0%{transform:scale(1)}
+	25%{transform:scale(0.8)}
+	50%{transform:scale(1)}
+	75%{transform:scale(0.8)}
+	100%{transform:scale(1)}
+}
+
+

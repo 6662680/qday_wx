@@ -1,0 +1,185 @@
+{template 'common/header'}
+{if $op == 'display' || $op == 'inkind2' || $op == 'inkind3'}
+<ul class="nav nav-tabs">
+	<li {if $op == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('credit', array('op' => 'display'))}">卡密类</a></li>
+	<li {if $op == 'inkind2'}class="active"{/if}><a href="{php echo $this->createWebUrl('credit', array('op' => 'inkind2'))}">现场类</a></li>
+	<li {if $op == 'inkind3'}class="active"{/if}><a href="{php echo $this->createWebUrl('credit', array('op' => 'inkind3'))}">邮寄类</a></li>
+</ul>
+<div class="main">
+	<form class="form-horizontal form" action="" method="post" onsubmit="return formcheck(this)">
+		<input name="weid" type="hidden" value="{$weid}">
+		<h4>奖品兑换管理</h4>
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th class="row-hover span2">奖品名称<i></i></th>
+					<th class="row-hover span2">兑换人<i></i></th>
+					<th class="row-hover span2">发放状态<i></i></th>
+					<th class="row-hover span3">兑换日期<i></i></th>
+					
+					<th class="row-hover" style="min-width:370px;">操作</th>
+					<th class="row-hover span1" style="text-align:right;width:100px;"></th>
+				</tr>
+			</thead>
+			<tbody id="status-items">
+			{loop $list $item}
+				<tr>
+					<td>{$item['title']}</td>
+					<td>{$item['realname']}</td>
+					<td>
+						{if $item['inkind'] == 1}
+							<a class="label label-success" href="">卡密已发放</a>
+						{else}
+							{if empty($item['status'])}
+							<a class="label label-error" href="{php echo $this->createWebUrl('Prizecode', array('op'=>'verify', 'status' => 1,  'id' => $item['id']));}">实物未发放
+							</a>
+							{else}
+							<a class="label label-success" href="{php echo $this->createWebUrl('Prizecode', array('op'=>'verify', 'status' => 0, 'id' => $item['id']));}">实物已发放
+							</a>
+							{/if}
+						{/if}
+
+					</td>
+					<td>{php echo date('Y-m-d H:m:s', $item['createtime']);}</td>
+					<td>
+						<span>
+							<a href="{php echo $this->createWebUrl('credit',array('op'=>'detail','openid' => $item['openid'],'id'=>$item['id']))}">查看</a>
+							<a href="{php echo $this->createWebUrl('credit',array('op'=>'delete','id'=>$item['id']))}" onclick="return confirm('此操作不可恢复，确认吗？');">删除</a>
+						</span>
+					</td>
+				</tr>
+			{/loop}
+			</tbody>
+		</table>
+	</form>
+</div>
+{elseif $op == 'detail'}
+<ul class="nav nav-tabs">
+	<li><a>兑换信息</a></li>
+</ul>
+<br/>
+<form class="form-horizontal form" action="" method="post">
+	<div class="panel panel-default">
+		{if $item['inkind'] != 1}
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">是否邮寄</label>
+				<div class="col-sm-5">
+					{if $item['inkind'] == 2}
+					<input type="radio" name="status" value="0" {if $item['status']==0}checked{/if}/>未发放&nbsp;&nbsp;
+					<input type="radio" name="status" value="1" {if $item['status']==1}checked{/if}/>已发放&nbsp;&nbsp;
+					{else}
+					<input type="radio" name="status" value="0" {if $item['status']==0}checked{/if}/>未邮寄&nbsp;&nbsp;
+					<input type="radio" name="status" value="1" {if $item['status']==1}checked{/if}/>已邮寄&nbsp;&nbsp;
+					{/if}
+				</div>
+			</div>
+		</div>
+		{/if}
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">奖品名称</label>
+				<div class="col-sm-5">
+					<input type="text" name="title" value="{$item['title']}" class="form-control" readonly = "readonly"/>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑换日期</label>
+				<div class="col-sm-5">
+					<input type="text" name="createtime" value="{php echo date('Y-m-d H:m:s', $item['createtime']);}" class="form-control" readonly = "readonly"/>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑换人</label>
+				<div class="col-sm-5">
+					<input type="text" name="realname" value="{$item['realname']}" class="form-control" readonly = "readonly"/>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">手机号码</label>
+				<div class="col-sm-5">
+					<input type="text" name="mobile" value="{$row['mobile']}" class="form-control" readonly = "readonly"/>
+				</div>
+			</div>
+		</div>
+		{if $item['inkind'] == 1}
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑换码</label>
+				<div class="col-sm-5">
+					<input type="text" name="code" value="{$item['code']}" class="form-control" readonly = "readonly"/>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑换方式</label>
+				<div class="col-sm-5">
+					<input type="text" name="url" value="{$item['url']}" class="form-control" readonly = "readonly"/>
+				</div>
+			</div>
+		</div>
+		{/if}
+		{if $item['inkind'] == 2}
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑换方式</label>
+				<div class="col-sm-5">
+					<input type="text" name="url" value="{$item['url']}" class="form-control" readonly = "readonly"/>           
+		       		<input type="hidden" name="inkind2" value="2" class="form-control" readonly = "readonly"/> 
+				</div>
+			</div>
+		</div>
+		{/if}
+		{if $item['inkind'] == 3}
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">地址</label>
+				<div class="col-sm-5">
+					<input type="text" name="address" value="{$row['address']}" class="form-control" readonly = "readonly"/>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">邮箱</label>
+				<div class="col-sm-5">
+					<input type="text" name="mail_to" value="{$row['email']}" class="form-control" placeholder="填写收件人邮箱"/>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">邮件标题</label>
+				<div class="col-sm-5">
+					<input type="text" name="title1" value="{$row['title']}" class="form-control" placeholder="填写邮件标题"/>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">邮件内容</label>
+				<div class="col-sm-5">
+					<textarea style="height:80px;" name="content" class="form-control" cols="70" id="" placeholder="填写邮件内容，包含快递单号等">{$row['content']}</textarea>
+				</div>
+			</div>
+		</div>
+		{/if} 
+	</div>
+	<div class="form-group col-sm-12">
+		<input type="hidden" name="id" value="{$item['id']}" />
+		<button type="button" onclick="history.go(-1)" class="btn btn-primary span3" >返回</button>
+		{if $item['inkind'] == 3 || $item['inkind'] == 2}
+		<button type="submit" class="btn btn-primary span3" name="submit" value="提交">提交</button>
+		{/if}
+		<input type="hidden" name="token" value="{$_W['token']}" />
+	</div>
+</form>
+{/if}
+{template 'common/footer'}

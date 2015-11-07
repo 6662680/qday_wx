@@ -1,0 +1,142 @@
+{template 'common/header'}
+{if $op== 'display'}
+<ul class="nav nav-tabs">
+	<li {if $op == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('award', array('op' => 'display'))}">奖品管理</a></li>
+	<li {if $op == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('award', array('op' => 'post'))}">奖品添加</a></li>
+</ul>
+<div class="main">
+<div style="margin:0;" class="alert alert-info"><i class="icon-warning-sign"></i>&nbsp;奖品信息。</div>
+	<form class="form-horizontal form" action="" method="post" onsubmit="return formcheck(this)">
+		<input name="weid" type="hidden" value="{$weid}">
+		<h4>奖品管理</h4>
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th class="row-hover span2">奖品名称<i></i></th>
+					<th class="row-hover span2">奖品数量<i></i></th>
+					<th class="row-hover span2">奖品类型<i></i></th>
+					<th class="row-hover span2">创建日期<i></i></th>
+					<th class="row-hover" style="min-width:370px;">操作</th>
+					<th class="row-hover span1" style="text-align:right;width:100px;"></th>
+				</tr>
+			</thead>
+			<tbody id="status-items">
+			{loop $list $item}
+				<tr>
+					<td>{$item['title']}</td>
+					<td>{$item['number']}</td>
+					<td>
+						{if $item['inkind']==1}卡密类{/if}
+						{if $item['inkind']==2}现场类{/if}
+						{if $item['inkind']==3}邮寄类{/if}
+					</td>
+					<td>{php echo date('Y-m-d', $item['createtime']);}</td>
+			
+					<td>
+						<a href="{php echo $this->createWebUrl('award',array('op'=>'post','id'=>$item['id'],'inkind'=>$item['inkind']))}">编辑</a>
+						<a onclick="return confirm('确认删除吗？');return false;" href="{php echo $this->createWebUrl('award',array('op'=>'delete','id'=>$item['id']))}">删除</a>
+					</td>
+				</tr>
+			{/loop}
+			</tbody>
+		</table>
+	</form>
+</div>
+{elseif $op == 'post'}
+<ul class="nav nav-tabs">
+	<li {if $op == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('award', array('op' => 'display'))}">奖品管理</a></li>
+	<li {if $op == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('award', array('op' => 'post'))}">奖品添加</a></li>
+</ul>
+
+<form class="form-horizontal form" action="" method="post">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">奖品类型</label>
+					<div class="col-sm-5" id="award-inkind">
+						<input type="radio" name="inkind"  value="1" {if $item['inkind'] == 1 || empty($item)} checked="checked"{/if}{if !empty($item)} disabled=true{/if} />				
+						卡密&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="inkind"  value="2" {if $item['inkind'] == 2} checked="checked"{/if}{if !empty($item)} disabled=true{/if} />				
+						现场&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="inkind"  value="3" {if $item['inkind'] == 3} checked="checked"{/if}{if !empty($item)} disabled=true{/if} />				
+						邮寄
+					</div>
+				</div>
+				<div class="form-group" id="div2">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">奖品名称</label>
+					<div class="col-sm-5">
+						<input type="text" value="{$item['title']}" class="form-control" name="title" placeholder="填写奖品名称">
+					</div>
+				</div>
+				<div class="form-group" id="div3">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">奖品数量</label>
+					<div class="col-sm-5">
+						<input type="text" name="number" value="{$item['number']}" class="form-control" placeHolder="请输入奖品总数量,卡密可不填"/><span>(卡密不用填,以上传的兑换码数量为准)</span>	
+					</div>
+				</div>
+				<div class="form-group" id="div4">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑换积分</label>
+					<div class="col-sm-5">
+						<input type="text" name="integral" value="{$item['integral']}" class="form-control" placeHolder="请输入所需兑换积分"/>	
+					</div>
+				</div>
+				<div class="form-group" id="div5">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">奖品描述</label>
+					<div class="col-sm-5">
+						<textarea style="height:60px;" name="description" class="form-control" cols="70" id="" placeholder="填写奖品描述，颜色、类型、规格等">{$item['description']}</textarea>
+					</div>
+				</div>
+				{if $item['inkind'] == 1 || empty($item)}
+				<div class="form-group" id="div6">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑 换 码</label>
+					<div class="col-sm-5">
+						<textarea style="height:80px;" class="form-control" cols="70" id="" name="activation_code" placeholder="填写兑换码或者其他密文类SN码，一行一个">{$acode}</textarea>
+					</div>
+				</div>
+				{/if}
+				{if $item['inkind'] != 3 || empty($item)}
+				<div class="form-group" id="div7">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑换方式</label>
+					<div class="col-sm-5">
+						<input type="text" id="" class="form-control" value="{$item['activation_url']}" name="activation_url" placeholder="填写激活地址或者其他领奖方法">
+					</div>
+				</div>
+				{/if}
+				<div class="form-group" id="div8">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">兑换日期</label>
+					<div class="col-sm-5">
+						{php echo tpl_form_field_daterange('datelimit', array('starttime'=>$item['starttime'],'endtime'=>$item['endtime']), array('time'=>true,'range'=>false))}
+					</div>
+				</div>
+				<div class="form-group" id="div9">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">奖品图片</label>
+					<div class="col-sm-5">
+						{php echo tpl_form_field_image('thumb', $item['thumb']);}
+						<span class="help-block">建议尺寸134*134</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+			<input type="hidden" name="id" value="{$item['id']}" />
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+		</div>
+	</form>
+	<script type="text/javascript">
+		//奖品类型切换
+		$("#award-inkind input").click(function(){
+			if($(this).val() == '1') {
+				$("#div7").show();
+				$("#div6").show();
+			} else if($(this).val() == '2'){
+				$("#div7").show();
+				$("#div6").hide();
+			} else {
+				$("#div6").hide();
+				$("#div7").hide();
+			}
+		});
+	</script>
+{/if}
+{template 'common/footer'}

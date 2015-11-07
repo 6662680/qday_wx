@@ -1,0 +1,118 @@
+{template 'common/header'}
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/reg/jquery-1.6.2.min.js"></script>
+<style>
+    #exec_target{display:none;width:0;height:0;}
+    #feedback{width:100%;margin:0 auto;}
+    #feedback img{float:left;width:150px;height:150px;} 
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#upfile").change(function(){
+        if($("#upfile").val() != '') $("#submit_form").submit();
+    });
+    $("#exec_target").load(function(){
+        var data = $(window.frames['exec_target'].document.body).find("textarea").html();
+        if(data != null){
+            $("#feedback").append(data.replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+            $("#upfile").val('');
+        }
+    });
+});
+</script>
+<div class="main">
+    <ul class="nav nav-tabs">
+        <li><a href="{php echo $this->createWebUrl('vote', array('id' => $_GET['rid']));}">管理投票</a></li>
+        <li><a href="{php echo $this->createWebUrl('voice', array('id' => $_GET['rid']));}">管理投稿</a></li>
+        <li class="active"><a href="{php echo $this->createWebUrl('post', array('rid' => $_GET['rid']));}">添加投票</a></li>
+    </ul>{php if(empty($_GET['id']))$rand=random(15,false);}
+<form id="submit_form" method="post" class="form-horizontal form" action="./index.php" target="exec_target" enctype="multipart/form-data">
+<input type="hidden" name="c" value="site" />
+<input type="hidden" name="a" value="entry" />
+<input type="hidden" name="m" value="xhw_picvote" />
+<input type="hidden" name="do" value="upimg" />
+<input type="hidden" name="id" value="{$_GPC['rid']}" />
+<input type="hidden" name="iid" value="{$_GPC['id']}" />
+<input type="hidden" name="web" value="{php echo $rand;}" />
+  <div class="panel panel-default">
+<div class="panel-heading">照片管理（点击照片即可删除）</div>
+<div class="panel-body">
+<table class="tb">
+ <tr><td><input type="file" name="upfile" id="upfile">        <!-- 添加上传文件 -->
+   </form>
+         <iframe id="exec_target" name="exec_target"></iframe>   <!-- 提交表单处理iframe框架 -->
+          <div id="feedback">{if $img['0']!=''}{php for($i=0; $i<count($img);$i++)echo"<a href='site.php?act=module&rid=".$_GET['rid']."&id=".$_GET['id']."&name=xhw_picvote&do=post&weid=1&imgid=".$i."'><img src=\"".$img[$i]."\"></a>";}{/if}</div>  
+           </td>
+       </tr> 
+</table>  </div> </div>
+<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="{$_GPC['id']}">
+<input type="hidden" name="rid" value="{$_GPC['rid']}">
+<input type="hidden" name="c" value="site" />
+<input type="hidden" name="a" value="entry" />
+<input type="hidden" name="m" value="xhw_picvote" />
+<input type="hidden" name="do" value="post" />
+<input type="hidden" name="web" value="{php echo $rand;}" />
+<div class="clearfix">
+<form class="form-horizontal form" action="" method="post" enctype="multipart/form-data">
+    <div class="panel panel-default">
+        <div class="panel-heading">基本信息</div>
+        <div class="panel-body">
+      <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">简介</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="title" value="{$subject['title']}">
+                         <div class="help-block">参赛照片简介</div>
+                    </div>
+                </div>
+      <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">名字</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="nickname" value="{$subject['nickname']}">
+                         <div class="help-block">参赛照片名字</div>
+                    </div>
+                </div>
+        <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">票数</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="num" value="{$subject['num']}">
+                         <div class="help-block">自定义票数</div>
+                    </div>
+                </div>
+        <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">人气</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="sharenum" value="{$subject['sharenum']}">
+                         <div class="help-block">自定义人气</div>
+                    </div>
+                </div>
+        <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">手机号</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input type="text" class="form-control" placeholder="" name="phone" value="{$subject['phone']}">
+                         <div class="help-block">手机号备用，可留空</div>
+                    </div>
+                </div>                              
+           
+            <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">审核状态</label>
+            <div class="col-sm-9 col-xs-12">
+              <label class="radio-inline">
+           <input type="radio" name="pass" value="1" {if $subject['pass'] == 1} checked="checked"{/if}/>通过</label>
+         <label class="radio-inline">
+             <input type="radio" name="pass" value="0" {if $subject['pass'] == 0} checked="checked"{/if}/>未通过</label>
+               <div class="help-block">通过审核后将显示在活动页面，如需重新上传照片，请先设置成未通过。</div>
+            </div>
+        </div>
+  
+              
+	  </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-12">
+            <input name="submit" type="submit" value="提交" class="btn btn-primary col-lg-1">
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </div>
+</form>
+</div>
+{template 'common/footer'}

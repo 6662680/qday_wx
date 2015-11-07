@@ -1,0 +1,213 @@
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>{$category['name']}</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+	<script src="../addons/weilive/style/js/baiduposition.js"></script>
+	<style>
+	a{
+		-webkit-border-radius: 4px 0 4px 0;
+		border-radius: 5px 5px 5px 5px;
+	}
+	</style>
+	<style>
+	.pagination li{
+		margin-left:7px;
+		background-color: #fa614b;
+		display: inline-block;
+		padding: 0 5px;
+		border-radius: 5px;
+		width:22%;
+		text-align:center;
+	}
+	.pagination li .pager-nav{
+		color: #fff;
+	}
+	</style>
+</head>
+<body> 
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+                <a class="link app-back" href="{php echo $this->createMobileUrl('index');}">
+                    <i class="icon-back"></i>
+                </a>
+
+                <h1 class="title sliding">{$category['name']}</h1>
+                <a class="link user" href="{php echo $this->createMobileUrl('home');}">
+                    <i class="icon-user"></i>
+                </a>
+            </div>
+                    <nav class="m-filter">
+                        <a {if $styles==1}class='z-sel'{/if} href="{php echo $this->createMobileUrl('list', array('op'=>'level', 'cid'=>$cid, 'keyword'=>'keyword'))}"><span>人气排行</span></a>
+                        <a {if $styles==2}class='z-sel'{/if} onclick="baiduPosition({$cid});" style="cursor:pointer;"><span>附近优先</span></a>
+                        <a id="bt4" {if $styles==3}class='z-sel'{/if} href="javascript:void(0);" ><span>{if empty($location_a)}地区筛选{else}{$location_a}{/if}</span></a>
+                        <a id="bt5" {if $styles==4}class='z-sel'{/if} href="javascript:void(0);"><span>{if empty($cname)}下级分类{else}{$cname}{/if}</span></a>
+                    </nav>
+        </header>
+        <section class="app-wrap" id="js_wrap">
+            <div class="inner">
+                <div class="m-list s-pdt">
+                    <div class="shops">
+						{if $gps == true}
+							{if $op=='level'}
+								{if !empty($activities)}
+								{loop $activities $act}
+									{if !empty($store[$act['storeid']]['id'])}
+									<dl>
+										<dt>
+											<a href="{php echo $this->createMobileurl('activity', array('id'=>$store[$act['storeid']]['id'], 'op'=>'more'));}">
+											   {$store[$act['storeid']]['title']}
+												<div class="u-grade s-small">
+													<div class="value" style="width:{php echo 20*$store[$act['storeid']]['level']}%;"></div>
+												</div>
+												{if $styles==2}<span style="position:absolute;right:1px;">{$s['dis']}km</span>{/if}
+												<!--<span class="dist">500m</span>-->
+											</a>
+										</dt>
+										
+											<dd>
+												<a href="{php echo $this->createMobileurl('activity', array('id'=>$act['id'], 'op'=>'detail'));}">
+													<img src="{$_W['attachurl']}{$act['thumb']}" onError="" class="pic" alt="暂无图片">
+													<div class="box">
+														<div class="content">
+															<div class="name f-toe">{$act['title']}</div>
+															<div class="number">
+																{if $act['num']==-1}无限量{else}{$act['num']}{/if}<div class="right"><span>{$act['catch']}</span>人领取</div>
+															</div>
+															<div class="money">
+																<span>{$act['kill_price']}</span>元<i>{$act['price']}元</i>
+															</div>
+														</div>
+													</div>
+												</a>
+											</dd>
+									</dl>
+									{/if}
+								{/loop}
+							{else}
+							<span>暂无数据</span>
+							{/if}
+							{else}
+							{if !empty($stores)}
+								{loop $stores $s}
+									<dl>
+										<dt>
+											<a href="{php echo $this->createMobileurl('activity', array('id'=>$s['id'], 'op'=>'more'));}">
+											   {$s['title']}
+												<div class="u-grade s-small">
+													<div class="value" style="width:{php echo 20*$s['level']}%;"></div>
+												</div>
+												{if $styles==2}<span style="position:absolute;right:1px;">{$s['dis']}km</span>{/if}
+												<!--<span class="dist">500m</span>-->
+											</a>
+										</dt>
+										{loop $activities $act}
+											{if $act['storeid']==$s['id']}
+											<dd>
+												<a href="{php echo $this->createMobileurl('activity', array('id'=>$act['id'], 'op'=>'detail'));}">
+													<img src="{$_W['attachurl']}{$act['thumb']}" onError="" class="pic" alt="暂无图片">
+													<div class="box">
+														<div class="content">
+															<div class="name f-toe">{$act['title']}</div>
+															<div class="number">
+																{if $act['num']==-1}无限量{else}{$act['num']}{/if}<div class="right"><span>{$act['catch']}</span>人领取</div>
+															</div>
+															<div class="money">
+																<span>{$act['kill_price']}</span>元<i>{$act['price']}元</i>
+															</div>
+														</div>
+													</div>
+												</a>
+											</dd>
+											{/if}
+										{/loop}
+									</dl>
+								{/loop}
+							{else}
+							<span>暂无数据</span>
+							{/if}
+							{/if}
+						{else}
+							<span>无法获取到您的位置，请开启位置服务</span>
+						{/if}
+						<span style="display:block;margin-top:10px;width:100%; height:20px;"></span>
+				</div>
+				{$pager}
+				<br/>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+<script src="../addons/weilive/style/js/zepto.min.js"></script>
+<script src="../addons/weilive/style/js/app.js"></script>
+<!--<script>
+    $(function () {
+        var $fix = $("#js_fix");
+        var $box = $("#js_wrap");
+        $(document).on('touchstart',function(){
+            $fix.css('top', 0);
+        }).on('touchend', function () {
+            $fix.css('top', $box.scrollTop());
+        });
+    });
+</script>-->
+<script>
+
+function positions(json, cid){
+	window.location.href = "{php echo $this->createMobileurl('list', array(), true)}&cid="+cid+"&lng="+json['lng']+"&lat="+json['lat'];
+}
+
+    $(function () {
+        $("#bt4").on('click', function () {
+			var data = {};
+			data = {$data};
+			app.select(data,function (text,value){
+				if(text!='关闭'){getCourse(text);}
+			});
+        });
+		
+	function getCourse(text){
+
+		$.ajax({
+			type: "POST",
+			url: "{php echo $this->createMobileurl('list',array('cid'=>$cid, 'op'=>'zone'))}",
+			data: {text: text},
+			dataType: "json",
+			
+			success: function (d) {
+				var data = {};
+				data = d;
+				app.select(data,function(text,value){
+					if(text!='关闭'){
+						window.location = value;
+					}
+				})
+			},
+			
+			error: function (xml, text, thrown){
+				alert("出错啦!");
+			}
+		});
+
+	}
+	
+	$("#bt5").on('click', function () {
+		var datas = {};
+		datas = {$datas};
+		app.select(datas, function (text, value) {
+			if(text!='关闭'){
+				window.location.href = value;
+			}
+		});
+	});
+});
+</script>
+</html>

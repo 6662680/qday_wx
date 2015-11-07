@@ -1,0 +1,194 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>《{$title}》演唱:{$nickname}</title>
+<meta name="format-detection" content="telephone=no">
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../addons/xhw_voice/template/mobile/skjs/jquery.js"></script>
+<script type="text/javascript" src="../addons/xhw_voice/template/mobile/skjs/common.js"></script>
+<link href="../addons/xhw_voice/template/mobile/skcss/style.css" type="text/css" rel="stylesheet"/>
+<link href="../addons/xhw_voice/template/mobile/skcss/992779.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../addons/xhw_voice/template/mobile/skcss/16701464.js"></script>
+<script type="text/javascript" src="../addons/xhw_voice/template/mobile/skcss/1548170.masonry.min.js"></script>
+<script type="text/javascript" src="../addons/xhw_voice/template/mobile/skcss/3714123.js"></script>
+<style type="text/css">
+#mbutton{padding:15px 10px 15px 10px; overflow:hidden; border-bottom:1px #DDD solid;}
+#mbutton > span{float:right; display:inline-block; background:#58a3ff; border:1px #63a0eb solid; color:#FFF; height:30px; line-height:30px; padding:0 10px; margin-left:10px;}
+#mcover{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0, 0, 0, 0.7);display:none;z-index:20000;}
+#mcover img{position:fixed;right: 18px;top:5px;width:260px;height:180px;z-index:20001;}
+.divcss{margin:0 auto;width:90%} 
+.p4 {left:0px;z-index:999;height: 49px;background-color: #444;width: 100%;text-align: center;position: fixed;bottom: 0px;}
+.p4 a{line-height:49px; color:#fff; font-size:14px; text-decoration:none; }
+</style>
+</head>
+<body>
+<div id="wrapper">
+    <dl id="header">
+        <dt><a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$rid))}"><img src="../attachment/{$logo}"/></a></dt>
+        <dd><span><em></em><em></em><em></em></span><strong><a href="{$submit_url}"><font color="#fff">我要报名</font></a></strong></dd>
+    </dl>
+    <div id="menu">
+        <ul>
+            <li><a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$rid))}">返回首页</a></li>
+            <li><a href="{php echo $this->createmobileUrl('top',array('do'=>'top', 'id'=>$rid))}">排行榜</a></li>
+            <li><a href="{php echo $this->createmobileUrl('my',array('do'=>'my', 'id'=>$rid))}">我的主页</a></li>
+        </ul>
+    </div>
+    <script>(function(){var A=$('#menu');$('#header dd span').click(function(){if(A.css('display')=='none') A.show();else A.hide()})})();</script>
+    <div id="main">
+        <div class="adb_0">
+            <script>step_ad(0)</script>
+        </div>
+        <h1 class="ptitle fc1"><strong class="">《{$title}》演唱:{$nickname}</strong><small class="fc4"><b>编号ID:{$id} 已有<font color="red">{$num}票</font>支持 人气：{$sharenum}</b></small></h1>
+        <div class="adb_1">
+            <!--广告 -->
+        </div>
+        <div align="center">
+        <div style="position: relative;">
+  <div style="position: absolute;">
+   <a href="#" id="start" onclick="play('{$mp3}');this.onclick=function(){play2()}"><img id="img" src="../addons/xhw_voice/template/mobile/skpicture/1.png" width="90%"/></a>
+  </div>
+{if strstr($avatar,"http")}<img src="{$avatar}" width="90%"/>{else}<img src="../attachment/{$avatar}" width="90%"/>{/if}
+</div>
+        </div>
+        <div class="adb_2">
+        <!--广告 -->
+        </div>
+        <ul class="b_page">
+            <li class="fl"><a href="{$votelink}"><b>投  一 票</b></a></li>
+            <li class="fr"><a href="{$rules_url}"><b>活动说明</b></a></li>
+        </ul>
+        <div id="mcover" onclick="$(this).hide()"><img src="addons/site/template/image/guide.png"></div>
+        <div class="adb_3">
+        <!--广告 -->
+        <div align="center"> 
+      {if $arr['0']['adpass']}{php echo htmlspecialchars_decode($arr['0']['ad']);} {elseif $arr['0']['adpic']!=""}
+       <a href="{$arr['0']['adlink']}"><img src="../attachment/{$arr['0']['adpic']}" width="100%"/></a>{/if}
+        </div>
+         <!--广告 -->
+        </div>
+        <div class="c_box box">
+            <h3><a href="{$rule_url}" class="fr fc1">想出现在这吗</a><strong class="fc3">朋友圈人气榜</strong></h3>
+            <div>
+<div class="container">
+    <div id="images" style="position: relative; height: 1129px; " class="masonry">
+                    {loop $toplist $row}
+                    <div class="items"><a href="{php echo $this->createmobileUrl('item',array('do'=>'item', 'id'=>$row['id']))}">{if strstr($row['avatar'],"http")}<img src="{$row['avatar']}">{else}<img src="../attachment/{$row['avatar']}">{/if}</a><span>{$row['sharenum']}人气</span><p>ID:{$row['id']} {$row['title']}</p></div>
+                {/loop}
+    </div>
+    </div>
+            </div>
+        </div>
+        <div class="adb_4">
+        <!--广告 -->
+        </div>
+    <script>
+$(function() {
+    if(!navigator.userAgent.match(/Android/i)) {
+        $(".contacts").click(function() {
+            $('#mcover').show();
+            return false;
+        });
+    }
+});
+</script>
+ <!--<script src="../addons/xhw_voice/template/mobile/play/skjs/main.js"></script> -->
+<script type="text/javascript">
+    function play(url,stop){
+        var audio = document.createElement('audio');
+        var source = document.createElement('source');
+        var oImg = document.getElementById('img');  
+        oImg.src = '../addons/xhw_voice/template/mobile/skpicture/2.png';   
+        source.type = "audio/mpeg";
+        source.type = "audio/mpeg";
+        source.src = url;
+        source.autoplay = "autoplay";
+        source.controls = "controls";
+        audio.appendChild(source);
+        audio.play();
+        $('.btn').hide();
+        $('.stop').show();
+
+        };
+      function play2(){
+        var link = document.getElementById('start');  
+        link.href = "{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}";  
+        }
+</script>
+{php require_once IA_ROOT."/addons/xhw_voice/jssdk.class.php";$weixin = new jssdk($jie='0',$url='');$wx = $weixin->get_sign();}
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>           
+<script type="text/javascript">
+  wx.config({
+      appId: "{$wx['appId']}",
+      timestamp: {$wx['timestamp']},
+      nonceStr: "{$wx['nonceStr']}",
+      signature: "{$wx['signature']}",
+      jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+      ]
+  });
+  wx.ready(function () {
+  //分享朋友
+  wx.onMenuShareAppMessage({
+      title: '{$nickname}正在参加{$title_a},投票ID:{$id}',
+      desc: '{$nickname}正在参加{$title_a},投票ID:{$id},赶快为TA投上一票吧！',
+      link: "{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}",
+      imgUrl: '{$avatar}',
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        window.location.href ='{php echo $this->createmobileUrl('share',array('do'=>'share', 'id'=>$id, 'rid'=>$rid, 'from'=>'item'));}';//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: '{$nickname}正在参加{$title_a},投票ID:{$id},赶快为TA投上一票吧！',
+      link:"{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}",
+      imgUrl:'{$avatar}',
+      trigger: function (res) {
+        //alert('用户点击分享到朋友圈');
+      },
+      success: function (res) {
+        window.location.href ='{php echo $this->createmobileUrl('share',array('do'=>'share', 'id'=>$id, 'rid'=>$rid, 'from'=>'item'));}';//分享成功回调
+      },
+      cancel: function (res) {
+          //window.location.href =adurl;
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });   
+    
+    
+  });
+</script>
+
+        <div id="footer">
+        {$title_a} @{$_W['account']['name']}
+        </div>
+        <br></br> <br></br>
+        <div style="display:none">
+{php echo htmlspecialchars_decode($cnzz);}
+        </div>
+<p class="p4">
+<a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$rid))}">首页</a>&nbsp;|&nbsp;
+<a href="{$rules_url}">活动说明</a>&nbsp;|&nbsp;
+<a href="{$submit_url}">我要报名</a>&nbsp;|&nbsp;
+<a href="{php echo $this->createmobileUrl('my',array('do'=>'my', 'id'=>$rid))}">我的投稿</a>&nbsp;|&nbsp;
+<a href="{php echo $this->createmobileUrl('top',array('do'=>'top', 'id'=>$rid))}">排行榜</a>
+</p>
+        </body>
+        </html>

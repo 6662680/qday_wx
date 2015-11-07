@@ -1,0 +1,128 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+	<li {if $_GPC['isshow'] == 0} class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('id' => $id, 'isshow' => 0))}">待审核</a></li>
+	<li {if $_GPC['isshow'] == 1} class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('id' => $id, 'isshow' => 1))}">已审核</a></li>
+</ul>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		{if $_GPC['isshow'] == 0}待审核{/if}
+		{if $_GPC['isshow'] == 1}已审核{/if}
+	</div>
+	<div class="panel-body table-responsive">
+		<div class="main" id="table-list">
+			<form action="" method="post" onsubmit="">
+					<table class="table table-hover">
+						<thead class="navbar-inner">
+							<tr>
+								<th style="width:5%;">选择</th>
+								<th style="width:10%;">用户</th>
+								<th style="width:15%;">昵称</th>
+								<th style="width:30%;">消息</th>
+								<th style="width:20%;">时间</th>
+								<th style="width:20%;"></th>
+							</tr>
+						</thead>
+						<tbody>
+							{loop $list $row}
+							<tr>
+								<td>
+									<input type="checkbox" name="select[]" class="checkbox" value="{$row['id']}" />
+								</td>
+								<td>
+									{if empty($row['avatar'])}
+									<img width="50" src="{php echo tomedia('images/global/noavatar_middle.gif');}" />
+									{else}
+									<img width="50" src="{php echo tomedia($row['avatar']);}" />
+									{/if}
+								</td>
+								<td>{$row['nickname']}</td>
+								<td>{$row['content']}</td>
+								<td>
+									{php echo date('Y-m-d H:i:s', $row[createtime]);}
+								</td>
+								<td>
+									{if empty($row['isblacklist'])}
+									<a class="btn btn-primary" href="{php echo $this->createWebUrl('blacklist', array('id' => $id, 'isshow'=>$isshow, 'from_user' => $row['from_user'], 'switch' => 1))}">添加黑名单</a>
+									{else}
+									<a class="btn btn-danger" href="{php echo $this->createWebUrl('blacklist', array('id' => $id, 'isshow'=>$isshow, 'from_user' => $row['from_user'], 'switch' => 0))}">移除黑名单</a>
+									{/if}
+								</td>
+							</tr>
+							{/loop}
+						</tbody>
+					</table>
+
+					{if !empty($list)}
+					<table class="table">
+						<tr>
+							<td style="width:50px;" class="row-first">
+								<input type="checkbox" onclick="selectAll(this);" /></td>
+							<td colspan="4">
+								{if $_GPC['isshow'] == 0}
+								<input type="submit" name="verify" value="审核" class="btn btn-primary" />
+								{/if}
+								<input type="submit" name="delete" value="删除" class="btn btn-primary" />
+								<input type="hidden" name="token" value="{$_W['token']}" />
+							</td>
+						</tr>
+					</table>
+					{/if}
+
+					{$pager}
+
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	// 全选操作
+	function selectAll(obj){
+		$('.checkbox').prop('checked', $(obj).prop('checked'));
+	}
+
+	require(['jquery'], function($){
+
+
+
+		//详细数据相关操作
+		var tdIndex;
+		$("#table-list thead").delegate("th", "mouseover", function(){
+			if($(this).find("i").hasClass("")) {
+				$("#table-list thead th").each(function() {
+					if($(this).find("i").hasClass("icon-sort")) $(this).find("i").attr("class", "");
+				});
+				$("#table-list thead th").eq($(this).index()).find("i").addClass("icon-sort");
+			}
+		});
+		$("#table-list thead th").click(function() {
+			if($(this).find("i").length>0) {
+				var a = $(this).find("i");
+				if(a.hasClass("icon-sort") || a.hasClass("icon-caret-up")) { //递减排序
+					/*
+						数据处理代码位置
+					*/
+					$("#table-list thead th i").attr("class", "");
+					a.addClass("icon-caret-down");
+				} else if(a.hasClass("icon-caret-down")) { //递增排序
+					/*
+						数据处理代码位置
+					*/
+					$("#table-list thead th i").attr("class", "");
+					a.addClass("icon-caret-up");
+				}
+				$("#table-list thead th,#table-list tbody:eq(0) td").removeClass("row-hover");
+				$(this).addClass("row-hover");
+				tdIndex = $(this).index();
+				$("#table-list tbody:eq(0) tr").each(function() {
+					$(this).find("td").eq(tdIndex).addClass("row-hover");
+				});
+			}
+		});
+	});
+</script>
+
+{template 'common/footer'}

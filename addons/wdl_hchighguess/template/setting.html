@@ -1,0 +1,61 @@
+{template 'common/header'}
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>借用高级认证设置<small>如果你的公众号不是微信认证服务号，可以借用别人的接口权限使用。</small></h4>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">AppId：</label>
+					<div class="col-sm-5">
+						<input type="text" name="appid" class="form-control" value="{$settings['appid']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">AppSecret：</label>
+					<div class="col-sm-5">
+						<input type="text" name="secret" class="form-control" value="{$settings['secret']}" />
+					</div>
+				</div>
+				<div class="form-group col-sm-12">
+					<input type="hidden" name="token" value="{$_W['token']}" />
+					<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label"></label>
+					<div class="col-sm-5">
+						<div style="color:#f00;">提交后请执行第二步才能取到头像</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">1.</label>
+					<div class="col-sm-5">
+						使用的AppId和AppSecret在 [开发者中心]，可以找到。
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label"></label>
+					<div class="col-sm-5">
+						<img src="../addons/wdl_hchighguess/style/images/appkey.jpg" width="395">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">2.</label>
+					<div class="col-sm-5">
+						借用说明：必需设置借用高级认证号的OAuth2.0网页授权的回调域名为你公众号第三方平台的全域名。
+					如：你的域名为：wx.qdaygroup.com ，你必需让借用高级认证号设置OAuth2.0网页授权的回调域名为:wx.qdaygroup.com<br>
+					只是为了完善一下头像和呢称,性别,要不很多功能没法完成
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label"></label>
+					<div class="col-sm-5">
+						<a href="../addons/wdl_hchighguess/style/images/help.jpg" target='_blank'><img src="../addons/wdl_hchighguess/style/images/help.jpg" width="500"></a>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+{template 'common/footer'}

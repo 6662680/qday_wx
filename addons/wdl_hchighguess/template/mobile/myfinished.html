@@ -1,0 +1,97 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="shortcut icon" href="../addons/wdl_hchighguess/style/images/favicon.ico">
+	<link rel="stylesheet" href="../addons/wdl_hchighguess/style/css/draw.css" type="text/css" media="screen" />
+	<link rel="prefetch" href="../addons/wdl_hchighguess/style/images/app.jpg"/>
+    <title>我画你猜</title>
+</head>
+<body>
+    <div class="result">
+        <header>
+            <div class="inner">
+                <div class="board j-picture">
+                    <img src="{$_W['attachurl']}{$myimage['image']}">
+                </div>
+                <div class="brief">
+                    <h1><span class="nickname-limit">{$member['realname']}</span>的画风独特指数: {$unique}%</h1>
+						<p>截止目前{$total}位朋友猜对，{if $total==0}这是真爱吗？{else}这必须是真爱！{/if}</p>
+					</div>
+            </div>
+        </header>
+        <div class="main">
+            <div class="inner">
+                <div class="navi-buttons">
+                    <div class="button-cnt">
+                        <a href="{$reply['gzurl']}" class="btn btn-1">关注{$_W['account']['name']}</a>
+                    </div>
+                    <div class="button-cnt">
+                        <a href="{php echo $this->createMobileUrl('index', array('rid'=>$rid))}" class="btn btn-2">{if $other==1}我也要玩{else}再来一发{/if}</a>
+                    </div>
+                </div>
+                <ul class="list">
+                    {loop $wordss $key $w}
+					<li {if $selectword['word']==$w['word']}class="right"{/if}>
+						<h2><span class="mark">{php echo char($key);}</span>{$w['word']}</h2>
+						<div class="users">
+							{loop $selectlog $s}
+							{if $w['word']==$s['word']}
+							<div class="one">
+								<img src="{$s['image']}"/>
+								<label>{$s['realname']}</label>
+							</div>
+							{/if}
+							{/loop}
+						</div>
+					</li>
+					{/loop}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 其他链接 -->
+    <div class="external-buttons">
+        <a href="{$reply['gzurl']}" class="link">想来点更劲爆的？戳这里&gt;&gt;</a>
+    </div>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/zepto.min.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/underscore-min.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/backbone-min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+{php $signPackage=$_W['account']['jssdkconfig'];}	
+<script>
+wx.config({
+	debug: false,   
+	appId: '<?php echo $signPackage["appId"];?>',
+	timestamp: '<?php echo $signPackage["timestamp"];?>',
+	nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+	signature: '<?php echo $signPackage["signature"];?>',
+	jsApiList: ['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo',]
+});
+
+wx.ready(function () {
+	var shareData = {
+		title: "{$reply['sharetitle']}",
+        desc: "{$reply['sharedescription']}",
+        link: "{$wx['url']}",
+        imgUrl: '{$_W['attachurl']}{$reply['sharecover']}',
+		trigger: function (res) {},
+		complete: function (res) {},
+		success: function (res) {
+		},
+		cancel: function (res) {
+		},
+		fail: function (res) {
+		}
+	};
+	wx.onMenuShareAppMessage(shareData);
+	wx.onMenuShareQQ(shareData);
+	wx.onMenuShareWeibo(shareData);
+	wx.onMenuShareTimeline(shareData);
+});
+</script>
+</body>
+</html>

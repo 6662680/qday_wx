@@ -1,0 +1,108 @@
+.wrapper {
+	width: 320px;
+	position: relative;
+	margin: 0 auto;
+	max-width: 500px;
+}
+.wrapper{
+	text-align: center;
+	min-height: 100%;
+}
+
+
+.bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+	height: 100%;
+}
+
+.next-btn {
+	padding: 10px 32px;
+	background: #fa2;
+	background: -moz-linear-gradient(top, #fa2 0, #f04a02 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fa2),
+		color-stop(100%, #f04a02));
+	background: -webkit-linear-gradient(top, #fa2 0, #f04a02 100%);
+	background: -o-linear-gradient(top, #fa2 0, #f04a02 100%);
+	background: -ms-linear-gradient(top, #fa2 0, #f04a02 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffaa22',
+		endColorstr='#f04a02', GradientType=0);
+	background: linear-gradient(top, #fa2 0, #f04a02 100%);
+	color: #000;
+	font-size: 20px;
+	border: 1px solid #c94e04;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+.next-btn.hover {
+	background: -moz-linear-gradient(top, #f04a02 0, #fa2 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f04a02),
+		color-stop(100%, #fa2));
+	background: -webkit-linear-gradient(top, #f04a02 0, #fa2 100%);
+	background: -o-linear-gradient(top, #f04a02 0, #fa2 100%);
+	background: -ms-linear-gradient(top, #f04a02 0, #fa2 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f04a02',
+		endColorstr='#ffaa22', GradientType=0);
+	background: linear-gradient(top, #f04a02 0, #fa2 100%);
+}
+
+.loading-mask {
+	width: 100%;
+	height: 200%;
+	position: fixed;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 100;
+	left: 0;
+	top: 0;
+	display: none;
+}
+
+.loading-mask .content {
+	position: absolute;
+	text-align: center;
+	width: 80%;
+	top: 70px;
+}
+
+.loading-mask .text {
+	color: white;
+	font-size: 18px;
+}
+
+.loading-mask .answer {
+	color: white;
+	font-size: 20px;
+}
+
+.loading-mask .answer strong {
+	color: #f04a02;
+}
+
+.loading-mask .next {
+	z-index: 100;
+	font-size: 20px;
+	color: #FFF;
+	display: block;
+	margin-top: 20px;
+}
+
+.loading-mask img.gimg {
+	display: block;
+	margin: 160px auto 0;
+}
+
+.page-url {
+	border-top: 1px solid #960;
+}
+
+.page-url-link {
+	text-shadow: none;
+	color: #960;
+}

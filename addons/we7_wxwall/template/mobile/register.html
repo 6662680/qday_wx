@@ -1,0 +1,64 @@
+{template 'header'}
+<body>
+<style>
+	body{padding-top:10px;}
+	.btn.btn-primary{background: #56c6d6; color: #FFF; border: 0;}
+	.panel-group{padding:0 15px;}
+</style>
+<div class="main">
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-warning">
+			<div class="panel-heading" role="tab" id="headingOne">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						微信墙相关说明
+					</a>
+				</h4>
+			</div>
+			<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+				<div class="panel-body">
+					尊敬的用户您好，欢迎使用{if empty($_W['account']['name'])}由情天团队开发的{/if}微信墙，在使用之前请务必认真填写您的个人信息，以便更好的在微信墙中与大家交流！谢谢！祝您工作顺利！
+				</div>
+			</div>
+		</div>
+		{if $member['nickname']}
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab" id="headingTwo">
+				<h4 class="panel-title">
+					<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+						您已经登记完成
+					</a>
+				</h4>
+			</div>
+			<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+				<div class="panel-body text-danger">
+					<div class="text-center" style="margin:10px 0;"><img src="{php echo tomedia($member['avatar']);}" style="border:1px #CCC solid; padding:1px; width:55px; height:55px; border-radius:50%;" /></div>
+					<p>您已经登记完成，点关闭按钮直接进入话题！如果需要修改信息，请再次提交更改。</p>
+				</div>
+			</div>
+		</div>
+		{/if}
+	</div>
+	<form action="" method="post" enctype="multipart/form-data" data-ajax="false" class="clearfix">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-12 control-label">头像</label>
+			<div class="col-sm-12 col-xs-12">
+				{php echo tpl_fans_form('avatar', $avatar);}
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-12 control-label">昵称</label>
+			<div class="col-sm-12 col-xs-12">
+				<input type="text" class="form-control" name="nickname" value="{$member['nickname']}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-12 control-label"></label>
+			<div class="col-sm-12 col-xs-12" style="text-align:center; margin:10px 0;">
+				<button type="submit" class="btn btn-primary btn-block btn-lg" name="submit" value="提交登记">提交登记</button>
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</div>
+		</div>
+	</form>
+</div>
+{template 'footer'}

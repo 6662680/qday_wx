@@ -1,0 +1,86 @@
+{template 'common/header'}
+<div class="main">
+	<form class="form-horizontal form" id="form2" action="" method="post">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				基本设置
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关注链接</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="gzurl" value="{$setting['gzurl']}" placeholder="设置引导关注的链接" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">帮助链接</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="helpurl" value="{$setting['helpurl']}" placeholder="设置帮助的链接" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">转发标题</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="title" value="{$setting['title']}" placeholder="设置转发的标题"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-1 control-label">转发图片</label>
+					<div class="col-sm-5">
+						{php echo tpl_form_field_image('logo', $setting['logo']);}
+						<span class="help-block">建议尺寸134*134</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">转发描述</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="description" value="{$setting['description']}" placeholder="设置转发的描述说明"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">附近距离</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="distance" value="{$setting['distance']}" placeholder="设置显示附近商家的距离，单位千米"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">分页数量</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="pagesize" value="{$setting['pagesize']}" placeholder="设置分页显示的数量，默认为10"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">联系电话</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="mobile" value="{$setting['mobile']}" placeholder="设置服务人员联系电话"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">通用密码</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="pwd" id="pwd" value="{$setting['pwd']}" onmouseout="hide();" onmouseover="show();" placeholder="该密码为超级密码，请谨慎使用！"/>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+			<input type="hidden" name="id" value="{$setting['id']}" />
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+		</div>
+	</form>
+</div>
+<script>
+function show(){
+	var pwd = window.document.getElementById('pwd');
+	pwd.type = 'text';
+	
+}
+
+function hide(){
+	var pwd = window.document.getElementById('pwd');
+	pwd.type = 'password';
+}
+</script>
+{template 'common/footer'}

@@ -1,0 +1,23 @@
+<?php
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_admap').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_navExtension').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_slide').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_property').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_announcement').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_member').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_phone').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_region').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_reply').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_report').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_service').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_verifycode').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_activity').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_res').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_search').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_fled').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_carpool').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_business').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_sjdp').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_propertyfree').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_protime').";");
+pdo_query("DROP TABLE IF EXISTS ".tablename('ims_xcommunity_servicecategory').";");

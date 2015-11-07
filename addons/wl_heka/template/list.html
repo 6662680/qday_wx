@@ -1,0 +1,63 @@
+{template 'common/header'}
+<div class="main">
+    <div class="panel panel-default">
+    	<div class="panel-heading">
+        	详细数据
+    	</div>
+        <div class="panel-body table-responsive">
+        	<form action="" method="post" onsubmit="">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th style="width:60px;" class="row-first">选择</th>
+						<th style="width:80px;">编号</th>
+						<th style="width:120px;">标题</th>
+						<th style="width:100px;">署名</th>
+						<th style="width:100px;">点击数</th>
+						<th style="width:120px;">分享数</th>
+						<th style="width:200px;">描述</th>
+						<th style="width:150px;">创建时间</th>
+						<th style="width:100px;">操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					{loop $list $row}
+					<tr>
+						<td class="row-first"><input type="checkbox" name="select[]" value="{$row['id']}" /></td>
+						<td>{$row['id']}</td>
+						<td>{$row['title']}</td>
+						<td>{$row['author']}</td>
+						<td>{php echo intval($row['hits'])}</td>
+						<td>{php echo intval($row['share'])}</td>
+						<td style='word-break:break-all'>{php echo substr($row['content'],0,200);}</td>
+						<td style="font-size:12px; color:#666;">
+							{php echo date('Y-m-d', $row[create_time]);}
+						</td>
+						<td>
+							<a href="{$_W['siteroot']}app/{php echo $this->createMobileUrl('show', array('card' => $row['card'],'id'=>$row['rid'],'cid'=>$row['id']));}" target="_blank" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="预览"><i class="fa fa-eye"></i></a>
+						</td>
+					</tr>
+					{/loop}
+					<tr>
+						<td class="row-first"><input type="checkbox" onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck})"/></td>
+						<td colspan="8">
+							<input type="submit" name="delete" value="删除" class="btn btn-primary" />
+							<input type="hidden" name="token" value="{$_W['token']}" />
+						</td>
+					</tr>
+                </tbody>
+                </table>
+            </form>
+        {$pager}
+        </div>
+    </div>
+  <a href="" class="btn btn-default">刷 新</a>
+  <a href="javascript:history.back()" class="btn btn-default">返 回</a>
+</div>
+<script>
+	require(['bootstrap'],function($){
+		$('.btn').tooltip();
+	});
+</script>
+{template 'common/footer'}
+ 

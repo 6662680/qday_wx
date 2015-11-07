@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+   <meta name="apple-mobile-web-app-capable" content="yes">
+
+   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+   <meta name="format-detection" content="telephone=no">
+
+   <title>我的心里只有你</title>
+
+   {php echo register_jssdk();}
+
+   <link rel="stylesheet" type="text/css" href="../addons/wl_heka/style/css/common.css">
+
+   <script>
+
+      var $ = function (id) {
+
+         return document.getElementById(id);
+
+      };
+
+      var _fromCode = "{$_W['siteroot']}";
+
+      var siteurl = "{php echo $_W['siteroot']}app";
+
+      var dataForWeixin = {
+
+         MsgImg: _fromCode + "addons/wl_heka/style/images/onlyyou.jpg",
+
+         TLImg: _fromCode + "addons/wl_heka/style/images/onlyyou.jpg",
+
+         path: siteurl + "{php echo $this->createMobileUrl('show', array('card' => $card,'id'=>$_GET['id'],'cid'=>$show['id']));}",
+
+         title: "情天祝福",
+
+         desc: "使用情天助手可以在朋友圈或聊天对话框发送更丰富的祝福类型",
+
+         fakeid: "",
+
+         callback: function () {
+
+         }
+
+      };
+
+      dataForWeixin.path = dataForWeixin.path.replace('./', '/');
+
+   </script>
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+   // 默认分享
+
+   wx.ready(function () {
+
+      sharedata = {
+
+         title: dataForWeixin.title,
+
+         desc: dataForWeixin.desc,
+
+         link: dataForWeixin.path,
+
+         imgUrl: dataForWeixin.MsgImg,
+
+         success: function(){
+
+            _$("{php echo $this->createMobileUrl('share', array('card' => $card,'id'=>$_GET['id'],'cid'=>$show['id']));}", "wid=" + _wid + "&type=card", "");
+
+         }
+
+      };
+
+      wx.onMenuShareAppMessage(sharedata);
+
+      wx.onMenuShareTimeline(sharedata);
+
+   });
+
+</script>
+
+<style>
+
+   body {
+
+      margin: 0;
+
+      min-width: 320px;
+
+      background-color: #fefefe;
+
+      background-image: linear-gradient(to top, #fefefe, #ffffff);
+
+      background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#fefefe), to(#ffffff));
+
+      background-repeat: no-repeat;
+
+   }
+
+
+
+   #card_loading {
+
+      margin-top: 33px;
+
+      text-align: center;
+
+   }
+
+
+
+   #card_loading img {
+
+      width: 200px;
+
+      height: 112px;
+
+   }
+
+
+
+   #card_body {
+
+      display: none;
+
+   }
+
+
+
+   #card_tip {
+
+      position: absolute;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      background-color: rgba(50, 50, 50, 0.8);
+
+      padding: 13px 0;
+
+      font-size: 14px;
+
+      color: #ffffff;
+
+      text-align: center;
+
+      z-index: 999;
+
+   }
+
+
+
+   #card_center {
+
+      margin-top: 60px;
+
+      text-align: center;
+
+   }
+
+
+
+   #card_center img {
+
+      width: 310px;
+
+      height: 208px;
+
+   }
+
+
+
+   #card_main {
+
+      margin: 15px 20px 0 20px;
+
+   }
+
+
+
+   #card_title, #card_content, #card_author, #card_date {
+
+      text-align: center;
+
+      color: #534741;
+
+   }
+
+
+
+   #card_title {
+
+      font-size: 30px;
+
+   }
+
+
+
+   #card_content {
+
+      margin-top: 18px;
+
+      font-size: 20px;
+
+      line-height: 30px;
+
+   }
+
+
+
+   #card_author, #card_date {
+
+      font-size: 18px;
+
+   }
+
+
+
+   #card_author {
+
+      margin-top: 18px;
+
+   }
+
+
+
+   #card_date {
+
+      margin-top: 5px;
+
+   }
+
+
+
+   #card_button {
+
+      margin: 15px;
+
+   }
+
+</style>
+
+<div style="display: none;" id="card_loading"><img src="../addons/wl_heka/style/images/card_loading.png"
+
+                                                   onerror="this.parentNode.removeChild(this)"></div>
+
+<div style="display: block;" id="card_body">
+
+   <div id="card_tip">
+
+      点击文字可直接编辑，按底部按钮发送
+
+   </div>
+
+   <div id="card_center"><img src="../addons/wl_heka/style/images/onlyyou_center.png"></div>
+
+   <div id="card_main">
+
+      <div><input id="card_title" type="text" value="{$show['title']}"/></div>
+
+      <div>
+
+   <textarea id="card_content" style="overflow:scroll;overflow-y:hidden;overflow-x:hidden;"
+
+             onchange="this.style.height=this.scrollHeight+'px';">
+
+   {if empty($show['content'])}我的心里只有你没有他，
+
+   只有你才是我的梦想，
+
+   只有你才是我的牵挂！
+
+   {else}
+
+   {$show['content']}
+
+   {/if}
+
+   </textarea>
+
+         <script>
+
+            $('card_content').style.height = $('card_content').scrollHeight + 'px';
+
+         </script>
+
+      </div>
+
+      <div><input id="card_author" type="text" value="{$show['author']}"/></div>
+
+      <div id="card_date">{php echo date('Y.m.d');}</div>
+
+   </div>
+
+   <div id="card_button">
+
+      <button class="button2" onclick="_card._post();">发送</button>
+
+   </div>
+
+</div>
+
+<script>
+
+   var siteurl = "{php echo $_W['siteroot']}app";
+
+   var _wid = 13777, _PUBLIC = "../addons/wl_heka/style/", _cardName = "示爱贺卡", _cardType = "onlyyou";
+
+   (function () {
+
+      dataForWeixin.title = "使用情天助手在微信发送" + _cardName;
+
+      dataForWeixin.desc = "通过情天助手的发送贺卡功能，向亲友传递最美好的祝福！";
+
+   })();
+
+   String.prototype.innerText = function () {
+
+      return this.replace(/(<[^>]+>)|(&nbsp;)/ig, "");
+
+   };
+
+   String.prototype.htmlDecode = function () {
+
+      return this.replace(/&amp;/ig, "&").replace(/&nbsp;/ig, " ").replace(/&[a-z]{2,4};/ig, "");
+
+   };
+
+   var _card = {
+
+      _post: function () {
+
+         var _title = $("card_title").value.innerText().trim(), _content = $("card_content").value.replace(/(<(br|div|\/div)>)+/ig, "\n").innerText(), _author = $("card_author").value.innerText().trim();
+
+         if (_title == "" || _title == "收卡人") {
+
+            _system._toast("没有输入收卡人名字");
+
+            return;
+
+         }
+
+         if (_title.len() > 20) {
+
+            _system._toast("收卡人名字在20字节以内");
+
+            return;
+
+         }
+
+         if (_content.len() < 10) {
+
+            _system._toast("祝福语太短了");
+
+            return;
+
+         }
+
+         if (_content.len() > 200) {
+
+            _system._toast("祝福语太长了");
+
+            return;
+
+         }
+
+         if (_author == "" || _author == "署名") {
+
+            _system._toast("请署上你的大名");
+
+            return;
+
+         }
+
+         if (_author.len() > 20) {
+
+            _system._toast("署名请在20字节以内");
+
+            return;
+
+         }
+
+         if (_title == '{$show['title']}' && _author == '{$show['author']}') {
+
+            _system._guide();
+
+            return;
+
+         }
+
+         _$("{php echo $this->createMobileUrl('set', array('card' => $card,'id'=>$_GET['id']));}", "wid=" + _wid + "&card=" + _cardType + "&title=" + _title.encode() + "&content=" + _content.encode() + "&author=" + _author.encode() + "&cardName=" + _cardName.encode(), "请稍候", "_card._ok");
+
+      },
+
+      _ok: function (json) {
+
+         if (json.state == "0") {
+
+            _system._toast("你填写的内容有问题");
+
+            return;
+
+         }
+
+         dataForWeixin.path = siteurl + "{php echo $this->createMobileUrl('show',array('card' => $card));}";
+
+         dataForWeixin.path = dataForWeixin.path.replace('./', '/').replace('do=show', 'do=show&cid=' + json.id);
+
+         dataForWeixin.title = "收到一张来自" + $("card_author").value.innerText().htmlDecode().trim() + "的" + _cardName;
+
+         dataForWeixin.desc = $("card_content").value.innerText().htmlDecode().trim().left(88);
+
+         dataForWeixin.callback = function () {
+
+            _$("{php echo $this->createMobileUrl('share', array('card' => $card,'id'=>$_GET['id']));}", "wid=" + _wid + "&type=card&cid=" + json.id, "", "");
+
+         };
+
+         _system._guide();
+
+
+
+         // 发送贺卡后分享
+
+         wx.ready(function () {
+
+            sharedata = {
+
+               title: dataForWeixin.title,
+
+               desc: dataForWeixin.desc,
+
+               link: dataForWeixin.path,
+
+               imgUrl: dataForWeixin.MsgImg,
+
+               success: function(){
+
+                  _$("{php echo $this->createMobileUrl('share', array('card' => $card,'id'=>$_GET['id']));}", "wid=" + _wid + "&type=card&cid=" + json.id, "");
+
+               }
+
+            };
+
+            wx.onMenuShareAppMessage(sharedata);
+
+            wx.onMenuShareTimeline(sharedata);
+
+         });
+
+      }
+
+   };
+
+   window.onload = function () {
+
+      $("card_body").show();
+
+      $("card_loading").hide();
+
+      dataForWeixin.callback = function () {
+
+         _$("{php echo $this->createMobileUrl('share', array('card' => $card,'id'=>$_GET['id']));}", "wid=" + _wid + "&type=card&cid={$show['id']}", "");
+
+      };
+
+   };
+
+</script>
+
+
+
+
+
+<div id="ok"><img src="../addons/wl_heka/style/images/ok.png">
+
+   <div id="ok_text"></div>
+
+</div>
+
+<div id="cover"></div>
+
+<div id="loading"><img src="../addons/wl_heka/style/images/loading.gif">
+
+   <div id="loading_text"></div>
+
+</div>
+
+<div id="guide">
+
+   <div><img src="../addons/wl_heka/style/images/guide.png"></div>
+
+   <div id="guide_button">
+
+      <div class="left">
+
+         <button class="button2" onclick="location.href=dataForWeixin.path+'&pre=true'">预览</button>
+
+      </div>
+
+      <div class="left">
+
+         <button class="button2" onclick="location.reload()">再发一条</button>
+
+      </div>
+
+      <div class="left">
+
+         <button class="button2" onclick="location.href='{php echo $this->createMobileUrl('index', array('card' => $card,'id'=>$_GET['id']));}'">
+
+            放弃
+
+         </button>
+
+      </div>
+
+      <div class="clear"></div>
+
+   </div>
+
+   <div id="guide_button2">
+
+      <button class="button2" onclick="_system._guideHide()">取消</button>
+
+   </div>
+
+</div>
+
+<div id="guide2"><img src="../addons/wl_heka/style/images/guide2.png"></div>
+
+<div id="guide3"><img src="../addons/wl_heka/style/images/guide3.png"></div>
+
+<div id="toast"></div>
+
+<script src="../addons/wl_heka/style/js/common.js?v={php echo time();}"></script>
+
+</body>
+
+</html>

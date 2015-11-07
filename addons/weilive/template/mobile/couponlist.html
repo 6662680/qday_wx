@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>优惠券列表</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/shop.css"/>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+				 <a class="link app-back" href="javascript:history.back();">
+                    <i class="icon-back"></i>
+                </a>
+			<p style=" float:right;"><a href="{php echo $this->createMobileUrl('myshop', array('op'=>'exit'))}" class=""><input type="button" value="退出" name="" style="color:#666; width:60px; height:28px;"/></a></p>
+                <h1 class="title sliding">优惠券列表</h1>
+            </div>
+        </header>
+        <footer class="app-foot app-foot-button">
+            <div class="inner">
+                <a class="button" href="{php echo $this->createMobileUrl('myshop', array('op'=>'couponpost', 'storeid'=>$storeid))}">添加优惠券</a>
+            </div>
+        </footer>
+        <section class="app-wrap" id="js_wrap">
+            <div class="inner">
+                <div class="m-list s-pdt">
+                    <nav id="js_fix" class="nav">
+                        <a class="z-sel" href="{php echo $this->createMobileUrl('myshop', array('op'=>'couponlist', 'storeid'=>$storeid))}"><span>优惠券</span></a>
+                        <a href="{php echo $this->createMobileUrl('myshop', array('op'=>'activitylist', 'storeid'=>$storeid))}"><span>活动</span></a>
+                        <a href="{php echo $this->createMobileUrl('myshop', array('op'=>'memberlist', 'storeid'=>$storeid))}"><span>会员</span></a>
+                    </nav>
+                    {loop $activities $act}
+					<ul class="coupons">
+					                        <li>
+                            <a class="f-cb" href="{php echo $this->createMobileUrl('myshop', array('op'=>'couponpost', 'opp'=>'detail', 'storeid'=>$storeid, 'id'=>$act['id']))}">
+                                <img src="{$_W['attachurl']}{$act['thumb']}" class="pic">
+
+                                <div class="box">
+                                    <div class="content">
+                                        <div class="name f-toe">{$act['title']}</div>
+                                        <p>
+                                            {if $act['num']}无限制{else}数量:{$act['num']}张{/if} <span class="right"><span>{$act['catch']}</span>人领取/{$act['used']}人使用</span>
+                                        </p>
+                                        <p class="money">
+                                            <span>{$act['kill_price']}</span>元<i>{$act['price']}元</i>
+                                            <b class="state right z-no">{if $act['ischeck']==0}未审核{else}已审核{/if}</b>
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>                 
+                    </ul>
+					{/loop}
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>

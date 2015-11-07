@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    
+    <link rel="stylesheet" type="text/css" href="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/comeon.css" media="all" />
+    <script type="text/javascript" src="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/jquery.js"></script>	
+    <script type="text/javascript" src="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/comeon.js"></script>	
+    
+    <link rel="stylesheet" type="text/css" href="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/sweet-alert.css" media="all" />
+    <script type="text/javascript" src="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/sweet-alert.min.js"></script>	
+    
+
+    
+    <title>{$reply['title']}</title>
+    <style type="text/css">
+        body { 
+            background: {if empty($reply['bgcolor'])}#ca1a48{else}{$reply['bgcolor']}{/if};
+            color: {if empty($reply['fontcolor'])}#fff{else}{$reply['fontcolor']}{/if};
+       }
+       .btn { 
+            {if !empty($reply['btncolor'])} background-color: {$reply['btncolor']};{/if} 
+           {if !empty($reply['btnfontcolor'])} color: {$reply['btnfontcolor']};{/if} 
+       }
+    </style>
+</head>
+<body>
+    {if !empty($reply['toppic'])}
+    <img src="{php echo toimage($reply['toppic'])}" style='width:100%;' />
+    {/if}
+  
+    {php $nowtime = strtotime( date('Y-m-d',time()) ) + 86399}
+    {if $reply['endtime'] < $nowtime} 
+    
+    <div class='container block white' style='text-align:left'>
+        <p style='font-size:18px/1.5em'><b>活动已经结束</b><p>
+        <p>{$reply['overcontent']}</p>
+    </div>
+    <div class='block white'>
+         <p style='font-size:18px/1.5em'><b>查询中奖情况</b><p>
+             
+               <input type='text' placeholder="{$reply['tel_rename']}" name='mobile' />
+              
+           </div>
+      <a href='javascript:;' class='block btn btn-search' style='text-align:center'>查 询</a>
+       {if !empty($reply['show_rank'])}
+          <a  href="{php echo  $this->createMobileUrl('rank',array('rid'=>$reply['rid']))}" class='block btn btn-rank'>{php echo empty($reply['rank_tips'])?'好友排名':$reply['rank_tips']}</a>
+          {/if}
+    {else}
+     
+    
+    <div class='container'>
+
+          {if !empty($fans) || !empty($share_fans)}
+          <a href='javascript:;' class='block white'>{$info_tips}</a>
+          {/if}
+          
+          {if !empty($fans)}
+             <a href='javascript:;' class='block btn btn-invite'>{$reply['invite_tips']}</a>
+          {/if}
+            
+          {if !empty($share_fans) && $fans['id']!=$share_fans['id']}
+          <a href='javascript:;' class='block btn btn-help'>{$reply['help_tips']}</a>
+          {/if}
+        
+         {if $is_follow}
+           {if empty($fans)}
+           <div class='block white'>
+               <input type='text' placeholder="{$reply['tel_rename']}" name='mobile' />
+             
+           </div>   <a href='javascript:;' class='block btn btn-join'>{$reply['join_tips']}</a>
+         {/if}
+         {else}
+             <a href='{$joinurl}' class='block btn btn-want'>{$reply['join_tips']}</a>
+          {/if}
+        {if !empty($reply['show_rank'])}
+          <a  href="{php echo  $this->createMobileUrl('rank',array('rid'=>$reply['rid']))}" class='block btn btn-rank'>{php echo empty($reply['rank_tips'])?'好友排名':$reply['rank_tips']}</a>
+          {/if}
+          
+        <p>{$reply['tips']}</p>
+        <p><a href="{php echo  $this->createMobileUrl('detail',array('rid'=>$reply['rid']))}" class='link'>[查看活动规则]</a></p>
+       
+    </div>
+    {/if}
+ 
+     <p style='text-align:center;'>@{if empty($reply['copyright'])}{$_W['account']['name']}{else}{$reply['copyright']}{/if}</p>
+    
+    <div id="mcover" onclick="$(this).hide()"><img src="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/guide.png"></div>
+    
+    {template 'loading'}
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>	
+    <script language='javascript'>
+	jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || {};
+	// 是否启用调试
+	jssdkconfig.debug = false;
+	
+	jssdkconfig.jsApiList = [
+		'checkJsApi',
+		'onMenuShareTimeline',
+		'onMenuShareAppMessage',
+		'onMenuShareQQ',
+		'onMenuShareWeibo',
+		'showOptionMenu',
+		'closeWindow'
+	];
+
+	wx.config(jssdkconfig);
+	 
+	       var shareMeta = {
+	 imgUrl:"{$shareimg}",
+	 link :  "{$sharelink}",
+	 desc : "{$sharedesc}",
+	 title : "{$sharetitle}"
+               };
+	   wx.ready(function () {
+		wx.showOptionMenu();
+		wx.onMenuShareAppMessage(shareMeta);
+		wx.onMenuShareTimeline(shareMeta);
+		wx.onMenuShareQQ(shareMeta);
+		wx.onMenuShareWeibo(shareMeta);
+	});		
+     </script>  
+        
+    <script language='javascript'>
+        
+            Comeon.init({
+                "rid":"{$reply['rid']}",
+                "openid": "{$openid}",
+                "guid":"{$guid}",
+                "modulepath":"{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/",
+                "fansid":  "{php echo !empty($share_fans)?$share_fans['id']:''}",
+                 'joinurl': "{php echo $this->createMobileUrl('join',array('rid'=>$reply['rid']))}",
+                 'helpurl': "{php echo $this->createMobileUrl('help',array('rid'=>$reply['rid']))}",
+                 'searchurl': "{php echo $this->createMobileUrl('search',array('rid'=>$reply['rid']))}"
+            });
+   
+        
+         
+    </script>
+</body>
+</html>

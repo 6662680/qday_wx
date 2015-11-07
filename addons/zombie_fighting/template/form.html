@@ -1,0 +1,119 @@
+<div class="panel panel-default">
+    <input type="hidden" name="reply_id" value="{$reply['id']}" />
+	<div class="panel-heading">
+		设置活动信息
+	</div>
+	<ul class="list-group reply-container">
+		<li class="list-group-item">
+			<div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">标题</label>
+					<div class="col-sm-9">
+					    <input type="text" class="form-control"  placeholder="添加标题" name="title" value="{$reply['title']}"  />
+					</div>
+				</div>
+
+                <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">背景封面</label>
+					<div class="col-sm-9" >
+						{php echo tpl_form_field_image('picture', $reply['picture']);}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">题目个数</label>
+					<div class="col-sm-9">
+				    <input type="text" class="form-control"  placeholder="添加题目个数"  name="qnum" value="{$reply['qnum']}" />
+					</div>
+				</div>
+				
+				 <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>关注引导</label>
+					<div class="col-sm-9 col-xs-12">
+							 <input type="text" id="followurl" class="form-control span7" placeholder="" name="followurl" value="{$reply['followurl']}">
+							<div class="help-block">未关注的粉丝，关注引导链接,如果出现错误请使用 <a target="_blank" href="http://www.dwz.cn/">短网址转换</a></div>
+					</div>
+				</div>
+				
+				<!--<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">答题时间</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control"  placeholder="添加答题时间"  name="answertime" value="{$reply['answertime']}" />
+						<span class="help-block">单位：秒 若不作限制请设置为0</span>
+					</div>
+				</div>-->
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动状态</label>
+					<div class="col-sm-9">
+						<input type="radio" name="status_fighting" value="2" id="status_02"{if $reply['status_fighting'] == '2'}checked="true"{/if}><label for="status_02">结束</label>
+						<input type="radio" name="status_fighting" value="1" id="status_01" {if $reply['status_fighting'] == '1'}checked="true"{/if}>
+                        <label for="status_01">暂停</label>
+						<input type="radio" name="status_fighting" value="0" id="status_00"  {if $reply['status_fighting'] == '0'}checked="true"{/if}>
+                        <label for="status_00">正常 </label>
+						<span class="help-block">可以随时暂停或结束活动的进程</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动时间</label>
+					<div class="col-sm-9">
+{php echo tpl_form_field_daterange('datelimit', array('start' => date('Y-m-d', $reply['start']),'end' => date('Y-m-d', $reply['end'])), '')}
+					</div>
+				</div>
+
+				<!--<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享封面</label>
+					<div class="col-sm-9" >
+						{php echo tpl_form_field_image('share_picture', $reply['share_picture']);}
+					</div>
+				</div>-->
+
+				<div class="form-group" >
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">广告图片</label>
+					<div class="col-sm-9 col-xs-12">
+						{php echo tpl_form_field_image('thumb', $reply['thumb'])}
+						<span class="help-block">图片建议：宽度保持640，高度根据广告位置来决定。</span>
+					</div>
+				</div>
+
+				<div class="form-group" >
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">广告链接</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="thumb_url" class="form-control" value="{$set['thumb_url']}" />
+                        <span class="help-block">
+					</span>
+					</div>
+				</div>
+
+                <!--<div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">每人每天最多参与次数</label>
+                    <div class="col-sm-5 col-xs-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="most_num_times" value="{$reply['most_num_times']}" />
+                            <span class="input-group-addon">次</span>
+                        </div>
+                        <div class="help-block">每天可以参与次数,系统默认为1次!</div>
+                    </div>
+                </div>-->
+
+                <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">描述</label>
+					<div class="col-sm-9">
+					 <textarea class="form-control" placeholder="添加描述" id="description" name="description"  >{$reply['description']}</textarea>
+					</div>
+				</div>		
+			</div>	
+			 
+		</li>
+	</ul>
+    <script>
+        $(function () {
+            require(['jquery', 'util'], function ($, u) {
+                $(function () {
+                    u.editor($('#description')[0]);
+                });
+            });
+        });
+    </script>
+</div>

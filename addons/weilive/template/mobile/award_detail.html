@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>奖品详情</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <section class="app-wrap">
+            <div class="inner">
+
+                <div class="m-integral">
+                    <div class="wrap">
+                        <dl class="list u-wrap">
+                            <dt class="title" style="text-align:center;">我的积分：{$profile['credit1']}</dt>
+							<dt class="title">{if $prize['inkind']==2}现场领取类奖品说明{else}邮寄类奖品说明{/if}:</dt>
+							<dd class="f-cb">
+								<a class="f-cb" onclick="return confirm('确定要兑换吗？');" href="{php echo $this->createMobileUrl('award', array('op'=>'exchange', 'id'=>$prize['id']));}">
+									<img class="pic" src="{php echo $_W['attachurl'].$prize['thumb']}" alt=""/>
+
+									<div class="box">
+										<div class="content">
+											<div class="name">{$prize['title']}</div>
+											<p>
+												<span class="number">{$prize['integral']}</span>积分
+												<span class="right" id="sys_10">剩{$prize['number']}件</span>
+												<input type="hidden" id="snum_10" name="number" value="{$prize['number']}" />
+											</p>
+										</div>
+											<br/><font color="black">{$prize['description']}</font>
+									</div>
+									
+								</a>
+                            </dd>
+						</dl>
+                    </div>
+                </div>     
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>

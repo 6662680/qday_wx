@@ -1,0 +1,292 @@
+{template 'common'}
+<div id="wallMain">
+	<div id="topbox" class="topbox">
+		<div class="topbox_l">
+			<div class="topic">
+				<h1 class="msg_tit">搜索公众号 <strong class="red">{$wall['account']['name']}</strong></h1>
+				<h1 class="msg_tit" style="display:none;">添加公众号 <strong class="red">{$wall['account']['account']}</strong></h1>
+				<span class="addCnt">发送 {loop $wall['keyword'] $row}<span class="red Topic_cnt">{$row['content']}</span>，{/loop} 登记后发送内容，自动上墙</span>
+			</div>
+		</div>
+	</div>
+	<div class="msg_list" id="msg_list_wrap">
+		<div id="msg_list" style="position:absolute;">
+
+		</div>
+	</div>
+</div>
+
+<div class="side_div">
+	<div class="side_item"><a href="javascript:;" id="remaintime" style="color:red; font-weight:600;">0</a></div>
+	{if $_W['uid']}<div class="side_item"><a href="javascript:;" onclick="wxwall.prevPage()">上一条</a></div>{/if}
+	{if $_W['uid']}<div class="side_item"><a href="javascript:;" onclick="wxwall.nextPage()">下一条</a></div>{/if}
+	<div class="side_item"><a href="#" id="status">暂停</a></div>
+	<div class="side_item"><a href="{php echo $this->createWebUrl('qrcode', array('id' => $wall['rid']))}">二维码</a></div>
+	{if $_W['uid']}<div class="side_item"><a href="{php echo $this->createWebUrl('lottery', array('id' => $wall['rid']))}">抽奖</a></div>{/if}
+</div>
+<script type="text/javascript">
+var messagehistory = {php echo json_encode($list)};
+var wxwall = {
+	'options' : {
+		'index' : -1,
+		'pagesize' : 1,
+		'delaytime' : 8000,
+		'wrapHeight' : 0,
+		'pause' : false
+	},
+	'temp' : '',
+	'status' : {'prev' : false, 'next' : true},
+	'timer' : {},
+	'timerdown' : {},
+	'lastmsgtime' : 0,
+	'page' : 1,
+	'txwall' : {
+		'status' : 1,
+		'lastmsgtime' : '{$_W['timestamp']}',
+		'lastuser' : '',
+	},
+	'init' : function() {
+		var $this = this;
+		this.options.wrapHeight = $('#msg_list_wrap').height();
+		this.prevPage();
+		this.control('start');
+		$('#remaintime').html(0);
+	},
+	/*构造一条微墙内容*/
+	'buildItem' : function(message) {
+		if ($('#msg_list #msg_'+message['id'])[0]){
+			return '';
+		}
+		if (this.lastmsgtime <= 0) {
+			this.lastmsgtime = message['createtime'];
+		}
+		if (message['avatar']) {
+			if(message['avatar'].indexOf('http') < 0){
+				message['avatar'] = '{$_W['attachurl']}' + message['avatar'];
+			}
+		} else {
+			message['avatar'] = '{$_W['attachurl']}' + 'images/global/noavatar_middle.gif';
+		}
+		var font_size = this.changeSize(message['content']);
+		var html =
+					'<div class="talkList" id="msg_'+message['id']+'" style="display:none; height:auto;">' +
+						'<div class="userPic">' +
+							'<img src="'+message['avatar']+'">' +
+							'<span class="userName">'+message['nickname']+'</span>' +
+						'</div>' +
+						'<div class="msgBox">' +
+							'<span class="msgCnt" style="font-size:' + font_size + 'px;line-height:' + parseInt(font_size+8) + 'px;">' +
+							message['content'] + '</span>' +
+						'</div>' +
+					'</div>';
+		return html;
+	},
+	'appendItem' : function(message) {/*向后插入一条消息*/
+		if (!message) {
+			return false;
+		}
+		$('#msg_list').append(this.buildItem(message));
+		$('#msg_list div:last-child').css('display', 'block');
+	},
+	'beforeItem' : function(message) {/*向前插入一条消息*/
+		if (!message) {
+			return false;
+		}
+		if ($('#msg_list div:first').size()) {
+			$('#msg_list div:first').before(this.buildItem(message));
+		} else {
+			$('#msg_list').append(this.buildItem(message));
+		}
+		var target = $('#msg_list div:first');
+		if (!this.options.pause) {
+			target.show().css('height', $(this).height()).animate({'duration' : 200, 'specialEasing' : {'width' : target.width()}});
+		}
+	},
+	'prevPage' : function() {/*浏览上一页数据*/
+		if (this.options.index >= messagehistory.length) {
+			return false;
+		}
+		this.control('pause');
+		if (this.status.prev) {
+			this.options.index += 2;
+			this.status.prev = false;
+		} else {
+			this.options.index += 1;
+		}
+		if ($('#msg_list .talkList').size() < this.options.index + 1) {
+			for (i = this.options.index; i < this.options.index + this.options.pagesize; i++) {
+				try {
+					this.appendItem(messagehistory[i]);
+				} catch (e) {
+				}
+			}
+		}
+		if (this.options.index >= 2){
+			var position = $('#msg_list .talkList').eq(this.options.index).position();
+			var top = 0;
+			if (position) {
+				top = $('#msg_list .talkList').eq(this.options.index).position().top + $('#msg_list .talkList').eq(this.options.index).outerHeight();
+				if (this.options.wrapHeight - top > 0) {
+					top = 0;
+				} else {
+					top = this.options.wrapHeight - top;
+				}
+			}
+			if (top != 0) {
+				$('#msg_list').css({'position' : 'absolute'}).animate({'top' : top});
+			}
+		}
+	},
+	'nextPage' : function() {
+		if (this.options.index <= 0) {
+			return false;
+		}
+		this.control('pause');
+		this.options.index -= 1;
+		if (!this.status.prev) {
+			if ($('#msg_list .talkList').eq(this.options.index - 1).outerHeight() < this.options.wrapHeight) {
+				this.options.index -= 2;
+			} else {
+				this.options.index -= 1;
+			}
+			this.status.prev = true;
+			this.status.next = false;
+		}
+		if (this.options.index < 0) {
+			this.options.index = 0;
+		}
+		if (this.options.index > 0) {
+			var position = $('#msg_list .talkList').eq(this.options.index).position();
+			var top = 0;
+			if (position) {
+				top = 0 - $('#msg_list .talkList').eq(this.options.index).position().top;
+			}
+			if (top != 0) {
+				$('#msg_list').css({'position' : 'absolute'}).animate({'top' : top});
+			}
+		} else if (this.options.index == 0) {
+			$('#msg_list').css({'position' : 'absolute'}).animate({'top' : 0});
+		}
+	},
+	'newItem' : function() {
+		var $this = this;
+		if (this.options.pause) {
+			return false;
+		}
+		if ($('#msg_list .talkList:hidden').size() > 0) {
+			try {
+				var target = $('#msg_list .talkList:hidden:last');
+				if (!this.options.pause && target[0]) {
+					target.show({'duration' : 200, 'specialEasing' : {'width' : target.width()}});
+				}
+			} catch (e) {}
+			$this.timer = setTimeout(function(){
+				$this.newItem();
+			}, $this.options.delaytime);
+			$this.countdown($this.options.delaytime);
+		} else {
+			$.getJSON('{php echo $this->createWebUrl('incoming', array('id' => $wall['rid']))}', {'lastmsgtime' : $this.lastmsgtime, 'page' : $this.page, 'r' : (new Date()).valueOf()}, function(s){
+				if (s && s['message']) {
+					$this.page++;
+				}
+				try {
+					$this.beforeItem(s['message']);
+				} catch (e) {
+				}
+				$this.timer = setTimeout(function(){
+					$this.newItem();
+				}, $this.options.delaytime);
+				$this.countdown($this.options.delaytime);
+			});
+			//获取新消息时，请求第三方墙数据
+			if ($this.txwall.status){
+				$.getJSON('{php echo $this->createWebUrl('incomingtxwall', array('name' => 'wxwall', 'do' => 'incomingtxwall', 'id' => $wall['rid']))}', {'lastmsgtime' : $this.txwall.lastmsgtime, 'lastuser' : $this.txwall.lastuser, 'r' : (new Date()).valueOf()}, function(s){
+					if (s['message']['status'] == '1') {
+						$this.txwall.lastmsgtime = s['message']['lastmsgtime'];
+						$this.txwall.lastuser = s['message']['lastuser'];
+					}
+				});
+			}
+		}
+	},
+	'control' : function(operation) {
+		var $this = this;
+		if (operation == 'pause') {
+			this.options.pause = true;
+			clearTimeout($this.timer);
+			$('#status').html('开始');
+			$('#status')[0].onclick = function(){
+				$this.control('start');
+			}
+		} else if(operation == 'start') {
+			this.options.pause = false;
+			$('#status').html('暂停');
+			$('#status')[0].onclick = function(){
+				$this.control('pause');
+			}
+			this.options.index = 0;
+			$('#msg_list').css({'position' : 'absolute'}).animate({'top' : 0});
+			clearTimeout($this.timer);
+			$this.newItem();
+		}
+	},
+	'countdown' : function(time) {
+		var $this = this;
+		if (time) {
+			clearTimeout(this.timerdown);
+			$('#remaintime').html(time / 1000);
+		} else {
+			time = parseInt($('#remaintime').html()) - 1;
+			if (time < 0){
+				time = 0;
+			}
+			$('#remaintime').html(time);
+		}
+		this.timerdown = setTimeout(function(){
+			$this.countdown();
+		}, 1000);
+	},
+	'removeHTMLTag' : function(str) {
+		str = str.replace(/<\/?[^>]*>/g,'');
+		str = str.replace(/[ | ]*\n/g,'\n');
+		str = str.replace(/\n[\s| | ]*\r/g,'\n');
+		str = str.replace(/&nbsp;/ig,'');
+		return str;
+	},
+	'strlen' : function(str) {
+		var n = 0;
+		str = this.removeHTMLTag(str);
+		for(i=0;i<str.length;i++){
+			var leg=str.charCodeAt(i);
+			/*if(leg>255){
+				n+=2;
+			}else {
+				n+=1;
+			}*/
+			n+=1;
+		}
+		return n;
+	},
+	'changeSize' : function(a) {
+		var $this = this;
+		var str_len = parseInt($this.strlen(a));
+		var font_size = 36;
+		for (j=18;j>str_len;j--) {
+			font_size += 4;
+		}
+		return font_size;
+	}
+};
+$(function(){
+	wxwall.init();
+
+	//公众号切换
+	var mTimer;
+	function auto_play() {
+		$(".msg_tit").toggle();
+	}
+	mTimer = setInterval(function(){auto_play()}, 5000);
+});
+</script>
+</body>
+</html>

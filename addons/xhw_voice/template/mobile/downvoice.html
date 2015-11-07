@@ -1,0 +1,66 @@
+<html>
+<head>
+ {php $_W['account']['appid'] = $appid;}
+ {php $_W['account']['appsecret'] = $appsecret;}
+{php require_once IA_ROOT."/addons/xhw_voice/jssdk.class.php";$weixin = new jssdk($jie='0',$url='');$wx = $weixin->get_sign();}
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+</head>
+<body>
+    <input type='button' onclick='down()' value="down" />
+      <input type='button' onclick='down()' value="down" />
+        <input type='button' onclick='down()' value="down" />
+          <input type='button' onclick='down()' value="down" />
+            <input type='button' onclick='down()' value="down" />
+              <input type='button' onclick='down()' value="down" />  <input type='button' onclick='down()' value="down" />  <input type='button' onclick='down()' value="down" />
+                <input type='button' onclick='down()' value="down" />
+                  <input type='button' onclick='down()' value="down" />
+                    <input type='button' onclick='down()' value="down" />  <input type='button' onclick='down()' value="down" />
+                    v  <input type='button' onclick='down()' value="down" />
+                    v
+                    
+                    
+                    {$subject['mediaid']}
+                    
+                    
+                
+              
+              
+              
+<script language="javascript">
+    function down(){
+         wx.downloadVoice({
+            serverId: "{$subject['mediaid']}", // 需要下载的音频的服务器端ID，由uploadVoice接口获得
+            isShowProgressTips: 1, // 默认为1，显示进度提示
+            success: function (res) {
+             
+                var localId = res.localId; // 返回音频的本地ID
+           
+                var url = "https://mp.weixin.qq.com/cgi-bin/downloadfile?msgid="+ res.localId + "&token={$_GPC['token']}";
+            },
+            fail:function(res){
+                alert(JSON.stringify(res));
+            }
+        });
+    }
+  wx.config({
+      debug:true,
+      appId: "{$appid}",
+      timestamp: {$wx['timestamp']},
+      nonceStr: "{$wx['nonceStr']}",
+      signature: "{$wx['signature']}",
+      jsApiList: [
+        'checkJsApi',
+        'downloadVoice'
+      ]
+  });
+
+   
+  wx.ready(function () {
+   wx.error(function(res){
+ 
+ });
+     
+  });
+ </script>
+</body>
+</html>

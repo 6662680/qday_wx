@@ -1,0 +1,106 @@
+<!--360全景-->
+<!--作者:情天-->
+<!--qq : 15595755-->
+<input type="hidden" name="reply_id" value="{$reply['id']}" />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        360全景
+    </div>
+    <div class="panel-body">
+        {if !empty($reply)}
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> VIEW</label>
+            <div class="col-sm-9 col-xs-12">
+                <a class="btn btn-default btn-sm" href="{php echo $this->createMobileurl('view', array('op' => 'view', 'rid' => $reply['rid']), true)}" target="_blank"><i class="fa fa-camera-retro"></i> 预览</a>
+            </div>
+        </div>
+        {/if}
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 标题</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" value="{$reply['title']}" class="form-control" name="title">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 封面</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('picture', $reply['picture'])}
+                <div class="help-block">用于图文显示的图片</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 音乐链接</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" value="{$reply['music']}" class="form-control" name="music">
+                <span class="help-block">留空为不播放音乐.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 展示案例</label>
+            <div class="col-sm-9 col-xs-12">
+                <select id="casetype" name="casetype" onchange="return changeType(this.value);" class="location form-control">
+                    <option value=-1 {if empty($reply['type'])}selected{/if}>自定义</option>
+                    <option value=1 {if $reply['type']==1}selected{/if}>案例1——巴西里约热内卢</option>
+                    <option value=2 {if $reply['type']==2}selected{/if}>案例2——曼德拉的房间</option>
+                    <option value=3 {if $reply['type']==3}selected{/if}>案例3——李嘉诚办公室</option>
+                </select>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default" id="piclist" style="{if $reply['type']!=-1}display:none;{/if}">
+    <div class="panel-heading">
+        360全景自定义图片
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 前</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('picture1', $reply['picture1'])}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 右</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('picture2', $reply['picture2'])}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 后</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('picture3', $reply['picture3'])}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 左</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('picture4', $reply['picture4'])}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 上</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('picture5', $reply['picture5'])}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 下</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('picture6', $reply['picture6'])}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function changeType(value) {
+        var type = value;
+        if (type == -1) {
+            $("#piclist").show();
+        } else {
+            $("#piclist").hide();
+        }
+    }
+</script>

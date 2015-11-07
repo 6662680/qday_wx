@@ -1,0 +1,60 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li><a>{$item['realname']}详细信息</a></li>
+</ul>
+<div class="main">
+    <div style="padding-top: 15px;">
+	<form class="form-horizontal form" id="form2" action="" method="post" onSubmit="return checkdata();">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				基本设置
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">姓名</label>
+					<div class="col-sm-5">
+						<input type="text" name="realname" class="span7" value="{$item['realname']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">电话</label>
+					<div class="col-sm-5">
+						<input type="text" name="mobile" class="span7" value="{$item['mobile']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">密码</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" name="pwd" value="{$setting['pwd']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-1 control-label">注册时间</label>
+					<div class="col-sm-5">
+						<input disabled type="text" name="createtime" class="span7" value="{php echo date('Y-m-d H:m:s', $item['createtime'])}" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+			<input type="hidden" name="id" value="{$hostid}" />
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+		</div>
+	</form>
+    </div>
+</div>
+<script>
+function checkdata(){
+	var pwd = document.getElementById('pwd').value;
+	if(pwd != '{$item['pwd']}'){
+		if(confirm('密码已改变，请谨慎操作，确认提交吗？')){
+			return true;
+		} else{
+			return false;
+		}
+	}
+	return true;
+}
+</script>
+{template 'common/footer'}

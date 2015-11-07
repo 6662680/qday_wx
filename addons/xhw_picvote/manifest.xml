@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[图片投票]]></name>
+		<identifie><![CDATA[xhw_picvote]]></identifie>
+		<version><![CDATA[1.8]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[图片投票]]></ability>
+		<description><![CDATA[图片投票]]></description>
+		<author><![CDATA[情天]]></author>
+		<url><![CDATA[http://www.qdaygroup.com]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+	<menu>
+      <entry title="项目管理" do="project" state="" direct="false" />  
+      <entry title="高级设置" do="setting" state="" direct="false" />  
+    </menu>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_xhw_picvote` (
+  `id` int(11) NOT NULL auto_increment,
+  `rid` int(10) NOT NULL,
+  `weid` int(10) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `photo` varchar(200) NOT NULL,
+  `smalltext` varchar(300) NOT NULL,
+  `share_title` varchar(500) NOT NULL,
+  `share_desc` varchar(500) NOT NULL,
+  `follow_url` varchar(300) NOT NULL,
+  `rule_url` varchar(500) NOT NULL,
+  `bgcolor` varchar(20) NOT NULL,
+  `rule` text NOT NULL,
+  `submit_url` varchar(500) NOT NULL,
+  `starttime` int(20) NOT NULL,
+  `endtime` int(20) NOT NULL,
+  `logo` varchar(500) NOT NULL,
+  `imgnum` int(10) NOT NULL,
+  `mynum` int(10) NOT NULL COMMENT '投票上限',
+  `cnzz` varchar(500) NOT NULL,
+  `pass` int(10) NOT NULL,
+  `anum` int(10) NOT NULL,
+  `bnum` int(10) NOT NULL,
+  `adpic` varchar(500) NOT NULL,
+  `adlink` varchar(500) NOT NULL,
+  `ad` varchar(5000) NOT NULL,
+  `adpass` int(10) NOT NULL,
+  `adimg` varchar(5000) NOT NULL,
+  `adimglink` varchar(5000) NOT NULL,
+  `adaimg` text NOT NULL,
+  `imagnum` int(10) NOT NULL,
+  `adiamglink` text NOT NULL,
+  `day` int(10) NOT NULL,
+  `hot` int(10) NOT NULL,
+  `sharenum` int(10) NOT NULL,
+  `viewnum` int(10) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `ims_xhw_picvote_log` (
+  `id` int(10) NOT NULL auto_increment,
+  `rid` int(10) NOT NULL COMMENT '项目ID',
+  `openid` varchar(100) character set utf8 NOT NULL,
+  `numid` int(10) NOT NULL COMMENT '被投票ID',
+  `time` int(20) NOT NULL,
+  `ip` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `openid` (`openid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `ims_xhw_picvote_reg` (
+  `id` int(10) NOT NULL auto_increment,
+  `rid` int(10) NOT NULL COMMENT '项目ID',
+  `weid` int(10) NOT NULL,
+  `title` varchar(100) character set utf8 NOT NULL,
+  `openid` varchar(500) character set utf8 NOT NULL,
+  `nickname` varchar(100) character set utf8 NOT NULL,
+  `avatar` varchar(500) character set utf8 NOT NULL,
+  `phone` text character set utf8 NOT NULL,
+  `pass` int(10) NOT NULL,
+  `num` int(11) NOT NULL COMMENT '赞',
+  `sharenum` int(10) NOT NULL COMMENT '朋友圈浏览次数',
+  `time` int(12) NOT NULL,
+  `img` varchar(5000) character set utf8 NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `openid` (`openid`(333))
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `ims_xhw_picvote_setting` (
+  `id` int(10) NOT NULL auto_increment,
+  `weid` int(10) NOT NULL,
+  `jssdkpass` int(10) NOT NULL,
+  `openidpass` int(10) NOT NULL,
+  `followpass` int(10) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+]]></install>
+	<uninstall><![CDATA[
+	DROP TABLE IF EXISTS `ims_xhw_picvote_setting`;
+	DROP TABLE IF EXISTS `ims_xhw_picvote_reg`;
+	DROP TABLE IF EXISTS `ims_xhw_picvote_log`;
+	DROP TABLE IF EXISTS `ims_xhw_picvote`;
+	]]></uninstall>
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>

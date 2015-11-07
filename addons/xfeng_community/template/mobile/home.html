@@ -1,0 +1,152 @@
+{template 'header'}
+{template 'mslide'}
+<style type="text/css">
+.home-box div  center{
+	color:#666666;
+	font-size:10px;
+	margin-top:15px;
+}
+
+</style>
+{if $member['status']}
+<div style='width:100%;height:40px;background:#f5f5f5;line-height:40px;'>&nbsp;&nbsp;&nbsp;物业服务</div>
+<div class="home-box">
+	<a href="{php echo $this->createMobileUrl('property')}">
+		<div style='background:#ffb81c'>
+			<i class="glyphicon glyphicon-user"></i>
+			<center>物业介绍</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('announcement',array('op' =>'display'))}">
+		<div style='background:#95bd38'> 
+			<i class="glyphicon glyphicon-bullhorn"></i>
+			<center>公告信息</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('repair', array('op' => 'display'))}">
+		<div style='background:#3c87c8'> 
+			<i class="glyphicon glyphicon-wrench"></i>
+			<center>小区报修</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('report', array('op' => 'display'))}">
+		<div style='background:#dd4b2b'> 
+			<i class="fa fa-legal"></i>
+			<center>投诉建议</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('phone')}">
+		<div style='background:#ab5e90'>
+			<i class="glyphicon glyphicon-earphone"></i>
+			<center>便民号码</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('propertyfree')}">
+		<div style='background:#660000'>
+			<i class="fa fa-money"></i>
+			<center>查物业费</center>
+		</div>
+	</a>
+	{loop $nav1 $nav}
+	<a href="{$nav['navurl']}">
+		<div style='background:{if $nav['bgcolor']}{$nav['bgcolor']}{else}#660000{/if}'>
+			<i class="{if $nav['icon']}{$nav['icon']}{else}icon-fullscreen{/if} icon-white"></i>
+			<center>{$nav['title']}</center>
+		</div>
+	</a>
+	{/loop}
+</div>
+<div style='width:100%;height:40px;background:#f5f5f5;line-height:40px;'>&nbsp;&nbsp;&nbsp;小区互动</div>
+<div class="home-box">
+	<a href="{php echo $this->createMobileUrl('activity',array('op' => 'display'))}">
+		<div style='background:#65944e'>
+			<i class="glyphicon glyphicon-tasks"></i>
+			<center>小区活动</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('homemaking', array('op'=>'display'))}">
+		<div style='background:#95bd38'>
+			<i class="glyphicon glyphicon-leaf"></i>
+			<center>家政服务</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('houselease', array('op'=>'display'))}">
+		<div style='background:#38bfc8'>
+			<i class="fa fa-info"></i>
+			<center>房屋租赁</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('search')}">
+		<div style='background:#ec9510'>
+			<i class="glyphicon glyphicon-search"></i>
+			<center>常用查询</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('fled',array('op' => 'display'))}">
+		<div style='background:#666699'>
+			<i class="fa fa-exchange"></i>
+			<center>二手市场</center>
+		</div>
+	</a>
+	<a href="{php echo $this->createMobileUrl('car',array('op' => 'display'))}">
+		<div style='background:#7f6000'>
+			<i class="fa fa-truck"></i>
+			<center>小区拼车</center>
+		</div>
+	</a>
+	{loop $nav2 $nav}
+	<a href="{$nav['navurl']}">
+		<div style='background:{if $nav['bgcolor']}{$nav['bgcolor']}{else}#660000{/if}'>
+			<i class="{if $nav['icon']}{$nav['icon']}{else}icon-fullscreen{/if} icon-white"></i>
+			<center>{$nav['title']}</center>
+		</div>
+	</a>
+	{/loop}
+</div>
+<div style='width:100%;height:40px;background:#f5f5f5;line-height:40px;'>&nbsp;&nbsp;&nbsp;生活服务</div>
+<div class="home-box" style='margin-bottom:80px;'>
+	<a href="{php echo $this->createMobileUrl('business',array('op' => 'app'))}">
+		<div style='background:#65944e'>
+			<i class="glyphicon glyphicon-shopping-cart"></i>
+			<center>小区商家</center>
+		</div>
+	</a>
+	{loop $nav3 $nav}
+	<a href="{$nav['navurl']}">
+		<div style='background:{if $nav['bgcolor']}{$nav['bgcolor']}{else}#660000{/if}'>
+			<i class="{if $nav['icon']}{$nav['icon']}{else}icon-fullscreen{/if} icon-white"></i>
+			<center>{$nav['title']}</center>
+		</div>
+	</a>
+	{/loop}
+</div>
+{else}
+
+<div class="tips img-rounded">
+
+	<div class="icon">
+		<i class="icon-spinner"></i>
+	</div>
+	<div class="text-danger" style="margin-bottom:10px;">请耐心等待审核</div>
+	<table class="table">
+		<tr>
+			<td style="text-align:center;">物业公司：</td>
+			<td style="text-align:left; font-size:14px;">
+				<a href="tel:{php echo $this->
+					module['config']['phone']}">{php echo $this->module['config']['cname']}
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">物业电话：</td>
+			<td style="text-align:left; font-size:14px;">
+				<a href="tel:{php echo $this->module['config']['phone']}">{php echo $this->module['config']['tel']}
+				</a>
+			</td>
+		</tr>
+	</table>
+
+</div>
+{/if}
+
+{template 'footer'}

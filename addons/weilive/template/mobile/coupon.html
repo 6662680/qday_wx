@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<link  rel="stylesheet"  href="../addons/weilive/style/css/reset.css"> 
+	<link  rel="stylesheet"  href="../addons/weilive/style/css/style.css"> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>{$store['title']}</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+	function submit_code(){
+		var code=document.getElementById("code").value;
+		var emp = /^\s*$/;
+		if(emp.test(code)){
+			alert("请输入验证码！");
+		}else{
+			checkCode(code, {$numed},{$detail['storeid']}, {$detail['id']});
+		}
+	}
+	function checkCode(code, nums, storeid, actid){
+		$.ajax({
+			type: "POST",
+			url: "{php echo $this->createMobileurl('activity', array('op'=>'checkcode'))}",
+			data: {code: code, nums: nums, storeid: storeid, actid: actid},
+			dataType: "text",
+			
+			success: function (d) {
+				if(d==1){
+					alert('消费成功！');
+					comment({$detail['storeid']});
+					//location.reload(true);
+					//document.getElementById('comment').style.display='block';
+				} else {
+					alert('验证码错误！');
+				}
+			},
+			
+			error: function (xml, text, thrown){
+				alert("出错啦!");
+			}
+		});
+	}
+	
+	function comment(storeid){
+		//document.getElementById('comment').style.display='block';
+		
+		var comment = prompt("请评论","");
+		if(comment){
+			$.ajax({
+				type: "POST",
+				url: "{php echo $this->createMobileurl('activity', array('op'=>'comment'))}",
+				data: {storeid: storeid, comment: comment},
+				dataType: "text",
+				
+				success: function (d) {
+					if(d==1){
+						alert('评论成功！');
+						location.reload(true);
+						//document.getElementById('comment').style.display='block';
+					} else {
+						alert('评论失败！');
+					}
+				},
+				
+				error: function (xml, text, thrown){
+					alert("出错啦!");
+				}
+			});
+		} else {
+			alert('谢谢惠顾！');
+			location.reload(true);
+		}
+	}
+	
+	function shop_map(){
+		document.location.href="http://api.map.baidu.com/marker?location={$store['lat']},{$store['lng']}&title={$store['title']}&name={$store['title']}&content={$store['place']}&output=html&src=wzj|wzj";
+	}
+	</script>
+</head>
+<body bgcolor="#F8F8F8">
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+                <a class="link app-back" href="javascript:history.go(-1);">
+                    <i class="icon-back"></i>
+                </a>
+
+                <h1 class="title sliding">{$detail['title']}</h1>
+                <a class="link user" href="{php echo $this->createMobileUrl('home');}">
+                    <i class="icon-user"></i>
+                </a>
+            </div>
+        </header>
+        <footer class="app-foot app-foot-button">
+            <div class="inner" id="inner" style="display:block;">
+                {if $numed == 0}
+					<a id="attachnone" href="javascript:void(0);" onClick="javascript:document.getElementById('xialihao').style.display='block';" class="cd-popup-trigger"><div class="msg">点击领取</div></a>            
+				{/if}
+				<div class="msg"><input onfocus="password1(this);" type="tel" id="code" name="code" placeholder="让商家输入验证密码" style="width:60%; color:#000; "/>&nbsp;<a id='yzxfs' href="javascript:submit_code();">验 证</a></div>
+			</div>
+			<div class="cd-popup" role="alert" id="xialihao" style="display:none;">
+				<div class="cd-popup-container">
+					<p>请选择领取数量</p>
+					<p>每次限领（{$detail['numed']}份）</p>
+					<input id="min" name="" type="button" value=" " />
+					<input id="text_box" name="nums" type="text" value="1" readonly="true"/>
+					<input id="add" name="" type="button" value=" " />
+					<p>总价：<label id="total"></label>元</p>
+					<ul class="cd-buttons">
+						<li><a href="javascript:void(0);" onClick="javascript:Receive({$detail['id']});document.getElementById('xialihao').style.display='none';">确认</a></li>
+						<li><a href="javascript:void(0);" onClick="javascript:document.getElementById('xialihao').style.display='none';">取消</a></li>
+					</ul>
+					<a href="#" class="cd-popup-close img-replace">关闭</a>
+				</div> 
+			</div>
+			
+			<div class="cd-popup" id="comment" style="display:none;">
+				<div class="cd-popup-container">
+					<p>请评论</p>
+					<p><textarea name="comment" style="width:90%;height:100px;"></textarea></p>
+					<ul class="cd-buttons">
+						<li><a href="javascript:void(0);" onClick="javascript:comment({$detail['id']});document.getElementById('comment').style.display='none';">确认</a></li>
+						<li><a href="javascript:void(0);" onClick="javascript:document.getElementById('comment').style.display='none';">取消</a></li>
+					</ul>
+					<a href="#" class="cd-popup-close img-replace">关闭</a>
+				</div> 
+			</div> 
+        </footer>
+        <section class="app-wrap">
+            <div class="inner">
+
+                <div class="m-detail">
+                    <div class="cover">
+						<div style="height:225px; overflow:hidden;"><img src="{$_W['attachurl']}{$detail['logo']}"/></div>
+                        <div class="number" id="join_num">{$detail['used']}人使用/<span id="shengyu">{if $detail['num']==-1}无限量{else}剩{$detail['num']}张{/if}</span></div>
+                    </div>
+                    <div class="coupon">
+					<p class="youhuijia">
+						{if $detail['type']==1}折扣券{/if}
+						{if $detail['type']==2}现金券{/if}
+						{if $detail['type']==3}体验券{/if}
+						{if $detail['type']==4}礼品券{/if}
+						{if $detail['type']==5}特价券{/if}
+						{if $detail['type']==6}换购券{/if}
+						{if $detail['type']==7}团购券{/if}
+					</p>
+                        <div class="money" id="moneys">
+                            {$detail['kill_price']}<span>元</span>
+							<a class="linqufenshu">已领<span id="linqufenshu">{$numed}</span>份</a>
+							</div>
+                       {if $numed >0}<span id="qxlqs"> <a class="button" href="javascript:noReceive({$detail['id']});">取消领取</a></span>{/if}
+                    </div>
+					
+					<div id="gzjks"><div id="gzjk">
+					<div class="baocunyouhui">使用获得：{$detail['score']}积分</div>
+					<div class="baocunyouhui1"><a id='gzjkyh' href="{$setting['gzurl']}">点击关注,才能保存优惠</a></div></div>
+					</div>
+					
+					
+                    <div class="info u-wrap">
+                        <h2 class="title">
+                            <div class="f-toe">{$detail['title']}</div>
+                        </h2>
+                        <div class="content">
+                            <div class="row z-fix">
+                                <span class="tag">优惠时间：</span>
+                                至{php echo date('Y-m-d h:i:s', $detail['end_time'])}
+							</div>
+							<div class="row z-fix">
+                                <span class="tag">温馨提示：</span>
+                                <p>
+									{$detail['prompt']}
+								</p>
+                           </div>
+                            <div class="row z-fix">
+                                <span class="tag">优惠详情：</span>
+                                <p>
+									{$detail['activity_detail']}
+								</p>
+							</div>
+                            
+                            <div class="row z-fix">
+                                <span class="tag">使用说明：</span>
+                                <p>
+									{$detail['description']}
+								</p>
+                           </div>
+                        </div>
+                        
+                    </div>
+                    <div class="shop u-wrap">
+                        <h2 class="title">{$store['title']}<a style=" float:right; color:#CCCCCC" href="{php echo $this->createMobileUrl('complain', array('actid'=>$detail['id']))}">投诉</a></h2>
+                        <a class="content map" href="javascript:shop_map();">
+                            <span>{$store['place']}</span>
+                        </a>
+                        <a class="content phone" href="tel:{$store['tel']}">
+                            <span>{$store['tel']}</span>
+                        </a>
+                        <a class="content more" href="{php echo $this->createMobileUrl('activity', array('op'=>'more', 'id'=>$store['id']));}">
+                            更多优惠
+                        </a>
+                    </div>
+                </div>
+                <footer class="m-cprt">
+                   		<a href="{$setting['gzurl']}">关注微信</a>
+						{if empty($setting['helpurl'])}{else}<a href="{$setting['helpurl']}">使用帮助</a>{/if}
+						<a href="{php echo $this->createMobileurl('myshop', array());}">免费开店</a>
+                </footer>
+            </div>
+        </section>
+    </div>
+</div>
+<input type="hidden" name="shengyuliang" id="shengyuliang" value="{$detail['num']}"/>
+<input type="hidden" name="oldrices" id="oldrices" value="{$detail['price']}"/>
+<input type="hidden" name="nowprices" id="nowprices" value="{$detail['kill_price']}"/>
+
+<script  src="../addons/weilive/style/js/jquery.1.11.1.js"></script>
+<script  src="../addons/weilive/style/js/main.js"></script> 
+
+<script>
+function password1(a){
+		setTimeout(function(){
+			a.type = 'password';
+		},500);
+	}
+
+$(function(){
+	var t = $("#text_box");
+	$("#add").click(function(){		
+		t.val(parseInt(t.val())+1)
+		var max_receive="{$detail['numed']}";
+		if((parseInt(t.val())+1)>parseInt(max_receive)){
+			t.val(parseInt(max_receive));
+		}
+		setTotal();
+	})
+	$("#min").click(function(){
+		t.val(parseInt(t.val())-1)
+		if((parseInt(t.val())-1)<=0){
+			t.val(1);
+		}
+		setTotal();
+	})
+	function setTotal(){
+	var prices="{$detail['kill_price']}";
+		$("#total").html((parseInt(t.val())*prices).toFixed(2));
+	}
+	setTotal();
+})
+function Receive(actid){
+	var nums= parseInt(document.getElementById("text_box").value);//获取领取数量
+	if({$detail['credit']}>0){
+		if(!confirm('领取需要'+nums*{$detail['credit']}+'积分，确定领取吗？')){
+			return false;
+		}
+	}
+	
+	var shengyu=parseInt(document.getElementById("shengyuliang").value);//获取剩余数量
+	if(shengyu==-1||shengyu>=nums){
+		$.ajax({
+			type: "POST",
+			url: "{php echo $this->createMobileurl('activity', array('op'=>'attach'))}",
+			data: {actid: actid, nums: nums},
+			dataType: "text",
+			
+			success: function (d) {
+				if(d==1){
+					alert('领取成功！到该店出示此优惠即可使用！');
+					location.reload(true);
+				} else if(d==-1){
+					alert('该优惠券不存在');
+				} else if(d==-2){
+					alert('不能再领取了');
+				} else if(d==-4){
+					alert('先要关注哦亲！！！');
+				} else if(d==-5){
+					alert('积分不够您领取！');
+				} else {
+					alert('领取数量不合法');
+				}
+			},
+			
+			error: function (xml, text, thrown){
+				alert("出错啦!");
+			}
+		});
+	}else{
+		alert('剩余的数量不够您领取，请重新领取！');
+		return false;
+	}
+}
+
+function noReceive(actid){
+	var num = document.getElementById("linqufenshu").innerHTML;
+	if(parseInt(num)<=0){
+		return;
+	} else {
+		$.ajax({
+			type: "POST",
+			url: "{php echo $this->createMobileurl('activity', array('op'=>'noreceive'))}",
+			data: {actid: actid},
+			dataType: "text",
+			
+			success: function (d) {
+				if(d==1){
+					location.reload(true);
+				}
+			},
+			
+			error: function (xml, text, thrown){
+				alert("出错啦!");
+			}
+		});
+	}
+}
+
+</script>
+
+<script>
+
+var imgUrl = "{$_W['attachurl']}{$detail['logo']}";
+var lineLink = "{$_W['siteroot']}{php echo $this->createMobileurl('activity', array('id'=>$detail['id'], 'op'=>'detail'));}";
+var descContent = '{$detail['description']}';
+var shareTitle = '{$detail['title']}';
+var appid = '';
+function shareFriend() {
+	WeixinJSBridge.invoke('sendAppMessage',{
+        "appid": appid,
+        "img_url": imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": lineLink,
+        "desc": descContent,
+        "title": shareTitle
+    }, function(res) {
+    })
+}
+
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+        "img_url": imgUrl,
+        "img_width": "200",
+		"img_height": "200",
+        "link": lineLink,
+        "desc": descContent,
+        "title": shareTitle
+    }, function(res) {
+    });
+}
+
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+        "content": descContent,
+        "url": lineLink,
+    }, function(res) {
+    });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    // 发送给好友
+	WeixinJSBridge.on('menu:share:appmessage', function(argv){
+        shareFriend();
+    });
+    // 分享到朋友圈
+    WeixinJSBridge.on('menu:share:timeline', function(argv){
+        shareTimeline();
+    });
+    // 分享到微博
+    WeixinJSBridge.on('menu:share:weibo', function(argv){
+        shareWeibo();
+    });
+}, false);
+</script>
+</body>
+</html>

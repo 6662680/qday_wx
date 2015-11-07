@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="wumi-weixin-share-img-url" content="{RES}images/truth.jpg">
+    <meta name="wumi-weixin-share-desc" content="想知道我的真心话吗？快和我交换秘密，来场真心话大冒险吧！">
+    <title>和朋友交换真心话</title>
+    <link rel="stylesheet" href="{RES}css/truth.default.css?v=1" type="text/css" media="screen" />
+</head>
+<body>
+    <!-- 选问题 -->
+    <div id="questions">
+        <div class="section">
+            <header>选择问题</header>
+            <div class="list">
+                <ul>
+                    {loop $list $item}
+                    {if !empty($replylist[$item['id']]['id'])}
+                    <a href="{php echo $this->createMobileUrl('question', array('id' => $item['id']), true)}">
+                    {/if}
+                    <li class="j-question" data-q="{$item['title']}">
+                        <div class="q">
+                            <p>{if !empty($replylist[$item['id']])}
+                                [已答]
+                               {/if}{$item['title']}</p>
+                        </div>
+                        <div class="forward"><i class="i-forward"></i></div>
+                    </li>
+                    {if !empty($replylist[$item['id']]['id'])}
+                    </a>
+                    {/if}
+                    {/loop}
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <header>或者</header>
+            <div class="main">
+                <a href="javascript:;" class="btn btn-lg btn-wrap btn-custom j-custom">自己写一个问题</a>
+            </div>
+        </div>
+    </div>
+    <div id="mytruth" style="display:none">
+        <form action="" method="post">
+            <div class="the-question j-question-content"></div>
+            <div class="the-truth">
+                <header>我的真心回答：</header>
+                <textarea class="input answer" name="a"></textarea>
+                <p class="tips">你和朋友们都要先回答问题才能看到对方的答案</p>
+            </div>
+            <input type="submit" class="btn btn-lg btn-wrap btn-submit" name="btnsubmit" value="提交"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+            <input type="hidden" name="q"/>
+        </form>
+    </div>
+    <div id="allQuestions" style="display:none">
+        {loop $list $item}
+        ||{$item['title']}||
+
+        {/loop}
+        </div>
+<script type="text/javascript" src="{RES}js/zepto.min.js"></script>
+<script type="text/javascript" src="{RES}js/truth.default.js"></script>
+<!--<script type="text/javascript" src="{RES}js/question.js"></script>-->
+<script type="text/javascript">
+    !function(t) {
+        function n() {
+            var t = Math.floor(Math.random() * o.length);
+            return o[t]
+        }
+        var i = '<input type="text" class="input custom-question j-question-string" placeholder="想与朋友交换的真心话题..."/>', s = '<div class="another j-change"><label>换个问题</label></div>', e = '<div class="ajax-loading-layer"><img src="{RES}images/ajax_loading.gif"/></div>', o = [], r = ($("#theme"), $("#questions")), a = $("#mytruth");
+        t.question = {
+            setInit: function(t) {
+                return o = t, this
+            },
+            run: function() {
+                this.onPopState().evQuestionList().evBtnCustom().evForm()
+            },
+            runWithQuestionAnswer: function(t, n) {
+                this.onPopState().evQuestionList().evBtnCustom().evForm(), "pushState"in history && history.pushState({
+                    q: t,
+                    a: n
+                }, null, location.href), this.showFormWithQuestionAnswer(t, n)
+            },
+            onPopState: function() {
+                var t = this;
+                return $(window).on("popstate", function() {
+                    "state"in history && null !== history.state ? "a"in history.state ? t.showFormWithQuestionAnswer(history.state.q, history.state.a) : t.showForm(history.state.q) : t.showList()
+                }), this
+            },
+            evQuestionList: function() {
+                var t = this;
+                return r.on("click", ".j-question", function() {
+                    var n = $(this).data("q");
+                    t.showForm(n), "pushState"in history && history.pushState({
+                        q: n
+                    }, null, "")
+                }), this
+            },
+            evBtnCustom: function() {
+                var t = this;
+                return r.on("click", ".j-custom", function() {
+                    t.showForm(), "pushState"in history && history.pushState({
+                        q: void 0
+                    }, null, "")
+                }), this
+            },
+            evForm: function() {
+                return a.on("click", ".j-change", function() {
+                    for (var t = a.find(".j-question-string"), i = n(); i == t.text().replace(/^ +| +$/g, "");)
+                        i = n();
+                    t.text(i), a.find(".input.answer").val("")
+                }), a.find("form").on("submit", function(t) {
+                    t.preventDefault();
+                    var n = $(this).find(".j-question-string"), i = n.val() || n.text(), s = $(this).find(".input[name=a]").val();
+                    i = i.replace(/^ +| +$/g, ""), s = s.replace(/^ +| +$/g, ""), i.length <= 1 || i.length > 256 ? n.addClass("error-border") : s.length <= 1 ? alert("这也太简洁了……要不再多说两句？") : s.length > 256 ? alert("太长了哦（已超出" + (s.length-256) + "字）") : ($(this).find("input[name=q]").val(i), $(this)[0].submit(), $("body").append(e), "replaceState"in history && history.replaceState(null, null, "{php echo $this->createMobileUrl('sendreply', array(), true)}"))
+                }).on("input", ".j-question-string", function() {
+                    $(this).removeClass("error-border")
+                }), this
+            },
+            showList: function() {
+                a.hide(), r.show()
+            },
+            showForm: function(t) {
+                var n = a.find(".j-question-content");
+                n.html(t ? '<p class="question-string j-question-string">' + t + "</p>" + s : i), a.find("[name=a]").val(""), r.hide(), a.show()
+            },
+            showFormWithQuestionAnswer: function(t, n) {
+                var e = a.find(".j-question-content");
+                o.indexOf(t)>-1 ? e.html('<p class="question-string j-question-string">' + t + "</p>" + s) : (e.html(i), a.find(".j-question-string").val(t)), a.find("[name=a]").val(n), r.hide(), a.show()
+            }
+        }
+    }(window);
+</script>
+<script>
+        $(function() {
+            question.setInit($('#allQuestions').text().replace(/\s/g, '').replace(/(^\|\|)|(\|\|$)/g, '').split('||||'));
+            var hash = location.hash;
+            if (/#!q=[\w\s\%\-\/\\\.\;\,\:\'\"\(\)\<\>\`\~\!\@#$\^\*\+\|\u4e00-\u9fa5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]*(\&|$)/i.test(hash)) {
+                var q = hash.match(/#!q=([\w\s\%\-\/\\\.\;\,\:\'\"\(\)\<\>\`\~\!\@#$\^\*\+\|\u4e00-\u9fa5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]*)\&/i)[1],
+                    a = hash.match(/&a=([\w\s\%\-\/\\\.\;\,\:\'\"\(\)\<\>\`\~\!\@#$\^\*\+\|\u4e00-\u9fa5\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b]*)$/i)[1];
+                question.runWithQuestionAnswer(decodeURI(q), decodeURI(a));
+            } else {
+                question.run();
+            }
+        });
+    </script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        /*
+         * 注意：
+         * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
+         * 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
+         * 3. 完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+         *
+         * 如有问题请通过以下渠道反馈：
+         * 邮箱地址：weixin-open@qq.com
+         * 邮件主题：【微信JS-SDK反馈】具体问题
+         * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
+         */
+        var appid = '{$_W['account']['jssdkconfig']['appId']}';
+        var timestamp = '{$_W['account']['jssdkconfig']['timestamp']}';
+        var nonceStr = '{$_W['account']['jssdkconfig']['nonceStr']}';
+        var signature = '{$_W['account']['jssdkconfig']['signature']}';
+
+        wx.config({
+            debug: false,
+            appId: appid,
+            timestamp: timestamp,
+            nonceStr: nonceStr,
+            signature: signature,
+            jsApiList: [
+                // 所有要调用的 API 都要加到这个列表中
+                'checkJsApi',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'hideMenuItems',
+                'showMenuItems',
+                'hideAllNonBaseMenuItem',
+                'showAllNonBaseMenuItem',
+                'translateVoice',
+                'startRecord',
+                'stopRecord',
+                'onRecordEnd',
+                'playVoice',
+                'pauseVoice',
+                'stopVoice',
+                'uploadVoice',
+                'downloadVoice',
+                'chooseImage',
+                'previewImage',
+                'uploadImage',
+                'downloadImage',
+                'getNetworkType',
+                'openLocation',
+                'getLocation',
+                'hideOptionMenu',
+                'showOptionMenu',
+                'closeWindow',
+                'scanQRCode',
+                'chooseWXPay',
+                'openProductSpecificView',
+                'addCard',
+                'chooseCard',
+                'openCard'
+            ]
+        });
+
+        var shareData = {
+            title: '{$share_title}',
+            desc: '{$share_desc}',
+            link: '{$share_url}',
+            imgUrl: '{$share_image}'
+        };
+
+        wx.ready(function () {
+            wx.onMenuShareAppMessage({
+                title: shareData.title,
+                desc: shareData.desc,
+                link: shareData.link,
+                imgUrl: shareData.imgUrl,
+                trigger: function (res) {
+                    //alert('用户点击发送给朋友');
+                },
+                success: function (res) {
+                    alert('感谢您的分享...');
+                },
+                cancel: function (res) {
+                    //alert('已取消');
+                },
+                fail: function (res) {
+                    alert(JSON.stringify(res));
+                }
+            });
+
+            wx.onMenuShareTimeline({
+                title: shareData.title,
+                link: shareData.link,
+                imgUrl: shareData.imgUrl,
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+            wx.onMenuShareQQ({
+                title: shareData.title,
+                desc: shareData.desc,
+                link: shareData.link,
+                imgUrl: shareData.imgUrl,
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
+            wx.onMenuShareWeibo({
+                title: shareData.title,
+                desc: shareData.desc,
+                link: shareData.link,
+                imgUrl: shareData.imgUrl,
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+
+        wx.error(function (res) {
+            //alert(res.errMsg);
+        });
+    </script>
+</body>
+</html>

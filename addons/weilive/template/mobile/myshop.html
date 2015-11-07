@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>商家店铺管理</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/shop.css"/>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+				<p style=" float:right;"><a href="{php echo $this->createMobileUrl('myshop', array('op'=>'exit'))}" class=""><input type="button" value="退出" name="" style="color:#666; width:60px; height:28px;"/></a></p>
+                <h1 class="title sliding">商家后台管理</h1>
+            </div>
+        </header>
+        <footer class="app-foot app-foot-button">
+            <div class="inner">
+                <a class="button" href="{php echo $this->createMobileUrl('myshop', array('op'=>'build', 'hostid'=>$host['id']))}">创建店铺</a>
+            </div>
+        </footer>
+        <section class="app-wrap" id="js_wrap">
+            <div class="inner">
+                {loop $shops $s}
+				<ul class="m-shops">
+				                    <li>
+                        <div class="info f-cb">
+                            <img class="pic" src="{$_W['attachurl']}{$s['logo']}" alt="暂无图片"/>
+                            <div class="box">
+                                <div class="content">
+                                    <div class="name f-toe">{$s['title']}{if $s['checked']==0}&nbsp;<font color="red">(未审核)</font>{/if}</div>
+                                    <p>
+                                        {$s['tel']}                                    </p>
+                                    <p>
+                                        {$s['place']}                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="foot">
+                            优惠券：<span>{if empty($num[$s['id']][0])}0{else}{$num[$s['id']][0]}{/if}</span>张
+                            &nbsp;&nbsp;&nbsp;
+                            活动：<span>{if empty($num[$s['id']][1])}0{else}{$num[$s['id']][1]}{/if}</span>个
+                            <a class="button" href="{php echo $this->createMobileUrl('myshop', array('op'=>'couponlist', 'storeid'=>$s['id']))}">进入管理</a>
+                        </div>
+                    </li>
+				</ul>
+				{/loop}
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+</html>

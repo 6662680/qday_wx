@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>商家后台管理</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/shop.css"/>
+	<script src="../addons/weilive/style/js/business.js"></script>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+                <h1 class="title sliding">商家后台</h1>
+            </div>
+        </header>
+        <section class="app-wrap">
+            <div class="inner">
+                <div class="m-login" id="js_tab">
+                    <ol class="toggle">
+                        <li class="z-sel">
+                            登录
+                        </li>
+                        <li>
+                            注册
+                        </li>
+                    </ol>
+                    <ul class="form">
+                        <li style="display: block;">
+                            <form name="fr2" id="fr2" onSubmit="javascript:return datalogin();" action="{php echo $this->createMobileUrl('myshop', array('op'=>'login'))}" method="post">
+                                <div class="row ipt">
+                                    <input type="tel" id="usernames" name="mobile" placeholder="用户名" value=""/>
+                                </div>
+                                <div class="row ipt">
+                                    <input name="pwd" id="passwords" type="tel" onFocus="password1(this);" placeholder="密码"/>
+                                </div>
+                                <div class="operation">
+                                    <div class="error" id="error2">请填写用户名、密码登陆</div>
+                                </div>
+                                <input class="submit" value="登录" name="sub2" id="sub2" type="submit"/>
+                            </form>
+                        </li>
+                        <li>
+                            <form name="fr1" id="fr1" onSubmit="javascript:return datasubmit();" action="{php echo $this->createMobileUrl('myshop', array('op'=>'reg'))}" method="post">
+                                <div class="row ipt">
+                                    <input type="tel" id="username" name="mobile" onBlur="javascript:checkdata(1,this,'error1')" placeholder="手机号码"/>
+                                </div>
+								<div class="msg" style="margin-top:0; margin-bottom:0; margin-left:2px; color:red;">
+                        请输入您的手机号码
+                    </div>
+                                <div class="row ipt">
+                                    <input name="pwd" id="pwd" type="tel" onFocus="password1(this);" onBlur="javascript:checkdata(2,this,'error1')" placeholder="密码"/>
+                                </div>
+								<div class="msg" style="margin-top:0; margin-bottom:0; margin-left:2px; color:red;">
+                        请输入6位数字密码
+                    </div>
+                                <div class="row ipt">
+                                    <input name="password" id="password" type="tel" onFocus="password1(this);" onBlur="javascript:checkdata(3,this,'error1')" placeholder="确认密码"/>
+                                </div>
+                                <!--<div class="row ipt">
+                                    <input type="text" maxlength="11" name="mobilephone" id="mobilephone" onBlur="javascript:checkdata(4,this,'error1')" placeholder="手机号码"/>
+                                </div>-->
+                                <div class="operation">
+                                    <div class="error" id="error1">亲,请填写相关信息</div>
+                                </div>
+                                <input class="submit" id="sub1" name="sub1" value="注册" type="submit"/>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+<script src="../addons/weilive/style/js/zepto.min.js"></script>
+<script src="../addons/weilive/style/js/app.js"></script>
+<script>
+    $(function () {
+        var $toggles = $('#js_tab .toggle').children();
+        var $boxs = $('#js_tab .form').children();
+        $toggles.on(app.clickEvent, function () {
+            var self = $(this);
+            if (!self.hasClass('z-sel')) {
+                $toggles.removeClass('z-sel');
+                self.addClass('z-sel');
+                $boxs.hide().eq(self.index()).show();
+            }
+        });
+    });
+	
+	function password1(a){
+		setTimeout(function(){
+			a.type = 'password';
+		},500);
+	}
+</script>
+</html>

@@ -1,0 +1,265 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li {if $op == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('activity', array('op' => 'post', 'storeid'=>$storeid))}">添加活动</a></li>
+	<li {if $op == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('activity', array('op' => 'display', 'storeid'=>$storeid))}">管理活动</a></li>
+</ul>
+{if $op == 'post'}
+<div class="main">
+	<form class="form-horizontal form" action="" method="post">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				活动详细设置
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">排序</label>
+					<div class="col-sm-5">
+						<input type="text" name="displayorder" class="form-control" value="{$activity['displayorder']}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动名称</label>
+					<div class="col-sm-5">
+						<input type="text" name="title" class="form-control" value="{$activity['title']}"/>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动Logo</label>
+					<div class="col-sm-5">
+						{php echo tpl_form_field_image('logo', $activity['logo']);}
+						<span class="help-block">建议尺寸134*134</span>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">原价</label>
+					<div class="col-sm-5">
+						<input type="text" name="price" class="form-control" value="{$activity['price']}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">秒杀价</label>
+					<div class="col-sm-5">
+						<input type="text" name="kill_price" class="form-control" value="{$activity['kill_price']}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">数量</label>
+					<div class="col-sm-5">
+						<input type="text" name="num" class="form-control" placeholder="默认不填代表无限量" value="{if $activity['num']<0}{else}{$activity['num']}{/if}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">每人限领数量</label>
+					<div class="col-sm-5">
+						<input type="text" name="numed" class="form-control" placeholder="默认不填代表1" value="{if $activity['numed']==1}{else}{$activity['numed']}{/if}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">温馨提示</label>
+					<div class="col-sm-5">
+						<textarea id="prompt" style="height:150px;" name="prompt" class="form-control" cols="60">{$activity['prompt']}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">优惠详情</label>
+					<div class="col-sm-5">
+						<textarea id="activity_detail" style="height:150px;" name="activity_detail" class="form-control" cols="60">{$activity['activity_detail']}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">使用说明</label>
+					<div class="col-sm-5">
+						<textarea id="description" style="height:150px;" name="description" class="form-control" cols="60">{$activity['description']}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">开始时间</label>
+					<div class="col-sm-5">
+						{php echo tpl_form_field_date('start_time', date('Y-m-d H:m:s',empty($activity['start_time'])?time():$activity['start_time']), true)}
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">结束时间</label>
+					<div class="col-sm-5">
+						{php echo tpl_form_field_date('end_time', date('Y-m-d H:m:s',empty($activity['end_time'])?(time()+60*60*24*7):$activity['end_time']), true)}
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">领取消费积分</label>
+					<div class="col-sm-5">
+						<input type="text" name="credit" class="form-control" placeholder="默认不填代表0" value="{$activity['credit']}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">使用获得积分</label>
+					<div class="col-sm-5">
+						<input type="text" name="score" class="form-control" placeholder="默认不填代表0" value="{$activity['score']}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动类型</label>
+					<div class="col-sm-5">
+						<input type="radio" name="type" value="1" {if $activity['type']==1}checked{/if}/>折扣券&nbsp;&nbsp;
+						<input type="radio" name="type" value="2" {if $activity['type']==2}checked{/if}/>现金券&nbsp;&nbsp;
+						<input type="radio" name="type" value="3" {if $activity['type']==3}checked{/if}/>体验券&nbsp;&nbsp;
+						<input type="radio" name="type" value="4" {if $activity['type']==4}checked{/if}/>礼品券&nbsp;&nbsp;
+						<input type="radio" name="type" value="5" {if $activity['type']==5}checked{/if}/>特价券&nbsp;&nbsp;
+						<input type="radio" name="type" value="6" {if $activity['type']==6}checked{/if}/>换购券&nbsp;&nbsp;
+						<input type="radio" name="type" value="7" {if $activity['type']==7}checked{/if}/>团购券&nbsp;&nbsp;
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">内定领取数量</label>
+					<div class="col-sm-5">
+						<input type="text" name="catch" class="form-control" placeholder="默认不填代表0" value="{if $activity['catch']==0}{else}{$activity['catch']}{/if}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">内定使用数量</label>
+					<div class="col-sm-5">
+						<input type="text" name="used" class="form-control" placeholder="默认不填代表0" value="{if $activity['used']==0}{else}{$activity['used']}{/if}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">是否开启</label>
+					<div class="col-sm-5">
+						<input type="radio" name="isopen" value="1" {if $activity['isopen'] == 1}checked="true"{/if} /> 是&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="isopen" value="0" {if $activity['isopen'] == 0}checked="true"{/if} /> 否
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">是否审核</label>
+					<div class="col-sm-5">
+						<input type="radio" name="ischeck" value="1" {if $activity['ischeck'] == 1}checked="true"{/if} /> 是&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="ischeck" value="0" {if $activity['ischeck'] == 0}checked="true"{/if} /> 否
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="form-group col-sm-12">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+			<input type="hidden" name="op" value="post" />
+			<input type="hidden" name="id" value="{$activity['id']}" />
+			<input type="hidden" name="storeid" value="{$storeid}" />
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+		</div>
+	</form>
+</div>
+{elseif $op == 'display'}
+<div class="main">
+    <div class="activity">
+    <form action="" method="post" class="form-horizontal form" >
+        <input type="hidden" name="op" value="posts" />
+		<table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:60px;">显示顺序</th>
+                <th>图标</th>
+                <th>活动名称</th>
+                <th>创建时间</th>
+                <th>优惠券类型</th>
+                <th>活动类型</th>
+                <th>是否开启</th>
+                <th>是否审核</th>
+                <th style="width:80px;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="level-list">
+            {loop $activities $row}
+            <tr>
+                <td><input type="text" class="form-control" name="displayorder[{$row['id']}]" value="{$row['displayorder']}"></td>
+                <td>{if $row['logo']}<img src="{$_W['attachurl']}{$row['logo']}"  width="50"/>{/if}</td>
+                <td><div class="type-child">{$row['title']}&nbsp;&nbsp;</div></td>
+				<td>{php echo date('Y-m-d', $row['createtime'])}</td>
+				<td>
+				{if $row['flag']==0}
+						{if $row['type']==1}折扣券{/if}
+						{if $row['type']==2}现金券{/if}
+						{if $row['type']==3}体验券{/if}
+						{if $row['type']==4}礼品券{/if}
+						{if $row['type']==5}特价券{/if}
+						{if $row['type']==6}换购券{/if}
+						{if $row['type']==7}团购券{/if}
+				{else}
+					活动
+				{/if}
+                </td>
+				
+				<td>
+                    {if $row['flag']==0}
+                    <span class="label" style="background:#56af45;">优惠券</span>
+                    {else}
+                    <span class="label" style="background:#000000;">活动</span>
+                    {/if}
+                </td>
+                <td>
+                    {if $row['isopen']==1}
+                    <span class="label" style="background:#56af45;">是</span>
+                    {else}
+                    <span class="label">否</span>
+                    {/if}
+                </td>
+				<td>
+                    {if $row['ischeck']==1}
+                    <span class="label" style="background:#56af45;">是</span>
+                    {else}
+                    <span class="label">否</span>
+                    {/if}
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('activity', array('op' => 'post', 'id' => $row['id'], 'storeid' => $storeid))}" title="编辑">编辑</a>
+                    <a onclick="return confirm('确认删除吗？');return false;" href="{php echo $this->createWebUrl('activity', array('op' => 'delete', 'id' => $row['id'], 'storeid' => $storeid))}" title="删除">删除</a>
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+			<tr>
+                <td colspan="5">
+                    <input name="submit" type="submit" class="btn btn-primary" value="批量更新排序">
+                    <input type="hidden" name="token" value="{$_W['token']}" />
+                </td>
+            </tr>
+        </table>
+    </form>
+    {$pager}
+    </div>
+</div>
+{/if}
+{template 'common/footer'}

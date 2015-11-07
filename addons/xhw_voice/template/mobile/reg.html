@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="no-js login-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta chaset="utf-8">
+<title>好声音报名表</title>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="cache-control" content="must-revalidate">
+<link rel="stylesheet" href="../addons/xhw_voice/template/mobile/reg/m.min.css">
+<script type="text/javascript" src="../addons/xhw_voice/template/mobile/reg/ga.js"></script>
+<script type="text/javascript" src="../addons/xhw_voice/template/mobile/reg/m.min.js"></script>
+</head>
+<body> 
+<!-- 头部 start -->
+<section class="header">
+      <header class="clearfix">
+<font size="4" color="#fff"><b>好声音报名表</b></font>
+      </header>
+</section>
+<section class="mt-20 account-form" id="login-form">
+<form method="post" action="" id="submit_post">
+<input type="hidden" name="c" value="entry" />
+<input type="hidden" value="post" name="do">
+<input type="hidden" value="xhw_voice" name="m">
+<input type="hidden" name="id" value="{$id}" />
+    <div class="input-group">
+            {if $title != ''}
+            <input type="text" data-validate="true" data-required="true" data-text="歌名" name="title" autocapitalize="off" autocorrect="off" placeholder="{$title}" value="{$title}">
+            {else}
+            <input type="text" data-validate="true" data-required="true" data-text="歌名" name="title" autocapitalize="off" autocorrect="off" placeholder="请输入参赛的歌曲名">
+            {/if}
+            {if $nickname != ''}
+            <input type="text" data-validate="true" data-required="true" data-text="昵称" name="nickname" autocapitalize="off" autocorrect="off" placeholder="{$nickname}" value="{$nickname}">
+            {else}
+            <input type="text" data-validate="true" data-required="true" data-text="昵称" name="nickname" autocapitalize="off" autocorrect="off" placeholder="请输入您的名字">
+            {/if}
+            {if $phone != '0' && $phone != ''}
+            <input type="text" data-validate="true" data-required="true" data-text="手机" name="phone" autocapitalize="off" autocorrect="off" placeholder="{$phone}" value="{$phone}"> 
+            {else}
+            <input type="text" data-validate="true" data-required="true" data-text="手机" name="phone" autocapitalize="off" autocorrect="off" placeholder="请输入您的手机号码">
+            {/if}
+    </div>
+    <br> <label for="somewhere">选择报名活动：</label>
+  <select id="rid" name="rid">
+{loop $list $row}
+<option value="{$row['id']}">{$row['title']}</option>
+        {/loop}
+  </select>
+<input name="submit" type="submit" value="登记信息" class="mt-20 btn-block btn-state-avail">
+<input type="hidden" name="id" value="{$id}" />
+  </form>
+  <div class="login-action-tip clearfix">
+
+    <div class="pull-right">
+      登记手机号仅用于好声音入围及中奖通知
+    </div>
+  </div> 
+</section>
+</body></html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<script>
+function checkdata()
+{
+var content=document.getElementById('content').value;
+var mobile=document.getElementById('mobile').value;
+var emp = /^\s*$/;
+var regPartton=/1[3-8]+\d{9}/;
+if(emp.test(content)){
+	alert("亲，请填写投诉内容！");
+	
+	}else if(emp.test(mobile)){
+	alert("亲，请填写您的手机号码！");
+	
+	}else if(!regPartton.test(mobile)){
+	alert("亲,手机号码有误，请重新输入！");
+		
+		 
+	 }else{
+	fr1.submit();
+	}
+
+}
+
+function checkdatas()
+{
+var content=document.getElementById('content').value;
+var mobile=document.getElementById('mobile').value;
+var emp = /^\s*$/;
+var regPartton=/1[3-8]+\d{9}/;
+if(emp.test(content)){
+	alert("亲，请填写投诉内容！");
+	return false;
+	}else if(emp.test(mobile)){
+	alert("亲，请填写您的手机号码！");
+	return false;
+	}else if(!regPartton.test(mobile)){
+	alert("亲,手机号码有误，请重新输入！");
+		return false;
+		 
+	 }else{
+	return true;
+	}
+
+}
+</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>投诉</title>
+    <style>
+		*{margin:0; padding:0;}
+		body{background-color:#F3F3F3;}
+		li{list-style-type:none;}
+		a{ text-decoration:none;}
+    	#zhengti {width:100%; padding:15px;}
+		.toushu {margin-bottom:10px; font-family:微软雅黑;}
+		.toushu1 {margin-top:10px; font-family:微软雅黑; border-radius:5px;}
+		.Sleirong {width:96%; border-bottom:#BCBCBC solid 1px; line-height:40px;}
+		input,textarea {
+	border:1px solid #ddd;
+	border-radius:0;
+	color:#999;
+	display:block;
+	font:400 1em/1 "Open Sans",sans-serif;
+	margin:0 0 .5em;
+	padding:0.5em 0.7em;
+	width:100%;
+	-webkit-transition:border-color 300ms,color 300ms;
+	transition:border-color 300ms,color 300ms;
+	-webkit-appearance:none
+}
+
+textarea { border-radius:5px;
+	margin:0;
+	min-height:7.5em;
+	line-height:1.5;
+	overflow:auto;
+	resize:vertical
+}
+input,select {
+	vertical-align:middle
+}
+* {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box
+}
+
+.header {font-size:16px; font-family:微软雅黑;}
+.tijiao {width:96%; height:40px; background-color:#00974B; text-align:center; line-height:20px; font-family:微软雅黑; color:#fff; margin:10px auto; border-radius:5px;}
+ 
+	</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<div id="zhengti">
+	<li class="header">我们一直努力为用户打造更加完美的服务体验平台.<br/> 欢迎广大用户积极对欺骗、服务差、卫生差等体验不好的商户进行投诉；以便商户及时的改进和处理.</li><br/>
+	<li class="toushu">请填写投诉原因:</li>
+    <div class="container">
+	<form id="fr1" name="fr1"  onSubmit="return checkdatas();" action="{php echo $this->createMobileUrl('complain', array('op'=>'post', 'actid'=>$actid));}" method="post">
+		<label class="fade">
+			<textarea name="content" id="content" placeholder="请输入投诉理由"></textarea>
+			<div class="arrow"></div>
+		</label>
+	
+    <li class="toushu1">请填写您的手机号码：</li>
+    <input type="text" class="toushu1" name="mobile" id="mobile" />
+    <input name="submit" type="submit" value="提交投诉" class="tijiao"/>
+	<input type="hidden" name="token" value="{$_W['token']}" />
+	</form>
+</div>
+</div>
+<body>
+</body>
+</html>

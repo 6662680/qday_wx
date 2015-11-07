@@ -1,0 +1,270 @@
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+	<meta name="description" content="优惠券" />
+    <title>优惠券</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+	<script src="../addons/weilive/style/js/baiduposition.js"></script>
+	<script src="../addons/weilive/style/js/TouchSlide.1.1.js"></script>
+	<style>
+	a{
+		-webkit-border-radius: 4px 0 4px 0;
+		border-radius: 5px 5px 5px 5px;
+	}
+	</style>
+	<style>
+	.pagination li{
+		margin-left:7px;
+		background-color: #fa614b;
+		display: inline-block;
+		padding: 0 5px;
+		border-radius: 5px;
+		width:22%;
+		text-align:center;
+	}
+	.pagination li .pager-nav{
+		color: #fff;
+	}
+	</style>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+                <div class="city"><a onclick="positionSort();" style="color:black">{if $location_c!='返回'}{$location_c} ▼{else}返回{/if}</a></div>
+                <div class="search">
+				<!--<form id="fr1" name="fr1" onSubmit="return checkdata()" action="index.php?type=search_post" method="post">-->
+                    <input type="text" name="searchs" id="searchs" placeholder="懒人请在这里搜索~" value="{$condition}"/> 
+                    <a class="btn">
+                       <!-- <i class="icon-search"></i>-->
+						<input type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;" onClick="baiduPosition('sort');" style="border:0;background-color:white;background-repeat:no-repeat;background-image:url(../addons/weilive/style/images/iconfont-search.png); background-position:0,20px; padding-right:5px; padding-top:5px;"/>
+                    </a>
+					<!--</form>-->
+                </div>
+                <h1 class="title sliding"></h1>
+                <a class="link user" href="{php echo $this->createMobileurl('home');}">
+                    <i class="icon-user"></i>
+                </a>
+            </div>
+			
+        </header>
+		
+        <!--<footer class="app-foot">
+            <div class="inner">
+                深圳
+            </div>
+        </footer>-->
+        <section class="app-wrap">
+			<div id="focus" class="focus">
+				<div class="hd" style="display:none;">
+					<ul></ul>
+				</div>
+				<div class="bd">
+					<ul>							
+						{loop $slides $s}
+							<li><a href="{$s['url']}"><img width="100%" height="225px" data-pinit="registered" src="{$_W['attachurl']}{$s['slide']}" /></a></li>
+						{/loop}
+					</ul>
+				</div>
+			</div>
+		
+            <div class="inner">
+                {if !empty($category)}
+				<nav class="m-types">
+                    {loop $category $c}
+					<a style="cursor:pointer;" onclick="baiduPosition({$c[id]})">
+					<img src="{$_W['attachurl']}{$c['logo']}" width="40px" height="40px"/>
+                        <p>{$c['name']}</p>
+                    </a>
+					{/loop}
+                </nav>
+				{/if}
+                <div class="m-hot">
+                    <h2 class="title">
+						{if $op=='sort'}
+							<span style="border-bottom: 2px solid #F868E7;color:#F868E7;">为您找到...</span>
+						{else}
+							<span onclick="window.location='{php echo $this->createMobileurl('index', array('op'=>'display'));}';" {if $style==1}style="border-bottom: 2px solid #F868E7;color:#F868E7;"{/if}>为您推荐</a></span>
+							<span onclick="window.location='{php echo $this->createMobileurl('index', array('op'=>'hot'));}';" {if $style==2}style="border-bottom: 2px solid #F868E7;color:#F868E7;"{/if}>热门优惠</span>
+							<span onclick="window.location='{php echo $this->createMobileurl('index', array('op'=>'new'));}';" {if $style==3}style="border-bottom: 2px solid #F868E7;color:#F868E7;"{/if}>最新上线</span>
+						{/if}
+					</h2>
+                    {if $style==1 || $op=='sort'}
+					<div class="m-list">
+                        <div class="shops">
+						    {loop $hotstores $h}
+							<dl>
+                                <dt>
+                                    <a href="{php echo $this->createMobileurl('activity', array('id'=>$h['id'], 'op'=>'more'));}">
+                                       {$h['title']}									   
+                                        <div class="u-grade s-small">
+                                            <div class="value" style="width:{php echo 20*$h['level']}%;"></div>
+                                        </div>
+										{if !empty($h['dis'])}<span style="position:absolute;right:1px;">{$h['dis']}km</span>{/if}
+                                        <!--<span class="dist">500m</span>-->
+                                    </a>
+                                </dt>
+								{loop $activities $act}
+								{if $act['storeid']==$h['id']}
+								<dd>
+                                    <a href="{php echo $this->createMobileurl('activity', array('id'=>$act['id'], 'op'=>'detail'));}">
+										<img class="pic" src="{$_W['attachurl']}{$act['thumb']}" onError="" alt="暂无图片"/>
+                                        <div class="box">
+                                            <div class="content">
+                                                <div class="name f-toe">{$act['title']}</div>
+                                                <div class="number">
+                                                    {if $act['num']==-1}无限量{else}{$act['num']}{/if}<div class="right"><span>{$act['catch']}</span>人领取</div>
+                                                </div>
+                                                <div class="money">
+                                                    <span>{$act['kill_price']}</span>元<i>{$act['price']}元</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </dd>
+								{/if}
+								{/loop}
+							</dl>
+							{/loop}
+                        </div><br/>
+                    </div>
+					{else}
+					<div class="m-list">
+                        <div class="shops">
+						    {loop $activities $act}
+							{if !empty($store[$act['storeid']]['id'])}
+							<dl>
+                                <dt>
+                                    <a href="{php echo $this->createMobileurl('activity', array('id'=>$store[$act['storeid']]['id'], 'op'=>'more'));}">
+                                       {$store[$act['storeid']]['title']}								   
+                                        <div class="u-grade s-small">
+                                            <div class="value" style="width:{php echo 20*$store[$act['storeid']]['level']}%;"></div>
+                                        </div>
+                                        <!--<span class="dist">500m</span>-->
+                                    </a>
+                                </dt>
+								<dd>
+                                    <a href="{php echo $this->createMobileurl('activity', array('id'=>$act['id'], 'op'=>'detail'));}">
+										<img class="pic" src="{$_W['attachurl']}{$act['thumb']}" onError="" alt="暂无图片"/>
+                                        <div class="box">
+                                            <div class="content">
+                                                <div class="name f-toe">{$act['title']}</div>
+                                                <div class="number">
+                                                    {if $act['num']==-1}无限量{else}{$act['num']}{/if}<div class="right"><span>{$act['catch']}</span>人领取</div>
+                                                </div>
+                                                <div class="money">
+                                                    <span>{$act['kill_price']}</span>元<i>{$act['price']}元</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </dd>
+								
+							</dl>
+							{/if}
+							{/loop}
+                        </div><br/>
+                    </div>
+					{/if}
+					{$pager}
+                </div><br/><br/>
+            </div>
+        </section>
+    </div>
+</div>
+<style type="text/css">
+	#foot{position:absolute;z-index:11;bottom:10px;width:100%;}
+</style>
+<footer id="foot" class="m-cprt">
+	<a href="{$setting['gzurl']}">关注微信</a>
+	{if empty($setting['helpurl'])}{else}<a href="{$setting['helpurl']}">使用帮助</a>{/if}
+	<a href="{php echo $this->createMobileurl('myshop');}">免费开店</a>
+</footer>
+<script type="text/javascript">
+	TouchSlide({
+		slideCell: "#focus",
+		titCell: ".hd ul", 
+		mainCell: ".bd ul",
+		effect: "leftLoop",
+		autoPlay: true,
+		autoPage: true, 
+		switchLoad: "_src" 
+	});
+</script>
+<script>
+function positionSort(){
+	if('{$location_c}'!='返回'){
+		window.location.href = "{php echo $this->createMobileurl('position')}";
+	} else {
+		history.go(-1);
+	}
+}
+
+function sort(json){
+	var condition = document.getElementById('searchs').value;
+	window.location.href = "{php echo $this->createMobileurl('position', array('op'=>'sort'), true)}&condition="+condition+"&lng="+json['lng']+"&lat="+json['lat'];
+}
+
+function positions(json, cid){
+	window.location.href = "{php echo $this->createMobileurl('list', '', true)}&cid="+cid+"&lng="+json['lng']+"&lat="+json['lat'];
+}
+	
+	var imgUrl = "{$_W['attachurl']}{$setting['logo']}";
+	var lineLink = "{$_W['siteroot']}{php echo $this->createMobileurl('index')}";
+	var descContent = '{$setting['description']}';
+	var shareTitle = '{$setting['title']}';
+	var appid = '';
+	function shareFriend() {
+		WeixinJSBridge.invoke('sendAppMessage',{
+			"img_url": imgUrl,
+			"img_width": "200",
+			"img_height": "200",
+			"link": lineLink,
+			"desc": descContent,
+			"title": shareTitle
+		}, function(res) {
+		})
+	}
+
+	function shareTimeline() {
+		WeixinJSBridge.invoke('shareTimeline',{
+			"img_url": imgUrl,
+			"img_width": "200",
+			"img_height": "200",
+			"link": lineLink,
+			"desc": descContent,
+			"title": shareTitle
+		}, function(res) {
+		});
+	}
+
+	function shareWeibo() {
+		WeixinJSBridge.invoke('shareWeibo',{
+			"content": descContent,
+			"url": lineLink,
+		}, function(res) {
+		});
+	}
+	// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+		// 发送给好友
+		WeixinJSBridge.on('menu:share:appmessage', function(argv){
+			shareFriend();
+		});
+		// 分享到朋友圈
+		WeixinJSBridge.on('menu:share:timeline', function(argv){
+			shareTimeline();
+		});
+		// 分享到微博
+		WeixinJSBridge.on('menu:share:weibo', function(argv){
+			shareWeibo();
+		});
+	}, false);
+</script>
+</body>
+</html>

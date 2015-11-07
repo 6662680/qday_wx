@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head lang="en" xml:lang="en">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>我的优惠</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <section class="app-wrap">
+            <div class="inner">
+
+                <div class="m-integral">
+                    <div class="wrap">
+                        <div class="coupons">
+							<dl>
+                            {if !empty($mycoupons)}
+							{loop $mycoupons $m}
+							{if !empty($shop[$m['storeid']])}
+                                <dt>{$shop[$m['storeid']]}<span class="msg"><a href="{php echo $this->createMobileurl('activity', array('id'=>$m['id'], 'op'=>'detail'));}">去消费</a></span></dt>
+                                <dd>
+                                   <a class="f-cb" href="{php echo $this->createMobileurl('activity', array('id'=>$m['id'], 'op'=>'detail'));}">
+                                        <img src="{$_W['attachurl']}{$m['logo']}" class="pic" />
+
+                                        <div class="box">
+                                            <div class="content">
+                                                <div class="name f-toe">{$m['title']}</div>
+													<p>有效期至{php echo date('Y-m-d h:i', $m['end_time'])}</p>
+                                                <div class="money">
+                                                    <span>{$m['kill_price']}</span>元<i>{$m['price']}元</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </dd>
+							{/if}
+							{/loop}	
+							{else}
+								暂无数据
+							{/if}
+                            </dl>
+						</div>
+                    </div>
+                </div><br/><br/>
+            </div>
+        </section>
+    </div>
+</div>
+<style type="text/css">
+	#foot{position:absolute;z-index:11;bottom:10px;width:100%;}
+</style>
+		<footer id="foot" class="m-cprt">
+			<a href="{$setting['gzurl']}">关注微信</a>
+			{if empty($setting['helpurl'])}{else}<a href="{$setting['helpurl']}">使用帮助</a>{/if}
+			<a href="{php echo $this->createMobileurl('myshop');}">免费开店</a>
+		</footer>
+</body>
+</html>

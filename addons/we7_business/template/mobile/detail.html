@@ -1,0 +1,68 @@
+{template 'header'}
+<style>
+/*商家信息*/
+.business .logo{width:100%; text-align:center;}
+.business .tabbable{padding:5px;}
+.business .accordion-toggle span{display:inline-block; width:80px; margin-right:5px; font-weight:bold;}
+.business .accordion-toggle{display:block; width:100%; background:#F7F7F7; padding:8px 10px;margin-bottom:2px;}
+.business .accordion-body p{padding:5px 10px; border:1px dashed #dddddd; margin-bottom:2px;}
+</style>
+<div class="business">
+	<div class="logo"><img src="{$_W['attachurl']}{$item['thumb']}" style="max-width:100%; onerror="this.parentNode.removeChild(this)"></div>
+	<div class="tabbable">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{php echo $this->createMobileUrl('detail', array('id' => $item['id']))}" data-toggle="tab">商家信息</a></li>
+			<li><a href="http://api.map.baidu.com/marker?location={$item['lat']},{$item['lng']}&title={php echo urlencode('所在位置');}&content={php echo urlencode($item[title]);}&output=html">地图导航</a></li>
+		</ul>
+		<form action="" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="from_user" value="{$_W['fans']['from_user']}" />
+		<div class="tab-content" style="margin-top:10px;">
+			<div class="tab-pane active" id="tab1">
+				<div class="accordion">
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<span class="accordion-toggle"><span>商家名称</span>{$item['title']}</span>
+						</div>
+					</div>
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<span class="accordion-toggle"><span>行业</span>{$item['industry1']} > {$item['industry2']}</span>
+						</div>
+					</div>
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<span class="accordion-toggle" data-toggle="collapse" data-target="#collapseOne"><span>商家简介</span></span>
+						</div>
+						<div id="collapseOne" class="accordion-body collapse in">
+							<div class="accordion-inner">
+								{$item['content']}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion business">
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<span class="accordion-toggle"><span>电话</span><a href="tel:{$item['phone']}">{$item['phone']}</a></span>
+						</div>
+					</div>
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<span class="accordion-toggle"><span>QQ</span><a href="http://wpa.qq.com/msgrd?v=3&uin={$item['qq']}&site=qq&menu=yes">{$item['qq']}</a></span>
+						</div>
+					</div>
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<span class="accordion-toggle">
+								<span>详细地址</span>
+								<address style="margin:5px 0 0 0;"><a href="http://api.map.baidu.com/marker?location={$item['lat']},{$item['lng']}&title={php echo urlencode('所在位置');}&content={php echo urlencode($item[title]);}&output=html">{$item['address']}</a></address>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	</div>
+</div>
+{template 'footer'}

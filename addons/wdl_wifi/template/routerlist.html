@@ -1,0 +1,59 @@
+{template 'common/header'}
+<div class="main">
+<ul class="nav nav-tabs">
+  <li{if $_GPC['do'] == 'routerlist'} class="active"{/if}><a href="{php echo  $this->createWebUrl('routerlist');}">路由器管理</a>
+  </li>
+  <li{if $_GPC['do'] == 'routeradd'} class="active"{/if}><a href="{php echo $this->createWebUrl('routeradd');}">添加路由器</a>
+  </li>
+</ul>
+          <div class="panel panel-default">
+    <div class="panel-heading">
+       <h4>路由器配置</h4>
+    </div>
+  
+        
+    <div class="panel-body">
+                    <p>
+        <a href="{php echo $this->createWeburl('routeradd', array())}"  class="btn btn-default"><i class="icon-plus-sign-alt" ></i> 新增路由器</a>
+        </p>
+	<div style="padding:15px;">
+		
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th >路由器名称</th>
+					<th>节点名称 </th>
+					<th >认证有效时间 </th>
+					<th >认证方式 </th>
+					<th  >认证状态</th>
+					<th >操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				{php $item = $this->getnode_info($item['node']);}
+				<tr>
+					<td>{$item['description']}</td>
+					<td>{$item['name']}</td>
+					<td>{$item['login_timeout']}</td>
+					<td>{if $item['qq_login']}<span class="label label-primary">QQ</span>{else}{/if}
+						{if $item['weibo_login']}<span class="label label-warning">微博</span>{else}{/if}
+						{if $item['weixin_login']}<span class="label label-success">微信</span>{else}{/if}</td>
+					<td>{if $item['is_portal']}<span class="label label-success">开启</span>{else}<span class="label label-danger">关闭</span>{/if}</td>
+					<td>
+                
+                    <a href="{php echo $this->createWebUrl('routeradd', array('node' => $item['node']))}" class="btn btn-small" title="编辑"><i class="fa fa-edit"></i> 编辑</a>
+	<a onclick="return confirm('确认删除该路由器？');return false;" href="{php echo $this->createWebUrl('delrouter', array('node' => $item['node']))}" class="btn btn-small" title="删除"><i class="fa fa-remove"></i> 删除</a></td>
+				</tr>
+				{/loop}
+
+				<td colspan=6">
+					<input name="token" type="hidden" value="{$_W['token']}" />
+				</td>
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+          </div>
+{template 'common/footer'}

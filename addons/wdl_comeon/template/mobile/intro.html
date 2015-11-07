@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    
+    <link rel="stylesheet" type="text/css" href="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/comeon.css" media="all" />
+    <script type="text/javascript" src="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/jquery.js"></script>	
+    <script type="text/javascript" src="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/comeon.js"></script>	
+    
+    <link rel="stylesheet" type="text/css" href="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/sweet-alert.css" media="all" />
+    <script type="text/javascript" src="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/sweet-alert.min.js"></script>	
+   
+    <title>{$reply['title']}</title>
+    <style type="text/css">
+        body { 
+            background: {if empty($reply['bgcolor'])}#ca1a48{else}{$reply['bgcolor']}{/if};
+            color: {if empty($reply['fontcolor'])}#fff{else}{$reply['fontcolor']}{/if};
+       }
+       .btn { 
+            {if !empty($reply['btncolor'])} background-color: {$reply['btncolor']};{/if} 
+           {if !empty($reply['btnfontcolor'])} color: {$reply['btnfontcolor']};{/if} 
+       }
+       .container { text-align:left }
+    </style>
+</head>
+<body>
+    {if !empty($reply['toppic'])}
+    <img src="{php echo toimage($reply['toppic'])}" style='width:100%;' />
+    {/if}
+    <div class='container block white'>
+        <p style='font-size:18px/1.5em'><b>参与方法:</b><p>
+        <p>{$reply['joincontent']}</p>
+    </div>
+    
+    
+    <a href='javascript:;' class='block btn btn-invite' style='text-align:center;' onclick="$('#mcover').show()">分享到朋友圈</a>
+      <a href='javascript:;' class='block btn' style='text-align:center;' onclick="history.back()">返回</a>
+     <p style='text-align:center;'>@{if empty($reply['copyright'])}{$_W['account']['name']}{else}{$reply['copyright']}{/if}</p>
+      <div id="mcover" onclick="$(this).hide()"><img src="{php echo IMS_VERSION>=0.6?'../addons':'./source/modules'}/wdl_comeon/style/guide.png"></div>
+         <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>	
+    <script language='javascript'>
+	jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || {};
+	// 是否启用调试
+	jssdkconfig.debug = false;
+	
+	jssdkconfig.jsApiList = [
+		'checkJsApi',
+		'onMenuShareTimeline',
+		'onMenuShareAppMessage',
+		'onMenuShareQQ',
+		'onMenuShareWeibo',
+		'showOptionMenu',
+		'closeWindow'
+	];
+
+	wx.config(jssdkconfig);
+	 
+	       var shareMeta = {
+	 imgUrl:"{$shareimg}",
+	 link :  "{$sharelink}",
+	 desc : "{$sharedesc}",
+	 title : "{$sharetitle}"
+               };
+	   wx.ready(function () {
+		wx.showOptionMenu();
+		wx.onMenuShareAppMessage(shareMeta);
+		wx.onMenuShareTimeline(shareMeta);
+		wx.onMenuShareQQ(shareMeta);
+		wx.onMenuShareWeibo(shareMeta);
+	});		
+     </script>  
+        
+    <script language='javascript'>
+            Comeon.init({
+                "rid":"{$reply['rid']}",
+                  'joinurl': "{php echo $this->createMobileUrl('join',array('rid'=>$reply['rid']))}",
+                'helpurl': "{php echo $this->createMobileUrl('help',array('rid'=>$reply['rid']))}",
+                'shareurl': "{$reply['share_url']}"
+            });
+       
+    </script>
+</body>
+</html>

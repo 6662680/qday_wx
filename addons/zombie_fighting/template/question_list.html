@@ -1,0 +1,417 @@
+{template 'common/header'}
+<div class='container' style='padding:0 5px 10px;margin:0;width:100%'>
+    <ul class="nav nav-tabs">
+      <li {if $op == 'post' && empty($id)}class="active"{/if}>
+        <a href="{php echo $this->createWebUrl('questions', array('op' => 'post'));}">添加题库</a>
+      </li>
+      <li {if $op == 'display'}class="active"{/if}>
+        <a href="{php echo $this->createWebUrl('questions',array('op'=>'display'));}">管理题库</a>
+      </li>
+      {if !empty($id) && $op == 'post'}
+      <li class="active">
+        <a href="{php echo $this->createWebUrl('questions',array('op'=>'post','name' => 'zombie_fighting','id'=>$id));}">
+         编辑题库
+        </a>
+      </li>
+      {/if}
+      <li {if $op == 'list'}class="active"{/if}>
+            <a href="{php echo $this->createWebUrl('questions', array('op' => 'list'));}">活动列表</a>
+      </li>
+      {if !empty($rid) && $op == 'rankList'}
+        <li class="active">
+        <a href="{php echo $this->createWebUrl('questions', array('op' => 'rankList','rid'=>$rid));}">排名信息</a>
+        </li>
+      {/if}
+    {if !empty($id) &&!empty($fid) && $op == 'postRank'}
+    <li class="active">
+        <a href="{php echo $this->createWebUrl('questions', array('op' => 'rankList','rid'=>$fid));}">排名信息</a>
+    </li>
+    {/if}
+    </ul>
+
+    {if $op =='display'}
+        <div class="panel panel-success">
+            <div class="panel-heading"> 营销及活动 >> 一站到底 >> 管理题库</div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">筛选</div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal" method="get" action="./index.php">
+                    <input type="hidden" name="m" value="zombie_fighting" >
+                    <input type="hidden" name="do" value="questions" >
+                    <input type="hidden" name="c" value="site" />
+                    <input type="hidden" name="a" value="entry" />
+                    <input type="hidden" value="display" name="op">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="搜索题目" value="{$_GPC['keyword']}" id="" name="keyword" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="pull-right col-xs-12 col-sm-2 col-lg-1">
+                            <button class="btn btn-block"><i class="fa fa-search"></i> 搜索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div style="padding:15px;">
+            <form id="form2" class="form-horizontal" method="post">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:60px;" class="row-first">选择</th>
+						<th>所属活动</th>
+                        <th style="width:350px;">题目<i></i></th>
+                        <th class="width:150px;">选项<i></i></th>
+                        <th style="width:50px;">分值<i></i></th>
+                        <th style="width:50px;">答案<i></i></th>
+                        <th style="width:110px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $list $k $v}
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="{$v['id']}" name="delete[]">
+                        </td>
+						 <th>{$fsArr[$v[sid]]}</th>
+                        <th>
+                            <a title="{$v['question']}" href="javascript:;" >
+                            {php echo substr($v[question],0,569);}
+                            </a>
+                        </th>
+                        <th>A.{$v[optionA]}
+                            B.{$v[optionB]}
+                            {if $v[optionC]}C.{$v[optionC]} {else} {/if}
+                            {if $v[optionD]}D.{$v[optionD]} {else} {/if}
+                            {if $v[optionE]}E.{$v[optionE]} {else} {/if}
+                            {if $v[optionF]}F.{$v[optionF]} {else} {/if}
+                        </th>
+                        <td>
+                            {$v[figure]}
+                        </td>
+                        <td>
+                            <a title="{$v['answer']}" href="javascript:;" >
+                                {$v[answer]}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{php echo $this->createWebUrl('questions', array('op' => 'post', 'id' => $v['id']))}" title="编辑" class="btn btn-mini btn-primary"><i class="fa fa-edit"></i></a>
+                            <a onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWebUrl('questions', array('id' => $v['id'],'op'=>'delBanks'))}" title="删除" class="btn btn-mini btn-danger"><i class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                   　
+                </table>
+                <div style="margin:0 auto;margin-right: auto;vertical-align: middle;text-align: center;" >
+                {$pager}
+                </div>　
+            </form>
+        </div>
+
+    <script type="text/javascript">
+        require(['bootstrap'],function($){
+
+            $('.btn').hover(function(){
+
+                $(this).tooltip('show');
+
+            },function(){
+
+                $(this).tooltip('hide');
+
+            });
+
+        });
+
+        $('#form2').submit(function(){
+            if($(":checkbox[name='delete[]']:checked").size() > 0){
+                return confirm('删除后不可恢复，您确定删除吗？');
+            }
+            return false;
+        });
+    </script>
+    {elseif $op == 'post'}
+    <div class="panel panel-success">
+        <div class="panel-heading">营销及活动 >> 一站到底 >> >> {if !empty($id) && $op == 'post'}编辑{else}添加{/if}题目</div>
+    </div>
+    <div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit="return validate(this);">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {if !empty($id)&&$op == 'post'}编辑{else}添加{/if}题目
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>所属活动</label>
+                            <div class="col-sm-9">
+                                <select name="sid"  class="form-control">
+                                    {loop $select_question $questions}
+                                    <option value="{$questions['id']}">{$questions['title']}</option>
+                                    {/loop}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>题目</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="question" id="question" class="form-control" value="{$item['question']}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>分值</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="figure" id="figure" class="form-control" value="{$item['figure']}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>正确答案</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="answer" id="answer" class="form-control" value="{$item['answer']}" />
+                                <span>例如  A </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>选项个数</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="option_num" id="option_num" class="form-control" value="1" readonly/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>选项A</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="optionA" id="optionA" class="form-control" value="{$item['optionA']}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>选项B</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="optionB" id="optionB" class="form-control" value="{$item['optionB']}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>选项C</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="optionC" id="optionC" class="form-control" value="{$item['optionC']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>选项D</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="optionD" id="optionD" class="form-control" value="{$item['optionD']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>选项E</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="optionE" id="optionE" class="form-control" value="{$item['optionE']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                                <span style='color:red'>*</span>选项F</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="optionF" id="optionF" class="form-control" value="{$item['optionF']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                            <div class="col-sm-4">
+                                <input type="hidden" name="id" value="{$item[id]}">
+                                <input type="hidden" name="token" value="{$_W['token']}" />
+                                <input name="submit" type="submit" value="提交" class="btn btn-primary span3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        {elseif $op =='list'}
+        <div class="panel panel-success">
+            <div class="panel-heading"> 营销及活动 >> 一站到底 >> 活动管理</div>
+        </div>
+        <div style="padding:15px;">
+            <form id="form2" class="form-horizontal" method="post">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:50px;" class="row-first">选择</th>
+                        <th style="width:200px;">活动名称</th>
+                        
+                        <th style="width:50px;">题数</th>
+                        <th style="width:100px;">活动状态</th>
+                        <th style="width:150px;">开始时间</th>
+                        <th style="width:150px;">结束时间</th>
+                        <th style="width:110px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {loop $list $row}
+                    <tr>
+                        <td class="row-first"><input type="checkbox" name="select[]" value="{$row['id']}" /></td>
+                        <td>
+                            <div class="mainContent">
+                                <div class="nickname" style="text-align:left;">{php echo substr($row[title],0,69);}</div>
+                            </div>
+                        </td>
+                         
+                        <td style="text-align:left;">{$row[qnum]}</td>
+                        <td style="text-align:left;font-size:12px; color:#666;">
+                            <div>{if $row['status_fighting'] == '1'}暂停{else if $row['status_fighting'] == '2'}结束{else} 正常{/if}</div>
+                        </td>
+                        <td style="text-align:left;">{php echo date('Y-m-d', $row['start']);}</td>
+                        <td style="text-align:left;">{php echo date('Y-m-d', $row['end']);}</td>
+                        <td style="text-align: left;">
+                            <a class="btn btn-mini btn-primary" href="{php echo $this->createWebUrl('questions', array('op' => 'rankList', 'rid' => $row[id]))}">排名</a>
+                            <a href="./index.php?c=platform&a=reply&do=post&m=zombie_fighting&rid={$row['rid']}" title="编辑" class="btn btn-mini btn-primary"><i class="fa fa-edit"></i></a>
+                            <a onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWebUrl('questions', array('id' => $row['id'],'op'=>'delActivity'))}" title="删除" class="btn btn-mini btn-danger">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                    {$pager}
+
+                </table>
+                　
+            </form>
+          　
+        </div>
+        {elseif $op =='rankList'}
+        <div class="panel panel-success">
+            <div class="panel-heading"> 营销及活动 >> 一站到底 >> 排名信息</div>
+        </div>
+    <div style="padding:15px;">
+        <form id="form2" class="form-horizontal" method="post">
+            <table class="table table-hover">
+                <thead class="navbar-inner">
+                <tr>
+                    <th style="width:5%;">全选</th>
+                    <th style="width: 150px;">用户名<i></i></th>
+                    <th style="width: 150px;">号码<i></i></th>
+                    <th>活动<i></i></th>
+                    <th>最后答题时间<i></i></th>
+                    <th>最后得分<i></i></th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {loop $list $row}
+                <tr>
+
+                    <td> <input type="checkbox" value="{$row['id']}" name="delete[]"> </td>
+                    <td>
+                        <div class="nickname" style="text-align: left;">{$row[nickname]}</div>
+                    </td>
+                    <td>
+                        {$row[mobile]}
+                    </td>
+                    <td style="text-align: left;">{$seriesArr[$row['fid']]}</td>
+                    <td style="text-align: left;">{php echo date('Y-m-d h:i:s', $row[lasttime]);}</td>
+                    <td style="text-align: left; font-size: 12px; color: #666;">
+                        {$row[lastcredit]}
+                    </td>
+                    <td style="text-align: left;">
+                        <a href="{php echo $this->createWebUrl('questions', array('op' => 'postRank', 'id' => $row['id'], 'fid' => $row['fid']))}" title="编辑" class="btn btn-mini btn-primary">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWebUrl('questions', array('rid' => $row['id'],'op'=>'delRank'))}" title="删除" class="btn btn-mini btn-danger">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+                {/loop}
+                </tbody>
+                {$pager}
+            </table>
+            <table class="table">
+                <tr>
+                    <td colspan="2">
+                        <input type="checkbox"  onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck});" name=''>
+                        <input class="btn btn-primary" type="submit" value="删除" name="submit" >
+
+                        <a class="btn btn-default" href="{php echo $this->createWebUrl('download',array('id'=>$rid))}">
+                            <i class="icon-download-alt"></i>导出信息
+                        </a>
+                    </td>
+
+                </tr>
+            </table>
+
+        </form>
+
+    </div>
+    <script>
+
+
+        $('#form2').submit(function(){
+            if($(":checkbox[name='delete[]']:checked").size() > 0){
+                return confirm('删除后不可恢复，您确定删除吗？');
+            }
+            return false;
+        });
+    </script>
+
+    {elseif $op == 'postRank'}
+    <div class="panel panel-success">
+        <div class="panel-heading">营销及活动 >> 一站到底 >> >> 修改分值</div>
+    </div>
+    <div class="main">
+        <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit="return validate(this);">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   修改分值
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            <span style='color:red'>*</span>昵称</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="nickname" id="nickname" class="form-control" value="{$rank['nickname']}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label">
+                            <span style='color:red'>*</span>最后得分</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="lastcredit" id="lastcredit" class="form-control" value="{$rank['lastcredit']}" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                        <div class="col-sm-4">
+                            <input type="hidden" name="id" value="{$rank[id]}">
+                            <input type="hidden" name="uid" value="{$rank[uid]}">
+                            <input type="hidden" name="token" value="{$_W['token']}" />
+                            <input name="submit" type="submit" value="提交" class="btn btn-primary span3" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{/if}
+</div>

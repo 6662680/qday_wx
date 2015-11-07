@@ -1,0 +1,43 @@
+<input type="hidden" name="reply_id" value="{$reply['id']}" />
+<div class="alert alert-block alert-new">
+    
+       
+        <div class="panel panel-default">
+    <div class="panel-heading">
+       <h4>添加认证信息</h4>
+    </div>
+    <div class="panel-body">
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">连接成功提示</label>
+            <div class="col-sm-9 col-xs-12">
+                <textarea name="oktip" rows="5" class="form-control" id='oktip'>{$reply['oktip']}</textarea>
+	<div class="help-block">路由器认证正常提示下一步操作信息，{url}表示认证网页的放置位置,{key}表示动态验证码的放置位置。例如：本机上网请{url}，如其他设备上网，请在设备登陆界面输入验证码:{key}（验证码有效期10分钟。）
+                   <a id="oktipe" href="javascript:;" data-original-title="" title=""><i class="fa fa-github-alt"></i> 表情</a></div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">选择路由器</label>
+            <div class="col-sm-9 col-xs-12">
+               <select name="routerid" id="routerid" class='form-control'   >
+				{loop $routerlist $ls} 
+				{php $ls = $this->getnode_info($ls['node']);}
+					<option {if $reply['routerid']==$ls['node']} selected="selected"{/if} value="{$ls['node']}" >{$ls['description']}（{$ls['name']}）</option>				  				    
+				{/loop}
+			    </select>
+            </div>
+        </div>
+    </div>
+ 
+ 
+ 
+</div>
+    <script language='javascript'>
+        require(['util'],function(util){
+        util.emotion($("#oktipe"), $("#oktip")[0], function(txt, elm, target){
+			
+		});
+              });  
+        </script>
+ 

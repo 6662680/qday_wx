@@ -1,0 +1,216 @@
+﻿<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta property="qc:admins" content="15317273575564615446375" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, maximum-scale=1, user-scalable=no" />
+<meta name="alexaVerifyID" content="LkzCRJ7rPEUwt6fVey2vhxiw1vQ"/>
+<title>{$title}排行榜</title>
+<link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="SegmentFault" />
+<meta name="userId" value="" id="SFUserId" />
+<link rel="stylesheet" href="../addons/xhw_voice/template/mobile/top/skcss/global.2dc833a2.css" />
+<link rel="stylesheet" href="../addons/xhw_voice/template/mobile/top/skcss/user_all.5e7dc670.css" />
+<link rel="stylesheet" href="../addons/xhw_voice/template/mobile/top/skcss/responsive.98744d0a.css" />
+<style type="text/css">
+.time-item strong{background:#C71C60;color:#fff;line-height:32px;font-size:27px;font-family:Arial;padding:0 5px;margin-right:5px;border-radius:5px;box-shadow:1px 1px 3px rgba(0,0,0,0.2);}
+#day_show{float:left;line-height:32px;color:#c71c60;font-size:27px;margin:0 5px;font-family:Arial, Helvetica, sans-serif;}
+.item-title .unit{background:none;line-height:32px;font-size:20px;padding:0 5px;float:left;}
+.p4 {left:0px;height: 49px;background-color: #444;width: 100%;text-align: center;position: fixed;bottom: 0px;}
+.p4 a{line-height:49px; color:#fff; font-size:14px; text-decoration:none; }
+</style>
+<script type="text/javascript" src="../addons/xhw_voice/template/mobile/top/skjs/jquery.min.js"></script>
+</head>
+<body class="user-top10">
+<div class="global-nav">
+    <nav class="container nav m-nav">
+        <h3 class="logo"><a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$id))}">{$title}</a></h2>
+    </nav><!-- end .global-nav -->
+</div>
+<div class="wrap">
+    <div class="container">
+        <!--广告 -->
+        <div align="center"> 
+      {if $arr['0']['adpass']}{php echo htmlspecialchars_decode($arr['0']['ad']);} {elseif $arr['0']['adpic']!=""}
+       <a href="{$arr['0']['adlink']}"><img src="../attachment/{$arr['0']['adpic']}" width="100%"/></a>{/if}
+        </div>
+         <!--广告 -->
+        <div class="row">
+            <div class="col-md-6 ranking-section mini">
+                <h2 class="h3">&nbsp;&nbsp;距离活动结束还剩：<small>
+    <div class="time-item">
+    <span id="day_show">0天</span>
+    <strong id="hour_show">0时</strong>
+    <strong id="minute_show">0分</strong>
+    <strong id="second_show">0秒</strong>
+</div><!--倒计时模块--></small></h2>
+<hr></hr>
+                <div class="row">
+                    <ul class="list-unstyled col-md-6">
+{loop $list $row}
+<li class="media"><span class="pull-left pos">{php echo ++$pxid;}</span> <a class="pull-left media-object" href="{php echo $this->createmobileUrl('item',array('do'=>'item', 'id'=>$row['id']))}">{if strstr($row['avatar'],"http")}<img class="avatar-40" src="{$row['avatar']}">{else}<img class="avatar-40" src="../attachment/{$row['avatar']}">{/if}</a><div class="media-body"><h3 class="media-heading h5 name"><a href="{php echo $this->createmobileUrl('item',array('do'=>'item', 'id'=>$row['id']))}">{$row['nickname']}《{$row['title']}》</a></h3><div class="score"><span class="earn">+{$row['num']}票</span>&nbsp;<span class="earn">+{$row['sharenum']}人气</span></div></div></li>
+{/loop}
+                  </ul>
+                </div>
+            </div>
+    
+    </div>
+</div>
+</div>
+<footer id="footer">
+<div class="container">
+    <div class="copyright">
+   {$title} @{$_W['account']['name']}
+    </div>
+</div>
+</footer>
+<div style="display:none">
+{php echo htmlspecialchars_decode($cnzz);}
+        </div>
+<div id="roundAndRound" class="widget-loading">加载中</div>
+<div id="fixedTools" class="hidden-xs hidden-sm">
+  <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>
+</div>
+<script>
+    (function (w) {
+        w.SFToken = (function () {
+    var _MK6ZC = //'wP'
+'c'+//'7NK'
+'4'+//'oGD'
+'8'+''///*'kEp'*/'kEp'
++//'dY'
+'dY'+'a'//'zN'
++'WmI'//'WmI'
++''///*'y'*/'y'
++'a'//'OG'
++'99c'//'T'
++'24'//'2NQ'
++'X'//'X'
++//'Hst'
+'87'+'f'//'e4'
++//'Y6'
+'f'+//'r'
+'b5'+'5f'//'O'
++'ac'//'w0L'
++''///*'AS'*/'AS'
++'0'//'oE2'
++//'m2'
+'a0c'+'d6b'//'lQO'
++//'8ju'
+'d'+//'bfp'
+'89c'+//'jRo'
+'4', _UBbAgqV = [[3,5],[4,7],[10,11]];
+
+    for (var i = 0; i < _UBbAgqV.length; i ++) {
+        _MK6ZC = _MK6ZC.substring(0, _UBbAgqV[i][0]) + _MK6ZC.substring(_UBbAgqV[i][1]);
+    }
+
+    return _MK6ZC;
+})();
+    })(window);
+</script>
+    <script src="../addons/xhw_voice/template/mobile/top/skjs/assets.ce4fe392.js"></script>
+    <script src="../addons/xhw_voice/template/mobile/top/skjs/top10.b85a59fa.js"></script>
+<script src="../addons/xhw_voice/template/mobile/top/skjs/m.js"></script>
+<script>
+  BAIDU_CLB_fillSlotAsync('981183','adid-981183');
+  BAIDU_CLB_fillSlotAsync('981184','adid-981184');
+  BAIDU_CLB_fillSlotAsync('981694','adid-981694');
+  BAIDU_CLB_fillSlotAsync('981179','adid-981179');
+</script>
+<script type="text/javascript">
+
+var intDiff = parseInt({$time});//倒计时总秒数量
+
+function timer(intDiff){
+    window.setInterval(function(){
+    var day=0,
+        hour=0,
+        minute=0,
+        second=0;//时间默认值        
+    if(intDiff > 0){
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+    }
+    if (minute <= 9) minute = '0' + minute;
+    if (second <= 9) second = '0' + second;
+    $('#day_show').html(day+"天");
+    $('#hour_show').html('<s id="h"></s>'+hour+'时');
+    $('#minute_show').html('<s></s>'+minute+'分');
+    $('#second_show').html('<s></s>'+second+'秒');
+    intDiff--;
+    }, 1000);
+} 
+
+$(function(){
+    timer(intDiff);
+}); 
+</script>
+{php require_once IA_ROOT."/addons/xhw_voice/jssdk.class.php";$weixin = new jssdk($jie='0',$url='');$wx = $weixin->get_sign();}
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+<script type="text/javascript">
+  wx.config({
+      appId: "{$wx['appId']}",
+      timestamp: {$wx['timestamp']},
+      nonceStr: "{$wx['nonceStr']}",
+      signature: "{$wx['signature']}",
+      jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+      ]
+  });
+  wx.ready(function () {
+  //分享朋友
+  wx.onMenuShareAppMessage({
+      title: '{$share_title}',
+      desc: '{$share_desc}',
+      link: "{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}",
+      imgUrl: '{php echo $_W['siteroot'];}{$photo}',
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        window.location.href ='{php echo $this->createmobileUrl('share',array('do'=>'share', 'id'=>$id, 'rid'=>$id, 'from'=>'index'));}';//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: '{$share_title}',
+      link:"{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}",
+      imgUrl:'{php echo $_W['siteroot'];}{$photo}',
+      trigger: function (res) {
+        //alert('用户点击分享到朋友圈');
+      },
+      success: function (res) {
+        window.location.href ='{php echo $this->createmobileUrl('share',array('do'=>'share', 'id'=>$id, 'rid'=>$id, 'from'=>'index'));}';//分享成功回调
+      },
+      cancel: function (res) {
+          //window.location.href =adurl;
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });   
+    
+    
+  });
+</script>
+<p class="p4">
+<a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$id))}">首页</a>&nbsp;|&nbsp;
+<a href="{$rules_url}">活动说明</a>&nbsp;|&nbsp;
+<a href="{$submit_url}">我要报名</a>&nbsp;|&nbsp;
+<a href="{php echo $this->createmobileUrl('my',array('do'=>'my', 'id'=>$id))}">我的投稿</a>&nbsp;|&nbsp;
+<a href="{php echo $this->createmobileUrl('top',array('do'=>'top', 'id'=>$id))}">排行榜</a>
+</p>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li class="active"><a>管理投诉</a></li>
+</ul>
+{if $op == 'post'}
+<div class="main">
+    <div style="padding-top: 15px;">
+	<form class="form-horizontal form" action="" method="post">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">投诉人电话</label>
+					<div class="col-sm-5">
+						<input type="text" name="mobile" value="{$item['mobile']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">投诉内容</label>
+					<div class="col-sm-5">
+						<input type="text" name="content" value="{$item['content']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">投诉时间</label>
+					<div class="col-sm-5">
+						{php echo date('Y-m-d h:i:s', $item['createtime'])}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+			<input type="hidden" name="id" value="{$item['id']}" />
+			<input type="button" value="返回" class="btn btn-primary col-lg-1" style="left:4%;" onclick="history.go(-1);"/>
+			<input type="submit" class="btn btn-primary col-lg-1" style="left:6%;" name="submit" value="提交" />
+		</div>
+	</form>
+    </div>
+</div>
+{elseif $op == 'display'}
+<div class="main">
+	<form action="" method="post">
+		<input type="hidden" name="c" value="site" />
+		<input type="hidden" name="a" value="entry" />
+		<input type="hidden" name="m" value="weilive" />
+		<input type="hidden" name="do" value="complain" />
+		<input type="hidden" name="op" value="sort" />
+		<table class="table sub-search">
+		<table class="table sub-search">
+			<tbody>
+				<tr>
+					<th style="width:100px;">手机号码</th>
+					<td>
+						<input name="mobile" type="text" value="{$sort['mobile']}" />
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>
+						<input type="submit" name="" value="搜索" class="btn btn-primary">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+    <form action="" method="post" class="form-horizontal form" onsubmit="return formcheck(this)">
+	<div style="padding-top: 15px;">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:120px;">投诉人电话</th>
+                <th style="width:120px;">投诉商家</th>
+                <th style="width:120px;">投诉活动</th>
+                <th style="width:120px;">投诉时间</th>
+                <th style="width:120px;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="level-list">
+            {loop $list $item}
+            <tr>
+                <td>{$item['mobile']}</td>
+				<td><a href="{php echo $this->createWebUrl('stores', array('op'=>'post', id=>$item['storeid']));}">{$item['storetitle']}</a></td>
+                <td><a href="{php echo $this->createWebUrl('activity', array('op'=>'post', id=>$item['actid'], 'storeid'=>$item['storeid']));}">{$item['acttitle']}</a></td>
+                <td>{php echo date('Y-m-d', $item['createtime'])}</td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('complain', array('id'=>$item['id'], 'op'=>'post'));}" title="编辑">编辑</a>
+                    <a onclick="return confirm('确认删除吗？');return false;" href="{php echo $this->createWebUrl('complain', array('id'=>$item['id'], 'op'=>'delete'));}" title="删除">删除</a>
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+		{$pager}
+	</div>
+    </form>
+</div>
+{/if}
+{template 'common/footer'}

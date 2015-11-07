@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>限时秒杀</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+	<script src="../addons/weilive/style/js/baiduposition.js"></script>
+	
+	<style>
+	a{
+		-webkit-border-radius: 4px 0 4px 0;
+		border-radius: 5px 5px 5px 5px;
+	}
+	</style>
+	<style>
+	.pagination li{
+		margin-left:7px;
+		background-color: #fa614b;
+		display: inline-block;
+		padding: 0 5px;
+		border-radius: 5px;
+		width:22%;
+		text-align:center;
+	}
+	.pagination li .pager-nav{
+		color: #fff;
+	}
+	</style>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <header class="app-head">
+            <div class="inner">
+                <a class="link app-back" href="javascript:history.go(-1);">
+                    <i class="icon-back"></i>
+                </a>
+                <h1 class="title sliding">限时秒杀</h1>
+                <a class="link user" href="{php echo $this->createMobileUrl('home');}">
+                    <i class="icon-user"></i>
+                </a>
+            </div>
+			<nav class="m-filter">
+				<a {if $styles==1}class='z-sel'{/if} href="{php echo $this->createMobileUrl('kill');}"><span>最新</span></a>
+				<a {if $styles==2}class='z-sel'{/if} onclick="baiduPosition(0);" style="cursor:pointer;"><span>附近</span></a>
+				<a {if $styles==3}class='z-sel'{/if} href="{php echo $this->createMobileUrl('kill', array('op'=>'lowprice'));}" ><span>低价</span></a>
+				<a id="bt5" {if $styles==4}class='z-sel'{/if} href="javascript:void(0);"><span>{if empty($cname)}地区{else}{$cname}{/if}</span></a>
+			</nav>
+        </header>
+
+        <section class="app-wrap" id="js_wrap">
+            <div class="inner">
+                <div class="m-list s-pdt">
+                    <ul class="activitys">
+					    {loop $activities $a}
+							<li>
+								<a class="f-cb" href="{php echo $this->createMobileurl('kill', array('id'=>$a['id'], 'op'=>'detail'));}">
+									<img src="{$_W['attachurl']}{$a['thumb']}" class="pic" alt="暂无图片">
+									<div class="box">
+										<div class="content">
+											<div class="name f-toe">{$a['title']}</div>
+											<div class="way">
+											 <b style="color:#FF0000">{$a['kill_price']}元</b><span  style="text-decoration:line-through; color:#999999">{$a['price']}元</span>
+											</div>
+											<div class="money">
+												<span style='background-color:rgb(255,128,0); display:inline; font-size:13px; width:auto; line-height:5px;height:5px; color:white'>
+													{if $a['start_time']>time()}
+														{php echo date('Y-m-d h:i:s', $a['start_time'])}开始
+													{/if}
+													{if $a['start_time']<time() && $a['end_time']>time() && $a['num']>0}
+														进行中...
+													{/if}
+													{if $a['end_time']<time() || $a['num']<=0}
+														活动已结束
+													{/if}
+												</span>
+												<div class="right">
+														限<span style='display:inline; width:100px; color:#00CCFF'>{$a['num']}</span>份
+												</div>
+											</div>
+										</div>
+									</div>
+								</a>
+							</li>
+						{/loop}
+                    </ul>
+					<br/>{$pager}
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</body>
+<script src="../addons/weilive/style/js/zepto.min.js"></script>
+<script src="../addons/weilive/style/js/app.js"></script>
+<script>
+$("#bt5").on('click', function () {
+		var data = {};
+		data = {$data};
+		app.select(data,function (text,value){
+			if(text!='关闭'){getCourse(text);}
+		});
+	});
+		
+function getCourse(text){
+
+	$.ajax({
+		type: "POST",
+		url: "{php echo $this->createMobileurl('kill', array('op'=>'zone'))}",
+		data: {text: text},
+		dataType: "json",
+		
+		success: function (d) {
+			var data = {};
+			data = d;
+			app.select(data,function(text,value){
+				if(text!='关闭'){
+					window.location = value;
+				}
+			})
+		},
+		
+		error: function (xml, text, thrown){
+			//TopBox.alert("出错啦!");
+		}
+	});
+}
+
+function positions(json, cid){
+	window.location.href = "{php echo $this->createMobileurl('kill', array('op'=>'nearby'), true)}&cid="+cid+"&lng="+json['lng']+"&lat="+json['lat'];
+}
+</script>
+
+<script>
+var imgUrl = "{$_W['attachurl']}{$setting['logo']}";
+var lineLink = "{$_W['siteroot']}{php echo $this->createMobileUrl('kill')}";
+var descContent = '{$setting['description']}';
+var shareTitle = '{$setting['title']}';
+var appid = '';
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+        "appid": appid,
+        "img_url": imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": lineLink,
+        "desc": descContent,
+        "title": shareTitle
+    }, function(res) {
+    })
+}
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+        "img_url": imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": lineLink,
+        "desc": descContent,
+        "title": shareTitle
+    }, function(res) {
+    });
+}
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+        "content": descContent,
+        "url": lineLink,
+    }, function(res) {
+    });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    // 发送给好友
+    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+        shareFriend();
+    });
+    // 分享到朋友圈
+    WeixinJSBridge.on('menu:share:timeline', function(argv){
+        shareTimeline();
+    });
+    // 分享到微博
+    WeixinJSBridge.on('menu:share:weibo', function(argv){
+        shareWeibo();
+    });
+}, false);
+</script>
+</html>

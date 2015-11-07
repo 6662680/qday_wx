@@ -1,0 +1,183 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>{$nickname} 投票ID:{$id}</title>
+<meta name="format-detection" content="telephone=no">
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/skjs/jquery.js"></script>
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/skjs/common.js"></script>
+<link href="../addons/xhw_picvote/template/mobile/skcss/style.css" type="text/css" rel="stylesheet"/>
+<link href="../addons/xhw_picvote/template/mobile/skcss/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../addons/xhw_picvote/js/bootstrap.min.js"></script>
+<link href="../addons/xhw_picvote/template/mobile/skcss/992779.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/skcss/16701464.js"></script>
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/skcss/1548170.masonry.min.js"></script>
+<script type="text/javascript" src="../addons/xhw_picvote/template/mobile/skcss/3714123.js"></script>
+<style type="text/css">
+#mbutton{padding:15px 10px 15px 10px; overflow:hidden; border-bottom:1px #DDD solid;}
+#mbutton > span{float:right; display:inline-block; background:#58a3ff; border:1px #63a0eb solid; color:#FFF; height:30px; line-height:30px; padding:0 10px; margin-left:10px;}
+#mcover{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0, 0, 0, 0.7);display:none;z-index:20000;}
+#mcover img{position:fixed;right: 18px;top:5px;width:260px;height:180px;z-index:20001;}
+.divcss{margin:0 auto;width:90%} 
+.p4 {left:0px;z-index:999;height: 49px;background-color: #444;width: 100%;text-align: center;position: fixed;bottom: 0px;}
+.p4 a{line-height:49px; color:#fff; font-size:14px; text-decoration:none; }
+</style>
+</head>
+<body {if $arr[0]['bgcolor']}style='background-color:{$arr[0]['bgcolor']}'{/if}>
+<div id="wrapper">
+    <dl id="header">
+        <dt><a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$rid))}"><img src="../attachment/{$logo}"/></a></dt>
+        <dd><span><em></em><em></em><em></em></span><strong><a href="{php echo $this->createmobileUrl('reg',array('do'=>'reg', 'id'=>$rid))}"><font color="#fff">我要报名</font></a></strong></dd>
+    </dl>
+    <div id="menu">
+        <ul>
+			<li><a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$rid))}">返回首页</a></li>
+			<li><a href="{php echo $this->createmobileUrl('top',array('do'=>'top', 'id'=>$rid))}">排行榜</a></li>
+			<li><a href="{php echo $this->createmobileUrl('my',array('do'=>'my', 'id'=>$rid))}">我的主页</a></li>
+        </ul>
+    </div>
+    <script>(function(){var A=$('#menu');$('#header dd span').click(function(){if(A.css('display')=='none') A.show();else A.hide()})})();</script>
+    <div id="main">
+        <div class="adb_0">
+            <script>step_ad(0)</script>
+        </div>
+        <h1 class="ptitle fc1"><strong class="">{$nickname}：{$title}</strong><small class="fc4"><b>编号ID:{$id} 已有<font color="red">{$num}票</font>支持 人气：{$sharenum}</b></small></h1>
+        <div class="adb_1">
+            <!--广告 -->
+        </div>
+        <div align="center">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="carousel slide" id="carousel-732517">
+                <ol class="carousel-indicators">
+                {php if(!empty($img['0']))echo"<li class=\"active\" data-slide-to=\"0\" data-target=\"#carousel-732517\"></li>";}
+{php for($i=1; $i<count($img);$i++)if(!empty($img[$i]))echo"<li data-slide-to=\"".$i."\" data-target=\"#carousel-732517\"></li>";}                      
+                </ol>
+                <div class="carousel-inner">
+                    
+{php if(!empty($img['0']))echo"<div class=\"item active\"><a href=\"".$votelink."\"><img src=\"../attachment/".$img['0']."\"></a></div>";}
+{php for($i=1; $i<count($img);$i++)if(!empty($img[$i]))echo"<div class=\"item\"><a href=\"".$votelink."\"><img src=\"../attachment/".$img[$i]."\"></a></div>";}                    
+                    
+                </div> <a class="left carousel-control" href="#carousel-732517" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-732517" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+    </div>
+
+        </div>
+        <div class="adb_2">
+        <!--广告 -->
+        </div>
+        <ul class="b_page">
+            <li class="fl"><a href="{$votelink}"><b>投  一 票</b></a></li>
+            <li class="fr"><a href="{php echo $this->createmobileUrl('reg',array('do'=>'reg', 'id'=>$rid))}"><b>我要报名</b></a></li>
+        </ul>
+        <div id="mcover" onClick="$(this).hide()"><img src=""></div>
+        <div class="adb_3">
+        <!--广告 -->
+        <div align="center"> 
+      {if $arr['0']['adpass']}{php echo htmlspecialchars_decode($arr['0']['ad']);} {elseif $arr['0']['adpic']!=""}
+       <a href="{$arr['0']['adlink']}"><img src="../attachment/{$arr['0']['adpic']}" width="100%"/></a>{/if}
+        </div>
+         <!--广告 -->
+        </div>
+        <div class="c_box box">
+            <h3><a href="{$rule_url}" class="fr fc1">想出现在这吗</a><strong class="fc3">朋友圈人气榜</strong></h3>
+            <div>
+            				<div class="container">
+    <div id="images" style="position: relative; height: 1129px; " class="masonry">
+    				{loop $toplist $row}
+    				 <div class="items"><a href="{php echo $this->createmobileUrl('item',array('do'=>'item', 'id'=>$row['id']))}"><img src="../attachment/{$row['avatar']}"></a><span>{$row['sharenum']}人气</span><p>ID:{$row['id']} {$row['nickname']}</p></div>
+				{/loop}
+    </div>
+    </div>
+            </div>
+        </div>
+        <div class="adb_4">
+        <!--广告 -->
+        </div>
+    <script>
+$(function() {
+    if(!navigator.userAgent.match(/Android/i)) {
+        $(".contacts").click(function() {
+            $('#mcover').show();
+            return false;
+        });
+    }
+});
+</script>
+{php require_once IA_ROOT."/addons/xhw_picvote/jssdk.class.php";$weixin = new jssdk($jie='0',$url='');$wx = $weixin->get_sign();}
+ <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>     
+<script type="text/javascript">
+  wx.config({
+      appId: "{$wx['appId']}",
+      timestamp: {$wx['timestamp']},
+      nonceStr: "{$wx['nonceStr']}",
+      signature: "{$wx['signature']}",
+      jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+      ]
+  });
+  wx.ready(function () {
+  //分享朋友
+  wx.onMenuShareAppMessage({
+      title: '{$nickname}正在参加{$title_a},投票ID:{$id}',
+      desc: '{$nickname}正在参加{$title_a},投票ID:{$id},赶快为TA投上一票吧！',
+      link: "{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}",
+      imgUrl: '{php echo $_W['siteroot'];}attachment/{$avatar}',
+      trigger: function (res) {
+        //alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+        window.location.href ='{php echo $this->createmobileUrl('share',array('do'=>'share', 'id'=>$id, 'rid'=>$rid, 'from'=>'item'));}';//分享成功回调
+      },
+      cancel: function (res) {
+       //window.location.href =adurl;//取消回调
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));//失败回调
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: '{$nickname}正在参加{$title_a},投票ID:{$id},赶快为TA投上一票吧！',
+      link:"{php echo 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];}",
+      imgUrl:'{php echo $_W['siteroot'];}attachment/{$avatar}',
+      trigger: function (res) {
+        //alert('用户点击分享到朋友圈');
+      },
+      success: function (res) {
+        window.location.href ='{php echo $this->createmobileUrl('share',array('do'=>'share', 'id'=>$id, 'rid'=>$rid, 'from'=>'item'));}';//分享成功回调
+      },
+      cancel: function (res) {
+          //window.location.href =adurl;
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });   
+    
+    
+  });
+</script>
+        <div id="footer">
+        {$title_a} @{$_W['account']['name']}
+        </div>
+        <br></br> <br></br>
+        <div style="display:none">
+{php echo htmlspecialchars_decode($cnzz);}
+        </div>
+<p class="p4">
+<a href="{php echo $this->createmobileUrl('index',array('do'=>'index', 'id'=>$rid))}">首页</a>&nbsp;|&nbsp;
+<a href="{$submit_url}">活动说明</a>&nbsp;|&nbsp;
+<a href="{php echo $this->createmobileUrl('reg',array('do'=>'reg', 'id'=>$rid))}">我要报名</a>&nbsp;|&nbsp;
+<a href="{php echo $this->createmobileUrl('my',array('do'=>'my', 'id'=>$rid))}">我的投稿</a>&nbsp;|&nbsp;
+<a href="{php echo $this->createmobileUrl('top',array('do'=>'top', 'id'=>$rid))}">排行榜</a>
+</p>
+        </body>
+        </html>

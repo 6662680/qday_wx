@@ -1,0 +1,64 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li class="active"><a href="">答错题目</a></li>
+</ul>
+<div class="main">
+	<div class="search">
+		<table class="table table-bordered tb">
+			<div class="sub-item" id="table-list">
+					<form action="" method="post" onsubmit="">
+					<div class="sub-content">
+						<table class="table table-hover2">
+							<thead class="navbar-inner">
+								<tr>
+									<th style="width:45px;" class="row-first">选择</th>
+									<th style="width:200px;">题目名称</th>
+									<th class="width:100px;">选项</th>
+									<th style="width:100px;">正确答案</th>
+									<th style="width:100px;">选择答案</th>
+									<th style="width:110px;">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								{loop $list $row}
+								<tr>
+									<td class="row-first"><input type="checkbox" name="select[]" value="{$row['id']}" /></td>
+									<td style="text-align:left;">{$row[qname]}</td>
+									<td style="text-align:left;">
+										A.{$row[optionA]} &nbsp;&nbsp;
+										B.{$row[optionB]} &nbsp;&nbsp;
+										{if $row[optionC]} C.{$row[optionC]} &nbsp;&nbsp;{else} {/if}
+										{if $row[optionD]} D.{$row[optionD]} &nbsp;&nbsp;{else} {/if}
+										{if $row[optionE]} E.{$row[optionE]} &nbsp;&nbsp;{else} {/if}
+										{if $row[optionF]} F.{$row[optionF]} &nbsp;&nbsp;{else} {/if}
+									</td>
+									<td style="text-align:left;font-size:12px; color:#666;">
+										{$row[answer]}
+									</td>
+									<td style="text-align:left;">{$row[wornganswer]}</td>
+									<td style="text-align: left;">
+										<a href="{php echo create_url('site/module', array('do' => 'delworngquestion', 'name' => 'fighting', 'id' => $row[id]))}">删除</a>
+									</td>
+								</tr>
+								{/loop}
+							</tbody>
+						</table>
+						<table class="table">
+							<tr>
+								<td style="width:40px;" class="row-first"><input type="checkbox" onclick="selectall(this, 'select');" /></td>
+								<td colspan="4">
+									<input type="submit" name="delete" value="删除选中" class="btn btn-primary" />
+									<input type="hidden" name="token" value="{$_W['token']}" />
+									<input type="hidden" name="fid" value="{$fid}" />
+									
+								</td>
+							</tr>
+						</table>
+					</div>
+					</form>
+					{$pager}
+				</div>
+		</table>
+	</div>
+</div>
+{template 'common/footer'}

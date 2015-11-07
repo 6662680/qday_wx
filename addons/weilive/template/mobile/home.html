@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>个人中心</title>
+<style>
+	*{margin:0; padding:0;}
+	body{font-family:微软雅黑;}
+	.kaishi{width:100%; overflow:hidden;}
+	#beijing{ background:url(../addons/weilive/style/images/123.jpg); background-size:cover;
+	filter : progid:DXImageTransform.Microsoft.AlphaImageLoader ( sizingMethod='scale' , src='../addons/weilive/style/images/123.jpg') ;}
+	#toubu {width:100%; height:100px;　font-size:16px; color:#2B2B2B;}
+	#toubu img{width:60px; height:60px; margin:30px 10px;}
+	#toubu li{list-style-type:none; line-height:25px; padding-top:20px; padding-left:80px;}
+	#ziliao {width:100%; height:40px; clear:left;}
+	#ziliao .gengai{width:49.8%; height:40px; float:left; font-size:18px; line-height:40px;
+				     filter:alpha(opacity=50); background:rgba(255, 255, 255, 0.4) none repeat scroll 0 0 !important;}
+	#ziliao a{text-decoration:none; color:#12A7D1;}
+	#ziliao .gengai:active{background:rgba(200, 200, 200, 0.4) none repeat scroll 0 0 !important;}
+	#ziliao .gengai1{width:49.8%; height:40px; float:left; font-size:18px; line-height:40px; background:rgba(255, 255, 255, 0.4) none repeat scroll 0 0 !important;}
+	#ziliao .gengai1 a{text-decoration:none; color:#12A7D1;}
+	#shenti {width:100%; height:100px; padding-top:20px;}
+	#shenti #wode{width:98%; height:80px; list-style-type:none; margin:0 auto;}
+	table {width:100%; height:80px;}
+	td {background:rgba(255, 255, 255, 0.4) none repeat scroll 0 0 !important;}
+	td:active{background:rgba(200, 200, 200, 0.4) none repeat scroll 0 0 !important;}
+	td a{text-decoration:none; color:#2B2B2B;}
+	table img{margin-bottom:-6px; margin-right:5px; height:25px;}
+	.jifen {width:100%; height:35px; background-color:#F6F6F6; border-bottom:#E8E8E8 solid 1px; padding-top:15px; font-size:18px; padding-left:40px;}
+	a{color:#2B2B2B; text-decoration:none;}
+	.jifen img{margin-right:15%; margin-top:1px; height:20px;}
+	.jifen:active{background-color:#D0D0D0;}
+</style>
+</head>
+
+<body>
+<div class="kaishi">
+<div id="beijing">
+	<div id="toubu">
+		<img src="{if empty($info['avatar'])}../addons/weilive/style/images/yh.png{else}{$info['avatar']}{/if}" align="left"/>
+    	<li>
+        姓名：{$info['realname']}<br/>
+		积分：<span id="mygold">{$info['credit1']}</span><br/>
+        金币：--
+		</li>
+	</div>
+	<div id="ziliao">
+		<a href="{php echo $this->createMobileUrl('home', array('op'=>'complete'))}"><div class="gengai" align="center">完善资料</div></a>
+		<a onclick="report()" style="cursor:pointer"><div class="gengai" align="center"><span id="wxqd">{if $credit == -1}每日签到{else}已签到{/if}</span></div></a>
+	</div>
+	<div id="shenti">
+		<li id="wode">
+    		<table>
+       		<tr align="center">
+            <td><a href="{php echo $this->createMobileUrl('home', array('op'=>'mycoupon'))}"><img src="../addons/weilive/style/images/wodequan.png"/>我的优惠</a></td>
+            <td><a href="{php echo $this->createMobileUrl('home', array('op'=>'myactivity'))}"><img src="../addons/weilive/style/images/miaoshatime.png"/>我的活动</a></td>
+            </tr>
+        	<tr align="center">
+            <td><a href="{php echo $this->createMobileUrl('home', array('op'=>'creditlog'))}"><img src="../addons/weilive/style/images/jifenzhu.png" />积分记录</a></td>
+            <td><a href="{php echo $this->createMobileUrl('award', array('op'=>'myaward'))}"><img src="../addons/weilive/style/images/lipinliwu.png" />我的兑换</a></td>
+            </tr>
+        	</table>
+    	</li>
+	</div>
+</div>
+	<a href="{php echo $this->createMobileUrl('award')}"><div class="jifen">积分兑换<img src="../addons/weilive/style/images/jiantou.png" align="right" /></div></a>
+	<a href="{php echo $this->createMobileUrl('kill')}"><div class="jifen">限时秒杀<img src="../addons/weilive/style/images/jiantou.png" align="right" /></div></a>
+    <a href="{php echo $this->createMobileUrl('index')}"><div class="jifen">返回首页<img src="../addons/weilive/style/images/jiantou.png" align="right" /></div></a>
+</div>
+</body>
+<script src="../addons/weilive/style/js/zepto.min.js"></script>
+<script>
+function report(){
+	if({$credit}!=-1){
+		return;
+	}
+	$.ajax({
+		type: "POST",
+		url: "{php echo $this->createMobileurl('home',array('op'=>'report'))}",
+		dataType: "text",
+		
+		success: function (d) {
+			if(d!=0){
+				window.document.getElementById('wxqd').innerHTML = '获得'+d+'分';
+				var credit = parseInt(window.document.getElementById('mygold').innerHTML);
+				var credit1 = credit + parseInt(d);
+				window.document.getElementById('mygold').innerHTML = credit1;
+			}
+		},
+		
+		error: function (xml, text, thrown){
+			TopBox.alert("出错啦!");
+		}
+	});
+}
+
+</script>
+</html>

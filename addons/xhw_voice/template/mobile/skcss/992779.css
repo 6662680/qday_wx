@@ -1,0 +1,6 @@
+﻿.container{ overflow:hidden;}
+.items { float:left; width:31%; margin:8px 0 0 2%; position:relative;}
+.items p{ font-size:14px; line-height:20px; height:20px; margin-top:5px; overflow:hidden; padding:0 5%;}
+.items img { display:block; width:100%; border-radius:5px;}
+.items span{ display:block; padding:0 8px; height:20px; line-height:20px; text-align:center; font-size:14px; color:#fff; border-radius:5px; background:rgba(38,23,15, 0.5); position:absolute; bottom:35px; right:8px;}
+#images .items { display: none;}

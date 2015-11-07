@@ -1,0 +1,159 @@
+﻿body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,form {
+	margin: 0; padding: 0;
+}
+ul,ol,li {
+	list-style: none; 
+}
+body {
+	 font-size:14px;background: #EEE; color: #333;
+}
+em,small {
+	font-style: normal; font-size: 14px;
+}
+img{
+	border:none;
+}
+a{
+	color:#000;
+	text-decoration:none;
+}
+a:hover{
+	color:#2C74AB;text-decoration:none
+}
+input,select,textarea,button{
+	font-size:15px;
+}
+.clear {clear:both}
+.z {
+	display: block; height: 1px; clear: both; overflow: hidden; margin: 0; padding: 0;
+}
+.z5 {
+	display: block; height: 5px; clear: both; overflow: hidden; margin: 0; padding: 0;
+}
+.z10 {
+	display: block; height: 10px; clear: both; overflow: hidden; margin: 0; padding: 0;
+}
+.mT5 {
+	margin-top: 5px;
+}
+.mB5 {
+	margin-bottom: 5px;
+}
+.mT10 {
+	margin-top: 10px;
+}
+.fl {
+	float: left;
+}
+.tc {text-align: center;}
+.fr {
+	float: right;
+}
+.fc1,.fc1 a {
+	color: #d71b2b
+}
+.fc2,.fc2 a {
+	color: #408FC4
+}
+.fc3,.fc3 a {
+	color: #FFF
+}
+.fc4,.fc4 a {
+	color: #000
+}
+.fc5,.fc5 a {
+	color: #3F96B9
+}
+.fc6,.fc6 a {
+	color: #adadad;
+}
+.box {
+	background: #fff; overflow: hidden; border-radius:1px; sborder: solid 1px #DDD;
+}
+.p_box{
+	padding: 10px;
+}
+.ibox .inner {
+	padding: 5px;
+}
+#position {
+	padding: 5px 10px;color: #cc2a2a; text-align: center;
+}
+#wraper {
+	position: relative; background: #E6E6E6; top: 0; width: 100%; z-index: 100;
+}
+#header {
+	height: 32px; position: fixed; top: 0; left: 0; width: 100%; background: #f1f1f1; z-index: 9999; overflow: hidden; background: #d71b2b;
+}
+#header dt {
+	float: left; padding-left: 5px; 
+}
+#header dt img {
+	height: 20px; margin-top: 5px
+}
+#header dd {
+	text-align: right; overflow: hidden; height: 32px; padding-right: 5px;
+}
+#header dd span {
+	display: inline-block; width: 20px; height: 20px; padding: 6px; float: right;
+}
+#header dd span em {
+	background: #FFF; margin: 2px 0; float: left; width: 20px; height: 3px;border-radius:2px;
+}
+#header dd strong {
+	height: 32px;line-height: 32px; float: right;color: #FFF;font-size: 16px; margin-right: 10px;
+}
+#menu {
+	position: fixed; top: 34px; right:5px; z-index:99999; background: #fff;box-shadow:0px 0px 5px rgba(0, 0, 0, 0.5); text-align: center; width: 100px; display: none;border-radius:8px; border: solid 4px #d71b2b; opacity: 0.85;overflow: hidden;
+}
+#menu ul li {
+	padding: 0 5px; font-size: 15px; line-height: 32px;border-bottom: dotted 1px #DDD;
+}
+#menu ul li.cur {
+	background: #d71b2b;
+}
+#menu ul li a {
+	color: #d71b2b; display: inline-block; font-weight: 600; margin: 0 2px;
+}
+#menu ul li.cur a {
+	color: #FFF
+}
+#main {
+	padding: 40px 0 5px; margin: 0 5px; 
+}
+.gray {
+	color: #999999;
+}
+#footer {
+	padding: 10px 0; text-align: center; font-size: 12px;
+}
+#footer .links  {
+	 text-align: center; height: 25px;
+}
+#footer .links a,#footer .links strong {
+	display: inline-block; font-size: 15px; margin:  0 10px;
+}
+#right_button {
+	position: fixed; right: 4px; bottom: 50px;
+}
+#right_button em {
+	width: 32px; height: 32px; opacity: 0.6; background: #666 url(../skimages/top_btn.png) center 0 no-repeat; -webkit-background-size: 16px auto; border-radius:17px; border: solid 1px #555; display: block; margin-bottom: 5px;
+}
+#right_button em a {
+	display: block; height: 32px;
+}
+#btn_top {
+	display: none;
+}
+#right_button em#getApp1 {
+	background-position: center -32px;
+}
+#right_button em#getApp2 {
+	background-position: center -64px;
+}
+
+#appbar { filter:alpha(opacity=90);-moz-opacity:0.9;-khtml-opacity: 0.9;opacity: 0.9; position: fixed;top:0;border-bottom: #ecaa68 1px solid; background: #FFFFE5;width:100%;height:0px; overflow: hidden; display:none; font-size: 14px;_position: absolute;_top: expressio(documentElement.scrollTop + 0 + "px");}
+#appbar strong {display:inline-block;line-height:27px;vertical-align: middle;color:#C00000; margin-left: 10px;}
+#appbar a{display:inline-block; float: right;margin-top:5px;vertical-align: middle; margin-right: 10px;}
+#appbar a em {background:url(../skimages/icon_client.png) no-repeat;-webkit-background-size: 16px auto;display:inline-block;height:16px;padding-left:16px; overflow: hidden;line-height:16px;margin-left:5px;font-size:12px;}
+#appbar a em.ic2{background-position: 0 -16px;}

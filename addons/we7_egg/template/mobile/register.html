@@ -1,0 +1,107 @@
+{template 'header'}
+
+<link type="text/css" rel="stylesheet" href="../addons/we7_scratchcard/template/images/common.mobile.css">
+
+<div data-role="page" data-theme="a">
+
+<div data-role="header" data-position="inline">
+
+	<h1>{$title}</h1>
+
+</div>
+
+<style>
+
+.fieldcontain label{vertical-align: middle;display: inline-block;width: 18%;}
+
+.fieldcontain input,.fieldcontain div{width:77%;display: inline-block;}
+
+</style>
+
+	<div class="main">
+
+		 <div data-role="collapsible-set">
+
+			<div data-role="collapsible" data-collapsed="{if $member['nickname']}true{else}false{/if}">
+
+				<h3>砸蛋相关说明</h3>
+
+				<p>尊敬的用户您好，欢迎使用{if empty($_W['account']['name'])}由情天团队开发的{/if}砸蛋抽奖，中奖用户请务必认真填写您的个人信息，以便我们及时准确的将奖品信息发送给您！谢谢！祝您工作顺利！</p>
+
+			</div>
+
+			{if $member['nickname']}
+
+			<div data-role="collapsible" data-collapsed="false">
+
+				<h3>您已经登记完成</h3>
+
+				<p style="color:red;">您已经登记完成，以后无需登记可直接砸蛋！如果需要修改信息，请再次提交更改。</p>
+
+			</div>
+
+			{/if}
+
+		</div>
+
+		<form action="{$_W['siteroot']}{php echo $this->createMobileUrl('register')}" method="post" data-ajax="false" onsubmit="return check(this)">
+
+		<input type="hidden" name="id" value="{$_GPC['id']}" />
+
+		<div class="fieldcontain"><label for="name">姓名：</label>{php echo tpl_fans_form('realname', $member['realname']);}</div>
+
+		<div class="fieldcontain"><label for="phone">手机：</label>{php echo tpl_fans_form('mobile', $member['mobile']);}</div>
+
+		<div class="fieldcontain"><label for="qq">ＱＱ：</label>{php echo tpl_fans_form('qq', $member['qq']);}</div>
+
+		<div style="margin:20px 0;"><input type="submit" name="submit" data-theme="a" data-icon="check" value="提交登记" /></div>
+
+		<input type="hidden" name="token" value="{$_W['token']}" />
+
+		</form>
+
+	</div>
+
+	<script type="text/javascript">
+
+		function check(form) {
+
+			if (!form['realname'].value) {
+
+				alert('请输入您的真实姓名！');
+
+				return false;
+
+			}
+
+			if (!form['mobile'].value) {
+
+				alert('请输入您的手机号码！');
+
+				return false;
+
+			}
+
+			if (!/^1[358]{1}[0-9]{9}/.test(form['mobile'].value)) {
+
+				alert('请输入正确的手机号码！');
+
+				return false;
+
+			}
+
+			if (!form['qq'].value) {
+
+				alert('请输入您的QQ号码！');
+
+				return false;
+
+			}
+
+			return true;
+
+		}
+
+	</script>
+
+{template 'footer'}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="wumi-weixin-share-img-url" content="{RES}images/truth.jpg">
+    <meta name="wumi-weixin-share-desc" content="想知道我的真心话吗？快和我交换秘密，来场真心话大冒险吧！">
+    <link rel="stylesheet" href="{RES}css/truth.default.css?v=1" type="text/css" media="screen" />
+    <title>{$titlte}</title>
+</head>
+<body>
+<div class="guide">
+    <div class="box share-box">
+        <p>还剩最后一步……</p>
+        <div class="content">
+            <h3>分享到微信群或好友，</h3>
+            <h3>看看他们会怎么回答这个问题</h3>
+        </div>
+    </div>
+</div>
+<div class="my-question">
+    <p class="question-content">{$question['title']}</p>
+</div>
+<ol class="answers">
+    <li>
+        <div class="answer-item">
+            <div class="head"><img src="{$reply['headimgurl']}"/></div>
+            <div class="main">
+                <header>我的回答：</header>
+                <p class="content">{$reply['content']}</p>
+            </div>
+        </div>
+    </li>
+    {loop $replys $item}
+    <li>
+        <div class="answer-item">
+            <div class="head"><img src="{$item['headimgurl']}"/></div>
+            <div class="main">
+                <header>{$item['nickname']}：</header>
+                <p class="content">{$item['content']}</p>
+            </div>
+        </div>
+    </li>
+    {/loop}
+</ol>
+<div class="box diffusion-box" id="page_repeat" style="{if $reply['sharecount'] == 0}display: none;{/if}">
+    <p class="content">还没过瘾？要不再来一发......</p>
+    <a href="{php echo $this->createMobileUrl('index', array(), true)}" class="btn btn-lg btn-wrap btn-want">再提个问题</a>
+</div>
+<script type="text/javascript" src="{RES}js/zepto.min.js"></script>
+<script type="text/javascript" src="{RES}js/truth.default.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    /*
+     * 注意：
+     * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
+     * 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
+     * 3. 完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+     *
+     * 如有问题请通过以下渠道反馈：
+     * 邮箱地址：weixin-open@qq.com
+     * 邮件主题：【微信JS-SDK反馈】具体问题
+     * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
+     */
+    var appid = '{$_W['account']['jssdkconfig']['appId']}';
+    var timestamp = '{$_W['account']['jssdkconfig']['timestamp']}';
+    var nonceStr = '{$_W['account']['jssdkconfig']['nonceStr']}';
+    var signature = '{$_W['account']['jssdkconfig']['signature']}';
+
+    wx.config({
+        debug: false,
+        appId: appid,
+        timestamp: timestamp,
+        nonceStr: nonceStr,
+        signature: signature,
+        jsApiList: [
+            // 所有要调用的 API 都要加到这个列表中
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+
+    var shareData = {
+        title: '{$share_title}',
+        desc: '{$share_desc}',
+        link: '{$share_url}',
+        imgUrl: '{$share_image}'
+    };
+
+    wx.ready(function () {
+        wx.onMenuShareAppMessage({
+            title: shareData.title,
+            desc: shareData.desc,
+            link: shareData.link,
+            imgUrl: shareData.imgUrl,
+            trigger: function (res) {
+                //alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+                // 用户确认分享后执行的回调函数
+                updateShare();
+                //alert('感谢您的分享...');
+            },
+            cancel: function (res) {
+                //alert('已取消');
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+
+        wx.onMenuShareTimeline({
+            title: shareData.title,
+            link: shareData.link,
+            imgUrl: shareData.imgUrl,
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                updateShare();
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+        wx.onMenuShareQQ({
+            title: shareData.title,
+            desc: shareData.desc,
+            link: shareData.link,
+            imgUrl: shareData.imgUrl,
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                updateShare();
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+
+        wx.onMenuShareWeibo({
+            title: shareData.title,
+            desc: shareData.desc,
+            link: shareData.link,
+            imgUrl: shareData.imgUrl,
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+
+    wx.error(function (res) {
+        //alert(res.errMsg);
+    });
+
+    function updateShare()
+    {
+        var req = {
+            qid: "{$question['id']}",
+            from_user:"{$from_user}"
+        }
+        $.ajax({
+            type: "post",
+            url: "{php echo $this->createMobileUrl('updateShare')}",
+            dataType: "json",
+            data: req,
+            success: function (data) {
+                $("#page_repeat").show();
+                alert('感谢您的分享');
+            }
+        });
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

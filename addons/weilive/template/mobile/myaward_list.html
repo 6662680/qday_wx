@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>积分兑换</title>
+    <link rel="stylesheet" href="../addons/weilive/style/css/user.css"/>
+	<style>
+	a{
+		-webkit-border-radius: 4px 0 4px 0;
+		border-radius: 5px 5px 5px 5px;
+	}
+	</style>
+	<style>
+	.pagination li{
+		margin-left:7px;
+		background-color: #665B59;
+		display: inline-block;
+		padding: 0 5px;
+		border-radius: 5px;
+		width:22%;
+		text-align:center;
+	}
+	.pagination li .pager-nav{
+		color: #fff;
+	}
+	</style>
+</head>
+<body>
+<div class="app-view">
+    <div class="app-page">
+        <section class="app-wrap">
+            <div class="inner">
+
+                <div class="m-integral">
+                    <div class="wrap">
+                        <dl class="list u-wrap">
+							{if !empty($awards)}
+							{if !empty($awards[1])}
+							<dt class="title">卡密类:</dt>
+                            {loop $awards[1] $item}
+							<dd class="f-cb">
+								<a class="f-cb">
+									<img class="pic" src="{php echo $_W['attachurl'].$item['thumb']}" alt=""/>
+
+									<div class="box">
+										<div class="content">
+											<div class="name">{$item['title']}</div>
+											<p>
+												<span class="number">{$item['integral']}</span>积分
+												<input type="hidden" id="snum_10" name="number" value="{$item['number']}" />
+											</p>
+										</div>
+									</div>
+								</a>
+                            </dd>
+							{/loop}
+							{/if}
+							{if !empty($awards[2])}
+							<dt class="title">现场类:</dt>
+							{loop $awards[2] $item}
+							<dd class="f-cb">
+								<a class="f-cb">
+									<img class="pic" src="{php echo $_W['attachurl'].$item['thumb']}" alt=""/>
+
+									<div class="box">
+										<div class="content">
+											<div class="name">{$item['title']}</div>
+											<p>
+												<span class="number">{$item['integral']}</span>积分
+												<input type="hidden" id="snum_10" name="number" value="{$item['number']}" />
+											</p>
+										</div>
+									</div>
+								</a>
+                            </dd>
+							{/loop}
+							{/if}
+							{if !empty($awards[3])}
+							<dt class="title">邮寄类:</dt>
+							{loop $awards[3] $item}
+							<dd class="f-cb">
+								<a class="f-cb">
+									<img class="pic" src="{php echo $_W['attachurl'].$item['thumb']}" alt=""/>
+
+									<div class="box">
+										<div class="content">
+											<div class="name">{$item['title']}</div>
+											<p>
+												<span class="number">{$item['integral']}</span>积分
+												<input type="hidden" id="snum_10" name="number" value="{$item['number']}" />
+											</p>
+										</div>
+									</div>
+								</a>
+                            </dd>
+							{/loop}
+							{/if}
+							{else}
+								暂无数据
+							{/if}
+							</dl>
+                    </div>
+                </div>  
+					<br/>{$pager}				
+            </div>
+        </section>
+    </div>
+</div>
+<style type="text/css">
+	#foot{position:absolute;z-index:11;bottom:10px;width:100%;}
+</style>
+		<footer id="foot" class="m-cprt">
+			<a href="{$setting['gzurl']}">关注微信</a>
+			{if empty($setting['helpurl'])}{else}<a href="{$setting['helpurl']}">使用帮助</a>{/if}
+			<a href="{php echo $this->createMobileurl('myshop');}">免费开店</a>
+		</footer>
+</body>
+</html>

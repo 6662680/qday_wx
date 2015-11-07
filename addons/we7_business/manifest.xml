@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="true">
+		<name><![CDATA[周边商户]]></name>
+		<identifie><![CDATA[we7_business]]></identifie>
+		<version><![CDATA[1.3]]></version>
+		<type><![CDATA[services]]></type>
+		<ability><![CDATA[提供商家信息的添加、聚合及LBS的查询。]]></ability>
+		<description><![CDATA[]]></description>
+		<author><![CDATA[012WZ.COM]]></author>
+		<url><![CDATA[http://bbs.b2ctui.com]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="location" />
+		</handles>
+	</platform>
+	<bindings>
+		<menu>
+			<entry title="商户列表" do="display" />
+			<entry title="添加商户" do="post" />
+		</menu>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_business` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `thumb` varchar(255) NOT NULL,
+  `content` varchar(1000) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `qq` varchar(15) NOT NULL,
+  `province` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `dist` varchar(50) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `lng` varchar(10) NOT NULL,
+  `lat` varchar(10) NOT NULL,
+  `industry1` varchar(10) NOT NULL,
+  `industry2` varchar(10) NOT NULL,
+  `createtime` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_lat_lng` (`lng`,`lat`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+	]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

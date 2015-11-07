@@ -1,0 +1,33 @@
+{template 'header'}
+<link href="{MODULE_URL}template/css/css.css" rel="stylesheet" />
+<link href="{MODULE_URL}template/css/stylesheet.css" rel="stylesheet" />
+<div class="top_menu">
+    便民电话
+</div>
+<div class="top_menu_shadow"></div>
+<table class="table table-bordered" >
+	<thead>
+		<tr>
+			<th>电话</th>
+			<th>说明</th>
+		</tr>
+	</thead>
+	<tbody>
+	{loop $phones $item}
+	<tr>
+		<td><a href="tel:{$item['phone']}">{$item['phone']}</a> <a href="tel:{$item['phone']}"><i class="icon-phone"></i></a></td>
+		<td>{$item['title']}</td>
+	</tr>
+	{/loop}
+	{if empty($phones)}
+	<tr>
+		<td colspan="2">没有任何电话</td>
+	</tr>
+	{/if}
+	</tbody>
+</table>
+<div class="list img-rounded" style="padding-top: 0; padding-bottom: 0;">
+{$pager}
+</div>
+
+{template 'footer'}

@@ -1,0 +1,194 @@
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/we7_research/template/mobile/common.mobile.css" />
+ 
+{if $initCalendar}
+<link type="text/css" rel="stylesheet" href="../web/resource/components/datetimepicker/bootstrap-datetimepicker.min.css" />
+<script type="text/javascript" src="../web/resource/components/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.datepicker').each(function(){
+			$(this).datetimepicker({
+				format: "yyyy-mm-dd",
+				minView: "2",
+				pickerPosition: "top-right",
+				autoclose: true
+			});
+		});
+	});
+</script>
+{/if}
+
+<script type="text/javascript">
+	function validate(){
+		{loop $ds $row}
+		{if $row['essential']}
+		{if in_array($row['type'], array('number', 'text', 'calendar', 'email'))}
+		if($.trim($(':text[name="field_{$row['refid']}_{$row['bind']}"]').val()) == '') {
+			alert('{$row['title']} 必须填写.');
+			return false;
+		}
+		{/if}
+
+		{if in_array($row['type'], array('image'))}
+		if($.trim($(':input[name="field_{$row['refid']}_{$row['bind']}"]').val()) == '') {
+			alert('{$row['title']} 必须上传.');
+			return false;
+		}
+		{/if}
+		{if in_array($row['type'], array('textarea'))}
+		if($.trim($('textarea[name="field_{$row['refid']}_{$row['bind']}"]').val()) == '') {
+			alert('{$row['title']} 必须填写.');
+			return false;
+		}
+		{/if}
+		{if in_array($row['type'], array('checkbox'))}
+		if($(':checkbox[name="field_{$row['refid']}_{$row['bind']}[]"]:checked').length == 0) {
+			alert('{$row['title']} 必须选择.');
+			return false;
+		}
+		{/if}
+		{if in_array($row['type'], array('number'))}
+		var num = parseFloat($.trim($(':text[name="field_{$row['refid']}_{$row['bind']}"]').val()));
+		if(isNaN(num)) {
+			alert('{$row['title']} 必须输入数字.');
+			return false;
+		}
+		{/if}
+		{if in_array($row['type'], array('email'))}
+		var mail = $.trim($(':text[name="field_{$row['refid']}_{$row['bind']}"]').val());
+		if(!(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/i).test(mail)) {
+			alert('{$row['title']} 必须输入邮箱地址.');
+			return false;
+		}
+		{/if}
+		{/if}
+		{/loop}
+		return true;
+	}
+</script>
+
+<style>
+	body{background:#ECECEC;}
+	.text-error { color:red}
+	.research-thumb{width:100%;}
+	.mobile-content img {width: 100%;}
+</style>
+
+<div class="research">
+	{if !empty($activity['thumb'])}
+	<img class="research-thumb" src="{php echo tomedia($activity['thumb']);}">
+	{/if}
+	<div class="mobile-div img-rounded">
+		<div class="mobile-hd">{$activity['title']}</div>
+		<div class="mobile-content">
+		{php echo htmlspecialchars_decode($activity['content'])}
+		</div>
+	</div>
+	<form action="" method="post" enctype="multipart/form-data" onsubmit="return validate();">
+	<div class="mobile-div img-rounded">
+		<div class="mobile-hd">请认真填写表单</div>
+		<div class="mobile-content">
+			<table class="form-table">
+				{loop $ds $row}
+				<tr>
+					<th>
+						<label for="">
+							{$row['title']}
+							{if $row['essential']}
+							<span title="必填项" class="text-error">*</span>
+							{/if}
+						</label>
+					</th>
+					<td>
+						{if $row['type'] == 'number'}
+						<input type="text" name="field_{$row['refid']}_{$row['bind']}" value="{$row['default']}" class="form-control"/>
+						{/if}
+						{if $row['type'] == 'text'}
+						<input type="text" name="field_{$row['refid']}_{$row['bind']}" value="{$row['default']}" class="form-control"/>
+						{/if}
+						{if $row['type'] == 'textarea'}
+						<textarea name="field_{$row['refid']}_{$row['bind']}" rows="3" class="form-control"/>{$row['default']}</textarea>
+						{/if}
+						{if $row['type'] == 'radio'}
+						<select name="field_{$row['refid']}_{$row['bind']}" class="form-control"/>
+						{loop $row['options'] $v}
+							<option value="{$v}" {if $v == $row['default']} selected="selected"{/if}>{$v}</option>
+						{/loop}
+						</select>
+						{/if}
+						{if $row['type'] == 'checkbox'}
+						{loop $row['options'] $v}
+						<label class="checkbox-inline btn btn-small">
+							<input type="checkbox" name="field_{$row['refid']}_{$row['bind']}[]" value="{$v}" {if $v == $row['default']} checked="checked"{/if}/>{$v}
+						</label>
+						{/loop}
+						{/if}
+						{if $row['type'] == 'select'}
+						<select name="field_{$row['refid']}_{$row['bind']}" class="form-control"/>
+						{loop $row['options'] $v}
+							<option value="{$v}" {if $v == $row['default']} selected="selected"{/if} />{$v}</option>
+						{/loop}
+						</select>
+						{/if}
+						{if $row['type'] == 'calendar'}
+						{php echo tpl_form_field_date('field_' . $row['refid'] . '_' . $row['bind']);}
+						{/if}
+						{if $row['type'] == 'email'}
+						<input type="text" name="field_{$row['refid']}_{$row['bind']}" value="{if $row['default']}{$row['default']}{else}@{/if}"  class="form-control"/>
+						{/if}
+
+						{if $row['type'] == 'image'}
+						<div class="file">
+							{php echo tpl_form_field_image('field_' . $row['refid'] . '_' . $row['bind'], '');}
+						</div>
+						{/if}
+
+						{if $row['type'] == 'range'}
+						<select name="field_{$row['refid']}_{$row['bind']}" class="form-control">
+							<option value="0:00-1:00" >0:00-1:00</option>
+							<option value="1:00-2:00">1:00-2:00</option>
+							<option value="2:00-3:00">2:00-3:00</option>
+							<option value="3:00-4:00">3:00-4:00</option>
+							<option value="4:00-5:00">4:00-5:00</option>
+							<option value="5:00-6:00">5:00-6:00</option>
+							<option value="6:00-7:00">6:00-7:00</option>
+							<option value="7:00-8:00">7:00-8:00</option>
+							<option value="8:00-9:00">8:00-9:00</option>
+							<option value="9:00-10:00">9:00-10:00</option>
+							<option value="10:00-11:00">10:00-11:00</option>
+							<option value="11:00-12:00">11:00-12:00</option>
+							<option value="12:00-13:00">12:00-13:00</option>
+							<option value="13:00-14:00">13:00-14:00</option>
+							<option value="14:00-15:00">14:00-15:00</option>
+							<option value="15:00-16:00">15:00-16:00</option>
+							<option value="16:00-17:00">16:00-17:00</option>
+							<option value="17:00-18:00">17:00-18:00</option>
+							<option value="18:00-19:00">18:00-19:00</option>
+							<option value="19:00-20:00">19:00-20:00</option>
+							<option value="20:00-21:00">20:00-21:00</option>
+							<option value="21:00-22:00">21:00-22:00</option>
+							<option value="22:00-23:00">22:00-23:00</option>
+							<option value="23:00-24:00">23:00-24:00</option>
+						</select>
+						{/if}
+						{if $row['type'] == 'reside'}
+						{php echo tpl_fans_form('reside',array('province' => $profile['resideprovince'],'city' => $profile['residecity'],'district' => $profile['residedist']));}
+						{/if}
+
+						{if !empty($row['description'])}
+						<span class="help-block">{php echo urldecode($row['description']);}</span>
+						{/if}
+					</td>
+				</tr>
+				{/loop}
+			</table>
+		</div>
+	</div>
+	<div class="mobile-submit">
+		<input type="hidden" name="token" value="{$_W['token']}" />
+		<input type="submit" class="btn btn-large btn-success submit" value="提交" name="submit" style="width:100%;">
+	</div>
+</form>
+</div>
+
+{template 'footer'}

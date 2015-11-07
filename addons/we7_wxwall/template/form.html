@@ -1,0 +1,138 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		添加微信墙
+	</div>
+	<input type="hidden" name="reply_id" value="{$reply['id']}" />
+	<div class="panel-body">
+		{if $reply['rid']}
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看内容</label>
+			<div class="col-sm-9">
+				<p class="form-control-static">
+					<a href="{php echo $this->createWebUrl('detail', array('id' => $reply['rid']))}" target="_blank">查看内容</a>&nbsp;&nbsp;
+					<a href="{php echo $this->createWebUrl('manage', array('id' => $reply['rid']))}" target="_blank">审核内容</a>
+				</p>
+			</div>
+		</div>
+		{/if}
+		
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">指定公众号</label>
+			<div class="col-sm-9">
+				<select name="acid" class="form-control" >
+					{loop $accounts $account}
+					<option value="{$account['acid']}" {if $reply['acid']==$account['acid']}selected="selected"{/if}>{$account['name']}</option>
+					{/loop}
+				</select>
+				<span class="help-block">指定子公众号,用于微信墙显示</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">退出指令</label>
+			<div class="col-sm-9">
+				<input type="text" value="{$reply['quit_command']}" class="form-control" name="quit-command">
+				<span class="help-block">用户退出话的指令，如果未设置则默认为“退出”</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">是否审核</label>
+			<div class="col-sm-9">
+				<label class="radio-inline">
+					<input type="radio" name="isshow" value="1" id="isshow_1" {if $reply['isshow'] == '1'}checked="true"{/if}> 是
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="isshow" value="0" id="isshow_0"  {if $reply['isshow'] == '0'}checked="true"{/if}>否
+				</label>
+				<span class="help-block">当用户在话题中发表内容，是否需要审核，为否为则直接显示内容。</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">进入提示</label>
+			<div class="col-sm-9">
+				<textarea style="height:200px;" class="form-control" name="enter-tips" id="enter-tips" cols="70">{$reply['enter_tips']}</textarea>
+				<span class="help-block">当用户进入此话题时，返回用户的提示信息。
+					<a class="" href="javascript:;" onclick="setemotion(this,'enter-tips');"><i class="fa fa-github-alt"></i> 表情</a>
+					<script type="text/javascript">
+						function setemotion(obj, id){
+							require(['util', 'jquery'], function(util, $){
+								var t = $('#'+id).get(0);
+								util.emotion(obj, t, function(txt, obj, t){
+									t.value = $(target).get(0).value;
+								});
+							});
+						}
+					</script>
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">发表提示</label>
+			<div class="col-sm-9">
+				<textarea style="height:200px;" class="form-control" name="send-tips" id="send-tips" cols="70">{$reply['send_tips']}</textarea>
+				<span class="help-block">当用户主动退出或是超时退出话题时，返回用户的提示信息。<a class="" href="javascript:;" onclick="setemotion(this,'send-tips');"><i class="fa fa-github-alt"></i> 表情</a></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">退出提示</label>
+			<div class="col-sm-9">
+				<textarea style="height:200px;" class="form-control" name="quit-tips" id="quit-tips" cols="70">{$reply['quit_tips']}</textarea>
+				<span class="help-block">当用户在话题发表内容成功时，返回用户的提示信息。<a class="" href="javascript:;" onclick="setemotion(this,'quit-tips');"><i class="fa fa-github-alt"></i> 表情</a></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">超时时间</label>
+			<div class="col-sm-9">
+				<div class="input-group">
+					<input type="text" name="timeout" class="form-control"  value="{$reply['timeout']}" />
+					<span class="input-group-addon">秒</span>
+				</div>
+				<span class="help-block">当用户在话题中未发表内容，并达到此选项设置的时间时，用户自动被踢出话题。</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">自定义背景</label>
+			<div class="col-sm-9">
+				{php echo tpl_form_field_image('background', $reply['background']);}
+				<span class="help-block"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">自定义LOGO</label>
+			<div class="col-sm-9">
+				{php echo tpl_form_field_image('logo', $reply['logo']);}
+				<span class="help-block"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">开启腾讯墙</label>
+			<div class="col-sm-9">
+				<label class="radio-inline">
+					<input type="radio" name="walls[tx][status]" value="1" id="syncwall_tx_1" {if !empty($reply['syncwall']['tx']['status'])}checked="true"{/if} onclick="$('#syncwall_tx').show();"> 是
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="walls[tx][status]" value="0" id="syncwall_tx_0" {if empty($reply['syncwall']['tx']['status'])}checked="true"{/if} onclick="$('#syncwall_tx').hide();"> 否
+				</label>
+				<span class="help-block">开启此选项后，系统自动获取指定的腾讯墙内的数据显示到情天墙内。</span>
+			</div>
+		</div>
+		<div class="form-group" id="syncwall_tx" {if empty($reply['syncwall']['tx']['status'])}style="display:none;"{/if}>
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">腾讯墙话题名</label>
+			<div class="col-sm-9">
+				<input type="text" value="{$reply['syncwall']['tx']['subject']}" class="form-control" name="walls[tx][subject]">
+				<span class="help-block"></span>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+/*验证表单可以实现 validateReplyForm 方法.*/
+/*
+	function validateReplyForm(formobj, $, _, util, $scope, $http) {
+		if (!formobj['quit-command'].value) {
+			util.message('请输入退出指令');
+			return false;
+		}
+	}
+*/
+</script>
+

@@ -1,0 +1,38 @@
+{template 'common'}
+
+<div id="wallMain">
+	<div id="topbox" class="topbox">
+		<div class="topbox_l">
+			<div class="topic">
+				<h1 class="msg_tit">搜索公众号 <strong class="red">{$wall['account']['name']}</strong></h1>
+				<h1 class="msg_tit" style="display:none;">添加公众号 <strong class="red">{$wall['account']['account']}</strong></h1>
+				<span class="addCnt">发送 {loop $wall['keyword'] $row}<span class="red Topic_cnt">{$row['content']}</span>，{/loop} 登记后发送内容，自动上墙</span>
+			</div>
+		</div>
+	</div>
+	<div id="msg_list" class="msg_list">
+		<div id="msg_{$row['id']}" style="margin:50px 0 0 40px;">
+			<img src="{$_W['attachurl']}qrcode_{$wall['acid']}.jpg" style="width:500px;" />
+			<img src="{$_W['attachurl']}headimg_{$wall['acid']}.jpg" style="width:420px;" />
+		</div>
+	</div>
+</div>
+
+<div class="side_div">
+	<div class="side_item"><a href="{php echo $this->createWebUrl('detail', array('id' => $wall['rid']))}">微信墙</a></div>
+	{if $_W['uid']}<div class="side_item"><a href="{php echo $this->createWebUrl('lottery', array('id' => $wall['rid']))}">抽奖</a></div>{/if}
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		//公众号切换
+		var mTimer;
+		function auto_play() {
+			$(".msg_tit").toggle();
+		}
+		mTimer = setInterval(function(){auto_play()}, 5000);
+	});
+</script>
+
+</body>
+</html>

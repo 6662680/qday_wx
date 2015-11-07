@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="shortcut icon" href="../addons/wdl_hchighguess/style/images/favicon.ico">
+	<link rel="stylesheet" href="../addons/wdl_hchighguess/style/css/draw.css" type="text/css" media="screen" />
+	<link rel="prefetch" href="../addons/wdl_hchighguess/style/images/app.jpg"/>
+    <title>我画你猜</title>
+</head>
+<body>
+    <div class="share">
+        <header>
+            <div class="guide">
+                <p>
+                    你真是绘画界的一朵奇葩，<br/>
+					赶快分享给你的小伙伴，<br/>
+                    看看哪些小伙伴最懂你！
+                </p>
+            </div>
+        </header>
+        <div class="main">
+            <div class="inner">
+                <div class="picture">
+                    <img src="{$_W['attachurl']}{$myimage['image']}"/>
+                </div>
+                <p>
+                    收到链接的小伙伴要从下列选项中找出正确答案：<br>
+                    {$selectword['words']}</p>
+            </div>
+        </div>
+        <footer>
+            <a class="btn btn-1 btn-follow" href="{$reply['gzurl']}">关注【{$_W['account']['name']}】,惊喜不断！</a>
+		</footer>
+    </div>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/zepto.min.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/underscore-min.js"></script>
+<script type="text/javascript" src="../addons/wdl_hchighguess/style/js/backbone-min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+{php $signPackage=$_W['account']['jssdkconfig'];}	
+<script>
+wx.config({
+	debug: false,   
+	appId: '<?php echo $signPackage["appId"];?>',
+	timestamp: '<?php echo $signPackage["timestamp"];?>',
+	nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+	signature: '<?php echo $signPackage["signature"];?>',
+	jsApiList: ['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo',]
+});
+
+wx.ready(function () {
+	var shareData = {
+		title: "{$reply['sharetitle']}",
+		desc: "{$reply['sharedescription']}",
+		link: "{$wx['url']}",
+		imgUrl: '{$_W['attachurl']}{$myimage['image']}',
+		trigger: function (res) {},
+		complete: function (res) {},
+		success: function (res) {
+		},
+		cancel: function (res) {
+		},
+		fail: function (res) {
+		}
+	};
+	wx.onMenuShareAppMessage(shareData);
+	wx.onMenuShareQQ(shareData);
+	wx.onMenuShareWeibo(shareData);
+	wx.onMenuShareTimeline(shareData);
+});
+</script>
+</body>
+</html>

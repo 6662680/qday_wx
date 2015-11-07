@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="no-js login-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta chaset="utf-8">
+<title>好声音报名表</title>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="cache-control" content="must-revalidate">
+<link rel="stylesheet" href="addons/xhw_voice/template/mobile/reg/m.min.css">
+<script type="text/javascript" src="addons/xhw_voice/template/mobile/reg/ga.js"></script>
+<script type="text/javascript" src="addons/xhw_voice/template/mobile/reg/m.min.js"></script>
+</head>
+<body> 
+<!-- 头部 start -->
+<section class="header">
+      <header class="clearfix">
+<font size="4" color="#fff"><b>好声音报名表</b></font>
+      </header>
+</section>
+<section class="mt-20 account-form" id="login-form">
+
+{if $_GET['error']=='1'}
+<center><B>歌曲名和手机号不能为空，请重新填写</B></center>
+{else}
+{if $_GET['error']=='2'}
+<center><B>您的投稿已经通过审核，请勿修改</B></center>
+{else}
+<center><B>感谢您的参与，我们会尽快完成审核</B></center>
+{/if}
+{/if}
+
+</section>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+WeixinJSBridge.call('showOptionMenu'); //显示分享
+ //WeixinJSBridge.call('hideOptionMenu'); //隐藏分享
+ WeixinJSBridge.call("closeWindow");  //关闭
+});
+</script>
+</body></html>
+
+

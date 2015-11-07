@@ -1,0 +1,125 @@
+{template 'common/header'}
+ <div class="panel panel-info">
+	<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="./index.php" method="get" class="form-horizontal" role="form">
+			<input type="hidden" name="c" value="site" />
+			<input type="hidden" name="a" value="entry" />
+        	<input type="hidden" name="m" value="we7_egg" />
+        	<input type="hidden" name="do" value="awardlist" />
+        	<input type="hidden" name="id" value="{$_GPC['id']}" />
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">登记情况</label>
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<select name="isregister" class="form-control">
+						<option value="0" {if empty($_GPC['isregister'])}selected{/if}>全部</option>
+						<option value="1" {if $_GPC['isregister'] == 1} selected{/if}>已登记</option>
+						<option value="2" {if $_GPC['isregister'] == 2} selected{/if}>未登记</option>
+					</select>
+				</div>
+			</div>
+            <div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">中奖情况</label>
+				<div class=" col-xs-12 col-sm-8 col-lg-9">
+					<select name="isaward" class="form-control">
+						<option value="0"  {if empty($_GPC['isaward'])}selected{/if}>全部</option>
+						<option value="1" {if $_GPC['isaward'] == 1} selected{/if}>已中奖</option>
+						<option value="2" {if $_GPC['isaward'] == 2} selected{/if}>未中奖</option>
+					</select>
+				</div>
+			</div>
+            <div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">个人信息</label>
+				<div class=" col-md-2">
+					<select name="profile"  class="form-control">
+						<option value="" selected="selected">请选择搜索用户资料</option>
+						<option {if $_GPC['profile'] == 'realname'}selected{/if} value="realname">姓名</option>
+						<option {if $_GPC['profile'] == 'mobile'}selected{/if} value="mobile">手机</option>
+						<option {if $_GPC['profile'] == 'qq'}selected{/if} value="qq">QQ</option>
+					</select>
+				</div>
+                <div class=" col-md-2">
+					<input type="text" name="profilevalue" value="{$_GPC['profilevalue']}"  class="form-control" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">中奖时间</label>
+				<div class="col-sm-8 col-lg-9">
+					 {php echo tpl_form_field_daterange('daterange',array('starttime'=>date('Y-m-d', $starttime),'endtime'=>date('Y-m-d',$endtime)))}
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">奖品信息</label>
+			    <div class=" col-md-2">
+					<select name="award" class="form-control" style="float:left;">
+						<option value="" selected="selected">请选择搜索奖品资料</option>
+						<option {if $_GPC['award'] == 'title'}selected{/if} value="title">名称</option>
+						<option {if $_GPC['award'] == 'description'}selected{/if} value="description">描述</option>
+					</select>
+				</div>
+				<div class=" col-md-2">
+					<input type="text" name="awardvalue" value="{$_GPC['awardvalue']}" class='form-control' style="float:left;"/>
+               	</div>
+                <div class="col-xs-12 col-md-2"><button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button></div>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">详细数据</div>
+	<div class="panel-body table-responsive">
+		<form action="" method="post" onsubmit="">
+			<table class="table table-hover">
+				<thead class="navbar-inner">
+				<tr>
+					<th style="width:80px;" class="row-first">选择</th>
+					<th style="width:200px;" class="row-hover">姓名<i></i></th>
+					<th style="width:200px;">手机<i></i></th>
+					<th style="width:200px;">QQ<i></i></th>
+					<th style="width:250px;">奖品<i></i></th>
+					<th>描述<i></i></th>
+					<th style="width:250px;">获取时间<i></i></th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				{loop $list $row}
+				<tr>
+					<td class="row-first"><input type="checkbox" name="select[]" value="{$row['id']}" /></td>
+					<td class="row-hover">{$row['realname']}</td>
+					<td>{$row['mobile']}</td>
+					<td>{$row['qq']}</td>
+					<td>{$row['award']}</td>
+					<td>{$row['description']}</td>
+					<td style="font-size:12px; color:#666;">
+						{php echo date('Y-m-d H:i', $row[createtime]);}
+					</td>
+					<td>{if $row['status'] == 0 || $row['status'] == 1}<a   href="{php echo $this->createWebUrl('awardlist', array('id' => $id, 'wid' => $row['id'], 'status' => 2))}" class="btn btn-success">确认领奖</a>{else}<a href="{php echo $this->createWebUrl('awardlist', array('id' => $id, 'wid' => $row['id'], 'status' => 0))}" class="btn btn-danger">取消领奖</a>{/if}</td>
+				</tr>
+				{/loop}
+				</tbody>
+			</table>
+			<table class="table">
+				<tr>
+					<td style="width:40px;" class="row-first"><input type="checkbox" id="selectAll" /></td>
+					<td>
+						<input type="submit" name="delete" value="删除" class="btn btn-primary" />
+						<input type="hidden" name="token" value="{$_W['token']}" />
+					</td>
+				</tr>
+					</tbody>
+			</table>
+		</form>
+	</div>
+</div>
+{$pager}
+<script type="text/javascript">
+	require(['jquery'],function($){
+		$('#selectAll').click(function() {
+			var checked = $(this).get(0).checked;
+			$(':checkbox').each(function(){this.checked = checked});
+		})
+	});
+</script>
+
+{template 'common/footer'}

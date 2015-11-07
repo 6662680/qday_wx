@@ -1,0 +1,122 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li {if $op == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('words', array('op' => 'post'))}">添加词语</a></li>
+	<li {if $op == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('words', array('op' => 'display'))}">管理词语</a></li>
+</ul>
+{if $op == 'post'}
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit="return validate(this);">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				词语设置
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">可画词语</label>
+					<div class="col-sm-5">
+						<input type="text" name="word" class="form-control" placeholder="设置页面上可选择画的词语" value="{$item['word']}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">猜测词语</label>
+					<div class="col-sm-5">
+						<textarea name="words" placeholder="本框设置已画词语的猜测范围，填写时用‘#’分隔，包括正确答案，建议填四个" class="form-control">{$item['words']}</textarea>
+					</div>
+				</div>
+			</div>
+			{if intval($id)}
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">添加时间</label>
+					<div class="col-sm-5">
+						{php echo date('Y-m-d h:i:s', $item['createtime'])}
+					</div>
+				</div>
+			</div>
+			{/if}
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+					<div class="col-sm-5">
+						<label class="radio-inline">
+							<input type="radio" name="isopen" value="1" {if $item['isopen'] == '1'}checked="true"{/if}> 显示
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="isopen" value="0" {if $item['isopen'] == '0'}checked="true"{/if}>不显示
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group col-sm-12">
+				<input type="hidden" name="token" value="{$_W['token']}" />
+				<input type="hidden" name="id" value="{$item['id']}" />
+				<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+			</div>
+		</div>
+	</form>
+</div>
+{elseif $op == 'display'}
+<div class="main">
+	<div class="panel panel-info">
+		<div class="panel-heading">筛选</div>
+		<div class="panel-body">
+			<form method="post">
+				<input type="hidden" name="c" value="site" />
+				<input type="hidden" name="a" value="entry" />
+				<input type="hidden" name="m" value="hchighgeuess" />
+				<input type="hidden" name="do" value="words" />
+				<input type="hidden" name="op" value="sort" />
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">可画词语</label>
+					<div class="col-sm-8 col-lg-9 col-xs-12">
+						<input name="word" type="text" class="form-control" value="{$sort['word']}" />
+					</div>
+				</div> 
+				<div class="form-group">
+					<div class="col-sm-3 col-lg-2"><button class="btn btn-default"><i class="fa fa-search"></i>搜索</button></div>
+				</div>
+			</form>
+		</div>
+	</div>
+    <form action="" method="post" class="form-horizontal form" onsubmit="return formcheck(this)">
+		<div class="panel panel-default">
+			<table class="table table-hover">
+				<thead class="navbar-inner">
+				<tr>
+					<th style="text-align:center;">序号</th>
+					<th style="text-align:center;">可画词语</th>
+					<th style="text-align:center;">猜测词语</th>
+					<th style="text-align:center;">属性</th>
+					<th style="text-align:center;">操作</th>
+				</tr>
+				</thead>
+				<tbody id="level-list">
+				{loop $list $key $item}
+				{php $key++}
+				<tr>
+					<td style="text-align:center;">{$key}</td>
+					<td style="text-align:center;">{$item['word']}</td>
+					<td style="text-align:center;">{$item['words']}</td>
+					<td style="text-align:center;">
+						{if $item['isopen']==1}
+						<span class="label" style="background:#56af45;">显示</span>
+						{else}
+						<span class="label" style="background:#747474;">不显示</span>
+						{/if}
+					</td>
+					<td style="text-align:center;">
+						<a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('words', array('id' => $item['id'], 'op' => 'post'))}" title="编辑"><i class="fa fa-pencil"></i></a>
+						<a class="btn btn-default btn-sm" onclick="return confirm('确认删除吗？');return false;" href="{php echo $this->createWebUrl('words', array('id' => $item['id'], 'op' => 'delete'))}" title="删除"><i class="fa fa-times"></i></a>
+					</td>
+				</tr>
+				{/loop}
+				</tbody>
+			</table>
+		</div>
+    </form>
+</div>
+<div style="text-align:center;">{$pager}<div>
+{/if}
+{template 'common/footer'}

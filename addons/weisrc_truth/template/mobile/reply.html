@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="wumi-weixin-share-img-url" content="{RES}images/truth.jpg">
+    <meta name="wumi-weixin-share-desc" content="想知道我的真心话吗？快和我交换秘密，来场真心话大冒险吧！">
+    <link rel="stylesheet" href="{RES}css/truth.default.css" type="text/css" media="screen" />
+    <title>{$title}</title>
+</head>
+<body>
+<!-- 还未说出自己的真心话 -->
+<div class="the-question">
+    <header>
+        <p class="question-content">{$question['title']}</p>
+    </header>
+</div>
+{if empty($curreply)}
+<div class="author-answer">
+    <div class="answer-item">
+        <div class="head"><img src="{$reply['headimgurl']}"/></div>
+        <div class="main">
+            <header>{$reply['nickname']}：</header>
+            <p class="content">想知道{$reply['nickname']}的真心话？交换真心话后才能看哦！（{$reply['nickname']}也会看到你的回答）</p>
+        </div>
+    </div>
+</div>
+<form action="" method="post" class="form-answer" id="formAnswer" enctype="multipart/form-data">
+    <div class="the-truth">
+        <header>我的真心回答：</header>
+        <textarea class="input answer" name="c" id="answer"></textarea>
+    </div>
+    <input type="hidden" name="qid" value="{$rid}"/>
+    <input type="hidden" name="token" value="{$_W['token']}" />
+    <input type="button" class="btn btn-lg btn-wrap btn-submit" value="提交" name="btnsubmit" id="btnsubmit" onclick="return btnsumbit();"/>
+</form>
+{else}
+<ol class="answers">
+    <li>
+        <div class="answer-item">
+            <div class="head"><img src="{$reply['headimgurl']}"/></div>
+            <div class="main">
+                <header>{$reply['nickname']}：</header>
+                <p class="content">{$reply['content']}</p>
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="answer-item">
+            <div class="head"><img src="{$curreply['headimgurl']}"/></div>
+            <div class="main">
+                <header>我：</header>
+                <p class="content">{$curreply['content']}</p>
+            </div>
+        </div>
+    </li>
+</ol>
+<div class="box diffusion-box">
+    <p class="content">你的朋友们都有哪些小秘密？<br/>你也可以向他们提问！</p>
+    <div class="button-group">
+        <div class="button">
+            <a href="{php echo $this->createMobileUrl('question', array('id' => $question['id']), true)}" class="btn btn-wrap btn-want" id="askThisQuestion">就问这个问题</a>
+        </div>
+        <div class="button">
+            <a href="{php echo $this->createMobileUrl('index', array(), true)}" class="btn btn-wrap btn-want">换个别的问题</a>
+        </div>
+    </div>
+</div>
+{/if}
+<script type="text/javascript" src="{RES}js/zepto.min.js"></script>
+<script>
+    var flag = true;
+    function btnsumbit() {
+        if (flag == false) {
+            return false;
+        }
+        flag = false;
+        var answer = $('#answer').val();
+        if (answer.length <= 1) {
+            alert('这也太简洁了……要不再多说两句？');
+            return false;
+        } else if (answer.length > 256) {
+            alert('太长了哦（已超出' + (answer.length - 256) + '字）');
+            return false;
+        }
+
+        var req = {
+            rid: "{$rid}",
+            from_user: "{$from_user}",
+            answer: answer
+        }
+
+        $.ajax({
+            type: "post",
+            url: "{php echo $this->createMobileUrl('SendAnswer')}",
+            dataType: "json",
+            data: req,
+            success: function (data) {
+                alert('感谢您的分享');
+                flag = true;
+                location.reload();
+            }
+        });
+    };
+</script>
+</body>
+</html>

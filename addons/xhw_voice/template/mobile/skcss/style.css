@@ -1,0 +1,155 @@
+﻿@import url(layout.css); 
+.focus {
+	padding: 5px; height: 183px;
+}
+.focus dl {
+	border-bottom: solid 1px #EEE; padding: 5px; height: 60px;
+}
+.focus dt {
+	margin-right: 5px; overflow: hidden; float: left;
+}
+.focus img {
+	width: 298px; height: 183px; display: block;
+}
+.focus #focus {
+    height: 183px; overflow: hidden;
+}
+.focus #focus_li {
+	text-align: right; height: 18px; doverflow: hidden;position: relative; top: -20px; margin-right: 5px; z-index: 999; font-weight: 700;
+}
+.focus #focus_li a {
+	background: #FFF; height: 16px; width: 16px;border-radius:8px;display: inline-block; text-align: center; line-height: 16px; color: #f75ca5; font-size: 12px; margin: 1px 2px;opacity: 0.8;
+}
+.focus #focus_li a.cur {
+	background:#fe71b3;color: #fff;
+}
+.focus #focus_title {
+	position: relative; top: -38px; height: 20px; line-height: 20px;color:#f75ca5; font-weight: 700;padding-left: 5px;
+}
+.header {
+	padding: 5px;
+}
+.focus .nobor {
+	dborder: none;
+}
+ul.pic {
+	padding: 10px 5px 5px; border-bottom: dotted 1px #DDD; clear: both; overflow: hidden;
+}
+ul.pic:after {
+	content: "."; display: block;height: 0;clear: both;visibility: hidden;
+}
+ul.pic li {
+	float: left; text-align: center; width:33.33%; font-size:12px;
+}
+ul.pic li img {
+	display: block; width: 90%;height:120px; margin: 0 auto 5px;
+}
+.blist ul.pic li {
+	width: 150px;
+}
+.blist ul.pic li img {
+	width: 140px;
+}
+.c_box .more {
+	display: block; padding: 5px; text-align: center;text-shadow:1px 1px 0px #FFF; color: #999
+}
+.c_box h3 {
+	background: #d71b2b; height: 32px; line-height: 32px; padding: 0 5px;color: #FFF;
+}
+.c_box h3 strong {
+	color: #FFF;
+}
+.c_box h3 a {
+	color: #FFF; font-size: 15px;
+}
+.c_box h4 {
+	 border-bottom: dashed 1px #EEE; padding: 5px;
+}
+.reclist {
+	position: relative; overflow: hidden; height: 150px; margin-bottom: 5px;
+}
+.reclist ul.pic li {
+	margin-bottom: 5px; width: 100px;
+}
+.showpage {
+    clear: both; display: block; height: 20px; margin: 0 1px; padding: 8px 0; text-align: center;
+}
+.showpage a, .showpage em {
+    background: none repeat scroll 0 0 #eee; display: inline-block; font-weight: 800; height: 22px; line-height: 22px; margin: 0 1px; padding: 0 7px; text-align: center;border-radius:11px;
+}
+.showpage span {
+    color: #BE5A5A;
+}
+.showpage em {
+   background: #d71b2b; color: #FFF;
+}
+.ptitle {
+	font-size: 18px; padding: 5px 0; text-align: center; margin: 0;
+}
+.ptitle small {
+	font-weight: 100; display: block;  font-size: 12px; margin-top: 5px;
+}
+#imgString img {
+	width: 100%; display: block;
+}
+.b_page {
+	height: 40px; padding: 10px 0;
+}
+.b_page li {
+	 width: 49%;background: #FFF; border-radius:4px;
+}
+.b_page a {
+	 display: block; height: 38px; line-height: 38px; text-align: center;
+}
+.vb_img {
+	position: fixed; top: 32px; width: 100%; display: none;
+}
+.vb_img .img_bg {
+	opacity: 0.8;background: #000; position: absolute;
+}
+.vb_img .img_box {
+	position: absolute; width: 100%;
+}
+.vb_img .img_box img {
+	position: absolute;
+}
+.vb_img .img_list {
+	position: fixed; margin: 5px 0; width: 100%; height: 20px; text-align: center;
+}
+.vb_img .img_list em {
+	background: #EEE;border-radius:3px; display: inline-block; width: 6px; height: 6px; margin: 2px;box-shadow:1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+.vb_img .img_list em.cur {
+	background: #fe71b3
+}
+.vb_img .img_list li img {
+	height: 50px; margin: 0 auto;
+}
+.vb_img .img_tmp {
+	visibility: hidden;
+}
+.vb_img span {
+	display: block; width: 100%; height: 32px; background: url(../skimages/loading.gif) center 50% no-repeat; position: absolute;opacity: 0.8; display: none;
+}
+.vb_img strong {
+	display: block; color: #FFF; font-size:16px; width: 100%; height: 32px; background: #000; position: fixed;opacity: 0.8;  top: 100px; height: 50px; width: 50px; border-radius:30px; padding: 5px; display: none; text-align: center; line-height: 50px;
+}
+.vb_btn {
+	display: none; position: fixed; top: 37px; width: 100%;
+}
+.vb_btn .close,.vb_btn a {
+	background: #000 url(../skimages/vb_btn.png) no-repeat center 0; padding:5px;border-radius:3px; -webkit-background-size: 28px auto;background-size:28px auto; width: 24px; height: 24px; display: block;opacity: 0.6;
+}
+.vb_btn .close {
+	margin-right: 5px;
+}
+.vb_btn a {
+	background-position: center -40px; margin-left: 5px;
+}
+
+.adb_1 {position: relative; left: -5px; margin-bottom:10px;}
+.adb_2 {position: relative; left: -5px; margin-top:10px;}
+.adb_3,.adb_i_3,.adb_c_3,.adb_r_3 {margin-left: -5px;}
+
+.adb_i_1,.adb_i_2,.adb_c_1,.adb_c_2,.adb_r_2 {margin-left: -5px; margin-top:10px;}
+.adb_r_1{margin-left: -5px;}

@@ -1,0 +1,121 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li {if $op == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('comment', array('op' => 'post', 'storeid'=>$storeid))}">添加评论</a></li>
+	<li {if $op == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('comment', array('op' => 'display', 'storeid'=>$storeid))}">管理评论</a></li>
+</ul>
+{if $op == 'post'}
+<style>
+.panel-body {
+	padding: 1px;
+}
+</style>
+<div class="main">
+    <div style="padding-top: 15px;">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+		<input type="hidden" name="id" value="{$item['id']}" />
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">电话</label>
+					<div class="col-sm-3">
+						<input type="text" name="mobile" class="form-control" value="{$item['mobile']}" />
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">评论</label>
+					<div class="col-sm-3">
+						<textarea name="comment" class="form-control">{$item['comment']}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">开始时间</label>
+					<div class="col-sm-3">
+						{php echo tpl_form_field_date('createtime', date('Y-m-d H:m:s',empty($item['createtime'])?time():$item['createtime']), true)}
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+					<div class="col-sm-3">
+						<input type="radio" name="isopen" value="1" id="isshow1" {if empty($item) || $item['isopen'] == 1}checked="true"{/if} /> 显示 &nbsp;&nbsp;&nbsp;
+						<input type="radio" name="isopen" value="0" id="isshow3"  {if !empty($item) && $item['isopen'] == 0}checked="true"{/if} /> 不显示
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input name="token" type="hidden" value="{$_W['token']}" />
+			<input type="button" onclick="history.go(-1);" value="返回" style="left:10%;" class="btn btn-primary col-lg-1">
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" style="left:15%;" value="提交" />
+		</div>
+	</form>
+    </div>
+</div>
+{elseif $op == 'display'}
+<div class="main">
+	<form action="">
+		<input type="hidden" name="act" value="module" />
+		<input type="hidden" name="name" value="weilive" />
+		<input type="hidden" name="do" value="comment" />
+		<input type="hidden" name="op" value="sort" />
+		<input type="hidden" name="storeid" value="{$storeid}" />
+		<table class="table sub-search">
+		<table class="table sub-search">
+			<tbody>
+				<tr>
+					<th style="width:100px;">手机号码</th>
+					<td>
+						<input name="mobile" type="text" value="{$sort['mobile']}" />
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td>
+						<input type="submit" name="" value="搜索" class="btn btn-primary">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+    <form action="" method="post" class="form-horizontal form" onsubmit="return formcheck(this)">
+	<div style="padding-top: 15px;">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:120px; text-align:center;">电话</th>
+                <th style="width:120px; text-align:center;">时间</th>
+                <th style="width:120px; text-align:center;">属性</th>
+                <th style="width:120px; text-align:center;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="level-list">
+            {loop $list $item}
+            <tr>
+                <td style="text-align:center;">{$item['mobile']}</td>
+				<td style="text-align:center;">{php echo date('Y-m-d',$item['createtime'])}</td>
+                <td style="text-align:center;">
+                    {if $item['isopen']==1}
+                    <span class="label" style="background:#56af45;">显示</span>
+                    {else}
+                    <span class="label">不显示</span>
+                    {/if}
+                </td>
+                <td style="text-align:center;">
+                    <a class="btn" href="{php echo create_url('site/module', array('do' => 'comment', 'name' => 'weilive', 'id' => $item['id'], 'storeid' => $storeid, 'op' => 'post'))}" title="编辑"><i class="icon-edit"></i></a>
+                    <a class="btn" onclick="return confirm('确认删除吗？');return false;" href="{php echo create_url('site/module', array('do' => 'comment', 'name' => 'weilive', 'storeid'=>$storeid, 'id' => $item['id'], 'op' => 'delete'))}" title="删除"><i class="icon-remove"></i></a>
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+		{$pager}
+	</div>
+    </form>
+</div>
+{/if}
+{template 'common/footer'}
