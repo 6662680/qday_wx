@@ -1,0 +1,83 @@
+<div id="main-slideshow">
+	<div id="rev_slider_1_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" style="margin:0px auto;background-color:#E9E9E9;padding:0px;margin-top:0px;margin-bottom:0px;max-height:600px;">
+		<div id="rev_slider_1_1" class="rev_slider fullwidthabanner" style="display:none;max-height:600px;height:600;">
+			<ul>
+				<li data-transition="random-premium,slideright,fadefrombottom,parallaxtotop,slotzoom-horizontal,curtain-2,3dcurtain-vertical" data-slotamount="7" data-masterspeed="800" data-delay="5000">
+				<img src="{dede:global.cfg_templets_skin/}/images/banner1.jpg" alt="banner1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+				<!-- LAYERS -->
+				</li>
+				<!-- SLIDE  -->
+				<li data-transition="random-premium,boxfade,scaledownfrombottom,incube" data-slotamount="7" data-masterspeed="800" data-delay="5000">
+				<!-- MAIN IMAGE -->
+				<img src="{dede:global.cfg_templets_skin/}/images/banner2.jpg" alt="banner2" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+				<!-- LAYERS -->
+				</li>
+				<!-- SLIDE  -->
+				<li data-transition="random,slidevertical,boxfade,fadefromtop,parallaxtotop,scaledownfrombottom,curtain-2,3dcurtain-horizontal,3dcurtain-vertical,turnoff-vertical" data-slotamount="7" data-masterspeed="800" data-delay="5000">
+				<!-- MAIN IMAGE -->
+				<img src="{dede:global.cfg_templets_skin/}/images/banner3.jpg" alt="banner3" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+				<!-- LAYERS -->
+				</li>
+			</ul>
+			<div class="tp-bannertimer">
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+				var tpj=jQuery;				
+				tpj.noConflict();				
+				var revapi1;
+				tpj(document).ready(function() {
+				if(tpj('#rev_slider_1_1').revolution == undefined)
+					revslider_showDoubleJqueryError('#rev_slider_1_1');
+				else
+				   revapi1 = tpj('#rev_slider_1_1').show().revolution(
+					{
+						dottedOverlay:"none",
+						delay:9000,
+						startwidth:960,
+						startheight:600,
+						hideThumbs:200,
+						thumbWidth:100,
+						thumbHeight:50,
+						thumbAmount:3,
+						navigationType:"bullet",
+						navigationArrows:"solo",
+						navigationStyle:"round",
+						touchenabled:"on",
+						onHoverStop:"on",
+						navigationHAlign:"center",
+						navigationVAlign:"bottom",
+						navigationHOffset:0,
+						navigationVOffset:20,
+						soloArrowLeftHalign:"left",
+						soloArrowLeftValign:"center",
+						soloArrowLeftHOffset:20,
+						soloArrowLeftVOffset:0,
+						soloArrowRightHalign:"right",
+						soloArrowRightValign:"center",
+						soloArrowRightHOffset:20,
+						soloArrowRightVOffset:0,
+						shadow:2,
+						fullWidth:"on",
+						fullScreen:"off",
+						stopLoop:"off",
+						stopAfterLoops:-1,
+						stopAtSlide:-1,
+						shuffle:"off",
+						autoHeight:"off",						
+						forceFullWidth:"on",						
+						hideThumbsOnMobile:"off",
+						hideBulletsOnMobile:"off",
+						hideArrowsOnMobile:"off",
+						hideThumbsUnderResolution:0,
+						hideSliderAtLimit:0,
+						hideCaptionAtLimit:0,
+						hideAllCaptionAtLilmit:0,
+						startWithSlide:0,
+						videoJsPath:"{dede:global.cfg_templets_skin/}/images/js/",//后面再添加
+						fullScreenOffsetContainer: ""	
+					});
+				});	//ready
+			</script>
+</div>

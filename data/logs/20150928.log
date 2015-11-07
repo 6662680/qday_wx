@@ -1,0 +1,750 @@
+2015-09-28 00:29:36 trace :
+------------
+Array:
+from : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+to : gh_1d96b7817eb3 ;
+time : 1443371376 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+createtime : 1443371376 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-28 00:29:36 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-28 00:29:36 response :
+------------
+
+2015-09-28 00:29:41 trace :
+------------
+Array:
+from : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+to : gh_1d96b7817eb3 ;
+time : 1443371381 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+createtime : 1443371381 ;
+msgtype : event ;
+latitude : 22.909534 ;
+longitude : 113.657135 ;
+precision : 60.000000 ;
+location_x : 22.909534 ;
+location_y : 113.657135 ;
+
+2015-09-28 00:29:41 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-28 00:29:41 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-28 00:30:02 trace :
+------------
+Array:
+from : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+to : gh_1d96b7817eb3 ;
+time : 1443371401 ;
+type : text ;
+event :  ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+createtime : 1443371401 ;
+msgtype : text ;
+content : 6 ;
+msgid : 6199232963486436432 ;
+redirection :  ;
+source :  ;
+
+2015-09-28 00:30:02 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 00:30:02 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 00:30:43 trace :
+------------
+Array:
+from : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+to : gh_1d96b7817eb3 ;
+time : 1443371443 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+createtime : 1443371443 ;
+msgtype : event ;
+latitude : 22.909550 ;
+longitude : 113.657143 ;
+precision : 70.000000 ;
+location_x : 22.909550 ;
+location_y : 113.657143 ;
+
+2015-09-28 00:30:43 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-28 00:30:43 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-28 00:31:12 trace :
+------------
+Array:
+from : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+to : gh_1d96b7817eb3 ;
+time : 1443371472 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt28Xy6aPiFOqQ9S__8ZsXRo ;
+createtime : 1443371472 ;
+msgtype : event ;
+latitude : 22.909550 ;
+longitude : 113.657143 ;
+precision : 70.000000 ;
+location_x : 22.909550 ;
+location_y : 113.657143 ;
+
+2015-09-28 00:31:12 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-28 00:31:12 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-28 01:25:09 trace :
+------------
+Array:
+from : o841pt6bfq1LU3NDv4V2PqS_Dj0U ;
+to : gh_1d96b7817eb3 ;
+time : 1443374709 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6bfq1LU3NDv4V2PqS_Dj0U ;
+createtime : 1443374709 ;
+msgtype : event ;
+latitude : 22.934488 ;
+longitude : 113.700729 ;
+precision : 65.000000 ;
+location_x : 22.934488 ;
+location_y : 113.700729 ;
+
+2015-09-28 01:25:09 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-28 01:25:09 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-28 03:25:43 trace :
+------------
+Array:
+from : o841pt6bfq1LU3NDv4V2PqS_Dj0U ;
+to : gh_1d96b7817eb3 ;
+time : 1443381943 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6bfq1LU3NDv4V2PqS_Dj0U ;
+createtime : 1443381943 ;
+msgtype : event ;
+latitude : 22.934505 ;
+longitude : 113.700676 ;
+precision : 65.000000 ;
+location_x : 22.934505 ;
+location_y : 113.700676 ;
+
+2015-09-28 03:25:43 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-28 03:25:43 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-28 03:57:31 trace :
+------------
+Array:
+from : o841pt_0Eg0iOZF9CCDV52KoeKwk ;
+to : gh_1d96b7817eb3 ;
+time : 1443383850 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_0Eg0iOZF9CCDV52KoeKwk ;
+createtime : 1443383850 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-28 03:57:31 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-28 03:57:31 response :
+------------
+
+2015-09-28 19:18:00 trace :
+------------
+Array:
+from : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+to : gh_1d96b7817eb3 ;
+time : 1443439080 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+createtime : 1443439080 ;
+msgtype : event ;
+latitude : 22.908684 ;
+longitude : 113.653030 ;
+precision : 1180.000000 ;
+location_x : 22.908684 ;
+location_y : 113.653030 ;
+
+2015-09-28 19:18:00 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-28 19:18:00 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-28 19:18:13 trace :
+------------
+Array:
+from : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+to : gh_1d96b7817eb3 ;
+time : 1443439093 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+createtime : 1443439093 ;
+msgtype : event ;
+latitude : 22.908684 ;
+longitude : 113.653030 ;
+precision : 1180.000000 ;
+location_x : 22.908684 ;
+location_y : 113.653030 ;
+
+2015-09-28 19:18:13 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-28 19:18:13 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-28 22:18:12 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443449892 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443449892 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-28 22:18:12 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-28 22:18:12 response :
+------------
+
+2015-09-28 22:18:21 trace :
+------------
+Array:
+from : o841pt-zhLCONi4w3DVSqeaKOcVo ;
+to : gh_1d96b7817eb3 ;
+time : 1443449901 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-zhLCONi4w3DVSqeaKOcVo ;
+createtime : 1443449901 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-28 22:18:21 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-28 22:18:21 response :
+------------
+
+2015-09-28 22:18:40 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443449920 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443449920 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-28 22:18:40 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:18:40 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:19:14 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443449954 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443449954 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-28 22:19:14 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:19:14 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:19:57 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443449997 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443449997 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-09-28 22:19:57 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:19:57 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:20:21 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443450021 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443450021 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=dianjia&m=jufeng_wcy ;
+
+2015-09-28 22:20:21 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:20:21 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:20:47 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443450047 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443450047 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-28 22:20:47 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:20:47 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:21:31 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443450090 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443450090 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-28 22:21:31 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:21:31 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:21:50 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443450110 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443450110 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-28 22:21:50 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:21:50 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:22:02 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443450122 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443450122 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-28 22:22:02 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:22:02 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:25:07 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443450307 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443450307 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-28 22:25:07 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:25:07 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:25:25 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443450325 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443450325 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-28 22:25:25 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:25:25 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 22:31:11 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443450671 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443450671 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-09-28 22:31:11 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 22:31:11 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 23:29:00 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443454140 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443454140 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=dianjia&m=jufeng_wcy ;
+
+2015-09-28 23:29:00 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 23:29:00 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-28 23:29:13 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443454153 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443454153 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-28 23:29:13 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-28 23:29:13 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" class="ancient-ie old-ie no-js" lang="zh-CN">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" class="ancient-ie old-ie no-js" lang="zh-CN">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" class="old-ie no-js" lang="zh-CN">
+<![endif]-->
+<!--[if IE 9]>
+<html id="ie9" class="old-ie9 no-js" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html class="no-js" lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>{dede:field.title/}_{dede:global.cfg_webname/}</title>
+<meta name="keywords" content="{dede:field name='keywords'/}" />
+<meta name="description" content="{dede:field name='description' function='html2text(@me)'/}" />
+<link rel="pingback" href="{dede:global.cfg_basehost/}" />
+
+{dede:include filename="head.htm"/}
+
+
+
+	<header id="fancy-header" class="fancy-header title-center" style="background-color: #d9242a; background: url({dede:global.cfg_templets_skin/}/images/bg_title.jpg) no-repeat center center; background-size: cover; min-height: 0px" >
+		<div class="wf-wrap">
+			<div class="wf-table" style="height: 0px;"><div class="wf-td hgroup"><h1 class="fancy-title" style="color: #ffffff">RECENT WORKS</h1><h2 class="fancy-subtitle" style="color: #ffffff">{dede:field name='typename'/}</h2></div><div class="assistive-text">你在这里：</div>
+
+				<ol xmlns:v="http://rdf.data-vocabulary.org/#" class="breadcrumbs wf-td text-small start-animation-done start-animation">
+<li typeof="v:Breadcrumb" style="color: #ffffff;"><a title="" href="{dede:global.cfg_basehost/}" property="v:title" rel="v:url">首页</a></li><li class="current" style="color: #ffffff;">{dede:field name='typename'/}</li></ol>
+				</div>
+		</header>
+	<div id="main" class="sidebar-none">
+
+
+		<div class="main-gradient"></div>
+
+		<div class="wf-wrap">
+			<div class="wf-container-main">
+
+				
+
+		
+			<!-- Content -->
+			<div id="content" class="content" role="main">
+
+		
+					<div class="filter without-isotope">
+						<div class="filter-categories">
+						  
+							<a href="../">查看全部</a>
+						
+							 {dede:channel type='son' currentstyle="
+    <a href='~typelink~' class='act'>~typename~</a>
+      "}
+							<a href="[field:typeurl/]">[field:typename/]</a>
+						   {/dede:channel} 
+						</div><div class="filter-extras">
+
+
+
+<div class="filter-by">
+<a href="#" data-by="date" class="act">日期</a>
+<span class="filter-switch"></span><a href="#" data-by="name">名称</a>
+</div>
+<div class="filter-sorting">
+<a href="#" data-sort="desc" class="act">正序</a><span class="filter-switch"></span><a href="#" data-sort="asc">倒序</a></div>
+</div>
+</div>
+					
+					
+					<div class="wf-container with-ajax portfolio-grid jg-container hover-style-two hover-grid" data-padding="5px" data-target-height="250px" data-cur-page="1">
+
+	
+
+{dede:list pagesize='15'}
+						<div class="wf-cell category-60" data-date="[field:pubdate/]" data-name="[field:title /]" data-post-id="[field:id /]">
+<article class="post-14093 dt_portfolio type-dt_portfolio status-publish hentry post">
+
+		<div class="rollover-project">
+			<a href="[field:arcurl /]" class="link show-content"  ><img class="preload-me" src="[field:litpic/]" alt="00 fm" width="362" height="325"  /></a><div class="rollover-content"><div class="wf-table"><div class="wf-td"><div class="links-container"><a href="[field:arcurl /]" class="project-details" rel="nofollow">详情</a><a href="[field:litpic/]" class="project-zoom dt-single-mfp-popup dt-mfp-item mfp-image" title="00 fm" data-dt-img-description="">缩放</a></div><div class="rollover-content-container"><h2 class="entry-title">[field:title /]</h2></div></div></div></div></div>
+</article><!-- #post-14093 -->
+
+</div>
+ {/dede:list}
+							
+			
+					
+					</div>
+
+					
+					
+					<div class="page1"><br />{dede:pagelist listitem="index,end,pre,next,pageno" listsize="4"/}</div>
+					
+					<div><div class="wpb_row wf-container" style="margin-top: 0px;margin-bottom: 0px" >
+	<div class="wf-cell wf-span-12 wpb_column column_container ">
+			
+<div class="gap" style="line-height: 32px; height: 32px;"></div>
+<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			
+<h2 style="text-align: center;"><span style="color: #808080; font-family: 'Trebuchet MS'; font-style: normal;">RECENT PORTFOLIO</span></h2>
+<h4 style="text-align: center;"><span style="color: #808080;">近期作品</span></h4>
+
+		</div> 
+	</div> 
+<div class="gap" style="line-height: 32px; height: 32px;"></div>
+<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			
+<p style="text-align: center; font-size: 8px;">Maecenas sit amet tincidunt elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas lorem.<br />
+Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames turpis egestas!
+		</div> 
+	</div> 
+<div class="gap" style="line-height: 32px; height: 32px;"></div>
+<div class="full slider-wrapper text-on-img hover-style-three cs-style-3">
+							
+							<div class="frame fullwidth-slider">
+								<ul class="clearfix">
+
+	{dede:arclist row='16' titlelen='42' orderby='pubdate' }     
+	<li class="fs-entry ts-cell"><div class="fs-entry-slide"><div class="fs-entry-img" data-dt-link="[field:arcurl/]">
+		<img src="[field:litpic/]" class="preload-me" width="320" height="320"  alt="[field:title/]" /></div>
+		<div class="fs-entry-content"><div class="links-container"><a class="project-details" href="[field:arcurl/]">详情</a><a href="[field:litpic/]" class="project-zoom  dt-single-mfp-popup dt-mfp-item mfp-image" title="00 fm" data-dt-img-description="">缩放</a></div><div class="rollover-content-container"><div class="rollover-content-wrap">
+			<h4>[field:title/]</h4></div></div>
+		</div></div>
+	</li>
+	
+{/dede:arclist}
+
+	
+</ul></div><div class="prev"><i></i></div><div class="next"><i></i></div></div>
+<div class="gap" style="line-height: 0px; height: 0px;"></div>
+
+	</div> 
+</div><div class="wpb_row wf-container" style="margin-top: 0px;margin-bottom: 0px" >
+	<div class="wf-cell wf-span-12 wpb_column column_container ">
+			
+	<div class="wpb_text_column wpb_content_element ">
+		<div class="wpb_wrapper">
+			
+
+		</div> 
+	</div> 
+	</div> 
+</div>
+</div>
+					
+				
+			</div><!-- #content -->
+
+			
+		
+
+		
+
+			</div><!-- .wf-container -->
+		</div><!-- .wf-wrap -->
+	</div><!-- #main -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+{dede:include filename="footer.htm"/}
+
+<!-- /footer -->
+</body>
+</html>
+

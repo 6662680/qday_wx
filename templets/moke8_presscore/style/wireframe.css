@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* CSS Document */
+/*!
+ * WireFrame v.1.0.rc2 - teeny-tiny leyout framework by Dream-Theme (http://dream-theme.com, http://themeforest.net/user/Dream-Theme)
+ * Copyright © 2013 Dream-Theme. All rights reserved. 
+ */
+/* !Grid system */
+.wf-container {
+	font-size: 0;
+	line-height: 0;
+	word-spacing: -4px;
+}
+.wf-cell,
+.wf-usr-cell,
+.content,
+.sidebar,
+.footer .widget {
+	-webkit-box-sizing:	border-box;
+	-moz-box-sizing:	border-box;
+	-ms-box-sizing:		border-box;
+	-o-box-sizing:		border-box;
+	box-sizing:			border-box;
+}
+.wf-cell,
+.wf-usr-cell,
+.footer .widget {
+	display: inline-block;
+	vertical-align: top;
+}
+	.ancient-ie .wf-cell,
+	.ancient-ie .wf-usr-cell,
+	.ancient-ie .footer .widget {
+		display: inline;
+		zoom: 1;
+	}
+/* !- Cells widths */
+.wf-1, .wf-span-12 { width: 100%; }
+.wf-1-2, .wf-2-4, .wf-span-6 { width: 50%; }
+.wf-1-3, .wf-span-4 { width: 33.3333%; }
+.wf-2-3, .wf-span-8 { width: 66.6667%; }
+.wf-1-4,
+.wf-span-3,
+.sidebar,
+.footer .widget { width: 25%; }
+/*.sidebar{ width: 21.8%; }*/
+.content,
+.wf-3-4, .wf-span-9 { width: 75%; }
+.wf-1-5 { width: 20%; }
+.wf-1-6, .wf-span-2 { width: 16.6667%; }
+.wf-span-1 { width: 8.3333% }
+/* Grid system: end */
+/* !Layout helpers */
+.wf-table {
+	display: table;
+	width: 100%;
+}
+.wf-tr {
+	display: table-row;
+}
+.wf-td {
+	display: table-cell;
+	vertical-align: middle;
+}
+.wf-float-left {
+	float: left;
+}
+.wf-float-right {
+	float: right;
+}
+/*
+.wf-clearfix:before,
+.wf-clearfix:after {
+	content: "";
+	display: table;
+}
+.wf-clearfix:after {
+	clear: both;
+}
+	.ancient-ie .wf-clearfix {
+		zoom: 1;
+	}
+*/
+.wf-phone-visible,
+.wf-mobile-visible {
+	display: none;
+}
+.ancient-ie .ie-fix {
+	display: inline;
+	zoom: 1;
+}
+/* Layout helpers: end */
+	
+/* !WireFrame settings */
+.wf-cell,
+.wf-usr-cell,
+.content,
+.sidebar,
+.footer .widget {
+	padding: 0 20px;
+}
+/*.sidebar {
+	padding: 0;
+}*/
+.wf-container,
+.wf-container-main {
+	margin: 0 -20px;
+	padding: 0;
+}
+.wf-wrap {
+	max-width: 1200px;
+	padding: 0 40px;
+	margin: 0 auto;
+}
+/* WireFrame settings: end */
+/* !Sandbox */
+/* Sandbox: end */
+/* !Temporary styles to highlight columns */
+/*
+.wf-1 { background-color: red; }
+.wf-1-2, .wf-2-4 { background-color: blue; }
+.wf-1-3 { background-color: green; }
+.wf-2-3 { background-color: fuchsia; }
+.wf-1-4 { background-color: lime; }
+.footer .widget, .wf-3-4 { background-color: maroon; }
+.wf-cell:hover,
+.footer .widget: hover {
+	background-color: aqua;
+}
+*/
+/* Temporary styles to highlight columns: end */

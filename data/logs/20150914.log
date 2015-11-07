@@ -1,0 +1,124 @@
+2015-09-14 20:02:45 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1442232165 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1442232165 ;
+msgtype : event ;
+latitude : 22.953602 ;
+longitude : 113.685143 ;
+precision : 40.000000 ;
+location_x : 22.953602 ;
+location_y : 113.685143 ;
+
+2015-09-14 20:02:45 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-14 20:02:45 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-14 20:02:59 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1442232179 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1442232179 ;
+msgtype : event ;
+latitude : 22.953602 ;
+longitude : 113.685143 ;
+precision : 40.000000 ;
+location_x : 22.953602 ;
+location_y : 113.685143 ;
+
+2015-09-14 20:02:59 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-14 20:02:59 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-14 20:03:06 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1442232186 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1442232186 ;
+msgtype : event ;
+latitude : 22.953602 ;
+longitude : 113.685143 ;
+precision : 40.000000 ;
+location_x : 22.953602 ;
+location_y : 113.685143 ;
+
+2015-09-14 20:03:06 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-14 20:03:06 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-14 20:05:51 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1442232350 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1442232350 ;
+msgtype : event ;
+latitude : 22.953529 ;
+longitude : 113.685150 ;
+precision : 40.000000 ;
+location_x : 22.953529 ;
+location_y : 113.685150 ;
+
+2015-09-14 20:05:51 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-14 20:05:51 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+

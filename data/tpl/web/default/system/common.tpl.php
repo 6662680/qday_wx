@@ -1,0 +1,240 @@
+<?php defined('IN_IA') or exit('Access Denied');?><?php (!empty($this) && $this instanceof WeModuleSite || 0) ? (include $this->template('common/header-gw', TEMPLATE_INCLUDEPATH)) : (include template('common/header-gw', TEMPLATE_INCLUDEPATH));?>
+<ol class="breadcrumb">
+	<li><a href="./?refresh"><i class="fa fa-home"></i></a></li>
+	<li><a href="<?php  echo url('system/welcome');?>">系统</a></li>
+	<li><a href="<?php  echo url('system/common');?>">其他设置</a></li>
+	<li class="active">全局设置</li>
+</ol>
+	<div class="clearfix">
+		<form action="" method="post" class="form-horizontal form" onsubmit="return formcheck(this)" id="form">
+			<h5 class="page-header">全局设置</h5>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">授权地址安全模式</label>
+				<div class="col-sm-10 col-xs-12">
+					<label for="radio_1" class="radio-inline"><input type="radio" name="authmode" id="radio_1" value="1" <?php  if(empty($_W['setting']['authmode']) || $_W['setting']['authmode'] == 1) { ?> checked<?php  } ?> /> 宽松</label>
+					<label for="radio_0" class="radio-inline"><input type="radio" name="authmode" id="radio_0" value="2" <?php  if(!empty($_W['setting']['authmode']) && $_W['setting']['authmode'] == 2) { ?> checked<?php  } ?> /> 严格</label>
+					<div class="help-block">设置严格模式时，系统提供给用户的授权地址时效为3分钟，在这个时间内用户没有点击则失效。并且在严格模式下，授权地址为一次性地址，用户点击后该地址自动失效。但不会影响已授权过的用户。</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-10 col-md-10 col-lg-10">
+					<input name="authmodesubmit" type="submit" value="提交" class="btn btn-primary span3" />
+					<input type="hidden" name="token" value="<?php  echo $_W['token'];?>" />
+				</div>
+			</div>
+			<h5 class="page-header">邮件设置</h5>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">SMTP服务器</label>
+				<div class="col-sm-10 col-xs-12">
+					<label for="radio_5" class="radio-inline"><input type="radio" name="smtp[type]" id="radio_5" value="163" <?php  if($_W['setting']['mail']['smtp']['type'] == 163 || empty($_W['setting']['mail']['smtp']['type'])) { ?> checked<?php  } ?> onclick="$('#smtp').hide();"/> 163服务器</label>
+					<label for="radio_4" class="radio-inline"><input type="radio" name="smtp[type]" id="radio_4" value="custom" <?php  if($_W['setting']['mail']['smtp']['type'] == 'custom') { ?> checked<?php  } ?> onclick="$('#smtp').show();" /> 自定义</label>
+					<div class="help-block">SMTP服务器为发送邮件的服务器，情天程序内置了163的邮件服务器的信息，可直接使用。如果有特殊需要请自定义SMTP服务器</div>	
+				</div>
+			</div>
+			<div id="smtp" <?php  if($_W['setting']['mail']['smtp']['type'] == 'custom') { ?>style="display:block;"<?php  } else { ?>style="display:none;" <?php  } ?>>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">SMTP服务器地址</label>
+					<div class="col-sm-10 col-xs-12">
+						<input type="text" name="smtp[server]" class="form-control" value="<?php  echo $_W['setting']['mail']['smtp']['server'];?>" />
+						<div class="help-block">指定SMTP服务器的地址</div>	
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">SMTP服务器端口</label>
+					<div class="col-sm-10 col-xs-12">
+						<input type="text" name="smtp[port]" class="form-control" value="<?php  echo $_W['setting']['mail']['smtp']['port'];?>" />
+						<div class="help-block">指定SMTP服务器的端口</div>	
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">使用SSL加密</label>
+					<div class="col-sm-10 col-xs-12">
+						<label for="radio_7" class="radio-inline"><input type="radio" name="smtp[authmode]" id="radio_7" value="1" <?php  if(!empty($_W['setting']['mail']['smtp']['authmode'])) { ?> checked<?php  } ?> /> 是</label>
+						<label for="radio_6" class="radio-inline"><input type="radio" name="smtp[authmode]" id="radio_6" value="0" <?php  if(empty($_W['setting']['mail']['smtp']['authmode'])) { ?> checked<?php  } ?> /> 否</label>
+						<div class="help-block">开启此项后，连接将用SSL的形式，此项需要SMTP服务器支持</div>	
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">发送帐号用户名</label>
+				<div class="col-sm-10 col-xs-12">
+					<input type="text" name="username" class="form-control" value="<?php  echo $_W['setting']['mail']['username'];?>" />
+					<div class="help-block">指定发送邮件的用户名，例如：123456@qq.com</div>	
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">发送帐号密码</label>
+				<div class="col-sm-10 col-xs-12">
+					<input type="password" name="password" class="form-control" value="<?php  echo $_W['setting']['mail']['password'];?>" />
+					<div class="help-block">指定发送邮件的密码</div>	
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">发件人名称</label>
+				<div class="col-sm-10 col-xs-12">
+					<input type="text" name="sender" class="form-control" value="<?php  echo $_W['setting']['mail']['sender'];?>" />
+					<div class="help-block">指定发送邮件发信人名称</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">邮件签名</label>
+				<div class="col-sm-10 col-xs-12">
+					<textarea id="signature" style="height:150px;" name="signature" class="form-control" cols="60"><?php  echo $_W['setting']['mail']['signature'];?></textarea>
+					<div class="help-block">指定邮件末尾添加的签名信息</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">测试接收人</label>
+				<div class="col-sm-10 col-xs-12">
+					<input type="text" name="receiver" class="form-control" value="" />
+					<div class="help-block"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-10 col-md-10 col-lg-10">
+					<input name="submit" type="submit" value="提交" class="btn btn-primary span3" />
+					<label for="radio_7" class="checkbox-inline" style=" margin-left:10px;"><input type="checkbox" name="testsend" id="radio_7" value="1" checked /> 保存后发信给测试接收人</label>
+					<input type="hidden" name="token" value="<?php  echo $_W['token'];?>" />
+				</div>
+			</div>
+                         
+         
+                                                   <h5 class="page-header">短信设置</h5>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">短信接口</label>
+				<div class="col-sm-10 col-xs-12">
+			<label class="radio-inline"><input type="radio" name="sms[type]" value="yimei" <?php  if($_W['setting']['sms']['type'] == "yimei" || empty($_W['setting']['sms']['type'])) { ?> checked<?php  } ?> /> 亿美 (<a href="http://www.emay.cn/" target="_blank">http://www.emay.cn/</a>)</label>
+                                                      <label class="radio-inline"><input type="radio" name="sms[type]" value="dxton" <?php  if($_W['setting']['sms']['type'] == "dxton" || empty($_W['setting']['sms']['type'])) { ?> checked<?php  } ?> /> 短信通 (<a href="http://www.dxton.com/" target="_blank">http://dxton.com/</a>)</label>
+                                                     <div class="help-block">如果有其他短信接口，可联系客服人员</div>	
+				</div>
+                                  
+			</div>
+                                                   <div class="sms_setting sms_setting_yimei" <?php  if($_W['setting']['sms']['type']!='yimei') { ?>style="display:none"<?php  } ?>>
+                                                            <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">网关地址</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                            <input type="text" name="sms[url]" class="form-control" value="<?php  echo $_W['setting']['sms']['url'];?>" />
+                                                                            <div class="help-block">网关地址</div>	
+                                                                    </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">序列号</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                            <input type="text" name="sms[serialNumber]" class="form-control" value="<?php  echo $_W['setting']['sms']['serialNumber'];?>" />
+                                                                            <div class="help-block">序列号</div>	
+                                                                    </div>
+                                                            </div>
+                                                                                          <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">密码</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                            <input type="text" name="sms[password]" class="form-control" value="<?php  echo $_W['setting']['sms']['password'];?>" />
+                                                                            <div class="help-block">密码,请通过亿美销售人员获取</div>	
+                                                                    </div>
+                                                            </div>
+                                                                                         <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">SESSION KEY</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                            <input type="text" name="sms[sessionKey]" class="form-control" value="<?php  echo $_W['setting']['sms']['sessionKey'];?>" />
+                                                                            <div class="help-block">登录后所持有的SESSION KEY，即可通过login方法时创建</div>	
+                                                                    </div>
+                                                            </div>
+                                                              <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">代理服务器设置</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                                                                <div class='input-group'>
+                                                                                                                    <div class='input-group-addon'>地址</div>
+                                                                                                                    <input type="text" name="sms[proxyhost]" class="form-control" value="<?php  echo $_W['setting']['sms']['proxyhost'];?>" />
+                                                                                                                    <div class='input-group-addon'>端口</div>
+                                                                                                                    <input type="text" name="sms[proxyport]" class="form-control" value="<?php  echo $_W['setting']['sms']['proxyport'];?>" />
+                                                                                                                    <div class='input-group-addon'>用户</div>
+                                                                                                                    <input type="text" name="sms[proxyusername]" class="form-control" value="<?php  echo $_W['setting']['sms']['proxyusername'];?>" />
+                                                                                                                    <div class='input-group-addon'>密码</div>
+                                                                                                                    <input type="text" name="sms[proxypassword]" class="form-control" value="<?php  echo $_W['setting']['sms']['proxypassword'];?>" />
+                                                                                                                </div>
+                                                                                  <div class="help-block">可选，代理服务器设置，如果地址不填写则不使用代理服务器</div>	
+                                                                    </div>
+                                                            </div>
+                                                                                       <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">连接超时时间</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                                                                <div class='input-group'>
+                                                                                                                    <input type="text" name="sms[timeout]" class="form-control" value="<?php  echo $_W['setting']['sms']['timeout'];?>" />
+                                                                                                                    <div class='input-group-addon'>秒</div>
+                                                                                                                </div>
+                                                                                  <div class="help-block">连接超时时间，默认0，为不超时</div>	
+                                                                    </div>
+                                                            </div>
+                                                                                         <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">信息返回超时时间</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                                                                <div class='input-group'>
+                                                                                                                    <input type="text" name="sms[response_timeout]" class="form-control" value="<?php  echo $_W['setting']['sms']['response_timeout'];?>" />
+                                                                                                                    <div class='input-group-addon'>秒</div>
+                                                                                                                </div>
+                                                                                  <div class="help-block">信息返回超时时间，如果不填写默认为30</div>	
+                                                                    </div>
+                                                                                         </div>
+                            
+                                                   </div>
+                                                   <div class="sms_setting sms_setting_dxton" <?php  if($_W['setting']['sms']['type']!='dxton') { ?>style="display:none"<?php  } ?>>
+                                                       
+                                                        <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">用户名</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                            <input type="text" name="sms[dxton_username]" class="form-control" value="<?php  echo $_W['setting']['sms']['dxton_username'];?>" />
+                                                                            <div class="help-block">短信通用户名</div>	
+                                                                    </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">密码</label>
+                                                                    <div class="col-sm-10 col-xs-12">
+                                                                            <input type="text" name="sms[dxton_pwd]" class="form-control" value="<?php  echo $_W['setting']['sms']['dxton_pwd'];?>" />
+                                                                            <div class="help-block">短信通密码</div>	
+                                                                    </div>
+                                                        </div>
+                                                       
+                                                   </div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">测试手机号</label>
+				<div class="col-sm-10 col-xs-12">
+					<input type="text" name="sms_receiver" class="form-control" value="" />
+					<div class="help-block">如果收到 “您的验证码是：【<?php  echo $_W['setting']['copyright']['sitename'];?>短信测试】。如需帮助请联系客服。”，说明接口可用</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-12 col-sm-10 col-md-10 col-lg-10">
+					<input name="sms_submit" type="submit" value="提交" class="btn btn-primary span3" />
+					<label for="radio_8" class="checkbox-inline" style=" margin-left:10px;">
+                                                                                         <input type="checkbox" name="sms_testsend" id="radio_8" value="1" checked /> 保存后发短信给测试手机号</label>
+				</div>
+			</div>
+                        
+                        
+			
+			<h5 class="page-header">系统锁操作</h5>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">删除升级锁</label>
+				<div class="col-sm-10 col-xs-12">
+					<input name="bae_delete_update" type="submit" value="删除" class="btn btn-primary span3" />
+					<div class="help-block">升级“情天”系统时，需要先删除升级锁，确保升级正常进行。</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label">删除安装锁</label>
+				<div class="col-sm-10 col-xs-12">
+					<input name="bae_delete_install" type="submit" value="删除" class="btn btn-primary span3" />
+					<div class="help-block">重新安装“情天”系统时，需要先删除安装锁。</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript">
+	//kindeditor($('#signature'));
+                $(function(){
+                    $(":radio[name='sms[type]']").click(function(){
+                          $(".sms_setting").hide();
+                          $(".sms_setting_" + $(this).val()).show();
+                    });
+            });
+	</script>
+<?php (!empty($this) && $this instanceof WeModuleSite || 0) ? (include $this->template('common/footer-gw', TEMPLATE_INCLUDEPATH)) : (include template('common/footer-gw', TEMPLATE_INCLUDEPATH));?>

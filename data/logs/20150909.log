@@ -1,0 +1,117 @@
+2015-09-09 08:27:45 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1441758465 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1441758465 ;
+msgtype : event ;
+latitude : 28.760393 ;
+longitude : 115.877251 ;
+precision : 70.000000 ;
+location_x : 28.760393 ;
+location_y : 115.877251 ;
+
+2015-09-09 08:27:45 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-09 08:27:45 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-09 15:06:07 trace :
+------------
+Array:
+from : o841pt0csVUZCQKJwUlcEBBukqOU ;
+to : gh_1d96b7817eb3 ;
+time : 1441782367 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0csVUZCQKJwUlcEBBukqOU ;
+createtime : 1441782367 ;
+msgtype : event ;
+latitude : 28.758923 ;
+longitude : 115.878662 ;
+precision : 1090.000000 ;
+location_x : 28.758923 ;
+location_y : 115.878662 ;
+
+2015-09-09 15:06:07 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-09 15:06:07 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-09 15:06:07 trace :
+------------
+Array:
+from : o841pt0csVUZCQKJwUlcEBBukqOU ;
+to : gh_1d96b7817eb3 ;
+time : 1441782367 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0csVUZCQKJwUlcEBBukqOU ;
+createtime : 1441782367 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-09 15:06:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-09 15:06:07 response :
+------------
+
+2015-09-09 15:06:12 trace :
+------------
+Array:
+from : o841pt0csVUZCQKJwUlcEBBukqOU ;
+to : gh_1d96b7817eb3 ;
+time : 1441782372 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0csVUZCQKJwUlcEBBukqOU ;
+createtime : 1441782372 ;
+msgtype : event ;
+latitude : 28.758923 ;
+longitude : 115.878662 ;
+precision : 1090.000000 ;
+location_x : 28.758923 ;
+location_y : 115.878662 ;
+
+2015-09-09 15:06:12 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-09 15:06:12 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+

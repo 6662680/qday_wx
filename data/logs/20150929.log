@@ -1,0 +1,5015 @@
+2015-09-29 00:35:20 trace :
+------------
+Array:
+from : o841ptxY83X_uHarqyNB17MRe3Yk ;
+to : gh_1d96b7817eb3 ;
+time : 1443458120 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxY83X_uHarqyNB17MRe3Yk ;
+createtime : 1443458120 ;
+msgtype : event ;
+latitude : 22.906988 ;
+longitude : 113.658424 ;
+precision : 65.000000 ;
+location_x : 22.906988 ;
+location_y : 113.658424 ;
+
+2015-09-29 00:35:20 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 00:35:20 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 00:50:02 trace :
+------------
+Array:
+from : o841pt7H2Lv_ItRTe57QpQfRzP2M ;
+to : gh_1d96b7817eb3 ;
+time : 1443459002 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt7H2Lv_ItRTe57QpQfRzP2M ;
+createtime : 1443459002 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-29 00:50:02 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 00:50:02 response :
+------------
+
+2015-09-29 00:50:13 trace :
+------------
+Array:
+from : o841pt7H2Lv_ItRTe57QpQfRzP2M ;
+to : gh_1d96b7817eb3 ;
+time : 1443459013 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt7H2Lv_ItRTe57QpQfRzP2M ;
+createtime : 1443459013 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-29 00:50:13 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 00:50:13 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt7H2Lv_ItRTe57QpQfRzP2M ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 01:19:11 trace :
+------------
+Array:
+from : o841ptxXCuOrqa0-rrY9lujWf6Xw ;
+to : gh_1d96b7817eb3 ;
+time : 1443460751 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxXCuOrqa0-rrY9lujWf6Xw ;
+createtime : 1443460751 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-29 01:19:11 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 01:19:11 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptxXCuOrqa0-rrY9lujWf6Xw ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 01:27:03 trace :
+------------
+Array:
+from : o841pt0FNZxFAqw0d-JRefLiW3mw ;
+to : gh_1d96b7817eb3 ;
+time : 1443461223 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0FNZxFAqw0d-JRefLiW3mw ;
+createtime : 1443461223 ;
+msgtype : event ;
+connecttime : 1443461223 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 01:27:03 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 01:27:03 response :
+------------
+
+2015-09-29 01:27:09 trace :
+------------
+Array:
+from : o841pt0FNZxFAqw0d-JRefLiW3mw ;
+to : gh_1d96b7817eb3 ;
+time : 1443461228 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0FNZxFAqw0d-JRefLiW3mw ;
+createtime : 1443461228 ;
+msgtype : event ;
+connecttime : 1443461229 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 01:27:09 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 01:27:09 response :
+------------
+
+2015-09-29 01:28:07 trace :
+------------
+Array:
+from : o841ptxtIWfGjtYxxFqTxeVw5jUo ;
+to : gh_1d96b7817eb3 ;
+time : 1443461287 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxtIWfGjtYxxFqTxeVw5jUo ;
+createtime : 1443461287 ;
+msgtype : event ;
+connecttime : 1443461287 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 01:28:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 01:28:07 response :
+------------
+
+2015-09-29 01:48:18 trace :
+------------
+Array:
+from : o841pt_MqgbvS9YevmmztQf4_MmE ;
+to : gh_1d96b7817eb3 ;
+time : 1443462498 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_MqgbvS9YevmmztQf4_MmE ;
+createtime : 1443462498 ;
+msgtype : event ;
+connecttime : 1443462498 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 01:48:18 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 01:48:18 response :
+------------
+
+2015-09-29 02:11:54 trace :
+------------
+Array:
+from : o841pt17OQNlxZShh-1RQMe-P5GE ;
+to : gh_1d96b7817eb3 ;
+time : 1443463914 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt17OQNlxZShh-1RQMe-P5GE ;
+createtime : 1443463914 ;
+msgtype : event ;
+connecttime : 1443463914 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 02:11:54 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 02:11:54 response :
+------------
+
+2015-09-29 02:11:59 trace :
+------------
+Array:
+from : o841pt1VIqCEr8bk2aHkUy7CxE8c ;
+to : gh_1d96b7817eb3 ;
+time : 1443463919 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt1VIqCEr8bk2aHkUy7CxE8c ;
+createtime : 1443463919 ;
+msgtype : event ;
+connecttime : 1443463919 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 02:11:59 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 02:11:59 response :
+------------
+
+2015-09-29 02:18:24 trace :
+------------
+Array:
+from : o841pt3fWXzmMD2_lccuVNL3SvhM ;
+to : gh_1d96b7817eb3 ;
+time : 1443464304 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3fWXzmMD2_lccuVNL3SvhM ;
+createtime : 1443464304 ;
+msgtype : event ;
+connecttime : 1443464304 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 02:18:24 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 02:18:24 response :
+------------
+
+2015-09-29 03:01:03 trace :
+------------
+Array:
+from : o841pt-iQMeRJpBONBv5HMzNFIvs ;
+to : gh_1d96b7817eb3 ;
+time : 1443466863 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-iQMeRJpBONBv5HMzNFIvs ;
+createtime : 1443466863 ;
+msgtype : event ;
+connecttime : 1443466863 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 03:01:03 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 03:01:03 response :
+------------
+
+2015-09-29 03:03:39 trace :
+------------
+Array:
+from : o841ptzetPaF7xJbtHMUrP1sjMLM ;
+to : gh_1d96b7817eb3 ;
+time : 1443467019 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzetPaF7xJbtHMUrP1sjMLM ;
+createtime : 1443467019 ;
+msgtype : event ;
+connecttime : 1443467019 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 03:03:39 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 03:03:39 response :
+------------
+
+2015-09-29 03:15:31 trace :
+------------
+Array:
+from : o841pt0F5C-WYZvIFJM1sHt1cLQo ;
+to : gh_1d96b7817eb3 ;
+time : 1443467731 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0F5C-WYZvIFJM1sHt1cLQo ;
+createtime : 1443467731 ;
+msgtype : event ;
+connecttime : 1443467731 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 03:15:31 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 03:15:31 response :
+------------
+
+2015-09-29 03:39:23 trace :
+------------
+Array:
+from : o841pt52Zc7NQb_k_5PPA1ecwb4Q ;
+to : gh_1d96b7817eb3 ;
+time : 1443469163 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt52Zc7NQb_k_5PPA1ecwb4Q ;
+createtime : 1443469163 ;
+msgtype : event ;
+connecttime : 1443469163 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 03:39:23 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 03:39:23 response :
+------------
+
+2015-09-29 03:57:23 trace :
+------------
+Array:
+from : o841ptwhjtn13-pI2UpAcw8E6xPY ;
+to : gh_1d96b7817eb3 ;
+time : 1443470243 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwhjtn13-pI2UpAcw8E6xPY ;
+createtime : 1443470243 ;
+msgtype : event ;
+connecttime : 1443470243 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 03:57:23 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 03:57:23 response :
+------------
+
+2015-09-29 04:08:34 trace :
+------------
+Array:
+from : o841pt17OQNlxZShh-1RQMe-P5GE ;
+to : gh_1d96b7817eb3 ;
+time : 1443470914 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt17OQNlxZShh-1RQMe-P5GE ;
+createtime : 1443470914 ;
+msgtype : event ;
+connecttime : 1443470914 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 04:08:34 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 04:08:34 response :
+------------
+
+2015-09-29 04:23:38 trace :
+------------
+Array:
+from : o841ptwxr39zaW6OdwxCm7CKk0_A ;
+to : gh_1d96b7817eb3 ;
+time : 1443471818 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwxr39zaW6OdwxCm7CKk0_A ;
+createtime : 1443471818 ;
+msgtype : event ;
+connecttime : 1443471818 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 04:23:38 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 04:23:38 response :
+------------
+
+2015-09-29 05:07:56 trace :
+------------
+Array:
+from : o841pt0FNZxFAqw0d-JRefLiW3mw ;
+to : gh_1d96b7817eb3 ;
+time : 1443474476 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0FNZxFAqw0d-JRefLiW3mw ;
+createtime : 1443474476 ;
+msgtype : event ;
+connecttime : 1443474476 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 05:07:56 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 05:07:56 response :
+------------
+
+2015-09-29 05:44:50 trace :
+------------
+Array:
+from : o841pt_xZcdJVeoBNzgskRgX6yzQ ;
+to : gh_1d96b7817eb3 ;
+time : 1443476690 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_xZcdJVeoBNzgskRgX6yzQ ;
+createtime : 1443476690 ;
+msgtype : event ;
+connecttime : 1443476690 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 05:44:50 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 05:44:50 response :
+------------
+
+2015-09-29 06:12:12 trace :
+------------
+Array:
+from : o841pt-CRltBcfEFAfOgoBRTIjTQ ;
+to : gh_1d96b7817eb3 ;
+time : 1443478332 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-CRltBcfEFAfOgoBRTIjTQ ;
+createtime : 1443478332 ;
+msgtype : event ;
+connecttime : 1443478332 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 06:12:12 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 06:12:12 response :
+------------
+
+2015-09-29 07:57:30 trace :
+------------
+Array:
+from : o841pt0FNZxFAqw0d-JRefLiW3mw ;
+to : gh_1d96b7817eb3 ;
+time : 1443484649 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0FNZxFAqw0d-JRefLiW3mw ;
+createtime : 1443484649 ;
+msgtype : event ;
+connecttime : 1443484649 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 07:57:30 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 07:57:30 response :
+------------
+
+2015-09-29 08:13:18 trace :
+------------
+Array:
+from : o841ptxSEW4oJougbchx6DqZXiws ;
+to : gh_1d96b7817eb3 ;
+time : 1443485598 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxSEW4oJougbchx6DqZXiws ;
+createtime : 1443485598 ;
+msgtype : event ;
+connecttime : 1443485598 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 08:13:18 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 08:13:18 response :
+------------
+
+2015-09-29 08:34:31 trace :
+------------
+Array:
+from : o841pt0jF419puqB6cL7bVzfaaQQ ;
+to : gh_1d96b7817eb3 ;
+time : 1443486871 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0jF419puqB6cL7bVzfaaQQ ;
+createtime : 1443486871 ;
+msgtype : event ;
+connecttime : 1443486871 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 08:34:31 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 08:34:31 response :
+------------
+
+2015-09-29 09:56:48 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1443491808 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1443491808 ;
+msgtype : event ;
+latitude : 22.913034 ;
+longitude : 113.657913 ;
+precision : 1790.000000 ;
+location_x : 22.913034 ;
+location_y : 113.657913 ;
+
+2015-09-29 09:56:48 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 09:56:48 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 10:00:56 trace :
+------------
+Array:
+from : o841pt8uYF1d3rvfzmCO1JaCj6kI ;
+to : gh_1d96b7817eb3 ;
+time : 1443492056 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8uYF1d3rvfzmCO1JaCj6kI ;
+createtime : 1443492056 ;
+msgtype : event ;
+connecttime : 1443492056 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 10:00:56 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 10:00:56 response :
+------------
+
+2015-09-29 10:14:04 trace :
+------------
+Array:
+from : o841ptxSEW4oJougbchx6DqZXiws ;
+to : gh_1d96b7817eb3 ;
+time : 1443492844 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxSEW4oJougbchx6DqZXiws ;
+createtime : 1443492844 ;
+msgtype : event ;
+connecttime : 1443492844 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 10:14:04 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 10:14:04 response :
+------------
+
+2015-09-29 10:15:57 trace :
+------------
+Array:
+from : o841pt3tz6ZCjwVw7uUQ9V7aoSsA ;
+to : gh_1d96b7817eb3 ;
+time : 1443492957 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3tz6ZCjwVw7uUQ9V7aoSsA ;
+createtime : 1443492957 ;
+msgtype : event ;
+connecttime : 1443492957 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 10:15:57 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 10:15:57 response :
+------------
+
+2015-09-29 10:51:17 trace :
+------------
+Array:
+from : o841ptyqdblmJeOjsR-xh12okf98 ;
+to : gh_1d96b7817eb3 ;
+time : 1443495078 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyqdblmJeOjsR-xh12okf98 ;
+createtime : 1443495078 ;
+msgtype : event ;
+connecttime : 1443495077 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 10:51:17 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 10:51:17 response :
+------------
+
+2015-09-29 11:02:06 trace :
+------------
+Array:
+from : o841pt3vYNyG2Ku25XOxYy9MAgWs ;
+to : gh_1d96b7817eb3 ;
+time : 1443495726 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3vYNyG2Ku25XOxYy9MAgWs ;
+createtime : 1443495726 ;
+msgtype : event ;
+connecttime : 1443495726 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 11:02:06 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 11:02:06 response :
+------------
+
+2015-09-29 11:25:23 trace :
+------------
+Array:
+from : o841pt0COBrmBI9VldtU8OlY90JY ;
+to : gh_1d96b7817eb3 ;
+time : 1443497122 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0COBrmBI9VldtU8OlY90JY ;
+createtime : 1443497122 ;
+msgtype : event ;
+connecttime : 1443497123 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 11:25:23 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 11:25:23 response :
+------------
+
+2015-09-29 11:30:13 trace :
+------------
+Array:
+from : o841pt4jJPloJElDvC1ksfTlEBYo ;
+to : gh_1d96b7817eb3 ;
+time : 1443497413 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4jJPloJElDvC1ksfTlEBYo ;
+createtime : 1443497413 ;
+msgtype : event ;
+connecttime : 1443497413 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 11:30:13 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 11:30:13 response :
+------------
+
+2015-09-29 11:42:52 trace :
+------------
+Array:
+from : o841ptxTv5mnrRs3S0DVQZh7EfiE ;
+to : gh_1d96b7817eb3 ;
+time : 1443498172 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxTv5mnrRs3S0DVQZh7EfiE ;
+createtime : 1443498172 ;
+msgtype : event ;
+connecttime : 1443498172 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 11:42:52 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 11:42:52 response :
+------------
+
+2015-09-29 11:43:31 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443498211 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443498211 ;
+msgtype : event ;
+connecttime : 1443498210 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 11:43:31 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 11:43:31 response :
+------------
+
+2015-09-29 11:49:41 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1443498581 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1443498581 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-29 11:49:41 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 11:49:41 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 11:57:14 trace :
+------------
+Array:
+from : o841pt2cMrIejiJbFIAmoXECaV8A ;
+to : gh_1d96b7817eb3 ;
+time : 1443499033 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt2cMrIejiJbFIAmoXECaV8A ;
+createtime : 1443499033 ;
+msgtype : event ;
+connecttime : 1443499034 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 11:57:14 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 11:57:14 response :
+------------
+
+2015-09-29 11:57:55 trace :
+------------
+Array:
+from : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+to : gh_1d96b7817eb3 ;
+time : 1443499075 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+createtime : 1443499075 ;
+msgtype : event ;
+latitude : 22.909248 ;
+longitude : 113.657265 ;
+precision : 65.000000 ;
+location_x : 22.909248 ;
+location_y : 113.657265 ;
+
+2015-09-29 11:57:55 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 11:57:55 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 11:58:07 trace :
+------------
+Array:
+from : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+to : gh_1d96b7817eb3 ;
+time : 1443499087 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+createtime : 1443499087 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 11:58:07 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 11:58:07 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 11:58:11 trace :
+------------
+Array:
+from : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+to : gh_1d96b7817eb3 ;
+time : 1443499091 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+createtime : 1443499091 ;
+msgtype : event ;
+latitude : 22.909187 ;
+longitude : 113.657356 ;
+precision : 65.000000 ;
+location_x : 22.909187 ;
+location_y : 113.657356 ;
+
+2015-09-29 11:58:11 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 11:58:11 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 12:09:43 trace :
+------------
+Array:
+from : o841ptzb4Py4J74cxWHYjtRoGclA ;
+to : gh_1d96b7817eb3 ;
+time : 1443499783 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzb4Py4J74cxWHYjtRoGclA ;
+createtime : 1443499783 ;
+msgtype : event ;
+connecttime : 1443499783 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 12:09:43 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 12:09:43 response :
+------------
+
+2015-09-29 12:14:12 trace :
+------------
+Array:
+from : o841ptxSEW4oJougbchx6DqZXiws ;
+to : gh_1d96b7817eb3 ;
+time : 1443500052 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxSEW4oJougbchx6DqZXiws ;
+createtime : 1443500052 ;
+msgtype : event ;
+connecttime : 1443500053 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 12:14:12 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 12:14:12 response :
+------------
+
+2015-09-29 12:25:54 trace :
+------------
+Array:
+from : o841pt6riGXz-UlnsjgrnN-6T45Q ;
+to : gh_1d96b7817eb3 ;
+time : 1443500754 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6riGXz-UlnsjgrnN-6T45Q ;
+createtime : 1443500754 ;
+msgtype : event ;
+connecttime : 1443500754 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 12:25:54 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 12:25:54 response :
+------------
+
+2015-09-29 12:29:16 trace :
+------------
+Array:
+from : o841pt-A2SQuN2uGLbQrlLS91RKM ;
+to : gh_1d96b7817eb3 ;
+time : 1443500956 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-A2SQuN2uGLbQrlLS91RKM ;
+createtime : 1443500956 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-29 12:29:16 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 12:29:16 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-A2SQuN2uGLbQrlLS91RKM ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 12:30:16 trace :
+------------
+Array:
+from : o841pt-A2SQuN2uGLbQrlLS91RKM ;
+to : gh_1d96b7817eb3 ;
+time : 1443501016 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-A2SQuN2uGLbQrlLS91RKM ;
+createtime : 1443501016 ;
+msgtype : event ;
+latitude : 22.894131 ;
+longitude : 113.644928 ;
+precision : 40.000000 ;
+location_x : 22.894131 ;
+location_y : 113.644928 ;
+
+2015-09-29 12:30:16 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 12:30:16 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 12:30:22 trace :
+------------
+Array:
+from : o841pt-A2SQuN2uGLbQrlLS91RKM ;
+to : gh_1d96b7817eb3 ;
+time : 1443501022 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-A2SQuN2uGLbQrlLS91RKM ;
+createtime : 1443501022 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-29 12:30:22 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 12:30:22 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-A2SQuN2uGLbQrlLS91RKM ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 12:51:52 trace :
+------------
+Array:
+from : o841pt3vYNyG2Ku25XOxYy9MAgWs ;
+to : gh_1d96b7817eb3 ;
+time : 1443502312 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3vYNyG2Ku25XOxYy9MAgWs ;
+createtime : 1443502312 ;
+msgtype : event ;
+connecttime : 1443502312 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 12:51:52 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 12:51:52 response :
+------------
+
+2015-09-29 13:01:03 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443502863 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443502863 ;
+msgtype : event ;
+connecttime : 1443502862 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 13:01:03 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 13:01:03 response :
+------------
+
+2015-09-29 13:01:54 trace :
+------------
+Array:
+from : o841pt3_p-YHOM3a5pr9ay_x0YRg ;
+to : gh_1d96b7817eb3 ;
+time : 1443502914 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3_p-YHOM3a5pr9ay_x0YRg ;
+createtime : 1443502914 ;
+msgtype : event ;
+connecttime : 1443502914 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 13:01:54 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 13:01:54 response :
+------------
+
+2015-09-29 13:02:12 trace :
+------------
+Array:
+from : o841pt6jI70chNZYIyfEPxlTkmgA ;
+to : gh_1d96b7817eb3 ;
+time : 1443502932 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6jI70chNZYIyfEPxlTkmgA ;
+createtime : 1443502932 ;
+msgtype : event ;
+connecttime : 1443502932 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 13:02:12 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 13:02:12 response :
+------------
+
+2015-09-29 13:43:34 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443505414 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443505414 ;
+msgtype : event ;
+connecttime : 1443505414 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 13:43:34 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 13:43:34 response :
+------------
+
+2015-09-29 13:44:20 trace :
+------------
+Array:
+from : o841pt9SEKcpWphIi-K81dl66-2I ;
+to : gh_1d96b7817eb3 ;
+time : 1443505460 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9SEKcpWphIi-K81dl66-2I ;
+createtime : 1443505460 ;
+msgtype : event ;
+connecttime : 1443505460 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 13:44:20 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 13:44:20 response :
+------------
+
+2015-09-29 14:10:59 trace :
+------------
+Array:
+from : o841pt0COBrmBI9VldtU8OlY90JY ;
+to : gh_1d96b7817eb3 ;
+time : 1443507059 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0COBrmBI9VldtU8OlY90JY ;
+createtime : 1443507059 ;
+msgtype : event ;
+connecttime : 1443507059 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 14:10:59 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:10:59 response :
+------------
+
+2015-09-29 14:23:19 trace :
+------------
+Array:
+from : o841pt2cMrIejiJbFIAmoXECaV8A ;
+to : gh_1d96b7817eb3 ;
+time : 1443507799 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt2cMrIejiJbFIAmoXECaV8A ;
+createtime : 1443507799 ;
+msgtype : event ;
+connecttime : 1443507799 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 14:23:19 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:23:19 response :
+------------
+
+2015-09-29 14:27:15 trace :
+------------
+Array:
+from : o841ptzb4Py4J74cxWHYjtRoGclA ;
+to : gh_1d96b7817eb3 ;
+time : 1443508035 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzb4Py4J74cxWHYjtRoGclA ;
+createtime : 1443508035 ;
+msgtype : event ;
+connecttime : 1443508035 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 14:27:15 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:27:15 response :
+------------
+
+2015-09-29 14:33:24 trace :
+------------
+Array:
+from : o841pt6riGXz-UlnsjgrnN-6T45Q ;
+to : gh_1d96b7817eb3 ;
+time : 1443508404 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6riGXz-UlnsjgrnN-6T45Q ;
+createtime : 1443508404 ;
+msgtype : event ;
+connecttime : 1443508404 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 14:33:24 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:33:24 response :
+------------
+
+2015-09-29 14:40:34 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443508834 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443508834 ;
+msgtype : event ;
+connecttime : 1443508834 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 14:40:34 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:40:34 response :
+------------
+
+2015-09-29 14:41:04 trace :
+------------
+Array:
+from : o841pt9vUbcPm-jrm3ONiNYFJG7Q ;
+to : gh_1d96b7817eb3 ;
+time : 1443508864 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9vUbcPm-jrm3ONiNYFJG7Q ;
+createtime : 1443508864 ;
+msgtype : event ;
+connecttime : 1443508864 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 14:41:04 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:41:04 response :
+------------
+
+2015-09-29 14:41:41 trace :
+------------
+Array:
+from : o841pt_3YG6krhvTCuHbLldN7jOA ;
+to : gh_1d96b7817eb3 ;
+time : 1443508901 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_3YG6krhvTCuHbLldN7jOA ;
+createtime : 1443508901 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-29 14:41:41 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:41:41 response :
+------------
+
+2015-09-29 14:41:41 trace :
+------------
+Array:
+from : o841pt7VlRr_J2K-cE1XhDXmvgW4 ;
+to : gh_1d96b7817eb3 ;
+time : 1443508901 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt7VlRr_J2K-cE1XhDXmvgW4 ;
+createtime : 1443508901 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-29 14:41:41 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:41:41 response :
+------------
+
+2015-09-29 14:43:05 trace :
+------------
+Array:
+from : o841pt9R6j5R2WZwsXG9pUiBgZgE ;
+to : gh_1d96b7817eb3 ;
+time : 1443508985 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9R6j5R2WZwsXG9pUiBgZgE ;
+createtime : 1443508985 ;
+msgtype : event ;
+connecttime : 1443508985 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 14:43:05 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:43:05 response :
+------------
+
+2015-09-29 14:55:06 trace :
+------------
+Array:
+from : o841ptxSEW4oJougbchx6DqZXiws ;
+to : gh_1d96b7817eb3 ;
+time : 1443509706 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxSEW4oJougbchx6DqZXiws ;
+createtime : 1443509706 ;
+msgtype : event ;
+connecttime : 1443509706 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 14:55:06 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 14:55:06 response :
+------------
+
+2015-09-29 15:06:03 trace :
+------------
+Array:
+from : o841pt3vYNyG2Ku25XOxYy9MAgWs ;
+to : gh_1d96b7817eb3 ;
+time : 1443510363 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3vYNyG2Ku25XOxYy9MAgWs ;
+createtime : 1443510363 ;
+msgtype : event ;
+connecttime : 1443510363 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 15:06:03 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 15:06:03 response :
+------------
+
+2015-09-29 15:07:01 trace :
+------------
+Array:
+from : o841ptyYwSGsi0zgQqQ-qgdvSSyk ;
+to : gh_1d96b7817eb3 ;
+time : 1443510421 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyYwSGsi0zgQqQ-qgdvSSyk ;
+createtime : 1443510421 ;
+msgtype : event ;
+connecttime : 1443510421 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 15:07:01 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 15:07:01 response :
+------------
+
+2015-09-29 15:09:07 trace :
+------------
+Array:
+from : o841ptxQSOzzXn2-aVN2TE-KJa94 ;
+to : gh_1d96b7817eb3 ;
+time : 1443510547 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxQSOzzXn2-aVN2TE-KJa94 ;
+createtime : 1443510547 ;
+msgtype : event ;
+connecttime : 1443510547 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 15:09:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 15:09:07 response :
+------------
+
+2015-09-29 15:11:22 trace :
+------------
+Array:
+from : o841ptwA2j4UJ2Xz5muRJEneI-KQ ;
+to : gh_1d96b7817eb3 ;
+time : 1443510682 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwA2j4UJ2Xz5muRJEneI-KQ ;
+createtime : 1443510682 ;
+msgtype : event ;
+connecttime : 1443510682 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 15:11:22 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 15:11:22 response :
+------------
+
+2015-09-29 15:12:08 trace :
+------------
+Array:
+from : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443510728 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+createtime : 1443510728 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:12:08 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:12:08 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:13:05 trace :
+------------
+Array:
+from : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443510785 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+createtime : 1443510785 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-29 15:13:05 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:13:05 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:13:13 trace :
+------------
+Array:
+from : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443510793 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+createtime : 1443510793 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=dianjia&m=jufeng_wcy ;
+
+2015-09-29 15:13:13 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:13:13 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:13:18 trace :
+------------
+Array:
+from : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443510798 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+createtime : 1443510798 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-09-29 15:13:18 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:13:18 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:14:00 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443510840 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443510840 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:14:00 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:14:00 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:14:10 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443510850 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443510850 ;
+msgtype : event ;
+latitude : 28.760628 ;
+longitude : 115.877296 ;
+precision : 90.000000 ;
+location_x : 28.760628 ;
+location_y : 115.877296 ;
+
+2015-09-29 15:14:10 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 15:14:10 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 15:14:12 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443510851 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443510851 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-29 15:14:12 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:14:12 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:14:17 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443510857 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443510857 ;
+msgtype : event ;
+latitude : 28.760628 ;
+longitude : 115.877296 ;
+precision : 90.000000 ;
+location_x : 28.760628 ;
+location_y : 115.877296 ;
+
+2015-09-29 15:14:17 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 15:14:17 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 15:14:17 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443510857 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443510857 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:14:17 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:14:17 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:17:22 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511042 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511042 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:17:22 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:17:22 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:17:28 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511048 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511048 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:17:28 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:17:28 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:20:37 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511236 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511236 ;
+msgtype : event ;
+latitude : 28.760473 ;
+longitude : 115.877281 ;
+precision : 70.000000 ;
+location_x : 28.760473 ;
+location_y : 115.877281 ;
+
+2015-09-29 15:20:37 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 15:20:37 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 15:20:37 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511236 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511236 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:20:37 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:20:37 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:20:58 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511258 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511258 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:20:58 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:20:58 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:21:00 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511260 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511260 ;
+msgtype : event ;
+latitude : 28.760607 ;
+longitude : 115.877296 ;
+precision : 90.000000 ;
+location_x : 28.760607 ;
+location_y : 115.877296 ;
+
+2015-09-29 15:21:00 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 15:21:00 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 15:21:04 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511264 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511264 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:21:04 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:21:04 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:21:07 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511267 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511267 ;
+msgtype : event ;
+latitude : 28.760607 ;
+longitude : 115.877296 ;
+precision : 90.000000 ;
+location_x : 28.760607 ;
+location_y : 115.877296 ;
+
+2015-09-29 15:21:07 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 15:21:07 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 15:21:11 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511271 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511271 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:21:11 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:21:11 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:21:23 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511283 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511283 ;
+msgtype : event ;
+latitude : 28.760626 ;
+longitude : 115.877296 ;
+precision : 90.000000 ;
+location_x : 28.760626 ;
+location_y : 115.877296 ;
+
+2015-09-29 15:21:23 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 15:21:23 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 15:21:24 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511284 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511284 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 15:21:24 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:21:24 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:21:28 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511288 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511288 ;
+msgtype : event ;
+latitude : 28.760628 ;
+longitude : 115.877296 ;
+precision : 90.000000 ;
+location_x : 28.760628 ;
+location_y : 115.877296 ;
+
+2015-09-29 15:21:28 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 15:21:28 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 15:21:31 trace :
+------------
+Array:
+from : o841pt-0vtmA-hLbTW5yY01dhluc ;
+to : gh_1d96b7817eb3 ;
+time : 1443511291 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-0vtmA-hLbTW5yY01dhluc ;
+createtime : 1443511291 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-09-29 15:21:31 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:21:31 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-0vtmA-hLbTW5yY01dhluc ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:26:26 trace :
+------------
+Array:
+from : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443511586 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+createtime : 1443511586 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-09-29 15:26:26 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 15:26:26 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 15:36:56 trace :
+------------
+Array:
+from : o841pt-wKRSdgy8cjoW2KMkbyxhc ;
+to : gh_1d96b7817eb3 ;
+time : 1443512216 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-wKRSdgy8cjoW2KMkbyxhc ;
+createtime : 1443512216 ;
+msgtype : event ;
+connecttime : 1443512216 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 15:36:56 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 15:36:56 response :
+------------
+
+2015-09-29 15:43:38 trace :
+------------
+Array:
+from : o841pt0hIZEXjEOOFy0jjwSSAcSw ;
+to : gh_1d96b7817eb3 ;
+time : 1443512618 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0hIZEXjEOOFy0jjwSSAcSw ;
+createtime : 1443512618 ;
+msgtype : event ;
+connecttime : 1443512618 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 15:43:38 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 15:43:38 response :
+------------
+
+2015-09-29 15:51:42 trace :
+------------
+Array:
+from : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+to : gh_1d96b7817eb3 ;
+time : 1443513102 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6D-gV26tX1xnpXLy6N_x2k ;
+createtime : 1443513102 ;
+msgtype : event ;
+latitude : 22.909185 ;
+longitude : 113.657387 ;
+precision : 65.000000 ;
+location_x : 22.909185 ;
+location_y : 113.657387 ;
+
+2015-09-29 15:51:42 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 15:51:42 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 16:14:07 trace :
+------------
+Array:
+from : o841pt9vUbcPm-jrm3ONiNYFJG7Q ;
+to : gh_1d96b7817eb3 ;
+time : 1443514447 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9vUbcPm-jrm3ONiNYFJG7Q ;
+createtime : 1443514447 ;
+msgtype : event ;
+connecttime : 1443514447 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 16:14:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 16:14:07 response :
+------------
+
+2015-09-29 16:29:19 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1443515359 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1443515359 ;
+msgtype : event ;
+latitude : 22.913034 ;
+longitude : 113.657913 ;
+precision : 1790.000000 ;
+location_x : 22.913034 ;
+location_y : 113.657913 ;
+
+2015-09-29 16:29:19 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 16:29:19 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 16:29:48 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1443515388 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1443515388 ;
+msgtype : event ;
+latitude : 22.913034 ;
+longitude : 113.657913 ;
+precision : 1790.000000 ;
+location_x : 22.913034 ;
+location_y : 113.657913 ;
+
+2015-09-29 16:29:48 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 16:29:48 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 16:31:06 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1443515466 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1443515466 ;
+msgtype : event ;
+latitude : 22.913034 ;
+longitude : 113.657913 ;
+precision : 1790.000000 ;
+location_x : 22.913034 ;
+location_y : 113.657913 ;
+
+2015-09-29 16:31:06 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 16:31:06 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 16:32:12 trace :
+------------
+Array:
+from : o841pt0COBrmBI9VldtU8OlY90JY ;
+to : gh_1d96b7817eb3 ;
+time : 1443515532 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0COBrmBI9VldtU8OlY90JY ;
+createtime : 1443515532 ;
+msgtype : event ;
+connecttime : 1443515532 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 16:32:12 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 16:32:12 response :
+------------
+
+2015-09-29 16:36:18 trace :
+------------
+Array:
+from : o841ptz6jqP-iN1gB6IGCixB7LXU ;
+to : gh_1d96b7817eb3 ;
+time : 1443515778 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptz6jqP-iN1gB6IGCixB7LXU ;
+createtime : 1443515778 ;
+msgtype : event ;
+connecttime : 1443515778 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 16:36:18 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 16:36:18 response :
+------------
+
+2015-09-29 16:37:20 trace :
+------------
+Array:
+from : o841pt6dEXRaFteNvFnCI-BgBvfY ;
+to : gh_1d96b7817eb3 ;
+time : 1443515840 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6dEXRaFteNvFnCI-BgBvfY ;
+createtime : 1443515840 ;
+msgtype : event ;
+connecttime : 1443515840 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 16:37:20 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 16:37:20 response :
+------------
+
+2015-09-29 16:43:36 trace :
+------------
+Array:
+from : o841pt_e28scRx2W3LlT2SIdkJZM ;
+to : gh_1d96b7817eb3 ;
+time : 1443516216 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_e28scRx2W3LlT2SIdkJZM ;
+createtime : 1443516216 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-29 16:43:36 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 16:43:36 response :
+------------
+
+2015-09-29 16:43:40 trace :
+------------
+Array:
+from : o841pt_e28scRx2W3LlT2SIdkJZM ;
+to : gh_1d96b7817eb3 ;
+time : 1443516220 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_e28scRx2W3LlT2SIdkJZM ;
+createtime : 1443516220 ;
+msgtype : event ;
+latitude : 22.911758 ;
+longitude : 113.662064 ;
+precision : 1130.000000 ;
+location_x : 22.911758 ;
+location_y : 113.662064 ;
+
+2015-09-29 16:43:40 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 16:43:40 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 16:43:43 trace :
+------------
+Array:
+from : o841pt_e28scRx2W3LlT2SIdkJZM ;
+to : gh_1d96b7817eb3 ;
+time : 1443516223 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_e28scRx2W3LlT2SIdkJZM ;
+createtime : 1443516223 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-29 16:43:43 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 16:43:43 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt_e28scRx2W3LlT2SIdkJZM ;
+MsgType : transfer_customer_service ;
+
+2015-09-29 16:44:07 trace :
+------------
+Array:
+from : o841pt_e28scRx2W3LlT2SIdkJZM ;
+to : gh_1d96b7817eb3 ;
+time : 1443516247 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_e28scRx2W3LlT2SIdkJZM ;
+createtime : 1443516247 ;
+msgtype : event ;
+latitude : 22.911758 ;
+longitude : 113.662064 ;
+precision : 1130.000000 ;
+location_x : 22.911758 ;
+location_y : 113.662064 ;
+
+2015-09-29 16:44:07 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 16:44:07 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 16:46:45 trace :
+------------
+Array:
+from : o841pt8uYF1d3rvfzmCO1JaCj6kI ;
+to : gh_1d96b7817eb3 ;
+time : 1443516405 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8uYF1d3rvfzmCO1JaCj6kI ;
+createtime : 1443516405 ;
+msgtype : event ;
+connecttime : 1443516405 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 16:46:45 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 16:46:45 response :
+------------
+
+2015-09-29 16:49:34 trace :
+------------
+Array:
+from : o841ptwMv-2NkK3Myq8R55KRUSZw ;
+to : gh_1d96b7817eb3 ;
+time : 1443516574 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwMv-2NkK3Myq8R55KRUSZw ;
+createtime : 1443516574 ;
+msgtype : event ;
+connecttime : 1443516574 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 16:49:34 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 16:49:34 response :
+------------
+
+2015-09-29 16:56:27 trace :
+------------
+Array:
+from : o841ptzb4Py4J74cxWHYjtRoGclA ;
+to : gh_1d96b7817eb3 ;
+time : 1443516987 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzb4Py4J74cxWHYjtRoGclA ;
+createtime : 1443516987 ;
+msgtype : event ;
+connecttime : 1443516987 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 16:56:27 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 16:56:27 response :
+------------
+
+2015-09-29 17:01:32 trace :
+------------
+Array:
+from : o841pt7AW7Z3VwhR-acU1ZNXJ_Lg ;
+to : gh_1d96b7817eb3 ;
+time : 1443517292 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt7AW7Z3VwhR-acU1ZNXJ_Lg ;
+createtime : 1443517292 ;
+msgtype : event ;
+connecttime : 1443517292 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:01:32 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:01:32 response :
+------------
+
+2015-09-29 17:04:17 trace :
+------------
+Array:
+from : o841pt3_p-YHOM3a5pr9ay_x0YRg ;
+to : gh_1d96b7817eb3 ;
+time : 1443517457 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3_p-YHOM3a5pr9ay_x0YRg ;
+createtime : 1443517457 ;
+msgtype : event ;
+connecttime : 1443517457 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:04:17 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:04:17 response :
+------------
+
+2015-09-29 17:04:34 trace :
+------------
+Array:
+from : o841ptwxr39zaW6OdwxCm7CKk0_A ;
+to : gh_1d96b7817eb3 ;
+time : 1443517474 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwxr39zaW6OdwxCm7CKk0_A ;
+createtime : 1443517474 ;
+msgtype : event ;
+connecttime : 1443517474 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:04:34 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:04:34 response :
+------------
+
+2015-09-29 17:06:14 trace :
+------------
+Array:
+from : o841ptxSEW4oJougbchx6DqZXiws ;
+to : gh_1d96b7817eb3 ;
+time : 1443517574 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxSEW4oJougbchx6DqZXiws ;
+createtime : 1443517574 ;
+msgtype : event ;
+connecttime : 1443517574 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:06:14 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:06:14 response :
+------------
+
+2015-09-29 17:19:20 trace :
+------------
+Array:
+from : o841ptwHLxXcvbdKYwF9Ne4w5lEM ;
+to : gh_1d96b7817eb3 ;
+time : 1443518360 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwHLxXcvbdKYwF9Ne4w5lEM ;
+createtime : 1443518360 ;
+msgtype : event ;
+connecttime : 1443518360 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:19:20 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:19:20 response :
+------------
+
+2015-09-29 17:23:41 trace :
+------------
+Array:
+from : o841pt8PLGw6PkpxxaMJaL7Drhyo ;
+to : gh_1d96b7817eb3 ;
+time : 1443518621 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8PLGw6PkpxxaMJaL7Drhyo ;
+createtime : 1443518621 ;
+msgtype : event ;
+connecttime : 1443518621 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:23:41 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:23:41 response :
+------------
+
+2015-09-29 17:25:55 trace :
+------------
+Array:
+from : o841pt9SEKcpWphIi-K81dl66-2I ;
+to : gh_1d96b7817eb3 ;
+time : 1443518755 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9SEKcpWphIi-K81dl66-2I ;
+createtime : 1443518755 ;
+msgtype : event ;
+connecttime : 1443518755 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:25:55 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:25:55 response :
+------------
+
+2015-09-29 17:30:13 trace :
+------------
+Array:
+from : o841ptxQSOzzXn2-aVN2TE-KJa94 ;
+to : gh_1d96b7817eb3 ;
+time : 1443519013 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxQSOzzXn2-aVN2TE-KJa94 ;
+createtime : 1443519013 ;
+msgtype : event ;
+connecttime : 1443519013 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:30:13 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:30:13 response :
+------------
+
+2015-09-29 17:30:22 trace :
+------------
+Array:
+from : o841pt3vYNyG2Ku25XOxYy9MAgWs ;
+to : gh_1d96b7817eb3 ;
+time : 1443519022 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3vYNyG2Ku25XOxYy9MAgWs ;
+createtime : 1443519022 ;
+msgtype : event ;
+connecttime : 1443519022 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:30:22 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:30:22 response :
+------------
+
+2015-09-29 17:36:07 trace :
+------------
+Array:
+from : o841pt_7WClQfcN860me3GxJr9xc ;
+to : gh_1d96b7817eb3 ;
+time : 1443519367 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_7WClQfcN860me3GxJr9xc ;
+createtime : 1443519367 ;
+msgtype : event ;
+connecttime : 1443519367 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:36:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:36:07 response :
+------------
+
+2015-09-29 17:39:01 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443519541 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443519541 ;
+msgtype : event ;
+connecttime : 1443519541 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:39:01 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:39:01 response :
+------------
+
+2015-09-29 17:53:26 trace :
+------------
+Array:
+from : o841pt0COBrmBI9VldtU8OlY90JY ;
+to : gh_1d96b7817eb3 ;
+time : 1443520406 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0COBrmBI9VldtU8OlY90JY ;
+createtime : 1443520406 ;
+msgtype : event ;
+connecttime : 1443520406 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:53:26 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:53:26 response :
+------------
+
+2015-09-29 17:54:00 trace :
+------------
+Array:
+from : o841pt0F5C-WYZvIFJM1sHt1cLQo ;
+to : gh_1d96b7817eb3 ;
+time : 1443520440 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0F5C-WYZvIFJM1sHt1cLQo ;
+createtime : 1443520440 ;
+msgtype : event ;
+connecttime : 1443520440 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 17:54:00 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 17:54:00 response :
+------------
+
+2015-09-29 18:24:59 trace :
+------------
+Array:
+from : o841pt0jF419puqB6cL7bVzfaaQQ ;
+to : gh_1d96b7817eb3 ;
+time : 1443522299 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0jF419puqB6cL7bVzfaaQQ ;
+createtime : 1443522299 ;
+msgtype : event ;
+connecttime : 1443522299 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 18:24:59 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 18:24:59 response :
+------------
+
+2015-09-29 18:27:24 trace :
+------------
+Array:
+from : o841pt_ydYYbPEqL1vUvdWswGez8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443522444 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_ydYYbPEqL1vUvdWswGez8 ;
+createtime : 1443522444 ;
+msgtype : event ;
+connecttime : 1443522444 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 18:27:24 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 18:27:24 response :
+------------
+
+2015-09-29 18:32:06 trace :
+------------
+Array:
+from : o841pt07JPll449U_oKqjoBDPLeE ;
+to : gh_1d96b7817eb3 ;
+time : 1443522726 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt07JPll449U_oKqjoBDPLeE ;
+createtime : 1443522726 ;
+msgtype : event ;
+connecttime : 1443522726 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 18:32:06 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 18:32:06 response :
+------------
+
+2015-09-29 18:33:00 trace :
+------------
+Array:
+from : o841pt178AC-ykEC0txePHsokXvE ;
+to : gh_1d96b7817eb3 ;
+time : 1443522780 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt178AC-ykEC0txePHsokXvE ;
+createtime : 1443522780 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-29 18:33:00 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 18:33:00 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt178AC-ykEC0txePHsokXvE ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 18:33:52 trace :
+------------
+Array:
+from : o841pt178AC-ykEC0txePHsokXvE ;
+to : gh_1d96b7817eb3 ;
+time : 1443522832 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt178AC-ykEC0txePHsokXvE ;
+createtime : 1443522832 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 18:33:52 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 18:33:52 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt178AC-ykEC0txePHsokXvE ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 18:34:37 trace :
+------------
+Array:
+from : o841pt178AC-ykEC0txePHsokXvE ;
+to : gh_1d96b7817eb3 ;
+time : 1443522877 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt178AC-ykEC0txePHsokXvE ;
+createtime : 1443522877 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 18:34:37 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 18:34:37 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt178AC-ykEC0txePHsokXvE ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 18:34:42 trace :
+------------
+Array:
+from : o841pt178AC-ykEC0txePHsokXvE ;
+to : gh_1d96b7817eb3 ;
+time : 1443522882 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt178AC-ykEC0txePHsokXvE ;
+createtime : 1443522882 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-09-29 18:34:42 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 18:34:42 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt178AC-ykEC0txePHsokXvE ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 18:39:51 trace :
+------------
+Array:
+from : o841pt8DiIQk7rZDCFz2Pm_FfnWU ;
+to : gh_1d96b7817eb3 ;
+time : 1443523191 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8DiIQk7rZDCFz2Pm_FfnWU ;
+createtime : 1443523191 ;
+msgtype : event ;
+connecttime : 1443523191 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 18:39:51 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 18:39:51 response :
+------------
+
+2015-09-29 18:47:49 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443523669 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443523669 ;
+msgtype : event ;
+connecttime : 1443523669 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 18:47:49 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 18:47:49 response :
+------------
+
+2015-09-29 19:02:39 trace :
+------------
+Array:
+from : o841pt5I_211EVv4Q9Po6F0c959I ;
+to : gh_1d96b7817eb3 ;
+time : 1443524559 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5I_211EVv4Q9Po6F0c959I ;
+createtime : 1443524559 ;
+msgtype : event ;
+connecttime : 1443524559 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:02:39 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:02:39 response :
+------------
+
+2015-09-29 19:04:36 trace :
+------------
+Array:
+from : o841pt6dEXRaFteNvFnCI-BgBvfY ;
+to : gh_1d96b7817eb3 ;
+time : 1443524676 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6dEXRaFteNvFnCI-BgBvfY ;
+createtime : 1443524676 ;
+msgtype : event ;
+connecttime : 1443524676 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:04:36 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:04:36 response :
+------------
+
+2015-09-29 19:09:54 trace :
+------------
+Array:
+from : o841pt34O4emKg_c9I1jtfQrIKSc ;
+to : gh_1d96b7817eb3 ;
+time : 1443524994 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt34O4emKg_c9I1jtfQrIKSc ;
+createtime : 1443524994 ;
+msgtype : event ;
+connecttime : 1443524994 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:09:54 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:09:54 response :
+------------
+
+2015-09-29 19:15:56 trace :
+------------
+Array:
+from : o841pt_MqgbvS9YevmmztQf4_MmE ;
+to : gh_1d96b7817eb3 ;
+time : 1443525356 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_MqgbvS9YevmmztQf4_MmE ;
+createtime : 1443525356 ;
+msgtype : event ;
+connecttime : 1443525356 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:15:56 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:15:56 response :
+------------
+
+2015-09-29 19:15:56 trace :
+------------
+Array:
+from : o841pt_MqgbvS9YevmmztQf4_MmE ;
+to : gh_1d96b7817eb3 ;
+time : 1443525356 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_MqgbvS9YevmmztQf4_MmE ;
+createtime : 1443525356 ;
+msgtype : event ;
+connecttime : 1443525356 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:15:56 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:15:56 response :
+------------
+
+2015-09-29 19:19:46 trace :
+------------
+Array:
+from : o841pt17OQNlxZShh-1RQMe-P5GE ;
+to : gh_1d96b7817eb3 ;
+time : 1443525585 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt17OQNlxZShh-1RQMe-P5GE ;
+createtime : 1443525585 ;
+msgtype : event ;
+connecttime : 1443525585 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:19:46 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:19:46 response :
+------------
+
+2015-09-29 19:40:58 trace :
+------------
+Array:
+from : o841ptxtIWfGjtYxxFqTxeVw5jUo ;
+to : gh_1d96b7817eb3 ;
+time : 1443526858 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxtIWfGjtYxxFqTxeVw5jUo ;
+createtime : 1443526858 ;
+msgtype : event ;
+connecttime : 1443526858 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:40:58 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:40:58 response :
+------------
+
+2015-09-29 19:42:29 trace :
+------------
+Array:
+from : o841pt3fWXzmMD2_lccuVNL3SvhM ;
+to : gh_1d96b7817eb3 ;
+time : 1443526949 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3fWXzmMD2_lccuVNL3SvhM ;
+createtime : 1443526949 ;
+msgtype : event ;
+connecttime : 1443526949 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:42:29 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:42:29 response :
+------------
+
+2015-09-29 19:44:07 trace :
+------------
+Array:
+from : o841pt7KCbNgNHh3myWW_VFuFPdE ;
+to : gh_1d96b7817eb3 ;
+time : 1443527047 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt7KCbNgNHh3myWW_VFuFPdE ;
+createtime : 1443527047 ;
+msgtype : event ;
+connecttime : 1443527047 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:44:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:44:07 response :
+------------
+
+2015-09-29 19:45:48 trace :
+------------
+Array:
+from : o841pt_7WClQfcN860me3GxJr9xc ;
+to : gh_1d96b7817eb3 ;
+time : 1443527148 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_7WClQfcN860me3GxJr9xc ;
+createtime : 1443527148 ;
+msgtype : event ;
+connecttime : 1443527148 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:45:48 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:45:48 response :
+------------
+
+2015-09-29 19:46:16 trace :
+------------
+Array:
+from : o841pt17OQNlxZShh-1RQMe-P5GE ;
+to : gh_1d96b7817eb3 ;
+time : 1443527176 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt17OQNlxZShh-1RQMe-P5GE ;
+createtime : 1443527176 ;
+msgtype : event ;
+connecttime : 1443527176 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:46:16 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:46:16 response :
+------------
+
+2015-09-29 19:50:20 trace :
+------------
+Array:
+from : o841pt34O4emKg_c9I1jtfQrIKSc ;
+to : gh_1d96b7817eb3 ;
+time : 1443527420 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt34O4emKg_c9I1jtfQrIKSc ;
+createtime : 1443527420 ;
+msgtype : event ;
+connecttime : 1443527420 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:50:20 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:50:20 response :
+------------
+
+2015-09-29 19:51:37 trace :
+------------
+Array:
+from : o841pt8dTZREuxhNy4jipDdGMPCU ;
+to : gh_1d96b7817eb3 ;
+time : 1443527497 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8dTZREuxhNy4jipDdGMPCU ;
+createtime : 1443527497 ;
+msgtype : event ;
+connecttime : 1443527497 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:51:37 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:51:37 response :
+------------
+
+2015-09-29 19:55:13 trace :
+------------
+Array:
+from : o841pt0COBrmBI9VldtU8OlY90JY ;
+to : gh_1d96b7817eb3 ;
+time : 1443527713 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0COBrmBI9VldtU8OlY90JY ;
+createtime : 1443527713 ;
+msgtype : event ;
+connecttime : 1443527713 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:55:13 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:55:13 response :
+------------
+
+2015-09-29 19:56:47 trace :
+------------
+Array:
+from : o841ptzetPaF7xJbtHMUrP1sjMLM ;
+to : gh_1d96b7817eb3 ;
+time : 1443527807 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzetPaF7xJbtHMUrP1sjMLM ;
+createtime : 1443527807 ;
+msgtype : event ;
+connecttime : 1443527807 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 19:56:47 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 19:56:47 response :
+------------
+
+2015-09-29 20:09:47 trace :
+------------
+Array:
+from : o841pt2ixKSPKegwmYAYVYVV0gRY ;
+to : gh_1d96b7817eb3 ;
+time : 1443528587 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt2ixKSPKegwmYAYVYVV0gRY ;
+createtime : 1443528587 ;
+msgtype : event ;
+connecttime : 1443528587 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 20:09:47 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 20:09:47 response :
+------------
+
+2015-09-29 20:40:32 trace :
+------------
+Array:
+from : o841ptwdADwPoj4SugJin0Q0HJE4 ;
+to : gh_1d96b7817eb3 ;
+time : 1443530432 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwdADwPoj4SugJin0Q0HJE4 ;
+createtime : 1443530432 ;
+msgtype : event ;
+connecttime : 1443530432 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 20:40:32 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 20:40:32 response :
+------------
+
+2015-09-29 20:48:16 trace :
+------------
+Array:
+from : o841ptwFVGqojt1hnW9xjUVgJgvk ;
+to : gh_1d96b7817eb3 ;
+time : 1443530896 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwFVGqojt1hnW9xjUVgJgvk ;
+createtime : 1443530896 ;
+msgtype : event ;
+connecttime : 1443530896 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 20:48:16 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 20:48:16 response :
+------------
+
+2015-09-29 20:55:23 trace :
+------------
+Array:
+from : o841pt8PLGw6PkpxxaMJaL7Drhyo ;
+to : gh_1d96b7817eb3 ;
+time : 1443531323 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8PLGw6PkpxxaMJaL7Drhyo ;
+createtime : 1443531323 ;
+msgtype : event ;
+connecttime : 1443531323 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 20:55:23 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 20:55:23 response :
+------------
+
+2015-09-29 20:56:26 trace :
+------------
+Array:
+from : o841ptyjOUQavHmM04sr6QBtYhv8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443531386 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyjOUQavHmM04sr6QBtYhv8 ;
+createtime : 1443531386 ;
+msgtype : event ;
+connecttime : 1443531386 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 20:56:26 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 20:56:26 response :
+------------
+
+2015-09-29 21:16:23 trace :
+------------
+Array:
+from : o841pt34O4emKg_c9I1jtfQrIKSc ;
+to : gh_1d96b7817eb3 ;
+time : 1443532583 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt34O4emKg_c9I1jtfQrIKSc ;
+createtime : 1443532583 ;
+msgtype : event ;
+connecttime : 1443532583 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:16:23 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:16:23 response :
+------------
+
+2015-09-29 21:17:39 trace :
+------------
+Array:
+from : o841pt_soj4iB6I3pZH2UDva5tV4 ;
+to : gh_1d96b7817eb3 ;
+time : 1443532658 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_soj4iB6I3pZH2UDva5tV4 ;
+createtime : 1443532658 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-09-29 21:17:39 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 21:17:39 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt_soj4iB6I3pZH2UDva5tV4 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 21:18:07 trace :
+------------
+Array:
+from : o841pt6jI70chNZYIyfEPxlTkmgA ;
+to : gh_1d96b7817eb3 ;
+time : 1443532686 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6jI70chNZYIyfEPxlTkmgA ;
+createtime : 1443532686 ;
+msgtype : event ;
+connecttime : 1443532686 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:18:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:18:07 response :
+------------
+
+2015-09-29 21:33:23 trace :
+------------
+Array:
+from : o841pt_MqgbvS9YevmmztQf4_MmE ;
+to : gh_1d96b7817eb3 ;
+time : 1443533603 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_MqgbvS9YevmmztQf4_MmE ;
+createtime : 1443533603 ;
+msgtype : event ;
+connecttime : 1443533603 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:33:23 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:33:23 response :
+------------
+
+2015-09-29 21:34:43 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443533683 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443533683 ;
+msgtype : event ;
+connecttime : 1443533683 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:34:43 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:34:43 response :
+------------
+
+2015-09-29 21:35:29 trace :
+------------
+Array:
+from : o841pt9sslsvdASI1BZhzuC3qPqQ ;
+to : gh_1d96b7817eb3 ;
+time : 1443533729 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9sslsvdASI1BZhzuC3qPqQ ;
+createtime : 1443533729 ;
+msgtype : event ;
+connecttime : 1443533729 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:35:29 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:35:29 response :
+------------
+
+2015-09-29 21:43:26 trace :
+------------
+Array:
+from : o841ptxtIWfGjtYxxFqTxeVw5jUo ;
+to : gh_1d96b7817eb3 ;
+time : 1443534205 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxtIWfGjtYxxFqTxeVw5jUo ;
+createtime : 1443534205 ;
+msgtype : event ;
+connecttime : 1443534205 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:43:26 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:43:26 response :
+------------
+
+2015-09-29 21:47:47 trace :
+------------
+Array:
+from : o841pt6hIbI2jq4Dz8ET-aAuBJAc ;
+to : gh_1d96b7817eb3 ;
+time : 1443534467 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6hIbI2jq4Dz8ET-aAuBJAc ;
+createtime : 1443534467 ;
+msgtype : event ;
+connecttime : 1443534467 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:47:47 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:47:47 response :
+------------
+
+2015-09-29 21:50:40 trace :
+------------
+Array:
+from : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+to : gh_1d96b7817eb3 ;
+time : 1443534640 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9CGGyq0v6fGaVeFlTpHMTc ;
+createtime : 1443534640 ;
+msgtype : event ;
+connecttime : 1443534640 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:50:40 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:50:40 response :
+------------
+
+2015-09-29 21:50:54 trace :
+------------
+Array:
+from : o841pty9yf9-HcRObP5Lku3FVwmQ ;
+to : gh_1d96b7817eb3 ;
+time : 1443534654 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pty9yf9-HcRObP5Lku3FVwmQ ;
+createtime : 1443534654 ;
+msgtype : event ;
+connecttime : 1443534654 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 21:50:54 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 21:50:54 response :
+------------
+
+2015-09-29 22:04:03 trace :
+------------
+Array:
+from : o841ptyYwSGsi0zgQqQ-qgdvSSyk ;
+to : gh_1d96b7817eb3 ;
+time : 1443535443 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyYwSGsi0zgQqQ-qgdvSSyk ;
+createtime : 1443535443 ;
+msgtype : event ;
+connecttime : 1443535443 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 22:04:03 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 22:04:03 response :
+------------
+
+2015-09-29 22:07:15 trace :
+------------
+Array:
+from : o841pt6jI70chNZYIyfEPxlTkmgA ;
+to : gh_1d96b7817eb3 ;
+time : 1443535635 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6jI70chNZYIyfEPxlTkmgA ;
+createtime : 1443535635 ;
+msgtype : event ;
+connecttime : 1443535635 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 22:07:15 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 22:07:15 response :
+------------
+
+2015-09-29 22:25:34 trace :
+------------
+Array:
+from : o841pt3siwsY9btBSC72DpuHsfw0 ;
+to : gh_1d96b7817eb3 ;
+time : 1443536734 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3siwsY9btBSC72DpuHsfw0 ;
+createtime : 1443536734 ;
+msgtype : event ;
+connecttime : 1443536734 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 22:25:34 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 22:25:34 response :
+------------
+
+2015-09-29 22:35:13 trace :
+------------
+Array:
+from : o841pt34O4emKg_c9I1jtfQrIKSc ;
+to : gh_1d96b7817eb3 ;
+time : 1443537312 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt34O4emKg_c9I1jtfQrIKSc ;
+createtime : 1443537312 ;
+msgtype : event ;
+connecttime : 1443537312 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 22:35:13 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 22:35:13 response :
+------------
+
+2015-09-29 22:45:55 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443537955 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443537955 ;
+msgtype : event ;
+connecttime : 1443537955 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 22:45:55 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 22:45:55 response :
+------------
+
+2015-09-29 22:47:10 trace :
+------------
+Array:
+from : o841pt01R4VYVpASAdHjtoseboPY ;
+to : gh_1d96b7817eb3 ;
+time : 1443538030 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt01R4VYVpASAdHjtoseboPY ;
+createtime : 1443538030 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-09-29 22:47:10 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 22:47:10 response :
+------------
+
+2015-09-29 22:47:15 trace :
+------------
+Array:
+from : o841pt01R4VYVpASAdHjtoseboPY ;
+to : gh_1d96b7817eb3 ;
+time : 1443538035 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt01R4VYVpASAdHjtoseboPY ;
+createtime : 1443538035 ;
+msgtype : event ;
+latitude : 22.909636 ;
+longitude : 113.657333 ;
+precision : 10.000000 ;
+location_x : 22.909636 ;
+location_y : 113.657333 ;
+
+2015-09-29 22:47:15 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 22:47:15 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 22:47:33 trace :
+------------
+Array:
+from : o841pt01R4VYVpASAdHjtoseboPY ;
+to : gh_1d96b7817eb3 ;
+time : 1443538053 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt01R4VYVpASAdHjtoseboPY ;
+createtime : 1443538053 ;
+msgtype : event ;
+latitude : 22.909639 ;
+longitude : 113.657333 ;
+precision : 30.000000 ;
+location_x : 22.909639 ;
+location_y : 113.657333 ;
+
+2015-09-29 22:47:33 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 22:47:33 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 22:47:34 trace :
+------------
+Array:
+from : o841pt01R4VYVpASAdHjtoseboPY ;
+to : gh_1d96b7817eb3 ;
+time : 1443538054 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt01R4VYVpASAdHjtoseboPY ;
+createtime : 1443538054 ;
+msgtype : event ;
+latitude : 22.909639 ;
+longitude : 113.657333 ;
+precision : 30.000000 ;
+location_x : 22.909639 ;
+location_y : 113.657333 ;
+
+2015-09-29 22:47:34 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-09-29 22:47:34 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-09-29 22:57:24 trace :
+------------
+Array:
+from : o841ptxjXC2cfLz5RWfUmVdDYW54 ;
+to : gh_1d96b7817eb3 ;
+time : 1443538644 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxjXC2cfLz5RWfUmVdDYW54 ;
+createtime : 1443538644 ;
+msgtype : event ;
+connecttime : 1443538644 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 22:57:24 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 22:57:24 response :
+------------
+
+2015-09-29 22:57:55 trace :
+------------
+Array:
+from : o841pt6dEXRaFteNvFnCI-BgBvfY ;
+to : gh_1d96b7817eb3 ;
+time : 1443538675 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6dEXRaFteNvFnCI-BgBvfY ;
+createtime : 1443538675 ;
+msgtype : event ;
+connecttime : 1443538675 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 22:57:55 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 22:57:55 response :
+------------
+
+2015-09-29 23:05:21 trace :
+------------
+Array:
+from : o841pt2ixKSPKegwmYAYVYVV0gRY ;
+to : gh_1d96b7817eb3 ;
+time : 1443539121 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt2ixKSPKegwmYAYVYVV0gRY ;
+createtime : 1443539121 ;
+msgtype : event ;
+connecttime : 1443539121 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 23:05:21 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 23:05:21 response :
+------------
+
+2015-09-29 23:08:07 trace :
+------------
+Array:
+from : o841pt9R6j5R2WZwsXG9pUiBgZgE ;
+to : gh_1d96b7817eb3 ;
+time : 1443539287 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9R6j5R2WZwsXG9pUiBgZgE ;
+createtime : 1443539287 ;
+msgtype : event ;
+connecttime : 1443539287 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 23:08:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 23:08:07 response :
+------------
+
+2015-09-29 23:20:41 trace :
+------------
+Array:
+from : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443540041 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5e9OpRLNR712R4F-fDRUS8 ;
+createtime : 1443540041 ;
+msgtype : event ;
+connecttime : 1443540041 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 23:20:41 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 23:20:41 response :
+------------
+
+2015-09-29 23:24:06 trace :
+------------
+Array:
+from : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443540246 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+createtime : 1443540246 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-09-29 23:24:06 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 23:24:06 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 23:24:17 trace :
+------------
+Array:
+from : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443540257 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+createtime : 1443540257 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-29 23:24:17 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 23:24:17 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 23:24:48 trace :
+------------
+Array:
+from : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+to : gh_1d96b7817eb3 ;
+time : 1443540288 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+createtime : 1443540288 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-09-29 23:24:48 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-09-29 23:24:48 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyk9PzQBMeJOhizQMZ9kwP8 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-09-29 23:30:54 trace :
+------------
+Array:
+from : o841pt6jI70chNZYIyfEPxlTkmgA ;
+to : gh_1d96b7817eb3 ;
+time : 1443540654 ;
+type : event ;
+event : WifiConnected ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6jI70chNZYIyfEPxlTkmgA ;
+createtime : 1443540654 ;
+msgtype : event ;
+connecttime : 1443540654 ;
+expiretime : 0 ;
+vendorid : 3001224419 ;
+placeid : 1649392 ;
+deviceno : 00:b0:c6:31:58:a0 ;
+
+2015-09-29 23:30:54 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-09-29 23:30:54 response :
+------------
+

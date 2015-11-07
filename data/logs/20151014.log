@@ -1,0 +1,7098 @@
+2015-10-14 00:00:04 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752004 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752004 ;
+msgtype : event ;
+latitude : 22.932997 ;
+longitude : 113.710014 ;
+precision : 65.000000 ;
+location_x : 22.932997 ;
+location_y : 113.710014 ;
+
+2015-10-14 00:00:04 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:00:04 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:00:08 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752008 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752008 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 00:00:08 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:00:08 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:00:16 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752016 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752016 ;
+msgtype : event ;
+latitude : 22.932999 ;
+longitude : 113.710236 ;
+precision : 65.000000 ;
+location_x : 22.932999 ;
+location_y : 113.710236 ;
+
+2015-10-14 00:00:16 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:00:16 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:00:23 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752023 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752023 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-10-14 00:00:23 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:00:23 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:00:33 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752033 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752033 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 00:00:33 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:00:33 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:00:37 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752037 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752037 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 00:00:37 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:00:37 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:00:56 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752055 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752055 ;
+msgtype : event ;
+latitude : 22.933098 ;
+longitude : 113.710068 ;
+precision : 65.000000 ;
+location_x : 22.933098 ;
+location_y : 113.710068 ;
+
+2015-10-14 00:00:56 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:00:56 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:01:02 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752062 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752062 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 00:01:02 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:01:02 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:01:16 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444752076 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444752076 ;
+msgtype : event ;
+latitude : 22.932943 ;
+longitude : 113.709923 ;
+precision : 65.000000 ;
+location_x : 22.932943 ;
+location_y : 113.709923 ;
+
+2015-10-14 00:01:16 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:01:16 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:09:19 trace :
+------------
+Array:
+from : op5RFuGkIiHZc2Hxv0e-GFe9X0yY ;
+to : gh_ca81d088dc8d ;
+time : 1444752559 ;
+type : text ;
+event :  ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuGkIiHZc2Hxv0e-GFe9X0yY ;
+createtime : 1444752559 ;
+msgtype : text ;
+content : 10 ;
+msgid : 6205164991946204864 ;
+redirection :  ;
+source :  ;
+
+2015-10-14 00:09:19 params :
+------------
+Array:
+message : Array ;
+module : stonefish_bigwheel ;
+rule : 22 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:09:19 response :
+------------
+Array:
+FromUserName : gh_ca81d088dc8d ;
+ToUserName : op5RFuGkIiHZc2Hxv0e-GFe9X0yY ;
+MsgType : text ;
+Content : 活动暂停，请稍后... ;
+
+2015-10-14 00:14:03 trace :
+------------
+Array:
+from : o841pt4fcli6lfto8dO88aS_4M-Q ;
+to : gh_1d96b7817eb3 ;
+time : 1444752843 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4fcli6lfto8dO88aS_4M-Q ;
+createtime : 1444752843 ;
+msgtype : event ;
+latitude : 22.909651 ;
+longitude : 113.657349 ;
+precision : 40.000000 ;
+location_x : 22.909651 ;
+location_y : 113.657349 ;
+
+2015-10-14 00:14:03 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:14:03 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:20:06 trace :
+------------
+Array:
+from : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+to : gh_1d96b7817eb3 ;
+time : 1444753205 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+createtime : 1444753205 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 00:20:06 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:20:06 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:20:14 trace :
+------------
+Array:
+from : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+to : gh_1d96b7817eb3 ;
+time : 1444753214 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+createtime : 1444753214 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 00:20:14 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:20:14 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:21:06 trace :
+------------
+Array:
+from : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+to : gh_1d96b7817eb3 ;
+time : 1444753266 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+createtime : 1444753266 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 00:21:06 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:21:06 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:22:56 trace :
+------------
+Array:
+from : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+to : gh_1d96b7817eb3 ;
+time : 1444753375 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+createtime : 1444753375 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 00:22:56 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:22:56 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:23:22 trace :
+------------
+Array:
+from : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+to : gh_1d96b7817eb3 ;
+time : 1444753401 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+createtime : 1444753401 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 00:23:22 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:23:22 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0TQEiRkrRnmGlUDuC-hE7o ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 00:30:44 trace :
+------------
+Array:
+from : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444753844 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+createtime : 1444753844 ;
+msgtype : event ;
+latitude : 22.903185 ;
+longitude : 113.663261 ;
+precision : 70.000000 ;
+location_x : 22.903185 ;
+location_y : 113.663261 ;
+
+2015-10-14 00:30:44 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:30:44 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:30:54 trace :
+------------
+Array:
+from : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444753854 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+createtime : 1444753854 ;
+msgtype : event ;
+latitude : 22.903185 ;
+longitude : 113.663261 ;
+precision : 70.000000 ;
+location_x : 22.903185 ;
+location_y : 113.663261 ;
+
+2015-10-14 00:30:54 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:30:54 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:39:12 trace :
+------------
+Array:
+from : o841pt4fcli6lfto8dO88aS_4M-Q ;
+to : gh_1d96b7817eb3 ;
+time : 1444754352 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4fcli6lfto8dO88aS_4M-Q ;
+createtime : 1444754352 ;
+msgtype : event ;
+latitude : 22.909697 ;
+longitude : 113.657280 ;
+precision : 40.000000 ;
+location_x : 22.909697 ;
+location_y : 113.657280 ;
+
+2015-10-14 00:39:12 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:39:12 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:39:54 trace :
+------------
+Array:
+from : op5RFuBdIbeiSuY7E9Y7VLls-76U ;
+to : gh_ca81d088dc8d ;
+time : 1444754393 ;
+type : text ;
+event :  ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuBdIbeiSuY7E9Y7VLls-76U ;
+createtime : 1444754393 ;
+msgtype : text ;
+content : 10 ;
+msgid : 6205172868916225975 ;
+redirection :  ;
+source :  ;
+
+2015-10-14 00:39:54 params :
+------------
+Array:
+message : Array ;
+module : stonefish_bigwheel ;
+rule : 22 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:39:54 response :
+------------
+Array:
+FromUserName : gh_ca81d088dc8d ;
+ToUserName : op5RFuBdIbeiSuY7E9Y7VLls-76U ;
+MsgType : text ;
+Content : 活动暂停，请稍后... ;
+
+2015-10-14 00:58:22 trace :
+------------
+Array:
+from : o841pt-MzsDmsAYetnNtdsFvIfvA ;
+to : gh_1d96b7817eb3 ;
+time : 1444755502 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-MzsDmsAYetnNtdsFvIfvA ;
+createtime : 1444755502 ;
+msgtype : event ;
+latitude : 22.909410 ;
+longitude : 113.657555 ;
+precision : 65.000000 ;
+location_x : 22.909410 ;
+location_y : 113.657555 ;
+
+2015-10-14 00:58:22 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 00:58:22 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 00:58:27 trace :
+------------
+Array:
+from : o841pt-MzsDmsAYetnNtdsFvIfvA ;
+to : gh_1d96b7817eb3 ;
+time : 1444755507 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-MzsDmsAYetnNtdsFvIfvA ;
+createtime : 1444755507 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 00:58:27 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 00:58:27 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-MzsDmsAYetnNtdsFvIfvA ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 01:02:18 trace :
+------------
+Array:
+from : o841pt_0Eg0iOZF9CCDV52KoeKwk ;
+to : gh_1d96b7817eb3 ;
+time : 1444755738 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_0Eg0iOZF9CCDV52KoeKwk ;
+createtime : 1444755738 ;
+msgtype : event ;
+latitude : 22.908607 ;
+longitude : 113.657806 ;
+precision : 1090.000000 ;
+location_x : 22.908607 ;
+location_y : 113.657806 ;
+
+2015-10-14 01:02:18 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 01:02:18 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 01:02:57 trace :
+------------
+Array:
+from : o841pt_0Eg0iOZF9CCDV52KoeKwk ;
+to : gh_1d96b7817eb3 ;
+time : 1444755777 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_0Eg0iOZF9CCDV52KoeKwk ;
+createtime : 1444755777 ;
+msgtype : event ;
+latitude : 22.908607 ;
+longitude : 113.657806 ;
+precision : 1090.000000 ;
+location_x : 22.908607 ;
+location_y : 113.657806 ;
+
+2015-10-14 01:02:57 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 01:02:57 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 01:13:21 trace :
+------------
+Array:
+from : o841pt4fcli6lfto8dO88aS_4M-Q ;
+to : gh_1d96b7817eb3 ;
+time : 1444756401 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4fcli6lfto8dO88aS_4M-Q ;
+createtime : 1444756401 ;
+msgtype : event ;
+latitude : 22.909746 ;
+longitude : 113.657227 ;
+precision : 40.000000 ;
+location_x : 22.909746 ;
+location_y : 113.657227 ;
+
+2015-10-14 01:13:21 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 01:13:21 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 01:14:00 trace :
+------------
+Array:
+from : o841pt4fcli6lfto8dO88aS_4M-Q ;
+to : gh_1d96b7817eb3 ;
+time : 1444756439 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4fcli6lfto8dO88aS_4M-Q ;
+createtime : 1444756439 ;
+msgtype : event ;
+latitude : 22.909563 ;
+longitude : 113.657425 ;
+precision : 40.000000 ;
+location_x : 22.909563 ;
+location_y : 113.657425 ;
+
+2015-10-14 01:14:00 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 01:14:00 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 01:15:23 trace :
+------------
+Array:
+from : o841pt4fcli6lfto8dO88aS_4M-Q ;
+to : gh_1d96b7817eb3 ;
+time : 1444756523 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4fcli6lfto8dO88aS_4M-Q ;
+createtime : 1444756523 ;
+msgtype : event ;
+latitude : 22.909575 ;
+longitude : 113.657333 ;
+precision : 40.000000 ;
+location_x : 22.909575 ;
+location_y : 113.657333 ;
+
+2015-10-14 01:15:23 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 01:15:23 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 01:36:05 trace :
+------------
+Array:
+from : o841ptw3PYZRuoZHuDdR5XwAufRA ;
+to : gh_1d96b7817eb3 ;
+time : 1444757765 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw3PYZRuoZHuDdR5XwAufRA ;
+createtime : 1444757765 ;
+msgtype : event ;
+latitude : 22.903648 ;
+longitude : 113.660774 ;
+precision : 960.000000 ;
+location_x : 22.903648 ;
+location_y : 113.660774 ;
+
+2015-10-14 01:36:05 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 01:36:05 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 01:36:32 trace :
+------------
+Array:
+from : o841ptw3PYZRuoZHuDdR5XwAufRA ;
+to : gh_1d96b7817eb3 ;
+time : 1444757792 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw3PYZRuoZHuDdR5XwAufRA ;
+createtime : 1444757792 ;
+msgtype : event ;
+latitude : 22.903648 ;
+longitude : 113.660774 ;
+precision : 960.000000 ;
+location_x : 22.903648 ;
+location_y : 113.660774 ;
+
+2015-10-14 01:36:32 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 01:36:32 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 01:47:47 trace :
+------------
+Array:
+from : o841pt4fcli6lfto8dO88aS_4M-Q ;
+to : gh_1d96b7817eb3 ;
+time : 1444758467 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4fcli6lfto8dO88aS_4M-Q ;
+createtime : 1444758467 ;
+msgtype : event ;
+latitude : 22.909756 ;
+longitude : 113.657219 ;
+precision : 40.000000 ;
+location_x : 22.909756 ;
+location_y : 113.657219 ;
+
+2015-10-14 01:47:47 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 01:47:47 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 02:06:31 trace :
+------------
+Array:
+from : op5RFuGSVHsvrOjmz42U2lrh5Ejk ;
+to : gh_ca81d088dc8d ;
+time : 1444759591 ;
+type : event ;
+event : subscribe ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuGSVHsvrOjmz42U2lrh5Ejk ;
+createtime : 1444759591 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 02:06:31 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 02:06:31 response :
+------------
+
+2015-10-14 02:51:32 trace :
+------------
+Array:
+from : o841pt3CVVr_lA0Tt5GxfCAKFwXI ;
+to : gh_1d96b7817eb3 ;
+time : 1444762292 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3CVVr_lA0Tt5GxfCAKFwXI ;
+createtime : 1444762292 ;
+msgtype : event ;
+latitude : 22.912762 ;
+longitude : 113.664207 ;
+precision : 900.000000 ;
+location_x : 22.912762 ;
+location_y : 113.664207 ;
+
+2015-10-14 02:51:32 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 02:51:32 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 02:51:37 trace :
+------------
+Array:
+from : o841pt3CVVr_lA0Tt5GxfCAKFwXI ;
+to : gh_1d96b7817eb3 ;
+time : 1444762297 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3CVVr_lA0Tt5GxfCAKFwXI ;
+createtime : 1444762297 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 02:51:37 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 02:51:37 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt3CVVr_lA0Tt5GxfCAKFwXI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 02:52:28 trace :
+------------
+Array:
+from : o841pt5JvcoUF71MbANPIGecXxys ;
+to : gh_1d96b7817eb3 ;
+time : 1444762348 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5JvcoUF71MbANPIGecXxys ;
+createtime : 1444762348 ;
+msgtype : event ;
+latitude : 22.909422 ;
+longitude : 113.657486 ;
+precision : 65.000000 ;
+location_x : 22.909422 ;
+location_y : 113.657486 ;
+
+2015-10-14 02:52:28 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 02:52:28 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 02:54:23 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444762463 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444762463 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 02:54:23 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 02:54:23 response :
+------------
+
+2015-10-14 02:54:30 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444762470 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444762470 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 02:54:30 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 02:54:30 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 02:55:20 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444762520 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444762520 ;
+msgtype : event ;
+latitude : 22.909613 ;
+longitude : 113.657455 ;
+precision : 65.000000 ;
+location_x : 22.909613 ;
+location_y : 113.657455 ;
+
+2015-10-14 02:55:20 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 02:55:20 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 02:59:47 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444762787 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444762787 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 02:59:47 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 02:59:47 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 02:59:58 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444762798 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444762798 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 02:59:58 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 02:59:58 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 03:01:07 trace :
+------------
+Array:
+from : o841pt3Q89lH29846CxwghjNPY74 ;
+to : gh_1d96b7817eb3 ;
+time : 1444762867 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3Q89lH29846CxwghjNPY74 ;
+createtime : 1444762867 ;
+msgtype : event ;
+latitude : 22.910288 ;
+longitude : 113.666534 ;
+precision : 40.000000 ;
+location_x : 22.910288 ;
+location_y : 113.666534 ;
+
+2015-10-14 03:01:07 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:01:07 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 03:01:22 trace :
+------------
+Array:
+from : o841pt3Q89lH29846CxwghjNPY74 ;
+to : gh_1d96b7817eb3 ;
+time : 1444762882 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3Q89lH29846CxwghjNPY74 ;
+createtime : 1444762882 ;
+msgtype : event ;
+latitude : 22.910288 ;
+longitude : 113.666534 ;
+precision : 40.000000 ;
+location_x : 22.910288 ;
+location_y : 113.666534 ;
+
+2015-10-14 03:01:22 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:01:22 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 03:01:31 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444762891 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444762891 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 03:01:31 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 03:01:31 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 03:01:36 trace :
+------------
+Array:
+from : o841pt3Q89lH29846CxwghjNPY74 ;
+to : gh_1d96b7817eb3 ;
+time : 1444762896 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3Q89lH29846CxwghjNPY74 ;
+createtime : 1444762896 ;
+msgtype : event ;
+latitude : 22.910290 ;
+longitude : 113.666573 ;
+precision : 40.000000 ;
+location_x : 22.910290 ;
+location_y : 113.666573 ;
+
+2015-10-14 03:01:36 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:01:36 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 03:01:38 trace :
+------------
+Array:
+from : o841pt3Q89lH29846CxwghjNPY74 ;
+to : gh_1d96b7817eb3 ;
+time : 1444762898 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3Q89lH29846CxwghjNPY74 ;
+createtime : 1444762898 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 03:01:38 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 03:01:38 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt3Q89lH29846CxwghjNPY74 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 03:03:48 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444763028 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444763028 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-10-14 03:03:48 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 03:03:48 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 03:05:41 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444763141 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444763141 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-10-14 03:05:41 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 03:05:41 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 03:05:57 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444763157 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444763157 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=dianjia&m=jufeng_wcy ;
+
+2015-10-14 03:05:57 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 03:05:57 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 03:06:12 trace :
+------------
+Array:
+from : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+to : gh_1d96b7817eb3 ;
+time : 1444763172 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+createtime : 1444763172 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 03:06:12 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 03:06:12 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Oi1yGoUK4ZgkYJzGCifSc ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 03:08:07 trace :
+------------
+Array:
+from : op5RFuNWn58862z1fmCGvddG6MQA ;
+to : gh_ca81d088dc8d ;
+time : 1444763287 ;
+type : event ;
+event : user_enter_session_from_card ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuNWn58862z1fmCGvddG6MQA ;
+createtime : 1444763287 ;
+msgtype : event ;
+cardid : pp5RFuPQhOLjRQiMp5MLCEck2YIc ;
+usercardcode : 079380311294 ;
+
+2015-10-14 03:08:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 03:08:07 response :
+------------
+
+2015-10-14 03:33:58 trace :
+------------
+Array:
+from : o841ptzR88yCDwLuAM_VYGs0Z9UI ;
+to : gh_1d96b7817eb3 ;
+time : 1444764838 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzR88yCDwLuAM_VYGs0Z9UI ;
+createtime : 1444764838 ;
+msgtype : event ;
+latitude : 22.928473 ;
+longitude : 113.656509 ;
+precision : 65.000000 ;
+location_x : 22.928473 ;
+location_y : 113.656509 ;
+
+2015-10-14 03:33:58 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:33:58 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 03:41:09 trace :
+------------
+Array:
+from : o841pt5JvcoUF71MbANPIGecXxys ;
+to : gh_1d96b7817eb3 ;
+time : 1444765269 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5JvcoUF71MbANPIGecXxys ;
+createtime : 1444765269 ;
+msgtype : event ;
+latitude : 22.909441 ;
+longitude : 113.657364 ;
+precision : 65.000000 ;
+location_x : 22.909441 ;
+location_y : 113.657364 ;
+
+2015-10-14 03:41:09 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:41:09 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 03:47:40 trace :
+------------
+Array:
+from : o841pt8P0zpzHusQFuaACcGIUYuo ;
+to : gh_1d96b7817eb3 ;
+time : 1444765660 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8P0zpzHusQFuaACcGIUYuo ;
+createtime : 1444765660 ;
+msgtype : event ;
+latitude : 22.905453 ;
+longitude : 113.656929 ;
+precision : 1860.000000 ;
+location_x : 22.905453 ;
+location_y : 113.656929 ;
+
+2015-10-14 03:47:40 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:47:40 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 03:48:03 trace :
+------------
+Array:
+from : o841pt8P0zpzHusQFuaACcGIUYuo ;
+to : gh_1d96b7817eb3 ;
+time : 1444765683 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8P0zpzHusQFuaACcGIUYuo ;
+createtime : 1444765683 ;
+msgtype : event ;
+latitude : 22.905453 ;
+longitude : 113.656929 ;
+precision : 1860.000000 ;
+location_x : 22.905453 ;
+location_y : 113.656929 ;
+
+2015-10-14 03:48:03 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:48:03 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 03:48:16 trace :
+------------
+Array:
+from : o841pt8P0zpzHusQFuaACcGIUYuo ;
+to : gh_1d96b7817eb3 ;
+time : 1444765696 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8P0zpzHusQFuaACcGIUYuo ;
+createtime : 1444765696 ;
+msgtype : event ;
+latitude : 22.905453 ;
+longitude : 113.656929 ;
+precision : 1860.000000 ;
+location_x : 22.905453 ;
+location_y : 113.656929 ;
+
+2015-10-14 03:48:16 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:48:16 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 03:48:30 trace :
+------------
+Array:
+from : o841pt8P0zpzHusQFuaACcGIUYuo ;
+to : gh_1d96b7817eb3 ;
+time : 1444765710 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8P0zpzHusQFuaACcGIUYuo ;
+createtime : 1444765710 ;
+msgtype : event ;
+latitude : 22.905453 ;
+longitude : 113.656929 ;
+precision : 1860.000000 ;
+location_x : 22.905453 ;
+location_y : 113.656929 ;
+
+2015-10-14 03:48:30 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 03:48:30 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 05:25:07 trace :
+------------
+Array:
+from : o841pt3EhL2ifym2YBAGO10KcTc4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444771507 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3EhL2ifym2YBAGO10KcTc4 ;
+createtime : 1444771507 ;
+msgtype : event ;
+latitude : 23.119272 ;
+longitude : 113.215393 ;
+precision : 40.000000 ;
+location_x : 23.119272 ;
+location_y : 113.215393 ;
+
+2015-10-14 05:25:07 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 05:25:07 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 06:30:07 trace :
+------------
+Array:
+from : o841pt9qow_qmLRUi6dTC4oKHWVA ;
+to : gh_1d96b7817eb3 ;
+time : 1444775407 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9qow_qmLRUi6dTC4oKHWVA ;
+createtime : 1444775407 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 06:30:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 06:30:07 response :
+------------
+
+2015-10-14 06:30:11 trace :
+------------
+Array:
+from : o841pt9qow_qmLRUi6dTC4oKHWVA ;
+to : gh_1d96b7817eb3 ;
+time : 1444775411 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt9qow_qmLRUi6dTC4oKHWVA ;
+createtime : 1444775411 ;
+msgtype : event ;
+latitude : 22.907150 ;
+longitude : 113.654327 ;
+precision : 86.516228 ;
+location_x : 22.907150 ;
+location_y : 113.654327 ;
+
+2015-10-14 06:30:11 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 06:30:11 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 07:17:29 trace :
+------------
+Array:
+from : o841pt-f3D_mXDkiB7yuP3UtJ_gk ;
+to : gh_1d96b7817eb3 ;
+time : 1444778249 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-f3D_mXDkiB7yuP3UtJ_gk ;
+createtime : 1444778249 ;
+msgtype : event ;
+latitude : 22.920732 ;
+longitude : 113.646240 ;
+precision : 65.000000 ;
+location_x : 22.920732 ;
+location_y : 113.646240 ;
+
+2015-10-14 07:17:29 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 07:17:29 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 08:04:17 trace :
+------------
+Array:
+from : o841pt8jTXEZIxBCMc__mryqqb1E ;
+to : gh_1d96b7817eb3 ;
+time : 1444781057 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8jTXEZIxBCMc__mryqqb1E ;
+createtime : 1444781057 ;
+msgtype : event ;
+latitude : 22.877260 ;
+longitude : 113.650703 ;
+precision : 40.000000 ;
+location_x : 22.877260 ;
+location_y : 113.650703 ;
+
+2015-10-14 08:04:17 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 08:04:17 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 08:04:44 trace :
+------------
+Array:
+from : o841pt8jTXEZIxBCMc__mryqqb1E ;
+to : gh_1d96b7817eb3 ;
+time : 1444781084 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8jTXEZIxBCMc__mryqqb1E ;
+createtime : 1444781084 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 08:04:44 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 08:04:44 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt8jTXEZIxBCMc__mryqqb1E ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 08:05:21 trace :
+------------
+Array:
+from : o841pt8jTXEZIxBCMc__mryqqb1E ;
+to : gh_1d96b7817eb3 ;
+time : 1444781121 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8jTXEZIxBCMc__mryqqb1E ;
+createtime : 1444781121 ;
+msgtype : event ;
+latitude : 22.880251 ;
+longitude : 113.660797 ;
+precision : 920.000000 ;
+location_x : 22.880251 ;
+location_y : 113.660797 ;
+
+2015-10-14 08:05:21 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 08:05:21 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 08:15:43 trace :
+------------
+Array:
+from : o841ptz149Gy6mZ5sR04CFokk7-s ;
+to : gh_1d96b7817eb3 ;
+time : 1444781743 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptz149Gy6mZ5sR04CFokk7-s ;
+createtime : 1444781743 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 08:15:43 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 08:15:43 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptz149Gy6mZ5sR04CFokk7-s ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 08:16:46 trace :
+------------
+Array:
+from : o841ptz149Gy6mZ5sR04CFokk7-s ;
+to : gh_1d96b7817eb3 ;
+time : 1444781806 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptz149Gy6mZ5sR04CFokk7-s ;
+createtime : 1444781806 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 08:16:46 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 08:16:46 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptz149Gy6mZ5sR04CFokk7-s ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 08:22:00 trace :
+------------
+Array:
+from : o841ptzb4Py4J74cxWHYjtRoGclA ;
+to : gh_1d96b7817eb3 ;
+time : 1444782120 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzb4Py4J74cxWHYjtRoGclA ;
+createtime : 1444782120 ;
+msgtype : event ;
+latitude : 22.909771 ;
+longitude : 113.656815 ;
+precision : 1430.000000 ;
+location_x : 22.909771 ;
+location_y : 113.656815 ;
+
+2015-10-14 08:22:00 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 08:22:00 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 08:22:17 trace :
+------------
+Array:
+from : o841ptzb4Py4J74cxWHYjtRoGclA ;
+to : gh_1d96b7817eb3 ;
+time : 1444782137 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzb4Py4J74cxWHYjtRoGclA ;
+createtime : 1444782137 ;
+msgtype : event ;
+latitude : 22.909771 ;
+longitude : 113.656815 ;
+precision : 1430.000000 ;
+location_x : 22.909771 ;
+location_y : 113.656815 ;
+
+2015-10-14 08:22:17 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 08:22:17 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 09:01:52 trace :
+------------
+Array:
+from : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444784512 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+createtime : 1444784512 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 09:01:52 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 09:01:52 response :
+------------
+
+2015-10-14 09:01:58 trace :
+------------
+Array:
+from : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444784518 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+createtime : 1444784518 ;
+msgtype : event ;
+latitude : 22.913593 ;
+longitude : 113.658325 ;
+precision : 1010.000000 ;
+location_x : 22.913593 ;
+location_y : 113.658325 ;
+
+2015-10-14 09:01:58 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 09:01:58 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 09:02:09 trace :
+------------
+Array:
+from : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444784529 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+createtime : 1444784529 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-10-14 09:02:09 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 09:02:09 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 09:02:18 trace :
+------------
+Array:
+from : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444784538 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+createtime : 1444784538 ;
+msgtype : event ;
+latitude : 22.913593 ;
+longitude : 113.658325 ;
+precision : 1010.000000 ;
+location_x : 22.913593 ;
+location_y : 113.658325 ;
+
+2015-10-14 09:02:18 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 09:02:18 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 09:02:20 trace :
+------------
+Array:
+from : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444784540 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+createtime : 1444784540 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 09:02:20 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 09:02:20 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 09:02:39 trace :
+------------
+Array:
+from : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444784559 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_a-WW1IEfVDcYiN0r9k5f0 ;
+createtime : 1444784559 ;
+msgtype : event ;
+latitude : 22.912296 ;
+longitude : 113.657211 ;
+precision : 90.000000 ;
+location_x : 22.912296 ;
+location_y : 113.657211 ;
+
+2015-10-14 09:02:39 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 09:02:39 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 09:10:46 trace :
+------------
+Array:
+from : o841ptw3PYZRuoZHuDdR5XwAufRA ;
+to : gh_1d96b7817eb3 ;
+time : 1444785046 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw3PYZRuoZHuDdR5XwAufRA ;
+createtime : 1444785046 ;
+msgtype : event ;
+latitude : 22.901560 ;
+longitude : 113.661064 ;
+precision : 900.000000 ;
+location_x : 22.901560 ;
+location_y : 113.661064 ;
+
+2015-10-14 09:10:46 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 09:10:46 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 09:12:30 trace :
+------------
+Array:
+from : o841ptw3PYZRuoZHuDdR5XwAufRA ;
+to : gh_1d96b7817eb3 ;
+time : 1444785150 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw3PYZRuoZHuDdR5XwAufRA ;
+createtime : 1444785150 ;
+msgtype : event ;
+latitude : 22.901560 ;
+longitude : 113.661064 ;
+precision : 900.000000 ;
+location_x : 22.901560 ;
+location_y : 113.661064 ;
+
+2015-10-14 09:12:30 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 09:12:30 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 10:25:07 trace :
+------------
+Array:
+from : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444789506 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+createtime : 1444789506 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 10:25:07 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 10:25:07 response :
+------------
+
+2015-10-14 10:25:11 trace :
+------------
+Array:
+from : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444789511 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+createtime : 1444789511 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 10:25:11 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:25:11 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:25:17 trace :
+------------
+Array:
+from : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444789517 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+createtime : 1444789517 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 10:25:17 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:25:17 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:25:21 trace :
+------------
+Array:
+from : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444789521 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+createtime : 1444789521 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-10-14 10:25:21 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:25:21 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:25:43 trace :
+------------
+Array:
+from : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444789543 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+createtime : 1444789543 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 10:25:43 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:25:43 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:26:26 trace :
+------------
+Array:
+from : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444789586 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+createtime : 1444789586 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 10:26:26 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:26:26 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:26:34 trace :
+------------
+Array:
+from : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+to : gh_1d96b7817eb3 ;
+time : 1444789594 ;
+type : text ;
+event :  ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+createtime : 1444789594 ;
+msgtype : text ;
+content : 密码 ;
+msgid : 6205324056041039875 ;
+redirection :  ;
+source :  ;
+
+2015-10-14 10:26:34 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:26:34 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6nflQLoJ7dJEPqpMvKxhf0 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:30:40 trace :
+------------
+Array:
+from : op5RFuAkyA5BaeB0HoSqffjt14Kg ;
+to : gh_ca81d088dc8d ;
+time : 1444789840 ;
+type : event ;
+event : user_enter_session_from_card ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuAkyA5BaeB0HoSqffjt14Kg ;
+createtime : 1444789840 ;
+msgtype : event ;
+cardid : pp5RFuG5bCJG1WfepJrYTdLsk_6A ;
+usercardcode : 680389524225 ;
+
+2015-10-14 10:30:40 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 10:30:40 response :
+------------
+
+2015-10-14 10:35:52 trace :
+------------
+Array:
+from : o841pt84BJfrvkidBQi1I8JeM1jU ;
+to : gh_1d96b7817eb3 ;
+time : 1444790152 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt84BJfrvkidBQi1I8JeM1jU ;
+createtime : 1444790152 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 10:35:52 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:35:52 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt84BJfrvkidBQi1I8JeM1jU ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:36:48 trace :
+------------
+Array:
+from : o841pt84BJfrvkidBQi1I8JeM1jU ;
+to : gh_1d96b7817eb3 ;
+time : 1444790208 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt84BJfrvkidBQi1I8JeM1jU ;
+createtime : 1444790208 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 10:36:48 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:36:48 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt84BJfrvkidBQi1I8JeM1jU ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:37:06 trace :
+------------
+Array:
+from : o841pt84BJfrvkidBQi1I8JeM1jU ;
+to : gh_1d96b7817eb3 ;
+time : 1444790226 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt84BJfrvkidBQi1I8JeM1jU ;
+createtime : 1444790226 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 10:37:06 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:37:06 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt84BJfrvkidBQi1I8JeM1jU ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 10:37:14 trace :
+------------
+Array:
+from : o841pt84BJfrvkidBQi1I8JeM1jU ;
+to : gh_1d96b7817eb3 ;
+time : 1444790234 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt84BJfrvkidBQi1I8JeM1jU ;
+createtime : 1444790234 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-10-14 10:37:14 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 10:37:14 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt84BJfrvkidBQi1I8JeM1jU ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:03:22 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791802 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791802 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 11:03:22 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 11:03:22 response :
+------------
+
+2015-10-14 11:03:25 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791804 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791804 ;
+msgtype : event ;
+latitude : 22.948856 ;
+longitude : 113.673004 ;
+precision : 40.000000 ;
+location_x : 22.948856 ;
+location_y : 113.673004 ;
+
+2015-10-14 11:03:25 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 11:03:25 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 11:03:50 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791830 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791830 ;
+msgtype : event ;
+latitude : 22.948856 ;
+longitude : 113.673004 ;
+precision : 40.000000 ;
+location_x : 22.948856 ;
+location_y : 113.673004 ;
+
+2015-10-14 11:03:50 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 11:03:50 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 11:03:52 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791832 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791832 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-10-14 11:03:52 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:03:52 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:03:57 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791837 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791837 ;
+msgtype : event ;
+latitude : 22.948858 ;
+longitude : 113.673012 ;
+precision : 40.000000 ;
+location_x : 22.948858 ;
+location_y : 113.673012 ;
+
+2015-10-14 11:03:57 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 11:03:57 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 11:03:57 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791837 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791837 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 11:03:57 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:03:57 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:04:03 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791843 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791843 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 11:04:03 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:04:03 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:04:16 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791856 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791856 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-10-14 11:04:16 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:04:16 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:04:16 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791856 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791856 ;
+msgtype : event ;
+latitude : 22.948854 ;
+longitude : 113.673004 ;
+precision : 40.000000 ;
+location_x : 22.948854 ;
+location_y : 113.673004 ;
+
+2015-10-14 11:04:16 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 11:04:16 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 11:04:23 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791863 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791863 ;
+msgtype : event ;
+latitude : 22.948881 ;
+longitude : 113.672997 ;
+precision : 70.000000 ;
+location_x : 22.948881 ;
+location_y : 113.672997 ;
+
+2015-10-14 11:04:23 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 11:04:23 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 11:04:24 trace :
+------------
+Array:
+from : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444791864 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+createtime : 1444791864 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 11:04:24 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:04:24 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwD9u8LwLrqKvPtqSNmFPe8 ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:14:59 trace :
+------------
+Array:
+from : o841pt0IxaSZ2F3OsXMmqCazRnWw ;
+to : gh_1d96b7817eb3 ;
+time : 1444792499 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0IxaSZ2F3OsXMmqCazRnWw ;
+createtime : 1444792499 ;
+msgtype : event ;
+latitude : 22.909515 ;
+longitude : 113.657372 ;
+precision : 40.000000 ;
+location_x : 22.909515 ;
+location_y : 113.657372 ;
+
+2015-10-14 11:14:59 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 11:14:59 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 11:15:02 trace :
+------------
+Array:
+from : o841pt0IxaSZ2F3OsXMmqCazRnWw ;
+to : gh_1d96b7817eb3 ;
+time : 1444792502 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0IxaSZ2F3OsXMmqCazRnWw ;
+createtime : 1444792502 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 11:15:02 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:15:02 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0IxaSZ2F3OsXMmqCazRnWw ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:15:32 trace :
+------------
+Array:
+from : o841pt0IxaSZ2F3OsXMmqCazRnWw ;
+to : gh_1d96b7817eb3 ;
+time : 1444792532 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0IxaSZ2F3OsXMmqCazRnWw ;
+createtime : 1444792532 ;
+msgtype : event ;
+latitude : 22.909513 ;
+longitude : 113.657372 ;
+precision : 40.000000 ;
+location_x : 22.909513 ;
+location_y : 113.657372 ;
+
+2015-10-14 11:15:32 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 11:15:32 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 11:34:08 trace :
+------------
+Array:
+from : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+to : gh_1d96b7817eb3 ;
+time : 1444793648 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+createtime : 1444793648 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 11:34:08 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:34:08 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:34:37 trace :
+------------
+Array:
+from : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+to : gh_1d96b7817eb3 ;
+time : 1444793677 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+createtime : 1444793677 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 11:34:37 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:34:37 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:37:34 trace :
+------------
+Array:
+from : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+to : gh_1d96b7817eb3 ;
+time : 1444793854 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+createtime : 1444793854 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 11:37:34 trace :
+------------
+Array:
+from : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+to : gh_1d96b7817eb3 ;
+time : 1444793854 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+createtime : 1444793854 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 11:37:34 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:37:34 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:37:34 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:37:34 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:37:39 trace :
+------------
+Array:
+from : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+to : gh_1d96b7817eb3 ;
+time : 1444793859 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+createtime : 1444793859 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 11:37:39 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:37:39 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:38:27 trace :
+------------
+Array:
+from : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+to : gh_1d96b7817eb3 ;
+time : 1444793907 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+createtime : 1444793907 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 11:38:27 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:38:27 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:38:39 trace :
+------------
+Array:
+from : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+to : gh_1d96b7817eb3 ;
+time : 1444793919 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+createtime : 1444793919 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=dianjia&m=jufeng_wcy ;
+
+2015-10-14 11:38:39 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 11:38:39 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyPkGVd91axVLxu-2WmaJ3I ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 11:49:54 trace :
+------------
+Array:
+from : o841pt5TokOJGcJ1fvmE_Gy8ql2w ;
+to : gh_1d96b7817eb3 ;
+time : 1444794594 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt5TokOJGcJ1fvmE_Gy8ql2w ;
+createtime : 1444794594 ;
+msgtype : event ;
+latitude : 22.909594 ;
+longitude : 113.657333 ;
+precision : 40.000000 ;
+location_x : 22.909594 ;
+location_y : 113.657333 ;
+
+2015-10-14 11:49:54 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 11:49:54 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 12:56:56 trace :
+------------
+Array:
+from : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+to : gh_1d96b7817eb3 ;
+time : 1444798616 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+createtime : 1444798616 ;
+msgtype : event ;
+latitude : 22.909634 ;
+longitude : 113.657349 ;
+precision : 40.000000 ;
+location_x : 22.909634 ;
+location_y : 113.657349 ;
+
+2015-10-14 12:56:56 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 12:56:56 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 12:58:03 trace :
+------------
+Array:
+from : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+to : gh_1d96b7817eb3 ;
+time : 1444798683 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+createtime : 1444798683 ;
+msgtype : event ;
+latitude : 22.907923 ;
+longitude : 113.657082 ;
+precision : 1400.000000 ;
+location_x : 22.907923 ;
+location_y : 113.657082 ;
+
+2015-10-14 12:58:03 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 12:58:03 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 12:58:09 trace :
+------------
+Array:
+from : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+to : gh_1d96b7817eb3 ;
+time : 1444798689 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+createtime : 1444798689 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 12:58:09 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 12:58:09 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 12:58:17 trace :
+------------
+Array:
+from : o841pt_th8FJNeUflaXTtmfKv2Z8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444798697 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_th8FJNeUflaXTtmfKv2Z8 ;
+createtime : 1444798697 ;
+msgtype : event ;
+latitude : 22.886175 ;
+longitude : 113.656525 ;
+precision : 40.000000 ;
+location_x : 22.886175 ;
+location_y : 113.656525 ;
+
+2015-10-14 12:58:17 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 12:58:17 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 12:58:24 trace :
+------------
+Array:
+from : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+to : gh_1d96b7817eb3 ;
+time : 1444798704 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+createtime : 1444798704 ;
+msgtype : event ;
+latitude : 22.907923 ;
+longitude : 113.657082 ;
+precision : 1400.000000 ;
+location_x : 22.907923 ;
+location_y : 113.657082 ;
+
+2015-10-14 12:58:24 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 12:58:24 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 12:58:33 trace :
+------------
+Array:
+from : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+to : gh_1d96b7817eb3 ;
+time : 1444798713 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+createtime : 1444798713 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=dianjia&m=jufeng_wcy ;
+
+2015-10-14 12:58:33 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 12:58:33 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 12:59:04 trace :
+------------
+Array:
+from : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+to : gh_1d96b7817eb3 ;
+time : 1444798744 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+createtime : 1444798744 ;
+msgtype : event ;
+latitude : 22.907923 ;
+longitude : 113.657082 ;
+precision : 1400.000000 ;
+location_x : 22.907923 ;
+location_y : 113.657082 ;
+
+2015-10-14 12:59:04 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 12:59:04 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 13:01:40 trace :
+------------
+Array:
+from : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+to : gh_1d96b7817eb3 ;
+time : 1444798900 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82fDFUeFb_98FyVOuRZ2bk ;
+createtime : 1444798900 ;
+msgtype : event ;
+latitude : 22.909517 ;
+longitude : 113.657463 ;
+precision : 40.000000 ;
+location_x : 22.909517 ;
+location_y : 113.657463 ;
+
+2015-10-14 13:01:40 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 13:01:40 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:18:15 trace :
+------------
+Array:
+from : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+to : gh_1d96b7817eb3 ;
+time : 1444803495 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+createtime : 1444803495 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 14:18:15 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 14:18:15 response :
+------------
+
+2015-10-14 14:18:29 trace :
+------------
+Array:
+from : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+to : gh_1d96b7817eb3 ;
+time : 1444803509 ;
+type : text ;
+event :  ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+createtime : 1444803509 ;
+msgtype : text ;
+content : 我要上网 ;
+msgid : 6205383820510966656 ;
+redirection :  ;
+source :  ;
+
+2015-10-14 14:18:29 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 14:18:29 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 14:22:02 trace :
+------------
+Array:
+from : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+to : gh_1d96b7817eb3 ;
+time : 1444803722 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+createtime : 1444803722 ;
+msgtype : event ;
+latitude : 22.934568 ;
+longitude : 113.700600 ;
+precision : 70.000000 ;
+location_x : 22.934568 ;
+location_y : 113.700600 ;
+
+2015-10-14 14:22:02 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:22:02 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:22:12 trace :
+------------
+Array:
+from : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+to : gh_1d96b7817eb3 ;
+time : 1444803731 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+createtime : 1444803731 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 14:22:12 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 14:22:12 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 14:23:09 trace :
+------------
+Array:
+from : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+to : gh_1d96b7817eb3 ;
+time : 1444803789 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+createtime : 1444803789 ;
+msgtype : event ;
+latitude : 22.934540 ;
+longitude : 113.700462 ;
+precision : 40.000000 ;
+location_x : 22.934540 ;
+location_y : 113.700462 ;
+
+2015-10-14 14:23:09 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:23:09 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:23:12 trace :
+------------
+Array:
+from : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+to : gh_1d96b7817eb3 ;
+time : 1444803791 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+createtime : 1444803791 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 14:23:12 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 14:23:12 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 14:24:16 trace :
+------------
+Array:
+from : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+to : gh_1d96b7817eb3 ;
+time : 1444803856 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8L8G7WypxvPUZG5SK5ZrsM ;
+createtime : 1444803856 ;
+msgtype : event ;
+latitude : 22.934540 ;
+longitude : 113.700462 ;
+precision : 40.000000 ;
+location_x : 22.934540 ;
+location_y : 113.700462 ;
+
+2015-10-14 14:24:16 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:24:16 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:33:09 trace :
+------------
+Array:
+from : o841pt42hTiSRu7qeBtiqx-Bu--c ;
+to : gh_1d96b7817eb3 ;
+time : 1444804389 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt42hTiSRu7qeBtiqx-Bu--c ;
+createtime : 1444804389 ;
+msgtype : event ;
+latitude : 22.918251 ;
+longitude : 113.655464 ;
+precision : 990.000000 ;
+location_x : 22.918251 ;
+location_y : 113.655464 ;
+
+2015-10-14 14:33:09 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:33:09 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:45:16 trace :
+------------
+Array:
+from : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444805116 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+createtime : 1444805116 ;
+msgtype : event ;
+latitude : 22.903337 ;
+longitude : 113.663307 ;
+precision : 40.000000 ;
+location_x : 22.903337 ;
+location_y : 113.663307 ;
+
+2015-10-14 14:45:16 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:45:16 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:45:43 trace :
+------------
+Array:
+from : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444805143 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+createtime : 1444805143 ;
+msgtype : event ;
+latitude : 22.903337 ;
+longitude : 113.663307 ;
+precision : 40.000000 ;
+location_x : 22.903337 ;
+location_y : 113.663307 ;
+
+2015-10-14 14:45:43 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:45:43 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:45:47 trace :
+------------
+Array:
+from : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444805147 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+createtime : 1444805147 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 14:45:47 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 14:45:47 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptw4oUfnqcY4qOCcfwSBs9rQ ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 14:52:02 trace :
+------------
+Array:
+from : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+to : gh_1d96b7817eb3 ;
+time : 1444805522 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+createtime : 1444805522 ;
+msgtype : event ;
+latitude : 22.930784 ;
+longitude : 113.650398 ;
+precision : 1030.000000 ;
+location_x : 22.930784 ;
+location_y : 113.650398 ;
+
+2015-10-14 14:52:02 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:52:02 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:53:06 trace :
+------------
+Array:
+from : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+to : gh_1d96b7817eb3 ;
+time : 1444805586 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+createtime : 1444805586 ;
+msgtype : event ;
+latitude : 22.930784 ;
+longitude : 113.650398 ;
+precision : 1030.000000 ;
+location_x : 22.930784 ;
+location_y : 113.650398 ;
+
+2015-10-14 14:53:06 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:53:06 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 14:53:15 trace :
+------------
+Array:
+from : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+to : gh_1d96b7817eb3 ;
+time : 1444805595 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+createtime : 1444805595 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 14:53:15 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 14:53:15 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 14:53:25 trace :
+------------
+Array:
+from : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+to : gh_1d96b7817eb3 ;
+time : 1444805605 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt82j_Iyzn-s58cKOq1TdXvY ;
+createtime : 1444805605 ;
+msgtype : event ;
+latitude : 22.930784 ;
+longitude : 113.650398 ;
+precision : 1030.000000 ;
+location_x : 22.930784 ;
+location_y : 113.650398 ;
+
+2015-10-14 14:53:25 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 14:53:25 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 15:06:08 trace :
+------------
+Array:
+from : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+to : gh_1d96b7817eb3 ;
+time : 1444806368 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+createtime : 1444806368 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 15:06:08 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 15:06:08 response :
+------------
+
+2015-10-14 15:06:19 trace :
+------------
+Array:
+from : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+to : gh_1d96b7817eb3 ;
+time : 1444806379 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+createtime : 1444806379 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-10-14 15:06:19 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 15:06:19 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 15:06:34 trace :
+------------
+Array:
+from : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+to : gh_1d96b7817eb3 ;
+time : 1444806394 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+createtime : 1444806394 ;
+msgtype : event ;
+latitude : 22.909630 ;
+longitude : 113.657333 ;
+precision : 40.000000 ;
+location_x : 22.909630 ;
+location_y : 113.657333 ;
+
+2015-10-14 15:06:34 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 15:06:34 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 15:06:35 trace :
+------------
+Array:
+from : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+to : gh_1d96b7817eb3 ;
+time : 1444806395 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+createtime : 1444806395 ;
+msgtype : event ;
+eventkey : http://120.24.51.49/app/index.php?c=mc&a=home&i=2 ;
+
+2015-10-14 15:06:35 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 15:06:35 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 15:06:39 trace :
+------------
+Array:
+from : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+to : gh_1d96b7817eb3 ;
+time : 1444806399 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt63h3K_pfHjaX7LH9OTAaxk ;
+createtime : 1444806399 ;
+msgtype : event ;
+latitude : 22.909630 ;
+longitude : 113.657333 ;
+precision : 40.000000 ;
+location_x : 22.909630 ;
+location_y : 113.657333 ;
+
+2015-10-14 15:06:39 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 15:06:39 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 15:06:50 trace :
+------------
+Array:
+from : o841pt0Ua6aSwaRzyw6cbhhlOlnc ;
+to : gh_1d96b7817eb3 ;
+time : 1444806410 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0Ua6aSwaRzyw6cbhhlOlnc ;
+createtime : 1444806410 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 15:06:50 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 15:06:50 response :
+------------
+
+2015-10-14 15:08:21 trace :
+------------
+Array:
+from : o841pt0ZbkB7-p6kLxva64O82nx4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444806501 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0ZbkB7-p6kLxva64O82nx4 ;
+createtime : 1444806501 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 15:08:21 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 15:08:21 response :
+------------
+
+2015-10-14 16:04:24 trace :
+------------
+Array:
+from : o841pt_cUdPLNnPTllxO-iVkGyBQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444809863 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_cUdPLNnPTllxO-iVkGyBQ ;
+createtime : 1444809863 ;
+msgtype : event ;
+latitude : 22.909695 ;
+longitude : 113.657310 ;
+precision : 40.000000 ;
+location_x : 22.909695 ;
+location_y : 113.657310 ;
+
+2015-10-14 16:04:24 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 16:04:24 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 16:10:20 trace :
+------------
+Array:
+from : o841pt_cUdPLNnPTllxO-iVkGyBQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444810220 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_cUdPLNnPTllxO-iVkGyBQ ;
+createtime : 1444810220 ;
+msgtype : event ;
+latitude : 22.909649 ;
+longitude : 113.657349 ;
+precision : 40.000000 ;
+location_x : 22.909649 ;
+location_y : 113.657349 ;
+
+2015-10-14 16:10:20 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 16:10:20 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 16:27:58 trace :
+------------
+Array:
+from : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+to : gh_1d96b7817eb3 ;
+time : 1444811278 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+createtime : 1444811278 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 16:27:58 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 16:27:58 response :
+------------
+
+2015-10-14 16:28:06 trace :
+------------
+Array:
+from : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+to : gh_1d96b7817eb3 ;
+time : 1444811286 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+createtime : 1444811286 ;
+msgtype : event ;
+latitude : 22.912846 ;
+longitude : 113.657837 ;
+precision : 1770.000000 ;
+location_x : 22.912846 ;
+location_y : 113.657837 ;
+
+2015-10-14 16:28:06 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 16:28:06 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 16:28:14 trace :
+------------
+Array:
+from : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+to : gh_1d96b7817eb3 ;
+time : 1444811293 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+createtime : 1444811293 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 16:28:14 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 16:28:14 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+MsgType : transfer_customer_service ;
+
+2015-10-14 16:29:05 trace :
+------------
+Array:
+from : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+to : gh_1d96b7817eb3 ;
+time : 1444811345 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzqKncI52ZNS6D-3m4aSd8k ;
+createtime : 1444811345 ;
+msgtype : event ;
+latitude : 22.912846 ;
+longitude : 113.657837 ;
+precision : 1770.000000 ;
+location_x : 22.912846 ;
+location_y : 113.657837 ;
+
+2015-10-14 16:29:05 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 16:29:05 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 16:47:05 trace :
+------------
+Array:
+from : o841ptyIBzxu8RTMI2jvbD36oOxA ;
+to : gh_1d96b7817eb3 ;
+time : 1444812425 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyIBzxu8RTMI2jvbD36oOxA ;
+createtime : 1444812425 ;
+msgtype : event ;
+latitude : 22.902018 ;
+longitude : 113.659592 ;
+precision : 65.000000 ;
+location_x : 22.902018 ;
+location_y : 113.659592 ;
+
+2015-10-14 16:47:05 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 16:47:05 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 16:47:26 trace :
+------------
+Array:
+from : o841ptyIBzxu8RTMI2jvbD36oOxA ;
+to : gh_1d96b7817eb3 ;
+time : 1444812446 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyIBzxu8RTMI2jvbD36oOxA ;
+createtime : 1444812446 ;
+msgtype : event ;
+latitude : 22.902018 ;
+longitude : 113.659592 ;
+precision : 65.000000 ;
+location_x : 22.902018 ;
+location_y : 113.659592 ;
+
+2015-10-14 16:47:26 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 16:47:26 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 17:57:58 trace :
+------------
+Array:
+from : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+to : gh_1d96b7817eb3 ;
+time : 1444816678 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+createtime : 1444816678 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 17:57:58 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 17:57:58 response :
+------------
+
+2015-10-14 17:58:02 trace :
+------------
+Array:
+from : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+to : gh_1d96b7817eb3 ;
+time : 1444816682 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+createtime : 1444816682 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 17:58:02 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 17:58:02 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 17:58:39 trace :
+------------
+Array:
+from : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+to : gh_1d96b7817eb3 ;
+time : 1444816718 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+createtime : 1444816718 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 17:58:39 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 17:58:39 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 17:58:53 trace :
+------------
+Array:
+from : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+to : gh_1d96b7817eb3 ;
+time : 1444816733 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+createtime : 1444816733 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 17:58:53 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 17:58:53 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 18:06:03 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817163 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817163 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 18:06:03 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 18:06:03 response :
+------------
+
+2015-10-14 18:06:13 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817173 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817173 ;
+msgtype : event ;
+latitude : 22.910894 ;
+longitude : 113.654579 ;
+precision : 40.000000 ;
+location_x : 22.910894 ;
+location_y : 113.654579 ;
+
+2015-10-14 18:06:13 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 18:06:13 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 18:06:18 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817178 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817178 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 18:06:18 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 18:06:18 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 18:06:39 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817199 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817199 ;
+msgtype : event ;
+latitude : 22.910820 ;
+longitude : 113.654488 ;
+precision : 40.000000 ;
+location_x : 22.910820 ;
+location_y : 113.654488 ;
+
+2015-10-14 18:06:39 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 18:06:39 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 18:06:46 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817206 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817206 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-10-14 18:06:46 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 18:06:46 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 18:07:39 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817258 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817258 ;
+msgtype : event ;
+latitude : 22.910866 ;
+longitude : 113.654533 ;
+precision : 40.000000 ;
+location_x : 22.910866 ;
+location_y : 113.654533 ;
+
+2015-10-14 18:07:39 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817258 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817258 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-10-14 18:07:39 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 18:07:39 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 18:07:39 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 18:07:39 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 18:11:30 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817490 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817490 ;
+msgtype : event ;
+latitude : 22.910799 ;
+longitude : 113.654495 ;
+precision : 40.000000 ;
+location_x : 22.910799 ;
+location_y : 113.654495 ;
+
+2015-10-14 18:11:30 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 18:11:30 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 18:11:47 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817507 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817507 ;
+msgtype : event ;
+latitude : 22.910799 ;
+longitude : 113.654495 ;
+precision : 40.000000 ;
+location_x : 22.910799 ;
+location_y : 113.654495 ;
+
+2015-10-14 18:11:47 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 18:11:47 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 18:12:16 trace :
+------------
+Array:
+from : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444817536 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3-Fsv--NP6Jgqf_UGi6LB4 ;
+createtime : 1444817536 ;
+msgtype : event ;
+latitude : 22.910786 ;
+longitude : 113.654495 ;
+precision : 40.000000 ;
+location_x : 22.910786 ;
+location_y : 113.654495 ;
+
+2015-10-14 18:12:16 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 18:12:16 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 18:30:07 trace :
+------------
+Array:
+from : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+to : gh_1d96b7817eb3 ;
+time : 1444818607 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+createtime : 1444818607 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 18:30:07 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 18:30:07 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt0gBRxTJlGAwkTHXWf4bSwM ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 19:38:42 trace :
+------------
+Array:
+from : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+to : gh_1d96b7817eb3 ;
+time : 1444822722 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+createtime : 1444822722 ;
+msgtype : event ;
+latitude : 22.913124 ;
+longitude : 113.660988 ;
+precision : 1080.000000 ;
+location_x : 22.913124 ;
+location_y : 113.660988 ;
+
+2015-10-14 19:38:42 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:38:42 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:39:30 trace :
+------------
+Array:
+from : op5RFuMglCtJb4ELjwpnYT7PLVnM ;
+to : gh_ca81d088dc8d ;
+time : 1444822770 ;
+type : text ;
+event :  ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuMglCtJb4ELjwpnYT7PLVnM ;
+createtime : 1444822770 ;
+msgtype : text ;
+content : 问个问题 ;
+msgid : 6205466545895107885 ;
+redirection :  ;
+source :  ;
+
+2015-10-14 19:39:30 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 19:39:30 response :
+------------
+
+2015-10-14 19:39:46 trace :
+------------
+Array:
+from : op5RFuMglCtJb4ELjwpnYT7PLVnM ;
+to : gh_ca81d088dc8d ;
+time : 1444822786 ;
+type : text ;
+event :  ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuMglCtJb4ELjwpnYT7PLVnM ;
+createtime : 1444822786 ;
+msgtype : text ;
+content : 有人在吗 ;
+msgid : 6205466614614584640 ;
+redirection :  ;
+source :  ;
+
+2015-10-14 19:39:46 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 19:39:46 response :
+------------
+
+2015-10-14 19:40:08 trace :
+------------
+Array:
+from : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+to : gh_1d96b7817eb3 ;
+time : 1444822808 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+createtime : 1444822808 ;
+msgtype : event ;
+latitude : 22.910315 ;
+longitude : 113.660042 ;
+precision : 730.000000 ;
+location_x : 22.910315 ;
+location_y : 113.660042 ;
+
+2015-10-14 19:40:08 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:40:08 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:40:16 trace :
+------------
+Array:
+from : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+to : gh_1d96b7817eb3 ;
+time : 1444822816 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+createtime : 1444822816 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_ktv ;
+
+2015-10-14 19:40:16 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 19:40:16 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 19:40:46 trace :
+------------
+Array:
+from : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+to : gh_1d96b7817eb3 ;
+time : 1444822846 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+createtime : 1444822846 ;
+msgtype : event ;
+latitude : 22.910315 ;
+longitude : 113.660042 ;
+precision : 730.000000 ;
+location_x : 22.910315 ;
+location_y : 113.660042 ;
+
+2015-10-14 19:40:46 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:40:46 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:40:50 trace :
+------------
+Array:
+from : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+to : gh_1d96b7817eb3 ;
+time : 1444822850 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+createtime : 1444822850 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 19:40:50 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 19:40:50 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 19:41:42 trace :
+------------
+Array:
+from : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+to : gh_1d96b7817eb3 ;
+time : 1444822901 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+createtime : 1444822901 ;
+msgtype : event ;
+latitude : 22.910315 ;
+longitude : 113.660042 ;
+precision : 730.000000 ;
+location_x : 22.910315 ;
+location_y : 113.660042 ;
+
+2015-10-14 19:41:42 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:41:42 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:41:44 trace :
+------------
+Array:
+from : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+to : gh_1d96b7817eb3 ;
+time : 1444822904 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+createtime : 1444822904 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-10-14 19:41:44 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 19:41:44 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 19:41:51 trace :
+------------
+Array:
+from : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+to : gh_1d96b7817eb3 ;
+time : 1444822911 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_FGlCmpCpgqQKh5fyXqOMY ;
+createtime : 1444822911 ;
+msgtype : event ;
+latitude : 22.910315 ;
+longitude : 113.660042 ;
+precision : 730.000000 ;
+location_x : 22.910315 ;
+location_y : 113.660042 ;
+
+2015-10-14 19:41:51 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:41:51 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:42:45 trace :
+------------
+Array:
+from : op5RFuAhoigAYjG22OUQgUyYW7S0 ;
+to : gh_ca81d088dc8d ;
+time : 1444822965 ;
+type : event ;
+event : subscribe ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuAhoigAYjG22OUQgUyYW7S0 ;
+createtime : 1444822965 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 19:42:45 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 19:42:45 response :
+------------
+
+2015-10-14 19:50:35 trace :
+------------
+Array:
+from : o841ptwkHrMr14uS4pu1Gwkumg7g ;
+to : gh_1d96b7817eb3 ;
+time : 1444823435 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwkHrMr14uS4pu1Gwkumg7g ;
+createtime : 1444823435 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 19:50:35 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 19:50:35 response :
+------------
+
+2015-10-14 19:50:39 trace :
+------------
+Array:
+from : o841ptwkHrMr14uS4pu1Gwkumg7g ;
+to : gh_1d96b7817eb3 ;
+time : 1444823439 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwkHrMr14uS4pu1Gwkumg7g ;
+createtime : 1444823439 ;
+msgtype : event ;
+latitude : 22.909006 ;
+longitude : 113.655121 ;
+precision : 1520.000000 ;
+location_x : 22.909006 ;
+location_y : 113.655121 ;
+
+2015-10-14 19:50:39 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:50:39 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:54:57 trace :
+------------
+Array:
+from : o841pt3XwBFs-bPwRgUvc5YmLps8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444823697 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3XwBFs-bPwRgUvc5YmLps8 ;
+createtime : 1444823697 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 19:54:57 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 19:54:57 response :
+------------
+
+2015-10-14 19:55:02 trace :
+------------
+Array:
+from : o841pt3XwBFs-bPwRgUvc5YmLps8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444823702 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3XwBFs-bPwRgUvc5YmLps8 ;
+createtime : 1444823702 ;
+msgtype : event ;
+latitude : 22.909355 ;
+longitude : 113.657623 ;
+precision : 120.000000 ;
+location_x : 22.909355 ;
+location_y : 113.657623 ;
+
+2015-10-14 19:55:02 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:55:02 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:55:04 trace :
+------------
+Array:
+from : o841pt7iq1tZ6gozfFIlKPD5g6VY ;
+to : gh_1d96b7817eb3 ;
+time : 1444823704 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt7iq1tZ6gozfFIlKPD5g6VY ;
+createtime : 1444823704 ;
+msgtype : event ;
+latitude : 22.906921 ;
+longitude : 113.661507 ;
+precision : 40.000000 ;
+location_x : 22.906921 ;
+location_y : 113.661507 ;
+
+2015-10-14 19:55:04 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:55:04 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:55:46 trace :
+------------
+Array:
+from : o841pt7iq1tZ6gozfFIlKPD5g6VY ;
+to : gh_1d96b7817eb3 ;
+time : 1444823746 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt7iq1tZ6gozfFIlKPD5g6VY ;
+createtime : 1444823746 ;
+msgtype : event ;
+latitude : 22.906921 ;
+longitude : 113.661507 ;
+precision : 40.000000 ;
+location_x : 22.906921 ;
+location_y : 113.661507 ;
+
+2015-10-14 19:55:46 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:55:46 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 19:55:51 trace :
+------------
+Array:
+from : o841pt3XwBFs-bPwRgUvc5YmLps8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444823751 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3XwBFs-bPwRgUvc5YmLps8 ;
+createtime : 1444823751 ;
+msgtype : event ;
+latitude : 22.909452 ;
+longitude : 113.657433 ;
+precision : 110.000000 ;
+location_x : 22.909452 ;
+location_y : 113.657433 ;
+
+2015-10-14 19:55:51 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 19:55:51 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 20:25:10 trace :
+------------
+Array:
+from : op5RFuOsBe7emh-lqVpzLp4gfTHU ;
+to : gh_ca81d088dc8d ;
+time : 1444825509 ;
+type : event ;
+event : subscribe ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuOsBe7emh-lqVpzLp4gfTHU ;
+createtime : 1444825509 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 20:25:10 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 20:25:10 response :
+------------
+
+2015-10-14 21:06:25 trace :
+------------
+Array:
+from : o841pt8_KEcsS1tQTSjXvzZ-fOqM ;
+to : gh_1d96b7817eb3 ;
+time : 1444827985 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8_KEcsS1tQTSjXvzZ-fOqM ;
+createtime : 1444827985 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 21:06:25 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 21:06:25 response :
+------------
+
+2015-10-14 21:07:03 trace :
+------------
+Array:
+from : o841pt_0Eg0iOZF9CCDV52KoeKwk ;
+to : gh_1d96b7817eb3 ;
+time : 1444828023 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_0Eg0iOZF9CCDV52KoeKwk ;
+createtime : 1444828023 ;
+msgtype : event ;
+latitude : 22.910604 ;
+longitude : 113.656380 ;
+precision : 1270.000000 ;
+location_x : 22.910604 ;
+location_y : 113.656380 ;
+
+2015-10-14 21:07:03 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 21:07:03 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 21:15:45 trace :
+------------
+Array:
+from : o841ptzonKzU_ZW2yD7DmDLXrqqM ;
+to : gh_1d96b7817eb3 ;
+time : 1444828545 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzonKzU_ZW2yD7DmDLXrqqM ;
+createtime : 1444828545 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=auth&a=login&forward=Yz1tYyZhPWhvbWUmaT0y&wxref=mp.weixin.qq.com#wechat_redirect ;
+
+2015-10-14 21:15:45 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 21:15:45 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptzonKzU_ZW2yD7DmDLXrqqM ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 21:16:15 trace :
+------------
+Array:
+from : o841ptzonKzU_ZW2yD7DmDLXrqqM ;
+to : gh_1d96b7817eb3 ;
+time : 1444828575 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzonKzU_ZW2yD7DmDLXrqqM ;
+createtime : 1444828575 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 21:16:15 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 21:16:15 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptzonKzU_ZW2yD7DmDLXrqqM ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 21:27:51 trace :
+------------
+Array:
+from : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+to : gh_1d96b7817eb3 ;
+time : 1444829271 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+createtime : 1444829271 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 21:27:51 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 21:27:51 response :
+------------
+
+2015-10-14 21:28:00 trace :
+------------
+Array:
+from : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+to : gh_1d96b7817eb3 ;
+time : 1444829280 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+createtime : 1444829280 ;
+msgtype : event ;
+latitude : 22.909330 ;
+longitude : 113.657799 ;
+precision : 65.000000 ;
+location_x : 22.909330 ;
+location_y : 113.657799 ;
+
+2015-10-14 21:28:00 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 21:28:00 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 21:28:07 trace :
+------------
+Array:
+from : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+to : gh_1d96b7817eb3 ;
+time : 1444829287 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+createtime : 1444829287 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 21:28:07 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 21:28:07 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 21:34:51 trace :
+------------
+Array:
+from : o841pt8khemG2IPImHW5tb2gmqQQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444829691 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8khemG2IPImHW5tb2gmqQQ ;
+createtime : 1444829691 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 21:34:51 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 21:34:51 response :
+------------
+
+2015-10-14 21:34:56 trace :
+------------
+Array:
+from : o841pt8khemG2IPImHW5tb2gmqQQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444829696 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8khemG2IPImHW5tb2gmqQQ ;
+createtime : 1444829696 ;
+msgtype : event ;
+latitude : 22.910219 ;
+longitude : 113.657784 ;
+precision : 1020.000000 ;
+location_x : 22.910219 ;
+location_y : 113.657784 ;
+
+2015-10-14 21:34:56 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 21:34:56 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 21:35:44 trace :
+------------
+Array:
+from : o841pt8khemG2IPImHW5tb2gmqQQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444829744 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8khemG2IPImHW5tb2gmqQQ ;
+createtime : 1444829744 ;
+msgtype : event ;
+latitude : 22.910219 ;
+longitude : 113.657784 ;
+precision : 1020.000000 ;
+location_x : 22.910219 ;
+location_y : 113.657784 ;
+
+2015-10-14 21:35:44 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 21:35:44 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 21:35:46 trace :
+------------
+Array:
+from : o841pt8khemG2IPImHW5tb2gmqQQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444829746 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8khemG2IPImHW5tb2gmqQQ ;
+createtime : 1444829746 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 21:35:46 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 21:35:46 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt8khemG2IPImHW5tb2gmqQQ ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 21:36:59 trace :
+------------
+Array:
+from : op5RFuJ2m7h4530GXihaUn4b-vN4 ;
+to : gh_ca81d088dc8d ;
+time : 1444829819 ;
+type : event ;
+event : subscribe ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuJ2m7h4530GXihaUn4b-vN4 ;
+createtime : 1444829819 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 21:36:59 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 21:36:59 response :
+------------
+
+2015-10-14 21:37:08 trace :
+------------
+Array:
+from : op5RFuJ2m7h4530GXihaUn4b-vN4 ;
+to : gh_ca81d088dc8d ;
+time : 1444829827 ;
+type : text ;
+event :  ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuJ2m7h4530GXihaUn4b-vN4 ;
+createtime : 1444829827 ;
+msgtype : text ;
+content : 哈喽 ;
+msgid : 6205496855479327059 ;
+redirection :  ;
+source :  ;
+
+2015-10-14 21:37:08 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 21:37:08 response :
+------------
+
+2015-10-14 21:38:51 trace :
+------------
+Array:
+from : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+to : gh_1d96b7817eb3 ;
+time : 1444829931 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxXUuOvDHW4kGeb7lq_SacA ;
+createtime : 1444829931 ;
+msgtype : event ;
+latitude : 22.909344 ;
+longitude : 113.658096 ;
+precision : 65.000000 ;
+location_x : 22.909344 ;
+location_y : 113.658096 ;
+
+2015-10-14 21:38:51 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 21:38:51 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 21:39:06 trace :
+------------
+Array:
+from : o841pt8khemG2IPImHW5tb2gmqQQ ;
+to : gh_1d96b7817eb3 ;
+time : 1444829946 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt8khemG2IPImHW5tb2gmqQQ ;
+createtime : 1444829946 ;
+msgtype : event ;
+latitude : 22.909552 ;
+longitude : 113.657379 ;
+precision : 40.000000 ;
+location_x : 22.909552 ;
+location_y : 113.657379 ;
+
+2015-10-14 21:39:06 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 21:39:06 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 21:44:47 trace :
+------------
+Array:
+from : o841ptwhQdMkD37ml-GvbIyxPoV4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444830286 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwhQdMkD37ml-GvbIyxPoV4 ;
+createtime : 1444830286 ;
+msgtype : event ;
+latitude : 22.906914 ;
+longitude : 113.664001 ;
+precision : 1100.000000 ;
+location_x : 22.906914 ;
+location_y : 113.664001 ;
+
+2015-10-14 21:44:47 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 21:44:47 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 21:46:57 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444830417 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444830417 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 21:46:57 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 21:46:57 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 21:47:11 trace :
+------------
+Array:
+from : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+to : gh_1d96b7817eb3 ;
+time : 1444830431 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+createtime : 1444830431 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-10-14 21:47:11 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 21:47:11 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwBV1DRdTwWPzraLBgyn_MI ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 21:50:12 trace :
+------------
+Array:
+from : o841pt6jI70chNZYIyfEPxlTkmgA ;
+to : gh_1d96b7817eb3 ;
+time : 1444830612 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6jI70chNZYIyfEPxlTkmgA ;
+createtime : 1444830612 ;
+msgtype : event ;
+latitude : 22.929819 ;
+longitude : 113.655251 ;
+precision : 1280.000000 ;
+location_x : 22.929819 ;
+location_y : 113.655251 ;
+
+2015-10-14 21:50:12 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 21:50:12 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 22:04:23 trace :
+------------
+Array:
+from : o841ptz766G4UBd75OwAE7mM52p8 ;
+to : gh_1d96b7817eb3 ;
+time : 1444831463 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptz766G4UBd75OwAE7mM52p8 ;
+createtime : 1444831463 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 22:04:23 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 22:04:23 response :
+------------
+
+2015-10-14 22:14:08 trace :
+------------
+Array:
+from : o841ptzf_77aMPJbI1fArzYt25UI ;
+to : gh_1d96b7817eb3 ;
+time : 1444832048 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptzf_77aMPJbI1fArzYt25UI ;
+createtime : 1444832048 ;
+msgtype : event ;
+latitude : 22.909929 ;
+longitude : 113.656914 ;
+precision : 70.000000 ;
+location_x : 22.909929 ;
+location_y : 113.656914 ;
+
+2015-10-14 22:14:08 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 22:14:08 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 22:15:58 trace :
+------------
+Array:
+from : o841ptxtJ58zeDFyaKod6Emj5QJY ;
+to : gh_1d96b7817eb3 ;
+time : 1444832158 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptxtJ58zeDFyaKod6Emj5QJY ;
+createtime : 1444832158 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 22:15:58 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 22:15:58 response :
+------------
+
+2015-10-14 22:17:33 trace :
+------------
+Array:
+from : o841pt6eaQlZvVtkZbfQiD1UE4Sc ;
+to : gh_1d96b7817eb3 ;
+time : 1444832253 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6eaQlZvVtkZbfQiD1UE4Sc ;
+createtime : 1444832253 ;
+msgtype : event ;
+latitude : 22.891926 ;
+longitude : 113.659836 ;
+precision : 90.000000 ;
+location_x : 22.891926 ;
+location_y : 113.659836 ;
+
+2015-10-14 22:17:33 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 22:17:33 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 22:24:08 trace :
+------------
+Array:
+from : o841pt4gacdeg3WTYciYgcZyilAs ;
+to : gh_1d96b7817eb3 ;
+time : 1444832648 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4gacdeg3WTYciYgcZyilAs ;
+createtime : 1444832648 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 22:24:08 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 22:24:08 response :
+------------
+
+2015-10-14 22:24:13 trace :
+------------
+Array:
+from : o841pt4gacdeg3WTYciYgcZyilAs ;
+to : gh_1d96b7817eb3 ;
+time : 1444832652 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4gacdeg3WTYciYgcZyilAs ;
+createtime : 1444832652 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 22:24:13 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 22:24:13 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt4gacdeg3WTYciYgcZyilAs ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 22:24:15 trace :
+------------
+Array:
+from : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444832655 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+createtime : 1444832655 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 22:24:15 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 22:24:15 response :
+------------
+
+2015-10-14 22:24:19 trace :
+------------
+Array:
+from : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444832658 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+createtime : 1444832658 ;
+msgtype : event ;
+latitude : 22.909647 ;
+longitude : 113.657234 ;
+precision : 40.000000 ;
+location_x : 22.909647 ;
+location_y : 113.657234 ;
+
+2015-10-14 22:24:19 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 22:24:19 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 22:24:19 trace :
+------------
+Array:
+from : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444832659 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+createtime : 1444832659 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 22:24:19 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 22:24:19 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 22:24:54 trace :
+------------
+Array:
+from : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+to : gh_1d96b7817eb3 ;
+time : 1444832694 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-o5ocutSH5Bc0E9PKdljo4 ;
+createtime : 1444832694 ;
+msgtype : event ;
+latitude : 22.909731 ;
+longitude : 113.657227 ;
+precision : 40.000000 ;
+location_x : 22.909731 ;
+location_y : 113.657227 ;
+
+2015-10-14 22:24:54 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 22:24:54 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 22:29:56 trace :
+------------
+Array:
+from : op5RFuMtBkzT6R8U40lR6BmwUFk8 ;
+to : gh_ca81d088dc8d ;
+time : 1444832996 ;
+type : event ;
+event : user_enter_session_from_card ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuMtBkzT6R8U40lR6BmwUFk8 ;
+createtime : 1444832996 ;
+msgtype : event ;
+cardid : pp5RFuPQhOLjRQiMp5MLCEck2YIc ;
+usercardcode : 595431940447 ;
+
+2015-10-14 22:29:56 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 22:29:56 response :
+------------
+
+2015-10-14 23:17:08 trace :
+------------
+Array:
+from : o841pt4LB78saFn5KYlQf369CGxE ;
+to : gh_1d96b7817eb3 ;
+time : 1444835828 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt4LB78saFn5KYlQf369CGxE ;
+createtime : 1444835828 ;
+msgtype : event ;
+latitude : 22.774817 ;
+longitude : 113.753227 ;
+precision : 40.000000 ;
+location_x : 22.774817 ;
+location_y : 113.753227 ;
+
+2015-10-14 23:17:08 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:17:08 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:19:14 trace :
+------------
+Array:
+from : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+to : gh_1d96b7817eb3 ;
+time : 1444835954 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+createtime : 1444835954 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 23:19:14 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 23:19:14 response :
+------------
+
+2015-10-14 23:19:19 trace :
+------------
+Array:
+from : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+to : gh_1d96b7817eb3 ;
+time : 1444835959 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+createtime : 1444835959 ;
+msgtype : event ;
+latitude : 22.911306 ;
+longitude : 113.654915 ;
+precision : 1240.000000 ;
+location_x : 22.911306 ;
+location_y : 113.654915 ;
+
+2015-10-14 23:19:19 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:19:19 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:19:23 trace :
+------------
+Array:
+from : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+to : gh_1d96b7817eb3 ;
+time : 1444835963 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+createtime : 1444835963 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 23:19:23 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:19:23 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:20:07 trace :
+------------
+Array:
+from : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+to : gh_1d96b7817eb3 ;
+time : 1444836007 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_tOEhgWAAGgRJouJi2ixVY ;
+createtime : 1444836007 ;
+msgtype : event ;
+latitude : 22.911306 ;
+longitude : 113.654915 ;
+precision : 1240.000000 ;
+location_x : 22.911306 ;
+location_y : 113.654915 ;
+
+2015-10-14 23:20:07 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:20:07 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:22:49 trace :
+------------
+Array:
+from : o841pt3ms1dPAz3fS9y74OlapolM ;
+to : gh_1d96b7817eb3 ;
+time : 1444836169 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3ms1dPAz3fS9y74OlapolM ;
+createtime : 1444836169 ;
+msgtype : event ;
+latitude : 22.922472 ;
+longitude : 113.651871 ;
+precision : 40.000000 ;
+location_x : 22.922472 ;
+location_y : 113.651871 ;
+
+2015-10-14 23:22:49 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:22:49 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:23:57 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836237 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836237 ;
+msgtype : event ;
+latitude : 22.911137 ;
+longitude : 113.664284 ;
+precision : 1190.000000 ;
+location_x : 22.911137 ;
+location_y : 113.664284 ;
+
+2015-10-14 23:23:57 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:23:57 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:25:01 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836301 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836301 ;
+msgtype : event ;
+latitude : 22.911137 ;
+longitude : 113.664284 ;
+precision : 1190.000000 ;
+location_x : 22.911137 ;
+location_y : 113.664284 ;
+
+2015-10-14 23:25:01 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:25:01 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:25:06 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836306 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836306 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 23:25:06 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:25:06 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:26:29 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836389 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836389 ;
+msgtype : event ;
+latitude : 22.911137 ;
+longitude : 113.664284 ;
+precision : 1190.000000 ;
+location_x : 22.911137 ;
+location_y : 113.664284 ;
+
+2015-10-14 23:26:29 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:26:29 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:26:38 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836398 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836398 ;
+msgtype : event ;
+latitude : 22.911137 ;
+longitude : 113.664284 ;
+precision : 1190.000000 ;
+location_x : 22.911137 ;
+location_y : 113.664284 ;
+
+2015-10-14 23:26:38 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:26:38 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:26:40 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836400 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836400 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 23:26:40 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:26:40 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:26:55 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836415 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836415 ;
+msgtype : event ;
+latitude : 22.912294 ;
+longitude : 113.665756 ;
+precision : 40.000000 ;
+location_x : 22.912294 ;
+location_y : 113.665756 ;
+
+2015-10-14 23:26:55 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:26:55 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:26:57 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836417 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836417 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&hid=1&do=detail&m=ewei_hotel ;
+
+2015-10-14 23:26:57 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:26:57 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:27:53 trace :
+------------
+Array:
+from : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+to : gh_1d96b7817eb3 ;
+time : 1444836473 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt6Yb4awajJIx0lIEkl_Rmwg ;
+createtime : 1444836473 ;
+msgtype : event ;
+latitude : 22.912294 ;
+longitude : 113.665756 ;
+precision : 40.000000 ;
+location_x : 22.912294 ;
+location_y : 113.665756 ;
+
+2015-10-14 23:27:53 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:27:53 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:30:41 trace :
+------------
+Array:
+from : o841pt_0f9qbIp2xlcxBDzogSFpE ;
+to : gh_1d96b7817eb3 ;
+time : 1444836641 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt_0f9qbIp2xlcxBDzogSFpE ;
+createtime : 1444836641 ;
+msgtype : event ;
+latitude : 22.909492 ;
+longitude : 113.657639 ;
+precision : 70.000000 ;
+location_x : 22.909492 ;
+location_y : 113.657639 ;
+
+2015-10-14 23:30:41 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:30:41 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:37:57 trace :
+------------
+Array:
+from : o841pt3ms1dPAz3fS9y74OlapolM ;
+to : gh_1d96b7817eb3 ;
+time : 1444837077 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt3ms1dPAz3fS9y74OlapolM ;
+createtime : 1444837077 ;
+msgtype : event ;
+latitude : 22.922464 ;
+longitude : 113.651894 ;
+precision : 40.000000 ;
+location_x : 22.922464 ;
+location_y : 113.651894 ;
+
+2015-10-14 23:37:57 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:37:57 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:39:16 trace :
+------------
+Array:
+from : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+to : gh_1d96b7817eb3 ;
+time : 1444837156 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+createtime : 1444837156 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 23:39:16 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:39:16 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:39:21 trace :
+------------
+Array:
+from : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+to : gh_1d96b7817eb3 ;
+time : 1444837161 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+createtime : 1444837161 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 23:39:21 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:39:21 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:41:09 trace :
+------------
+Array:
+from : op5RFuFPzYb5w2_BE8bYH4Oy3QXk ;
+to : gh_ca81d088dc8d ;
+time : 1444837269 ;
+type : event ;
+event : subscribe ;
+tousername : gh_ca81d088dc8d ;
+fromusername : op5RFuFPzYb5w2_BE8bYH4Oy3QXk ;
+createtime : 1444837269 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 23:41:09 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 23:41:09 response :
+------------
+
+2015-10-14 23:41:44 trace :
+------------
+Array:
+from : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+to : gh_1d96b7817eb3 ;
+time : 1444837304 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+createtime : 1444837304 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 23:41:44 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:41:44 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841pt-pA3stOBHtWYoxUqkhZO6E ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:47:51 trace :
+------------
+Array:
+from : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+to : gh_1d96b7817eb3 ;
+time : 1444837671 ;
+type : event ;
+event : subscribe ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+createtime : 1444837671 ;
+msgtype : event ;
+eventkey :  ;
+
+2015-10-14 23:47:51 params :
+------------
+Array:
+rule : -2 ;
+module :  ;
+message : Array ;
+
+2015-10-14 23:47:51 response :
+------------
+
+2015-10-14 23:48:28 trace :
+------------
+Array:
+from : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+to : gh_1d96b7817eb3 ;
+time : 1444837708 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+createtime : 1444837708 ;
+msgtype : event ;
+latitude : 22.909582 ;
+longitude : 113.659096 ;
+precision : 670.000000 ;
+location_x : 22.909582 ;
+location_y : 113.659096 ;
+
+2015-10-14 23:48:28 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:48:28 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:48:31 trace :
+------------
+Array:
+from : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+to : gh_1d96b7817eb3 ;
+time : 1444837711 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+createtime : 1444837711 ;
+msgtype : event ;
+eventkey : http://wifi.weixin.qq.com/mbl/connect.xhtml?type=1 ;
+
+2015-10-14 23:48:31 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:48:31 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:49:05 trace :
+------------
+Array:
+from : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+to : gh_1d96b7817eb3 ;
+time : 1444837745 ;
+type : trace ;
+event : LOCATION ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptwArNu1vY0Pr4RZ1lVD768k ;
+createtime : 1444837745 ;
+msgtype : event ;
+latitude : 22.909681 ;
+longitude : 113.657486 ;
+precision : 40.000000 ;
+location_x : 22.909681 ;
+location_y : 113.657486 ;
+
+2015-10-14 23:49:05 params :
+------------
+Array:
+message : Array ;
+module : default ;
+rule : -1 ;
+
+2015-10-14 23:49:05 response :
+------------
+Array:
+errno : -1 ;
+message : Invaild value ;
+
+2015-10-14 23:57:44 trace :
+------------
+Array:
+from : o841ptyCS9_SSXTAnM60ueNUvn6A ;
+to : gh_1d96b7817eb3 ;
+time : 1444838264 ;
+type : text ;
+event :  ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyCS9_SSXTAnM60ueNUvn6A ;
+createtime : 1444838264 ;
+msgtype : text ;
+content : /:beer ;
+msgid : 6205533092099344645 ;
+redirection :  ;
+source :  ;
+
+2015-10-14 23:57:44 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:57:44 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyCS9_SSXTAnM60ueNUvn6A ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+
+2015-10-14 23:58:10 trace :
+------------
+Array:
+from : o841ptyCS9_SSXTAnM60ueNUvn6A ;
+to : gh_1d96b7817eb3 ;
+time : 1444838290 ;
+type : event ;
+event : VIEW ;
+tousername : gh_1d96b7817eb3 ;
+fromusername : o841ptyCS9_SSXTAnM60ueNUvn6A ;
+createtime : 1444838290 ;
+msgtype : event ;
+eventkey : http://qdaygroup.com/app/index.php?i=2&c=entry&do=index&m=foot_bath ;
+
+2015-10-14 23:58:10 params :
+------------
+Array:
+message : Array ;
+module : custom ;
+rule : 14 ;
+priority : 0 ;
+keyword : Array ;
+
+2015-10-14 23:58:10 response :
+------------
+Array:
+FromUserName : gh_1d96b7817eb3 ;
+ToUserName : o841ptyCS9_SSXTAnM60ueNUvn6A ;
+MsgType : text ;
+Content : 多客服接入时间为：8时~17时 ;
+

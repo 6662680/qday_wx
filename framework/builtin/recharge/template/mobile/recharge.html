@@ -1,0 +1,65 @@
+{template 'common/header'}
+<style>
+	body{background:#d2e6e9;}
+	/*手机余额充值*/
+	.charge select{position:absolute;}
+	.charge .panel-body span input{position:absolute; width:150px; height:30px; top:2px; border:none; left:42px; z-index:10; padding-left:10px; outline:none;}
+	.charge.panel{margin:.5em; border:none;}
+	.charge.panel-info>.panel-heading {background: -webkit-gradient(linear, 0 0, 100% 0, from(#ebebeb), to(#f3f9fa), color-stop(30%, #f5f9f9)); color:#666666; border:none;}
+	a{color:#666666;}a:hover{color: #3ebacc;}
+	.charge .btn.btn-primary{background: #56c6d6; color: #FFF; border: 0;}
+	.charge i{display:inline-block; width:15px; height:15px; text-align:center; line-height:15px;}
+</style>
+<div class="charge panel panel-info">
+	<div class="panel-heading">
+		<h4>余额充值</h4>
+	</div>
+	<div class="panel-body">
+		<form name="theform" method="get" role="form" id="form1">
+			<input type="hidden" name="c" value="entry" />
+			<input type="hidden" name="m" value="recharge" />
+			<input type="hidden" name="i" value="{$_W['uniacid']}" />
+			<input type="hidden" name="do" value="pay" />
+			<div class="form-group input-group">
+				<div class="input-group-addon"><i class="fa fa-user"></i></div>
+				<input type="text" class="form-control" placeholder="用户名" value="{$username}" readonly>
+			</div>
+			<div class="form-group" style="position:relative;">
+				<div class="input-group">
+					<div class="input-group-addon"><i class="fa fa-money"></i></div>
+					<select name="moneySe" id="moneySe" class="form-control">
+						<option value="0">请选择</option>
+						<option value="30">30元</option>
+						<option value="50">50元</option>
+						<option value="100">100元</option>
+						<option value="200">200元</option>
+						<option value="300">300元</option>
+					</select>
+				</div>
+				<span><input type="text" placeholder="请输入充值金额" name="money" id="money"></span>
+			</div>
+			<input type="submit" name="submit" class="btn btn-primary btn-block" value="立即充值">
+			<input type="hidden" name="token" value="{$_W['token']}">
+		</form>
+	</div>
+</div>
+<script>
+	$('#moneySe').change(function(){
+		var money = $('#moneySe').val();
+		if(parseFloat(money) > 0){
+			$('#money').val($('#moneySe').val());
+		} else {
+			$('#money').val('');
+		}
+	});
+	$('#form1').submit(function(){
+		var money = parseFloat($('#money').val().trim());
+		if(isNaN(money)) {
+			util.message('请输入正确的充值金额', '', 'error');
+			return false;
+		}
+	});
+</script>
+
+{template 'common/toolbar'}
+

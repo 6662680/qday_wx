@@ -1,0 +1,62 @@
+<?php defined('IN_IA') or exit('Access Denied');?><div class="alert alert-block alert-new">
+
+	<table id="form" class="tb reply-news-edit">
+
+		<tr>
+
+			<th>标题</th>
+
+			<td>
+
+				<input type="text" id="title" class="span7" placeholder="" name="title" value="<?php  echo $setting['title'];?>">
+
+			</td>
+
+		</tr>
+
+		<tr>
+
+			<th>封面</th>
+
+			<td>
+
+				<!-- 此处增加class="reply-news-edit-cover-1"为编辑状态，反之则不显示封面图片，隐藏删除按钮 -->
+
+				<?php  echo tpl_form_field_image('picture', $reply['picture']);?>
+<div class="help-block">用于单图文回复的显示 700*300</div>
+
+			</td>
+
+		</tr>
+
+		<tr>
+
+			<th>描述</th>
+
+			<td>
+
+				<textarea style="height:80px;" class="span7" cols="70" id="description" name="description"><?php  echo $setting['description'];?></textarea>
+
+			</td>
+
+		</tr>
+
+	</table>
+
+</div>
+
+<script type="text/javascript">
+
+<!--
+
+	kindeditor();
+
+	$('.reply-edit-cover-upload').each(function(){
+
+		kindeditorUploadBtn($(this));
+
+	});
+
+//-->
+
+</script>
