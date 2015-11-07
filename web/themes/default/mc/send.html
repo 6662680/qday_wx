@@ -1,0 +1,81 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li><a href="{php echo url('mc/mass')}"> 微信群发</a></li>
+	<li class="active"><a href="{php echo url('mc/mass/send')}"> 已发送</a></li>
+</ul>
+
+<div class="clearfix">
+	<div class="panel panel-info">
+		<div class="panel-heading">筛选</div>
+		<div class="panel-body">
+			<form action="./index.php" method="get" class="form-horizontal" role="form" id="form0">
+				<input type="hidden" name="c" value="mc" />
+				<input type="hidden" name="a" value="mass" />
+				<input type="hidden" name="do" value="send" />
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">所属公众号</label>
+					<div class="col-sm-9 col-md-8 col-lg-8 col-xs-12">
+						<select class="form-control" name="acid" id="acid">
+							<option value="">所有公众号</option>
+							{loop $accounts $acc}
+							<option value="{$acc['acid']}"{if $acc['acid'] == $acid} selected="selected"{/if}>{$acc['name']}</option>
+							{/loop}
+						</select>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<form action="?{$_SERVER['QUERY_STRING']}" method="post" id="form1">
+		<div class="panel panel-default">
+			<div class="panel-body table-responsive">
+				<table class="table table-hover" cellspacing="0" cellpadding="0">
+					<thead class="navbar-inner">
+					<tr>
+						<th>消息详情</th>
+						<th>所属公众号</th>
+						<th>发送用户组</th>
+						<th>发送人数</th>
+						<th>发送时间</th>
+					</tr>
+					</thead>
+					<tbody>
+						{loop $list $li}
+							<tr>
+								<td>{$li['content']}</td>
+								<td>{$accounts[$li['acid']]['name']}</td>
+								<td>{$li['groupname']}</td>
+								<td>{if $li['groupname'] == '全部用户'}NAN{else}{$li['fansnum']}{/if}</td>
+								<td>{php echo date('Y-m-d H:i:s', $li['createtime']);}</td>
+							</tr>
+						{/loop}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="modal fade" id="myModal-d" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:400px;">
+		<div class="modal-content" id="myModal">
+		</div>
+	</div>
+</div>
+
+<script>
+	require(['jquery', 'bootstrap'], function(){
+		$('#acid').change(function(){
+			$('#form0').submit();
+			return;
+		});
+
+		$('.ajax-show').click(function(){
+			$.post('{php echo url("mc/mass/ajax")}', {id : $(this).attr('id')}, function(data){
+				$('#myModal').html(data);
+				$('#myModal-d').modal('show');
+			});
+		});
+	});
+</script>
+{template 'common/footer'}

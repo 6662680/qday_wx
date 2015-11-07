@@ -1,0 +1,85 @@
+{template 'header_up'}
+		{if $op == 'display'}
+<!--版本信息-->
+<div class="box">
+	<h3><i class="fa fa-refresh"></i> 尚校校工作室版本信息</h3>
+    <div class="alert alert-info" style="line-height:28px;margin-top:8px;">
+    <div class="update">
+    <li>服务器环境：{php echo PHP_OS;}<?php echo $_SERVER[SERVER_SOFTWARE];?> MySql:{php echo mysql_get_server_info();} php:{php echo PHP_VERSION;}</li>
+    <li>服务器IP：{php echo $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT'];}</li>
+    <li>当前网站语言：{php echo getenv("HTTP_ACCEPT_LANGUAGE");}</li>
+    <li>官方网站：<a href="http://www.qdaygroup.com" class="blue">http://www.qdaygroup.com</a></li>
+	<li>无法一键更新？<a href="http://www.qdaygroup.com/forum.php?mod=viewthread&tid=859&extra=" class="blue">点击这里看教程</a></li>
+
+    <li class="red">[当前系统版本]：尚校校工作室_V{$ver}</li>
+	{if $lastver == $ver}
+	<li class="red">[最新系统版本]：尚校校工作室_V{$ver} （恭喜, 你的程序已经是最新版本.）</li>
+	{/if}
+	{if $lastver != $ver}
+	<li class="red">[下一个系统版本]：尚校校工作室_V{$lastver} &nbsp;&nbsp;<button onclick="chanage();" class="btn btn-primary">查看版本</button></li>
+	<script type="text/javascript">
+		function chanage()
+		  {
+			location = "{php echo create_url('cloud/upgrade',array('op'=>'chanage'));}";
+		}
+		</script>
+	{/if}
+    </div>
+
+	<div class="alert alert-danger">
+		 {if $domain_time == '0'}<i class="fa fa-exclamation-triangle"></i> 授权版本：授权已过期，请联系企业客服：<!-- WPA Button Begin -->
+<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzgwMDA4MzA3NV8yMTc2ODhfODAwMDgzMDc1Xw"></script>
+<!-- WPA Button End -->
+        {else}
+           <i class="fa fa-refresh"></i> 授权版本：高级商业版 &nbsp;免费更新服务截止：({php echo date("Y-m-d", $domain_time);})
+		 {/if}
+		</div>
+
+    </div>
+</div>
+<!--版本信息-->
+
+<!--论坛动态-->
+<div class="box">
+	<h3><i class="fa fa-refresh"></i> 在线更新日志</h3>
+     <div class="alert alert-info" style="line-height:20px;margin-top:8px;">
+		<script type="text/javascript" src="http://www.qdaygroup.com/api.php?mod=js&bid=11"></script>
+    </div>
+</div>
+<!--论坛动态end-->
+{/if}
+
+{if $op == 'chanage'}
+<!--更新信息-->
+<div class="box">
+	<h3><i class="fa fa-refresh"></i>待更新的升级包</h3>
+    <div class="alert alert-info" style="line-height:20px;margin-top:8px;">
+	<p class="red"><i class="fa fa-refresh"></i> [待更新的程序版本]：尚校校工作室_V{$lastver} &nbsp;&nbsp;<button onclick="disp_confirm();" class="btn btn-primary" >在线升级</button></p>
+	<script type="text/javascript">
+		function disp_confirm()
+		  {
+		  var r=confirm("确定已备份好系统，并更新系统到最新版本吗？")
+		  if (r==true)
+			{
+			location = "{php echo create_url('cloud/upgrade',array('op'=>'update'));}";
+			}
+		  }
+		function alert(title) {
+            $("#windowcenter").slideToggle("slow");
+            $("#txt").html(title);
+            setTimeout('$("#windowcenter").slideUp(500)', 4000);
+        } 
+		</script>
+	<br/>
+	<div class="alert alert-danger">
+		<i class="fa fa-refresh"></i> [本次更新的内容]：{$cinfo}
+    </div>
+    </div>
+</div>
+<!--更新信息end-->
+{/if}
+
+	</div>
+</div>
+
+{template 'footer_up'}

@@ -1,0 +1,139 @@
+{template 'common/header-gw'}
+<ol class="breadcrumb">
+	<li><a href="./?refresh"><i class="fa fa-home"></i></a></li>
+	<li><a href="{url 'system/welcome'}">系统</a></li>
+	<li class="active">{if intval($_GPC['status']) == 1}审核用户{else}用户列表{/if}</li>
+</ol>
+<script type="text/javascript">
+	var u ={};
+	require(['jquery', 'util'], function($, s){
+		u.deny = function(uid){
+			var uid = parseInt(uid);
+			if(isNaN(uid)) {
+				return;
+			}
+			if(!confirm('确认要禁用/解禁此用户吗? ')) {
+				return;
+			}
+			$.post('{php echo url('user/permission');}', {'do': 'deny', uid: uid}, function(dat){
+				if(dat == 'success') {
+					location.href = location.href;
+				} else {
+					s.message('操作失败, 请稍后重试. ' + dat);
+				}
+			});
+		};
+		u.del = function(uid){
+			var uid = parseInt(uid);
+			if(isNaN(uid)) {
+				return;
+			}
+			if(!confirm('确认要删除此用户吗? ')) {
+				return;
+			}
+			$.post('{php echo url('user/edit');}', {'do': 'delete', uid: uid}, function(dat){
+				if(dat == 'success') {
+					location.href = location.href;
+				} else {
+					s.message('操作失败, 请稍后重试. ' + dat);
+				}
+			});
+		};
+
+	});
+</script>
+<ul class="nav nav-tabs">
+	<li {if intval($_GPC['status']) != 1}class="active"{/if}><a href="{php echo url('user/display');}">用户列表</a></li>
+	{if !empty($settings['verify'])}
+	<li {if intval($_GPC['status']) == 1}class="active"{/if}><a href="{php echo url('user/display', array('status' => 1));}">审核用户</a></li>
+	{/if}
+	<li><a href="{php echo url('user/create');}">添加用户</a></li>
+</ul>
+<div class="panel panel-info">
+	<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="" method="get" class="form-horizontal" role="form">
+		<input type="hidden" name="c" value="user">
+		<input type="hidden" name="a" value="display">
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+				<div class="col-sm-8 col-lg-9 col-xs-12">
+					<select name="status" class="form-control">
+						<option value="" selected>全部</option>
+						<option value="2" {if $_GPC['status'] == '2'} selected{/if}>启用</option>
+						<option value="1" {if $_GPC['status'] == '1'} selected{/if}>禁用</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">用户名</label>
+				<div class="col-sm-8 col-lg-9 col-xs-12">
+					<input class="form-control" name="username" id="" type="text" value="{$_GPC['username']}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">用户组</label>
+				<div class="col-sm-8 col-lg-9 col-xs-12">
+					<select name="group" class="form-control">
+						<option value="">全部</option>
+						{loop $usergroups $group}
+						<option {if $_GPC['group'] == $group['id']} selected{/if} value="{$group['id']}">{$group['name']}</option>
+						{/loop}
+					</select>
+				</div>
+				<div class="pull-right col-xs-12 col-sm-2 col-lg-2">
+					<button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+				</div>
+			</div>
+			<div class="form-group">
+			</div>
+		</form>
+	</div>
+</div>
+<div class="rule panel panel-default">
+	<div class="table-responsive panel-body">
+	<table class="table table-hover">
+		<thead class="navbar-inner">
+			<tr>
+				<th style="width:150px;">用户名</th>
+				<th style="width:200px;">身份</th>
+				<th style="width:100px;">状态</th>
+				<th style="min-width:180px;">注册时间</th>
+				<th style="min-width:300px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{loop $users $user}
+			<tr>
+				<td>{if !$user['founder']}<a href="{php echo url('user/edit', array('uid' => $user['uid']))}">{$user['username']}</a>{else}{$user['username']}{/if}</td>
+				<td>
+				{if $user['founder']}
+					<span class="label label-success">管理员</span>
+				{elseif isset($usergroups[$user['groupid']])}
+					<span class="label label-info">{$usergroups[$user['groupid']]['name']}</span>
+				{else}
+					<span class="label label-error">未分配</span>
+				{/if}
+				</td>
+				<td>
+					{if intval($user['status']) != 2}<span class="label label-danger">被禁止</span>{/if}
+				</td>
+				<td>{php echo date('Y-m-d H:i:s', $user['joindate'])}</td>
+				<td>
+					<div>
+						<a href="{php echo url('user/edit', array('uid' => $user['uid']))}">编辑</a>&nbsp;&nbsp;
+					{if empty($user['founder'])}
+						<a href="{php echo url('user/permission', array('uid' => $user['uid']))}">查看操作权限</a>&nbsp;&nbsp;
+						<a href="javascript:;" onclick="u.deny('{$user['uid']}');">{if intval($user['status']) == 2}禁止{else}启用{/if}用户</a>&nbsp;&nbsp;
+						<a href="javascript:;" onclick="u.del('{$user['uid']}');">删除用户</a>
+					{/if}
+					</div>
+				</td>
+			</tr>
+			{/loop}
+		</tbody>
+	</table>
+	</div>
+</div>
+{$pager}
+{template 'common/footer-gw'}

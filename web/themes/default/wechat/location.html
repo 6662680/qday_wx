@@ -1,0 +1,252 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li {if $do == 'display'}class="active"{/if}><a href="{php echo url('wechat/location/display', array());}">门店信息列表</a></li>
+	<li {if $do == 'logo'}class="active"{/if}><a href="{php echo url('wechat/location/logo', array());}">门店LOGO</a></li>
+	<li {if $do == 'post'}class="active"{/if}><a href="{php echo url('wechat/location/post', array());}">添加门店</a></li>
+</ul>
+<script>
+	require(['bootstrap'],function($){
+		$('.btn').hover(function(){
+			$(this).tooltip('show');
+		},function(){
+			$(this).tooltip('hide');
+		});
+	});
+</script>
+{if $do == 'logo'}
+<style>
+	.text-danger{color:red;}
+</style>
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+		<div class="panel panel-default" id="step1">
+			<div class="panel-heading">
+				商户LOGO
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 公众号</label>
+					<div class="col-sm-9 col-xs-12">
+						<select name="acid" id="acid" class="form-control">
+							{loop $accounts $account}
+								<option value="{$account['acid']}" {if $acid = $account['acid']}selected{/if}>{$account['name']}</option>
+							{/loop}
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 上传商户LOGO</label>
+					<div class="col-sm-9 col-xs-12">
+						{php echo tpl_form_field_image('logo', $coupon_setting['logourl'])}
+						<div class="help-block">商户LOGO大小不超过1M。像素为：300*300。仅支持JPG格式</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input name="submit" id="submit" type="submit" value="提交" class="btn btn-primary col-lg-1">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+	</form>
+</div>
+{elseif $do == 'post'}
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+		<div class="panel panel-default" id="step1">
+			<div class="panel-heading">
+				门店信息
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 公众号</label>
+					<div class="col-sm-8 col-xs-12">
+						<select name="acid" id="acid" class="form-control">
+							{loop $accounts $li}
+							<option value="{$li['acid']}">{$li['name']}</option>
+							{/loop}
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 门店名</label>
+					<div class="col-sm-8 col-xs-12">
+						<input type="text" class="form-control" name="business_name" value="{$item['business_name']}"/>
+						<span class="help-block">门店名不得含有区域地址信息（如，北京市XXX公司）</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"> 分店名(选填)</label>
+					<div class="col-sm-8 col-xs-12">
+						<input type="text" class="form-control" name="branch_name" value="{$item['branch_name']}"/>
+						<span class="help-block">分店名不得含有区域地址信息（如，“北京国贸店”中的“北京”）</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 类目</label>
+					<div class="col-sm-4 col-xs-6">
+						<select name="category" id="category" class="form-control">
+							<option value="美食" id="0">美食</option>
+							<option value="休闲娱乐" id="1">休闲娱乐</option>
+							<option value="生活服务" id="2">生活服务</option>
+							<option value="运输票务" id="3">运输票务</option>
+							<option value="电影票" id="4">电影票</option>
+							<option value="旅游" id="5">旅游</option>
+							<option value="酒店" id="6">酒店</option>
+							<option value="购物" id="7">购物</option>
+							<option value="虚拟" id="8">虚拟</option>
+						</select>
+					</div>
+					<div class="col-sm-4 col-xs-6">
+						<select name="subclass" id="subclass" class="form-control" style="display:none">
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 地址</label>
+					<div class="col-sm-8 col-xs-12">
+						{php echo tpl_fans_form('reside',array('province' => $item['province'],'city' => $item['city'],'district' => $item['district']));}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 详细地址</label>
+					<div class="col-sm-8 col-xs-12">
+						<input type="text" name="address" id="addresss" class="form-control" placeholder="输入详细地址，请勿重复填写省市区信息" value="{$item['address']}"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 定位</label>
+					<div class="col-sm-8 col-xs-12" id="map">
+						{php echo tpl_form_field_coordinate('baidumap', $item['baidumap'])}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger">*</span> 电话</label>
+					<div class="col-sm-8 col-xs-12">
+						<input type="text" class="form-control" name="telephone" value="{$item['telephone']}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input name="submit" id="submit" type="submit" value="提交" class="btn btn-primary col-lg-1">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+	</form>
+</div>
+<script>
+	$(function(){
+		var subclass= [
+			['外卖', '粤菜', '茶餐厅', '川菜', '湘菜', '东北菜', '西北菜', '火锅', '自助餐', '小吃', '快餐', '日本料理', '韩国料理', '东南亚菜', '西餐', '面包甜点', '咖啡厅', '江浙菜', '其它美食'],
+			['展览展出', '会议活动', '培训拓展', '美容美发', '美甲', '艺术写真', '酒吧/俱乐部', '文化文艺', 'KTV', '棋牌室', '运动健身', '足疗按摩', '演出门票', '宠物美容'],
+			['留学中介', '百货商场', '超市/便利店', '婚庆服务', '汽车服务', '家政服务', '物业管理', '医疗保健', '快递', '货运', '宠物医疗', '教育学校'],
+			['运输票务'],
+			['电影票'],
+			['景点门票', '旅游套餐'],
+			['星级酒店', '度假村', '快捷酒店'],
+			['综合电商', '服饰', '鞋类箱包', '运动户外', '化妆品', '珠宝配饰', '家纺家装', '数码家电', '乐器', '鲜花礼品', '普通食品', '保健食品', '酒类', '母婴用品', '图书报刊杂志', '钟表眼镜', '药房/药店'],
+			['话费/流量/宽带', '水电煤缴费', '有线电视缴费']
+		];
+		//初始化
+		var cate = "{$item['category']}";
+		var sub = "{$item['subclass']}";
+		if(cate) {
+			$('#category').find('option[value="' + cate +  '"]').prop('selected', true);
+			var id = $('#category').find('option[value="' + cate +  '"]').attr('id');
+			var html = '';
+			for(var i = 0; i < subclass[id].length; i++) {
+				if(sub) {
+					if(sub == subclass[id][i]) {
+						var select = 'selected';
+					} else {
+						var select = '';
+					}
+					html += '<option value="'+subclass[id][i] +'" '+select+'>'+subclass[id][i]+'</option>';
+				} else {
+					html += '<option value="'+subclass[id][i]+'">'+subclass[id][i]+'</option>';
+				}
+			}
+			$('#subclass').html(html);
+			$('#subclass').show();
+		} else {
+			for(var i = 0; i < subclass[0].length; i++) {
+				html += '<option value="'+subclass[0][i]+'">'+subclass[0][i]+'</option>';
+			}
+			$('#subclass').html(html);
+			$('#subclass').show();
+		}
+
+		$('#category').change(function(){
+			var id = $(this).find('option[value="' + $(this).val() +  '"]').attr('id');
+			var html = '';
+			for(var i = 0; i < subclass[id].length; i++) {
+				html += '<option value="'+subclass[id][i]+'">'+subclass[id][i]+'</option>';
+			}
+			$('#subclass').html(html);
+			$('#subclass').show();
+		});
+
+		$('#map :text').css('margin-left', '-15px');
+	});
+</script>
+{elseif $do == 'display'}
+<div class="clearfix">
+	<div class="panel panel-info">
+		<div class="panel-heading">筛选</div>
+		<div class="panel-body">
+			<form action="./index.php" method="get" class="form-horizontal" role="form" id="form1">
+				<input type="hidden" name="c" value="mc" />
+				<input type="hidden" name="a" value="fangroup" />
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">公众号</label>
+					<div class="col-sm-9 col-md-8 col-lg-8 col-xs-12">
+						<select class="form-control" name="acid">
+							<option value="">所有公众号</option>
+							{loop $accounts $acc}
+							<option value="{$acc['acid']}"{if $acc['acid'] == $acid} selected="selected"{/if}>{$acc['name']}</option>
+							{/loop}
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">关键字</label>
+					<div class="col-sm-9 col-md-8 col-lg-8 col-xs-12">
+						<input type="text" class="form-control" placeholder="请输入店名或地址"/>
+					</div>
+					<div class="pull-right col-xs-12 col-sm-3 col-lg-2">
+						<button class="btn btn-default" data-original-title="" title=""><i class="fa fa-search"></i> 搜索</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="form-group" style="margin-bottom: 40px;margin-left:-15px">
+		<div class="col-sm-12">
+			<a href="{php echo url('wechat/card/qr', array('op' => 'post', 'cid' => $cid))}" class="btn btn-success col-lg-1">添加投放二维码</a>
+		</div>
+	</div>
+
+	<form action="{php echo url('wechat/location/');}" method="post" id="form2">
+		<input type="hidden" name="acid" value="{$acid}">
+		<div class="panel panel-default">
+			<div class="panel-body table-responsive">
+				<table class="table table-hover" ng-controller="advAPI" style="width:100%;" cellspacing="0" cellpadding="0">
+					<thead class="navbar-inner">
+					<tr>
+						<th width="20%">门店名称</th>
+						<th width="20%">分店名</th>
+						<th width="20%">类型</th>
+						<th width="20%">电话</th>
+						<th width="20%">地址</th>
+					</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</form>
+</div>
+{/if}
+
+{template 'common/footer'}

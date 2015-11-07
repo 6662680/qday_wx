@@ -1,0 +1,20 @@
+			</div>
+		</div>
+	</div>
+	<script>
+		function subscribe(){
+			$.post("{url 'utility/subscribe'}", function(){
+				setTimeout(subscribe, 5000);
+			});
+		}
+		function sync() {
+			$.post("{url 'utility/sync'}", function(){
+				setTimeout(sync, 60000);
+			});
+		}
+		$(function(){
+			subscribe();
+			sync();
+		});
+	</script>
+{template 'common/footer-base'}

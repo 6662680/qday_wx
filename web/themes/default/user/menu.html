@@ -1,0 +1,82 @@
+{template 'common/header-gw'}
+<style>
+.table>thead>tr>th{border-bottom:0;}
+.table>thead>tr>th .checkbox label{font-weight:bold;}
+.table>tbody>tr>td{border-top:0;}
+.table .checkbox{padding-top:4px;}
+</style>
+<ol class="breadcrumb">
+	<li><a href="./?refresh"><i class="fa fa-home"></i></a></li>
+	<li class=""><a href="{url 'user/display'}">系统</a></li>
+	<li><a href="{url 'account/display'}">公众号列表</a></li>
+	<li><a href="{url 'account/post' array('uniacid' => $uniacid)}">编辑主公众号</a></li>
+	<li><a href="{url 'account/permission' array('uniacid' => $uniacid)}">账号操作员列表</a></li>
+	<li class="active">操作人员权限</li>
+</ol>
+<form class="form-horizontal form" action="" method="post">
+<div class="alert alert-info">
+	<i class="fa fa-exclamation-circle"></i> 默认未勾选任何菜单时，用户拥有全部权限
+</div>
+<div class="panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table ">
+			{loop $menus $name $sections}
+			{php $realname = array('platform' => '基础设置', 'site' => '微站功能', 'mc' => '粉丝营销', 'setting' => '功能选项', 'ext' => '扩展功能')}
+				<thead>
+					<tr class="info">
+						<th colspan="6">
+							<div class="checkbox">
+								<label><input type="checkbox" name="{$name}" onChange="selectall(this, '{$name}')">{$realname[$name]}</label>
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody class="{$name}">
+					{php $i = 1;}
+					{loop $sections $submenus}
+						{loop $submenus['items'] $menu}
+							<?php
+								$urls = parse_url($menu['url']);
+								$url = rtrim($urls['query'], '&');
+							?>
+							{if $i%6 == 1 || $i == 1}<tr>{/if}
+								<td>
+									<div class="checkbox">
+										<label><input type="checkbox" class="{$name}" value="{$url}" {if in_array($url, $hasurls)}checked{/if} name="permurls[]">{$menu['title']}</label>
+									</div>
+								</td>
+							{if $i%6 == 0}</tr>{/if}
+							{php $i++;}
+						{/loop}
+					{/loop}
+					{if $i%6 != 1}</tr>{/if}
+				</tbody>
+			{/loop}
+		</table>
+	</div>
+</div>
+<button type="submit" class="btn btn-primary span3" name="submit" value="提交" onclick="if ($('input:checkbox:checked').size() == 0) {return confirm('您未勾选任何菜单权限，意味着允许用户使用所有功能。确定吗？')}">提交</button>
+<input type="hidden" name="token" value="{$_W['token']}" />
+</form>
+<script>
+//处理全选函数
+function selectall(obj, a){
+	$('.'+a+' input:checkbox').each(function() {
+		$(this)[0].checked = obj.checked ? true : false;
+	});
+}
+//当已经全选时，默认全选按钮选中
+$(function() {
+	$('.table>tbody').each(function() {
+		var a = true;
+		$(this).find('input:checkbox').each(function() {
+			if($(this)[0].checked != true) {
+				a = false;
+				return false;
+			}
+		});
+		if(a) $('input[name='+$(this).attr('class')+']:checkbox')[0].checked = true;
+	});
+});
+</script>
+{template 'common/footer-gw'}

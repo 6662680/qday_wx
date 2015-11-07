@@ -1,0 +1,91 @@
+{template 'common/header'}
+<div class="main">
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{php echo url('mc/business');}">商户管理</a></li>
+</ul>
+
+{if ($do == 'display') && ($list['status'] == 1)}
+	<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="id" value="{$item['id']}">
+		<div class="panel panel-default">
+			<div class="panel-heading">商户基本信息</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">名称</label>
+					<div class="col-sm-8 col-xs-12">
+						<input type="text" name="title" value="{if !empty($item['title'])}{$item['title']}{/if}" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">宣传图</label>
+					<div class="col-sm-8 col-xs-12">
+						{if !empty($item['thumb'])}
+							{php echo tpl_form_field_image('thumb', $item['thumb'])}
+						{else}
+							{php echo tpl_form_field_image('thumb')}
+						{/if}
+						<span class="help-block"></span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">行业</label>
+					{php echo tpl_form_field_industry('industry', $item['industry1'], $item['industry2'])}
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">简介</label>
+					<div class="col-sm-8 col-xs-12">
+						<textarea style="height:100px;" class="form-control" name="content" id="reply-add-text">{if !empty($item['content'])}{$item['content']}{/if}</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">电话</label>
+					<div class="col-sm-8 col-xs-12">
+						<input type="text" name="phone" value="{if !empty($item['phone'])}{$item['phone']}{/if}"  class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">QQ</label>
+					<div class="col-sm-8 col-xs-12">
+						<input type="text" name="qq" value="{if !empty($item['qq'])}{$item['qq']}{/if}"  class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">地区</label>
+					<div class="col-sm-9 col-xs-12">
+						{if !empty($reside)}
+							{php echo tpl_form_field_district('dis', $reside)}
+						{else}
+							{php echo tpl_form_field_district('dis')}
+						{/if}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">详细地址</label>
+					<div class="col-sm-8 col-xs-12">
+						<div class="input-append"><input type="text" name="address" value="{if !empty($item['address'])}{$item['address']}{/if}"  class="form-control" /></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">坐标</label>
+					<div class="col-sm-8 col-xs-12">
+						{if !empty($item)}
+							{php echo tpl_form_field_coordinate('baidumap', $item)}
+						{else}
+							{php echo tpl_form_field_coordinate('baidumap')}
+						{/if}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<button type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交">提交</button>
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</div>
+		</div>
+	</form>
+
+	</div>
+{/if}
+
+{template 'common/footer'}

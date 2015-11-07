@@ -1,0 +1,35 @@
+<form method="post" action="{php echo url('mc/creditmanage/manage')}" id="form1">
+	<input type="hidden" name="do" value="manage">
+	<input type="hidden" name="uid" value="{$data['uid']}">
+	<div class="table-responsive">
+	<table class="table" style="min-width:568px;">
+	<tr>
+		<td style="border-top:none;vertical-align:middle;width:80px;"><strong>用户ID</strong><br> {$data['uid']}</td>
+		<td style="border-top:none;vertical-align:middle;width:90px;"><strong>姓名</strong> <br>{if $data['realname']} {$data['realname']} {else} 未完善 {/if}</td>
+		<td style="border-top:none;vertical-align:middle;"><strong>邮箱</strong> <br>{if $data['email']} {$data['email']} {else} 未完善 {/if}</td>
+		<td style="border-top:none;vertical-align:middle"><strong>手机</strong> <br>{if $data['mobile']} {$data['mobile']} {else} 未完善 {/if}</td>
+	</tr>
+	{loop $creditnames $index $creditname}
+		<tr>
+			<td style="border-top:none;vertical-align:middle"><strong>{$creditname['title']}</strong></td>
+			<td style="border-top:none;vertical-align:middle"><strong>{$data[$index]}</strong></td>
+			<td style="border-top:none;vertical-align:middle">
+				<label><input type="radio" style="vertical-align:-1px;" name="{$index}_type" value="1" checked> 增加</label>&nbsp;&nbsp;&nbsp;&nbsp;
+				<label><input type="radio" style="vertical-align:-1px;" name="{$index}_type" value="2"> 减少</label>
+			</td>
+			<td style="border-top:none;vertical-align:middle;width:100px;"> 
+				<input type="text" name="{$index}_value"  value="" class="form-control">
+			</td>
+		<tr>
+	{/loop}
+		<tr>
+			<td colspan="2" style="border-top:none;vertical-align:middle;width:120px"><strong>积分操作备注</strong></td>
+			<td colspan="2" style="border-top:none;vertical-align:middle">
+				<textarea class="form-control" style="width:350px;" name="remark"></textarea>
+			</td>
+		</tr>
+	<input name="token" type="hidden" value="{$_W['token']}"/>
+	</table>
+	</div>
+</form>
+

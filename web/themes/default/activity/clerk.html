@@ -1,0 +1,110 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li{if $do == 'introduce'} class="active"{/if}><a href="{php echo url('activity/offline');}">功能说明</a></li>
+	<li{if $do == 'clerk'} class="active"{/if}><a href="{php echo url('activity/offline/clerk');}">店员管理</a></li>
+</ul>
+<div class="main table-responsive">
+	<div class="alert alert-warning" role="alert">
+		注意：店员的名称和消费密码均不能有重复。
+	</div>
+	<form method="post" class="form-horizontal" id="form1">
+		<div class="panel panel-default">
+			<div class="panel-body table-responsive">
+				<table class="table table-hover">
+					<thead class="navbar-inner">
+					<tr>
+						<th style="width:50px;">删？</th>
+						<th style="width:300px;">店员名称</th>
+						<th style="width:300px;">消费密码</th>
+					</tr>
+					</thead>
+					<tbody id="list">
+					{loop $list $item}
+					<tr>
+						<td style="vertical-align:middle;"><input type="checkbox" name="delete[]" value="{$item['id']}" /></td>
+						<td><input type="text" name="title[{$item['id']}]" class="form-control" style="width:250px" value="{$item['name']}" /></td>
+						<td><input type="text" name="password[{$item['id']}]" class="form-control" style="width:250px" value="{$item['password']}" /></td>
+					</tr>
+					{/loop}
+					</tbody>
+					<tbody style="border-top:0;">
+					<tr>
+						<td></td>
+						<td colspan="2">
+							<a href="javascript:;" onclick="addItem()"><i class="icon-plus-sign-alt"></i> 添加</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div>
+			<input name="token" type="hidden" value="{$_W['token']}" />
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+<!--
+	function addItem() {
+		var html = '' +
+				'<tr>' +
+					'<td></td>' +
+					'<td><input type="text" name="title-new[]" class="form-control title-new" style="width:250px" value="" /></td>' +
+					'<td><input type="text" name="password-new[]" class="form-control password-new" style="width:250px;display:inline" value="" />' +
+					'<a href="javascript:;"  style="padding-left:20px;"onclick="deleteItem(this);"><i class=""></i>删除</a>' +
+					'</td>' +
+				'</tr>';
+		$('#list').append(html);
+	}
+	function deleteItem(o) {
+		$(o).parent().parent().remove();
+	}
+
+require(['jquery', 'util'], function($, u){
+	$("#form1").submit(function(){
+		var colarr=new Array();
+		var col;
+		var titlearr=new Array();
+		var tit;
+		var bool=true;
+		
+		$(":text[name^=password]").each(function(index){
+			value=$(this).val().trim();
+			if(value==""){
+				u.message('密码不能为空.', '', 'error');
+				bool = false;
+			}
+			if(value !=""){
+				for(col in colarr){
+					if(colarr[col]==value){
+						u.message('密码重复，请设置不同的密码.', '', 'error');
+						bool = false;
+					}		
+				}
+				colarr[index+1]=value;
+			}	
+		})
+		
+		$(":text[name^=title]").each(function(index){
+			title=$(this).val().trim();
+			if(title==""){
+				u.message('店员姓名不能为空.', '', 'error');
+				bool = false;
+			}
+			if(title !=""){
+				for(tit in titlearr){
+					if(titlearr[tit]==title){
+						u.message('店员姓名重复，请设置不同的店员姓名.', '', 'error');
+						bool = false;
+					}		
+				}
+				titlearr[index+1]=title;
+			}	
+		})
+		if(!bool) return false;
+	});
+});
+//-->
+</script>
+{template 'common/footer'}

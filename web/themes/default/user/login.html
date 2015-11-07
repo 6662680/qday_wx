@@ -1,0 +1,61 @@
+{template 'common/header-base'}
+<style>
+	@media screen and (max-width:767px){.login .panel.panel-default{width:90%; min-width:300px;}}
+	@media screen and (min-width:768px){.login .panel.panel-default{width:70%;}}
+	@media screen and (min-width:1200px){.login .panel.panel-default{width:50%;}}
+</style>
+<div class="login">
+	<div class="logo">
+		<a href="./?refresh" {if !empty($_W['setting']['copyright']['flogo'])}style="background:url('{php echo tomedia($_W['setting']['copyright']['flogo']);}') no-repeat;"{/if}></a>
+	</div>
+	<div class="clearfix" style="margin-bottom:5em;">
+		<div class="panel panel-default container">
+			<div class="panel-body">
+				<form action="" method="post" role="form" onsubmit="return formcheck();">
+					<div class="form-group input-group">
+						<div class="input-group-addon"><i class="fa fa-user"></i></div>
+						<input name="username" type="text" class="form-control input-lg" placeholder="请输入用户名登录">
+					</div>
+					<div class="form-group input-group">
+						<div class="input-group-addon"><i class="fa fa-unlock-alt"></i></div>
+						<input name="password" type="password" class="form-control input-lg" placeholder="请输入登录密码">
+					</div>
+					<div class="form-group">
+						<label class="checkbox-inline input-lg">
+							<input type="checkbox" value="true" name="rember"> 记住用户名 
+						</label>
+						<div class="pull-right">
+							{if !$_W['siteclose']}<a href="{url 'user/register'}" class="btn btn-link btn-lg">注册</a>{/if}
+							<input type="submit" name="submit" value="登录" class="btn btn-primary btn-lg" />
+							<input name="token" value="{$_W['token']}" type="hidden" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="center-block footer" role="footer">
+		<div class="text-center">
+			{if empty($_W['setting']['copyright']['footerright'])}<a href="http://www.qdaygroup.com">关于情天</a>&nbsp;&nbsp;<a href="http://www.qdaygroup.com">情天帮助</a>{else}{$_W['setting']['copyright']['footerright']}{/if} &nbsp; &nbsp; {if !empty($_W['setting']['copyright']['statcode'])}{$_W['setting']['copyright']['statcode']}{/if}
+		</div>
+		<div class="text-center">
+			{if empty($_W['setting']['copyright']['footerleft'])}Powered by <a href="http://www.qdaygroup.com"><b>情天</b></a> v{IMS_VERSION} &copy; 2014 <a href="http://www.qdaygroup.com">www.qdaygroup.com</a>{else}{$_W['setting']['copyright']['footerleft']}{/if}
+		</div>
+	</div>
+</div>
+<script>
+function formcheck() {
+	if($('#remember:checked').length == 1) {
+		cookie.set('remember-username', $(':text[name="username"]').val());
+	} else {
+		cookie.del('remember-username');
+	}
+	return true;
+}
+require(['jquery'],function($){
+	var h = document.documentElement.clientHeight;
+	$(".login").css('min-height',h);
+});
+</script>
+</body>
+</html>

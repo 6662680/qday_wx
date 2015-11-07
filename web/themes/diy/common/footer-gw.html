@@ -1,0 +1,14 @@
+			</div>
+		</div>
+		<script>require(['bootstrap']);</script>
+		<div class="center-block footer" role="footer">
+			<div class="text-center">
+				{if empty($_W['setting']['copyright']['footerright'])}<a href="http://www.qdaygroup.com">关于情天</a>&nbsp;&nbsp;<a href="http://www.qdaygroup.com">情天帮助</a>{else}{$_W['setting']['copyright']['footerright']}{/if}{if !empty($_W['setting']['copyright']['statcode'])}&nbsp; &nbsp; {$_W['setting']['copyright']['statcode']}{/if}
+			</div>
+			<div class="text-center">
+				{if empty($_W['setting']['copyright']['footerleft'])}Powered by <a href="http://www.qdaygroup.com"><b>情天</b></a> v{IMS_VERSION} &copy; 2014 <a href="http://www.qdaygroup.com">www.qdaygroup.com</a>{else}{$_W['setting']['copyright']['footerleft']}{/if}
+			</div>
+		</div>
+	</div>
+</body>
+</html>

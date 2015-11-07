@@ -1,0 +1,37 @@
+<div class="clearfix user-browser">
+	<div class="form-horizontal">
+		<table class="table tb" style="min-width:568px;">
+			<thead>
+			<tr>
+				<th style="width: 35px;" class="text-center">选择</th>
+				<th style="width: 100px;">门店名称</th>
+				<th style="width: 100px;">地址</th>
+			</tr>
+			</thead>
+			<tbody class="location-list">
+			{if !empty($location)}
+				{loop $location $row}
+					<tr id="loca-{$row['id']}">
+						<td class="text-center"><input type="checkbox" id="chk_loca_{$row['id']}" name="locationids[]" data-id="{$row['id']}" value="{$row['location_id']}"></td>
+						<td><label for="chk_loca_{$row['id']}" style="font-weight:normal;" class="name">{$row['business_name']}</label></td>
+						<td><label class="label label-info address">{$row['address']}</label></td>
+					</tr>
+				{/loop}
+			{else}
+				<tr>
+					<td align="center" colspan="3">没有有效的门店</td>
+				</tr>
+			{/if}
+			</tbody>
+		</table>
+	</div>
+</div>
+<script>
+	var selected = $('#form4 input[name="location-select"]').val();
+	if(selected) {
+		selected = selected.split('-');
+		for(var j=0;j<selected.length;j++) {
+			$('.location-list :checkbox[value='+selected[j]+']').prop('checked', true);
+		}
+	}
+</script>
