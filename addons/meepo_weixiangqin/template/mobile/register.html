@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>{if empty($res['telephone'])}完善{else}编辑{/if}资料,红娘帮你找那个TA</title>
+<link rel="stylesheet" type="text/css" href="{MEEPORES}/static/friend/css/index.css" />
+<link rel="stylesheet" href="{MEEPORES}/static/friend/css/jquery.mobile-1.4.3.css?t={php echo time();}"  />
+{php echo register_jssdk(false);}
+<script src="{MEEPORES}/static/friend/js/jquery.js" "></script>
+<script src="{MEEPORES}/static/friend/js/index.js" "></script>
+<script src="{MEEPORES}/static/friend/js/jquery.mobile-1.4.3.min.js" ></script>
+<script src="{MEEPORES}/static/artDialog/jquery.artDialog.js-skin=default" ></script>
+<script src="{MEEPORES}/static/artDialog/plugins/iframeTools.js" s></script>
+<script type="text/javascript">
+
+function beforeSubmit(form){
+	var regPartton=/1[3-8]+\d{9}/;
+if(form.uitsCharacter.value=='' || form.uitsCharacter.value=='30个字以内'){
+alert('亲，理想对象的性格要求不能为空哦！');
+form.uitsCharacter.focus();
+return false;
+}
+if(form.uitsOthers.value=='' || form.uitsOthers.value=='写下你的愿望吧，让红娘来帮你实现。30字内。'){
+alert('亲，愿望不能为空哦！');
+form.uitsOthers.focus();
+return false;
+}
+if(form.realname.value==''|| form.realname.value=='5个汉字以内,不能修改'){
+alert('亲，请填写您的真实姓名');
+form.realname.focus();
+return false;
+}
+if(form.telephone.value=='' || form.uphone.value=='请填写你的真实手机号！' ){
+alert('亲，请填写您的真实手机号！');
+form.telephone.focus();
+return false;
+}
+if(form.resideprovincecity.value=='' || form.resideprovincecity.value=='请填写你的真实地址！' ){
+alert('亲，请填写您的真实地址！');
+form.resideprovincecity.focus();
+return false;
+}
+if(!regPartton.test(form.telephone.value)){
+     alert('亲，请填写您的真实手机号！');
+     form.telephone.focus();
+     return false;
+}
+if(form.Descrip.value=='' || form.Descrip.value=='多一份了解，缘分更靠近。最多填写100个字。' ){
+alert('亲，自我介绍不能为空哦！');
+form.Descrip.focus();
+return false;
+}
+if(form.lookingfor.value==''){
+alert('亲，交友宣言不能为空哦！');
+form.lookingfor.focus();
+return false;
+}
+if(form.occupation.value==''){
+alert('亲，工作不能为空哦！');
+form.occupation.focus();
+return false;
+}
+return true;
+}
+</script>
+</head>
+
+<body style="padding: 15px 10px 10px;">
+<div class="wrap"> 
+
+  <header class="mb15">
+	<h1><a href="http://meepo.com.cn" class="home fright"><img src="{if empty($settings['logo'])}{MEEPORES}/static/friend/images/logo.png{else}{php echo $_W['attachurl'].$settings['logo']}{/if}"  alt="{if empty($settings['title'])}微相亲{else}{$settings['title']}{/if}"></a><a href="{php echo  $this->createMobileUrl('alllist')}"  target="_blank" class="goback fleft" style="color:#fff">{if empty($res['telephone'])}完善{else}编辑{/if}资料</a></h1>
+  </header>
+<div id="pt-main">
+<form class="regForm" action="" method="post" target="_self" enctype="multipart/form-data" onSubmit="return beforeSubmit(this);">
+<div class="section sec1">
+  <section class="mb15">
+    <div class="blocks">
+      <h2>理想对象条件</h2>
+      <p>写下你的择偶要求，小红娘帮你匹配哦！~</p>
+    </div>
+    <div class="dottedLine"></div>
+    <div class="blocks">
+      <ul class="cList">
+        <li>
+          <h6>身高要求</h6>      
+          <div class="">
+            <div class="selectWrap shorts">
+              <select name="uheightL" id="heightL">
+			  {if $res['uheightL'] == '0'}
+			    <option value="0" selected="true">请选择</option>
+			  {/if}
+			   {loop $heightLs $row}
+			       <option value="{$row}" {if $res['uheightL'] == $row}selected="true"{/if}>{$row}cm</option>
+			   {/loop}
+              </select>
+            </div>          
+            <div class="scenter">~</div>
+            <div class="selectWrap shorts">
+              <select name="uheightH" id="heightH">
+               {if $res['uheightH'] == '0'}
+			    <option value="0" selected="true">请选择</option>
+			  {/if}
+			   {loop $heightHs $row}
+			       <option value="{$row}" {if $res['uheightH'] == $row}selected="true"{/if}>{$row}cm</option>
+			   {/loop}
+                
+              </select>
+            </div>
+          </div>
+        </li>
+		<li>
+         <h6>体重要求</h6>
+          <div class="liItem lh" style="width:100%">
+            <div class="selectWrap shorts" style="width:100%">
+              <select name="uweight" id="ageL" style="width:100%">
+              {if $res['uweight'] == '0'}
+			    <option value="0" selected="true">请选择</option>
+			  {/if}
+              <option value="501" {if $res['uweight'] == '501'}selected="true"{/if}>50kg以下</option>
+              <option value="5080" {if $res['uweight'] == '5080'}selected="true"{/if}>50~80kg以内</option>
+			  <option value="801" {if $res['uweight'] == '801'}selected="true"{/if}>80kg以上</option>
+          </select>
+            </div>
+            
+          </div>    
+        </li>    
+        <li>
+          <h6>年龄要求</h6>
+          <div class="liItem lh" style="width:100%">
+            <div class="selectWrap shorts" style="width:100%">
+              <select name="uage" id="ageL" style="width:100%">
+			  {if $res['uage'] == '0'}
+			    <option value="0" selected="true">请选择</option>
+			  {/if}
+			    {if empty($ages)}
+                   <option value="1825" {if $res['uage'] == '1825'}selected="true"{/if}>18-25岁</option>
+                   <option value="2635" {if $res['uage'] == '2635'}selected="true"{/if}>26-35岁</option>
+			       <option value="3645" {if $res['uage'] == '3645'}selected="true"{/if}>36-45岁</option>
+				   <option value="4655" {if $res['uage'] == '4655'}selected="true"{/if}>46-55岁</option>
+				   <option value="5501" {if $res['uage'] == '5501'}selected="true"{/if}>55岁以上</option>
+				   
+				{else}
+				{loop $ages $row}
+                 <option value="{$row}" {if $row==$morenage}selected="true"{/if}>{$row}</option>
+				 {/loop}
+				{/if}
+              </select>
+            </div>
+            
+          </div>
+        </li>
+		<!---2014-11-14增加一些杂项--->
+		<li>
+          <h6 class="column lcolor"><span>学历要求</span><div class="selectWrap shorts">
+            <select name="ueducation" id="itsEducation">
+			
+              <option value="" {if empty($res['ueducation'])}selected="true"{/if}>无要求</option>
+              <option value="高中/职高以上" {if $res['ueducation'] == '高中/职高以上'}selected="true"{/if}>高中/职高以上</option>
+              <option value="大专以上" {if $res['ueducation'] == '大专以上'}selected="true"{/if}>大专以上</option>
+              <option value="本科以上" {if $res['ueducation'] == '本科以上'}selected="true"{/if}>本科以上</option>
+              <option value="硕士以上" {if $res['ueducation'] == '硕士以上'}selected="true"{/if}>硕士以上</option>
+            </select>
+          </div></h6>        
+        </li>
+		<li>
+          <h6 class="column lcolor"><span>月薪要求</span><div class="selectWrap shorts">
+          <select name="urevenue" id="itsSalary">
+		  <option value="" {if empty($res['urevenue'])}selected="true"{/if}>无要求</option>
+            <option value="3000以下" {if $res['urevenue'] == '3000以下'}selected="true"{/if}>3000以下</option>
+            <option value="3000~5000" {if $res['urevenue'] == '3000~5000'}selected="true"{/if}>3000~5000</option>
+            <option value="5000~10000" {if $res['urevenue'] == '5000~10000'}selected="true"{/if}>5000~10000</option>
+            <option value="10000以上" {if $res['urevenue'] == '10000以上'}selected="true"{/if}>10000以上</option>
+          </select>
+          </div></h6>        
+        </li>
+		
+		 <li>
+          <h6>理想星座</h6>
+          <div class="liItem lh" style="width:100%">
+            <div class="selectWrap shorts" style="width:100%">
+              <select name="lxxingzuo" id="uconstellation">
+               <option value="白羊座" selected="true">白羊座</option>
+              <option value="金牛座" {if $res['lxxingzuo']=='金牛座'}selected="true"{/if}>金牛座</option>
+              <option value="双子座" {if $res['lxxingzuo']=='双子座'}selected="true"{/if}>双子座</option>
+              <option value="巨蟹座" {if $res['lxxingzuo']=='巨蟹座'}selected="true"{/if}>巨蟹座</option>
+              <option value="狮子座" {if $res['lxxingzuo']=='狮子座'}selected="true"{/if}>狮子座</option>
+              <option value="处女座" {if $res['lxxingzuo']=='处女座'}selected="true"{/if}>处女座</option>
+              <option value="天秤座" {if $res['lxxingzuo']=='天秤座'}selected="true"{/if}>天秤座</option>
+              <option value="天蝎座" {if $res['lxxingzuo']=='天蝎座'}selected="true"{/if}>天蝎座</option>
+              <option value="射手座" {if $res['lxxingzuo']=='射手座'}selected="true"{/if}>射手座</option>
+              <option value="摩羯座" {if $res['lxxingzuo']=='摩羯座'}selected="true"{/if}>摩羯座</option>
+              <option value="水瓶座" {if $res['lxxingzuo']=='水瓶座'}selected="true"{/if}>水瓶座</option>
+              <option value="双鱼座" {if $res['lxxingzuo']=='双鱼座'}selected="true"{/if}>双鱼座</option>
+            </select>
+            </div>
+            
+          </div>
+        </li>
+        <li>
+          <h6>性格要求<em class="lcolor">(*必填项)</em></h6>
+          <div class="areaWrap"><textarea data-index='0' name="uitsCharacter" id="itsCharacter"  cols="30" rows="6" placeholder="30个字以内" >{$res['uitsCharacter']}</textarea></div>
+        </li>
+        <li>
+          <h6>一句话描述理想的另一半<em class="lcolor">(*必填项)</em></h6>
+          <div class="areaWrap"><textarea data-index='1' name="uitsOthers" id="itsOthers" cols="30" rows="6" placeholder="写下你的愿望吧，最多填写30个字。" value="{$res['uitsOthers']}">{$res['uitsOthers']}</textarea></div>
+        </li>
+      </ul>
+    </div> 
+  </section>
+  <p id="iterateEffects" class="basicbtn greenbtn mb15">下一步</p>
+  <div style="height:15px;width:100%;border-top:1px solid #f0f0f0;box-shadow:0 -1px 0 #bebebe
+;"></div>
+</div>
+<div class="section sec2">
+  <section class="mb15">
+    <div class="blocks">
+      <h2>自身条件</h2>
+      <p>也留下你的资料，让合适你的对象来寻找你吧</p>
+    </div>  
+    <div class="dottedLine"></div>
+    <div class="blocks">
+      <ul class="cList">
+        <li>
+          <h6>姓名</h6>
+          <div class="textWrap"><input data-index='3' name="realname" id="uname" type="text" class="textInput"  placeholder="5个汉字以内,不能修改"  value="{$res['realname']}"/></div>        
+        </li>
+        <li>
+          <h6 class="column lcolor"><span>性别</span><div class="selectWrap shorts2">
+           <select name="gender" id="ugender">
+            <option value="2" {if $res['gender']=='2'}selected="true"{/if}>女</option>
+            <option value="1" {if $res['gender']=='1'}selected="true"{/if}>男</option>
+			<option value="0" {if $res['gender']=='0'}selected="true"{/if}>保密</option>
+          </select>
+          </div></h6>  
+        </li>
+		<li> <h6>所在省市</h6>
+          <div class="textWrap"><input data-index='4' name="resideprovincecity" id="resideprovincecity" type="text" class="textInput"  placeholder="请填写你的真实地址！" value="{$res['resideprovincecity']}"/></div>
+        </li>
+		<style>
+		
+		</style>
+        <li>
+          <h6>手机号</h6>
+          <div class="textWrap"><input data-index='4' name="telephone" id="uphone" type="text" class="textInput"  placeholder="请填写你的真实手机号！" value="{$res['telephone']}"/></div>        
+        </li>
+        <li>
+          <h6 class="column lcolor"><span>年龄</span><div class="selectWrap shorts2">
+            <select name="age" id="uage">
+			  {if $res['age'] == '0'}
+			    <option value="0" selected="true">请选择</option>
+			  {/if}
+                 {loop $myages $row}
+                 <option value="{$row}" {if $res['age']==$row}selected="true"{/if}>{$row}</option>
+				 {/loop}
+				
+			
+			
+            
+          </select>
+          </div></h6>  
+        </li>
+        <li>
+          <h6 class="column lcolor"><span>星座</span><div class="selectWrap shorts2">
+            <select name="constellation" id="uconstellation">
+              <option value="白羊座" selected="true">白羊座</option>
+              <option value="金牛座" {if $res['constellation']=='金牛座'}selected="true"{/if}>金牛座</option>
+              <option value="双子座" {if $res['constellation']=='双子座'}selected="true"{/if}>双子座</option>
+              <option value="巨蟹座" {if $res['constellation']=='巨蟹座'}selected="true"{/if}>巨蟹座</option>
+              <option value="狮子座" {if $res['constellation']=='狮子座'}selected="true"{/if}>狮子座</option>
+              <option value="处女座" {if $res['constellation']=='处女座'}selected="true"{/if}>处女座</option>
+              <option value="天秤座" {if $res['constellation']=='天秤座'}selected="true"{/if}>天秤座</option>
+              <option value="天蝎座" {if $res['constellation']=='天蝎座'}selected="true"{/if}>天蝎座</option>
+              <option value="射手座" {if $res['constellation']=='射手座'}selected="true"{/if}>射手座</option>
+              <option value="摩羯座" {if $res['constellation']=='摩羯座'}selected="true"{/if}>摩羯座</option>
+              <option value="水瓶座" {if $res['constellation']=='水瓶座'}selected="true"{/if}>水瓶座</option>
+              <option value="双鱼座" {if $res['constellation']=='双鱼座'}selected="true"{/if}>双鱼座</option>
+            </select>
+          </div></h6>  
+        </li>
+        <li>
+          <h6 class="column lcolor"><span>身高</span><div class="selectWrap shorts2">
+            <select name="height" id="uHeight">
+                  {if $res['height'] == '0'}
+			    <option value="0" selected="true">请选择</option>
+			  {/if}
+                 {loop $myheights $row}
+                 <option value="{$row}" {if $res['height'] == $row}selected="true"{/if}>{$row}cm</option>
+				 {/loop}
+            </select>
+          </div></h6> 
+        </li>
+        <li>
+          <h6 class="column lcolor"><span>体重</span><div class="selectWrap shorts2">
+            <select name="weight" id="weight">
+			 {if $res['weight'] == '0'}
+			    <option value="0" selected="true">请选择</option>
+			  {/if}
+              <option value="401" {if $res['weight']=='401'}selected="true"{/if}>40kg以下</option>
+              <option value="40" {if $res['weight']=='40'}selected="true"{/if}>40kg</option>
+              <option value="41" {if $res['weight']=='41'}selected="true"{/if}>41kg</option> 
+              <option value="42" {if $res['weight']=='42'}selected="true"{/if}>42kg</option>
+              <option value="43" {if $res['weight']=='43'}selected="true"{/if}>43kg</option>
+              <option value="44" {if $res['weight']=='44'}selected="true"{/if}>44kg</option>
+              <option value="45" {if $res['weight']=='45'}selected="true"{/if}>45kg</option>
+              <option value="46" {if $res['weight']=='46'}selected="true"{/if}>46kg</option>
+              <option value="47" {if $res['weight']=='47'}selected="true"{/if}>47kg</option>
+              <option value="48" {if $res['weight']=='48'}selected="true"{/if}>48kg</option>
+              <option value="49" {if $res['weight']=='49'}selected="true"{/if}>49kg</option>         
+              <option value="50" {if $res['weight']=='50'}selected="true"{/if}>50kg</option>
+              <option value="51" {if $res['weight']=='51'}selected="true"{/if}>51kg</option>
+              <option value="52" {if $res['weight']=='52'}selected="true"{/if}>52kg</option>
+              <option value="53" {if $res['weight']=='53'}selected="true"{/if}>53kg</option>
+              <option value="54" {if $res['weight']=='54'}selected="true"{/if}>54kg</option>
+              <option value="55" {if $res['weight']=='55'}selected="true"{/if}>55kg</option>
+              <option value="56" {if $res['weight']=='56'}selected="true"{/if}>56kg</option>
+              <option value="57" {if $res['weight']=='57'}selected="true"{/if}>57kg</option>
+              <option value="58" {if $res['weight']=='58'}selected="true"{/if}>58kg</option>
+              <option value="59" {if $res['weight']=='59'}selected="true"{/if}>59kg</option>
+              <option value="60" {if $res['weight']=='60'}selected="true"{/if}>61kg</option>
+			   <option value="61" {if $res['weight']=='61'}selected="true"{/if}>61kg</option>
+              <option value="62" {if $res['weight']=='62'}selected="true"{/if}>62kg</option>
+			  <option value="63" {if $res['weight']=='63'}selected="true"{/if}>63kg</option>
+			  <option value="64" {if $res['weight']=='64'}selected="true"{/if}>64kg</option>
+			  <option value="65" {if $res['weight']=='65'}selected="true"{/if}>65kg</option>
+			  <option value="66" {if $res['weight']=='66'}selected="true"{/if}>66kg</option>
+			  <option value="67" {if $res['weight']=='67'}selected="true"{/if}>67kg</option>
+			  <option value="68" {if $res['weight']=='68'}selected="true"{/if}>68kg</option>
+			  <option value="69" {if $res['weight']=='69'}selected="true"{/if}>69kg</option>
+			  <option value="70" {if $res['weight']=='70'}selected="true"{/if}>70kg</option>
+			   <option value="701" {if $res['weight']=='701'}selected="true"{/if}>70kg以上</option>   
+            </select>
+          </div></h6>         
+        </li> 
+		<!---自身条件状况-->
+		 <li>
+          <h6 class="column lcolor"><span>婚姻状态</span><div class="selectWrap shorts3">
+            <select name="affectivestatus" id="umaritalStatus">
+			  {if empty($res['affectivestatus'])}
+			    <option value="" selected="true">请选择</option>
+			  {/if}
+              <option value="未婚" {if $res['affectivestatus']=='未婚'}selected="true"{/if}>未婚</option>
+              <option value="离异" {if $res['affectivestatus']=='离异'}selected="true"{/if}>离异</option>
+              <option value="丧偶" {if $res['affectivestatus']=='丧偶'}selected="true"{/if}>丧偶</option>
+			  <option value="已婚" {if $res['affectivestatus']=='已婚'}selected="true"{/if}>已婚</option>
+            </select>
+          </div></h6> 
+        </li>
+		<li>
+          <h6 class="column lcolor"><span>学历</span><div class="selectWrap shorts2">
+            <select name="education" id="uEducation">
+			 {if empty($res['education'])}
+			    <option value="" selected="true">请选择</option>
+			  {/if}
+			 
+            <option value="高中以下" {if $res['education']=='高中以下'}selected="true"{/if}>高中以下</option>
+            <option value="高中/职高/中专" {if $res['education']=='高中/职高/中专'}selected="true"{/if}>高中/职高/中专</option>
+            <option value="大专以上" {if $res['education']=='大专以上'}selected="true"{/if}>大专</option>
+            <option value="本科以上" {if $res['education']=='本科以上'}selected="true"{/if}>本科</option>
+            <option value="硕士" {if $res['education']=='硕士'}selected="true"{/if}>硕士</option>
+            <option value="博士" {if $res['education']=='博士'}selected="true"{/if}>博士</option>
+          </select>
+          </div></h6> 
+        </li>
+		<li>
+          <h6 class="column lcolor"><span>住房状态</span><div class="selectWrap shorts3">
+            <select name="housestatus" id="uhouseStatus">
+			 {if empty($res['affectivestatus'])}
+			    <option value="" selected="true">请选择</option>
+			  {/if}
+            <option value="市区有房" {if $res['housestatus']=='市区有房'}selected="true"{/if}>市区有房</option>
+            <option value="老家有房" {if $res['housestatus']=='老家有房'}selected="true"{/if}>老家有房</option>
+            <option value="近期准备买房" {if $res['housestatus']=='近期准备买房'}selected="true"{/if}>近期准备买房</option>
+            <option value="无房" {if $res['housestatus']=='无房'}selected="true"{/if}>无房</option>
+          </select>
+          </div></h6> 
+        </li>
+		 <li>
+           <h6 class="column lcolor"><span>车辆状态</span><div class="selectWrap shorts3">
+            <select name="carstatus" id="ucarStatus">
+			 {if empty($res['carstatus'])}
+			    <option value="" selected="true">请选择</option>
+			  {/if}
+            <option value="有车" {if $res['carstatus']=='有车'}selected="true"{/if}>有车</option>
+            <option value="近期准备购车" {if $res['carstatus']=='近期准备购车'}selected="true"{/if}>近期准备购车</option>
+            <option value="无车" {if $res['carstatus']=='无车'}selected="true"{/if}>无车</option>
+          </select>
+          </div></h6>        
+        </li>
+        <li>
+          <h6>工作</h6>
+          <div class="areaWrap">
+          <textarea data-index='6' name="occupation" id="uwork" cols="30" rows="2" placeholder="30个字以内">{$res['occupation']}</textarea></div>
+        </li>
+        <li>
+           <h6 class="column lcolor"><span>月收入</span><div class="selectWrap shorts2">
+            <select name="revenue" id="uSalary">
+			 {if empty($res['revenue'])}
+			    <option value="" selected="true">请选择</option>
+			  {/if}
+              <option value="3000以下" {if $res['revenue']=='3000以下'}selected="true"{/if}>3000以下</option>
+              <option value="3000~5000" {if $res['revenue']=='3000~5000'}selected="true"{/if}>3000~5000</option>
+              <option value="5000~10000" {if $res['revenue']=='5000~10000'}selected="true"{/if}>5000~10000</option>
+              <option value="10000以上" {if $res['revenue']=='10000以上'}selected="true"{/if}>10000以上</option>
+            </select>
+          </div></h6>
+        </li>
+		
+        <li>
+          <h6>自我介绍</h6>
+          <div class="areaWrap"><textarea data-index='5' name="Descrip" id="uDescrip" cols="30" rows="6" placeholder="多一份了解，缘分更靠近。最多填写100个字。" value="{$res['Descrip']}">{$res['Descrip']}</textarea></div>
+        </li>
+		 <li>
+          <h6>交友宣言</h6>
+          <div class="areaWrap"><textarea data-index='5' name="lookingfor" id="uDescrip" cols="30" rows="6" placeholder="留下你的交友宣言吧。最多填写20个字。" value="{$res['lookingfor']}">{$res['lookingfor']}</textarea></div>
+        </li>
+      </ul>
+    </div>       
+  </section>
+  <div class="submitWrap"><input type="submit" class="submitBtn" id="submitBtn" value="提交保存" /></div>
+</div> 
+</form>
+</div>
+</div>
+<script type="text/javascript">
+ $(function(){
+    
+   $("#iterateEffects").on('click',function(){
+	   var first= document.getElementById('itsCharacter').value.length;
+	   var second=document.getElementById('itsOthers').value.length;
+	   var flag = true;
+	   
+       if(first== 0 || second== 0){
+         alert('亲，理想对象的性格要求以及愿望不能为空哦！');
+         
+         flag = false;
+       }
+	   if(first>90 || second>90){
+         alert('亲，理想对象的性格要求以及愿望,30个汉字以内哦！');
+         
+         flag = false;
+       }
+		
+	  
+      if(flag){
+        $(".sec1").fadeOut('slow', function() {
+          $('body').scrollTop(0);
+        });
+        $(".sec2").fadeIn('fast');
+        $(".sec1").hide();
+      };      
+   });
+
+   $('#lw').on('click',function(){
+   	$('#pic').parents('.textWrap').removeClass('warning');
+   });
+ });
+
+</script>           
+<script type="text/javascript">
+  wx.ready(function () {
+    var shareData = {
+    title: "{$settings['title']}",
+    desc: "{$settings['share_content']}",
+    link: "{$settings['share_link']}",
+    imgUrl: "{$_W['attachurl']}{$settings['share_logo']}",
+  };
+  
+  //分享朋友
+  wx.onMenuShareAppMessage({
+       title: shareData.title,
+      desc: shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+        send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: shareData.title+"---"+shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+          send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        Joel_gmuAlert("分享失败","网络超时！！！！");
+      }
+    });   
+    
+  });
+
+
+
+function send_intergal(){
+   $.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('shareajax')}",
+			data:{openid:'{$openid}}'},
+			cache:false,
+			success:function(data){
+				if(data=="no"){
+					alert("分享成功,抱歉，网络超时，获取积分失败！！！");
+                   
+				}
+				else if(data=="over"){
+				   alert("分享成功,你今天的分享次数已经超过上限哦，请明天再来吧！！！");
+				
+				}
+				else{
+				   alert("分享成功,恭喜您，获得{$settings['share_jifen']}个奖励积分！今天你还有"+data+"次分享赚积分机会哦！");
+				}
+			}
+		});
+}
+
+
+        </script>
+		{template 'footer'}

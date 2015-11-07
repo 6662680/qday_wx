@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>{if empty($settings['title'])}微相亲{else}{$settings['title']}{/if}情书</title>
+<link rel="stylesheet" type="text/css" href="{MEEPORES}/static/friend/css/index.css" />
+<link rel="stylesheet" href="{MEEPORES}/static/friend/css/jquery.mobile-1.4.3.css" />
+{php echo register_jssdk(false);}
+<script src="{MEEPORES}/static/friend/js/jquery.js"></script>
+<!--Wap前端GMU样式-->
+        <link rel="stylesheet" type="text/css" href="{RES}/themes/css/gmu.css" />
+        <!--Wap前端GMU重置样式-->
+        <link rel="stylesheet" type="text/css" href="{RES}/themes/css/Joel-basegmu.css" />
+        <!--Wap前端Zepto函数库1.0-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/zepto.min.js"></script>
+        <!--Wap前端Joel公共封装函数库-针对ZEPTO-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-baseapi.js"></script>
+         <!--Wap前端Joel公共函数-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-base.js"></script>
+        <!--Wap前端Joel-Gmu公共函数库-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/gmu.min.js"></script>
+        <!--Wap前端Joel-Gmu公共函数库-针对Gmu-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-basegmu.js"></script>
+		<script type="text/javascript" src="{RES}/themes/js/imglazyload.js"></script>
+		<script type="text/javascript" charset="utf-8" src="{RES}/themes/wsj/js/showalert.js"></script>
+</head>
+
+<body style="padding: 15px 10px 10px;">
+<div class="wrap">  
+<header class="mb15">
+   <h1><a href="{php echo  $this->createMobileUrl('alllist')}"  target="_blank" class="home fright"><img src="{if empty($settings['logo'])}{MEEPORES}/static/friend/images/logo.png{else}{php echo $_W['attachurl'].$settings['logo']}{/if}"  alt="{if empty($settings['title'])}微相亲{else}{$settings['title']}{/if}"></a><a href="{php echo  $this->createMobileUrl('alllist')}"  target="_blank" class="goback fleft">&nbsp;我的情书</a></h1>
+</header>
+<section class="loveMail mb15">
+  <div class="mailHeader">
+    <a href=""  target="_blank " class="btnBasic getMail gmActive">拆情书</a>
+    <a href="{php echo  $this->createMobileUrl('alllist')}"  target="_blank" class="btnBasic sendMail">寄情书</a>
+  </div>
+    <div class="mailBody">
+    <ul class="mailList gmList">
+	{if empty($res)}
+              <div class="mailFunc">
+          
+				<div class="mailContent" style="font-size:20px;color:red;text-align:center">
+				 目前还没人写情书给你哦！<br><br><font style="color:#000;font-size:15px;background-color:#ffded5;text-align:center">缘分有时候要主动出击哦!</font>
+				</div></div>
+	{else}
+	{loop $res $row}
+    <li>
+	    
+        <div class="mailFunc">
+          <a href="{php echo  $this->createMobileUrl('others',array('weid'=>$weid,'openid'=>$row['openid']))}" target="_blank" class="itsInfo">
+            <img src="{if preg_match('/http:(.*)/',$result[$row['id']]['avatar'])}{$result[$row['id']]['avatar']} {else if preg_match('/images(.*)/',$result[$row['id']]['avatar'])} ./resource/attachment/{$result[$row['id']]['avatar']}     {else} {MEEPORES}/static/friend/images/cdhn80.jpg{/if}" alt="">
+            <h3>{$row['from']}</h3>
+            <i>{php echo date('Y-m-d H:i:s', $row['time']);}</i>
+                      </a>
+          <div class="oprate">
+            <a href="{php echo $this->createMobileUrl('hitmail',array('weid'=>$weid,'toname'=>$row['from'],'toopenid'=>$row['openid']))}" target="_blank" class="reply"></a>
+     
+             <a class="delete" onclick="return confirm('确认删除吗？');return false;" href="{php echo $this->createMobileUrl('deletemails',array('weid'=>$weid,'id'=>$row['id']))}"></a>
+          </div>
+        </div>
+        <div class="mailContent">
+          <p>{$row['content']}</p>
+          <i class="arrDown"></i>
+        </div>
+      </li>
+	  {/loop}
+	  {/if}
+	  </ul>
+  </div></section>
+  <script>
+  $(function(){
+    $('.mailContent').on('click',function(){
+      var _this = $(this);
+      if(_this.find('.active').html()){
+        _this.css('padding-right','21px').children('i').show();
+        _this.children('p').removeClass('active');
+      }else{
+        _this.css('padding-right',0).children('i').hide();
+        _this.children('p').addClass('active');
+      }     
+
+    });
+  });
+ 
+</script>
+ 
+ 
+<script type="text/javascript">
+
+
+function offdel(){
+	 return;
+}
+</script>    
+<script type="text/javascript">
+ 
+  wx.ready(function () {
+    var shareData = {
+    title: "{$settings['title']}",
+    desc: "{$settings['share_content']}",
+    link: "{$settings['share_link']}",
+    imgUrl: "{$_W['attachurl']}{$settings['share_logo']}",
+  };
+  
+  //分享朋友
+  wx.onMenuShareAppMessage({
+       title: shareData.title,
+      desc: shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+        send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: shareData.title+"---"+shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+          send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        Joel_gmuAlert("分享失败","网络超时！！！！");
+      }
+    });   
+    
+  });
+
+
+
+function send_intergal(){
+   $.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('shareajax')}",
+			data:{openid:'{$openid}}'},
+			cache:false,
+			success:function(data){
+				if(data=="no"){
+					Joel_gmuAlert("分享成功","抱歉，网络超时，获取积分失败！！！");
+                   
+				}
+				else if(data=="over"){
+				   Joel_gmuAlert("分享成功","你今天的分享次数已经超过上限哦，请明天再来吧！！！");
+				
+				}
+				else{
+				   Joel_gmuAlert("分享成功","恭喜您，获得{$settings['share_jifen']}个奖励积分！今天你还有"+data+"次分享赚积分机会哦！");
+				}
+			}
+		});
+}
+
+
+        </script>
+		{template 'footer'}

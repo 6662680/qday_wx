@@ -1,0 +1,88 @@
+{template 'common/header'}
+{template 'common'}
+<div class="box">
+    <div class="bg">
+        <div style="margin:80px 15px 0 15px;">
+            {if empty($got)}
+                {if $activity['type'] == 'direct'}
+                    <h5 class="text-center">您收到一个大红包, 马上打开看看吧</h5>
+                {else}
+                    {if $help['already'] > 0}
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning  progress-bar-striped active" role="progressbar" aria-valuenow="{$help['already']}" aria-valuemin="0" aria-valuemax="{$help['total']}" style="width: {php echo $help['already']*100/$help['total']}%">
+                        </div>
+                    </div>
+                    {/if}
+                    {if $help['ok']}
+                    <h5 class="text-center">
+                        新春大吉, 辛苦向好友们拜年. 总算讨到了一个大红包, 马上打开看看吧
+                    </h5>
+                    {else}
+                    <h5 class="text-center">
+                        新春大吉, 现在就去向好友拜年讨红包. 还需要 <mark>{php echo $help['total'] - $help['already']}</mark> 个好友赏脸, 就能领到一个大红包
+                    </h5>
+                    {/if}
+                {/if}
+            {else}
+                {if $got['status'] == 'success'}
+                    <h5 class="text-center">您已经成功领取大红包, 可以去微信钱包里看看啦</h5>
+                {else}
+                    <h4 class="text-center"><strong>红包还没有打开, 您可以重新领取</strong></h4>
+                    <h5 class="text-center">我们的红包只有在每天 08:00 - 23:59 才发放哦. 如果没有领取成功, 可以避开这个时间段重新领取. 或者联系我们</h5>
+                {/if}
+            {/if}
+        </div>
+    </div>
+    <div class="btns container">
+        <div class="form-group">
+            {if empty($got)}
+                {if $activity['type'] == 'direct'}
+                    <button class="btn btn-warning btn-block" onclick="doSend();">马上打开红包</button>
+                {else}
+                    {if $help['ok']}
+                        <button class="btn btn-warning btn-block" onclick="doSend();">马上打开红包</button>
+                    {else}
+                        <button class="btn btn-warning btn-block" onclick="shareDialog();">向好友拜年讨红包</button>
+                    {/if}
+                {/if}
+            {else}
+                {if $got['status'] == 'success'}
+                    <button class="btn btn-warning btn-block" disabled>已经领取过红包了</button>
+                {else}
+                    <button class="btn btn-warning btn-block" onclick="doSend();">重新领取红包</button>
+                {/if}
+            {/if}
+        </div>
+        {if $activity['type'] == 'shared' && $help['already'] > 0}
+        <div class="form-group">
+            <button class="btn btn-warning btn-block" onclick="myDialog()">查看给我塞过红包的好友</button>
+        </div>
+        {/if}
+        <div class="form-group">
+            <button class="btn btn-link btn-block text-right" onclick="rulesDialog();">查看活动说明</button>
+        </div>
+        <script>
+            function doSend() {
+                require(['jquery', 'util'], function($, u){
+                    $.post('{php echo $this->createMobileUrl("send")}').success(function(dat){
+                        if(dat == 'success') {
+                            location.reload();
+                        } else {
+                            u.message(dat);
+                        }
+                    });
+                });
+            }
+            function myDialog() {
+                require(['jquery'], function($){
+                    $('.rules-dialog .dialog-content').removeClass('fadeOutDownBig').addClass('fadeInUpBig');
+                    $.post('{php echo $this->createMobileUrl("my")}').success(function(dat){
+                        $('.rules-dialog .dialog-content .content').html(dat);
+                        $('.rules-dialog').show();
+                    });
+                })
+            }
+        </script>
+    </div>
+</div>
+{template 'common/footer'}

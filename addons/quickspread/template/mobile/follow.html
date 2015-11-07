@@ -1,0 +1,34 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+<style>
+  td {
+    vertical-align:middle !important;
+  }
+  .followtime {
+    font-size:10px;
+    text-align:right;
+  }
+  body {
+    background-color:white;
+  }
+</style>
+
+<div class="">
+      {template 'fansinfo'}
+      <table class="table table-striped" style='width:100%;'>
+        <tbody>
+          {loop $mylist $f}
+          <tr>
+            <td>{php echo ++$seq}</td>
+            <td><img style="width:46px;height:46px"  class="img-rounded" src="{php echo preg_replace('/\/0/', '/46', stripslashes($f['avatar']));}" /></td>
+            <td><div class='eclipse'>{$f['nickname']}</div></td>
+            <td class="followtime">{php echo date('Y-m-d H:i', $f['createtime'])}</td>
+          </tr>
+          {/loop}
+        </tbody>
+      </table>
+    </div>
+{if count($mylist) >= 500}
+<p style="text-align:center;margin:20px">最多显示500条</p>
+{/if}
+    {template 'footer'}

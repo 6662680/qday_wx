@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>{if empty($settings['title'])}微相亲{else}{$settings['title']}{/if}我喜欢的</title>
+<link rel="stylesheet" type="text/css" href="{MEEPORES}/static/friend/css/index.css" />
+<link rel="stylesheet" href="{MEEPORES}/static/friend/css/jquery.mobile-1.4.3.css" />
+{php echo register_jssdk(false);}
+<script src="{MEEPORES}/static/friend/js/jquery.js"></script>
+<!--Wap前端GMU样式-->
+        <link rel="stylesheet" type="text/css" href="{RES}/themes/css/gmu.css" />
+        <!--Wap前端GMU重置样式-->
+        <link rel="stylesheet" type="text/css" href="{RES}/themes/css/Joel-basegmu.css" />
+        <!--Wap前端Zepto函数库1.0-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/zepto.min.js"></script>
+        <!--Wap前端Joel公共封装函数库-针对ZEPTO-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-baseapi.js"></script>
+         <!--Wap前端Joel公共函数-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-base.js"></script>
+        <!--Wap前端Joel-Gmu公共函数库-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/gmu.min.js"></script>
+        <!--Wap前端Joel-Gmu公共函数库-针对Gmu-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-basegmu.js"></script>
+</head>
+
+<body style="padding: 15px 10px 10px;">
+<div class="wrap">  
+<header class="mb15">
+  <h1><a href="{php echo  $this->createMobileUrl('alllist')}" class="home fright"><img src="{if empty($settings['logo'])}{MEEPORES}/static/friend/images/logo.png{else}{php echo $_W['attachurl'].$settings['logo']}{/if}"  alt="{if empty($settings['title'])}微相亲{else}{$settings['title']}{/if}"></a><a href="{php echo $this->createMobileUrl('homecenter')}" class="goback fleft" style="color:#fff">我喜欢的</a></h1>
+</header>
+<section class="likedSec mb15">
+  <ul class="imgList">
+  {if empty($result)}<li style="height:100px;width:100%"><span style="font-size:20px;color:red;height:60px">太遗憾了，你不喜欢任何人！<br><font style="color:#000;font-size:15px;background-color:#ffded5">你也太矫情了吧!</font></span></li>{else}
+  {loop $result $row}  
+  <li><a class="linka" href="{php echo $this->createMobileUrl('others',array('openid'=>$row['from_user']))}" target="_blank"><img src="{if preg_match('/http:(.*)/',$row['avatar'])}{$row['avatar']} {else if preg_match('/images(.*)/',$row['avatar'])} ./resource/attachment/{$row['avatar']}     {else}{MEEPORES}/static/friend/images/cdhn80.jpg{/if}" alt="头像"><span>{$row['nickname']}</span></a></li>
+  {/loop}
+  {/if}
+  </ul>
+</section>      
+<script type="text/javascript">
+  wx.ready(function () {
+    var shareData = {
+    title: "{$settings['title']}",
+    desc: "{$settings['share_content']}",
+    link: "{$settings['share_link']}",
+    imgUrl: "{$_W['attachurl']}{$settings['share_logo']}",
+  };
+  
+  //分享朋友
+  wx.onMenuShareAppMessage({
+       title: shareData.title,
+      desc: shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+        send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: shareData.title+"---"+shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+          send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        Joel_gmuAlert("分享失败","网络超时！！！！");
+      }
+    });   
+    
+  });
+
+
+
+function send_intergal(){
+   $.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('shareajax')}",
+			data:{openid:'{$openid}}'},
+			cache:false,
+			success:function(data){
+				if(data=="no"){
+					Joel_gmuAlert("分享成功","抱歉，网络超时，获取积分失败！！！");
+                   
+				}
+				else if(data=="over"){
+				   Joel_gmuAlert("分享成功","你今天的分享次数已经超过上限哦，请明天再来吧！！！");
+				
+				}
+				else{
+				   Joel_gmuAlert("分享成功","恭喜您，获得{$settings['share_jifen']}个奖励积分！今天你还有"+data+"次分享赚积分机会哦！");
+				}
+			}
+		});
+}
+
+
+        </script>
+		{template 'footer'}

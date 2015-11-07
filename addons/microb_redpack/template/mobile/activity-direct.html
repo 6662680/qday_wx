@@ -1,0 +1,59 @@
+{template 'common/header'}
+{template 'common'}
+<div class="stage"></div>
+<div class="widget bg">
+    <div style="margin:30% 15% 0 15%;">
+        {if empty($got)}
+            {if !empty($error)}
+            {$error['message']}
+            {else}
+            <h5 class="text-center">您收到一个大红包, 马上打开看看吧</h5>
+            {/if}
+        {else}
+            {if $got['status'] == 'complete'}
+                <h5 class="text-center">您已经成功领取大红包, 可以去微信钱包里看看啦</h5>
+            {elseif $got['status'] == 'none'}
+                <h4 class="text-center"><strong>没有抢到哦, 请期待我们下一次活动</strong></h4>
+            {else}
+                <h4 class="text-center"><strong>红包还没有打开, 请重新领取</strong></h4>
+                <h5 class="text-center">我们的红包只有在每天 08:00 - 23:59 才发放哦. 如果没有领取成功, 可以在这个时间段重新领取. 或者联系我们</h5>
+            {/if}
+        {/if}
+    </div>
+</div>
+<div class="widget btns">
+    <div class="form-group">
+        {if empty($got)}
+            {if empty($error)}
+            <button class="btn btn-warning btn-block" onclick="doSend();">马上打开红包</button>
+            {/if}
+        {else}
+            {if $got['status'] == 'complete'}
+                <button class="btn btn-warning btn-block" disabled>已经领取过红包了</button>
+            {elseif $got['status'] == 'created'}
+                <button class="btn btn-warning btn-block" onclick="doSend();">重新领取红包</button>
+            {/if}
+        {/if}
+    </div>
+    <div class="form-group">
+        <button class="btn btn-link btn-block text-right" onclick="rulesDialog('{$activity['actid']}');">查看活动说明</button>
+    </div>
+    <script>
+        function doSend() {
+            profileDialog(function(){
+                require(['jquery'], function($){
+                    var pars = {};
+                    pars.actid = "{$activity['actid']}";
+                    $.post('{php echo $this->createMobileUrl("send")}', pars).success(function(dat){
+                        if(dat == 'success') {
+                            location.reload();
+                        } else {
+                            message(dat);
+                        }
+                    });
+                });
+            });
+        }
+    </script>
+</div>
+{template 'common/footer'}

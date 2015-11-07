@@ -1,0 +1,1165 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>TA的魔方秀</title>
+{php echo register_jssdk(false);}
+<link rel="stylesheet" type="text/css" href="{MEEPORES}/static/friend/css/timeline.css?a={$suijinum}">
+<style type="text/css">
+img{display:inline-block;}
+.posa{position:absolute;}
+.posr{position:relative;}
+
+.f12{font-size:12px;}
+.f14{font-size:14px;}
+.fl{float:left;}
+.fr{float:right;}
+.cf:after{content:"";display:table;clear:both;}
+
+.screen_x0{-webkit-transform: rotateY(0deg) rotateX(0deg);}
+.screen_x90{-webkit-transform: rotateY(0deg) rotateX(90deg);}
+.screen_x180{-webkit-transform: rotateY(0deg) rotateX(180deg);}
+.screen_x270{-webkit-transform: rotateY(0deg) rotateX(270deg);}
+.screen_x360{-webkit-transform: rotateY(0deg) rotateX(360deg);}
+
+.swipe_tip{position:absolute;bottom:25px;left:50%;margin-left:-11px;width:22px;height:23px;background:url({MEEPORES}/static/friend/images/swipe_up.png) no-repeat;background-size:22px 23px;}
+.hd_bd{border-width:45px 15px 0 15px;border-style:solid;position:relative;text-align:center;line-height:45px;}
+.hd_bd .tit{color:#fff;font-size:18px;position:absolute;width:100%;top:-45px;left:0;}
+.global,
+.screen,
+.layer{z-index:1;}
+.layer .inner{width:100%;height:100%;}
+.layer2 .hd_bd{color:#435d50;border-color:#ff005e transparent transparent transparent;}
+.layer2 .ft{position:absolute;width:84%;bottom:0;left:0;padding:45px 8% 8px;z-index:3;}
+.layer3 .hd_bd{color:#505150;border-color:#ff005e transparent transparent transparent;}
+.layer4 .hd_bd{color:#435d50;border-color:#ff005e transparent transparent transparent;}
+.layer4 .ft{position:absolute;width:84%;bottom:0;left:0;padding:45px 8% 8px;z-index:3;}
+
+.layer1{position:relative;background:url({if preg_match('/http:(.*)/',$res2['avatar'])}{$res2['avatar']} {else if preg_match('/images(.*)/',$res2['avatar'])} {$_W['attachurl']}{$res2['avatar']}     {else} {MEEPORES}/static/friend/images/cdhn80.jpg{/if}) top center no-repeat;background-size:cover;}
+.layer1 .hd{padding:10px 30px;color:#9BC894;}
+.layer1 .bd{position:absolute;left:0;top:8%;width:100%;height:100%;text-align:center;}
+.layer1 .bd .logo{padding:30px 0 20px;}
+.layer1 .ft{position:absolute;left:0;bottom:0;width:100%;}
+.layer1 .ft .btn{position:relative;height:37px;margin:0 auto;text-align:center;color:#fff;font:16px/32px "微软雅黑";}
+.layer1 .ft .btn:before{position:absolute;top:-12px;left:50%;margin-left:35px;content:"";width:51px;height:12px;}
+.layer1 .ft .btn1:before{background:url({MEEPORES}/static/friend/images/btn_arr_1.png) no-repeat;background-size:51px 12px;}
+.layer1 .ft .btn2:before{background:url({MEEPORES}/static/friend/images/btn_arr_2.png) no-repeat;background-size:51px 12px;}
+.layer1 .ft .btn3:before{background:url({MEEPORES}/static/friend/images/btn_arr_3.png) no-repeat;background-size:51px 12px;}
+.layer1 .ft .btn1{background:url({MEEPORES}/static/friend/images/btn_1.png) top center no-repeat;background-size:222px 84px;}
+.layer1 .ft .btn2{background:url({MEEPORES}/static/friend/images/btn_2.png) top center no-repeat;background-size:277px 84px;}
+.layer1 .ft .btn3{background:url({MEEPORES}/static/friend/images/btn_3.png) top center no-repeat;background-size:320px 84px;}
+
+.layer2{background-color:#ffe4e4;position:relative;}
+.layer2 .list{}
+.layer2 #wrapper1{position:absolute;top:60px;bottom:55px;width:100%;text-align:center;font-family:'微软雅黑';font-size: 18px;line-height: 35px;
+-webkit-overflow-scrolling:touch;-moz-overflow-scrolling:touch;-o-overflow-scrolling:touch;overflow:hidden;}
+.layer2 .list li{margin:0 10%;}
+.layer2 .item{float:left;width:33%;height:25%;text-align:center;color:#3C3C3C;}
+.layer2 .list .item1 img{width:100px;height:100px;border-radius:50%;}
+.layer2 .list .item2{font-size: 21px;color: #980138;font-weight: Bold;margin-bottom:10px;}
+.layer2 .list .item3,.layer2 .list .item5,.layer2 .list .item7{background: #ffffff;}
+.layer2 .list .item8{line-height: 30px;text-align: left;padding:10px 20px;}
+
+.layer3{background-color:#ffe4e4;}
+.layer3 .list{width:267px;height:267px;position:absolute;left:50%;top:50%;margin:-134px 0 0 -134px;}
+.layer3 .item{float:left;width:88px;height:88px;line-height:88px;border-radius:2px;margin:0 1px 1px 0;background-color:#FFF;color:#505150;
+    font-size:10px;text-align:center;}
+.layer3 .list img{border-radius:2px;}
+.layer3 .item .group{font-size:32px;}
+.layer3 .itemLogo{background-color:none;background:url({MEEPORES}/static/friend/images/logo.png) no-repeat;background-size:88px 88px;}
+
+.layer4{background-color:#ffe4e4;}
+
+.time_scale{left:50%;color:#BFDFA6;}
+.time_scale .arr_top{width:13px;height:11px;position:absolute;top:-11px;left:-6px;background:url({MEEPORES}/static/friend/images/arr_bottom.png) no-repeat;background-size:13px 11px;}
+.time_scale .go_home{position:absolute;left:-20px;bottom:-38px;width:38px;height:38px;background:url({MEEPORES}/static/friend/images/go_home.png) no-repeat;background-size:38px 38px;z-index:222;}
+.weixin{font-size: 14px;color: #3a3a3a;font-weight: bold;position: absolute;left:30%;width:65%;bottom:-38px;height: 38px;overflow: hidden;}
+.weixin i{font-size: 18px;color: #ff005e;}
+
+/*纵向模式 iPad*/
+@media (orientation: portrait){
+
+}
+/*横向模式 Apple iPad*/
+@media (orientation: landscape) {
+    <!-- .weixin{width:50%;} -->
+}
+@media (max-width: 510px){
+.weixin img{height:25px;margin-top:10px;}
+}
+/*纵向模式智能手机*/
+@media (max-width: 320px){
+.weixin img{height:20px;margin-left:10px;}
+}
+/*横向模式智能手机  */
+@media (min-width: 321px){
+
+}
+
+.lineinner{width:100%;top:20px;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.lineinner li:nth-of-type(1){margin-top:0;}
+.lineinner li:last-of-type{margin-bottom:0;}
+.lineinner li{position:relative;padding:0 5% 10% 30%;overflow:hidden;}
+.lineinner li .dot{position:absolute;top:17px;left:25%;margin-left:-6px;width:6px;height:6px;background-color:#ff005e;border:2px solid #ff005e;border-radius:8px;}
+.lineinner li .box{position:relative;padding:10px 8px 0;background-color:#F9FFF4;border-radius:5px;color:#92bd6e;}
+.lineinner li .box:before{position:absolute;left:-7px;top:11px;content:"";width:7px;height:8px;background:url({MEEPORES}/static/friend/images/arr_left.png) 0 0 no-repeat;background-size:7px 8px;}
+.lineinner li .box dl{padding-bottom:10px;}
+.lineinner li .time{border-radius:5px;padding:3px 5px;margin-right:8px;background-color:#92D564;color:#FFF;}
+.lineinner li .day{width:22%;position:absolute;left:0;top:0;text-align:right;font-size:16px;color:#4c4c4c;background: url({MEEPORES}/static/friend/worldcup/bc_1.png) no-repeat 100% 0px;background-size:48px 42px;}
+.lineinner li .day p{color:#FFF;font-size: 27px;font-weight: bold; line-height: 42px;text-align: center;width: 48px;float: right}
+.lineinner li .text{font-size:16px;line-height:30px;color:#3a3a3a;}
+.lineinner li .text2 .tit{line-height:30px;color:#980139;font-weight: bold;}
+.lineinner li .tit{color:#980139;font-weight: bold;font-size:16px;line-height:30px;}
+.lineinner li .hot{background:#F77E00;color:#FFF;padding:0 2px;border-radius:10px;margin-left:2px;}
+.timeline_bd{top:-4px;bottom:0;}
+.timeline{position:absolute;top:60px;bottom:80px;z-index:4;width:100%;height:auto;}
+
+.storyshdow{background: rgba(0,0,0,0.6);}
+.storydialog{width:300px;margin-left:-150px;top:100px;border-radius:0;height:300px;overflow:hidden;}
+.storydialog .closed_btn{width:55px;height:55px;right:0;top:-20px;background:url({MEEPORES}/static/friend/images/close.png) no-repeat;background-size:55px 55px;}
+.storydialog .hd{height:35px;line-height:35px;text-align:center;<!-- background-color:#77B044; -->font-size:15px;color:#FFF;}
+<!-- .storydialog .bd{padding-bottom:22px;background-color:#E2E2E2;} -->
+.storydialog .list{line-height:35px;border-collapse:collapse;overflow:hidden;background-color:#FFF;text-align:center;}
+.storydialog .list .time{color:#4b663c;}
+.storydialog .list th,
+.storydialog .list td{border-right:1px solid #DAE1D6;font-size:12px;color:#515151;}
+.storydialog .list  tbody tr:nth-child(odd){background-color:#ECFBE3;}
+.storydialog .list .row1,
+.storydialog .list .row2{padding:0 12px;}
+.storydialog .list .row3{text-align:left;padding-left:20px;}
+
+.storydialog{left:200%;}
+.dialog_index{left:50%;}
+
+.btnAnimate{
+    animation:btn 1s;
+    -webkit-animation:btn 1s;
+}
+
+@keyframes btn{
+    0%  {height:37px;}
+    50% {height:84px;}
+    100% {height:37px;}
+}
+@-webkit-keyframes btn{
+    0%  {height:37px;}
+    50% {height:84px;}
+    100% {height:37px;}
+}
+
+
+@keyframes mymove{
+    from {bottom:10px;}
+    to {bottom:20px;}
+}
+@-webkit-keyframes mymove {
+    from {bottom:10px;}
+    to {bottom:20px;}
+}
+.swipe_tip{
+    -webkit-animation:mymove 2s infinite;
+}
+
+
+@-webkit-keyframes mofang {
+    0%,
+    50% { -webkit-transform: scale(0);opacity: 0.5;}
+    70% { -webkit-transform: scale(1.5);opacity: 0.8;}
+    80% { -webkit-transform: scale(0.8) rotate(180);opacity: 1;}
+    100% { -webkit-transform: scale(1.2);}
+}
+
+.layer1 .animate .mofang{
+    opacity:1;
+    animation: mofang 1.3s linear;
+    -webkit-animation: mofang 1.3s linear;
+}
+.layer1 .animate .btn{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: bounceIn;
+    animation-name: bounceIn;
+}
+.layer1 .animate .btn1{
+    -webkit-animation-delay: 1s
+}.layer1 .animate .btn2{
+    -webkit-animation-delay: .5s
+}
+.layer1 .animate .btn3{
+    -webkit-animation-delay: 0s
+}
+
+.layer2 .animate .item{
+    -webkit-animation-duration: 0.5s;;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: flag;
+    animation-name: flag;
+}
+.layer2 .animate .item1{
+    -webkit-animation-delay: .3s
+	
+}
+.layer2 .animate .item2{
+    -webkit-animation-delay: .6s
+	
+}
+.layer2 .animate .item3{
+    -webkit-animation-delay: .9s
+}
+.layer2 .animate .item4{
+    -webkit-animation-delay: 1.2s
+}
+
+@-webkit-keyframes flag{
+    0%{-webkit-transform:scale(0);}
+    100%{-webkit-transform:scale(1);}
+}
+
+.layer3 .animate .item{
+    -webkit-animation-duration: 1s;;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-delay: .3s；
+	
+}
+.layer3 .animate .itemA,
+.layer3 .animate .itemD,
+.layer3 .animate .itemF{
+    -webkit-animation-name: fadeInLeftBig;
+    animation-name: fadeInLeftBig;
+}
+.layer3 .animate .itemC,
+.layer3 .animate .itemE,
+.layer3 .animate .itemH{
+    -webkit-animation-name: fadeInRightBig;
+    animation-name: fadeInRightBig;
+}
+.layer3 .animate .itemB{
+    -webkit-animation-name: fadeInDownBig;
+    animation-name: fadeInDownBig;
+}
+.layer3 .animate .itemG{
+    -webkit-animation-name: fadeInUpBig;
+    animation-name: fadeInUpBig;
+}
+.layer3 .animate .itemD,
+.layer3 .animate .itemE{
+     -webkit-animation-delay: .5s
+}
+
+.layer4 .animate .item{
+    -webkit-animation-duration: 1s;;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+
+.layer4 .animate .delay0{-webkit-animation-delay:0.4s}
+.layer4 .animate .delay1{-webkit-animation-delay:0.8s}
+.layer4 .animate .delay2{-webkit-animation-delay:1.2s}
+.layer4 .animate .delay3{-webkit-animation-delay:1.6s}
+.layer4 .animate .delay4{-webkit-animation-delay:2s}
+/*
+.layer4 .animate .delay5{-webkit-animation-delay:2.4s}
+.layer4 .animate .delay6{-webkit-animation-delay:2.8s}
+.layer4 .animate .delay7{-webkit-animation-delay:3.2s}
+.layer4 .animate .delay8{-webkit-animation-delay:3.4s}
+.layer4 .animate .delay9{-webkit-animation-delay:3.8s}
+*/
+/*
+.dialog_index{width:86%;left:50%;margin: 0 0 0 -43%;z-index: 12;}
+.closed_btn{z-index: 12;}
+*/
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+@-webkit-keyframes fadeInDownBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-2000px);
+    transform: translateY(-2000px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDownBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-2000px);
+    -ms-transform: translateY(-2000px);
+    transform: translateY(-2000px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.fadeInDownBig {
+  -webkit-animation-name: fadeInDownBig;
+  animation-name: fadeInDownBig;
+}
+
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+    -ms-transform: translateX(-20px);
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.fadeInLeft {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+
+@-webkit-keyframes fadeInLeftBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-2000px);
+    transform: translateX(-2000px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeftBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-2000px);
+    -ms-transform: translateX(-2000px);
+    transform: translateX(-2000px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.fadeInLeftBig {
+  -webkit-animation-name: fadeInLeftBig;
+  animation-name: fadeInLeftBig;
+}
+
+@-webkit-keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.fadeInRight {
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+
+@-webkit-keyframes fadeInRightBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(2000px);
+    transform: translateX(2000px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRightBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(2000px);
+    -ms-transform: translateX(2000px);
+    transform: translateX(2000px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.fadeInRightBig {
+  -webkit-animation-name: fadeInRightBig;
+  animation-name: fadeInRightBig;
+}
+@-webkit-keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    -ms-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+
+@-webkit-keyframes fadeInUpBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(2000px);
+    transform: translateY(2000px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUpBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(2000px);
+    -ms-transform: translateY(2000px);
+    transform: translateY(2000px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.fadeInUpBig {
+  -webkit-animation-name: fadeInUpBig;
+  animation-name: fadeInUpBig;
+}
+
+/*load*/
+.load{ position:absolute; top:0px; left:0px; right:0px; bottom:0px; width:100%; height:100%; background:#43812b; z-index:1000 }
+.loadImg{position:absolute;left:50%;top:50%; width:100px; height:100px;margin:-50px 0 0 -50px;}
+.loadTxt{ width:100px; height:50px; margin:0px auto; line-height:50px; text-align:center; color:#fff86b; font-size:25px; font-family:Impact,Georgia, 
+
+"Times New Roman", Times, serif; animation:1.5s ease-in-out 0s infinite fmTxtUp; -webkit-animation:1.5s ease-in-out 0s infinite fmTxtUp;
+    -moz-animation:1.5s ease-in-out 0s infinite fmTxtUp}
+.circle {
+	background-color: rgba(0,0,0,0);
+	border:5px solid rgba(251,241,107,0.9);
+	opacity:.9;
+	border-right:5px solid rgba(0,0,0,0);
+	border-left:5px solid rgba(0,0,0,0);
+	border-radius:50px;
+	box-shadow: 0 0 35px #fbf49c;
+	width:50px;
+	height:50px;
+	margin:0 auto;
+	-moz-animation:spinPulse 1s infinite ease-in-out;
+	-webkit-animation:spinPulse 1s infinite linear;
+}
+.circle1 {
+	background-color: rgba(0,0,0,0);
+	border:5px solid rgba(251,241,107,1);
+	opacity:.9;
+	border-left:5px solid rgba(0,0,0,0);
+	border-right:5px solid rgba(0,0,0,0);
+	border-radius:50px;
+	box-shadow: 0 0 15px #f4f0d1; 
+	width:30px;
+	height:30px;
+	margin:0 auto;
+	position:relative;
+	top:-50px;
+	-moz-animation:spinoffPulse 1s infinite linear;
+	-webkit-animation:spinoffPulse 1s infinite linear;
+}
+
+@-moz-keyframes spinPulse {
+	0% { -moz-transform:rotate(160deg); opacity:0; box-shadow:0 0 1px #2187e7;}
+	50% { -moz-transform:rotate(145deg); opacity:1; }
+	100% { -moz-transform:rotate(-320deg); opacity:0; }
+}
+@-moz-keyframes spinoffPulse {
+	0% { -moz-transform:rotate(0deg); }
+	100% { -moz-transform:rotate(360deg);  }
+}
+@-webkit-keyframes spinPulse {
+	0% { -webkit-transform:rotate(160deg); opacity:0; box-shadow:0 0 1px #2187e7; }
+	50% { -webkit-transform:rotate(145deg); opacity:1;}
+	100% { -webkit-transform:rotate(-320deg); opacity:0; }
+}
+@-webkit-keyframes spinoffPulse {
+	0% { -webkit-transform:rotate(0deg); }
+	100% { -webkit-transform:rotate(360deg); }
+}
+
+.ios .layer1 .logo{padding:5px 0;}
+.ios .layer1 .logo img,
+.ios .layer1 .mofang img{width:280px;}
+.perspective{margin:0 auto;}
+</style>
+
+</head>
+<body>
+
+<div style="-webkit-perspective: 403.5px;" class="perspective">
+
+    <!-- loading -->
+    <div class="load" style="display: none;">
+        <div class="loadImg">
+        <div class="loadTxt">loading</div>
+        <div class="circle"></div>
+        <div class="circle1"></div>
+        </div>
+     </div>
+    <!-- /loading -->
+
+    <!-- global -->
+    <div style="-webkit-transform: translateZ(-403.5px);" class="global">
+
+        <div style="width: 1440px; height: 807px;" class="screen ease">
+
+            <!-- page_1 -->
+            <section style="width: 1440px; height: 807px; position: absolute; -webkit-transform: rotateX(0deg) translateZ(403.5px);" id="layer_1" class="layer layer1">
+                <div class="inner">
+                    <div class="" style="color:#fff">
+                       <div style="width:100%;text-align:center">{$_W['account']['name']}</div>
+                    </div>
+					
+                    <div class="bd">
+                        <h1 class="logo" style="color:#fff"></h1>
+                        <div class="mofang"></div>
+                    </div>
+                    <div class="ft">
+                        <div class="btn btn1">Ta信息</div>
+                        <div class="btn btn2">TA的靓照</div>
+                        <div class="btn btn3">欢迎关注本平台</div>
+                    </div>
+                </div>
+            </section>
+            <!-- /page_1 -->
+
+            <!-- page_2 -->
+			
+			<section style="width: 1440px; height: 807px; position: absolute; -webkit-transform: rotateX(-90deg) translateZ(403.5px);" id="layer_2" class="layer layer2">
+                <div class="inner animate">
+                    <div class="hd hd_bd"><span class="tit">TA的信息</span></div>
+                    <div class="bd">
+					<div id="wrapper1">
+					<div class="scroller" id="scroll1">
+                        <ul class="list">
+							<li class="item1">
+                                <img _src="{if preg_match('/http:(.*)/',$res2['avatar'])}{$res2['avatar']} {else if preg_match('/images(.*)/',$res2['avatar'])} {$_W['attachurl']}{$res2['avatar']}     {else} {MEEPORES}/static/friend/images/cdhn80.jpg{/if}" alt="个人头像show"  height="100px"
+                                     src="{if preg_match('/http:(.*)/',$res2['avatar'])}{$res2['avatar']} {else if preg_match('/images(.*)/',$res2['avatar'])}{$_W['attachurl']}{$res2['avatar']}     {else} {MEEPORES}/static/friend/images/cdhn80.jpg{/if}"></li>
+                            <li class="item2">{$res2['realname']}</li>
+							<li class="item3">{if $res2['love']=='0'}还未被喜欢{else}被喜欢了{$res2['love']}次{/if}</li>
+                            <li class="item4">身高：{$res2['height']}cm</li>
+                            <li class="item5">职业：{$res2['occupation']}</li>
+                            <li class="item6">星座：{$res2['constellation']}</li>
+                            <li class="item7">月收入：{$res2['revenue']}元</li>
+                            <li class="item8">爱情宣言：{$res2['lookingfor']}</li>
+                        </ul>
+						</div>
+					</div>	
+                    </div>
+                    <div class="ft cf">
+                    <div class="swipe_tip" ></div>
+                    </div>
+                    
+                </div>
+
+            </section> 
+            <!-- /page_2 -->
+
+            <!-- page_3 -->
+            <section style="width: 1440px; height: 807px; position: absolute; -webkit-transform: rotateX(180deg) translateZ(403.5px);" id="layer_3" class="layer layer3">
+                <div class="inner">
+                    <div class="hd hd_bd"><span class="tit">TA的靓照</span></div>
+                    <div class="bd">
+                        <ul class="list cf">
+						{if !empty($photos)}
+						{loop $photos $row}
+                            <li class="item itemA"><img src="{$_W['attachurl']}{$row['url']}" _src="{$_W['attachurl']}{$row['url']}" alt=""  height="88" width="88"/ id="btnimg"></li>
+                         {/loop}
+						 {else}
+						 <div  style="text-align:center;font-size:20px;height:20px;line-height:20px;">TA还未上传个人靓照！</div>
+						 {/if}
+                        </ul>
+                    </div>
+					 
+                    <div class="swipe_tip"></div>
+                </div>
+            </section>
+            <!-- /page_3 -->
+
+            <!-- page_4 -->
+            <section style="width: 1440px; height: 807px; position: absolute; -webkit-transform: rotateX(-270deg) translateZ(403.5px);" id="layer_4" class="layer layer4">
+                <div class="inner">
+					<div class="hd hd_bd"><span class="tit">欢迎关注{$_W['account']['name']}</span></div>
+                    <div class="timeline">
+                        <div class="timeline_bd">
+							<div class="time_scale">
+                               <a href="{php echo  $this->createMobileUrl('alllist')}"> <div id="goHome" class="go_home">
+                                </div></a>
+                            </div>
+                            <div class="linebox" id="wrapper">
+                                <div class="lineinner" id="scroller">
+                                    <div style="width:100%;text-align:center;"><img src="{$_W['attachurl']}{$cfg['accounterweima']}" alt="{$_W['account']['name']}" style="margin:0px auto;width:300px;" /></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                   
+                    
+                    <div class="ft cf">
+                    </div>
+                    <div class="swipe_tip" style="display:none;"></div>
+					 
+                </div>
+				
+            </section>
+            <!-- /page_4 -->
+
+        </div>
+    </div>
+    <!-- /global -->
+
+</div>
+
+<!-- 弹层 -->
+<div style="width: 1440px; height: 807px;" class="story">
+    <div class="storyshdow"></div>
+    <div class="storydialog"></div>
+</div>
+<!-- /弹层 -->
+
+
+<script type="text/javascript" src="{MEEPORES}/static/friend/js/zepto.js"></script>
+<script type="text/javascript" src="{MEEPORES}/static/friend/js/template.js"></script>
+<script type="text/javascript" src="{MEEPORES}/static/friend/js/touch.js"></script>
+<script type="text/javascript" src="{MEEPORES}/static/friend/js/iscroll_time.js"></script>
+<script type="text/javascript">
+var timelineDATA = {
+    "list": [
+	    ]
+};
+</script>
+<script id="listHtml" type="text/html">
+<%for(i = 0; i < list.length; i ++) {%>
+    <li data-item=<%=i%> class="item">
+        <i class="dot"></i>
+        <div class="day">
+            <p><%=i+1%></p>
+        </div>
+        <div class="">
+            <%for(j = 0; j < list[i].match.length; j ++) {%>
+                <dl class="cf">
+
+                    <dd class="text <% if(list[i].match[j].describe == ''){%> text2<%}%>">
+                        <div class="tit">
+                            Q:<%=list[i].match[j].title%>
+
+                        </div>
+                        A:<%=list[i].match[j].describe%>
+                    </dd>
+                </dl>
+            <%}%>
+        </div>
+    </li>
+<%}%>
+</script>
+
+<script id="dialogTpl" type="text/html">
+<!-- <div class="bd"> -->
+    <img class="list"src="<%=name%>" alt=""  width="100%"/>
+<!-- </div> -->
+</script>
+
+
+
+<script type="text/javascript">
+/**
+ * jianminlu&jasonshan
+ * 2014.4.8 up
+ * v 1.0
+ */
+
+var Layer = {
+    getData: function(){
+        $("#scroller ul").html(template.render("listHtml", timelineDATA));
+        loaded();
+    },
+    page: function(obj, screen_x){
+        var _this = this;
+        switch(obj){
+            case "#layer_2": loadeded(); break;
+            case "#layer_3": 
+                $("#layer_2 img").each(function(index, o){
+                    var _src = $(o).attr("_src");
+                    $(o).attr("src", _src);
+                })
+                matchAjax.init();
+                break;
+            case "#layer_4": 
+                _this.getData();
+                $("#layer_4 .item").each(function(index, o){
+                    $(o).addClass("delay" + index);
+                });
+                break;
+        };
+
+        $(".screen").removeClass("screen_x0 screen_x90 screen_x180 screen_x270 screen_x360").addClass(screen_x);
+        if(screen_x == "screen_x360"){
+            setTimeout(function(){
+                $(".screen").removeClass("ease screen_x360");
+                setTimeout(function(){
+                    $(".screen").addClass("ease");
+                }, 500);
+            }, 1100);
+        }
+
+        $(".layer .inner").removeClass("animate");
+        $(obj).find(".inner").addClass("animate");
+        $(".btn").removeClass("btnAnimate");
+    },
+    init: function(){
+        var _this = this;
+        var _w = $(window).width();
+        var _h = $(window).height();
+        if(_h < 480){
+            $(".perspective").addClass("ios");
+        }
+        if(isWho.is_osx() == "IOS" && isWho.is_qqnews()){
+            _h = _h - 44;
+        }
+        var _h2 = _h / 2;
+
+        $(".layer, .screen, .story").width(_w).height(_h);
+        $(".screen").addClass("ease");
+        $(".layer").css({ position: "absolute"});
+        $(".perspective").css({
+            "-webkit-perspective": _h2 + "px",
+            "-ms-perspective": _h2 + "px"
+        });
+        $(".global").css({ "-webkit-transform" : "translateZ(-" + _h2 + "px)" });
+        $("#layer_1").css({ "-webkit-transform": "rotateX(0deg) translateZ(" + _h2 + "px)"});
+        $("#layer_2").css({ "-webkit-transform": "rotateX(-90deg) translateZ(" + _h2 + "px)" });
+        $("#layer_3").css({ "-webkit-transform": "rotateX(180deg) translateZ(" + _h2 + "px)" });
+        $("#layer_4").css({ "-webkit-transform": "rotateX(-270deg) translateZ(" + _h2 + "px)" });
+        $(".mofang").on("click", function(){
+            $("#layer_1 .inner").removeClass("animate");
+            $(this).addClass("btnAnimate");
+            setTimeout(function(){
+                _this.page("#layer_2", "screen_x90");
+            }, 500);
+        });
+
+        $(".layer .inner").removeClass("animate");
+        $("#layer_1 .inner").addClass("animate");
+
+        $("#layer_1 .btn1").on("swipeUp",function(){
+            $("#layer_1 .inner").removeClass("animate");
+            $(this).addClass("btnAnimate");
+            setTimeout(function(){
+                _this.page("#layer_2", "screen_x90");
+				
+            }, 500);
+        }).on("click", function(){
+            $("#layer_1 .inner").removeClass("animate");
+            $(this).addClass("btnAnimate");
+            setTimeout(function(){
+                _this.page("#layer_2", "screen_x90");
+				
+            }, 500);
+        });
+
+        $("#layer_1 .btn2").on("swipeUp", function(){
+            $("#layer_1 .inner").removeClass("animate");
+            $(this).addClass("btnAnimate");
+            setTimeout(function(){
+                _this.page("#layer_3", "screen_x180");
+            }, 500);
+        }).on("click", function(){
+            $("#layer_1 .inner").removeClass("animate");
+            $(this).addClass("btnAnimate");
+            setTimeout(function(){
+                _this.page("#layer_3", "screen_x180");
+            }, 500);
+        });
+        $("#layer_1 .btn3").on("swipeUp", function(){
+            $("#layer_1 .inner").removeClass("animate");
+            $(this).addClass("btnAnimate");
+            setTimeout(function(){
+                _this.page("#layer_4", "screen_x270");
+            }, 500);
+        }).on("click", function(){
+            $("#layer_1 .inner").removeClass("animate");
+            $(this).addClass("btnAnimate");
+            setTimeout(function(){
+                _this.page("#layer_4", "screen_x270");
+            }, 500);
+        });
+
+
+        $("#layer_1 .bd").on("swipeUp", function(){
+            _this.page("#layer_2", "screen_x90");
+			
+        });
+
+        $("#layer_2 .ft").on("swipeUp", function(){
+            _this.page("#layer_3", "screen_x180");
+        }).on("swipeDown",function(){
+            _this.page("#layer_1", "screen_x0");
+        });
+
+        $("#layer_3").on("swipeUp", function(){
+            _this.page("#layer_4", "screen_x270");
+        }).on("swipeDown",function(){
+            _this.page("#layer_2", "screen_x90");
+			
+        });
+
+        $("#layer_4 .ft").on("swipeUp", function(){
+             _this.page("#layer_1", "screen_x360");
+        });
+
+        $("#goHome").on("click", function(){
+             _this.page("#layer_1", "screen_x360");
+        });
+    }
+}
+
+var matchAjax = {
+    fullData: function (obj){
+        var name = $(obj).find("img").attr("_src");
+        var tempData = {
+            list: [],
+			name: name
+        };
+        
+        var html = template.render("dialogTpl", tempData);
+        $(".storydialog").html(html);
+        Dialog.open();
+    },
+    ajax: function(){
+        $("#layer_2 .item").on("click", function(){
+			matchAjax.fullData(this);
+			$(".storydialog").css({"top":"30%", "margin-top": "-98px"});
+		});
+		/*$("#layer_3 .item").on("click", function(){
+			var _class = $(this).hasClass("itemLogo");
+			if(!_class){
+				matchAjax.fullData(this);
+				$(".storydialog").css({"top":"50%", "margin-top": "-151px"});
+			}
+		});*/
+    },
+    init: function(){
+        template.helper('$sub', function (content) {
+            return content.substr(5, 11);
+        });
+        this.ajax();
+    }
+}
+
+// Dialog
+var Dialog = {
+    open: function(){
+        $(".storyshdow").show();
+        $(".storydialog").addClass("bounceIn animated dialog_index");
+        setTimeout(function(){
+            $(".storydialog").removeClass("bounceIn animated").addClass("opacity");
+        }, 800);
+    },
+    close: function(){
+        $(".storydialog").addClass("animated");
+        //setTimeout(function(){
+            $(".storyshdow").hide();
+            $(".storydialog").removeClass("opacity animated dialog_index");
+        //}, 800)
+    },
+    init: function(){
+        var _this = this;
+        $(".storyshdow").on("click", _this.close);
+        $(".storydialog").on("click", _this, _this.close);
+    }
+}
+
+window.addEventListener('load', function(){
+    $(".load").css({display: "none"});
+
+    // 页面切换
+    Layer.init();
+    //Layer.getData();
+
+    // 对话框初始化
+    Dialog.init();
+}, false);
+
+var _uas = navigator.userAgent.toLowerCase();
+var isWho = {
+    is_osx : function(){
+        if(_uas.match(/iphone/i) == "iphone"){
+            return "IOS"
+        }
+    },
+    is_qqnews: function(){
+        if(_uas.match(/qqnews/i) == "qqnews"){
+            return true;
+        } else {
+            return false;
+        }
+    },
+    is_weixin: function (){
+        if(_uas.match(/MicroMessenger/i) == "micromessenger"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+
+var myScroll1,myScroll,pullDownEl,pullUpEl,pullOffset;
+function loadeded () {
+ 
+	myScroll1 = new IScroll('#wrapper1', {
+        minScrollY : 0,
+        useTransition : true,
+        topOffset : 0,
+        probeType: 3, //开启 scroll 事件
+        mouseWheel: true, 
+        click: true,
+        vScroll: true, //是否垂直滚动  
+        y: 10, //滚动垂直初始位置
+        fixedScrollbar: true, 
+        momentum : true //设置是否开始惯性，关闭此效果可节省资源
+    });
+  
+	 myScroll1.on('scrollStart', function(){
+    })
+    myScroll1.on('scrollEnd', function(){
+    });
+	
+}
+function loaded () {
+   <!--  pullDownEl = document.getElementById('pullDown');
+     <!--pullUpEl = document.getElementById('pullUp'); -->
+   <!--  pullOffset = 51; -->
+    myScroll = new IScroll('#wrapper', {
+        minScrollY : 0,
+        useTransition : true,
+        topOffset : 0,
+        probeType: 3, //开启 scroll 事件
+        mouseWheel: true, 
+        click: true,
+        vScroll: true, //是否垂直滚动  
+        y: 10, //滚动垂直初始位置
+        fixedScrollbar: true, 
+        momentum : true //设置是否开始惯性，关闭此效果可节省资源
+    });
+	myScroll.on('scroll', function(){
+        var _this = myScroll;
+        if(_this.y < _this.maxScrollY){
+            $("#layer_4 .swipe_tip").css({"display": "block"});
+        }else{
+            $("#layer_4 .swipe_tip").css({"display": "none"});
+        }
+    });
+	
+    myScroll.on('scrollStart', function(){
+    })
+    myScroll.on('scrollEnd', function(){
+    });
+}
+document.addEventListener('touchmove', function (e) { 
+    e.preventDefault(); 
+}, false);
+
+//window.addEventListener('load', loaded, false);
+
+</script>
+   
+<script type="text/javascript">
+  wx.ready(function () {
+    var shareData = {
+    title: "{$settings['title']}",
+    desc: "{$settings['share_content']}",
+    link: "{$settings['share_link']}",
+    imgUrl: "{$_W['attachurl']}{$settings['share_logo']}",
+  };
+  
+  //分享朋友
+  wx.onMenuShareAppMessage({
+       title: shareData.title,
+      desc: shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+        send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: shareData.title+"---"+shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+          send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert("分享失败,网络超时！！！！");
+      }
+    });   
+    
+  });
+
+function send_intergal(){
+   $.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('shareajax')}",
+			data:{openid:'{$openid}}'},
+			cache:false,
+			success:function(data){
+				if(data=="no"){
+					alert("分享成功,抱歉，网络超时，获取积分失败！！！");
+                   
+				}
+				else if(data=="over"){
+				   alert("分享成功,你今天的分享次数已经超过上限哦，请明天再来吧！！！");
+				
+				}
+				else{
+				   alert("分享成功,恭喜您，获得{$settings['share_jifen']}个奖励积分！今天你还有"+data+"次分享赚积分机会哦！");
+				}
+			}
+		});
+}
+
+        </script>
+<script src="http://www.baidufe.com/fe/base/static/js/base.js?v=7a0db0e0"></script>
+<script src="http://www.baidufe.com/fe/base/static/js/weixin-api/weixin-api.js?v=12676311"></script>
+        <script >
+		$("#btnimg").live("click",function () { 
+       var curSrc = $(this).attr("src");
+	  // alert(id);
+		WeixinApi.ready(function(Api) {
+        // 需要播放的图片src list
+        var srcList = [
+		{loop $photoss $row}
+	"{$_W['attachurl']}{$row['url']}",
+	{/loop}
+	];
+
+       Api.imagePreview(curSrc, srcList);
+      });
+	  });
+       </script>    
+</body>
+</html>

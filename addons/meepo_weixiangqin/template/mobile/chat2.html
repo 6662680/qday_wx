@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+正在与{$to}聊天
+</title>
+<meta charset="utf-8" />
+<meta name="description" />
+<meta name="keywords" />
+<meta content="eric.wu" name="author" />
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type" />
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control" />
+<meta content="no-cache" http-equiv="pragma" />
+<meta content="0" http-equiv="expires" />
+<meta content="telephone=no, address=no" name="format-detection" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<link rel="stylesheet" type="text/css" href="{RES2}css/mobilemain.css?t={php echo time();}"/>
+
+{php echo register_jssdk(false);}
+    <script src="{RES2}js/jquery_min.js"></script>
+    <script>
+        document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+            WeixinJSBridge.call('hideToolbar');
+            WeixinJSBridge.call('hideOptionMenu');
+            $(window).scrollTop(document.body.scrollHeight);
+        });
+    </script>
+	<script language='javascript'>
+function tip(msg,autoClose){
+	var div = $("#poptip");
+	var content =$("#poptip_content");
+	if(div.length<=0){
+		div = $("<span id='poptip'></span>").appendTo(document.body);
+		content =$("<span id='poptip_content'>" + msg + "</span>").appendTo(document.body);
+	}else{
+		content.html(msg);
+		content.show(); 
+		div.show();
+	}
+	if(autoClose) {
+		setTimeout(function(){
+			content.fadeOut(500);
+			div.fadeOut(500);
+		},1000);
+	}
+}
+function tip_close(){
+	$("#poptip").fadeOut(500);
+	$("#poptip_content").fadeOut(500);
+}
+</script>
+
+	
+</head>
+<body onselectstart="return true;" ondragstart="return false;">
+<ul style="position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+		height: 35px;
+        margin: auto;
+        background: #f3f3f3;
+        z-index: 1000;
+        border-top: 1px solid #b2b2b2;">
+                    
+                        <li style="width:100%">
+						  
+						<div style="float:left;margin-left:10px" class="acolor">
+						
+                           <a href="{php echo $this->createMobileUrl('mynews')}" target="__blank"   class="ui-btn" ">我的消息</a>
+</div>
+<div style="float:right;margin-right:10px" class="acolor">
+  <a href="{php echo $this->createMobileUrl('dropblack',array('toname'=>$to,'toopenid'=>$toopenid))}" target="__blank"  class="ui-btn" >{if empty($result)}拉黑{else}取消{/if}</a>
+</div>
+                        </li>
+                         
+         <style>
+.acolor a:link {color: #0079ff;} 
+.acolor a:visited {color: #0079ff;} 
+ .acolor a:hover{color: #0079ff;} 
+.acolor a:active {color: #0079ff;} 
+		 .ui-btn{height: 30px;
+line-height: 30px;
+padding: 0 13px;
+min-width: 56px;
+display: inline-block;
+position: relative;
+text-align: center;
+border: none;
+font-size: 14px;
+background-color: #fdfdfd;
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, white), to(#fafafa));
+border-radius: 3px;
+vertical-align: top;
+
+text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+-webkit-box-sizing: border-box;
+border: 1px solid #cacccd;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+outline:0;
+}
+		 </style>                
+     <style type='text/css'>
+	#poptip { display:block;position: fixed; top:40%;left:50%;width:160px;margin-left:-80px;height: 80px;background:#000; opacity: 0.7;filter:alpha(opacity=0.7); color:#fff;z-index: 999;  border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
+	#poptip_content { display:block;position: fixed; top:40%;left:50%;width:160px;margin-left:-80px; height: 27px; color:#fff;text-align:center;font-size:14px;z-index: 9909;text-align:center;line-height:80px}
+   </style>                  
+                   
+</ul>
+
+
+
+
+<div style="height:16px"></div>
+
+    <div id="container" class="container animate">
+	
+        <div class="containertop" id="containertop">
+            
+            
+        </div>
+        <footer>
+            <section class="nav_footer" id="nav_footer">
+                <ul>
+                    <ol class="tbox">
+                        <li>
+                            <a class="pointer toolsface" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="facePoint"></a>
+							
+                        </li>
+                         <li>
+                            <a class="pointer toolscamera" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" id="camera"></a>
+							
+                        </li>
+						
+                        <!--改为点击刷新--->
+						
+                        <li style="width: 100%;">
+                            <input type="text" id="sendtext"  oninput="cansend()" onpropertychange="cansend()" class="toolstext" style="width: 100%;" />
+                        </li>
+
+                        <li>
+                            <a id="btnsend" class="toolssend on" style="height: 24px; padding-top: 6px; margin: 0 7px;">发送</a>
+                        </li>
+                    </ol>
+                  
+
+
+                    
+                    <ol id="face_area" >
+
+                        <li class="page_emotion box_swipe" id="page_smiley" >
+                            <dl id="list_smiley" class="list_emotion pt_10">
+                                
+                            </dl>
+                            <dt>
+                                <ol id="nav_smiley" class="nav_emotion">
+                                    <span class="on"></span>
+                                    <span></span>
+                                </ol>
+                            </dt>
+                        </li>
+
+                        <li class="page_emotion box_swipe" id="page_xiong" style="display:none;">
+                            <dl id="list_xiong" class="list_emotion pt_10">
+
+                            </dl>
+                            <dt>
+                                <ol id="nav_xiong" class="nav_emotion">
+                                    <span class="on"></span>
+                                    <span></span>
+                                </ol>
+                            </dt>
+                        </li>
+
+                        <li class="page_emotion box_swipe" id="page_mayi" style="display:none;">
+                            <dl id="list_mayi" class="list_emotion pt_10">
+
+                            </dl>
+                            <dt>
+                                <ol id="nav_mayi" class="nav_emotion">
+                                    <span class="on"></span>
+                                    <span></span>
+                                </ol>
+                            </dt>
+                        </li>
+                         <li class="page_emotion box_swipe" id="page_paopaobing" style="display:none;">
+                            <dl id="list_paopaobing" class="list_emotion pt_10">
+
+                            </dl>
+                            <dt>
+                                <ol id="nav_paopaobing" class="nav_emotion">
+                                    <span class="on"></span>
+                                    <span></span>
+                                </ol>
+                            </dt>
+                        </li>
+						<li class="page_emotion box_swipe" id="page_qbl" style="display:none;">
+                            <dl id="list_qbl" class="list_emotion pt_10">
+
+                            </dl>
+                            <dt>
+                                <ol id="nav_qbl" class="nav_emotion">
+                                    <span class="on"></span>
+                                    <span></span>
+                                </ol>
+                            </dt>
+                        </li>
+						<li class="page_emotion box_swipe" id="page_bzmh" style="display:none;">
+                            <dl id="list_bzmh" class="list_emotion pt_10">
+
+                            </dl>
+                            <dt>
+                                <ol id="nav_bzmh" class="nav_emotion">
+                                    <span class="on"></span>
+                                    <span></span>
+                                </ol>
+                            </dt>
+                        </li>
+
+                    </ol>
+
+
+                    <!--ol style="margin:0;padding:0;display:none;border:1px solid gray" id="wrapper2" >
+                        <li  style="width:100%;color:#000;text-align:center;margin: 10px auto;font-size: 16px;" id="scroller2">
+						</li>
+				   </ol-->
+<div class="page">
+
+<div class="nav" id="nav">
+<ul  class="facetype" id="facetype" style="">
+<li><div href="#"><span data-key="jingdian" class="jingdian on">经典</span></div></li>
+
+<li><div href="#"><span data-key="mayi" class="mayi" >搞笑蚂蚁</span></div></li>
+<li><div href="#"><span data-key="paopaobing" class="xiong" >炮炮兵</span></div></li>
+<li><div href="#"><span data-key="qbl" class="xiong">丘比龙</span></div></li>
+<li><div href="#"><span data-key="bzmh" class="xiong">暴走漫画</span></div></li>
+<li><div href="#"><span data-key="xiong" class="xiong">熊大兔兔</span></div></li>
+<li><div href="#"><span data-key="jingdian" class="jingdian on">请期待</span></div></li>
+<li><div href="#"><span data-key="jingdian" class="jingdian on">请期待</span></div></li>
+</ul>
+</div>
+</div>
+<style>
+.page{width:100%;margin:0 auto;font:12px 'Microsoft YaHei',Arial;color: #007aff;}
+.nav{width:100%;overflow:hidden;margin:0 auto;height:50px;position:relative; line-height:100px;}
+.nav ul{position:absolute;left:0;top:0;width:100%;z-index:1;margin:0;padding:0}
+.nav ul li{width:25%; float:left;margin:0;padding:0}
+.nav a{color:#007aff;width:100%; display:block; text-decoration:none; text-align:center;}
+#facetype div{text-align:center;height:50px}
+#facetype div span{text-align:center;width:100%;height:50px;line-height:50px}
+</style>
+                </ul>
+
+
+            </section>
+        </footer>
+        <input type="hidden" id="pageNumber" value="2" />
+        <input type="hidden" id="lastmsgtime" value="" />
+    </div>
+<script src="http://www.baidufe.com/fe/base/static/js/base.js?v=7a0db0e0"></script>
+<script src="http://www.baidufe.com/fe/base/static/js/weixin-api/weixin-api.js?v=12676311"></script>
+
+<script type="text/javascript">
+var $jq = jQuery.noConflict(true);
+$jq(document).ready(function () {
+	   $jq("#btnimg").live("click",function (event) { 
+	//$("#btnimg").click(function(event){
+		
+       var curSrc = $jq(this).attr("num");
+	   //alert(curSrc);
+		WeixinApi.ready(function(Api) {
+        var srcList = [curSrc];
+        Api.imagePreview(curSrc, srcList);
+      });
+	  });
+ });
+</script> 
+</body>
+</html>
+
+<script src="{RES2}js/emotion.js?t={$num}" ></script>
+<script src="{RES2}js/helper_min.js" ></script>
+<script src="{RES2}js/swipe.js" ></script>
+
+<script>
+    var userAgent = navigator.userAgent.toLowerCase();
+    var IsIOS = false;
+    if(userAgent.indexOf("iphone") >= 0){
+        IsIOS = true;
+        $("#nav_footer ul").css("position","absolute");
+    }
+	
+
+    var sender = "{$_W['fans']['from_user']}";//粉丝标识
+    var geter = "{$geter}";
+    var CustomerHeadUrl = "{$avatar}";
+    function cansend() {
+        var text = $("#sendtext").val();
+        var btn = $("#btnsend");
+        if (text.trim().length > 0) {
+            btn.removeClass("on");
+        }
+        else {
+            btn.addClass("on");
+        }
+    }
+   
+    $("#btnsend").click(function(){
+        var text = $("#sendtext").val();
+        if (text.trim().length == 0) {
+            return;
+        }
+        else{
+            sendMessage(sender,geter,'text', text.trim());
+        }
+    });
+ </script>
+<script>
+var getType = true;
+var TimeInterval;
+$(document).ready(function () {
+	form_smiley.rend({
+        spearate: 14,
+        count: 27,
+        size: 24,
+        extend: "png",
+        page: "page_smiley",
+        list: "list_smiley",
+        nav: "nav_smiley",
+        img: "http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/smiley/smiley",
+        key: "smiley"
+    });
+    $("#face_area").hide();
+	$(".page").hide();
+	onLoadMessage(1);//加载历史已读消息 
+    setInterval(getnewMessage2,2000); //每1秒发送一次请求 加载最新回复消息
+    $(window).bind("scroll", function () {
+		
+        if ($(document).scrollTop() <= 0 && getType) {
+            var oldheight = document.body.scrollHeight;
+            var page = $("#pageNumber").val();
+            onLoadMessage(page);
+            $(document).scrollTop(document.body.scrollHeight - oldheight)
+        }
+
+    });
+    scrollTop();
+   
+});
+
+
+var scrollTop = function () {
+    TscrollTop();
+    setTimeout(TscrollTop, 100);
+    setTimeout(TscrollTop, 1000);
+}
+
+function TscrollTop() {
+    $(window).scrollTop(document.body.scrollHeight);
+}
+
+function onLoadMessage(page) {
+	var fromType = 'amr';
+	var id="1";
+    $.ajax({
+        type: 'post',
+        url: "{php echo $this->createMobileUrl('getfatherback10')}",
+        data: {
+            action: 'GetMessageData',
+            sender: sender,
+            geter: geter,
+            page: page
+        },
+        dataType: 'json',
+        success: function (json) {
+            if (json) {
+                for (var i = 0; i <= json.length - 1; i++) {
+                    var uliHtml = "";
+                    var voiceId = "";
+                    var obj = json[i];
+                    var fromType = obj.sender;
+					var fromwho = obj.sender;//谁发的
+                    var ulclass = 'class="ul_talk reply"';
+                    var showFlag = true;
+                    var path = '<path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" />';
+                    var preobj;
+                    if (obj.fromwho == "{$_W['fans']['from_user']}") {
+                        ulclass = 'class="ul_talk"';
+                        path = '<path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" />';
+                    }
+                    //alert(obj.sender);
+                    
+                    if (obj.sender != sender) {//回复的放于左边
+						
+						uliHtml = '<p class="time" style="border:1px solid gray;width:50%;margin-left:20px;border-radius:8px;-webkit-border-radius:8px;">' + obj.stime + '</p>';
+						
+						if(obj.msgtype == 'text'){
+                             uliHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >' + obj.sendernickname + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div><article class="content">' + obj.content + '</article></div></li></ul>';
+                        }else if(obj.msgtype == 'voice'){
+							var time = 5;
+                                uliHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >' + obj.sendernickname + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div>';
+								uliHtml += '<article class="content" data-id="' + time + '" data-value="2" num="'+ obj.content +'" style="padding-bottom: 8px;" id="playto">' +
+                                '<span class="voice" id="voicespan' + obj.content + '"></span><span class="second" id="VoiceSecond' + time + '" style="margin-left: 30px;">'+ obj.voicetime +'”</span>' +
+                                '<audio id="myaudio" data-value="2" data-id="' + time + '" controls="" name="MessageFromaudio" style="display:none"><source src="' + obj.content + '" type="video/mp4"></audio>' +
+                           ' </article></div></li></ul>';
+                        }else if(obj.msgtype == 'images'){
+						         uliHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >' + obj.sendernickname + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div><img src="{$_W['attachurl']}' + obj.thumburl + '" num="{$_W['attachurl']}' + obj.content + '" id="btnimg" style="height:60px;width:60px" /></div></li></ul>';
+						 
+						}else{
+						   
+						   uliHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >' + obj.sendernickname + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div><img src=' + obj.content + ' data-src=' + obj.content + ' data-gid="g2" title="点击查看大图" class="image" onload="preViewImg(this, event);" onerror="preViewImg(this, event);" style="height:70px;width:70px" /></div></li></ul>';
+						}
+          
+                    }
+                    else {//自己发的放于右边
+						
+						uliHtml = '<p class="time" style="color:blue;border:1px solid blue;width:50%;margin-left:140px;border-radius:8px;-webkit-border-radius:8px;">' + obj.stime + '</p>';
+						
+						if(obj.msgtype == 'text'){
+                                uliHtml += '<ul class="ul_talk reply"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >{$member['nickname']}</label></div><div><span class="arrow" ><svg><path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" /></svg></span></div><div><article class="content">' + obj.content + '</article></div></li></ul>';
+						}else if(obj.msgtype == 'voice'){
+                    
+					var time = 5;
+					
+						   uliHtml += '<ul class="ul_talk reply">' +
+                '<li class="tbox">' +
+                    '<div>' +
+                        '<span class="head">' +
+                            '<img src="{$avatar}">' +
+                       ' </span><label class="name" >{$member['nickname']}</label>' +
+                    '</div>' +
+                    '<div>' +
+                        '<span class="arrow">' +
+                            '<svg>' +
+                                '<path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" />' +
+                            '</svg>' +
+                    '</span>' +
+                   ' </div>' +
+                    '<div>' +
+                        '<article class="content" data-id="' + time + '" data-value="1"  num="'+ obj.content +'" style="padding-bottom: 8px;" id="playto">' +
+                            '<span class="replysecond" id="replysecond' + time + '">'+obj.voicetime+'”</span><span class="replyvoice" id="replyvoice' + time + '" style="margin-left:30px;"></span>' +
+                            '<audio id="myaudio_' + time + '" data-value="1" data-id="' + time + '" controls name="MessageFromaudio" style="display:none;"><source src="' + obj.content + '" type="video/mp4"></source></audio>' +
+                        '</article> ' +
+                   '</div>' +
+               ' </li>' +
+           ' </ul>';
+                        }else if(obj.msgtype == 'images'){
+
+						          uliHtml += '<ul class="ul_talk reply"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >{$member['nickname']}</label></div><div><span class="arrow" ><svg><path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" /></svg></span></div><div><img src="{$_W['attachurl']}' + obj.thumburl + '" num="{$_W['attachurl']}' + obj.content + '"  id = "btnimg" style="float:right;height:70px;width:70px" /></div></li></ul>';
+						 
+						}else{
+						     
+							  uliHtml += '<ul class="ul_talk reply"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >{$member['nickname']}</label></div><div><span class="arrow" ><svg><path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" /></svg></span></div><div><img src=' + obj.content + ' data-src=' + obj.content + ' data-gid="g2" title="点击查看大图" class="image" onload="preViewImg(this, event);" onerror="preViewImg(this, event);" style="height:70px;width:70px" /></div></li></ul>';
+						}
+                    }
+                   
+                    $("#containertop").prepend(uliHtml);
+                    
+                }
+                if (json.length > 0) {
+                    page++;
+                }else{
+				    getType = false;
+				}
+                $("#pageNumber").val(page);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+//**********************不停的发送ajax接收返回的最新消息**************
+function getnewMessage2() {
+	var fromType = 'amr';
+	var id="1";
+    $.ajax({
+        type: 'post',
+        url: "{php echo $this->createMobileUrl('getmes')}",
+        data: {
+            sender: "{$_W['fans']['from_user']}",
+            geter: "{$geter}",
+        },
+        dataType: 'json',
+        success: function (json) {
+            if (json) {
+                for (var i = 0; i <= json.length; i++) {
+                    var uliHtml = "";
+                    
+                    var obj = json[i];
+                    if(obj.msgtype == 'text'){
+                    //alert(obj.sender);
+					    uliHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >' + obj.sendernickname + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div><article class="content">' + obj.content + '</article></div></li></ul>';
+                    }else if(obj.msgtype == 'voice'){
+                    //alert(obj.sender);
+					
+
+					    uliHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >' + obj.sendernickname + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div><article class="content" data-id=' + id + ' data-value=' + fromType + ' data-name="Messagevoice" style="padding-bottom: 8px;" num="'+ obj.content +'" id="playto">' +'<span class="voice" id="voicespan' + id + '"></span><span class="second" id="VoiceSecond' + id + '" style="margin-left: 30px;">'+obj.voicetime+'”</span>' +'<audio id="myaudio_' + id + '" data-value=' + fromType + ' data-id=' + id + ' controls name="MessageFromaudio" style="display:none;"><source src=' + obj.content + ' type="video/mp4"></source></audio></article></div></li></ul>';
+                    }else if(obj.msgtype == 'images'){
+						uliHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >' + obj.sendernickname + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div><img src="{$_W['attachurl']}' + obj.thumburl + '" num="{$_W['attachurl']}' + obj.content + '" id="btnimg" style="float:left;height:70px;width:70px" /></div></li></ul>';
+					
+					}else{
+						uliHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + obj.senderavatar + '" /></span><label class="name" >' + obj.sendernickname + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div><img src=' + obj.content + ' data-src=' + obj.content + ' data-gid="g2" title="点击查看大图" class="image" onload="preViewImg(this, event);" onerror="preViewImg(this, event);" style="height:70px;width:70px" /></div></li></ul>';
+					
+					}
+                          
+                  
+                   
+                    $("#containertop").append(uliHtml);
+                     scrollTop();
+                }
+                
+                
+            }
+        },
+        error: function () {
+        }
+    });
+}
+function sendMessage(sender, geter,msgtype, Content) {
+	{if empty($res2['constellation'])}
+	   alert('亲,需要先完善个人资料哦！');
+       window.location='{php echo  $this->createMobileUrl('userinfo')}';  
+	   return;
+	{/if}
+	
+	{if !empty($result)}
+	  tip('抱歉，您已经将{$to}拉入黑名单！',true);
+	  return;
+	  {/if}
+	{if !empty($uresult)}
+	   tip('抱歉，{$to}已经将你拉入黑名单！',true);
+	   return;
+	{/if}
+    var type;
+    var extension;
+	if (msgtype == "xiong" || msgtype == "mayi" || msgtype == "smiley" || msgtype == 'paopaobing' || msgtype == 'qbl' || msgtype == 'bzmh') {
+        type = msgtype;
+       // msgType = 'image';
+        if (type == "xiong" || type == "smiley") {
+            extension = '.png';
+        }
+		else if(type == "bzmh"){
+		    extension = '.jpg';
+		}
+        else {
+            extension = '.gif';
+        }
+        //Content = '{$_W['siteroot']}addons/meepo_weixiangqin/template/style/' + type + '/' + Content.replace('[', '').replace(']', '') + extension;
+		if(msgtype == 'paopaobing'  || msgtype == 'qbl' || msgtype == 'bzmh'){
+			Content = '{$_W['siteroot']}addons/meepo_weixiangqin/template/style/' + type + '/' + Content.replace('[', '').replace(']', '') + extension;
+		}else{
+		   Content = 'http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/' + type + '/' + Content.replace('[', '').replace(']', '') + extension;
+		}
+        
+
+    }
+	tip("拼命发送中...");
+    $("#sendtext").val("");
+    $("#sendtext").html("");
+    
+    $("#btnsend").addClass("on");
+  //alert(geter);
+
+    var date = new Date();
+    var time = date.getFullYear() + "" + (date.getMonth() + 1) + "" + date.getDate() + "" + date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
+
+    var r = Math.floor(Math.random() * 100000);
+    var id = time + "n" + r;
+
+    var liHtml;
+    var voiceId = "";
+    var spanId = "";
+	spanId = "spanId_" + id;
+    $.ajax({
+        type: 'post',
+        url: "{php echo $this->createMobileUrl('chatfatherajax')}",
+        data: {
+            action: 'sendmessage',
+            sender: sender,
+            geter: geter,
+			msgtype:msgtype,
+            content: Content
+        },
+        dataType: 'json',
+        success: function (json) {
+			//alert(json.succ);
+            if (json.succ != '0') {
+             tip_close();
+			  switch (msgtype) {
+								case 'text':
+									 case 'text':
+									liHtml = '<ul class="ul_talk reply"><li class="tbox"><div><span class="head"><img src="' + CustomerHeadUrl + '" /></span><label class="name" >{$member['nickname']}</label></div><div><span class="arrow" ><svg><path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" /></svg></span></div><div><article class="content">' + FormatFace(Content) + '</article></div></li></ul>';
+								break;
+								case 'smiley':
+								/*alert(Content);
+								return;*/
+									liHtml = '<ul class="ul_talk reply">' +
+												'<li class="tbox">' +
+													'<div>' +
+														'<span class="head">' +
+															'<img src="' + CustomerHeadUrl + '" />' +
+														'</span>' +
+													'<label class="name" >{$member['nickname']}</label></div>' +
+													'<div>' +
+														'<span class="arrow" >' +
+														'</span>' +
+														'</div>' +
+														'<div>' +
+														'<img src="' + Content + '" style="float:right;height:70px;width:70px" /></div></li></ul>';
+									break;
+									case 'xiong':
+								/*alert(Content);
+								return;*/
+									liHtml = '<ul class="ul_talk reply">' +
+												'<li class="tbox">' +
+													'<div>' +
+														'<span class="head">' +
+															'<img src="' + CustomerHeadUrl + '" />' +
+														'</span>' +
+													'<label class="name" >{$member['nickname']}</label></div>' +
+													'<div>' +
+														'<span class="arrow" >' +
+														'</span>' +
+														'</div>' +
+														'<div>' +
+														'<img src="' + Content + '" style="float:right;height:70px;width:70px" /></div></li></ul>';
+									break;
+									case 'mayi':
+								/*alert(Content);
+								return;*/
+									liHtml = '<ul class="ul_talk reply">' +
+												'<li class="tbox">' +
+													'<div>' +
+														'<span class="head">' +
+															'<img src="' + CustomerHeadUrl + '" />' +
+														'</span>' +
+													'<label class="name" >{$member['nickname']}</label></div>' +
+													'<div>' +
+														'<span class="arrow" >' +
+														'</span>' +
+														'</div>' +
+														'<div>' +
+														'<img src="' + Content + '" style="float:right;height:70px;width:70px" /></div></li></ul>';
+									break;
+									case 'paopaobing':
+								/*alert(Content);
+								return;*/
+									liHtml = '<ul class="ul_talk reply">' +
+												'<li class="tbox">' +
+													'<div>' +
+														'<span class="head">' +
+															'<img src="' + CustomerHeadUrl + '" />' +
+														'</span>' +
+													'<label class="name" >{$member['nickname']}</label></div>' +
+													'<div>' +
+														'<span class="arrow" >' +
+														'</span>' +
+														'</div>' +
+														'<div>' +
+														'<img src="' + Content + '" style="float:right;height:70px;width:70px" /></div></li></ul>';
+									break;
+									case 'qbl':
+								/*alert(Content);
+								return;*/
+									liHtml = '<ul class="ul_talk reply">' +
+												'<li class="tbox">' +
+													'<div>' +
+														'<span class="head">' +
+															'<img src="' + CustomerHeadUrl + '" />' +
+														'</span>' +
+													'<label class="name" >{$member['nickname']}</label></div>' +
+													'<div>' +
+														'<span class="arrow" >' +
+														'</span>' +
+														'</div>' +
+														'<div>' +
+														'<img src="' + Content + '" style="float:right;height:70px;width:70px" /></div></li></ul>';
+									break;
+									case 'bzmh':
+								/*alert(Content);
+								return;*/
+									liHtml = '<ul class="ul_talk reply">' +
+												'<li class="tbox">' +
+													'<div>' +
+														'<span class="head">' +
+															'<img src="' + CustomerHeadUrl + '" />' +
+														'</span>' +
+													'<label class="name" >{$member['nickname']}</label></div>' +
+													'<div>' +
+														'<span class="arrow" >' +
+														'</span>' +
+														'</div>' +
+														'<div>' +
+														'<img src="' + Content + '" style="float:right;height:70px;width:70px" /></div></li></ul>';
+									break;
+							}
+							
+							$("#containertop").append(liHtml);
+            }
+            else {
+				tip('网络超时，发送失败！',true);
+            }
+        },
+        error: function () {
+            tip('网络超时，发送失败！',true);
+        }
+    });
+	
+	
+}
+
+//替换表情符号
+function FormatFace(contentFace) {
+    var arr = ["/::)", "/::~", "/::B", "/::|", "/:8-)", "/::<", "/::$", "/::X", "/::Z", "/::'(", "/::-|", "/::@", "/::P", "/::D", "/::O", "/::(", "/::+", "/:--b", "/::Q", "/::T", "/:,@P", "/:,@-D", "/::d", "/:,@o", "/::g", "/:|-)", "/::!", "/::L", "/::>", "/::,@", "/:,@f", "/::-S", "/:?", "/:,@x", "/:,@@", "/::8", "/:,@!", "/:!!!", "/:xx", "/:bye", "/:wipe", "/:dig", "/:handclap", "/:&-(", "/:B-)", "/:<@", "/:@>", "/::-O", "/:>-|", "/:P-(", "/::'|", "/:X-)", "/::*", "/:@x", "/:8*", "/:pd", "/:<W>", "/:beer", "/:basketb", "/:oo", "/:coffee", "/:eat", "/:pig", "/:rose", "/:fade", "/:showlove", "/:heart", "/:break", "/:cake", "/:li", "/:bome", "/:kn", "/:footb", "/:ladybug", "/:shit", "/:moon", "/:sun", "/:gift", "/:hug", "/:strong", "/:weak", "/:share", "/:v", "/:@)", "/:jj", "/:@@", "/:bad", "/:lvu", "/:no", "/:ok", "/:love", "/:<L>", "/:jump", "/:shake", "/:<O>", "/:circle", "/:kotow", "/:turn", "/:skip", "/:#-0", "/:#-0", "[街舞]", "/:kiss", "/:<&", "/:&>"];
+    try {
+        for (var i = 0; i < arr.length; i++) {
+            var face = arr[i];
+            contentFace = contentFace.replace(face, "<img src='http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/face/" + i + ".gif' />");
+        }
+    } catch (e) {
+        alert(e.message);
+    }
+    return contentFace;
+}
+
+function FormatFaceImage(contentFace) {
+
+    var arr = ["smiley001", "smiley002", "smiley003", "smiley004", "smiley005", "smiley006", "smiley007", "smiley008", "smiley009", "smiley010", "smiley011", "smiley012", "smiley013", "smiley014", "smiley015", "smiley016", "smiley017", "smiley018", "smiley019", "smiley020", "smiley021", "smiley022", "smiley023", "smiley024", "smiley025", "smiley026", "smiley027"];
+
+    try {
+        for (var i = 0; i < arr.length; i++) {
+            var face = arr[i];
+            contentFace = contentFace.replace('[', '').replace(']', '').replace(face, "<img src='http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/smiley/" + face + ".png' style='-webkit-background-size: auto 24px;width:24px;height:24px'/>");
+        }
+    } catch (e) {
+        alert(e.message);
+    }
+    return contentFace;
+}
+
+//音频事件
+function SetAudioEventLister() {
+
+    var eleAudios = $("audio[name=MessageFromaudio]");
+    var eleclicks = $("article[data-name=Messagevoice]");
+    $(eleAudios).each(function (audio) {
+        $(eleAudios[audio]).bind("loadedmetadata", function () {
+            showSeconds(this);
+        });
+
+    });
+
+    $(eleclicks).click(function () {
+        playAudio(this);
+    });
+}
+
+$.FormatDateTime = function (obj, IsMi) {
+    var myDate = new Date(obj);
+    var year = myDate.getFullYear();
+    var month = ("0" + (myDate.getMonth() + 1)).slice(-2);
+    var day = ("0" + myDate.getDate()).slice(-2);
+    var h = ("0" + myDate.getHours()).slice(-2);
+    var m = ("0" + myDate.getMinutes()).slice(-2);
+    var s = ("0" + myDate.getSeconds()).slice(-2);
+    var mi = ("00" + myDate.getMilliseconds()).slice(-3);
+    if (IsMi == true) {
+        return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s;
+    }
+    else {
+        return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s + "." + mi;
+    }
+};
+
+//show seconds
+function showSeconds(thi) {
+    var id = thi.getAttribute("data-id");
+    var trueseconds = Math.floor(thi.duration);
+    var seconds = trueseconds;
+    if (seconds > 90) {
+        seconds = 90;
+    }
+    var fromType = thi.getAttribute("data-value");
+    if (fromType == 2) {
+        $("#VoiceSecond" + id).attr("style", "margin-left: " + seconds + "px;");
+        $("#VoiceSecond" + id).html(trueseconds + "”");
+    }
+    else {
+        $("#replyvoice" + id).attr("style", "margin-left: " + seconds + "px;");
+        $("#replysecond" + id).html(trueseconds + "”");
+    }
+}
+//play audio
+function playAudio(thi) {
+    var dataid = thi.getAttribute("data-id");
+    var fromType = thi.getAttribute("data-value");
+
+    if (fromType == 2) {
+        $("#voicespan" + dataid).removeClass("voice").addClass("playvoice");
+    }
+    else {
+        $("#replyvoice" + dataid).removeClass("replyvoice").addClass("replyplayvoice");
+    }
+    var oAudio = $("#myaudio_" + dataid)[0];
+
+    $("audio").each(function (i, v) {
+        if (v == oAudio) {
+            if (v.paused) {
+                v.play();
+                $(v).closest("article").find("span[id^='voicespan']").removeClass("voice").addClass("playvoice");
+                $(v).closest("article").find("span[id^='replyvoice']").removeClass("replyvoice").addClass("replyplayvoice");
+
+                v.onended = function () {
+                    $(v).closest("article").find("span[id^='voicespan']").removeClass("playvoice").addClass("voice");
+                    $(v).closest("article").find("span[id^='replyvoice']").removeClass("replyplayvoice").addClass("replyvoice");
+                }
+            } else {
+                v.pause();
+                $(v).closest("article").find("span[id^='voicespan']").removeClass("playvoice").addClass("voice");
+                $(v).closest("article").find("span[id^='replyvoice']").removeClass("replyplayvoice").addClass("replyvoice");
+            }
+        } else {
+            v.pause();
+            v.currentTime = 0;
+            $(v).closest("article").find("span[id^='voicespan']").removeClass("playvoice").addClass("voice");
+            $(v).closest("article").find("span[id^='replyvoice']").removeClass("replyplayvoice").addClass("replyvoice");
+        }
+    });
+}
+
+function hidenface(e) {
+    var facearea = $("#face_area");
+    if (facearea.is(":hidden")) {
+
+    }
+    else {
+        $("#nav_footer").height("48px");
+    }
+    $("#face_area").hide();
+    $(".page").hide();
+	//$("#nav").hide();
+    var userAgent = navigator.userAgent;
+}
+
+$("#facePoint").click(function () {
+    var facearea = $("#face_area");
+
+    if (facearea.is(":hidden")) {
+        $("#nav_footer").height("195px");
+    }
+    else {
+        $("#nav_footer").height("48px");
+    }
+    facearea.toggle(100);
+	$(".page").toggle();
+    $("#wrapper2").hide();
+    $("#scroller2").text("");
+    scrollTop();
+});
+
+
+
+$("#facetype span").click(function () {
+    var type = $(this).attr("data-key");
+    $("#facetype span").each(function () {
+        var e = this;
+        $(this).removeClass("on");
+    });
+    $(this).addClass("on");
+    if (type == "jingdian") {
+        $("#page_smiley").show();
+        $("#page_xiong").hide();
+        $("#page_mayi").hide();
+		$("#page_qbl").hide();
+		$("#page_bzmh").hide();
+		 $("#page_paopaobing").hide();
+    }
+    else if (type == "xiong") {
+        $("#page_smiley").hide();
+        $("#page_xiong").show();
+        $("#page_mayi").hide();
+		$("#page_paopaobing").hide();
+		$("#page_qbl").hide();
+		$("#page_bzmh").hide();
+        if ($("#list_xiong").html().trim() == "") {
+            form_smiley.rend({
+                spearate: 14,
+                count: 98,
+                size: 36,
+                extend: "png",
+                page: "page_xiong",
+                list: "list_xiong",
+                nav: "nav_xiong",
+                img: "http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/xiong/xiong",
+                key: "xiong"
+            });
+        }
+    }
+    else if (type == "mayi") {
+        $("#page_smiley").hide();
+        $("#page_xiong").hide();
+		$("#page_qbl").hide();
+        $("#page_mayi").show();
+		$("#page_paopaobing").hide();
+		$("#page_bzmh").hide();
+        if ($("#list_mayi").html().trim() == "") {
+            form_smiley.rend({
+                spearate: 14,
+                count: 57,
+                size: 30,
+                extend: "gif",
+                page: "page_mayi",
+                list: "list_mayi",
+                nav: "nav_mayi",
+                img: "http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/mayi/mayi",
+                key: "mayi"
+            });
+        }
+    }
+	else if (type == "paopaobing") {
+        $("#page_smiley").hide();
+        $("#page_xiong").hide();
+        $("#page_mayi").hide();
+		$("#page_qbl").hide();
+		$("#page_bzmh").hide();
+		$("#page_paopaobing").show();
+        if ($("#list_paopaobing").html().trim() == "") {
+            form_smiley.rend({
+                spearate: 14,
+                count: 20,
+                size: 30,
+                extend: "gif",
+                page: "page_paopaobing",
+                list: "list_paopaobing",
+                nav: "nav_paopaobing",
+                img: '{$_W['siteroot']}addons/meepo_weixiangqin/template/style/paopaobing/paopaobing',
+                key: "paopaobing"
+            });
+        }
+    }
+	else if (type == "qbl") {
+        $("#page_smiley").hide();
+        $("#page_xiong").hide();
+        $("#page_mayi").hide();
+		$("#page_paopaobing").hide();
+		$("#page_bzmh").hide();
+		$("#page_qbl").show();
+        if ($("#list_qbl").html().trim() == "") {
+            form_smiley.rend({
+                spearate: 14,
+                count: 20,
+                size: 30,
+                extend: "gif",
+                page: "page_qbl",
+                list: "list_qbl",
+                nav: "nav_qbl",
+                img: '{$_W['siteroot']}addons/meepo_weixiangqin/template/style/qbl/qbl',
+                key: "qbl"
+            });
+        }
+    }
+	else if (type == "bzmh") {
+        $("#page_smiley").hide();
+        $("#page_xiong").hide();
+        $("#page_mayi").hide();
+		$("#page_paopaobing").hide();
+		$("#page_qbl").hide();
+		$("#page_bzmh").show();
+		
+        if ($("#list_bzmh").html().trim() == "") {
+            form_smiley.rend({
+                spearate: 14,
+                count: 20,
+                size: 30,
+                extend: "jpg",
+                page: "page_bzmh",
+                list: "list_bzmh",
+                nav: "nav_bzmh",
+                img: '{$_W['siteroot']}addons/meepo_weixiangqin/template/style/bzmh/bzmh',
+                key: "bzmh"
+            });
+        }
+    }
+});
+</script>
+      
+<script type="text/javascript">
+  wx.ready(function () {
+    var shareData = {
+    title: "{$settings['title']}",
+    desc: "{$settings['share_content']}",
+    link: "{$settings['share_link']}",
+    imgUrl: "{$_W['attachurl']}{$settings['share_logo']}",
+  };
+  
+  //分享朋友
+  wx.onMenuShareAppMessage({
+       title: shareData.title,
+      desc: shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+        send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: shareData.title+"---"+shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+          send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert("分享失败,网络超时！！！！");
+      }
+    });   
+    
+  });
+ var images = {
+    localId: [],
+    serverId: []
+  };
+  
+  document.querySelector('#camera').onclick = function () {
+    wx.chooseImage({
+      success: function (res) {
+        images.localId = res.localIds;
+        alert('已选择 ' + res.localIds.length + ' 张图片');
+		if (images.localId.length == 0) {
+      alert('请先点击上传图片选择图片');
+      return;
+    }
+    var i = 0, length = images.localId.length;
+    images.serverId = [];
+    function upload() {
+      wx.uploadImage({
+        localId: images.localId[i],
+        success: function (res) {
+          i++;
+          alert('已上传：' + i + '/' + length);
+          images.serverId.push(res.serverId);
+          if (i < length) {
+			  //alert(i);
+			downphotos(res.serverId);
+          
+			upload();
+          }else{
+			  //alert(res.serverId);
+		     downphotos(res.serverId);
+		  }
+		  
+        },
+        fail: function (res) {
+          alert(JSON.stringify(res));
+        }
+      });
+    }
+	
+    upload();
+      }
+    });
+  };
+
+function downphotos(id){
+	var cr = '';
+   $.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('UploadImage3')}",
+			data:{id:id,geter:"{$geter}"},
+			cache:false,
+			success:function(data){
+			   //alert(data);
+               if(data != '0'){
+				     scrollTop();
+				     data = JSON.parse(data);
+			         liHtml = '<ul class="ul_talk reply">' +
+                        '<li class="tbox">' +
+                            '<div>' +
+                                '<span class="head">' +
+                                    '<img src="{$avatar}" />' +
+                                '</span>' +
+                            '<label class="name" >{$member['nickname']}</label></div>' +
+                            '<div>' +
+                                '<span class="arrow" >' +
+                                '</span>' +
+                                '</div>' +
+                                '<div>' +
+                                '<img src="{$_W['attachurl']}' + data.thumburl + '" style="float:right;height:70px;width:70px" / id="btnimg" num="{$_W['attachurl']}' + data.picurl + '"></div></li></ul>';
+								 $("#containertop").append(liHtml);
+			   }else{
+			     tip('网络超时，发送失败！',true);
+			   }
+			}
+		});
+}
+
+ </script>
+  
+<script>
+window.Swipe2 = function(b, a) {
+    if (!b) {
+        return null
+    }
+    var c = this;
+    this.options = a || {};
+    this.index = this.options.startSlide || 0;
+    this.speed = this.options.speed || 300;
+	this.lwidth = this.options.width || 80;//导航li宽度
+    this.delay = this.options.auto || 0;//自动滚动菜单速度0为不自动滚动
+	this.col=this.options.auto || 4;//每排显示个数
+    this.container = b;
+    this.element = this.container.children[0];
+    this.container.style.overflow = "hidden";
+    this.element.style.listStyle = "none";
+    this.element.style.margin = 0;
+    this.setup();
+    if (this.delay != 0) {
+        this.begin();
+    }
+    if (this.element.addEventListener) {
+        this.element.addEventListener("touchstart", this, false);
+        this.element.addEventListener("touchmove", this, false);
+        this.element.addEventListener("touchend", this, false);
+        this.element.addEventListener("touchcancel", this, false);
+        this.element.addEventListener("webkitTransitionEnd", this, false);
+        this.element.addEventListener("msTransitionEnd", this, false);
+        this.element.addEventListener("oTransitionEnd", this, false);
+        this.element.addEventListener("transitionend", this, false);
+        window.addEventListener("resize", this, false)
+    }
+};
+Swipe2.prototype = {
+    setup: function() {
+        this.slides = this.element.children;
+        
+        this.width = Math.ceil(("getBoundingClientRect" in this.container) ? this.container.getBoundingClientRect().width: this.container.offsetWidth);
+        if (!this.width) {
+            return null
+        }
+		this.length = this.slides.length;
+		this.length = Math.ceil(this.slides.length/4);
+        if (this.length < 1) {
+            return null
+        }
+		
+        this.container.style.visibility = "hidden";
+        this.element.style.width = Math.ceil(this.slides.length * this.lwidth) + "px";
+        var a = this.slides.length;
+        while (a--) {
+            var b = this.slides[a];
+            b.style.width = this.lwidth + "px";
+            b.style.display = "table-cell";
+            b.style.verticalAlign = "top"
+        }
+        this.slide(this.index, 0);
+        this.container.style.visibility = "visible"
+    },
+    slide: function(a, c) {
+        var b = this.element.style;
+        if (c == undefined) {
+            c = this.speed
+        }
+        b.webkitTransitionDuration = b.MozTransitionDuration = b.msTransitionDuration = b.OTransitionDuration = b.transitionDuration = c + "ms";
+        b.MozTransform = b.webkitTransform = "translate3d(" + -(a * this.width) + "px,0,0)";
+        b.msTransform = b.OTransform = "translateX(" + -(a * this.width) + "px)";
+        this.index = a
+    },
+    getPos: function() {
+        return this.index
+    },
+    prev: function(a) {
+        this.delay = a || 0;
+        clearTimeout(this.interval);
+        if (this.index) {
+            this.slide(this.index - 1, this.speed)
+        } else {
+            this.slide(this.length - 1, this.speed)
+        }
+    },
+    next: function(a) {
+        this.delay = a || 0;
+        clearTimeout(this.interval);
+        if (this.index < this.length - 1) {
+            this.slide(this.index + 1, this.speed)
+        } else {
+            this.slide(0, this.speed)
+        }
+    },
+    begin: function() {
+        var a = this;
+        this.interval = (this.delay) ? setTimeout(function() {
+            a.next(a.delay)
+        },
+        this.delay) : 0
+    },
+    stop: function() {
+        this.delay = 0;
+        clearTimeout(this.interval)
+    },
+    resume: function() {
+        this.delay = this.options.auto || 0;
+        this.begin()
+    },
+    handleEvent: function(a) {
+        switch (a.type) {
+        case "touchstart":
+            this.onTouchStart(a);
+            break;
+        case "touchmove":
+            this.onTouchMove(a);
+            break;
+        case "touchcancel":
+        case "touchend":
+            this.onTouchEnd(a);
+            break;
+        case "webkitTransitionEnd":
+        case "msTransitionEnd":
+        case "oTransitionEnd":
+        case "transitionend":
+            this.transitionEnd(a);
+            break;
+        case "resize":
+            this.setup();
+            break
+        }
+    },
+    transitionEnd: function(a) {
+        if (this.delay) {
+            this.begin()
+        }
+        
+    },
+    onTouchStart: function(a) {
+        this.start = {
+            pageX: a.touches[0].pageX,
+            pageY: a.touches[0].pageY,
+            time: Number(new Date())
+        };
+        this.isScrolling = undefined;
+        this.deltaX = 0;
+        this.element.style.MozTransitionDuration = this.element.style.webkitTransitionDuration = 0;
+        a.stopPropagation()
+    },
+    onTouchMove: function(a) {
+        if (a.touches.length > 1 || a.scale && a.scale !== 1) {
+            return
+        }
+        this.deltaX = a.touches[0].pageX - this.start.pageX;
+        if (typeof this.isScrolling == "undefined") {
+            this.isScrolling = !!(this.isScrolling || Math.abs(this.deltaX) < Math.abs(a.touches[0].pageY - this.start.pageY))
+        }
+        if (!this.isScrolling) {
+            a.preventDefault();
+            clearTimeout(this.interval);
+            this.deltaX = this.deltaX / ((!this.index && this.deltaX > 0 || this.index == this.length - 1 && this.deltaX < 0) ? (Math.abs(this.deltaX) / this.width + 1) : 1);
+            this.element.style.MozTransform = this.element.style.webkitTransform = "translate3d(" + (this.deltaX - this.index * this.width) + "px,0,0)";
+            a.stopPropagation()
+        }
+    },
+    onTouchEnd: function(c) {
+        var b = Number(new Date()) - this.start.time < 250 && Math.abs(this.deltaX) > 20 || Math.abs(this.deltaX) > this.width / 2,
+        a = !this.index && this.deltaX > 0 || this.index == this.length - 1 && this.deltaX < 0;
+        if (!this.isScrolling) {
+            this.slide(this.index + (b && !a ? (this.deltaX < 0 ? 1: -1) : 0), this.speed)
+        }
+        c.stopPropagation()
+    }
+};
+
+//开始调用插件
+var count = document.body.clientWidth/4;
+var slider=new Swipe2(document.getElementById('nav'),{speed:500,auto:0,width:count,col:4});
+</script>
+
+

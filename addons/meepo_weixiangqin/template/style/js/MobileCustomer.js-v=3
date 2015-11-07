@@ -1,0 +1,717 @@
+﻿var getType = 1;
+var TimeInterval;
+$(document).ready(function () {
+
+    form_smiley.rend({
+        spearate: 14,
+        count: 27,
+        size: 24,
+        extend: "png",
+        page: "page_smiley",
+        list: "list_smiley",
+        nav: "nav_smiley",
+        img: "http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/smiley/smiley",
+        key: "smiley"
+    });
+    $("#face_area").hide();
+    $.getScript("http://" + SocketIp + ":8889/socket.io/socket.io.js", function () {
+        LoadSocket();
+    });
+    $(window).bind("scroll", function () {
+        if ($(document).scrollTop() <= 0) {
+            var oldheight = document.body.scrollHeight;
+            var page = $("#pageNumber").val();
+            onLoadMessage(page);
+            $(document).scrollTop(document.body.scrollHeight - oldheight)
+        }
+
+    });
+    scrollTop();
+    //imgonload();
+    SetAudioEventLister();
+    //SocketMessage(1, 2);
+    //GetPolling();
+});
+
+
+var scrollTop = function () {
+    TscrollTop();
+    setTimeout(TscrollTop, 100);
+    setTimeout(TscrollTop, 1000);
+}
+
+function TscrollTop() {
+    $(window).scrollTop(document.body.scrollHeight);
+}
+
+function onLoadMessage(page) {
+    $.ajax({
+        type: 'post',
+        url: 'Ajax/CustomerChatAjax.aspx',
+        data: {
+            action: 'GetMessageData',
+            weimobid: sWeimobId,
+            AId: AId,
+            page: page
+        },
+        dataType: 'json',
+        success: function (json) {
+            if (json) {
+                for (var i = json.length - 1; i >= 0; i--) {
+                    var ulHtml = "";
+                    var voiceId = "";
+                    var obj = json[i];
+                    var fromType = obj.FromType;
+                    var ulclass = 'class="ul_talk reply"';
+                    var showFlag = true;
+                    var path = '<path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" />';
+                    var preobj;
+                    if (i != json.length - 1) {
+                        preobj = json[i + 1];
+                        var minsec = Date.parse(obj.AddTime) - Date.parse(preobj.AddTime);
+                        var minutes = minsec / 1000 / 60;
+                        if (null != preobj && minutes <= 2) {
+                            showFlag = false;
+                        }
+                    }
+                    if (obj.FromType == 2) {
+                        ulclass = 'class="ul_talk"';
+                        path = '<path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" />';
+                    }
+                    else {
+                        if (obj.MsgType == "faceimg") {
+                            path = '';
+                        }
+                    }
+                    if (showFlag) {
+                        ulHtml += '<p class="time" style="display:block;">' + $.FormatDateTime(obj.AddTime, true) + '</p>';
+                    }
+                    ulHtml += '<ul ' + ulclass + '>' +
+                            '<li class="tbox">' +
+                                '<div>';
+                    if (obj.FromType == 2) {
+                        var CustomerServiceHeadUrl = obj.HeadUrl;
+                        if (CustomerServiceHeadUrl != null) {
+                            if (CustomerServiceHeadUrl.trim().length == 0) {
+                                CustomerServiceHeadUrl = "images/mengmei.jpg";
+                            }
+                        }
+
+                        ulHtml += '<span class="head">' +
+                                        '<img src="' + CustomerServiceHeadUrl + '" />' +
+                                    '</span>' +
+                                   ' <label class="name">' + obj.ReplyUserName + '</label>'
+                    }
+                    else {
+                        ulHtml += '<span class="head">' +
+                                        '<img src="' + CustomerHeadUrl + '" />' +
+                                    '</span>';
+                    }
+                    ulHtml += '</div>' +
+                                '<div>' +
+                                    '<span class="arrow">' +
+                                        '<svg>' + path + '</svg>' +
+                                    '</span>' +
+                                '</div>' +
+                                '<div>';
+                    switch (obj.MsgType) {
+                        case 'text':
+                            ulHtml += '<article class="content">' + obj.Content + '</article></div></li></ul>';
+                            break;
+                        case 'image':
+                            var url;
+                            if (obj.Content != null) {
+                                url = obj.Content.trim();
+                                if (url == "") {
+                                    url = obj.PicUrl;
+                                }
+                            }
+                            ulHtml += '<img src=' + url + ' data-src=' + url + ' data-gid="g2" title="点击查看大图" class="image" onload="preViewImg(this, event);" onerror="preViewImg(this, event);" /></div></li></ul>';
+                            break;
+                        case 'voice':
+                            var id = obj.Id;
+                            if (fromType == 2) {
+                                ulHtml += '<article class="content" data-id=' + id + ' data-value=' + fromType + ' data-name="Messagevoice" style="padding-bottom: 8px;" onclick="playAudio(this);">' +
+                           '<span class="voice" id="voicespan' + id + '"></span><span class="second" id="VoiceSecond' + id + '" style="margin-left: 30px;">1”</span>' +
+                           '<audio id="myaudio_' + id + '" data-value=' + fromType + ' data-id=' + id + ' controls name="MessageFromaudio" style="display:none;"><source src=' + obj.Content + ' type="video/mp4"></source></audio></article></div></li></ul>';
+                            }
+                            else {
+                                ulHtml += '<article class="content" data-id=' + id + ' data-value=' + fromType + '  data-name="Messagevoice" onclick="playAudio(this);">' +
+                            '<span class="replysecond" id="replysecond' + id + '">1”</span><span class="replyvoice" id="replyvoice' + id + '" style="margin-left:30px;"></span>' +
+                            '<audio id="myaudio_' + id + '" data-value=' + fromType + ' data-id=' + id + ' controls name="MessageFromaudio" style="display:none;"><source src=' + obj.Content + ' type="video/mp4"></source></audio></article></div></li></ul>';
+                            }
+                            voiceId = "myaudio_" + id
+                            break;
+                        case 'faceimg':
+                            var url = obj.Content.trim();
+                            if (url == "") {
+                                url = obj.PicUrl;
+                            }
+                            ulHtml += ' <img src=' + url + ' style="float:right;" /></div></li></ul>';
+                            break;
+                        case 'news':
+                            if (obj.News && obj.News.length > 0) {
+                                var objNewsList = obj.News;
+                                if (objNewsList.length == 1) {
+                                    var objNews = objNewsList[0];
+                                    ulHtml += '<div class="graphic">' +
+                                              '<p class="ftitle">' + objNews.title + '</p>' +
+                                              '<p class="stitle">' + obj.FormatAddTime + '</p>' +
+                                              '<a href="' + objNews.url + '" target="_blank"><img width="182" height="112" src="' + objNews.picurl + '" /></a>' +
+                                              '<a class="ttitle" href="' + objNews.url + '" target="_blank">' + objNews.description + '</a>' +
+                                              '<a class="readall" href="' + objNews.url + '" target="_blank">阅读全文</a>' +
+                                         '</div>';
+                                }
+                                else {
+                                    ulHtml += '<div class="multigraphic">'
+                                    var objNews = objNewsList[0];
+                                    ulHtml += ' <a href="' + objNews.url + '" target="_blank"><img width="182" height="112" src="' + objNews.picurl + '" /></a>' +
+                                              ' <a class="maintitleback" href="' + objNews.url + '" target="_blank"></a>' +
+                                              ' <a class="maintitle" href="' + objNews.url + '" target="_blank">' + objNews.title + '</a>' +
+                                              '<div class="child"> ' +
+                                              '  <ul>';
+                                    for (var j = 1; j < objNewsList.Count; j++) {
+                                        var objN = objNewsList[j];
+                                        ulHtml += ' <li> ' +
+                                              '  <a class="ctitle" href="' + objN.url + '">' + objN.title + '</a>' +
+                                                 '   <img width="40" height="40" src="' + objN.picurl + '" />' +
+                                           ' </li>';
+                                    }
+                                    ulHtml += '</ul>' +
+                           '</div>' +
+                   '</div>';
+                                }
+                            }
+                            break;
+                    }
+                    $("#containertop").prepend(ulHtml);
+                    if (voiceId.trim().length > 0) {
+                        var audio = $("#" + voiceId);
+                        audio.bind("loadedmetadata", function () {
+                            showSeconds(this);
+                        });
+                    }
+                }
+                if (json.length > 0) {
+                    page++;
+                }
+                $("#pageNumber").val(page);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+$("#facePoint").click(function () {
+    var facearea = $("#face_area");
+
+    if (facearea.is(":hidden")) {
+        $("#nav_footer").height("195px");
+    }
+    else {
+        $("#nav_footer").height("48px");
+    }
+    facearea.toggle(100);
+    $("#facetype").toggle();
+    scrollTop();
+});
+
+
+
+$("#facetype span").click(function () {
+    var type = $(this).attr("data-key");
+    $("#facetype span").each(function () {
+        var e = this;
+        $(this).removeClass("on");
+    });
+    $(this).addClass("on");
+    if (type == "jingdian") {
+        $("#page_smiley").show();
+        $("#page_xiong").hide();
+        $("#page_mayi").hide();
+    }
+    else if (type == "xiong") {
+        $("#page_smiley").hide();
+        $("#page_xiong").show();
+        $("#page_mayi").hide();
+        if ($("#list_xiong").html().trim() == "") {
+            form_smiley.rend({
+                spearate: 14,
+                count: 98,
+                size: 36,
+                extend: "png",
+                page: "page_xiong",
+                list: "list_xiong",
+                nav: "nav_xiong",
+                img: "http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/xiong/xiong",
+                key: "xiong"
+            });
+        }
+    }
+    else if (type == "mayi") {
+        $("#page_smiley").hide();
+        $("#page_xiong").hide();
+        $("#page_mayi").show();
+        if ($("#list_mayi").html().trim() == "") {
+            form_smiley.rend({
+                spearate: 14,
+                count: 57,
+                size: 30,
+                extend: "gif",
+                page: "page_mayi",
+                list: "list_mayi",
+                nav: "nav_mayi",
+                img: "http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/mayi/mayi",
+                key: "mayi"
+            });
+        }
+    }
+});
+
+var reconnectFailCount = 0;
+function LoadSocket() {
+    try {
+        var socket = io.connect('http://' + SocketIp + ':8889/');
+        //连接事件
+        socket.on("connect", function () {
+            clearInterval(TimeInterval);
+            getType = 1;
+            reconnectFailCount = 0;
+            socket.emit('paramquery', {
+                aid: AId,
+                weimobid: sWeimobId
+            });
+        });
+        socket.on('dataChange', function (json) {
+            if (json) {
+                if (json.msgCount == 1 || json.msg == 1) {
+                    SocketMessage(json.msgCount, json.msg);
+                }
+            }
+        });
+        //重新连接
+        socket.on('reconnecting', function (data) {
+            reconnectFailCount++;
+            if (reconnectFailCount >= 6) {
+                alert("连接服务器失败，请检查您当前的网络");
+            }
+        });
+        //重新连接成功
+        socket.on('reconnect', function (data) {
+            reconnectFailCount = 0;
+        });
+        //断开事件
+        socket.on('disconnect', function () { });
+    }
+    catch (e) {
+
+    }
+}
+
+function StartPolling() {
+    getType = 2;
+    clearInterval(TimeInterval);
+    TimeInterval = setInterval(GetPolling, 10000);
+    GetPolling();
+}
+
+function GetPolling() {
+    $.ajax({
+        type: 'post',
+        url: 'Ajax/CustomerChatAjax.aspx',
+        data: {
+            action: 'GetPolling',
+            weimobid: sWeimobId,
+            AId: AId
+        },
+        dataType: 'json',
+        success: function (json) {
+            if (json) {
+                PollingSuccess(json);
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+function SocketMessage(msgCount, msg) {
+    $.ajax({
+        type: 'post',
+        url: 'Ajax/CustomerChatAjax.aspx',
+        data: {
+            action: 'GetSocketMessage',
+            weimobid: sWeimobId,
+            AId: AId,
+            r: Math.random()
+        },
+        dataType: 'json',
+        success: function (json) {
+            if (json) {
+                PollingSuccess(json);
+            }
+        },
+        error: function () {
+        }
+    });
+}
+
+
+var elelastmsgtime = $("#lastmsgtime");
+function PollingSuccess(json) {
+    for (var i = 0; i < json.length; i++) {
+        var liHtml = '';
+        var obj = json[i];
+        var voiceId = "";
+        var HeadUrl = 'images/mengmei.jpg';
+        if (obj.HeadUrl.trim().length > 0) {
+            HeadUrl = obj.HeadUrl;
+        }
+        var lastmsgtime = "";
+        if (elelastmsgtime) {
+            lastmsgtime = elelastmsgtime.val();
+        }
+        if (lastmsgtime.trim().length > 0) {
+            var minsec = Date.parse(obj.AddTime) - Date.parse(lastmsgtime.trim());
+            var minutes = minsec / 1000 / 60;
+            if (minutes > 2) {
+                liHtml += '<p class="time">' + obj.AddTime + '</p>';
+            }
+        }
+        elelastmsgtime.val(obj.AddTime);
+        liHtml += '<ul class="ul_talk"><li class="tbox"><div><span class="head"><img src="' + HeadUrl + '" /></span><label class="name" >' + obj.ReplyUserName + '</label></div><div><span class="arrow" ><svg><path d="M2,20 A9,5,0,0,1,18,24 L20,0" stroke-width="1" stroke="#e2e2e2" fill="#e2e2e2" /></svg></span></div><div>';
+        switch (obj.MsgType) {
+            case 'text':
+                liHtml += '<article class="content">' + obj.Content + '</article>';
+                break;
+            case 'image':
+                liHtml += '<img src="' + obj.Content + '" data-src="' + obj.Content + '" data-gid="g2" title="点击查看大图" class="image" onload="preViewImg(this, event);" onerror="preViewImg(this, event);" />';
+                break;
+            case 'faceimg':
+                liHtml += '<img src="' + obj.Content + '" data-src="' + obj.Content + '" class="image" style="max-width:200px;" />';
+                break;
+            case 'voice':
+                var id = obj.Id;
+                liHtml += '<article class="content" data-id="' + id + '" data-value="2" data-name="Messagevoice" style="padding-bottom: 8px;" onclick="playAudio(this);">' +
+                                '<span class="voice" id="voicespan' + id + '"></span><span class="second" id="VoiceSecond' + id + '" style="margin-left: 30px;">1”</span>' +
+                                '<audio id="myaudio_' + id + '" data-value="2" data-id="' + id + '" controls="" name="MessageFromaudio" style="display:none;"><source src="' + obj.Content + '" type="video/mp4"></audio>' +
+                           ' </article> ';
+                voiceId = "myaudio_" + id;
+                break;
+            case 'news':
+                if (obj.News && obj.News.length > 0) {
+                    var objNewsList = obj.News;
+                    if (objNewsList.length == 1) {
+                        var objNews = objNewsList[0];
+                        liHtml += '<div class="graphic">' +
+                                  '<p class="ftitle">' + objNews.title + '</p>' +
+                                  '<p class="stitle">' + obj.FormatAddTime + '</p>' +
+                                  '<a href="' + objNews.url + '" target="_blank"><img width="182" height="112" src="' + objNews.picurl + '" /></a>' +
+                                  '<a class="ttitle" href="' + objNews.url + '" target="_blank">' + objNews.description + '</a>' +
+                                  '<a class="readall" href="' + objNews.url + '" target="_blank">阅读全文</a>' +
+                             '</div>';
+                    }
+                    else {
+                        liHtml += '<div class="multigraphic">'
+                        var objNews = objNewsList[0];
+                        liHtml += ' <a href="' + objNews.url + '" target="_blank"><img width="182" height="112" src="' + objNews.picurl + '" /></a>' +
+                                  ' <a class="maintitleback" href="' + objNews.url + '" target="_blank"></a>' +
+                                  ' <a class="maintitle" href="' + objNews.url + '" target="_blank">' + objNews.title + '</a>' +
+                                  '<div class="child"> ' +
+                                  '  <ul>';
+                        for (var j = 1; j < objNewsList.Count; j++) {
+                            var objN = objNewsList[j];
+                            liHtml += ' <li> ' +
+                                  '  <a class="ctitle" href="' + objN.url + '">' + objN.title + '</a>' +
+                                     '   <img width="40" height="40" src="' + objN.picurl + '" />' +
+                               ' </li>';
+                        }
+                        liHtml += '</ul>' +
+               '</div>' +
+       '</div>';
+                    }
+                }
+                break;
+        }
+        liHtml += '</div></li></ul>';
+        $("#containertop").append(liHtml);
+        if (voiceId.trim().length > 0) {
+            var audio = $("#" + voiceId);
+            audio.bind("loadedmetadata", function () {
+                showSeconds(this);
+            });
+        }
+        scrollTop();
+    }
+}
+
+
+//照相机按钮上传图片
+function sendimg(thi) {
+    var file = thi.files[0];
+    if (file != null) {
+        var tform = $("#Upload_form");
+        tform.submit();
+    }  
+}
+
+$("#Upload_iframe").load(function () {
+    var iframebody = window.frames['Upload_iframe'].document.body;
+    var text = iframebody.innerText;
+    var obj = eval("(" + text + ")");
+    if (obj != null && obj.succ == true) {
+        sendMessage(obj.nAId, obj.sWeimobId, obj.msgType, obj.imageUrl);
+    }
+    else if (obj.msg) {
+        alert(obj.msg);
+    }
+});
+
+//发送消息
+function sendMessage(nAId, sWeimobId, msgType, Content) {
+    var type;
+    var extension;
+    if (msgType == "xiong" || msgType == "mayi" || msgType == "smiley") {
+        type = msgType;
+        msgType = 'image';
+        if (type == "xiong" || type == "smiley") {
+            extension = '.png';
+        }
+        else {
+            extension = '.gif';
+        }
+        Content = 'http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/' + type + '/' + Content.replace('[', '').replace(']', '') + extension;
+    }
+
+
+    $("#sendtext").val("");
+    $("#sendtext").html("");
+    scrollTop();
+    $("#btnsend").addClass("on");
+
+
+    var date = new Date();
+    var time = date.getFullYear() + "" + (date.getMonth() + 1) + "" + date.getDate() + "" + date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
+
+    var r = Math.floor(Math.random() * 100000);
+    var id = time + "n" + r;
+
+    var liHtml;
+    var voiceId = "";
+    var spanId = "";
+    switch (msgType) {
+        case 'text':
+            liHtml = '<ul class="ul_talk reply"><li class="tbox"><div><span class="head"><img src="' + CustomerHeadUrl + '" /></span></div><div><span class="arrow" ><svg><path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" /></svg></span></div><div><article class="content">' + FormatFaceImage(Content) + '</article></div></li></ul>';
+            break;
+        case 'image':
+            liHtml = '<ul class="ul_talk reply"><li class="tbox"><div><span class="head"><img src="' + CustomerHeadUrl + '" /></span></div><div><span class="arrow" ><svg><path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" /></svg></span></div><div><img src="' + Content + '" data-src="' + Content + '" data-gid="g2" title="点击查看大图" class="image" onload="preViewImg(this, event);" onerror="preViewImg(this, event);" /></div></li></ul>';
+            break;
+        case 'voice':
+            liHtml = '<ul class="ul_talk reply">' +
+                '<li class="tbox">' +
+                    '<div>' +
+                        '<span class="head">' +
+                            '<img src="' + CustomerHeadUrl + '">' +
+                       ' </span>' +
+                    '</div>' +
+                    '<div>' +
+                        '<span class="arrow">' +
+                            '<svg>' +
+                                '<path d="M18,40 A9,5,0,0,0,2,37 L0,23" stroke-width="1" stroke="#2792ff" fill="#2792ff" />' +
+                            '</svg>' +
+                    '</span>' +
+                   ' </div>' +
+                    '<div>' +
+                        '<article class="content" data-id="' + id + '" data-value="1"  data-name="Messagevoice" onclick="playAudio(this);">' +
+                            '<span class="replysecond" id="replysecond' + id + '">1”</span><span class="replyvoice" id="replyvoice' + id + '" style="margin-left:30px;"></span>' +
+                            '<audio id="myaudio_' + id + '" data-value="1" data-id="' + id + '" controls name="MessageFromaudio" style="display:none;"><source src="' + Content + '" type="video/mp4"></source></audio>' +
+                        '</article> ' +
+                   '</div>' +
+               ' </li>' +
+           ' </ul>';
+            voiceId = "myaudio_" + id;
+            break;
+        case 'faceimg':
+            liHtml = '<ul class="ul_talk reply">' +
+                        '<li class="tbox">' +
+                            '<div>' +
+                                '<span class="head">' +
+                                    '<img src="' + CustomerHeadUrl + '" />' +
+                                '</span>' +
+                            '</div>' +
+                            '<div>' +
+                                '<span class="arrow" >' +
+                                '</span>' +
+                                '</div>' +
+                                '<div>' +
+                                '<img src="' + Content + '" style="float:right;" /></div></li></ul>';
+            break;
+    }
+    spanId = "spanId_" + id;
+    $("#containertop").append(liHtml);
+
+    if (voiceId.trim().length > 0) {
+        var audio = $("#" + voiceId);
+        audio.bind("loadedmetadata", function () {
+            showSeconds(this);
+        });
+    }
+
+    $.ajax({
+        type: 'post',
+        url: 'Ajax/CustomerChatAjax.aspx',
+        data: {
+            action: 'sendmessage',
+            weimobid: sWeimobId,
+            AId: nAId,
+            msgType: msgType,
+            content: Content
+        },
+        dataType: 'json',
+        success: function (json) {
+            if (json && json.succ == true) {
+               
+            }
+            else {
+                $("#" + spanId).attr("style", "display: block;");
+            }
+        },
+        error: function () {
+            $("#" + spanId).attr("style", "display: block;");
+        }
+    });
+}
+
+//替换表情符号
+function FormatFace(contentFace) {
+    var arr = ["/::)", "/::~", "/::B", "/::|", "/:8-)", "/::<", "/::$", "/::X", "/::Z", "/::'(", "/::-|", "/::@", "/::P", "/::D", "/::O", "/::(", "/::+", "/:--b", "/::Q", "/::T", "/:,@P", "/:,@-D", "/::d", "/:,@o", "/::g", "/:|-)", "/::!", "/::L", "/::>", "/::,@", "/:,@f", "/::-S", "/:?", "/:,@x", "/:,@@", "/::8", "/:,@!", "/:!!!", "/:xx", "/:bye", "/:wipe", "/:dig", "/:handclap", "/:&-(", "/:B-)", "/:<@", "/:@>", "/::-O", "/:>-|", "/:P-(", "/::'|", "/:X-)", "/::*", "/:@x", "/:8*", "/:pd", "/:<W>", "/:beer", "/:basketb", "/:oo", "/:coffee", "/:eat", "/:pig", "/:rose", "/:fade", "/:showlove", "/:heart", "/:break", "/:cake", "/:li", "/:bome", "/:kn", "/:footb", "/:ladybug", "/:shit", "/:moon", "/:sun", "/:gift", "/:hug", "/:strong", "/:weak", "/:share", "/:v", "/:@)", "/:jj", "/:@@", "/:bad", "/:lvu", "/:no", "/:ok", "/:love", "/:<L>", "/:jump", "/:shake", "/:<O>", "/:circle", "/:kotow", "/:turn", "/:skip", "/:#-0", "/:#-0", "[街舞]", "/:kiss", "/:<&", "/:&>"];
+    try {
+        for (var i = 0; i < arr.length; i++) {
+            var face = arr[i];
+            contentFace = contentFace.replace(face, "<img src='http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/face/" + i + ".gif' />");
+        }
+    } catch (e) {
+        alert(e.message);
+    }
+    return contentFace;
+}
+
+function FormatFaceImage(contentFace) {
+
+    var arr = ["smiley001", "smiley002", "smiley003", "smiley004", "smiley005", "smiley006", "smiley007", "smiley008", "smiley009", "smiley010", "smiley011", "smiley012", "smiley013", "smiley014", "smiley015", "smiley016", "smiley017", "smiley018", "smiley019", "smiley020", "smiley021", "smiley022", "smiley023", "smiley024", "smiley025", "smiley026", "smiley027"];
+
+    try {
+        for (var i = 0; i < arr.length; i++) {
+            var face = arr[i];
+            contentFace = contentFace.replace('[', '').replace(']', '').replace(face, "<img src='http://hs-net-img.oss-cn-hangzhou.aliyuncs.com/Face/images/smiley/" + face + ".png' style='-webkit-background-size: auto 24px;width:24px;height:24px'/>");
+        }
+    } catch (e) {
+        alert(e.message);
+    }
+    return contentFace;
+}
+
+//音频事件
+function SetAudioEventLister() {
+
+    var eleAudios = $("audio[name=MessageFromaudio]");
+    var eleclicks = $("article[data-name=Messagevoice]");
+    $(eleAudios).each(function (audio) {
+        $(eleAudios[audio]).bind("loadedmetadata", function () {
+            showSeconds(this);
+        });
+
+    });
+
+    $(eleclicks).click(function () {
+        playAudio(this);
+    });
+}
+
+$.FormatDateTime = function (obj, IsMi) {
+    var myDate = new Date(obj);
+    var year = myDate.getFullYear();
+    var month = ("0" + (myDate.getMonth() + 1)).slice(-2);
+    var day = ("0" + myDate.getDate()).slice(-2);
+    var h = ("0" + myDate.getHours()).slice(-2);
+    var m = ("0" + myDate.getMinutes()).slice(-2);
+    var s = ("0" + myDate.getSeconds()).slice(-2);
+    var mi = ("00" + myDate.getMilliseconds()).slice(-3);
+    if (IsMi == true) {
+        return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s;
+    }
+    else {
+        return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s + "." + mi;
+    }
+};
+
+//show seconds
+function showSeconds(thi) {
+    var id = thi.getAttribute("data-id");
+    var trueseconds = Math.floor(thi.duration);
+    var seconds = trueseconds;
+    if (seconds > 90) {
+        seconds = 90;
+    }
+    var fromType = thi.getAttribute("data-value");
+    if (fromType == 2) {
+        $("#VoiceSecond" + id).attr("style", "margin-left: " + seconds + "px;");
+        $("#VoiceSecond" + id).html(trueseconds + "”");
+    }
+    else {
+        $("#replyvoice" + id).attr("style", "margin-left: " + seconds + "px;");
+        $("#replysecond" + id).html(trueseconds + "”");
+    }
+}
+//play audio
+function playAudio(thi) {
+    var dataid = thi.getAttribute("data-id");
+    var fromType = thi.getAttribute("data-value");
+
+    if (fromType == 2) {
+        $("#voicespan" + dataid).removeClass("voice").addClass("playvoice");
+    }
+    else {
+        $("#replyvoice" + dataid).removeClass("replyvoice").addClass("replyplayvoice");
+    }
+    var oAudio = $("#myaudio_" + dataid)[0];
+
+    $("audio").each(function (i, v) {
+        if (v == oAudio) {
+            if (v.paused) {
+                v.play();
+                $(v).closest("article").find("span[id^='voicespan']").removeClass("voice").addClass("playvoice");
+                $(v).closest("article").find("span[id^='replyvoice']").removeClass("replyvoice").addClass("replyplayvoice");
+
+                v.onended = function () {
+                    $(v).closest("article").find("span[id^='voicespan']").removeClass("playvoice").addClass("voice");
+                    $(v).closest("article").find("span[id^='replyvoice']").removeClass("replyplayvoice").addClass("replyvoice");
+                }
+            } else {
+                v.pause();
+                $(v).closest("article").find("span[id^='voicespan']").removeClass("playvoice").addClass("voice");
+                $(v).closest("article").find("span[id^='replyvoice']").removeClass("replyplayvoice").addClass("replyvoice");
+            }
+        } else {
+            v.pause();
+            v.currentTime = 0;
+            $(v).closest("article").find("span[id^='voicespan']").removeClass("playvoice").addClass("voice");
+            $(v).closest("article").find("span[id^='replyvoice']").removeClass("replyplayvoice").addClass("replyvoice");
+        }
+    });
+}
+
+function hidenface(e) {
+    var facearea = $("#face_area");
+    if (facearea.is(":hidden")) {
+
+    }
+    else {
+        $("#nav_footer").height("48px");
+    }
+    $("#face_area").hide();
+    $("#facetype").hide();
+    var userAgent = navigator.userAgent;
+}

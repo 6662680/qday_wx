@@ -1,0 +1,118 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li><a href="{php echo $this->createWebUrl('entry');}">活动参与方式</a></li>
+    <li><a href="{php echo $this->createWebUrl('activity');}">红包活动选项</a></li>
+    <li class="active"><a href="{php echo $this->createWebUrl('records');}">红包发放记录</a></li>
+    <li><a href="{php echo $this->createWebUrl('api');}">接口参数</a></li>
+</ul>
+<div class="clearfix">
+    <div class="panel panel-info">
+        <div class="panel-heading">筛选</div>
+        <div class="panel-body">
+            <form action="" method="get" class="form-horizontal" role="form">
+                <input type="hidden" name="a" value="entry" />
+                <input type="hidden" name="c" value="site" />
+                <input type="hidden" name="m" value="microb_redpack" />
+                <input type="hidden" name="do" value="records" />
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 control-label">昵称</label>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12">
+                        <input class="form-control" name="nickname" type="text" value="{$_GPC['nickname']}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 control-label">状态</label>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="" {if empty($_GPC['status'])}checked="checked"{/if}> 不限
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="success" {if $_GPC['status']=='success'}checked="checked"{/if}> 发放成功
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="status" value="failed" {if $_GPC['status']=='failed'}checked="checked"{/if}> 未成功
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 control-label"></label>
+                    <div class="col-sm-8 col-md-8 col-lg-8 col-xs-12">
+                        <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            红包领取记录
+        </div>
+        <div class="table-responsive panel-body">
+            <table class="table table-hover">
+                <tr>
+                    <th style="width:90px;"></th>
+                    <th style="width:120px;">昵称</th>
+                    <th>城市</th>
+                    <th style="width:100px;">领取方式</th>
+                    <th style="width:100px;">助力次数</th>
+                    <th style="width:100px;">红包金额</th>
+                    <th style="width:100px;">发放状态</th>
+                    <th style="width:100px;"></th>
+                </tr>
+                {loop $ds $row}
+                <tr>
+                    <td><img src="{$row['avatar']}" alt="" width="64" class="img-rounded" /></td>
+                    <td>{$row['nickname']}</td>
+                    <td>{$row['state']}/{$row['city']}</td>
+                    <td>
+                        {if empty($row['id'])}
+                            <span class="label label-default">未领取</span>
+                        {else}
+                            {if $row['type'] == 'direct'}
+                                <span class="label label-success">直接领取</span>
+                            {else}
+                                <span class="label label-info">分享领取</span>
+                            {/if}
+                        {/if}
+                    </td>
+                    <td>
+                        {$row['helps']}
+                    </td>
+                    <td>{$row['fee']}</td>
+                    <td>
+                        {if $row['send'] == 'success'}
+                        <span class="label label-success">发放成功</span>
+                        {else}
+                        <abbr title="{$row['send']}"><span class="label label-danger">查看详情</span></abbr>
+                        {/if}
+                    </td>
+                    <td>
+                        {if $row['send'] != 'success'}
+                        <a class="btn btn-default btn-sm" href="javascript:;" onclick="doSend('{$row["uid"]}');">再次发放</a>
+                        {/if}
+                    </td>
+                </tr>
+                {/loop}
+            </table>
+        </div>
+        <div class="panel-body text-right">
+            {$pager}
+        </div>
+        <script>
+            function doSend(uid) {
+                require(['jquery', 'util'], function($, u){
+                    var pars = {};
+                    pars.uid = uid;
+                    $.post('{php echo $this->createWebUrl("send")}', pars).success(function(dat){
+                        if(dat == 'success') {
+                            u.message('发放成功', location.href);
+                        } else {
+                            u.message(dat);
+                        }
+                    });
+                });
+            }
+        </script>
+    </div>
+</div>
+{template 'common/footer'}

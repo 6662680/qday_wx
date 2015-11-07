@@ -1,0 +1,379 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li><a href="{php echo $this->createWebUrl('entry');}">活动参与方式</a></li>
+    <li><a href="{php echo $this->createWebUrl('activity');}">活动管理</a></li>
+    {if empty($activity['actid'])}
+    <li class="active"><a href="{php echo $this->createWebUrl('activity', array('foo'=>'create'));}">新增活动</a></li>
+    {else}
+    <li class="active"><a href="{php echo $this->createWebUrl('activity', array('foo'=>'modify', 'id'=>$activity['actid']));}">编辑活动</a></li>
+    {/if}
+    <li><a href="{php echo $this->createWebUrl('gifts');}">礼品设置</a></li>
+    <li><a href="{php echo $this->createWebUrl('devices')}">设备管理</a> </li>
+    <li><a href="{php echo $this->createWebUrl('api');}">接口参数</a></li>
+</ul>
+<script>
+    require(['bootstrap', 'angular', 'util', 'underscore'], function($, angular, u, _){
+        $(function(){
+            var itemSet = {};
+            angular.module('app', []).controller('formPanel', function($scope, $http) {
+                $scope.type = "{$activity['type']}";
+                $scope.gifts = {php echo json_encode($activity['gifts'])};
+                $scope.sumItem = function(column) {
+                    var total = 0;
+                    angular.forEach($scope.gifts, function(val, key){
+                        total += parseFloat(val[column]);
+                    });
+                    return total;
+                }
+                $scope.addItem = function(entry) {
+                    var exists = false;
+                    angular.forEach($scope.gifts, function(val, key){
+                        if(val.gift == entry.id) {
+                            exists = true;
+                        }
+                    });
+                    if(!exists) {
+                        var gift = {};
+                        gift.gift = entry.id;
+                        gift.title = entry.title;
+                        gift.quantity = 100;
+                        gift.rate = 1;
+                        $scope.gifts.push(gift);
+                    }
+                };
+                $scope.delItem = function(entry) {
+                    $scope.gifts = _.without($scope.gifts, entry);
+                }
+                define.amd = false;
+                require(['{$modulePublic}bootstrap3-typeahead.min.js'], function(){
+                    $('.input-query').typeahead({
+                        source: function(query, process) {
+                            var params = {fuzzy: query};
+                            $http.post('{php echo $this->createWebUrl("gifts", array("foo"=>"search"))}', params).success(function(dat) {
+                                if($.isArray(dat)) {
+                                    var ds = [];
+                                    $.each(dat, function() {
+                                        var row = this;
+                                        itemSet[row.id] = row;
+                                        var exists = false;
+                                        angular.forEach($scope.gifts, function(val, key){
+                                            if(val.gift == row.id) {
+                                                exists = true;
+                                            }
+                                        });
+                                        if(!exists) {
+                                            var str = row.title;
+                                            if(row.type == 'cash') {
+                                                str += ' &nbsp; <span data-id="' + row.id + '" class="pull-right label label-danger">现金红包</span>';
+                                            }
+                                            if(row.type == 'coupon') {
+                                                str += ' &nbsp; <span data-id="' + row.id + '" class="pull-right label label-success">消费券</span>';
+                                            }
+                                            ds.push(str);
+                                        }
+                                    });
+                                    process(ds);
+                                }
+                            });
+                        },
+                        items: 10,
+                        updater: function(val) {
+                            var id = $('<div>' + val + '</div>').find('span').attr('data-id');
+                            $scope.$apply(function(){
+                                $scope.addItem(itemSet[id]);
+                            });
+                        },
+                        highlighter: function(item) {
+                            return item;
+                        }
+                    });
+                    define.amd = true;
+                });
+                $scope.submit = function() {
+                    var message = '';
+                    if($.trim($(':text[name=title]').val()) == '' || $.trim($(':text[name=title]').val()).length > 6) {
+                        message += '必须输入活动名称, 且不能超过6个汉字 <br>';
+                    }
+                    if($.trim($(':text[name=guide]').val()) == '') {
+                        message += '必须输入活动引导素材 <br>';
+                    }
+                    if($.trim($(':text[name=sorry]').val()) == '') {
+                        message += '必须输入未中奖跳转页面 <br>';
+                    }
+                    if($.trim($(':text[name="shake[description]"]').val()) == '' || $.trim($(':text[name="shake[description]"]').val()).length > 7) {
+                        message += '必须输入摇一摇页面副标题,  并且不能超过7个字<br>';
+                    }
+                    if($.trim($(':text[name="shake[image]"]').val()) == '') {
+                        message += '必须输入摇一摇页面图标 <br>';
+                    }
+                    if($.trim($(':text[name="shake[comment]"]').val()).length > 15) {
+                        message += '摇一摇页面备注不能超过15个字 <br>';
+                    }
+                    if($scope.gifts.length == 0) {
+                        message += '必须设置活动礼品 <br>';
+                    }
+                    if($scope.sumItem('rate') > 100) {
+                        message += '总中奖概率不能超过100% <br>';
+                    }
+                    if(message) {
+                        u.message(message);
+                    } else {
+                        $('#theform')[0].submit();
+                    }
+                };
+            });
+            angular.bootstrap(document, ['app']);
+        });
+    }); 
+</script>
+<div class="clearfix">
+    <form id="theform" class="form form-horizontal ng-cloak" action="" method="post" ng-controller="formPanel">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                活动基本信息
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">活动名称</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" name="title" value="{$activity['title']}"/>
+                        <div class="help-block">
+                            这种活动的名称, 方便下次识别, 例如: 元宵节大派送
+                        </div>
+                    </div>
+                </div>
+                {if empty($activity['actid'])}
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动形式</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="type" value="direct" ng-model="type"> 现场礼品
+                        </label>
+                        <span class="help-block"><strong>创建活动后不可更改活动形式</strong></span>
+                        <span class="help-block">现场礼品, 粉丝到达摇一摇设备的现场可以通过摇一摇摇到礼品, 不在现场无法领取</span>
+                    </div>
+                </div>
+                {else}
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <p class="form-control-static">
+                            {if $activity['type'] == 'direct'}现场礼品{/if}
+                        </p>
+                        <input name="type" type="hidden" value="{$activity['type']}" />
+                    </div>
+                </div>
+                {/if}
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动时间</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_daterange('time', $time, true)}
+                        <span class="help-block">活动的时间范围, 其他时间活动将不生效</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动规则说明</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <textarea style="height:150px;" class="richtext-clone" name="rules">{$activity['rules']}</textarea>
+                        <span class="help-block">详细说明活动参与规则</span>
+                    </div>
+                    <script type="text/javascript">
+                        require(['jquery', 'util'],function($, util){
+                            window.editor = util.editor($('.richtext-clone')[0]);
+                        })
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">图文消息素材</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="guide" class="form-control" value="{$activity['guide']}">
+                        <span class="help-block">本次活动的图文素材, 用于引导关注. 请在微信公众平台中编辑的单条图文消息来介绍本次活动, 用于引导粉丝快速关注</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">未中奖跳转页</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="sorry" class="form-control" value="{$activity['sorry']}">
+                        <span class="help-block">根据活动形式不同, 未中奖时将显示未中奖的提示(将有跳转链接的按钮来方式)或直接跳转至未中奖页</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动主页背景图片</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('banner', $activity['banner'])}
+                        <span class="help-block">建议尺寸为360*200</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-show="type == 'direct'">
+            <div class="panel-heading">
+                现场礼品设置参数
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">每人每天可参与次数</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="direct[daily]" value="{$direct['daily']}" class="form-control">
+                        <span class="help-block">每个粉丝每天可到达现场参与活动的次数. <strong>注意: 不设置即为不限制(请谨慎设置这个模式), 未中奖也算参与一次</strong></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">总计可参与次数</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="direct[total]" value="{$direct['total']}" class="form-control">
+                        <span class="help-block">每个粉丝在这次活动中总计可参与活动的次数. <strong>注意: 不设置即为不限制, 未中奖也算参与一次</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default hide">
+            <div class="panel-heading">
+                活动限制(下列各项为空不限制)
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">限制必须粉丝参与</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <span class="help-block">设置必须粉丝才能参与活动, 还是非粉丝也可以</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动性别限制</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="limit[gender]" class="form-control" value="{$activity['limit']['gender']}">
+                        <span class="help-block">设置为男或女, 不设置为不限制性别;</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">限制有头像的粉丝</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <span class="help-block">没有设置头像的粉丝不能参与活动, 可以保证高质量粉丝;</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">限制有地区的粉丝</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <span class="help-block">没有设置个人位置的粉丝不能参与活动, 可以保证高质量粉丝;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                活动分享设置
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享的图片</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('share[image]', $activity['share']['image'])}
+                        <span class="help-block">建议尺寸为200*200</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享的标题</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="share[title]" class="form-control" value="{$activity['share']['title']}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享文案</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <textarea name="share[content]" class="form-control" rows="5">{$activity['share']['content']}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                摇一摇页面设置
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">页面图标</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('shake[image]', $activity['shake']['image'])}
+                        <span class="help-block">建议尺寸为120*120</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">页面副标题</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="shake[description]" class="form-control" value="{$activity['shake']['description']}">
+                        <span class="help-block">不要超过7个字</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">页面备注</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <textarea name="shake[comment]" class="form-control" rows="5">{$activity['shake']['comment']}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                活动礼品信息
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">礼品列表</label>
+                    <div class="col-sm-10">
+                        <div class="table-responsive">
+                            <table class="table table-striped" style="width:auto;">
+                                <tr>
+                                    <th style="width:120px;">礼品名称</th>
+                                    <th class="text-center" style="width:120px;">本次发放数量</th>
+                                    <th class="text-center" style="width:120px;">领取几率</th>
+                                    <th style="width:150px;"></th>
+                                </tr>
+                                <tr ng-repeat="row in gifts">
+                                    <td><p class="form-control-static">{{row.title}}</p></td>
+                                    <td class="text-center">
+                                        <input name="gifts[quantity][]" class="form-control text-right" type="text" ng-model="row.quantity" />
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input name="gifts[rate][]" class="form-control text-right" type="text" ng-model="row.rate" />
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-default btn-sm" href="javascript:;" ng-click="delItem(row);">删除</a>
+                                        <input name="gifts[id][]" type="hidden" value="{{row.gift}}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-right">
+                                        <strong>总计数量: {{sumItem('quantity')}}</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong>总中奖率: {{sumItem('rate')}}%</strong>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><input class="form-control input-query" type="text"></td>
+                                    <td colspan="4"><p class="form-control-static">输入礼品名称来添加礼品</p></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="alert alert-info">
+                            这里设置这次活动的所有奖品, 最终活动界面将显示所有礼品的数量总和 <br>
+                            中奖率为每个粉丝礼品抽中的概率, 总概率不能超过100%
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input type="button" value="保存" class="btn btn-primary btn-block" ng-click="submit();" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{template 'common/footer'}

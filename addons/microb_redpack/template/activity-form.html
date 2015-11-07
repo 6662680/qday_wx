@@ -1,0 +1,415 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li><a href="{php echo $this->createWebUrl('entry');}">活动参与方式</a></li>
+    <li><a href="{php echo $this->createWebUrl('activity');}">活动管理</a></li>
+    {if empty($activity['actid'])}
+    <li class="active"><a href="{php echo $this->createWebUrl('activity', array('foo'=>'create'));}">新增活动</a></li>
+    {else}
+    <li class="active"><a href="{php echo $this->createWebUrl('activity', array('foo'=>'modify', 'id'=>$activity['actid']));}">编辑活动</a></li>
+    {/if}
+    <li><a href="{php echo $this->createWebUrl('gifts');}">礼品设置</a></li>
+    <li><a href="{php echo $this->createWebUrl('api');}">接口参数</a></li>
+</ul>
+<script>
+    require(['bootstrap', 'angular', 'util', 'underscore'], function($, angular, u, _){
+        $(function(){
+            var itemSet = {};
+            angular.module('app', []).controller('formPanel', function($scope, $http) {
+                $scope.type = "{$activity['type']}";
+                $scope.gifts = {php echo json_encode($activity['gifts'])};
+                $scope.sumItem = function(column) {
+                    var total = 0;
+                    angular.forEach($scope.gifts, function(val, key){
+                        total += parseFloat(val[column]);
+                    });
+                    return total;
+                }
+                $scope.addItem = function(entry) {
+                    var exists = false;
+                    angular.forEach($scope.gifts, function(val, key){
+                        if(val.gift == entry.id) {
+                            exists = true;
+                        }
+                    });
+                    if(!exists) {
+                        var gift = {};
+                        gift.gift = entry.id;
+                        gift.title = entry.title;
+                        gift.quantity = 100;
+                        gift.rate = 1;
+                        $scope.gifts.push(gift);
+                    }
+                };
+                $scope.delItem = function(entry) {
+                    $scope.gifts = _.without($scope.gifts, entry);
+                }
+
+                define.amd = false;
+                require(['{$modulePublic}bootstrap3-typeahead.min.js'], function(){
+                    $('.input-query').typeahead({
+                        source: function(query, process) {
+                            var params = {fuzzy: query};
+                            $http.post('{php echo $this->createWebUrl("gifts", array("foo"=>"search"))}', params).success(function(dat) {
+                                if($.isArray(dat)) {
+                                    var ds = [];
+                                    $.each(dat, function() {
+                                        var row = this;
+                                        itemSet[row.id] = row;
+
+                                        var exists = false;
+                                        angular.forEach($scope.gifts, function(val, key){
+                                            if(val.gift == row.id) {
+                                                exists = true;
+                                            }
+                                        });
+                                        if(!exists) {
+                                            var str = row.title;
+                                            if(row.type == 'cash') {
+                                                str += ' &nbsp; <span data-id="' + row.id + '" class="pull-right label label-danger">现金红包</span>';
+                                            }
+                                            if(row.type == 'coupon') {
+                                                str += ' &nbsp; <span data-id="' + row.id + '" class="pull-right label label-success">消费券</span>';
+                                            }
+                                            ds.push(str);
+                                        }
+                                    });
+                                    process(ds);
+                                }
+                            });
+                        },
+                        items: 10,
+                        updater: function(val) {
+                            var id = $('<div>' + val + '</div>').find('span').attr('data-id');
+                            $scope.$apply(function(){
+                                $scope.addItem(itemSet[id]);
+                            });
+                        },
+                        highlighter: function(item) {
+                            return item;
+                        }
+                    });
+                });
+    
+                $scope.submit = function() {
+                    var message = '';
+                    if($.trim($(':text[name=title]').val()) == '') {
+                        message += '必须输入活动名称 <br>';
+                    }
+                    if($.trim($(':text[name=guide]').val()) == '') {
+                        message += '必须输入活动引导素材 <br>';
+                    }
+    
+                    //if($scope.gifts.length == 0) {
+                     //   message += '必须设置活动礼品 <br>';
+                   //}
+                   // if($scope.sumItem('rate') > 100) {
+                   //     message += '总中奖概率不能超过100% <br>';
+                   // }
+                    if(message) {
+                        u.message(message);
+                    } else {
+                        $('#theform')[0].submit();
+                    }
+                };
+            });
+            angular.bootstrap(document, ['app']);
+        });
+    }); 
+</script>
+<div class="clearfix">
+    <form id="theform" class="form form-horizontal ng-cloak" action="" method="post" ng-controller="formPanel">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                活动基本信息
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">活动名称</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" name="title" value="{$activity['title']}"/>
+                        <div class="help-block">
+                            这种活动的名称, 方便下次识别, 例如: 元宵节大派送
+                        </div>
+                    </div>
+                </div>
+                {if empty($activity['actid'])}
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动形式</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="type" value="direct" ng-model="type"> 直接送
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="type" value="shared" ng-model="type"> 助力讨礼品
+                        </label>
+                        <label class="radio-inline hide">
+                            <input type="radio" name="type" value="game" ng-model="type"> 礼品游戏
+                        </label>
+                        <label class="radio-inline disabled">
+                            <input type="radio" name="type" disabled="disabled" value="box" ng-model="type"> 开宝箱游戏
+                        </label>
+                        <label class="radio-inline disabled">
+                            <input type="radio" name="type" disabled="disabled" value="dial" ng-model="type"> 大转盘游戏
+                        </label>
+                        <label class="radio-inline disabled">
+                            <input type="radio" name="type" disabled="disabled" value="floor" ng-model="type"> 抢楼游戏
+                        </label>
+                        <span class="help-block"><strong>创建活动后不可更改</strong></span>
+                        <span class="help-block">直接送, 参与活动的粉丝将直接得到发放的礼品. <strong>每个粉丝只能领取一次礼品</strong></span>
+                        <span class="help-block"><strong>助力讨礼品, 粉丝A发送助力主题页给好友(恭喜发财, 红包拿来). 好友收到分享的主题页时可以在页面上向粉丝A助力. 累计助力指定的次数, 粉丝A就能获得礼品</strong></span>
+                        <span class="help-block hide">礼品游戏, 参与活动的粉丝可以使用支付功能购买游戏道具来抽取礼品. <strong>每个粉丝可以多次领取礼品</strong></span>
+                        <span class="help-block"><strong>更多游戏方式欢迎联系开发定制</strong></span>
+                    </div>
+                </div>
+                {else}
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动类型</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <p class="form-control-static">
+                            {if $activity['type'] == 'direct'}直接送{/if}
+                            {if $activity['type'] == 'shared'}助力讨礼品{/if}
+                            {if $activity['type'] == 'game'}礼品游戏{/if}
+                        </p>
+                        <input name="type" type="hidden" value="{$activity['type']}" />
+                    </div>
+                </div>
+                {/if}
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动时间</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_daterange('time', $time, true)}
+                        <span class="help-block">活动的时间范围, 其他时间活动将不能访问</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动规则说明</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <textarea style="height:150px;" class="richtext-clone" name="rules">{$activity['rules']}</textarea>
+                        <span class="help-block">详细说明活动参与规则</span>
+                    </div>
+                    <script type="text/javascript">
+                        require(['jquery', 'util'],function($, util){
+                            window.editor = util.editor($('.richtext-clone')[0]);
+                        })
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">图文消息素材</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="guide" class="form-control" value="{$activity['guide']}">
+                        <span class="help-block">本次活动的图文素材, 用于引导关注. 请在微信公众平台中编辑的单条图文消息来介绍本次活动, 用于引导粉丝快速关注</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动主页背景图片</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('banner', $activity['banner'])}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-show="type == 'game'">
+            <div class="panel-heading">
+                礼品游戏玩法参数
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">游戏道具名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="game[label]" value="{$game['label']}" class="form-control">
+                        <span class="help-block">粉丝要参与礼品游戏, 所需要的游戏道具名称</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">道具价格</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="game[price]" value="{$game['price']}" class="form-control">
+                        <span class="help-block">购买一个游戏道具所需的金额</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">资金池</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="game[pool]" value="{$game['pool']}" class="form-control">
+                        <span class="help-block">本次活动资金池内的总金额</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">结束金额</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="game[threshold]" value="{$game['threshold']}" class="form-control">
+                        <span class="help-block">为保证资金安全, 资金池数额低于这个值时会结束活动</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-show="type == 'shared'">
+            <div class="panel-heading">
+                助力讨礼品玩法参数
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">需要助力次数</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="shared[helps]" value="{$shared['helps']}" class="form-control">
+                        <span class="help-block">粉丝A发送助力主题页给好友. 好友收到分享的主题页时可以在页面上向粉丝A助力. 累计助力指定的次数, 粉丝A就能获得礼品</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">助力进度文字提示</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="shared[progress]" class="form-control" value="{$shared['progress']}">
+                        <span class="help-block">现在就去向好友讨红包. 还需要 &lt;mark&gt;{left}&lt;/mark&gt; 个好友赏脸, 就能领到一个大红包</span>
+                        <span class="help-block">注意: 可以使用{left}来替换当前还需要的助力次数</span>
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">获得红包文字提示</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="shared[got]" class="form-control" value="{$shared['got']}">
+                        <span class="help-block">获得红包时的文字提示. 例如: 辛苦向好友们讨红包. 总算讨到了一个大红包, 马上打开看看吧</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">请求助力文字</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="shared[request]" class="form-control" value="{$shared['request']}">
+                        <span class="help-block">粉丝A向好友请求助力时的文字. 例如: 恭喜发财, 红包拿来</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">助力按钮</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="shared[label]" class="form-control" value="{$shared['label']}">
+                        <span class="help-block">好友助力时显示的文本. 例如: 给TA塞红包, 赏{nickname}俩字儿.  注意: 可以使用{nickname}来替换邀请者的昵称</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">限制助力次数</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="shared[limit]" class="form-control" value="{$shared['limit']}">
+                        <span class="help-block">为了防止作弊, 可以限制每个粉丝只能助力好友的次数. 设置为0为不限制</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                活动限制(下列各项为空不限制)
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动限制区域</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="limit[range]" class="form-control" value="{$activity['limit']['range']}">
+                        <span class="help-block">如果要限制粉丝在特定区域才能领取, 请设置省和市. 设置格式: 省-市;省-市;省, 例如: 山西-太原;山西-运城;北京</span>
+                        <span class="help-block"><strong>省份和城市需要按照微信个人资料中的位置设置. 如果设置错误, 将不能领取</strong></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动性别限制</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="limit[gender]" class="form-control" value="{$activity['limit']['gender']}">
+                        <span class="help-block">设置为男,女;</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动总金额限制</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="limit[amount]" class="form-control" value="{$activity['limit']['amount']}">
+                        <span class="help-block">活动总金额达到设置数量, 将自动结束活动</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                活动分享设置
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享的图片</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('share[image]', $activity['share']['image'])}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享的标题</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="share[title]" class="form-control" value="{$activity['share']['title']}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享文案</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <textarea name="share[content]" class="form-control" rows="5">{$activity['share']['content']}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                活动礼品信息
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">礼品列表</label>
+                    <div class="col-sm-10">
+                        <div class="table-responsive">
+                            <table class="table table-striped" style="width:auto;">
+                                <tr>
+                                    <th style="width:120px;">礼品名称</th>
+                                    <th class="text-center" style="width:120px;">本次发放数量</th>
+                                    <th class="text-center" style="width:120px;">领取几率</th>
+                                    <th style="width:150px;"></th>
+                                </tr>
+                                <tr ng-repeat="row in gifts">
+                                    <td><p class="form-control-static">{{row.title}}</p></td>
+                                    <td class="text-center">
+                                        <input name="gifts[quantity][]" class="form-control text-right" type="text" ng-model="row.quantity" />
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input name="gifts[rate][]" class="form-control text-right" type="text" ng-model="row.rate" />
+                                            <span class="input-group-addon">%</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-default btn-sm" href="javascript:;" ng-click="delItem(row);">删除</a>
+                                        <input name="gifts[id][]" type="hidden" value="{{row.gift}}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-right">
+                                        <strong>总计数量: {{sumItem('quantity')}}</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong>总中奖率: {{sumItem('rate')}}%</strong>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center"><input class="form-control input-query" type="text"></td>
+                                    <td colspan="4"><p class="form-control-static">输入礼品名称来添加礼品</p></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="alert alert-info">
+                            这里设置这次活动的所有奖品, 最终活动界面将显示所有礼品的数量总和 <br>
+                            中奖率为每个粉丝礼品抽中的概率, 总概率不能超过100%
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-md-2 col-lg-1">
+                        <input type="button" value="保存" class="btn btn-primary btn-block" ng-click="submit();" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{template 'common/footer'}

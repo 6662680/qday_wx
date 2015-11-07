@@ -1,0 +1,278 @@
+<style>
+    body{{if !empty($forceSubscribe)}display:none;{/if}background-color:#e8a32e;}
+    .container.container-fill{width:100%;height:100%;position:absolute;}
+    a.btn:visited,a.btn:active,a.btn:hover{color:#fff;}
+    .dia{display:none;}
+    .dia-cover{position:fixed;top:0;left:0;right:0;bottom:0;z-index:5;background-color:#000;opacity:0.7;}
+    
+    .message-dialog .dia-cover{background-color:#fff;opacity:0.3;}
+    .message-dialog .dia-close{position:absolute;top:0;right:0;z-index:30;width:15%;height:20%;background-image:url({$modulePublic}img/close.png);background-repeat:no-repeat;background-size:100% 100%;}
+    .message-dialog .dia-content{position:absolute;top:20%;left:5%;right:5%;bottom:40%;z-index:29;color:#666;background-image:url({$modulePublic}img/scroll.png);background-repeat:no-repeat;background-size:100% 100%;}
+    .message-dialog .content{margin:15% 5% 10% 5%;}
+    
+    .rules-dialog .dia-cover{background-color:#fff;opacity:0.3;}
+    .rules-dialog .dia-close{position:absolute;top:0;right:0;z-index:22;width:15%;height:10%;background-image:url({$modulePublic}img/close.png);background-repeat:no-repeat;background-size:100% 100%;}
+    .rules-dialog .dia-content{position:absolute;top:20%;left:5%;right:5%;bottom:1%;z-index:21;color:#666;background-image:url({$modulePublic}img/scroll.png);background-repeat:no-repeat;background-size:100% 100%;}
+
+    .profile-dialog .dia-cover{background-color:#fff;opacity:0.3;}
+    .profile-dialog .dia-close{position:absolute;top:0;right:0;z-index:22;width:15%;height:12%;background-image:url({$modulePublic}img/close.png);background-repeat:no-repeat;background-size:100% 100%;}
+    .profile-dialog .dia-content{position:absolute;top:20%;left:10%;right:10%;bottom:1%;padding:15% 10%;z-index:21;color:#666;background-image:url({$modulePublic}img/scroll.png);background-repeat:no-repeat;background-size:100% 100%;}
+
+    .subscribe-dialog .dia-cover{background-color:#fff;opacity:0.3;}
+    .subscribe-dialog .dia-content{position:absolute;top:30%;left:10%;right:10%;bottom:30%;padding:15% 10%;z-index:21;color:#666;background-image:url({$modulePublic}img/scroll.png);background-repeat:no-repeat;background-size:100% 100%;}
+    .input-group-btn .btn{font-size:14px;}
+
+    .stage{background-color:#e7a32d;{if !empty($activity['banner'])}background-image:url({php echo tomedia($activity['banner'])});{else}background-image:url({$modulePublic}img/bg.jpg);{/if}background-size:100% 100%;position:absolute;top:0;bottom:0;left:0;right:0;}
+    .widget{position:absolute;left:0;right:0}
+
+    .bg{background-size:100% auto;background-repeat:no-repeat;background-image:url({$modulePublic}img/pack.png);top:12%;left:10%;right:10%;bottom:0;}
+    .bg h5, .bg h4{line-height:1.5em;color:#fff;}
+    .bg small{line-height:1.5rem;color:#ccc;}
+
+    .btns{bottom:1%;left:10%;right:10%}
+    .btn, .list-group-item{font-size:1.2em;}
+    .btn-danger{background-color:#ed3c19;}
+
+    .tips{position:absolute;top:20%;margin:auto 50px;}
+    .tips h5{color:#ec971f;}
+    @media screen and (max-height: 480px){
+        .form-group{margin-bottom:10px;}
+        .btn{font-size:1em;}
+    }
+</style>
+<script>
+    function message(msg) {
+        require(['jquery'], function($){
+            $('.message-dialog .dia-content').removeClass('fadeOutDownBig').addClass('fadeInUpBig');
+            $('.message-dialog .content').html(msg);
+            $('.message-dialog').show();
+        })
+    }
+    function shareDialog() {
+        require(['jquery'], function($){
+            $('.share-dialog').show();
+        })
+    }
+    function rulesDialog(actid) {
+        require(['jquery'], function($){
+            $('.rules-dialog .dia-content').removeClass('fadeOutDownBig').addClass('fadeInUpBig');
+            var pars = {};
+            pars.actid = actid;
+            $.post('{php echo $this->createMobileUrl("rules")}', pars).success(function(dat){
+                $('.rules-dialog .dia-content .content').html(dat);
+                $('.rules-dialog').show();
+            });
+        })
+    }
+    function profileDialog(callback) {
+        require(['jquery'], function($) {
+            $.get('{php echo $this->createMobileUrl("my", array("foo"=>"profile"))}').success(function(dat){
+                if(dat != 'success') {
+                    $('.profile-dialog .dia-content').removeClass('fadeOutDownBig').addClass('fadeInUpBig');
+                    $('.profile-dialog').show();
+                    window.__profileCallback = function(){
+                        $('.profile-dialog .dia-content').removeClass('fadeInUpBig').addClass('fadeOutDownBig');
+                        setTimeout(function() {
+                            $('.profile-dialog .dia-content').parent().hide();
+                            callback();
+                        }, 500);
+                    }
+                } else {
+                    callback();
+                }
+            });
+        });
+    }
+    function doProfileSendCode(o) {
+        require(['jquery'], function($){
+            $(o).attr('disabled', true).html('发送中');
+            var pars = {};
+            pars.phone = $.trim($('#phone').val());
+            var msg = '';
+            if(pars.phone == '' || !(/^1\d{10}$/).test(pars.phone)) {
+                msg += '请输入有效的手机号码<br>';
+            }
+            if(msg) {
+                message(msg);
+                return;
+            }
+            $.post('{php echo $this->createMobileUrl("code")}', pars).success(function(dat){
+                if(dat > 0) {
+                    var t = 60;
+                    $(o).attr('disabled', true).html(t + '秒');
+                    window.timer = window.setTimeout(function() {
+                        doResetSendBtn(o, t);
+                    }, 1000);
+                } else {
+                    $(o).attr('disabled', false).html('重新发送');
+                }
+            });
+        });
+    }
+
+    //发送短信按钮倒计时
+    function doResetSendBtn(o,t){
+        if(t != 0){
+            t--;
+            $(o).html(t + '秒');
+            window.timer = window.setTimeout(function() {doResetSendBtn(o, t);}, 1000);
+        } else {
+            $(o).attr('disabled', false).html('重新发送');
+            clearTimeout(window.timer);
+        }
+    }
+
+    function doProfile() {
+        require(['jquery'], function($){
+            var pars = {};
+            pars.name = $.trim($('#name').val());
+            pars.phone = $.trim($('#phone').val());
+            pars.code = $.trim($('#code').val());
+            var msg = '';
+            if(pars.name == '') {
+                msg += '请输入姓名<br>';
+            }
+            if(pars.phone == '' || !(/^1\d{10}$/).test(pars.phone)) {
+                msg += '请输入有效的手机号码<br>';
+            }
+            if(pars.code == '' || !(/^\d{6}$/).test(pars.code)) {
+                msg += '请输入有效的手机验证码<br>';
+            }
+            if(msg) {
+                message('请正确填写资料才能继续:<br>' + msg);
+                return;
+            }
+            $.post('{php echo $this->createMobileUrl("my", array("foo"=>"profile"))}', pars).success(function(dat){
+                if(dat == 'success') {
+                    window.__profileCallback();
+                } else {
+                    message(dat);
+                }
+            });
+        });
+    }
+
+    function doSlider() {
+        require(['jquery'], function($){
+            var step = $('.slider ul').height() / $('.slider li').length;
+            var pos = parseInt($('.slider ul').css('top'));
+            if(isNaN(pos)) {
+                pos = 0;
+            }
+            pos -= step;
+            if($('.slider ul').height() + pos < step) {
+                pos = 0;
+            }
+            $('.slider ul').animate({top:pos + 'px'}, 1000);
+            setTimeout(function(){
+                doSlider();
+            }, 2000);
+        });
+    }
+    $(function(){
+        $('.share-dialog .dia-cover,.message-dialog .dia-cover').click(function(){
+            var o = $(this).parent();
+            $(this).next().removeClass('fadeInUpBig').addClass('fadeOutDownBig');
+            setTimeout(function() {
+                o.hide();
+            }, 500);
+        });
+        $('.dia-content .dia-close').click(function(){
+            var o = $(this).parent();
+            o.removeClass('fadeInUpBig').addClass('fadeOutDownBig');
+            setTimeout(function() {
+                o.parent().hide();
+            }, 500);
+        });
+        $('.container-fill').height($(document).height());
+        {if !empty($forceSubscribe)}
+        $.post('{php echo $this->createMobileUrl("check")}').success(function(dat){
+            if(dat == 'failed') {
+                $('.subscribe-dialog').removeClass('dia');
+            }
+            $('body').show();
+        });
+        {/if}
+        doSlider();
+    });
+</script>
+{if !empty($recents)}
+<div class="slider widget text-center" style="z-index:22;color:#333;height:1.5em;margin:.1em auto;overflow:hidden;">
+    <ul class="list-unstyled" style="position:relative;">
+        {loop $recents $recent}
+        <li>{$recent['nickname']} 刚刚领取了 {$recent['fee']} 元红包</li>
+        {/loop}
+    </ul>
+</div>
+{/if}
+<div class="share-dialog dia">
+    <div class="dia-cover"></div>
+    <div class="dialog-content">
+        <h4 style="line-height:1.5em;">你可以发送给你的好友, 或者分享到群聊天. 给他们拜年讨红包</h4>
+    </div>
+</div>
+<div class="rules-dialog dia">
+    <div class="dia-cover"></div>
+    <div class="dia-content animated fadeInUpBig">
+        <div class="dia-close"></div>
+        <div style="overflow-x:hidden;overflow-y:auto;position:absolute;top:10%;left:10%;right:10%;bottom:10%;">
+            <div class="content"></div>
+        </div>
+    </div>
+</div>
+
+{if !empty($forceSubscribe)}
+<div class="subscribe-dialog dia">
+    <div class="dia-cover"></div>
+    <div class="dia-content animated fadeInUpBig">
+        <h4>还没有关注我们, 需要关注我们才能参加活动</h4>
+        <div class="form" style="margin-top:20%;">
+            <div class="form-group">
+                <a class="btn btn-warning btn-block" href="{$activity['guide']}">马上去关注</a>
+            </div>
+        </div>
+    </div>
+</div>
+{/if}
+        
+<div class="message-dialog dia">
+    <div class="dia-cover"></div>
+    <div class="dia-content animated fadeInUpBig">
+        <div class="dia-close"></div>
+        <div style="overflow-x:hidden;overflow-y:auto;position:absolute;top:10%;left:10%;right:10%;bottom:10%;">
+            <div class="content">
+                最新的消息是什么情况, 最新的消息是什么情况, 最新的消息是什么情况, 最新的消息是什么情况 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="profile-dialog dia">
+    <div class="dia-cover"></div>
+    <div class="dia-content animated fadeInUpBig">
+        <div class="dia-close"></div>
+        <div class="form">
+            <div class="form-group">
+                <label>请输入您的姓名</label>
+                <input type="text" class="form-control" id="name" placeholder="输入姓名领取红包" value="{$profile['name']['value']}">
+            </div>
+            <div class="form-group">
+                <label>请输入您的手机号码</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="phone" placeholder="" value="{$profile['phone']['value']}">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" onclick="doProfileSendCode(this);">获取验证码</button>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>请输入手机验证码</label>
+                <input type="text" class="form-control" id="code" placeholder="输入手机验证码领取红包">
+            </div>
+            <div>
+                <button class="btn btn-warning btn-block" onclick="doProfile();">确定继续</button>
+            </div>
+        </div>
+    </div>
+</div>
+

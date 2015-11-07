@@ -1,0 +1,119 @@
+{template 'common/header3'}
+
+<div class="main">
+
+ 
+
+    <form action="" method="post" class="form-horizontal form">
+
+        <h4>页面设置</h4>
+
+        <table class="tb">
+
+            <tr>
+
+                <th>网页标题</th>
+
+                <td>
+
+                    <input type="text" name="title" class="span5" value="{php echo $reply['title']}" />
+
+                </td>
+
+            </tr>
+
+            
+
+        </table>
+
+        <h4>分享设置</h4>
+
+		<table>
+
+				<tbody>
+
+				<th>分享标题：</th>
+
+				<td>
+
+					<input type="text" id="share_title" class="span7" placeholder="" name="share_title" value="{$reply['share_title']}">
+
+					<div class="help-block">分享的文字，用户显示分享给用户的介绍!</div>
+
+				</td>
+
+				</tr>
+
+				<tr>
+
+					<th>分享描述：</th>
+
+					<td>
+
+						<textarea style="height:60px;" name="share_desc" class="span7" cols="60">{$reply['share_desc']}</textarea>
+
+					</td>
+
+				</tr>
+
+				<th>分享地址：</th>
+
+				<td>
+
+					<input type="text" id="share_url" class="span7" placeholder="" name="share_url" value="{$reply['share_url']}">
+
+					<div class="help-block">分享的链接! 推荐用微信平台的素材库，转成短地址。<a target="_blank" href="http://www.dwz.cn/">短网址转换</a></div>
+
+				</td>
+
+				</tr>
+
+				<tr>
+
+				<th>分享说明：</th>
+
+				<td>
+
+					<textarea style="height:200px; width:100%;" id='share_txt' class="span7 richtext-clone" name="share_txt" cols="70">{$reply['share_txt']}</textarea>
+
+					<span class="help-block">如分享地址为空，则显示这里文字，分享后用户需关注公共号,才可以参加活动! </span>
+
+				</td>
+
+				</tr>
+
+				<tr>
+
+				<th>版权信息</th>
+
+				<td>
+
+					<textarea style="height:200px; width:100%;" id='share_txt' class="span7 richtext-clone" name="copyright" cols="70">{$reply['copyright']}</textarea>
+
+				</td>
+
+				</tr>
+
+				<tr>
+
+                <th></th>
+
+                <td>
+
+                    <input name="submit" type="submit" value="提交" class="btn btn-primary span3" />
+
+                    <input type="hidden" name="token" value="{$_W['token']}" />
+
+                </td>
+
+            </tr>
+
+		</table>
+
+
+
+    </form>
+
+</div>
+
+{template 'common/footer'}

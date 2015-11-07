@@ -1,0 +1,47 @@
+{template 'common/header'}
+{template 'common'}
+<div class="stage"></div>
+<div class="widget bg">
+    <div style="margin:30% 15% 0 15%;">
+        {if $help['isok']}
+            <h5 class="text-center">
+                您的好友 <mark>{$owner['nickname']}</mark> 正在玩讨红包的游戏. 向好友讨红包, 好友赏脸, 即可收到大红包, 已经有 <mark>{$help['total']}</mark> 位好友打赏TA红包, TA已经成功领取了一个红包. 赶快一起来玩吧
+            </h5>
+        {else}
+            <h5 class="text-left">
+                {$activity['tag']['request']}
+            </h5>
+            {if empty($help['rank'])}
+            <div class="text-center">
+                <a class="btn btn-warning" href="javascript:;" onclick="doHelp()">{$activity['tag']['label']}</a>
+            </div>
+            {else}
+            <h5 class="text-left">
+                您已经打赏过TA, 您是第 <mark>{php echo $help['rank']}</mark> 位打赏他的好友
+            </h5>
+            {/if}
+        {/if}
+    </div>
+</div>
+<div class="widget btns">
+    <div class="form-group">
+        <a class="btn btn-warning btn-block" href="{$activity['guide']}">我也要领红包</a>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-link btn-block text-right" onclick="rulesDialog('{$activity["actid"]}');">查看活动说明</button>
+    </div>
+</div>
+<script>
+    function doHelp() {
+        require(['jquery'], function($){
+            $.post(location.href).success(function(dat){
+                if(dat == 'success') {
+                    location.reload();
+                } else {
+                    message(dat);
+                }
+            });
+        });
+    }
+</script>
+{template 'common/footer'}

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <title>{$title}</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="{TEMPLATE_PATH}css/ionic.css">
+    <script src="{TEMPLATE_PATH}js/ionic.bundle.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script type="text/javascript">
+  if(navigator.appName == 'Microsoft Internet Explorer'){
+    if(navigator.userAgent.indexOf("MSIE 5.0")>0 || navigator.userAgent.indexOf("MSIE 6.0")>0 || navigator.userAgent.indexOf("MSIE 7.0")>0) {
+      alert('您使用的 IE 浏览器版本过低, 推荐使用 Chrome 浏览器或 IE8 及以上版本浏览器.');
+    }
+  }
+  {php define('HEADER', true);}
+  var root_path = '{php echo $_W['siteroot']}';
+  window.sysinfo = {
+{if !empty($_W['uniacid'])}
+    'uniacid': '{$_W['uniacid']}',
+{/if}
+{if !empty($_W['acid'])}
+    'acid': '{$_W['acid']}',
+{/if}
+{if !empty($_W['openid'])}
+    'openid': '{$_W['openid']}',
+{/if}
+{if !empty($_W['uid'])}
+    'uid': '{$_W['uid']}',
+{/if}
+    'siteroot': '{$_W['siteroot']}',
+    'siteurl': '{$_W['siteurl']}',
+    'attachurl': '{$_W['attachurl']}',
+{if defined('MODULE_URL')}
+    'MODULE_URL': '{MODULE_URL}',
+{/if}
+    'cookie' : {'pre': '{$_W['config']['cookie']['pre']}'}
+  };
+  
+  // jssdk config 对象
+  jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || {};
+  
+  // 是否启用调试
+  jssdkconfig.debug = false;
+  
+  jssdkconfig.jsApiList = [
+    'checkJsApi',
+    'onMenuShareTimeline',
+    'onMenuShareAppMessage',
+    'onMenuShareQQ',
+    'onMenuShareWeibo',
+    'hideMenuItems',
+    'showMenuItems',
+    'hideAllNonBaseMenuItem',
+    'showAllNonBaseMenuItem',
+    'translateVoice',
+    'startRecord',
+    'stopRecord',
+    'onRecordEnd',
+    'playVoice',
+    'pauseVoice',
+    'stopVoice',
+    'uploadVoice',
+    'downloadVoice',
+    'chooseImage',
+    'previewImage',
+    'uploadImage',
+    'downloadImage',
+    'getNetworkType',
+    'openLocation',
+    'getLocation',
+    'hideOptionMenu',
+    'showOptionMenu',
+    'closeWindow',
+    'scanQRCode',
+    'chooseWXPay',
+    'openProductSpecificView',
+    'addCard',
+    'chooseCard',
+    'openCard'
+  ];
+  
+  </script>
+
+  <?php
+  $_share['title'] = !empty($_share['title']) ? $_share['title'] : $_W['account']['name'];
+  $_share['imgUrl'] = !empty($_share['imgUrl']) ? $_share['imgUrl'] : '';
+  if(isset($_share['content'])){
+    $_share['desc'] = $_share['content'];
+    unset($_share['content']);
+  }
+  $_share['desc'] = !empty($_share['desc']) ? $_share['desc'] : '';
+  $_share['desc'] = preg_replace('/\s/i', '', str_replace(' ', '', cutstr(str_replace('&nbsp;', '', ihtmlspecialchars(strip_tags($_share['desc']))), 60)));
+  if(empty($_share['link'])) {
+    $_share['link'] = '';
+    $query_string = $_SERVER['QUERY_STRING'];
+    if(!empty($query_string)) {
+      //加上分享人的uid
+      parse_str($query_string, $query_arr);
+      $query_arr['u'] = $_W['member']['uid'];
+      $query_string = http_build_query($query_arr);
+      $_share['link'] = $_W['siteroot'].'app/index.php?'. $query_string;
+    }
+  }
+?>
+  <script type="text/javascript">
+  
+  wx.config(jssdkconfig);
+  
+  var $_share = {php echo json_encode($_share);};
+  
+  if(typeof sharedata == 'undefined'){
+    sharedata = $_share;
+  } else {
+    sharedata['title'] = sharedata['title'] || $_share['title'];
+    sharedata['desc'] = sharedata['desc'] || $_share['desc'];
+    sharedata['link'] = sharedata['link'] || $_share['link'];
+    sharedata['imgUrl'] = sharedata['imgUrl'] || $_share['imgUrl'];
+  }
+
+  function tomedia(src) {
+    if(typeof src != 'string')
+      return '';
+    if(src.indexOf('http://') == 0 || src.indexOf('https://') == 0) {
+      return src;
+    } else if(src.indexOf('../addons') == 0 || src.indexOf('../attachment') == 0) {
+      src=src.substr(3);
+      return window.sysinfo.siteroot + src;
+    } else if(src.indexOf('./resource') == 0) {
+      src=src.substr(2);
+      return window.sysinfo.siteroot + 'app/' + src;
+    } else if(src.indexOf('images/') == 0) {
+      return window.sysinfo.attachurl+ src;
+    }
+  }
+
+  wx.ready(function () {
+    wx.onMenuShareAppMessage(sharedata);
+    wx.onMenuShareTimeline(sharedata);
+    wx.onMenuShareQQ(sharedata);
+    wx.onMenuShareWeibo(sharedata);
+  });
+  // {if $controller == 'site' && $action == 'site'}
+  //   $('#category_show').click(function(){
+  //     $('.head .order').toggleClass('hide');
+  //     return false;
+  //   });
+  //   //文章点击和分享加积分
+  //   {if !empty($_GPC['u'])}
+  //     var url = "{php echo url('site/site/handsel/', array('id' => $detail['id'], 'action' => 'click', 'u' => $_GPC['u']), true);}";
+  //     $.post(url, function(dat){});
+  //   {/if}
+  //   sharedata.success = function(){
+  //     var url = "{php echo url('site/site/handsel/', array('id' => $detail['id'], 'action' => 'share'));}";
+  //     $.post(url, function(dat){});
+  //   }
+  // {/if}
+
+    </script>
+    <style>
+  .content {
+    border-color: #e42012;
+    background-color: #ef473a;
+    background-image: linear-gradient(0deg, #e42012, #e42012 50%, transparent 50%);
+    color: #fff;
+  }
+  
+  .home_header{
+    padding:1em;
+  }
+
+  .menu-content {
+    -webkit-transform: none;
+    transform: none;
+    box-shadow: -1px 0px 2px rgba(0, 0, 0, 0.2), 1px 0px 2px rgba(0, 0, 0, 0.2);
+    background-image:url('{php echo $user['bg_img']}');
+    background-size:cover;
+  }
+  .home_header img{
+      width: 5em;
+      border-radius: 2.5em;
+      margin: 0 auto;
+      display: block;
+  }
+
+  .home_header span{
+      text-align: center;
+      display: block;
+      margin-top: 1em;
+      font-size: 1.2em;
+      color:#000;
+  }
+
+  .home_header .group{
+    padding-top: 0.4em;
+    border-color: #073391;
+    background-color: {php echo $setting['mainColor']};
+    color: #fff;
+    width: 6em;
+    height: 2em;
+    border-radius: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5em;
+
+  }
+  .bar.bar-positive .title {
+    color: #fff;
+    text-align:center;
+  }
+
+  .home_header a{
+    text-decoration: none;
+    color:#fff;
+  }
+
+  .home_header .left{
+      float: left;
+      width: 49.9%;
+      border-color: #073391;
+      background-color: {php echo $setting['mainColor']};
+      color: #fff;
+      height: 2em;
+      margin-right: 0.1%;
+  }
+  .home_header .right{
+        float: right;
+        width: 49.9%;
+        border-color: #073391;
+        background-color: {php echo $setting['mainColor']};
+        height: 2em;
+        padding: 0.4em;
+        color: #fff;
+        margin-left: 0.1%;
+  }
+  .home_header p{
+    padding-top: 0.5em;
+    color: #fff;
+  }
+
+  .home_header .img_left{
+      float: left;
+      margin-top: -3em;
+      margin-left: 1em;
+      border-color: {php echo $setting['mainColor']};
+      background-color: {php echo $setting['mainColor']};
+      color: #fff;
+      width: 6em;
+      height: 2.2em;
+      padding: 0.4em 0em;
+      border-radius: 1em;
+  }
+
+  .home_header .img_right{
+      float: right;
+      margin-top: -3em;
+      margin-right: 1em;
+      color: #fff;
+      border-color: {php echo $setting['mainColor']};
+      background-color: {php echo $setting['mainColor']};
+      width: 5em;
+      height: 2.2em;
+      border-radius: 1em;
+      padding: 0.4em 0;
+  }
+
+  .footer{
+    position: absolute;
+    bottom: 0em;
+    color: white;
+    border-color: #e42012;
+      background-color: #ef473a;
+    width: 100%;
+    height: 3em;
+    padding-top: 0.9em;
+    text-align: center;
+    font-size: 1.2em;
+  }
+  .bar.bar-positive {
+    border-color: {php echo $setting['mainColor']};
+    background-color: {php echo $setting['mainColor']};
+    color: #fff;
+  }
+  .bar.bar-assertive {
+    border-color: {php echo $setting['sliderColor']};
+    background-color: {php echo $setting['sliderColor']};
+    color: #fff;
+  }
+  .padding{
+    padding:0em;
+  }
+  
+  .red{
+     border-color: {php echo $setting['mainColor']};
+    background-color: {php echo $setting['mainColor']};
+    color: #fff;
+
+  }
+  body{
+    background-color: rgb(242, 239, 239);
+  }
+
+  .center{
+    display:block;
+    text-align:center;
+  }
+  .home_message{
+    background-color: gray;
+    width: 100%;
+    display: block;
+    background-size:cover;
+  }
+  .share{
+    background-size:cover;
+    position:absolute;
+    top:0px;
+    left:0px;
+    bottom:0px;
+    right:0px;
+    background-color:gray;
+    z-index:99;
+    opacity: 0.8;
+    filter:alpha(opacity=80); 
+  }
+  .share img{
+    widht:100%;
+    height:100%;
+  }
+  .item span,.item h2{
+    text-align: left;
+    display: block;
+  }
+    .item-icon-right {
+      padding-right: 54px;
+      border-bottom-width: 2px;
+      border-top: none;
+    }
+    .footer1{
+      position: absolute;
+      bottom: 0em;
+      width: 50%;
+      color: #fff;
+      background-color: {php echo $setting['mainColor']};
+      height: 3em;
+      padding-top: 0.8em;
+      font-size: 1.1em;
+      right:0.1%;
+      display: inline-block;
+      text-align: center;
+      box-shadow: 0px -5px 5px #DFDCDC;
+      -moz-box-shadow: 0px -5px 5px #DFDCDC;
+      -webkit-box-shadow: 0px -5px 5px #DFDCDC;
+      text-shadow: 1px 0px 1px #dfdcdc;
+    }
+    .footer2{
+      position: absolute;
+      bottom: 0em;
+      width: 50%;
+      color: #fff;
+      left:0.1%;
+      background-color: {php echo $setting['mainColor']};
+      height: 3em;
+      padding-top: 0.8em;
+      font-size: 1.1em;
+      display: inline-block;
+      text-align: center;
+      box-shadow: 0px -5px 5px #DFDCDC;
+      -moz-box-shadow: 0px -5px 5px #DFDCDC;
+      -webkit-box-shadow: 0px -5px 5px #DFDCDC;
+      text-shadow: 1px 0px 1px #dfdcdc;
+    }
+
+
+  .list span{
+    height: 2em;
+    display: block;
+  }
+
+  .contact_header img{
+    width: 8em;
+    height: 8em;
+    border-radius: 4em;
+    display: block;
+    margin: 1em auto;
+  }
+
+  .contact_header .nickname{
+      display: block;
+      color: #000;
+      text-align: center;
+      font-size: 2em;
+      height: 2em;
+      padding-top: 0.5em;
+  }
+
+  a{
+    text-decoration:none;
+  }
+
+  .contact_header .content1{
+    display: block;
+    font-size: 1.1em;
+    text-align: center;
+    height: 2em;
+    padding-top: 0.3em;
+  }
+
+  .contact_header .group{
+    display: block;
+    text-align: center;
+    font-size: 1.1em;
+    height: 2em;
+    padding-top: 0.3em;
+    background-color: rgb(0, 121, 157);
+    width: 8em;
+    margin: 0 auto;
+    color: white;
+    border-radius: 1em;
+  }
+
+  .contact_header .left{
+      display: block;
+      text-align: center;
+      font-size: 1.1em;
+      background-color: rgb(0, 121, 157);
+      color: white;
+      height: 2em;
+      padding-top: 0.4em;
+  }
+
+  form{
+    margin-top:2em;
+  }
+
+  .money{
+    display: block;
+  width: 100%;
+  height: 5em;
+  background-color: {php echo $setting['mainColor']};
+  text-align: center;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+  margin-top: -1em;
+    
+  }
+  
+
+  .red{
+     border-color: {php echo $setting['mainColor']};
+    background-color: {php echo $setting['mainColor']};
+    color: #fff;
+
+  }
+
+  .money2{
+    width: 100%;
+  height: 100% !important;
+  border-radius: 2em;
+  text-align: center;
+  margin: 0;
+
+  }
+  .center_meepo{
+    text-align : center;
+  }
+
+</style>
+  </head>
+  <body>
+
+    <div>
+      <ion-nav-view></ion-nav-view>
+    </div>
+
+    <script>
+
+    function get_timef(begin_time,end_time){
+      if(begin_time < end_time){
+        var starttime = begin_time;
+        var endtime = end_time;
+      }else{
+        var starttime = end_time;
+        var endtime = begin_time;
+      }
+      var timediff = endtime - starttime;
+      var days = Math.floor(timediff/(24*3600*1000));
+      var remain = timediff%(24*3600*1000);
+      var hours = Math.floor(remain/(3600*1000));
+      remain = remain%(3600*1000);
+      var minutes = Math.floor(remain/(60*1000))
+      remain = remain%(60*1000);
+      var seconds=Math.round(remain/1000)
+      return (days>0?(days + '天') :'') + (hours>0?(hours + '小时'):'') + (minutes>0?(minutes + '分'):'') + (seconds>0?(seconds + '秒'):'');
+    }
+
+      angular.module('ionicApp', ['ionic'])
+
+      .config(function($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+          .state('eventmenu', {
+            url: "/event",
+            abstract: true,
+            templateUrl: "../addons/meepo_begging/template/mobile/menu.html?t=1.82",
+            controller: 'MenuCtrl'
+          })
+          .state('eventmenu.home', {
+            url: "/home/:uid",
+            views: {
+              'menuContent' :{
+                templateUrl: "../addons/meepo_begging/template/mobile/home.html?t=1.82",
+                controller: "HomeCtrl"
+              }
+            }
+          })
+          .state('eventmenu.checkin', {
+            url: "/check-in/:uid",
+            views: {
+              'menuContent' :{
+                templateUrl: "../addons/meepo_begging/template/mobile/confirm.html?t=1.82",
+                controller: "ConfirmCtrl"
+              }
+            }
+          })
+          .state('eventmenu.about', {
+            url: "/about",
+            views: {
+              'menuContent' :{
+                templateUrl: "../addons/meepo_begging/template/mobile/bootPage.html?t=1.82",
+                controller: "AboutCtrl"
+              }
+            }
+          })
+          .state('eventmenu.contact', {
+            url: "/contact",
+            views: {
+              'menuContent' :{
+                templateUrl: "../addons/meepo_begging/template/mobile/contact.html?t=1.82",
+                controller: "ContactCtrl"
+              }
+            }
+          })
+
+        $urlRouterProvider.otherwise("/event/about");
+      })
+
+
+      .controller('MenuCtrl', function($scope, $ionicSideMenuDelegate) {
+
+        $scope.closeMenu = function() {
+          $ionicSideMenuDelegate.toggleLeft(false);
+        };
+        $scope.toggleLeft = function() {
+          $ionicSideMenuDelegate.toggleLeft();
+        };
+        $scope.toggleRight = function() {
+          $ionicSideMenuDelegate.toggleRight();
+        };
+
+        $scope.menu = {php echo json_encode($menu)};
+
+      })
+
+      .controller('AboutCtrl',function($scope){
+          $scope.item = {php echo json_encode($boot)};
+          
+          $scope.next = function() {
+            console.log('NEXT');
+            $scope.$broadcast('slideBox.nextSlide');
+          };
+          $scope.slideChanged = function(index) {
+            console.log('Slide changed', index);
+          };
+      })
+
+      .controller('HomeCtrl',function($scope,$http,$stateParams,$ionicSideMenuDelegate,$ionicLoading){
+        $ionicSideMenuDelegate.toggleLeft(false);
+        
+        $scope.uid = $stateParams.uid?$stateParams.uid:{php echo $_GPC['uid']};
+        $ionicLoading.show({
+              delay: 100,
+              duration: 3000
+        });
+      	var homeUrl = '{php echo $_W['siteroot'].'app/'.$this->createMobileUrl('gethome',false)}&uid=' + $scope.uid;
+        $http.get(homeUrl).success(function(data){
+          $scope.home = data;
+          $ionicSideMenuDelegate.toggleLeft(false);
+          $scope.$digest();
+        });
+        $scope.time = 0;
+        $scope.time = setInterval(function() {
+                                 $scope.time++;
+                                 $scope.$digest(); // 通知视图模型的变化
+                      }, 1000);
+
+
+        $scope.showShare = false;
+        $scope.footerForm = false;
+        $scope.itemClick = function(item){
+          $scope.footerForm = !$scope.footerForm;
+        };
+
+        $scope.footerFunc = function(){
+          $scope.footerForm = true;
+        };
+
+        $scope.share = function() {
+          $scope.showShare = !$scope.showShare;
+        }
+
+        $ionicSideMenuDelegate.toggleLeft(false);
+      })
+
+      .controller('ConfirmCtrl', function($scope,$http,$state,$stateParams) {
+        $scope.showForm = true;
+        $scope.set = {php echo json_encode($confirm)};
+        
+        $scope.item = {};
+        $scope.submit = function() {
+          if(!$scope.item.money) {
+            alert('大爷赏点吧');
+            return;
+          }
+          $scope.item.uid = $stateParams.uid;
+          var item = $scope.item;
+          var confirm_post = '{php echo $_W['siteroot'].'app/'.$this->createMobileUrl('confirm')}';
+          $http.post(confirm_post,item).success(function(data){
+            if(data.status){
+              window.location.href="{php echo $_W['siteroot'].'app/'.$this->createMobileUrl('pay',false)}&begid="+data.begid;
+            }else{
+              alert(data.message);
+            }
+          });
+        };
+
+      })
+
+      .controller('ContactCtrl', function($scope,$http,$state) {
+        $scope.contact = {php echo json_encode($contact)};
+        $scope.showForm = true;
+
+        $scope.money = {php echo $money};
+
+        $scope.radioClick = function(val) {
+          $scope.contact.submit = val;
+          $scope.item.openid = '{$_W['openid']}'
+        };
+
+        // $scope.radioChange = function() {
+        //   console.debug('radio ng-change', 'change', $scope.radioModel.data);
+        // };
+
+        $scope.item = {};
+        $scope.submit = function() {
+          if(!$scope.item.money) {
+            alert('请输入提现金额');
+            return;
+          }
+          
+
+          if($scope.contact.submit == '微信钱包'){
+            if(!$scope.item.openid) {
+              alert('请在微信浏览器内操作');
+              return;
+            }
+          }
+
+          else if($scope.contact.submit == '支付宝'){
+            if(!$scope.item.apply) {
+              alert('请认真填写支付宝账号');
+              return;
+            }
+          }else{
+            alert('请选择提现方式');
+            return;
+          }
+
+          if(!$scope.item.uid) {
+            $scope.item.uid = {php echo $_GPC['uid']};
+          }
+          var item = $scope.item;
+          var confirm_post = '{php echo $_W['siteroot'].'app/'.$this->createMobileUrl('contact')}';
+          $http.post(confirm_post,item).success(function(data){
+            if(data.status){
+              var toParams = {uid : $scope.uid};
+              $state.go('eventmenu.home', toParams);
+            }else{
+              alert(data.message);
+            }
+          });
+        };
+
+      })
+
+      .controller('AttendeesCtrl', function($scope) {
+
+        $scope.activity = [];
+        $scope.arrivedChange = function(attendee) {
+          var msg = attendee.firstname + ' ' + attendee.lastname;
+          msg += (!attendee.arrived ? ' has arrived, ' : ' just left, ');
+          msg += new Date().getMilliseconds();
+          $scope.activity.push(msg);
+          if($scope.activity.length > 3) {
+            $scope.activity.splice(0, 1);
+          }
+        };
+
+      });
+    </script>
+  </body>
+</html>

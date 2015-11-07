@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>推广分享</title>
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="./source/modules/quickleaflet/template/mobile/style/Mobile.css">
+<script src="./source/modules/quickleaflet/template/mobile/script/jquery-2.0.3.min.js"></script>
+<style>
+#wrap > header{width:100%; height:80px; display:block; color:#fff; text-align:center; font-size:25px; padding-top:90px;}
+#wrap > header.car{background:url({php echo $_W['attachurl'] . $leaflet['poster_img']}) center  no-repeat;}
+#wrap > header.car{background-size:cover}
+#wrap > section{ padding-top:20px; text-align:center;}
+#wrap > footer{ width:100%; height:8px;  background:#ad0040; display:block; margin-top:60px;}
+</style>
+</head>
+<body>
+<div id="wrap">
+    <header class="car" style="">推广：<br>{$leaflet['share_title']}</header>
+    <section id="main">
+        <div class="p" style="text-align:left; padding-bottom:10px;">
+        奖励规则：<br />
+        &nbsp;1、点击分享给好友或分享到朋友圈，奖励{$leaflet['share_credit']}个积分<br />
+        &nbsp;2、只要好友查阅了分享内容，奖励{$leaflet['click_credit']}个积分<br />
+        &nbsp;3、好友填写了表单，奖励{$leaflet['fillform_credit']}个积分<br />
+        &nbsp;4、好友重复查阅或重复填写表单不重复奖励。<br />
+        推广方式：<br />
+&nbsp;1、点击页面右上角分享按钮<br />
+&nbsp;2、选择分享给朋友或分享到朋友圈<br />
+&nbsp;3、朋友打开您的分享，或者通过您所分享的链接完成提示操作后，您便可获得相应奖励<!--span>{$leaflet['share_award']}</span-->
+        </div>
+        <div class="p">分享页面预览（仅供参考）</div>
+        <img src="{php echo $_W['attachurl'] . $leaflet['preview_img']}" width="180" height="283" />
+    </section>
+    <footer></footer>
+</div>
+</body>
+
+<script>
+
+$(document).ready(function(e) {
+    if($(document).height() > getPageHeight()){
+    $("#wrap > footer").attr("style","position:fixed; bottom:0;");
+  }
+});
+
+function getPageHeight(){
+  return $("#wrap").height();
+}
+
+function shareCall(share_type, share_msg) {
+  switch (share_type) {
+    case "send_msg":
+    case "timeline":
+    case "weibo":
+    default:
+    $.post(
+    '{php echo $_W['siteroot'] . $this->createMobileUrl('ShareTrack')}',
+    { leafletid: "{$leaflet['leafletid']}", track_type: 'share_credit', track_id: "{$_W['fans']['from_user']}" },
+    function(m){
+    },
+    "json");
+    break;
+  }
+}
+
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+        WeixinJSBridge.call('showOptionMenu');
+        var shareLink = "{php echo $_W['siteroot'] . $this->createMobileUrl("leaflet", array("leafletid"=>$leaflet['leafletid'], 'track_id'=>$_W['fans']['from_user']))}";
+        var imgUrl = "{php echo $_W['attachurl'] . $leaflet['poster_img']}";
+        // 发送给好友
+        WeixinJSBridge.on('menu:share:appmessage', function(argv){
+            WeixinJSBridge.invoke('sendAppMessage',{
+                "link":shareLink,
+                "img_url":imgUrl,
+                "desc": "{$leaflet['share_content']}",
+                "title":"{$leaflet['share_title']}"
+            }, function(res) {
+              shareCall('send_msg', '');
+             });
+
+        });
+
+        // 分享到朋友圈
+        WeixinJSBridge.on('menu:share:timeline', function(argv){
+            WeixinJSBridge.invoke('shareTimeline',{
+                "link":shareLink,
+                "img_url":imgUrl,
+                "desc": "{$leaflet['share_content']}",
+                "title":"{$leaflet['share_title']}"
+            }, function(res) {
+               shareCall('timeline', '');
+            });
+            shareCall('timeline', '');
+        });
+
+}, false)
+
+</script>
+</html>

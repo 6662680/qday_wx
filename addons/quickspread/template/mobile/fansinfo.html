@@ -1,0 +1,19 @@
+<style>
+  .fansinfo {
+    margin-bottom:5px;
+  }
+  .fansname {
+    font-size:20px;
+    margin:5px 0px 8px 0px;
+  }
+</style>
+
+<div class="fansinfo">
+  <div class="img-rounded" style='float:left;width:30%;'><img width="96px" height="96px" class="img-rounded" src="{php echo preg_replace('/\/0/', '/96', stripslashes($fans['avatar']));}" /></div>
+  <div class="" style='float:left;width:70%;'>
+    <div class="fansname"><b>{$fans['nickname']}</b></div>
+    {if $is_follow}推荐人数:{php echo count($mylist)}人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{/if}积分:{$fans['credit1']}<br/>
+    关注日期:{php echo date('Y-m-d H:i', $fans['createtime'])}
+  </div>
+</div>
+<div class="clearfix"></div>

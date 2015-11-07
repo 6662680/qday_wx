@@ -1,0 +1,10 @@
+<style>
+.footerbar{position:fixed; left:0; bottom:0px; width:100%; height:50px;}
+.footerbar a{display:block; float:left; width:100%; height:45px; text-align:center; text-decoration:none;}
+.footerbar a:first-child{border-left:0;}
+.footerbar a i{font-size:20px; display:block;}
+#footer { position: fixed;width:100%;bottom:0px;height:25px;line-height:25px;color:#333;}
+</style>
+<div class="footerbar">
+  <a href="{php echo $this->createMobileUrl('myticket', array("ticketid"=>$ticketid))}"><img src="{php echo strpos($event['buttonimg'], 'http://') === FALSE ? $_W['attachurl'] . $event['buttonimg'] : $event['buttonimg']}"  alt="查看优惠" /></a>
+</div>

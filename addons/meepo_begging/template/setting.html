@@ -1,0 +1,245 @@
+{template 'common/header'}
+<style type="text/css">
+.red {float:left;color:red}
+.white{float:left;color:#fff}
+.tooltipbox {
+    background:#fef8dd;border:1px solid #c40808; position:absolute; left:0;top:0; text-align:center;height:20px;
+    color:#c40808;padding:2px 5px 1px 5px; border-radius:3px;z-index:1000;
+}
+.red { float:left;color:red}
+</style>
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+        <!-- <div class="panel panel-default">
+            <div class="panel-heading">
+                参数设置
+            </div>
+            <div class="panel-body"> -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        前端页面设计
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">主页面颜色色调</label>
+                            <div class="col-sm-9 col-xs-12">
+                                {php echo tpl_form_field_color('mainColor',$settings['mainColor'])}
+                                <!-- <input type="text" name="mainColor" class="form-control" value="{$settings['mainColor']}" />
+                                } -->
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">主页面背景</label>
+                            <div class="col-sm-9 col-xs-12">
+                                {php echo tpl_form_field_image('mainImage',$settings['mainImage'])}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">侧边栏颜色色调</label>
+                            <div class="col-sm-9 col-xs-12">
+                                {php echo tpl_form_field_color('sliderColor',$settings['sliderColor'])}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        APP启动页管理
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">第一张</label>
+                            <div class="col-sm-9 col-xs-12">
+                                {php echo tpl_form_field_image('bootFirst',$settings['bootFirst'])}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">第二张</label>
+                            <div class="col-sm-9 col-xs-12">
+                                {php echo tpl_form_field_image('bootSecond',$settings['bootSecond'])}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">第三张</label>
+                            <div class="col-sm-9 col-xs-12">
+                                {php echo tpl_form_field_image('bootThird',$settings['bootThird'])}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        主页文字类
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">启动页标题</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="bootTitle" class="form-control" value="{$settings['bootTitle']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">主页面标题</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="mainTitle" class="form-control" value="{$settings['mainTitle']}" />
+                            </div>
+                        </div>
+
+                        
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">会员称号(位于主页昵称下放)</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="groupTitle" class="form-control" value="{$settings['groupTitle']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">乞讨宣言(后面做成用户自定义)</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="mainContent" class="form-control" value="{$settings['mainContent']}" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">打开自己主页顶部提示信息</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="topMessage" class="form-control" value="{$settings['topMessage']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">打开自己主页底部靠左菜单文字</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="footerLeft" class="form-control" value="{$settings['footerLeft']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">打开自己主页底部靠右菜单文字</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="footerRight" class="form-control" value="{$settings['footerRight']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">打开别人主页顶部提示信息</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="otherTopMessage" class="form-control" value="{$settings['otherTopMessage']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">打开别人主页底部靠左菜单文字</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="otherFooterLeft" class="form-control" value="{$settings['otherFooterLeft']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">打开别人主页底部靠右菜单文字</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="otherFooterRight" class="form-control" value="{$settings['otherFooterRight']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">主页左侧标题</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="mainLeftTitle" class="form-control" value="{$settings['mainLeftTitle']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">主页右侧标题</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="mainRightTitle" class="form-control" value="{$settings['mainRightTitle']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">左侧排行榜展示人数</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="rankLeftNum" class="form-control" value="{$settings['rankLeftNum']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">右侧排行榜展示人数</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="rankRightNum" class="form-control" value="{$settings['rankRightNum']}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        订单页面文字类
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">订单页面标题</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="orderTitle" class="form-control" value="{$settings['orderTitle']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">打赏金额输入提示文字</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="orderMoney" class="form-control" value="{$settings['orderMoney']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">留言输入提示文字</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="orderMessage" class="form-control" value="{$settings['orderMessage']}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">提交按钮文字</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" name="orderSubmit" class="form-control" value="{$settings['orderSubmit']}" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            <!-- </div>
+        </div> -->
+        <div class="form-group col-sm-12">
+            <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+
+<script language='javascript'>
+	require(['jquery', 'util'], function($, u){
+		$(function(){
+			window.optionchanged = false;
+	        $('#myTab a').click(function (e) {
+	            e.preventDefault();//阻止a链接的跳转行为
+	            $(this).tab('show');//显示当前选中的链接及关联的content
+	        })
+		});
+	});
+</script>
+<script type="text/javascript">
+	require(['jquery.ui', 'bootstrap.switch', 'util'], function($, $, u){
+		$(function(){
+			$(":checkbox").bootstrapSwitch();
+		});
+	});
+</script>
+{template 'common/footer'}

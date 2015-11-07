@@ -1,0 +1,140 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li ><a href="{php echo $this->createWebUrl('set')}">基本设置</a></li>
+	<li class="active"><a href="{php echo $this->createWebUrl('pay_set')}">消费设置</a></li>
+</ul>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		积分兑换资料消费设置以及分享奖励积分设置【注: 只可为整数】<br><br>
+		<font color=red>对于兑换积分 设置为0 那么将直接显示 填写好 请记得提交！！！</font>
+	</div>
+	<form id="reply-form" class="form-horizontal form"  method="post" enctype="multipart/form-data">
+	<div class="panel-body">
+	<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看电话</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_telephone" value="{$settings['pay_telephone']}">
+				<span class="help-block">查看电话，若是设置为0 将不需要兑换即可查看该项
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看身高</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_height" value="{$settings['pay_height']}">
+				<span class="help-block">查看身高 若是设置为0 将不需要兑换即可查看该项</span>
+			</div>
+		</div>
+		 <div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看体重</label>
+			
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_weight" value="{$settings['pay_weight']}">
+				<span class="help-block">查看体重 若是设置为0 将不需要兑换即可查看该项</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看车房状态</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_carhouse" value="{$settings['pay_carhouse']}">
+				<span class="help-block">查看车房状态 若是设置为0 将不需要兑换即可查看该项
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看职业</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_occupation" value="{$settings['pay_occupation']}">
+				<span class="help-block">查看职业 若是设置为0 将不需要兑换即可查看该项
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看月收入</label>
+			
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_revenue" value="{$settings['pay_revenue']}">
+				<span class="help-block">查看月收入 若是设置为0 将不需要兑换即可查看该项
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看情感状况</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_affectivestatus" value="{$settings['pay_affectivestatus']}">
+				<span class="help-block">查看情感状况 若是设置为0 将不需要兑换即可查看该项</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看自我介绍</label>
+			
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_Descrip" value="{$settings['pay_Descrip']}">
+				<span class="help-block">查看自我介绍 若是设置为0 将不需要兑换即可查看该项</span>
+			</div>
+		</div>
+		
+		
+			
+</div>
+</div>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		查看理想对象要求积分设置【注: 只可为整数】
+	</div>
+	
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看身高要求</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_uheight" value="{$settings['pay_uheight']}">
+				<span class="help-block">查看身高要求 若是设置为0 将不需要兑换即可查看该项</span>
+			</div>
+		</div>
+        <div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看年龄要求</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_uage" value="{$settings['pay_uage']}">
+				<span class="help-block">查看年龄要求 若是设置为0 将不需要兑换即可查看该项</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看理想星座</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_lxxingzuo" value="{$settings['pay_lxxingzuo']}">
+				<span class="help-block">查看理想星座 若是设置为0 将不需要兑换即可查看该项</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">查看理想的另一半</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="pay_uitsOthers" value="{$settings['pay_uitsOthers']}">
+				<span class="help-block">查看理想的另一半 若是设置为0 将不需要兑换即可查看该项</span>
+			</div>
+		</div>
+</div>
+</div>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		分享奖励积分设置【注: 只可为整数】
+	</div>
+	
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享奖励积分</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="share_jifen" value="{$settings['share_jifen']}">
+				<span class="help-block">分享奖励积分</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<input name="submit" type="submit" value="保存" class="btn btn-primary btn-danger" />
+				<input type="hidden" name="id" value="{$settings['id']}" />
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</div>
+		</div>
+	</form>
+</div>
+</div>
+{template 'common/footer'}

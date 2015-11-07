@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>我的消息</title>
+	{php echo register_jssdk(false);}
+    <script type="text/javascript">
+    	var type = "sale";
+    </script>
+    <link rel="stylesheet" type="text/css" href="{RES2}css/global.css?t={php echo time();}"/>
+    <script type="text/javascript" src="{RES2}js/zepto.min.js" ></script>
+    <script type="text/javascript" src="{RES2}js/global.js"></script>
+    <!--<script type="text/javascript" src="{RES}wjs/salelist.js"></script>-->
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+</head>
+<body>
+	<ul style="position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+		height: 35px;
+        margin: auto;
+        background: #f3f3f3;
+        z-index: 1000;
+        border-top: 1px solid #b2b2b2;">
+                    
+                        <li style="width:100%">
+						  
+						<div style="float:left;margin-left:10px" class="acolor">
+						
+                           <a href="{php echo  $this->createMobileUrl('alllist')}" target="__blank"   class="ui-btn" ">返回</a>
+</div>
+<div style="float:right;margin-right:10px" class="acolor">
+  <a href="{php echo  $this->createMobileUrl('blacklist')}" target="__blank"  class="ui-btn" >黑名单</a>
+</div>
+                        </li>
+                         
+         <style>
+		 .acolor a:link {color: #0079ff;} 
+.acolor a:visited {color: #0079ff;} 
+ .acolor a:hover{color: #0079ff;} 
+.acolor a:active {color: #0079ff;} 
+		 .ui-btn{height: 30px;
+line-height: 30px;
+padding: 0 13px;
+min-width: 56px;
+display: inline-block;
+position: relative;
+text-align: center;
+border: none;
+color: #0079ff;
+font-size: 14px;
+background-color: #fdfdfd;
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, white), to(#fafafa));
+border-radius: 3px;
+vertical-align: top;
+color: #00a5e0;
+text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+-webkit-box-sizing: border-box;
+border: 1px solid #cacccd;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+outline:0;
+}
+		 </style>                
+                       
+                   
+</ul>
+<div style="height:35px"></div>
+	<div class="logo">
+        <img src="{RES2}images/mynews.png" height="30px" width="80px"/>   | 我的消息
+    </div>  
+    
+	<div class="warp">
+	
+	
+	
+<article>
+    <section>
+        <div class="newHouseList" id="newHouseList">
+            {if !empty($itsrow)}
+			 {loop $itsrow $row $key}
+			<div class="linked">
+			      <div class="item">
+				  <?php
+				     $someone = $this->getres2($row);
+				  ?>
+			        <a href="{php echo $this->createMobileUrl('hitmail',array('toname'=>$someone['nickname'],'toopenid'=>$row))}" target="__blank">
+			      <div class="li-item">
+							  <div class="img"><img src="{$itsuserinfo[$row]['senderavatar']}"></div>
+							  <div class="w_100">
+								 <h3>未读消息({$key})</h3>
+								 <h3>昵称:{$itsuserinfo[$row]['sendernickname']}</h3>
+							  </div>
+							  
+			     </div>
+			       </a>
+			    </div>
+			</div>
+			{/loop}
+			{else}
+			   <div style="height:40px;line-height:40px;text-align:center;color:red">暂无你的消息记录！！！！</div>
+			{/if}
+        </div>
+        
+    </section>
+</article>
+</div>
+<script type="text/javascript">
+  wx.ready(function () {
+    var shareData = {
+    title: "{$settings['share_title']}",
+    desc: "{$settings['share_content']}",
+    link: "{$settings['share_link']}",
+    imgUrl: "{$_W['attachurl']}{$settings['share_logo']}",
+  };
+  
+  //分享朋友
+  wx.onMenuShareAppMessage({
+       title: shareData.title,
+      desc: shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+        send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: shareData.title+"---"+shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+          send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        Joel_gmuAlert("分享失败","网络超时！！！！");
+      }
+    });   
+    
+  });
+
+
+
+function send_intergal(){
+   $.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('shareajax')}",
+			data:{openid:'{$openid}}'},
+			cache:false,
+			success:function(data){
+				if(data=="no"){
+					Joel_gmuAlert("分享成功","抱歉，网络超时，获取积分失败！！！");
+                   
+				}
+				else if(data=="over"){
+				   Joel_gmuAlert("分享成功","你今天的分享次数已经超过上限哦，请明天再来吧！！！");
+				
+				}
+				else{
+				   Joel_gmuAlert("分享成功","恭喜您，获得{$settings['share_jifen']}个奖励积分！今天你还有"+data+"次分享赚积分机会哦！");
+				}
+			}
+		});
+}
+
+function getlocation(){
+
+    wx.getLocation({
+      success: function (res) {
+        alert(JSON.stringify(res));
+      },
+      cancel: function (res) {
+        alert('用户拒绝授权获取地理位置');
+      }
+    });
+
+}
+        </script>
+</body></html>
+
+
+
+
+
+
+
+
+

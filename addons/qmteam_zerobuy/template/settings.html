@@ -1,0 +1,40 @@
+{template 'common/header'}
+<script>
+<!--
+require(['jquery.ui', 'bootstrap.switch', 'util'], function($, $, u){
+	$(function(){
+		$(":radio[name='dayjoin']").bootstrapSwitch();
+	});
+});
+//-->
+</script>
+<div class="main">
+	<form class="form-horizontal form" id="form2" action="" method="post">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				模块参数配置
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+                	<label class="col-xs-12 col-sm-3 col-md-2 col-lg-1 control-label">每日参与一次</label>
+                    <div class="col-sm-9">
+					    <input type="radio" name="dayjoin" value="1" {if $this->module['config']['dayjoin']==1}checked{/if} />
+					    <span class="help-block">开启后，每日可参与一次活动。</span>
+                    </div>
+                </div>
+           	   <div class="form-group">
+                	<label class="col-xs-12 col-sm-3 col-md-2 col-lg-1 control-label">评论：友言ID</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="uyan" class="form-control" value="{php echo $this->module['config']['uyan']}" />
+                        <span class="help-block">本模块评论插件使用友言插件（需使用评论插件，请先到友言http://www.uyan.cc/注册账号），使用时请输入友言ID，置空则不开启评论。</span>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input name="token" type="hidden" value="{$_W['token']}" />
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+		</div>
+	</form>
+</div>
+{template 'common/footer'}

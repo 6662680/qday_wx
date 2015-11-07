@@ -1,0 +1,1 @@
+<table class="table">    <tr>        <th>好友</th>        <th style="width:150px;">打赏时间</th>    </tr>    {loop $ds $row}    <tr>        <td>{$row['user']['nickname']}</td>        <td><span class="badge">{php echo date('y.m.d H:i:s', $row['dateline'])}</span></td>    </tr>    {/loop}</table>

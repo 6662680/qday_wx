@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* CSS Document */
+body{ background:#F0EFF4;}
+*{ margin:0; padding:0; font-family:Arial, "ºÚÌå"; font-size:15px;}
+img{ border:0;}
+a{ text-decoration:none; cursor:default; outline:none}
+a:focus{ outline:none; background:none;}
+a:link {color: #000000}
+a:visited {color: #000000}
+a:hover {color: #000}
+a:active {color: #000}
+*:focus {outline: none; background:none;} 
+li{ list-style:none;}
+.write{ width:100%; margin:15px 0 15px 0; line-height:15px;}
+.write img{ float:left; margin:0 5px 0 10px;}
+.write_heart{ width:100%;}
+.write_info{ margin:0 10px; position:relative;border:1px solid #B1B1B3; background:#EBEBEB; border-radius:8px; padding:10px; }
+.write_info .number{ color:#888; position:absolute; bottom:10px; right:20px; font-weight:bold;}
+.write_info textarea{width:100%; display: block; height:166px; margin:0 auto;resize:none; border:none; background:none;}
+.habit{ width:100%; border-top:1px solid #DBDBDB; background:#fff;}
+.habit ul{ width:100%;}
+.habit ul li:link{ background:#fff}
+.habit ul li:visited{ background:#fff}
+.habit ul li:hover{ background:#fff}
+.habit ul li:active{ background:#DFDFDD;}
+.habit ul li span{ width:auto; height:44px; display:block; margin:0 0 0 10px; border-bottom:0px solid #DDDBDC; line-height:44px; position:relative}
+.habit ul li span font{ width:100px;}
+.habit ul li span input{ width:160px; height:34px; float:left; margin:0 10px 0 0; line-height:34px; text-align:left;}
+.habit ul li span strong{ float:right; font-weight:normal;}
+.habit ul li span .two{ float:right; margin:0 10px 0 0; position:relative;}
+.habit ul li span .three{ float:right; margin:0 10px 0 0; position:relative; color:#888;}
+.habit ul li span .three select{ left:0; width:50px;}
+.habit ul li span .three .sel02{ left:50px; width:40px;}
+.habit ul li span .three .sel03{ left:90px; width:40px;}
+.habit ul li span .four{ float:right; margin:0 10px 0 0; position:relative; color:#888;}
+.habit ul li span .four a{ width:65px; display:block; float:left; margin:0; text-align:right;}
+.habit ul li span .four select{ width:65px; left:0;}
+.habit ul li span .four .sel04{ left:65px;}
+.habit ul li span .four .sel05{ left:130px;}
+.habit ul li span .black{ color:#000;}
+.habit ul li span .three a{ margin:0; float:none;}
+.habit ul li span .two select{ left:0; width:50px;}
+.habit ul li span .two .sel02{ right:0; left:auto;}
+.habit ul li span .two a{ float:none; margin:0;}
+.habit ul li span select{text-align: left; width:100px; height:34px;}
+.habit ul li span select option{ border:none;}
+.habit ul li span .a_out{ color:#000}
+.habit ul li span font{ float:left;}
+.habit ul li span a{ float:right; margin:0 10px 0 0; color:#888;}
+.habit ul .hobby span{ height:auto; overflow:hidden;} 
+.habit ul .hobby span font{ width:100%; display:block;}
+.habit ul .hobby span a{ background:#E9E9E9; float:left; line-height:normal; padding:5px; margin:0 10px 10px 0;white-space:nowrap; }
+.habit ul .hobby span .chosen{ background:#3CB2EF; color:#fff;}
+.habit ul .hobby:link{ background:#fff}
+.habit ul .hobby:visited{ background:#fff}
+.habit ul .hobby:hover{ background:#fff}
+.habit ul .hobby:active{ background:#fff;}
+.habit ul .last{border-bottom:1px solid #DDDBDC;}
+.habit ul .last span{ border:none;}
+.habit ul .last .revise{ color:#278BFB;}
+.exit{ width:100%; margin:20px 0 0 0;}
+.exit a{
+width:-moz-calc(100% - 20px);
+	width:-webkit-calc(100% - 20px);
+	width: calc(100% - 20px); display: block; height:42px; border-radius:5px;margin:0 auto; text-align:center; color:#fff; line-height:42px;
+	background:-moz-linear-gradient(top,#F04243,#ED4A4B);
+	background:-webkit-linear-gradient(top,#F04243,#ED4A4B);
+	background:linear-gradient(top,#F04243,#ED4A4B);}
+.hi_succeed{ width:200px;background:rgba(0,0,0,0.6);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px; position: fixed;top: 50%; left: 50%; margin:-45px 0 0 -100px;text-align: center; padding: 13px 10px;}
+.hi_succeed span{ color:#fff;}
+.password{ width:100%; height:100%; background:rgba(0,0,0,0.5); position:absolute; top:0; left:0;}
+.pw_info{ width:270px; height:146px; background:#DFDFDF; border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px; position:absolute;top:70px; left:50%; margin:0 0 0 -135px; z-index:2;}
+.pw_info span{ width:100%; text-align:center; display:block; margin:20px 0 15px 0;}
+.pw_info input{ width:230px; height:30px; border:1px solid #ccc; border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px; margin:0 auto; display:block; padding:0 0 0 8px; line-height:30px;}
+.btn{ width:270px; height:44px; border-top:1px solid #ccc; margin:15px 0 0 0;}
+.btn a{ width:135px; height:44px; line-height:44px; text-align:center; color:#0F83FE; display:block; float:left;}
+.btn .keep{ width:134px; border-left:1px solid #ccc;}
+.sure{ margin:20px 0 0 0; padding:0 0 20px 0;}
+.sure a{display: block; height:42px; border-radius:5px;margin:0 10px; text-align:center; color:#fff; line-height:42px;
+	background:#3CB2EF;}

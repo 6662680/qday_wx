@@ -1,0 +1,88 @@
+{template 'common/header'}
+<div class="clearfix">
+    <div class="panel panel-info">
+        <div class="panel-heading">基本设置</div>
+        <div class="panel-body">
+        <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit="return formcheck(this)">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信顶部标题</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control" name="title" value="{$settings['title']}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">背景</label>
+                <div class="col-sm-6 col-md-6">
+                    {php echo tpl_form_field_image('bg',$settings['bg']);}
+                    <div class="help-block">640 * 1010像素，<a href="{MODULE_URL}template/mobile/images/bg.zip" target="_blank">下载素材</a>。</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">画布</label>
+                <div class="col-sm-6 col-md-6">
+                    {php echo tpl_form_field_image('paper',$settings['paper']);}
+                    <div class="help-block">590 * 590像素，正方形</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">logo</label>
+                <div class="col-sm-6 col-md-6">
+                    {php echo tpl_form_field_image('logo',$settings['logo']);}
+                    <div class="help-block">200 * 75像素</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享标题</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control" name="share_title" value="{$settings['share_title']}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享内容</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control" name="share_content" value="{$settings['share_content']}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享图标</label>
+                <div class="col-sm-6 col-md-6">
+                    {php echo tpl_form_field_image('share_icon',$settings['share_icon'], '', array('width' => 400, 'extras' => array('text' => 'ng-model="entry.share_icon"')));}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">关注按钮文字</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control" name="follow_txt" value="{$settings['follow_txt']}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">关注按钮链接</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control" name="follow_link" value="{$settings['follow_link']}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">底部banner图片</label>
+                <div class="col-sm-6 col-md-6">
+                    {php echo tpl_form_field_image('banner_img',$settings['banner_img']);}
+                    <div class="help-block">640 * 110像素</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">底部banner链接</label>
+                <div class="col-sm-6 col-md-6">
+                    <input type="text" class="form-control" name="banner_link" value="{$settings['banner_link']}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                <div class="col-sm-8">
+                    <button type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交">提交</button>
+                    <input type="hidden" name="token" value="{$_W['token']}" />
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+{template 'common/footer'}

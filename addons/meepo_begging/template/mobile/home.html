@@ -1,0 +1,83 @@
+<!-- 注释：
+	
+	本文件为网络乞讨活动主页，用来显示乞讨内容
+
+	乞讨内容自定义，带支付功能！
+	
+ -->
+<style>
+  
+  
+</style>
+
+ <ion-view title="{{home.title}}" class="center" hide-back-button="true">
+ 		<!-- 注释  左方菜单 主要展示 已经乞讨金额，打赏好友列表，及打赏排名 -->
+
+		    <div class="share" ng-show="showShare" ng-click="share()">
+          <img src="../addons/meepo_begging/template/mobile/img/share.jpg" >
+        </div>
+        
+        <ion-nav-buttons side="left">
+          <button ng-click="toggleLeft()" class="button button-icon ion-navicon"></button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+          <button ng-click="toggleRight()" class="button button-icon ion-ios-person-outline"></button>
+        </ion-nav-buttons>
+        <ion-content class="has-header" padding="true">
+
+        <!-- style="background-size:cover;background-image:url('{php echo tomedia($item['thumb'])}')" -->
+          <span class="home_message" ng-show="!home.isMe">{{home.notMemessage}}</span>
+          <span class="home_message" ng-show="home.isMe">{{home.isMemessage}}</span>
+
+          
+          <div class="home_header">
+
+            <!-- 头像 昵称 讨饭宣言 -->
+            <img src="{{home.avatar}}">
+            <!-- <span class="img_left">{{home.meto}}</span>
+            <span class="img_right"><a ng-href="{{home.about.url}}">{{home.activity}}</a></span> -->
+            <span>{{home.nickname}}</span>
+            <span class="group">{{home.group}}</span>
+            <span>{{home.content}}</span>
+            <!-- 已经讨到的钱 -->
+             <span class="left" ng-click="toggleLeft()"><p>第{{home.num}}名</p></span>
+            <span class="right" ng-click="toggleRight()">{{home.money}}元</span>
+          </div>
+			<!-- 注释 讨饭者头像及讨到多少钱显示统计  底部显示 版权及我也要讨饭-->
+          <ion-list>
+            <div class="item item-divider">
+            最新打赏
+            </div>
+            <!-- 打赏详情 及最新打赏-->
+            <ion-item ng-repeat="item in home.items"
+                          class="item item-avatar-left item-icon-right"
+                          type="item-avatar" >
+                  <img src="{{item.avatar}}">
+                  <h2>{{item.nickname}}</h2>
+                  <span>{{item.message}}</span>
+                  <span>{{((item.time + time) / (60*60)) | number:0}}小时{{((item.time + time) % (60*60))/60 | number:0}}分钟{{((item.time + time) % (60*60))%60 | number:0}}秒前</span>
+                  <i class="badge badge-assertive">{{item.money}}元</i>
+            </ion-item>
+            <div class="item item-divider">
+            </div>
+            <div class="item item-divider">
+            </div>
+          </ion-list>
+
+        </ion-content>
+
+        <a ng-href="{{home.checkFollow}}" class="footer1" ng-show="!home.isMe">
+          <span >{{home.meto}}</span>
+        </a>
+        <a ng-href="#/event/check-in/{{uid}}" class="footer2" ng-show="!home.isMe">
+          <span >{{home.footer}}</span>
+        </a>
+
+        <div class="footer1" ng-click="share()" ng-show="home.isMe">
+          <span >{{home.share}}</span>
+        </div>
+        <a ng-href="#/event/contact" class="footer2" ng-show="home.isMe">
+          <span >{{home.tixian}}</span>
+        </a>
+      </ion-view>

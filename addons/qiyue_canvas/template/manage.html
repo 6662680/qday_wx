@@ -1,0 +1,76 @@
+{template 'common/header'}
+<script type="text/javascript">
+    function fooe_delete(id){
+        $.getJSON(window.location.href, {'delid':id}, function(json){
+            if(json.message.state==0){
+                location.reload();
+            }
+        });
+    }
+    function fooe_save(id){
+        $.getJSON(window.location.href, {'saveid':id}, function(json){
+            if(json.message.state==0){
+                location.reload();
+            }
+        });
+    }
+</script>
+<div class="main">
+    <ul class="nav nav-tabs" role="tablist">
+        <li{if $ischeck=='0'} class="active"{/if}>
+            <a href="{php echo $this->createWebUrl('check')}">未审核</a>
+        </li>
+        <li{if $ischeck=='1'} class="active"{/if}>
+            <a href="{php echo $this->createWebUrl('list')}">已审核</a>
+        </li>
+    </ul>
+    <div class="row">
+{loop $result['list'] $item}
+      <div class="col-sm-4 col-md-3" data-id="{$item['id']}">
+        <div class="thumbnail">
+            <div style="padding: 5px;">
+                #{$item['id']}
+                <div class="pull-right">
+                    <a href="javascript:;" onclick="QIYUE.delete(this)"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                {if $item['ischeck']==0}
+                    <a href="javascript:;" onclick="QIYUE.check(this)"></i> 审核</a>
+                {/if}
+                </div>
+            </div>
+            <img src="{php echo tomedia($item['attach'])}" width="100%" alt="">
+            <div class="caption">
+                <p><span class="pull-right">{php echo date('Y-m-d H:i:s',$item['createtime'])}</span></p>
+            </div>
+        </div>
+      </div>
+{/loop}
+    </div>
+{$result['pager']}
+<script type="text/javascript">
+    var QIYUE = {
+        delete: function(_this){
+            var $this = $(_this).parent().parent().parent().parent();
+            var id = $this.attr('data-id');
+            if(!id) return false;
+            $.post(window.location.href, {"op":"delete","id":id}, function(msg){
+                var _obj = JSON.parse(msg);
+                if(_obj.message.state==0){
+                    $this.remove();
+                }
+            });
+        },
+        check: function(_this){
+            var $this = $(_this).parent().parent().parent().parent();
+            var id = $this.attr('data-id');
+            if(!id) return false;
+            $.post(window.location.href, {"op":"check","id":id}, function(msg){
+                var _obj = JSON.parse(msg);
+                if(_obj.message.state==0){
+                    $this.remove();
+                }
+            });
+        }
+    }
+</script>
+</div>
+{template 'common/footer'}

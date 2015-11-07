@@ -1,0 +1,51 @@
+{template 'header'}
+<style>
+  .bg-img {
+    background: no-repeat center top;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display:block;
+    top: 0;
+    left: 0;
+    z-index: -10;
+  }
+
+  #kill{
+    position: fixed;
+    top:{$leaflet['pos_top']}px;
+    left:{$leaflet['pos_left']}px;
+    z-index:100;
+  }
+  #menu{
+    position: fixed;
+    bottom:0px;
+    left:0px;
+    z-index:101;
+    width:100px;
+    background-color: red;
+  }
+</style>
+<div class="bg-img" style='background-image: url({php echo strpos($leaflet['background'], 'http://') === FALSE ? $_W['attachurl'] . $leaflet['background'] : $leaflet['background']})'></div>
+<div id="kill">
+  {if !empty($leaflet['register_button'])}
+ <a href="{php echo $this->createMobileUrl('register', array('leafletid'=>$leafletid))}">
+   <img src="{php echo strpos($leaflet['register_button'], 'http://') === FALSE ? $_W['attachurl'] . $leaflet['register_button'] : $leaflet['register_button']}" alt="注册派单员"/>
+ </a>
+ {/if}
+ {if !empty($leaflet['fillform_url']) && !empty($leaflet['fillform_button']) }
+ <a href="{php echo $leaflet['fillform_url'] . "&track_id=" . $track_id . '&leafletid=' . $leafletid}">
+   <img src="{php echo strpos($leaflet['fillform_button'], 'http://') === FALSE ? $_W['attachurl'] . $leaflet['fillform_button'] : $leaflet['fillform_button']}" alt="填表"/>
+ </a>
+ {/if}
+</div>
+</div>
+<script>
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  WeixinJSBridge.call('showOptionMenu');
+});
+</script>
+{php $footer_off=true;}
+{template 'footer'}

@@ -1,0 +1,34 @@
+<style>
+  
+
+</style>
+<ion-view title="可提现金额为{{money}}" hide-back-button="false">
+        <ion-content class="has-header">
+          
+          <form class="list" ng-show="showForm">
+          <div class="money">
+              <input class="money2" type="text" placeholder="{{contact.money}}" ng-model="item.money">
+          </div>
+
+          <label class="money" ng-show="contact.submit == '微信钱包'">
+              <input type="text" class="money2" ng-model="item.openid" ng-disabled="true">
+          </label>
+          <label class="money" ng-show="contact.submit == '支付宝'">
+              <input class="money2" type="text" placeholder="{{contact.apply}}" ng-model="item.apply">
+          </label>
+
+          <ion-radio ng-click="radioClick(item.applyDisabled)"
+             ng-model="item.applyDisabled"
+             ng-value="'微信钱包'">微信钱包</ion-radio>
+
+          <ion-radio ng-click="radioClick(item.wechatDisabled)"
+             ng-model="item.wechatDisabled"
+             ng-value="'支付宝'">支付宝</ion-radio>
+
+          
+            <div class="padding">
+              <button class="button button-block red" ng-click="submit()">{{contact.submit}}</button>
+            </div>
+          </form>
+        </ion-content>
+      </ion-view>

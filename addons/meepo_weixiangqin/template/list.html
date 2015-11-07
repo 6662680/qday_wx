@@ -1,0 +1,170 @@
+{template 'common/header'}
+<div class="main">
+	
+<script type="text/javascript" src="../addons/meepo_weixiangqin/template/jquery-1.7.2.min.js"></script>
+<script>
+	function selectall(obj, name){
+		$('input[name="'+name+'[]"]:checkbox').each(function() {
+			$(this).attr("checked", $(obj).attr('checked') ? true : false);
+		});
+	}
+</script>
+
+<ul class="nav nav-tabs">
+	<li {if $_GPC['isshow'] == 0} class="active"{/if}><a href="{php echo $this->createWebUrl('list', array('id' => $id, 'isshow' => 0))}">待审核</a></li>
+	<li {if $_GPC['isshow'] == 1} class="active"{/if}><a href="{php echo $this->createWebUrl('list', array('id' => $id, 'isshow' => 1))}">已审核</a></li>
+</ul>
+
+<div class="panel panel-info">
+	<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="./index.php" method="get" class="form-horizontal" role="form">
+			<input type="hidden" name="c" value="site" />
+			<input type="hidden" name="a" value="entry" />
+			<input type="hidden" name="m" value="meepo_weixiangqin" />
+			<input type="hidden" name="do" value="list" />
+			{if $_GPC['isshow']=='1'}
+			   <input type="hidden" name="isshow" value="1" />
+			{else}
+             <input type="hidden" name="isshow" value="0" />
+			{/if}
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">昵称</label>
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">手机号码</label>
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<input class="form-control" name="telephone" id="" type="text" value="{$_GPC['telephone']}">
+				</div>
+			</div>
+			<div class="form-group">
+                <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">注册时间</label>
+                <div class="col-xs-12 col-sm-8 col-lg-9">
+               	{php echo tpl_form_field_daterange('datelimit', array('starttime'=>date('Y-m-d',$_GPC['starttime']),'endtime'=>date('Y-m-d',$_GPC['endtime'])))}
+				<br><small>注意: 首次点击审核机制 默认显示的时间为当前日期 此时下面的下面显示的数据与这个时间无关  只有当你选定了时间范围 点击搜索 那么时间将生效</small>
+               </div>
+           </div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<select name="yingcang" class='form-control'>
+							<option value="1" {if $_GPC['yingcang']=='1'} selected{/if}>显示</option>
+							<option value="2" {if $_GPC['yingcang']=='2'} selected{/if}>隐藏</option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class=" col-xs-12 col-sm-2 col-lg-2">
+					<input type="submit"  value="搜索" class="btn btn-primary" />
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		{if $_GPC['isshow'] == 0}待审核<br><br><font color=red>请注意:　待审核排列顺序为 完善资料的会员将优先排列在前 未完善的会员排列按时间排序</font>{/if}
+		{if $_GPC['isshow'] == 1}已审核{/if}
+	</div>
+	<div class="panel-body">
+		<div class="main" id="table-list">
+			<form action="" method="post" onsubmit="">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead class="navbar-inner">
+						<tr>
+							<th style="width:10%;" class="row-first">选择</th>
+							<th style="width:30%;">用户<i></i></th>
+							<th class="row-hover" style="width:20%">手机号码<i></i></th>
+							<th style="width:20%;">所在地</th>
+							<th style="width:20%;">时间<i></i></th>
+							
+						</tr>
+						</thead>
+						<tbody>
+						{loop $list $row}
+						<tr>
+							<td class="row-first"><input type="checkbox" name="select[]" value="{$row['id']}" /></td>
+							<td class="row-hover">
+								<img width="50" src="{if preg_match('/http:(.*)/',$row['avatar'])}{$row['avatar']} {else if preg_match('/images(.*)/',$row['avatar'])} {$_W['attachurl']}{$row['avatar']}     {else}{MEEPORES}/static/friend/images/cdhn80.jpg{/if}" class="avatar" />
+								<div class="mainContent">
+									<div class="nickname">{$row['nickname']}</div>
+								</div>
+							</td>
+							<td>{if !empty($row['telephone'])}{$row['telephone']}{else}对方还未完善此项{/if}</td>
+							<td>
+								{if !empty($row['resideprovincecity'])}{$row['resideprovincecity']}{else}对方还未完善此项{/if}
+							</td>
+							<td style="font-size:12px; color:#666;">
+								<div style="margin-bottom:10px;">{php echo date('Y-m-d', $row['time']);}</div>
+								<div>{php echo date('h:i:s', $row['time']);}</div>
+							</td>
+							
+						</tr>
+						{/loop}
+						</tbody>
+					</table>
+					{if !empty($list)}
+					<table class="table">
+						<tr>
+							<td style="width:50px;" class="row-first"><input type="checkbox" onclick="selectall(this, 'select');" /></td>
+							<td colspan="4">
+								{if $_GPC['isshow'] == 0}
+								<input type="submit" name="verify" value="审核" class="btn btn-primary" />
+								{/if}
+								<input type="submit" name="delete" value="删除" class="btn btn-primary" />
+								<input type="hidden" name="token" value="{$_W['token']}" />
+							</td>
+						</tr>
+					</table>
+					{/if}
+					{$pager}
+				</div>
+			</form>
+		</div>
+	</div>
+
+<script>
+require(['jquery'], function($){
+	//详细数据相关操作
+	var tdIndex;
+	$("#table-list thead").delegate("th", "mouseover", function(){
+		if($(this).find("i").hasClass("")) {
+			$("#table-list thead th").each(function() {
+				if($(this).find("i").hasClass("icon-sort")) $(this).find("i").attr("class", "");
+			});
+			$("#table-list thead th").eq($(this).index()).find("i").addClass("icon-sort");
+		}
+	});
+	$("#table-list thead th").click(function() {
+		if($(this).find("i").length>0) {
+			var a = $(this).find("i");
+			if(a.hasClass("icon-sort") || a.hasClass("icon-caret-up")) { //递减排序
+				/*
+					数据处理代码位置
+				*/
+				$("#table-list thead th i").attr("class", "");
+				a.addClass("icon-caret-down");
+			} else if(a.hasClass("icon-caret-down")) { //递增排序
+				/*
+					数据处理代码位置
+				*/
+				$("#table-list thead th i").attr("class", "");
+				a.addClass("icon-caret-up");
+			}
+			$("#table-list thead th,#table-list tbody:eq(0) td").removeClass("row-hover");
+			$(this).addClass("row-hover");
+			tdIndex = $(this).index();
+			$("#table-list tbody:eq(0) tr").each(function() {
+				$(this).find("td").eq(tdIndex).addClass("row-hover");
+			});
+		}
+	});
+});
+</script>
+{template 'common/footer'}

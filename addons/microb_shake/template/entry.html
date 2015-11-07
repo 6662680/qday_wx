@@ -1,0 +1,38 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="{php echo $this->createWebUrl('entry');}">活动参与方式</a></li>
+    <li><a href="{php echo $this->createWebUrl('activity');}">活动管理</a></li>
+    <li><a href="{php echo $this->createWebUrl('gifts');}">礼品设置</a></li>
+    <li><a href="{php echo $this->createWebUrl('devices');}">设备管理</a></li>
+    <li><a href="{php echo $this->createWebUrl('api');}">接口参数</a></li>
+</ul>
+<div class="clearfix">
+    <div class="alert alert-danger">
+        <h4>模块使用前需要注意</h4>
+        <p>
+            周边摇一摇使用腾讯最新的摇一摇周边功能. 特别适合各种车站, 会场, 卖场等现场活动, 活动形式新颖, 可以迅速引爆现场. <br>
+            主要功能使用 <mark>认证订阅号或认证服务号</mark>, 同时需要订购硬件设备, 每个设备价格在100元以内. <br>
+        </p>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            活动参与形式
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-info">
+                创建活动, 并绑定设备后. 将设备部署至各现场, 并提供活动宣传展示. 粉丝到达现场后打开蓝牙, 进入微信摇一摇即可摇出活动链接
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            关于设备
+        </div>
+        <div class="panel-body">
+          <div class="alert alert-warning">
+              自行购买的设备, 请自行设置参数并激活才能使用
+          </div>
+        </div>
+    </div>
+</div>
+{template 'common/footer'}

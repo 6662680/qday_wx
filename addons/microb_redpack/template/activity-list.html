@@ -1,0 +1,121 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li><a href="{php echo $this->createWebUrl('entry');}">活动参与方式</a></li>
+    <li class="active"><a href="{php echo $this->createWebUrl('activity');}">活动管理</a></li>
+    <li><a href="{php echo $this->createWebUrl('gifts');}">礼品设置</a></li>
+    <li><a href="{php echo $this->createWebUrl('api');}">接口参数</a></li>
+</ul>
+<div class="clearfix">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            营销活动列表
+        </div>
+        <div class="table-responsive panel-body" style="overflow:visible;">
+            <table class="table table-hover">
+                <tr>
+                    <th>活动名称</th>
+                    <th style="width:100px;">活动类型</th>
+                    <th style="width:130px;">活动时间</th>
+                    <th style="width:100px;">发放</th>
+                    <th style="width:330px;"></th>
+                </tr>
+                {loop $ds $row}
+                <tr>
+                    <td>
+                        <p class="form-control-static">
+                            {$row['title']}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="form-control-static">
+                            {if $row['type'] == 'direct'}
+                            <span class="label label-info">直接发放</span>
+                            {/if}
+                            {if $row['type'] == 'game'}
+                            <span class="label label-info">红包游戏</span>
+                            {/if}
+                            {if $row['type'] == 'shared'}
+                                <span class="label label-info">助力讨礼品</span>
+                            {/if}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="form-control-static form-control-static-list" style="line-height:1.8em;">
+                            <span class="label label-primary">{php echo date('Y-m-d H:i', $row['start'])}</span> <br>
+                            <span class="label label-success">{php echo date('Y-m-d H:i', $row['end'])}</span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="form-control-static form-control-static-list" style="line-height:1.8em;">
+                            <span class="label label-info">总数量: {$row['count']['total']}</span> <br>
+                            <span class="label label-info">已发放: {$row['count']['already']}</span> <br>
+                            <span class="label label-info">还剩余: {$row['count']['surplus']}</span> <br>
+                        </p>
+                    </td>
+                    <td style="overflow:visible;">
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-default" href="{php echo $this->createWebUrl('activity', array('foo'=>'modify','id'=>$row['actid']))}"><i class="fa fa-edit"></i> 编辑</a>
+                            <a class="btn btn-default" href="{php echo $this->createWebUrl('activity', array('foo'=>'delete','id'=>$row['actid']))}" onclick="return confirm('删除活动将同时删除所有的领取记录及核销记录. 如果已经存在数据, 请不要进行删除.') && confirm('删除前已经确认了解删除后果?');"><i class="fa fa-remove"></i> 删除</a>
+                            <a class="btn btn-success" href="{php echo $this->createWebUrl('activity', array('foo'=>'records','id'=>$row['actid']))}"><i class="fa fa-list"></i> 发放记录</a>
+                            <div class="btn-group btn-group-sm">
+                                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="javascript:;">活动地址 <span class="caret"></span></a>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li>
+                                        <a href="{$row['url']}" target="_blank"><i class="fa fa-external-link fa-fw"></i> 直接访问</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="javascript:;" onclick="displayUrl('{$row['url']}', '{$row['surl']}');"><i class="fa fa-link fa-fw"></i> 查看链接</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="javascript:;" onclick="displayQr('{php echo $this->createWebUrl('qr', array('raw' => base64_encode($row['url'])))}');"><i class="fa fa-qrcode fa-fw"></i> 查看二维码</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {/loop}
+            </table>
+        </div>
+        <div class="panel-body text-right">
+            {$pager}
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-default" href="{php echo $this->createWebUrl('activity', array('foo'=>'create'))}">新增活动</a>
+        </div>
+        <script>
+            function displayUrl(lurl, surl) {
+                require(['jquery', 'util'], function($, u) {
+                    var content = '<p class="form-control-static" style="word-break:break-all">菜单使用链接(需要oAuth): <br>' + lurl + '</p>';
+                    content += '<p class="form-control-static" style="word-break:break-all">自动回复使用链接: <br>' + surl + '</p>';
+                    var footer =
+                            '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>' +
+                            '<button type="button" class="btn btn-primary">复制菜单链接</button>' +
+                            '<button type="button" class="btn btn-success">复制自动回复链接</button>';
+                    var diaobj = u.dialog('查看URL', content, footer);
+                    diaobj.find('.btn-default').click(function() {
+                        diaobj.modal('hide');
+                    });
+                    diaobj.on('shown.bs.modal', function(){
+                        u.clip(diaobj.find('.btn-primary')[0], lurl);
+                        u.clip(diaobj.find('.btn-success')[0], surl);
+                    });
+                    diaobj.modal('show');
+                });
+            }
+            function displayQr(url) {
+                require(['jquery', 'util'], function($, u) {
+                    var content = '<div class="panel panel-default text-center"><img src="' + url + '" alt="活动地址二维码" class="img-rounded"></div>';
+                    var footer =
+                            '<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>';
+                    var diaobj = u.dialog('查看URL二维码', content, footer);
+                    diaobj.find('.btn-default').click(function() {
+                        diaobj.modal('hide');
+                    });
+                    diaobj.modal('show');
+                });
+            }
+        </script>
+    </div>
+</div>
+{template 'common/footer'}

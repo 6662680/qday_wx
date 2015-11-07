@@ -1,0 +1,1367 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+
+<meta content="telephone=no" name="format-detection" />
+ <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<title>{if !empty($settings['title'])}{$settings['title']}{else}红娘首页{/if}</title>
+
+<link rel="stylesheet" type="text/css" href="{MEEPORES}/static/friend/css/index.css"  />
+<link rel="stylesheet" href="{MEEPORES}/static/friend/css/jquery.mobile-1.4.css"  />
+{php echo register_jssdk(false);}
+<script src="{MEEPORES}/static/friend/js/jquery.js" ></script>
+<script src="{MEEPORES}/static/friend/js/jquery.mobile-1.4.3.min.js" ></script>
+<!--距离定位---->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5PESLgvMcSbSUbPjmDKgvGZ3"></script>
+<!--Wap前端GMU样式-->
+        <link rel="stylesheet" type="text/css" href="{RES}/themes/css/gmu.css" />
+        <!--Wap前端GMU重置样式-->
+        <link rel="stylesheet" type="text/css" href="{RES}/themes/css/Joel-basegmu.css" />
+        <!--Wap前端Zepto函数库1.0-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/zepto.min.js"></script>
+        <!--Wap前端Joel公共封装函数库-针对ZEPTO-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-baseapi.js"></script>
+         <!--Wap前端Joel公共函数-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-base.js"></script>
+        <!--Wap前端Joel-Gmu公共函数库-->
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/gmu.min.js"></script>
+        <!--Wap前端Joel-Gmu公共函数库-针对Gmu-->
+		<script type="text/javascript" charset="utf-8" src="{RES}/themes/js/iscroll.js"></script>
+        <script type="text/javascript" charset="utf-8" src="{RES}/themes/js/Joel-basegmu.js"></script>
+		<script type="text/javascript" src="{RES}/themes/js/imglazyload.js"></script>
+		
+
+	<script src="{MEEPORES}/static/friend/js/love.js" ></script>
+	<script type="text/javascript">
+			var cachlat;
+			var cachlng;
+			var curlat;
+			var curlng;
+			//start
+			var map = new BMap.Map("allmap");  
+            var point = new BMap.Point(121.473754,31.23037);  
+            var geolocation = new BMap.Geolocation();
+			//end
+			$(function(){
+           geolocation.getCurrentPosition(function(r) {
+           var _this = this;
+           if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+						var mk = new BMap.Marker(r.point);
+						locLng = r.point.lng;
+						locLat = r.point.lat;
+						curlng = locLng;
+						curlat = locLat;
+                        cachlng  = locLng;
+						cachlat = locLat;
+						//alert(curlat);
+                        $.ajax({
+										 type: "POST",
+										 dataType: "html",
+										 timeout: 12000,//（毫秒）
+										 url: "{php echo $this->createMobileUrl('alllist')}",
+										 data: {
+										 'curlat':cachlat,
+										 'curlng':cachlng
+										 },
+										 success: function(data)
+										 {
+											
+											$("#loading").empty();
+											//alert('成功');
+										 }
+                               
+			            });
+						 
+
+           } else {
+						 tip("定位失败！！！",true);
+           }
+       }, {
+                   enableHighAccuracy: true
+       });
+ });
+</script>
+<script type="text/javascript">
+//点击喜欢JS
+var $jq = jQuery.noConflict(true);
+$jq(document).ready(function () {
+	//jQuery(".brand li img").live
+$jq(".hitlike").live('click',function(){
+		var love = $(this);
+		var id = love.attr("date");
+		var toopenid = $(".toopenid"+id).val();
+		
+		$.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('likeajax')}",
+			data:{uid:id,toopenid:toopenid},
+			cache:false,
+			success:function(data){
+				if(data=="error"){
+                   Joel_gmuAlert('喜欢Ta','身份失效，请重新从微信进入！');
+			       return;
+				}
+				else if(data=="nfull"){
+				    Joel_gmuAlert('喜欢Ta','你还未完善个人资料，先去完善吧！',null,function(){window.location='{php echo  $this->createMobileUrl('userinfo')}';});
+				}
+				else{
+					love.fadeOut(300);
+				love.html(data);
+				love.fadeIn(300);
+				}
+			}
+		});
+		return false;
+	});
+	});
+	
+  //点击我的资料
+$jq(document).ready(function () { 
+ $jq(".myInfo").click(function () { 
+   $(this).addClass("cur").siblings().removeClass("cur");
+	var openid ='{$openid}';
+	if(openid==''){
+	        Joel_gmuAlert('我的个人中心','身份失效，请重新从微信进入');
+			return;
+	}else{
+      window.location='{php echo  $this->createMobileUrl('homecenter')}';  
+	}
+ });
+  });
+  //点击个人中心
+  $jq(document).ready(function () { 
+$jq(".ucenter").click(function () { 
+     
+	// tip_close();
+	var openid ='{$openid}';
+	if(openid==''){
+	        Joel_gmuAlert('我的个人中心','身份失效，请重新从微信进入');
+			return;
+	}else{
+      window.location='{php echo  $this->createMobileUrl('homecenter')}';  
+	}
+ });
+  });
+  //点击查看男女神榜单
+  //点击个人中心
+  $jq(document).ready(function () { 
+$jq(".meepobangdan").click(function () { 
+   $(".f3").removeClass("f3").addClass("f33"); 
+	var openid ='{$openid}';
+	var itfull = '{$res['constellation']}'
+	if(openid==''){
+	        Joel_gmuAlert('男神女神榜单','身份失效，请重新从微信进入');
+			return;
+	}else if(itfull==''){
+				    Joel_gmuAlert('男神女神榜单','你还未完善个人资料，先去完善吧！',null,function(){window.location='{php echo  $this->createMobileUrl('userinfo')}';});
+	}else{
+      window.location='{php echo  $this->createMobileUrl('meepoweekwomenbangdan')}';  
+	}
+ });
+  });
+   //点击查看男女神榜单
+  //点击个人中心
+  $jq(document).ready(function () { 
+$jq("#huodong").click(function () { 
+   
+      window.location='{php echo  $this->createMobileUrl('huodongindex')}';  
+	
+ });
+  });
+  //点击了进入查看别人的状态
+   $jq(document).ready(function () { 
+$jq(".linka").live('click',function () { 
+    var objid = $(this).attr("date");
+    var toopenid = $(".toopenid"+objid).val();
+	var occupation =$(".occupation"+objid).val();
+	var lat = $(".lat"+objid).val();
+	var lng = $(".lng"+objid).val();
+	
+	if(occupation==''){
+	       
+			Joel_gmuAlert('Ta的个人中心','请先完善个人资料',null,function(){window.location='{php echo  $this->createMobileUrl('userinfo')}';});
+			return;
+	}else if(lat==''){
+	       Joel_gmuAlert('Ta的个人中心','请先提交自己的位置',null,function(){getlocation();});
+			return;
+	}else{
+       window.location = "/app/index.php?i={$weid}&c=entry&do=others&m=meepo_weixiangqin&openid=" +toopenid; 
+	}
+ });
+  });
+  
+	</script>
+	<script language='javascript'>
+function tip(msg,autoClose){
+	var div = $("#poptip");
+	var content =$("#poptip_content");
+	if(div.length<=0){
+		div = $("<div id='poptip'></div>").appendTo(document.body);
+		content =$("<div id='poptip_content'>" + msg + "</div>").appendTo(document.body);
+	}else{
+		content.html(msg);
+		content.show(); div.show();
+	}
+	if(autoClose) {
+		setTimeout(function(){
+			content.fadeOut(500);
+			div.fadeOut(500);
+		},1000);
+	}
+}
+function tip_close(){
+	$("#poptip").fadeOut(500);
+	$("#poptip_content").fadeOut(500);
+}
+</script>
+	<style type='text/css'>
+	#poptip { position: fixed; top:40%;left:50%;width:160px;margin-left:-80px;height: 80px;background:#000; opacity: 0.7;filter:alpha(opacity=0.7); color:#fff;z-index: 999;  border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
+	#poptip_content { position: fixed; top:40%;left:50%;width:160px;margin-left:-80px; height: 27px; color:#fff;text-align:center;font-size:14px;z-index: 9909;text-align:center;line-height:80px}
+   </style>
+</head>
+<!--强加css来控制body-->
+
+</style>
+<body style="padding: 15px 10px 10px;">
+<div><marquee direction="left" style="color:red;height:30px;line-height:30px;">{$settings['headtitle']}</marquee></div>
+<div class="wrap"> 
+<header class="mb15">
+       
+	           
+  <h1><a href="" target="_blank" class="home fleft"><img src="{if empty($settings['logo'])}{MEEPORES}/static/friend/images/logo.png{else}{php echo $_W['attachurl'].$settings['logo']}{/if}"  alt="{if empty($settings['title'])}校园红娘{else}{$settings['title']}{/if}"></a><span class="pl15 fleft" style="font-size:12px;">{if empty($settings['title'])}微相亲{else}{$settings['title']}{/if}</span><span  class="ucenter fright"><i><em></em></i></span>
+  </h1>
+</header>
+<!--div id="timer"><div class="timeLeft">距离更新还有</div><div id="timeRight"class="timeRight"></div></div-->
+<!--------将倒计时替换为广告ads------->
+
+<!------>
+<!--封面图集-->
+        
+        {if !empty($slide)}
+        <div id="J-album">
+            <div id="J-album-wp">
+                <!-- 轮播s -->
+                <div class="scroller" id="scroller">
+                    <ul id="thelist">
+                        {loop $slide $item}
+                        <li>
+                            <a href="{if empty($item['url'])}#{else}{$item['url']}{/if}" target="__blank">
+                                <img _src="{$_W['attachurl']}{$item['attachment']}" src="{$_W['attachurl']}{$item['attachment']}" />
+                            </a>
+							<div id="title"><a href="{if empty($item['url'])}#{else}{$item['url']}{/if}" target="__blank">{$item['title']}</a></div>
+                        </li>
+                        
+                   
+                        {/loop}
+                    </ul>
+					
+					
+                </div>
+            </div>
+            <div id="J-album-nav">
+                <ul id="indicator">
+                    {php $flag = false;}
+                    {loop $slide $item}
+                    {if !$flag}
+                    <li class="active">1</li>{php $flag = true;}
+                    {else}
+                    <li>1</li>
+                    {/if}
+                    {/loop}
+                </ul>
+            </div>
+            <div class="clr"></div>
+        </div>
+		<style>
+					#title{
+					position:relative;
+					text-align:left;
+					background: rgba(0,0,0,0.1);
+					bottom: 24px;
+                    left: 0;
+                    margin-bottom: 0;
+					
+					z-index:9999px;
+                    
+					}
+					#title a{color:#000;}
+					#thelist img{height:120px !important}
+					</style>
+        {/if}
+        
+        <div style="clear: both;"></div>
+<!--增加幻灯片-->
+<div class="search_box">
+<div class="search">
+<form id="index_search_form">
+<div class="text_box">
+<input style="color: rgb(64, 64, 64); " id="id" name="id" type="text" value="" placeholder="请输入对方微信昵称" class="keyword text" onkeydown="this.style.color='#404040'" autocomplete="off" id="keyword"><input type="submit" value="" class="submit" id="sousuo" data-page = "0"></div>
+</div>
+</form>
+</div>
+</div>
+<br>
+
+<!-------搜索结束------->
+<style type="text/css">
+.search_box{padding-left: 3px;padding-right:3px;position: relative;height: 32px;padding-bottom: 10px;padding-top: 10px;overflow: hidden;background-color: #f8f8f8;border-radius: 10px;}
+.search_box .logo_img{position: absolute;width: 45px;height: 19px;left: 10px;top: 15px;}
+.search_box .search{border:1px solid #ff3600;height: 30px;border-radius: 4px;padding: 0 40px 0 8px;position: relative;background: #fff;display:block;}
+.search_box .search .text{width: 100%;border:none;height: 20px;line-height: 20px;outline: none;font-size: 14px;font-family: "Microsoft Yahei";padding:5px 0;color:#b6b7b9;display:block;}
+.search_box .search .submit{width: 40px;height: 30px;position: absolute;right: 0px;top: 0px;background:#fff url("../addons/meepo_weixiangqin/template/mobile/tpl/static/friend/images/touch_sprite.png") 12px -21px no-repeat;background-size: 125px 45px;border:none;border-radius: 4px;}
+.search_box_focus{padding-left: 65px;}
+/*
+*幻灯样式
+*/
+/*J-album样式*/
+#J-album {
+	margin: 0 auto;
+	/*background-color: #FFFFFF;*/
+	width: 100%;
+	overflow: hidden;
+}
+#J-album-wp {
+	width: 100%;
+	margin: 0 auto;
+	height: auto;
+	
+	overflow: hidden;
+	z-index: 1;
+}
+.scroller {
+	height: auto;
+	overflow: hidden;
+}
+.scroller ul {
+	display: block;
+	
+	overflow: hidden;
+	height: auto;
+	margin: auto;
+	padding: 0;
+	text-align: center;
+}
+.scroller li {
+	width: auto;
+	height: auto;
+	display: block;
+	float: left;
+	text-align: center;
+}
+
+#J-album-nav {
+	float:right;
+	right: 3%;
+	margin-top: -37px;
+	padding: 0;
+	position: relative;
+	width: auto;
+	z-index: 3;
+}
+#indicator > li {
+	display: block;
+	float: left;
+	list-style: none;
+}
+#indicator {
+	display: block;
+	margin: 0 8px;
+	padding: 0;
+	width: auto;
+}
+#indicator > li {
+	text-indent: -9999em;
+	width: 8px;
+	height: 8px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: #888;
+	overflow: hidden;
+	margin-right: 4px;
+}
+#indicator > li.active {
+	background: #DDDDDD;
+}
+ #indicator > li:last-child {
+	margin: 0;
+}
+</style>
+<section class="indexSec" id="indexSec">
+  <ul class="indexList" id="list_article">
+        {loop $list2 $row}
+    <li class="indexItem">
+    <span  class="linka" date="{$row['id']}">
+ <img src="{if preg_match('/http:(.*)/',$row['avatar'])}{$row['avatar']} {else if preg_match('/images(.*)/',$row['avatar'])} {$_W['attachurl']}{$row['avatar']}     {else}{MEEPORES}/static/friend/images/cdhn80.jpg{/if}"  alt="用户头像">
+        <div class="itemc">
+          <p class="hcolor" style="font-size:13px;">{php echo cutstr($row['realname'],5,true);}&nbsp;&nbsp;{if $row['gender']=='1'}男{elseif $row['gender']=='2'}女{else}保密{/if}&nbsp;&nbsp;<font id="shopspostion" style="color:red;font-size:12px;">&nbsp;&nbsp;{$juli[$row['id']]}</font></p>
+          <p class="lcolor" style="font-size:13px;">微信:{php echo cutstr($row['nickname'],5,true);}&nbsp;&nbsp;{$row['resideprovincecity']}</p>
+		  <input type="hidden" class="nickname{$row['id']}" value="{$row['nickname']}"/>
+		  <input type="hidden" class="toopenid{$row['id']}" value="{$row['from_user']}"/>
+		  <input type="hidden" class="openid{$row['id']}" value="{$openid}"/>
+		  <input type="hidden" class="occupation{$row['id']}" value="{$res['occupation']}"/>
+		  <input type="hidden" class="lat{$row['id']}" value="{$res['lat']}"/>
+		  <input type="hidden" class="lng{$row['id']}" value="{$res['lng']}"/>
+        </div>
+        <i class="arr"></i>
+      </span>    
+    	<div class="likebox">
+    		<div class="likeit  fleft "><span class="hitlike" date="{$row['id']}" title="{$row['openid']}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$row['love']}</span></div>
+    		<div class="likeit letterit fright"><a class="hitmail"  date="{$row['id']}" href="{php echo $this->createMobileUrl('hitmail',array('toname'=>$row['nickname'],'toopenid'=>$row['from_user']))}" target="__blank" style="color:#fff">聊一聊</a></div>
+    	</div>
+      
+      </li>
+     <li class="dottedLine"></li>
+     
+	
+	{/loop}
+  </ul>
+ <!--------点击加载样式-------->
+ <div style="height:20px">
+ </div>
+<!--div id="all">
+            <div  id="loading"></div><div  id="J-getmore" data-page = "2" >查看更多</div>
+</div-->
+<div id="more">
+<div id="all"><span><span id="loading"></span>&nbsp;&nbsp;&nbsp;<span  id="J-getmore" data-page = "2">查看更多</span></span></div>
+<div id="man" style="display:none"><span><span id="loading"></span>&nbsp;&nbsp;&nbsp;<span  id="J-getmore2" data-page = "2">查看更多</span></span></div>
+<div id="woman" style="display:none"><span><span id="loading"></span>&nbsp;&nbsp;&nbsp;<span  id="J-getmore3" data-page = "2">查看更多</span></span></div>
+<div id="ilike" style="display:none"><span><span id="loading"></span>&nbsp;&nbsp;&nbsp;<span  id="J-getmore4" data-page = "2">查看更多</span></span></div>
+<div id="likeme" style="display:none"><span><span id="loading"></span>&nbsp;&nbsp;&nbsp;<span  id="J-getmore5" data-page = "2">查看更多</span></span></div>
+<div id="zuipei2" style="display:none"><span><span id="loading"></span>&nbsp;&nbsp;&nbsp;<span  id="J-getmore6" data-page = "2">查看更多</span></span></div>
+<div id="nearperson" style="display:none"><span><span id="loading"></span>&nbsp;&nbsp;&nbsp;<span  id="J-getmore7" data-page = "1">查看更多</span></span></div>
+<div id="sousuomore" style="display:none"><span><span id="loading"></span>&nbsp;&nbsp;&nbsp;<span  id="J-getmore8" data-page = "8">查看更多</span></span></div>
+</div>
+
+<div id="showresult"></div>
+
+<style type="text/css">
+#more div{width:100%;text-align:center;font-family: sans-serif;background: rgba(200,200,200,0.4);height:50px;line-height:50px}
+
+#loading img{height:16px;width:16px}
+.ui-icon-loading{display:none !important}
+/*#J-getmore,#J-getmore2,#J-getmore3,#J-getmore4,#J-getmore5,#J-getmore6,#J-getmore7,#J-getmore8{width:100%;text-align:center;font-family: sans-serif;background: -webkit-linear-gradient(top, #ffffff, #f7f7f7);height:30px;line-height:30px}*/
+.endres{width:100%;text-align:center;font-family: sans-serif;background: rgba(200,200,200,0.4);height:50px;line-height:50px}
+.ui-dialog-content{background-color:#fff !important}
+</style>
+<!--------点击加载样式-------->
+ 
+</section>
+
+<div class="myLetter">
+     <span  class="meeponew" ><span class="f1"></span><span>{if empty($cfg['firstcard'])}女神{else}{$cfg['firstcard']}{/if}</span></span>
+	 <span  class="meepohot"><span class="f2"></span><span>{if empty($cfg['secondcard'])}男神{else}{$cfg['secondcard']}{/if}</span></span>
+	 <span  class="meepobangdan"><span class="f3"></span><span>{if empty($cfg['thirdcard'])}榜单{else}{$cfg['thirdcard']}{/if}</span></span>
+	 <span  class="myInfo"><span class="f4"></span><span>{if empty($cfg['fourcard'])}个人中心{else}{$cfg['fourcard']}{/if}</span></span>
+	 <span  class="zuipei" ><span class="f5"></span><span>{if empty($cfg['fivecard'])}与我相关{else}{$cfg['fivecard']}{/if}</span></span>
+</div>
+</div>
+<style type="text/css">
+.myLetter {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 11;
+  background: rgba(249,249,249,1);
+   height: 50px;
+ 
+}
+
+.myLetter .meeponew,.myLetter .meepohot,.myLetter .meepobangdan,.myLetter .myInfo,.myLetter .zuipei{
+  width: 20%;
+ 
+  font:12px/180% Arial, Helvetica, sans-serif, "宋体";
+  float: left;
+  
+  text-align: center;
+}
+.myLetter .meeponew span,.myLetter .meepohot span,.myLetter .meepobangdan span,.myLetter .myInfo span,.myLetter .zuipei span{
+margin-top:4px;
+ display:block;text-align:center;height:24px
+}
+.f1{background:url("../addons/meepo_weixiangqin/template/mobile/tpl/static/friend/caidan/hpdi_menu_women2.png") center center no-repeat;background-size: 24px 24px;}
+
+
+.f2{background:url("../addons/meepo_weixiangqin/template/mobile/tpl/static/friend/caidan/hpdi_menu_men2.png") center center no-repeat;background-size: 24px 24px;}
+
+
+.f3{background:url("../addons/meepo_weixiangqin/template/mobile/tpl/static/friend/caidan/hpdi_menu_paihangbang2.png") center center no-repeat;background-size: 24px 24px;}
+
+
+.f4{background:url("../addons/meepo_weixiangqin/template/mobile/tpl/static/friend/caidan/hpdi_menu_me2.png") center center no-repeat;background-size: 24px 24px;}
+
+
+.f5{background:url("../addons/meepo_weixiangqin/template/mobile/tpl/static/friend/caidan/hpdi_menu_@2.png") center center no-repeat;background-size: 24px 24px;}
+
+.cur{ border-top:1px solid #ff3600;}
+</style>
+
+<!-- 弹出层2 -->
+</body>
+
+
+
+
+
+
+ <script type="text/javascript">
+
+	Zepto(function($){
+		//内滚动导航
+		//图片懒加载
+		$('.linka').imglazyload();
+		//返回顶部
+		//$('#gotop').gotop();
+	});
+	//获取更多
+	$('#J-getmore').on('click',function(){
+		//执行动画
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('getmoreall')}";
+		
+		var page=$(this).data('page');
+		
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','奴家只能提供这么多了!');
+				//移出加载更多
+				$("#loading").remove();
+
+				$('#J-getmore').html("已经加载全部");
+                //$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$('#J-getmore').data('page',page+1);
+				//结束转动
+				$("#loading").empty();
+				
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'page' : page,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				$("#loading").remove();
+			}
+		});
+		return false;
+	});
+	
+	$('.meepohot').on('click',function(){
+		//获取男嘉宾 
+		 
+	 $(this).addClass("cur").siblings().removeClass("cur");
+       
+		$("#list_article").empty();
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#all").remove();
+		$("#woman").hide();
+        $("#ilike").hide();
+        $("#likeme").hide();
+		$("#zuipei2").hide();
+		$("#nearperson").hide();
+		$("#sousuomore").hide();
+		$("#man").show();
+		$('#J-getmore2').data('page',2);
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meepohot')}";
+		
+		var truepage=0;
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','奴家只能提供这么多了!');
+				//移出加载更多
+				$("#man").hide();
+				$("#showresult").addClass("endres");
+				$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','网络超时加载失败，请重试!');
+				$('#J-getmore2').data('page',2);
+				$("#loading").empty();
+			}
+		});
+		return false;
+	});
+	//获取更多
+	$('#J-getmore2').on('click',function(){
+		//执行动画
+		$("#showresult").empty();
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meepohot')}";
+		
+		var truepage=$(this).data('page');
+		
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','奴家只能提供这么多了!');
+				//移出加载更多
+				
+				$('#man').hide();
+				$("#showresult").addClass("endres");
+				$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$('#J-getmore2').data('page',truepage+1);
+				//结束转动
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','网络超时加载失败，请重试!');
+				$("#loading").remove();
+			}
+		});
+		return false;
+	});
+	$('.meeponew').on('click',function(){
+		//获取女嘉宾 
+         $(this).addClass("cur").siblings().removeClass("cur");
+		$("#list_article").empty();
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#all").remove();
+		$("#man").hide();
+        $("#ilike").hide();
+        $("#likeme").hide();
+		$("#zuipei2").hide();
+		$("#nearperson").hide();
+		$("#sousuomore").hide();
+		$("#woman").show();
+		$('#J-getmore3').data('page',2);
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meeponew')}";
+		
+		var truepage=0;
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','奴家只能提供这么多了!');
+				//移出加载更多
+                
+				$("#woman").hide();
+				$("#showresult").addClass("endres");
+				$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				$('#J-getmore3').data('page',1);
+				$("#loading").empty();
+			}
+		});
+		return false;
+	});
+	//获取更多
+	$('#J-getmore3').on('click',function(){
+		//执行动画
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meeponew')}";
+		
+		var truepage=$(this).data('page');
+		
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','奴家只能提供这么多了!');
+				//移出加载更多
+				
+				$('#woman').hide();
+				$("#showresult").addClass("endres");
+				$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$('#J-getmore3').data('page',truepage+1);
+				//结束转动
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				$("#loading").remove();
+			}
+		});
+		return false;
+	});
+	//获取我喜欢的人
+	$('#ilikesomeone').on('click',function(){
+		//获取女嘉宾 
+		$("#list_article").empty();
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#all").remove();
+		$("#man").hide();
+		$("#woman").hide();
+        $("#likeme").hide();
+		$("#zuipei2").hide();
+		$("#nearperson").hide();
+		$("#sousuomore").hide();
+        $("#ilike").show();
+		$('#J-getmore4').data('page',2);
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meepoilike')}";
+		
+		var truepage=0;
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','亲，你只喜欢了这么多哦!');
+				//移出加载更多
+                 
+				 $("#ilike").hide();
+				 $("#showresult").addClass("endres");
+				 $("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				$('#J-getmore4').data('page',1);
+				Joel_gmuAlert('加载更多','网络超时加载失败，请重试!');
+				
+				$("#loading").empty();
+			}
+		});
+		return false;
+	});
+	//获取更多
+	$('#J-getmore4').on('click',function(){
+		//执行动画
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meepoilike')}";
+		
+		var truepage=$(this).data('page');
+		
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','亲，你只喜欢了这么多哦!');
+				//移出加载更多
+				
+				$('#ilike').hide();
+				$("#showresult").addClass("endres");
+				$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$('#J-getmore4').data('page',truepage+1);
+				//结束转动
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				$("#loading").remove();
+			}
+		});
+		return false;
+	});
+//获取喜欢我的
+	$('#someonelikeme').on('click',function(){
+		//获取女嘉宾 
+		$("#list_article").empty();
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#all").remove();
+		$("#man").hide();
+		$("#woman").hide();
+        $("#ilike").hide();
+		$("#zuipei2").hide();
+		$("#nearperson").hide();
+		$("#sousuomore").hide();
+        $("#likeme").show();
+		$('#J-getmore5').data('page',2);
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meeposomelikeme')}";
+		
+		var truepage=0;
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','亲，喜欢你只有这么多哦!');
+				//移出加载更多
+                
+				 $("#likeme").hide();
+				 $("#showresult").addClass("endres");
+				 $("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				$('#J-getmore5').data('page',1);
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				
+				$("#loading").empty();
+			}
+		});
+		return false;
+	});
+	//获取更多
+	$('#J-getmore5').on('click',function(){
+		//执行动画
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meeposomelikeme')}";
+		
+		var truepage=$(this).data('page');
+		
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('加载更多','亲，喜欢你只有这么多哦!');
+				//移出加载更多
+				
+				$('#likeme').hide();
+				$("#showresult").addClass("endres");
+				$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$('#J-getmore5').data('page',truepage+1);
+				//结束转动
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				$("#loading").remove();
+			}
+		});
+		return false;
+	});
+//最配 的处理
+$('.zuipei').on('click',function(){
+	 $(this).addClass("cur").siblings().removeClass("cur");
+		window.location = "{php echo $this->createMobileurl('mynews')}";
+	});
+	//附近的人处理
+	//最配 的处理
+$('#meeponear').on('click',function(){
+		//获取女嘉宾 
+		$("#list_article").empty();
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#all").remove();
+		$("#man").hide();
+		$("#woman").hide();
+        $("#ilike").hide();
+        $("#likeme").hide();
+		$("#zuipei2").hide();
+		$("#sousuomore").hide();
+        $("#nearperson").show();
+		$('#J-getmore7').data('page',1);
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meeponear')}";
+		
+		var truepage=0;
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('附近的人','亲，这里暂时还找不到附近的人!');
+				//移出加载更多
+                
+				 $("#nearperson").hide();
+				 $("#showresult").addClass("endres");
+				 $("#showresult").html("已经加载全部");
+			}else if(e=='1'){
+				//移出加载更多
+				Joel_gmuAlert('附近的人','亲，要先去完善自己的资料哦!',null,function(){window.location='{php echo  $this->createMobileUrl('userinfo')}';});
+				$("#nearperson").hide();
+			
+			}else if(e=='2'){
+			  Joel_gmuAlert('附近的人','亲，要先去完善自己的资料哦!',null,function(){getlocation();});
+				//移出加载更多
+				
+				$("#nearperson").hide();
+			
+			}else{
+				$('#list_article').append(e);
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				$('#J-getmore7').data('page',1);
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				
+				$("#loading").empty();
+			}
+		});
+		return false;
+	});
+	//获取更多
+	$('#J-getmore7').on('click',function(){
+		//执行动画
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('meeponear')}";
+		
+		var truepage=$(this).data('page');
+		
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('附近的人','亲，附近的人只有这么多哦!');
+				//移出加载更多
+				
+				$("#nearperson").hide();
+				$("#showresult").addClass("endres");
+				$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$('#J-getmore7').data('page',truepage+1);
+				//结束转动
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'islast':islast,
+				'cateson':cateson
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				$("#loading").remove();
+			}
+		});
+		return false;
+	});
+//以上为 加载js
+//增加搜索功能
+  //点击了进入查看别人的状态
+	$('#sousuo').on('click',function(){
+		//获取女嘉宾 
+        var keyword = $('.text').val();
+	    if(keyword==''){
+	      return false;
+	    }
+		$("#list_article").empty();
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#all").remove();
+		$("#man").hide();
+		$("#woman").hide();
+        $("#ilike").hide();
+        $("#likeme").hide();
+		$("#zuipei2").hide();
+        $("#nearperson").hide();
+		//$("#nearperson").hide();
+		$("#sousuomore").show();
+		$('#J-getmore8').data('page',2);
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('sousuomore')}";
+		
+		var truepage=1;
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('搜人','亲，这里暂时还找不到这个人哦!');
+				//移出加载更多
+                
+				 $("#sousuomore").hide();
+				 $("#showresult").addClass("endres");
+				 $("#showresult").html("已经加载全部");
+			}else if(e=='1'){
+			  Joel_gmuAlert('搜索','亲，要先去完善自己的资料哦!',null,function(){window.location='{php echo  $this->createMobileUrl('userinfo')}';});
+				//移出加载更多
+				
+				 $("#sousuomore").hide();
+			
+			}else if(e=='2'){
+			   Joel_gmuAlert('附近的人','亲，要先去完善自己的资料哦!',null,function(){getlocation();});
+				//移出加载更多
+				
+				 $("#sousuomore").hide();
+			
+			}else{
+				$('#list_article').append(e);
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'keyword' : keyword
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				$('#J-getmore8').data('page',1);
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				
+				$("#loading").empty();
+			}
+		});
+		return false;
+	});
+	//获取更多
+	$('#J-getmore8').on('click',function(){
+		//执行动画
+		 var keyword = $('.text').val();
+	    if(keyword==''){
+	      return false;
+	    }
+		$("#showresult").empty();
+		$("#showresult").removeClass("endres");
+		$("#loading").html(
+	     "<img src='{MEEPORES}/static/forum/css/img/loading.gif'/>");
+		var loadurl="{php echo $this->createMobileurl('sousuomore')}";
+		
+		var truepage=$(this).data('page');
+		
+		var islast="";
+		var cateson="";
+		var okfun=function(e){
+			if(e=='0'){
+				//Joel_gmuAlert('搜人','亲，只有这么多哦!');
+				//移出加载更多
+				
+				 $("#sousuomore").hide();
+				 $("#showresult").addClass("endres");
+				$("#showresult").html("已经加载全部");
+			}else{
+				$('#list_article').append(e);
+				$('#J-getmore8').data('page',truepage+1);
+				//结束转动
+				$("#loading").empty();
+			}
+		};
+
+		$.ajax({
+			type : 'POST',
+			url : loadurl,
+			data : {
+				'truepage' : truepage,
+				'keyword' : keyword
+			},
+			// type of data we are expecting in return:
+			dataType : 'json',
+			timeout : 6000,
+			context : $('body'),
+			success : okfun,
+			error : function(xhr) {
+				Joel_gmuAlert('加载更多','呜呜，网络超时加载失败，请重试!');
+				$("#loading").remove();
+			}
+		});
+		return false;
+	});
+</script>
+
+<script type="text/javascript">
+  wx.ready(function () {
+    var shareData = {
+    title: "{$settings['share_title']}",
+    desc: "{$settings['share_content']}",
+    link: "{$settings['share_link']}",
+    imgUrl: "{$_W['attachurl']}{$settings['share_logo']}",
+  };
+  
+  //分享朋友
+  wx.onMenuShareAppMessage({
+       title: shareData.title,
+      desc: shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+        send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: shareData.title+"---"+shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+          send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        Joel_gmuAlert("分享失败","网络超时！！！！");
+      }
+    });   
+    
+  });
+
+
+
+function send_intergal(){
+   $.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('shareajax')}",
+			data:{openid:'{$openid}}'},
+			cache:false,
+			success:function(data){
+				if(data=="no"){
+					Joel_gmuAlert("分享成功","抱歉，网络超时，获取积分失败！！！");
+                   
+				}
+				else if(data=="over"){
+				   Joel_gmuAlert("分享成功","你今天的分享次数已经超过上限哦，请明天再来吧！！！");
+				
+				}
+				else{
+				   Joel_gmuAlert("分享成功","恭喜您，获得{$settings['share_jifen']}个奖励积分！今天你还有"+data+"次分享赚积分机会哦！");
+				}
+			}
+		});
+}
+
+function getlocation(){
+
+    wx.getLocation({
+      success: function (res) {
+        alert(JSON.stringify(res));
+      },
+      cancel: function (res) {
+        alert('用户拒绝授权获取地理位置');
+      }
+    });
+
+}
+        </script>
+		<script type="text/javascript">
+		var myScroll;
+		function loaded() {
+			myScroll = new iScroll('J-album-wp', {
+				snap : true,
+				momentum : false,
+				hScrollbar : false,
+				onScrollEnd : function() {
+					document.querySelector('#indicator > li.active').className = '';
+					document.querySelector('#indicator > li:nth-child(' + (this.currPageX + 1) + ')').className = 'active';
+				}
+			});
+		}
+		document.addEventListener('DOMContentLoaded', loaded, false);
+	</script>
+	<script type="text/javascript">
+		var count = document.getElementById("thelist").getElementsByTagName("img").length;
+		var divwidth = document.body.clientWidth-20;
+		for ( i = 0; i < count; i++) {
+			document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:" + divwidth + "px";
+           // document.getElementById("thelist").getElementsByTagName("div").item(i).style.cssText = " width:" + divwidth + "px";
+		}
+		document.getElementById("scroller").style.cssText = " width:" + divwidth * count + "px";
+		setInterval(function() {
+			myScroll.scrollToPage('next', 0, 400, count);
+		}, 3500);
+
+	
+		window.onresize = function() {
+			for ( i = 0; i < count; i++) {
+				document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:" + divwidth + "px";
+
+			}
+			document.getElementById("scroller").style.cssText = " width:" + divwidth * count + "px";
+		}
+	</script>
+		{template 'footer'}

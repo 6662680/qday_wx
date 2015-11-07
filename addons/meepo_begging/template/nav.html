@@ -1,0 +1,10 @@
+<ul class="nav nav-tabs" id="myTab">
+    <li>
+		<a href="?c=home&a=welcome&do=ext&m={php echo $_GPC['m']}">返回</a>
+	</li>
+    <li {if $_GPC['do'] == 'manage'}class="active"{/if}><a href="{php echo $this->createWebUrl('manage')}">乞讨管理</a></li>
+    <li {if $_GPC['do'] == 'money'}class="active"{/if}><a href="{php echo $this->createWebUrl('money')}">发放饭钱</a></li>
+    {if !empty($_GPC['uid'])}
+    <li {if $_GPC['do'] == 'look'}class="active"{/if}><a href="{php echo $this->createWebUrl('look',array('uid'=>$_GPC['uid']))}">打赏详情</a></li>
+    {/if}
+</ul>

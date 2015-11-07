@@ -1,0 +1,101 @@
+{template 'common/header'}
+{template 'nav'}
+<div class="main">
+<div class="panel panel-info">
+<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="./index.php" method="get" class="form-horizontal" role="form" id="form1">
+			<input type="hidden" name="c" value="site" />
+			<input type="hidden" name="a" value="entry" />
+			<input type="hidden" name="m" value="meepo_begging" />
+			<input type="hidden" name="do" value="money" />
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">昵称</label>
+				<div class="col-sm-8 col-lg-9 col-xs-12">
+					<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="可查询乞讨会员">
+				</div>
+			</div> 
+		</form>
+	</div>
+</div>
+<form action="" method="post" class="form-horizontal" role="form">
+	<div class="panel panel-default">
+		<div class="panel-body table-responsive">
+			<table class="table">
+				<thead class="navbar-inner">
+					<tr>
+					   <th style="width:25px;">选？</th>
+						<th style="width:180px;">昵称</th>
+						<th style="width:80px;">头像</th>
+						<th style="width:100px;">提现金额</th>
+						<th style="width:180px;">提交时间</th>
+						<th style="width:80px;">提现方式</th>
+						<th style="width:80px;">状态</th>
+						<th style="width:180px;">操作</th>
+					</tr>
+				</thead>
+				<style>
+					.wait{
+						  display: block;
+						  width: 4em;
+						  background-color: rgb(147, 158, 171);
+						  color: white;
+						  height: 2em;
+						  padding-top: 0.3em;
+						  text-align: center;
+						  border-radius: 1em;
+					}
+
+					.aleady{
+						  display: block;
+						  width: 4em;
+						  background-color: red;
+						  color: white;
+						  height: 2em;
+						  padding-top: 0.3em;
+						  text-align: center;
+						  border-radius: 1em;
+					}
+
+					.refuse{
+						  display: block;
+						  width: 4em;
+						  background-color: black;
+						  color: white;
+						  height: 2em;
+						  padding-top: 0.3em;
+						  text-align: center;
+						  border-radius: 1em;
+					}
+				</style>
+				<tbody>
+					{loop $lists $item}
+					<tr>
+					   <td><input type="checkbox" name="orderid[]" value="{$item['id']}" class=""></td>
+						<td>{$item['nickname']}</td>
+						<td><img src="{php echo tomedia($item['avatar'])}" style="width: 50px;border-radius: 25px;height: 50px;"></td>
+						<td>{$item['money']}元</td>
+						<td>{php echo date('Y-m-d H:i:s', $item['createtime'])}</td>
+						<td>{if $item['type']==1}微信钱包{else}支付宝{/if}</td>
+						<td>{if $item['status']==0}<span class="wait">待支付</span>{else if $item['status']==1}<span class="aleady">已支付</span>{else if $item['status']==2}<span class="refuse">已拒绝</span>{else}未知{/if}</span></td>
+						<td>
+							<a class="btn btn-default" href="{php echo $this->createWebUrl('money',array('type'=>'wechat','status'=>2))}">红包发放</a>
+							<a class="btn btn-default" href="{php echo $this->createWebUrl('money',array('type'=>'apply','status'=>2))}">支付宝发放</a>
+						</td>
+					</tr>
+					{/loop}
+				</tbody>
+				<tr>
+					<td><input type="checkbox" onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck});"></td>
+                    <td colspan="12">
+                        <input type="submit" class="btn btn-danger" name="delete" value="删除" />
+                        <input type="submit" class="btn btn-pramary" name="upload" value="导出数据" />
+                    </td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</form>
+</div>
+{$pager}
+{template 'common/footer'}

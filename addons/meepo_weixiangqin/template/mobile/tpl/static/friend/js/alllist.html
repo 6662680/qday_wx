@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>{if !empty($settings['title'])}{$settings['title']}{else}红娘首页{/if}</title>
+
+<link rel="stylesheet" type="text/css" href="http://meepo.com.cn/source/modules/meeposchoolmother/template/mobile/tpl/static/friend/css/index.css"  />
+<link rel="stylesheet" href="../source/modules/meeposchoolmother/template/mobile/tpl/static/friend/css/jquery.mobile-1.4.3.css"  />
+<script src="../source/modules/meeposchoolmother/template/mobile/tpl/static/friend/js/jquery.js" ></script>
+<!--<script src="../source/modules/meeposchoolmother/template/mobile/tpl/static/friend/js/index.js" ></script-->
+<script src="../source/modules/meeposchoolmother/template/mobile/tpl/static/friend/js/jquery.mobile-1.4.3.min.js" ></script>
+
+<!--<script src="../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/js/main.js" ></script-->
+<!--<script src="../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/js/dialog_min.js" ></script-->
+<script src="./resource/script/common.js"></script>
+<script src="../source/modules/meeposchoolmother/template/mobile/tpl/static/friend/js/jquery.roll.js"></script>
+<script src="../source/modules/meeposchoolmother/template/mobile/tpl/static/friend/js/love.js" ></script>
+<!--距离定位---->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5PESLgvMcSbSUbPjmDKgvGZ3"></script>
+<!--<script type="text/javascript" src="../source/modules/meeposchoolmother/template/mobile/tpl/static/friend/js/position.js?v=2"></script>-->
+<!-----距离定位------>
+
+<script type="text/javascript">
+            //checkMM()
+// - -!,你懂的.
+          //先技术经纬度  将值赋予input
+	
+//end
+            var times=0;
+			var times2=1;
+            var loaded1 = true;
+			var loaded = true;
+			//var curlat = $("#curlat").val();
+			//var curlng = $("#curlng").val();
+			//start
+			var point = new BMap.Point(116.331398, 39.897445);
+            var geolocation = new BMap.Geolocation();
+            
+			//end
+			$(function(){
+				if (document.location.href.indexOf("/shop/all/") == 0) {
+            geolocation = null
+            };
+      geolocation.getCurrentPosition(function(r) {
+           var _this = this;
+           if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+						var mk = new BMap.Marker(r.point);
+						locLng = r.point.lng;
+						locLat = r.point.lat;
+						 
+						$(".indexList").each(function() {
+							var ShopLngLat = $(this).find("#showlan").val();
+							var InputOF = ShopLngLat.indexOf(",");
+							var InputOFLast = ShopLngLat.length;
+							var ShopLng = ShopLngLat.slice(0, InputOF);
+							var ShopLat = ShopLngLat.slice(InputOF + 1, InputOFLast);
+							var dis111 = distanceByLnglat(locLng, locLat, ShopLng, ShopLat);
+							$(this).find("#shopspostion").html("" + dis111 + " Km");
+						});
+                        $("#curlat").val(locLat);
+						$("#curlng").val(locLng);
+
+           } else {
+						$(".indexList").each(function() {
+							$(this).find("#shopspostion").html("无法获取距离" + _this.getStatus() + "");
+						});
+           }
+       }, {
+                   enableHighAccuracy: true
+       });
+				$("#loading").html(
+	     "<img src='../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/css/img/loading.gif'/>");
+                 //times++;
+                 $.ajax(
+                 {
+                     type: "POST",
+                     dataType: "html",
+					 timeout: 12000,//（毫秒）
+                     url: "?act=module&name=meeposchoolmother&do=listmore&weid={$weid}",
+                     data: {'times':times,
+					 'curlat':$('#curlat').val(),
+					 'curlng':$('#curlng').val()
+					 },
+					 error: function(XMLHttpRequest, textStatus, errorThrown){        //TODO: 处理status， http status code，超时 408
+                           // $("#loading").css("display","none");
+						    //$("#loading2").html("点击加载更多...");
+							if(textStatus=="timeout"){
+							   $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+							   
+							}else{
+							   $("#loading").html("<div style='text-align:center'>加载出现未知错误，请重试！</div>");
+							}
+							loaded1=false;
+							loaded=false;
+                            //loaded=false;
+                // 注意：如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能
+                      //是"timeout", "error", "notmodified" 和 "parsererror"。&"curlat="+curlat&"curlng="+curlng
+                     },
+                     success: function(data)
+                     {
+                        //alert("第"+times+"次追加数据.");
+						$("#loading").empty();
+                        if(data == "")
+						{  
+							$("#loading").html("<div style='text-align:center;color:red'>已经加载所有</div>");
+                            loaded1=false;
+                           
+						}else 
+                        {
+                            $("#list_article").append(data);                            
+                            loaded1=false;                       
+
+                        }
+                     }
+                  }
+                  
+                );
+			});
+            function Add_Data()
+            {
+              var top = $("#list_article").offset().top;
+              if(loaded && ($(window).scrollTop() + $(window).height() > top))
+              {
+                 $("#loading").html(
+	     "<img src='../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/css/img/loading.gif'/>");
+                 times2++;
+                 $.ajax(
+                 {
+                     type: "POST",
+                     dataType: "html",
+					 timeout: 10000,//（毫秒）
+                     url: "?act=module&name=meeposchoolmother&do=listmore&weid={$weid}",
+                     data: {
+						 'times2':times2,
+						 'curlat':$('#curlat').val(),
+						 'curlng':$('#curlng').val()},
+					 error: function(XMLHttpRequest, textStatus, errorThrown){        //TODO: 处理status， http status code，超时 408
+                            if(textStatus=="timeout"){
+							   $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+							   
+							}else{
+							   $("#loading").html("<div style='text-align:center'>加载出现未知错误，请重试！</div>");
+							}
+                            loaded=false;
+                // 注意：如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能
+                      //是"timeout", "error", "notmodified" 和 "parsererror"。
+                     },
+                     success: function(data)
+                     {
+                        //alert("第"+times+"次追加数据.");
+						$("#loading").empty();
+                        if(data == "没有数据")
+                        {
+                            $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+                            loaded=false;
+                           
+                        }
+						else if(data == "已经加载完毕")
+                        {
+                            $("#loading").html("<div style='text-align:center;color:red'>已经加载所有</div>");
+                            loaded=false;
+                           
+                        }
+						else if(data == "")
+						{   
+							$("#loading").css("display","none");
+						    $("#loading2").html("点击加载更多...");
+                           
+						}
+                        else 
+                        {
+                            $("#list_article").append(data);                            
+                           
+                        }
+                     }
+                  }
+                  
+                );
+              }
+            }
+            $(window).scroll(Add_Data); 
+			
+function checkMM() {
+	//var ismm = navigator.userAgent.indexOf("MicroMessenger") > -1;
+	//if (ismm == false) {
+	//	window.location.href = 'erro.html';
+	//}
+
+	var browser = {
+		versions : function() {
+			var u = navigator.userAgent, app = navigator.appVersion;
+			return {
+				trident : u.indexOf('Trident') > -1, //IE内核
+				presto : u.indexOf('Presto') > -1, //opera内核
+				webKit : u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+				gecko : u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+				mobile : !!u.match(/AppleWebKit.*Mobile/)
+						|| !!u.match(/Windows Phone/) || !!u.match(/Android/)
+						|| !!u.match(/MQQBrowser/),
+				ios : !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+				android : u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+				iPhone : u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+				iPad : u.indexOf('iPad') > -1, //是否iPad
+				webApp : u.indexOf('Safari') > -1 //是否web应该程序，没有头部与底部
+			};
+		}()
+	}
+
+	if (browser.versions.ios == true || browser.versions.android == true
+			|| browser.versions.iPhone == true || browser.versions.iPad == true
+			|| browser.versions.mobile == true) {
+	}else{
+		
+		window.location.href = '{php echo $this->createMobileUrl('errorjoin')}';
+	}
+}
+function distanceByLnglat(lng1, lat1, lng2, lat2) {
+        var radLat1 = Rad(lat1);
+        var radLat2 = Rad(lat2);
+        var a = radLat1 - radLat2;
+        var b = Rad(lng1) - Rad(lng2);
+        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * 6378137.0;
+        s = Math.round(s * 10000) / 10000000;
+        s = s.toFixed(2);
+        return s;
+    }
+function Rad(d) {
+        return d * Math.PI / 180.0
+    };
+</script>
+
+<script type="text/javascript"> 
+/*****点击我的资料*****/
+ $(document).ready(function () { 
+ $(".myInfo").click(function () { 
+	var submitData = {
+		openid:'{$openid}',
+		action: "setly"
+	};
+	$.post('{php echo $this->createMobileUrl('Registerajax')}', submitData,
+	function(data) {
+		if (data.res == false && data.msg == '你还未注册哦，请先注册！') {
+			warn2();
+			return;
+		}
+		else if(data.res == false && data.msg == '1'){
+		     warning();
+			return;
+		
+		}
+		else if(data.res == true && data.msg == 'no'){
+		   userinfocheck2();
+			return;
+		}
+		else if(data.res == true && data.msg == 'yes'){
+		   userinfo2();
+			return;
+		}
+		else if(data.res == false && data.msg == '身份失效，请重新从微信登陆！'){
+		  alert(data.msg);
+		}
+		else if(data.res == false && data.msg=='zhucebuwanzheng'){
+		   alert('上次授权后您未完成全部注册，请认真填写信息！');
+             		  window.location="?act=module&name=meeposchoolmother&do=register3&weid={$weid}&openid={$openid}";
+
+		}
+	},
+	"json")
+ });
+ });
+/******点击喜欢******/  
+
+ 
+ /*********点击写情书**********/
+ $(document).ready(function () { 
+ $(".hitmail").click(function () { 
+    var objid = $(this).attr("date");
+	
+	var uname = $(".uname"+objid).val();
+    var toopenid = $(".toopenid"+objid).val();
+	var submitData = {
+		uname: uname,
+		openid:'{$openid}',
+		action: "setly"
+	};
+	
+	$.post('{php echo $this->createMobileUrl('Registerajax')}', submitData,
+	function(data) {
+		if (data.res == false && data.msg == '你还未注册哦，请先注册！') {
+			warn2();
+			return;
+		}
+		else if(data.res == false && data.msg == '1'){
+		     warning();
+			return;
+		
+		}
+		else if(data.res == true && data.msg == 'no'){
+		   userinfocheck2();
+			return;
+		}
+		else if(data.res == true && data.msg == 'yes'){
+		  window.location="?act=module&name=meeposchoolmother&do=hitmail&weid={$weid}&toname="+data.uname+"&toopenid="+toopenid;
+		
+		 
+		}
+		else if(data.res == false && data.msg == '身份失效，请重新从微信登陆！'){
+		  alert(data.msg);
+		  location.reload();
+		}
+		else if(data.res == false && data.msg=='zhucebuwanzheng'){
+		   alert('上次授权后您未完成全部注册，请认真填写信息！');
+             		  window.location="?act=module&name=meeposchoolmother&do=register3&weid={$weid}&openid={$openid}";
+
+		}
+	},
+	"json")
+ });
+ });
+/********点击我的情书**********/
+$(document).ready(function () { 
+ $(".myLove").click(function () { 
+ 	var submitData = {
+		openid:'{$openid}',
+		action: "setly"
+	};
+	$.post('{php echo $this->createMobileUrl('Registerajax')}', submitData,
+	function(data) {
+		if (data.res == false && data.msg == '你还未注册哦，请先注册！') {
+			warn2();
+			return;
+		}
+		else if(data.res == false && data.msg == '1'){
+		     warning();
+			return;
+		
+		}
+		else if(data.res == true && data.msg == 'no'){
+		   userinfocheck2();
+			return;
+		}
+		else if(data.res == true && data.msg == 'yes'){
+		  window.location="?act=module&name=meeposchoolmother&do=mymails&weid={$weid}&openid={$openid}";
+		 
+		 
+		}
+		else if(data.res == false && data.msg == '身份失效，请重新从微信登陆！'){
+		  alert(data.msg);
+		  location.reload();
+		}
+		else if(data.res == false && data.msg=='zhucebuwanzheng'){
+		   alert('上次授权后您未完成全部注册，请认真填写信息！');
+             		  window.location="?act=module&name=meeposchoolmother&do=register3&weid={$weid}&openid={$openid}";
+
+		}
+	},
+	"json")
+ });
+ });
+/************点击别人的头像  进入别人的主页*************/
+$(document).ready(function () { 
+ $(".linka").click(function () {
+	var objid = $(this).attr("date");
+    var toopenid = $(".toopenid"+objid).val();
+ 	var submitData = {
+		openid:'{$openid}',
+		action: "setly"
+	};
+	$.post('{php echo $this->createMobileUrl('Registerajax')}', submitData,
+	function(data) {
+		if (data.res == false && data.msg == '你还未注册哦，请先注册！') {
+			warn2();
+			return;
+		}
+		else if(data.res == false && data.msg == '1'){
+		     warning();
+			return;
+		
+		}
+		else if(data.res == true && data.msg == 'no'){
+		   userinfocheck2();
+			return;
+		}
+		else if(data.res == true && data.msg == 'yes'){
+		  window.location="?act=module&name=meeposchoolmother&do=others&weid={$weid}&openid="+toopenid;
+		  
+		 
+		}
+		else if(data.res == false && data.msg == '身份失效，请重新从微信登陆！'){
+		  alert(data.msg);
+		  location.reload();
+		}
+		else if(data.res == false && data.msg=='zhucebuwanzheng'){
+		   alert('上次授权后您未全程全部注册，请认真填写信息！');
+             		  window.location="?act=module&name=meeposchoolmother&do=register3&weid={$weid}&openid={$openid}";
+
+		}
+	},
+	"json")
+ });
+ });
+ /********点击了个人中心*********/
+ $(document).ready(function () { 
+ $(".ucenter").click(function () {
+ 	var submitData = {
+		openid:'{$openid}',
+		action: "setly"
+	};
+	$.post('{php echo $this->createMobileUrl('Registerajax')}', submitData,
+	function(data) {
+		if (data.res == false && data.msg == '你还未注册哦，请先注册！') {
+			warn2();
+			return;
+		}
+		else if(data.res == false && data.msg == '1'){
+		     warning();
+			return;
+		
+		}
+		else if(data.res == true && data.msg == 'no'){
+		   userinfocheck2();
+			return;
+		}
+		else if(data.res == true && data.msg == 'yes'){
+		  window.location="?act=module&name=meeposchoolmother&do=homecenter&weid={$weid}&openid={$openid}";
+		 
+		 
+		}
+		else if(data.res == false && data.msg == '身份失效，请重新从微信登陆！'){
+		  alert(data.msg);
+		  location.reload();
+		}
+		else if(data.res == false && data.msg=='zhucebuwanzheng'){
+		   alert('上次授权后您未完成全部注册，请认真填写信息！');
+             		  window.location="?act=module&name=meeposchoolmother&do=register3&weid={$weid}&openid={$openid}";
+
+		}
+	},
+	"json")
+ });
+ });
+function userinfo2(){
+	window.location='{php echo  $this->createMobileUrl('userinfo')}';
+	}
+function userinfocheck2(){    
+		alert("亲，你的资料还在审核中哦！");
+		window.location='{php echo  $this->createMobileUrl('userinfo')}';  
+		}
+function warn2(){  
+	alert("亲，你还没有注册哦！");
+	window.location='{php echo  $this->createMobileUrl('register')}';
+}
+function warning(){  
+	alert("亲，你还没有注册哦！");
+	window.location='{php echo  $this->createMobileUrl('register2')}';
+}
+</script> 
+</head>
+
+<body>
+<div class="wrap"> 
+<input type="hidden" id="curlat" name="curlat" value="0" />
+<input type="hidden" id="curlng" name="curlng" value="0" />
+<header class="mb15">
+       
+	       <!--D:\phpStudy\WWW\source\modules\meeposchoolmother\template\mobile\tpl\static\forum\css\img-->             
+  <h1><a href="" target="_blank" class="home fleft"><img src="{if empty($settings['logo'])}../source/modules/meeposchoolmother/template/mobile/tpl/static/friend/images/logo.png{else}{php echo $_W['attachurl'].$settings['logo']}{/if}"  alt="{if empty($settings['title'])}校园红娘{else}{$settings['title']}{/if}"></a><span class="pl15 fleft" style="font-size:12px;">{if empty($settings['title'])}校园红娘{else}{$settings['title']}{/if}</span><span  class="ucenter fright"><i><em></em></i></span>
+  </h1>
+</header>
+<div id="timer"><div class="timeLeft">距离更新还有</div><div id="timeRight"class="timeRight"></div></div>
+<section class="indexSec" id="indexSec">
+
+                         <div style="color:red;text-align:center;font-size:20px;">11/02  15:00  显示距离调试中</div>
+
+
+  <ul class="indexList" id="list_article">
+       <!--//2014-11-2 15:00 调试距离问题-->
+		  <!--p class="address"><font id="shopspostion" class="a2">计算中...</font></p>
+          <input id="showlan" type="hidden" value="23.362024,116.732893"/-->
+         
+		  <!--//2014-11-2 15:00 调试距离问题-->     
+  </ul>
+<div  id="loading"></div>
+<div  id="loading2"></div>
+
+<style type="text/css">
+#loading img{display:block; margin:0 auto;height:30px;width:30px}
+.ui-icon-loading{display:none !important}
+</style>
+</section>
+
+<div class="myLetter">
+     <span  class="hot" >红娘最热</span><span  class="myInfo">我的资料</span><span  class="myLove" >我的情书</span>
+</div>
+</div>
+<!-- 弹出层 -->
+<div class="openhot">
+<ul id="nowhot" style="text-align:center">
+<li id="meepohot">喜欢排行</li>
+<li id="meeponew">收件排行</li>
+<li id="meeponear">红娘最配</li>
+</ul>
+<style type="text/css">
+#nowhot{
+text-align:center;  
+width: 100%;
+}
+#nowhot li{  width: 100%;
+  height: 45px;
+  background: #fc3d06;
+  color: #fff;
+  line-height: 45px;
+  text-align: center;
+  border-bottom:1px solid #fff;
+    background-image:  url("http://zam.copyte.com/source/modules/meepohongniang/template/mobile/tpl/static/friend/images/line.jpg");
+	background-position: right;
+    background-repeat: no-repeat;
+  }
+
+</style>
+</div>
+<!-- 弹出层 -->
+</body>
+<script type="text/javascript">
+$(function() {
+    $(".hot").click(function() {
+        $(".openhot").slideToggle();
+    });
+});
+</script>
+<script type="text/javascript">
+
+
+var endDate=new Date(2014,10,16,00,00,00);//年月日时分秒，月要减去1
+   
+function daoJiShi(){
+ var now=new Date();
+ var oft=Math.round((endDate-now)/1000);
+ var ofd=parseInt(oft/3600/24);
+ var ofh=parseInt((oft%(3600*24))/3600);
+ var ofm=parseInt((oft%3600)/60);
+ var ofs=oft%60;
+ var ofh1=String(parseInt(ofh/10));
+ var ofh2=String(parseInt(ofh%10));
+ var ofm1=String(parseInt(ofm/10));
+ var ofm2=String(parseInt(ofm%10));
+ var ofs1=String(parseInt(ofs/10));
+ var ofs2=String(parseInt(ofs%10));
+ document.getElementById('timeRight').innerHTML='<span>'+ofh1+ofh2 +'</span>'+'<span style="margin:0 10px;">'+ofm1+ ofm2+'</span>'+'<span>'+ofs1+ofs2+'</span>';
+ if(ofs<0){document.getElementById('timeRight').innerHTML='倒计时结束！';return;};
+ setTimeout('daoJiShi()',1000);
+};
+daoJiShi();
+</script> 
+<script type="text/javascript">
+$(document).ready(function () {
+ $("#meepohot").click(function () { 
+	        var times3=0;
+			var times4=1;
+            var loaded3 = true;
+			var loaded4 = true;
+			$(function(){
+                $("#list_article").empty();
+				$("#loading").html(
+	     "<img src='../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/css/img/loading.gif'/>");
+                 //times++;
+                 $.ajax(
+                 {
+                     type: "POST",
+                     dataType: "html",
+					 timeout: 12000,//（毫秒）
+                     url: "?act=module&name=meeposchoolmother&do=meepohot&weid={$weid}",
+                     data: "times3="+times3,
+					 error: function(XMLHttpRequest, textStatus, errorThrown){        //TODO: 处理status， http status code，超时 408
+                           // $("#loading").css("display","none");
+						    //$("#loading2").html("点击加载更多...");
+							if(textStatus=="timeout"){
+							   $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+							   
+							}else{
+							   $("#loading").html("<div style='text-align:center'>加载出现未知错误，请重试！</div>");
+							}
+							loaded3=false;
+							loaded4=false;
+                            //loaded=false;
+                // 注意：如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能
+                      //是"timeout", "error", "notmodified" 和 "parsererror"。
+                     },
+                     success: function(data)
+                     {
+                        //alert("第"+times+"次追加数据.");
+						$("#loading").empty();
+                        if(data == "")
+						{  
+							$("#loading").html("<div style='text-align:center;color:red'>已经加载所有</div>");
+                            loaded3=false;
+                           
+						}else 
+                        {
+                            $("#list_article").append(data);                            
+                            loaded3=false;                       
+
+                        }
+                     }
+                  }
+                  
+                );
+			});
+            function Add_Data()
+            {
+              var top = $("#list_article").offset().top;
+              if(loaded4 && ($(window).scrollTop() + $(window).height() > top))
+              {
+                 $("#loading").html(
+	     "<img src='../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/css/img/loading.gif'/>");
+                 times4++;
+                 $.ajax(
+                 {
+                     type: "POST",
+                     dataType: "html",
+					 timeout: 10000,//（毫秒）
+                     url: "?act=module&name=meeposchoolmother&do=meepohot&weid={$weid}",
+                     data: "times4="+times4,
+					 error: function(XMLHttpRequest, textStatus, errorThrown){        //TODO: 处理status， http status code，超时 408
+                            if(textStatus=="timeout"){
+							   $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+							   
+							}else{
+							   $("#loading").html("<div style='text-align:center'>加载出现未知错误，请重试！</div>");
+							}
+                            loaded4=false;
+                // 注意：如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能
+                      //是"timeout", "error", "notmodified" 和 "parsererror"。
+                     },
+                     success: function(data)
+                     {
+                        //alert("第"+times+"次追加数据.");
+						$("#loading").empty();
+                        if(data == "没有数据")
+                        {
+                            $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+                            loaded4=false;
+                           
+                        }
+						else if(data == "已经加载完毕")
+                        {
+                            $("#loading").html("<div style='text-align:center;color:red'>已经加载所有</div>");
+                            loaded4=false;
+                           
+                        }
+						else if(data == "")
+						{   
+							$("#loading").css("display","none");
+						    $("#loading2").html("点击加载更多...");
+                           
+						}
+                        else 
+                        {
+                            $("#list_article").append(data);                            
+                           
+                        }
+                     }
+                  }
+                  
+                );
+              }
+            }
+            $(window).scroll(Add_Data); 
+ });
+ });
+
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+ $("#meeponew").click(function () { 
+	        var times5=0;
+			var times6=1;
+            var loaded5 = true;
+			var loaded6 = true;
+			$(function(){
+                $("#list_article").empty();
+				$("#loading").html(
+	     "<img src='../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/css/img/loading.gif'/>");
+                 //times++;
+                 $.ajax(
+                 {
+                     type: "POST",
+                     dataType: "html",
+					 timeout: 12000,//（毫秒）
+                     url: "?act=module&name=meeposchoolmother&do=meeponew&weid={$weid}",
+                     data: "times5="+times5,
+					 error: function(XMLHttpRequest, textStatus, errorThrown){        //TODO: 处理status， http status code，超时 408
+                           // $("#loading").css("display","none");
+						    //$("#loading2").html("点击加载更多...");
+							if(textStatus=="timeout"){
+							   $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+							   
+							}else{
+							   $("#loading").html("<div style='text-align:center'>加载出现未知错误，请重试！</div>");
+							}
+							loaded5=false;
+							loaded6=false;
+                            //loaded=false;
+                // 注意：如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能
+                      //是"timeout", "error", "notmodified" 和 "parsererror"。
+                     },
+                     success: function(data)
+                     {
+                        //alert("第"+times+"次追加数据.");
+						$("#loading").empty();
+                        if(data == "")
+						{  
+							$("#loading").html("<div style='text-align:center;color:red'>已经加载所有</div>");
+                            loaded5=false;
+                           
+						}else 
+                        {
+                            $("#list_article").append(data);                            
+                            loaded5=false;                       
+
+                        }
+                     }
+                  }
+                  
+                );
+			});
+            function Add_Data()
+            {
+              var top = $("#list_article").offset().top;
+              if(loaded6 && ($(window).scrollTop() + $(window).height() > top))
+              {
+                 $("#loading").html(
+	     "<img src='../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/css/img/loading.gif'/>");
+                 times6++;
+                 $.ajax(
+                 {
+                     type: "POST",
+                     dataType: "html",
+					 timeout: 10000,//（毫秒）
+                     url: "?act=module&name=meeposchoolmother&do=meeponew&weid={$weid}",
+                     data: "times6="+times6,
+					 error: function(XMLHttpRequest, textStatus, errorThrown){        //TODO: 处理status， http status code，超时 408
+                            if(textStatus=="timeout"){
+							   $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+							   
+							}else{
+							   $("#loading").html("<div style='text-align:center'>加载出现未知错误，请重试！</div>");
+							}
+                            loaded6=false;
+                // 注意：如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能
+                      //是"timeout", "error", "notmodified" 和 "parsererror"。
+                     },
+                     success: function(data)
+                     {
+                        //alert("第"+times+"次追加数据.");
+						$("#loading").empty();
+                        if(data == "没有数据")
+                        {
+                            $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+                            loaded6=false;
+                           
+                        }
+						else if(data == "已经加载完毕")
+                        {
+                            $("#loading").html("<div style='text-align:center;color:red'>已经加载所有</div>");
+                            loaded6=false;
+                           
+                        }
+						else if(data == "")
+						{   
+							$("#loading").css("display","none");
+						    $("#loading2").html("点击加载更多...");
+                           
+						}
+                        else 
+                        {
+                            $("#list_article").append(data);                            
+                           
+                        }
+                     }
+                  }
+                  
+                );
+              }
+            }
+            $(window).scroll(Add_Data); 
+ });
+ });
+
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+ $("#meeponear").click(function () { 
+	        var times7=0;
+			var times8=1;
+            var loaded7 = true;
+			var loaded8 = true;
+			$(function(){
+                $("#list_article").empty();
+				$("#loading").html(
+	     "<img src='../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/css/img/loading.gif'/>");
+                 //times++;
+                 $.ajax(
+                 {
+                     type: "POST",
+                     dataType: "html",
+					 timeout: 12000,//（毫秒）
+                     url: "?act=module&name=meeposchoolmother&do=meeponear&weid={$weid}",
+                     data: "times7="+times7,
+					 error: function(XMLHttpRequest, textStatus, errorThrown){        //TODO: 处理status， http status code，超时 408
+                           // $("#loading").css("display","none");
+						    //$("#loading2").html("点击加载更多...");
+							if(textStatus=="timeout"){
+							   $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+							   
+							}else{
+							   $("#loading").html("<div style='text-align:center'>加载出现未知错误，请重试！</div>");
+							}
+							loaded7=false;
+							loaded8=false;
+                            //loaded=false;
+                // 注意：如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能
+                      //是"timeout", "error", "notmodified" 和 "parsererror"。
+                     },
+                     success: function(data)
+                     {
+                        //alert("第"+times+"次追加数据.");
+						$("#loading").empty();
+                        if(data == "")
+						{  
+							$("#loading").html("<div style='text-align:center;color:red'>已经加载所有</div>");
+                            loaded7=false;
+                           
+						}
+						else if(data == "未注册"){
+						  loaded7=false;
+						  loaded8=false;
+
+						  alert("你还未注册哦，找不到属于你的最配！");
+						  {if $cfg['ishnon']=="0"}warnn();{else}warning3();{/if}//未开启高级号注册
+						 
+						}
+						else 
+                        {
+                            $("#list_article").append(data);                            
+                            loaded7=false;                       
+
+                        }
+                     }
+                  }
+                  
+                );
+			});
+            function Add_Data()
+            {
+              var top = $("#list_article").offset().top;
+              if(loaded8 && ($(window).scrollTop() + $(window).height() > top))
+              {
+                 $("#loading").html(
+	     "<img src='../source/modules/meeposchoolmother/template/mobile/tpl/static/forum/css/img/loading.gif'/>");
+                 times8++;
+                 $.ajax(
+                 {
+                     type: "POST",
+                     dataType: "html",
+					 timeout: 10000,//（毫秒）
+                     url: "?act=module&name=meeposchoolmother&do=meeponear&weid={$weid}",
+                     data: "times8="+times8,
+					 error: function(XMLHttpRequest, textStatus, errorThrown){        //TODO: 处理status， http status code，超时 408
+                            if(textStatus=="timeout"){
+							   $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+							   
+							}else{
+							   $("#loading").html("<div style='text-align:center'>加载出现未知错误，请重试！</div>");
+							}
+                            loaded8=false;
+                // 注意：如果发生了错误，错误信息（第二个参数）除了得到null之外，还可能
+                      //是"timeout", "error", "notmodified" 和 "parsererror"。
+                     },
+                     success: function(data)
+                     {
+                        //alert("第"+times+"次追加数据.");
+						$("#loading").empty();
+                        if(data == "没有数据")
+                        {
+                            $("#loading").html("<div style='text-align:center'>网络超时，请重试</div>");
+                            loaded8=false;
+                           
+                        }
+						else if(data == "已经加载完毕")
+                        {
+                            $("#loading").html("<div style='text-align:center;color:red'>已经加载所有</div>");
+                            loaded8=false;
+                           
+                        }
+						else if(data == "")
+						{   
+							$("#loading").css("display","none");
+						    $("#loading2").html("点击加载更多...");
+                           
+						}
+                        else 
+                        {
+                            $("#list_article").append(data);                            
+                           
+                        }
+                     }
+                  }
+                  
+                );
+              }
+            }
+            $(window).scroll(Add_Data); 
+ });
+ });
+function warnn(){  
+	//alert("亲，你还没有注册哦！");
+	window.location='{php echo  $this->createMobileUrl('register')}';
+}
+function warning3(){  
+	//alert("亲，你还没有注册哦！");
+	window.location='{php echo  $this->createMobileUrl('register2')}';
+}
+</script>
+{template 'footer'}
+</html>

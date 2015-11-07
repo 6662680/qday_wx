@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>画个鸡吧！</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script>
+    (function() {
+        var onBridgeReady = function() {
+            var appId = '',
+                imgUrl = 'http://heka.tn10000.com/images/card.png',
+                link = location.href,
+                title = '呵呵贺卡',
+                desc = '私人订制您的马年祝福，有音乐的动画贺卡，用文字祝福守候您的拜年、节庆、祝福、乔迁、添丁……回复呵呵即可选择贺卡。';
+            fakeid = '';
+            WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+                WeixinJSBridge.invoke('sendAppMessage', {
+                    "appid": appId,
+                    "img_url": imgUrl,
+                    "img_width": "640",
+                    "img_height": "640",
+                    "link": link,
+                    "desc": desc,
+                    "title": title,
+                }, function(res) {});
+            });
+            WeixinJSBridge.on('menu:share:timeline', function(argv) {
+                WeixinJSBridge.invoke('shareTimeline', {
+                    "img_url": imgUrl,
+                    "img_width": "640",
+                    "img_height": "640",
+                    "link": link,
+                    "desc": desc,
+                    "title": title,
+                }, function(res) {});
+            });
+            var audio = document.getElementById('bgsound');
+            audio.play();
+        }
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        }
+        else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    })();
+    </script>
+    <style>
+      body { padding-bottom: 50px; }
+      .mt10{margin-top: 10px;}
+      .mt20{ margin-top: 20px; }
+      .mobile {padding-right: 15px;}
+      .mobile .col-xs-4{ padding-left: 15px; padding-right: 0;}
+      .mobile .thumbnail {margin-bottom: 15px;}
+      .bootom-nav li {display: inline-block;}
+      .loading {position:fixed;z-index:999;left:50%;top:50%;width:100px;height:80px;margin-top:-50px;margin-left:-50px;border-radius:4px;background:rgba(0, 0, 0, 0.8);color:#fff}
+      .loading i, .mov-seats .locking.loading_w:before {display:inline-block;width:20px;height:20px;-webkit-animation:my_fhload 1s infinite;position:absolute;left:50%;top:50%;margin:-10px auto auto -10px;background:url(../img/loading.png?m=0717) no-repeat;-webkit-background-size:100% auto;background-size:100% auto}
+      .loading span {position:absolute;left:0;bottom:10px;width:100%;text-align:center;font-size:1.22rem}
+      @-webkit-keyframes my_fhload{0%{-webkit-transform:rotate(0deg)}8.32%{-webkit-transform:rotate(0deg)}8.33%{-webkit-transform:rotate(30deg)}16.65%{-webkit-transform:rotate(30deg)}16.66%{-webkit-transform:rotate(60deg)}24.99%{-webkit-transform:rotate(60deg)}25%{-webkit-transform:rotate(90deg)}33.32%{-webkit-transform:rotate(90deg)}33.33%{-webkit-transform:rotate(120deg)}41.65%{-webkit-transform:rotate(120deg)}41.66%{-webkit-transform:rotate(150deg)}49.99%{-webkit-transform:rotate(150deg)}50%{-webkit-transform:rotate(180deg)}58.32%{-webkit-transform:rotate(180deg)}58.33%{-webkit-transform:rotate(210deg)}66.65%{-webkit-transform:rotate(210deg)}66.66%{-webkit-transform:rotate(240deg)}74.9%{-webkit-transform:rotate(240deg)}75%{-webkit-transform:rotate(270deg)}83.32%{-webkit-transform:rotate(270deg)}83.33%{-webkit-transform:rotate(300deg)}91.65%{-webkit-transform:rotate(300deg)}91.66%{-webkit-transform:rotate(330deg)}99.9%{-webkit-transform:rotate(330deg)}100%{-webkit-transform:rotate(0deg)}}
+
+    </style>
+</head>
+<body>
+  <div class="loading" id="loading" style="opacity: 1;"><i></i></div>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <ul class="nav navbar-nav bootom-nav text-center">
+                <li><a href="#"><span class="glyphicon glyphicon-picture"></span> 我的作品</a> </li>
+                <li><a href="{php echo url('entry//index',array('m'=>'canvas'))}"><span class="glyphicon glyphicon-pencil"></span> 我还要画</a></li>
+            </ul>
+        </div>
+    </nav>
+  <div class="container">
+    <div class="page-header">
+      <h3 class="text-center">{$config['share_title']}</h3>
+      <p class="lead">{$config['share_content']}</p>
+    </div>
+    <ul class="nav nav-tabs" role="tablist">
+      <li{if $ischeck=='0'} class="active"{/if}><a href="{php echo url('entry//list',array('m'=>'canvas','ischeck'=>0))}">NEW 新鲜</a></li>
+      <li{if $ischeck=='1'} class="active"{/if}><a href="{php echo url('entry//list',array('m'=>'canvas','ischeck'=>1))}">RANK 热榜</a></li>
+      <li class="text-info"><a href="#"><span class="glyphicon glyphicon-star-empty"></span> 关注</a></li>
+    </ul>
+    <div class="row mt20 mobile">
+{loop $result['list'] $item}
+{php $path = pathinfo($item['attach']);}
+      <div class="col-xs-4 col-sm-3 col-md-2">
+        <a href="{php echo url('entry//index',array('m'=>'canvas','pic'=>basename($item['attach'], '.'.$path['extension'])),true)}" class="thumbnail">
+          <img src="{php echo tomedia($item['attach'])}" alt="...">
+        </a>
+      </div>
+{/loop}
+    </div>
+{$result['pager']}
+  </div>
+<script type="text/javascript">
+    window.onload=function(){
+        document.getElementById('loading').style.display = "none";
+    }
+</script>
+</body>
+</html>

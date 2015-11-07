@@ -1,0 +1,64 @@
+{template 'common/header'}
+{template 'common'}
+<div class="box">
+    <div class="bg">
+        <div style="margin:80px 15px 0 15px;">
+            {if $activity['type'] == 'direct'}
+                <h5 class="text-center">您的好友 <mark>{$owner['nickname']}</mark> 领到一个大红包. 赶快一起来参与吧</h5>
+            {else}
+                {if $help['ok']}
+                <h5 class="text-center">
+                    您的好友 <mark>{$owner['nickname']}</mark> 正在玩拜年讨红包的游戏. 向好友拜年, 即可收到大红包, 已经有 <mark>{$help['total']}</mark> 位好友打赏TA红包, TA已经成功领取了一个红包. 赶快一起来玩吧
+                </h5>
+                {else}
+                    {if empty($help['rank'])}
+                        <h5 class="text-left">
+                            您的好友 <mark>{$owner['nickname']}</mark> 向你拜年了. 祝您新年大吉, 万事如意, 恭喜发财, 红包拿来
+                        </h5>
+                        <!--
+                        <h5 class="text-left"><small>如果给TA红包, 你将是将是第 <mark>{php echo $help['already'] + 1}</mark> 位给他打赏TA红包的好友</small></h5>
+                        -->
+                        <div class="text-center">
+                            <a class="btn btn-warning" href="javascript:;" onclick="doHelp()">{$activity['label']}</a>
+                        </div>
+                    {else}
+                        <h5 class="text-left">
+                            您的好友 <mark>{$owner['nickname']}</mark> 向你拜年了. 祝您新年大吉, 万事如意, 恭喜发财, 红包拿来
+                        </h5>
+                        <h5 class="text-left">
+                            您已经打赏给TA一个红包, 您是第 <mark>{php echo $help['rank']}</mark> 位打赏他的好友
+                        </h5>
+                    {/if}
+                {/if}
+            {/if}
+        </div>
+    </div>
+    <div class="btns container">
+        <div class="form-group">
+            {if $activity['type'] == 'direct'}
+                <a class="btn btn-warning btn-block" href="{$activity['guide']}">我也要领大红包</a>
+            {else}
+                <a class="btn btn-warning btn-block" href="{$activity['guide']}">我也要给好友拜年讨红包</a>
+            {/if}
+        </div>
+        <div class="form-group">
+            <button class="btn btn-link btn-block text-right" onclick="rulesDialog();">查看活动说明</button>
+        </div>
+    </div>
+    <script>
+        function doHelp() {
+            require(['jquery', 'util'], function($, u){
+                var pars = {};
+                pars.owner = '{$owner["uid"]}';
+                $.post('{php echo $this->createMobileUrl("help")}', pars).success(function(dat){
+                    if(dat == 'success') {
+                        location.reload();
+                    } else {
+                        u.message(dat);
+                    }
+                });
+            });
+        }
+    </script>
+</div>
+{template 'common/footer'}

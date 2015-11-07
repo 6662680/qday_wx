@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-sm-1">
+            <img class="img-rounded" src="{php echo preg_replace('/\/0/', '/96', stripslashes($fans['avatar']));}" />
+        </div>
+        <div class="col-sm-7">
+            <p><strong>推荐人数：</strong> {php echo count($mylist)}人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>积分：</strong> {$fans['credit1']}</p>
+            <p><strong>关注日期： </strong>{php echo date('Y-m-d H:i', $fans['createtime'])} </p>
+            <p><strong>上线： </strong> {if empty($uplevel)}系统{else}{php echo $this->userlink($uplevel['leader'])}{/if}</p>
+        </div>
+
+    </div>
+</div>
+<div class="clearfix">

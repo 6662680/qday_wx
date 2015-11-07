@@ -1,0 +1,60 @@
+{template 'common/header'}
+{template 'common'}
+<div class="stage"></div>
+<div class="widget bg">
+    <div style="margin:30% 15% 0 15%;">
+        <h4 class="text-center"><strong>现有: {$game['label']} x{$game['quantity']}</strong></h4>
+        <h5 class="text-center">游戏玩法: 购买{$game['label']}后, 每次使用将会获得随机金额的红包</h5>
+    </div>
+    {if $game['quantity'] > 0}
+    <div style="margin:10% 15% 0 15%;" class="text-center">
+        <a class="btn btn-warning" href="javascript:;" onclick="doSend(0);">马上使用</a>
+    </div>
+    {/if}
+</div>
+<div class="widget btns">
+    <div class="form-group">
+        <a class="btn btn-warning btn-block" href="javascript:;" onclick="doBuy();">购买{$game['label']}并参与游戏</a>
+    </div>
+    {if $game['already'] > 0}
+    <div class="form-group">
+        <button class="btn btn-warning btn-block" onclick="myDialog()">查看我的游戏记录</button>
+    </div>
+    {/if}
+    <div class="form-group">
+        <button class="btn btn-link btn-block text-right" onclick="rulesDialog('{$activity['actid']}');">查看活动说明</button>
+    </div>
+    <script>
+        function doSend(rid) {
+            require(['jquery'], function($){
+                var pars = {};
+                pars.actid = "{$activity['actid']}";
+                pars.rid = rid;
+                $.post('{php echo $this->createMobileUrl("send")}', pars).success(function(dat){
+                    if(dat == 'success') {
+                        location.reload();
+                    } else {
+                        message(dat);
+                    }
+                });
+            });
+        }
+        function doBuy() {
+            profileDialog(function(){
+                location.href = "{php echo $this->createMobileUrl('buy', array('actid'=>$activity['actid']))}" ;
+            });
+        }
+        function myDialog() {
+            require(['jquery'], function($){
+                $('.rules-dialog .dia-content').removeClass('fadeOutDownBig').addClass('fadeInUpBig');
+                var pars = {};
+                pars.actid = "{$activity['actid']}";
+                $.post('{php echo $this->createMobileUrl("my", array("foo"=>"history"))}', pars).success(function(dat){
+                    $('.rules-dialog .dia-content .content').html(dat);
+                    $('.rules-dialog').show();
+                });
+            })
+        }
+    </script>
+</div>
+{template 'common/footer'}

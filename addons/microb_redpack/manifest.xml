@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[商户现金红包]]></name>
+		<identifie><![CDATA[microb_redpack]]></identifie>
+		<version><![CDATA[1.8]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[提供利用商户现金红包进行营销活动的功能]]></ability>
+		<description><![CDATA[商户现金红包功能不同于市面上现有的红包功能. 用户领取后不需要提现, 打开后直接存入微信钱包零钱. <br>
+        主要功能使用 <mark>支持支付的认证服务号</mark>, 订阅号和未认证的服务号可以借用接口. <br>
+        也可以支持有赞等其他平台的营销活动]]></description>
+		<author><![CDATA[情天]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+		<menu>
+			<entry title="活动参与方式" do="entry" state="" direct="false" />
+			<entry title="红包活动选项" do="activity" state="" direct="false" />
+			<entry title="礼品设置" do="gifts" state="" direct="false" />
+			<entry title="接口参数" do="api" state="" direct="false" />
+		</menu>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_mbrp_activities` (
+  `actid` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '活动编号',
+  `uniacid` int(10) unsigned NOT NULL,
+  `title` varchar(20) NOT NULL COMMENT '活动名称',
+  `start` int(10) unsigned NOT NULL COMMENT '开始时间',
+  `end` int(10) unsigned NOT NULL COMMENT '结束时间',
+  `rules` text NOT NULL COMMENT '活动规则介绍',
+  `guide` varchar(255) NOT NULL COMMENT '活动指南(图文素材地址)',
+  `banner` varchar(500) NOT NULL COMMENT '背景图片',
+  `type` varchar(10) NOT NULL COMMENT '活动类型(direct, shared)',
+  `limit` varchar(1000) NOT NULL DEFAULT '',
+  `share` varchar(1000) NOT NULL DEFAULT '',
+  `tag` text NOT NULL,
+  `amount` decimal(10,2) NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`actid`),
+  KEY `type` (`type`),
+  KEY `uniacid` (`uniacid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_mbrp_activity_gifts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `activity` int(10) unsigned NOT NULL,
+  `gift` int(10) unsigned NOT NULL,
+  `quantity` int(10) unsigned NOT NULL,
+  `rate` decimal(6,2) NOT NULL COMMENT '中奖百分比率',
+  PRIMARY KEY (`id`),
+  KEY `activity` (`activity`),
+  KEY `gift` (`gift`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_mbrp_fans` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) unsigned NOT NULL,
+  `openid` varchar(40) NOT NULL DEFAULT '',
+  `proxy` varchar(40) NOT NULL DEFAULT '',
+  `unionid` varchar(40) NOT NULL DEFAULT '',
+  `nickname` varchar(20) NOT NULL DEFAULT '',
+  `gender` varchar(2) DEFAULT '',
+  `state` varchar(20) NOT NULL DEFAULT '',
+  `city` varchar(20) NOT NULL DEFAULT '',
+  `country` varchar(20) NOT NULL DEFAULT '',
+  `avatar` varchar(500) NOT NULL DEFAULT '',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`uid`),
+  KEY `uniacid` (`uniacid`),
+  KEY `openid` (`openid`),
+  KEY `proxy` (`proxy`),
+  KEY `nickname` (`nickname`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_mbrp_gifts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `title` varchar(20) NOT NULL,
+  `type` varchar(20) NOT NULL COMMENT 'cash - 现金红包, coupon - 券类',
+  `tag` text NOT NULL,
+  `remark` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `uniacid` (`uniacid`),
+  KEY `type` (`type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_mbrp_helps` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `activity` int(10) unsigned NOT NULL,
+  `owner` int(10) unsigned NOT NULL,
+  `helper` int(10) unsigned NOT NULL,
+  `dateline` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `activity` (`activity`),
+  KEY `uniacid` (`uniacid`),
+  KEY `owner` (`owner`),
+  KEY `helper` (`helper`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_mbrp_profiles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `uid` int(10) unsigned NOT NULL,
+  `name` varchar(10) NOT NULL,
+  `title` varchar(20) NOT NULL,
+  `value` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`),
+  KEY `uniacid` (`uniacid`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_mbrp_records` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `uid` int(10) unsigned NOT NULL,
+  `activity` int(10) unsigned NOT NULL,
+  `gift` int(10) unsigned NOT NULL,
+  `fee` varchar(20) NOT NULL DEFAULT '',
+  `log` varchar(500) NOT NULL DEFAULT '',
+  `status` varchar(20) NOT NULL,
+  `created` int(10) unsigned NOT NULL,
+  `completed` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `activity` (`activity`),
+  KEY `gift` (`gift`),
+  KEY `log` (`log`(333)),
+  KEY `uniacid` (`uniacid`),
+  KEY `status` (`status`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_mbrp_trades` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `activity` int(10) unsigned NOT NULL,
+  `uid` int(10) unsigned NOT NULL,
+  `item` varchar(20) NOT NULL,
+  `status` varchar(10) NOT NULL,
+  `created` int(10) unsigned NOT NULL,
+  `paid` int(10) unsigned NOT NULL,
+  `completed` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `uniacid` (`uniacid`),
+  KEY `activity` (`activity`),
+  KEY `uid` (`uid`),
+  KEY `item` (`item`),
+  KEY `status` (`status`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+	]]></install>
+	<uninstall><![CDATA[
+DROP TABLE IF EXISTS `ims_mbrp_fans`;
+DROP TABLE IF EXISTS `ims_mbrp_records`;
+DROP TABLE IF EXISTS `ims_mbrp_helps`;
+		]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

@@ -1,0 +1,96 @@
+{template 'common/header'}
+{template 'common'}
+<div class="stage"></div>
+<div class="widget bg">
+    <div style="margin:30% 15% 0 15%;">
+        {if empty($got)}
+            {if !empty($error)}
+                {$error['message']}
+            {else}
+                {if $help['already'] > 0}
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning  progress-bar-striped active" role="progressbar" aria-valuenow="{$help['already']}" aria-valuemin="0" aria-valuemax="{$help['total']}" style="width: {php echo $help['already']*100/$help['total']}%">
+                    </div>
+                </div>
+                {/if}
+                {if $help['isok']}
+                <h5 class="text-center">
+                    {$activity['tag']['got']}
+                </h5>
+                {else}
+                <h5 class="text-center">
+                    {$activity['tag']['progress']}
+                </h5>
+                {/if}
+            {/if}
+        {else}
+            {if $got['status'] == 'complete'}
+                <h5 class="text-center">您已经成功领取礼品</h5>
+            {elseif $got['status'] == 'none'}
+                <h4 class="text-center"><strong>没有抢到礼品哦, 请期待我们下一次活动</strong></h4>
+            {else}
+                <h4 class="text-center"><strong>礼品还没有领取, 请重新领取</strong></h4>
+                <h5 class="text-center">我们的现金红包只有在每天 08:00 - 23:59 才发放哦. 如果没有领取成功, 可以在这个时间段重新领取. 或者联系我们</h5>
+            {/if}
+        {/if}
+    </div>
+</div>
+<div class="widget btns">
+    <div class="form-group">
+        {if empty($got)}
+            {if empty($error)}
+                {if $help['isok']}
+                    <button class="btn btn-warning btn-block" onclick="doSend();">马上打开红包</button>
+                {else}
+                    <button class="btn btn-warning btn-block" onclick="doShare();">去找好友帮忙</button>
+                {/if}
+            {/if}
+        {else}
+            {if $got['status'] == 'complete'}
+                <button class="btn btn-warning btn-block" disabled>已经领取过红包了</button>
+            {elseif $got['status'] == 'created'}
+                <button class="btn btn-warning btn-block" onclick="doSend();">重新领取红包</button>
+            {/if}
+        {/if}
+    </div>
+    {if $help['already'] > 0}
+    <div class="form-group">
+        <button class="btn btn-warning btn-block" onclick="myDialog()">查看帮助过我的好友</button>
+    </div>
+    {/if}
+    <div class="form-group">
+        <button class="btn btn-link btn-block text-right" onclick="rulesDialog('{$activity['actid']}');">查看活动说明</button>
+    </div>
+    <script>
+        function doSend() {
+            profileDialog(function(){
+                require(['jquery'], function($){
+                    var pars = {};
+                    pars.actid = "{$activity['actid']}";
+                    $.post('{php echo $this->createMobileUrl("send")}', pars).success(function(dat){
+                        if(dat == 'success') {
+                            location.reload();
+                        } else {
+                            message(dat);
+                        }
+                    });
+                });
+            });
+        }
+        function doShare() {
+            alert('快去找好友帮忙, 你懂的');
+        }
+        function myDialog() {
+            require(['jquery'], function($){
+                $('.rules-dialog .dia-content').removeClass('fadeOutDownBig').addClass('fadeInUpBig');
+                var pars = {};
+                pars.actid = "{$activity['actid']}";
+                $.post('{php echo $this->createMobileUrl("my", array("foo"=>"history"))}', pars).success(function(dat){
+                    $('.rules-dialog .dia-content .content').html(dat);
+                    $('.rules-dialog').show();
+                });
+            })
+        }
+    </script>
+</div>
+{template 'common/footer'}

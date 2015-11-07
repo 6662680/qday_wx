@@ -1,0 +1,103 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{php echo $this->createWebUrl('settings');}">订单提交成功</a></li>
+	<li><a href="javascript:;" target="_blank">设置帮助</a></li>
+</ul>
+
+<div class="main">
+	<form id="theform" action="" class="form-horizontal form" method="post">
+		{if $type == 'submit'}
+		<script>
+		$(function(){
+			$('#theform').submit(function(){
+				if($.trim($(':text[name=template]').val()) == '') {
+					message('必须输入模板ID');
+					return false;
+				}
+				if($.trim($('textarea[name=caption]').val()) == '') {
+					message('必须输入通知消息标题');
+					return false;
+				}
+				if($.trim($('textarea[name=remark]').val()) == '') {
+					message('必须输入通知消息说明');
+					return false;
+				}
+				return true;
+			});
+		});
+		</script>
+		<h4>订单提交成功时的通知</h4>
+		<table class="tb">
+			<tr>
+				<th><label for="">模板类型</label></th>
+				<td>
+					<div class="alert alert-info">
+						订单提交成功时的通知, 推荐使用 TM00015 号模板 <br>
+						{nickname}	可以用于替换粉丝名称
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">模板ID</label></th>
+				<td>
+					<input type="text" name="template" value="{$setting['template']}" class="span5">
+					<span class="help-block">请访问微信公众平台获取通知消息模板ID, 不清楚可以参考说明文档</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">链接</label></th>
+				<td>
+					<input type="text" name="url" value="{$setting['url']}" class="span7">
+					<span class="help-block">粉丝点击这个通知消息时跳转的链接. 如果为空, 则会进入系统默认的链接</span>
+					<span class="help-block">默认微小店的订单通知信息, 将不会进行跳转</span>
+					<span class="help-block">默认微信商城的订单通知消息, 将会跳转至订单详情页面</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">通知消息头部</label></th>
+				<td>
+					<textarea style="height:80px;" class="span7" name="caption" cols="70">{$setting['caption']}</textarea>
+					<span class="help-block">通知消息的头部信息, 用于说明通知消息的主要内容(标题)</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">消息补充说明</label></th>
+				<td>
+					<textarea style="height:80px;" class="span7" name="remark" cols="70">{$setting['remark']}</textarea>
+					<span class="help-block">通知消息的结束部分, 用于补充说明</span>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">消息主体内容</label></th>
+				<td>
+					<div class="alert alert-default">
+						支付金额：{{订单金额}} <br>
+						商品信息：{{商品名称}} <br>
+						这些数据将由系统自动调用
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">示例</label></th>
+				<td>
+					<div class="alert alert-default">
+						我们已收到您的货款，开始为您打包商品，请耐心等待: ) <br>
+						支付金额：30.00元 <br>
+						商品信息：我是商品名字 <br> <br>
+
+						如有问题请致电0755-61910103或直接在微信留言，情天将第一时间为您服务！
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<button type="submit" class="btn btn-primary span3" name="submit" value="提交">保存</button>
+					<input type="hidden" name="token" value="{$_W['token']}" />
+				</td>
+			</tr>
+		</table>
+		{/if}
+	</form>
+</div>
+{template 'common/footer'}

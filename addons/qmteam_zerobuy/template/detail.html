@@ -1,0 +1,209 @@
+{template 'common/header'}
+<script type='text/javascript' src='resource/js/lib/jquery-1.11.1.min.js'></script>
+<style type="text/css">
+.red {float:left;color:red}
+.white{float:left;color:#fff}
+.tooltipbox {
+	background:#fef8dd;border:1px solid #c40808; position:absolute; left:0;top:0; text-align:center;height:20px;
+	color:#c40808;padding:2px 5px 1px 5px; border-radius:3px;z-index:1000;
+}
+.red { float:left;color:red}
+
+</style>
+<script>
+$(function(){
+$('.nav-tabs li').click(function(){
+  var i=$(this).index();
+  $(this).addClass('active');
+  $(this).siblings().removeClass('active');
+  $('.item').hide();
+  $('.item').eq(i).show();
+  })
+{if !empty($draw_info)}
+	$('.nav-tabs li').removeClass('active');
+	$('.nav-tabs li').eq(2).addClass('active');
+	$('.item').hide();
+	$('.item').eq(2).show();
+{else}
+	$('.draw_code').css('display','none');
+{/if}
+
+{if !empty($info)}
+	$('.nav-tabs li').removeClass('active');
+	$('.nav-tabs li').eq(0).addClass('active');
+	$('.item').hide();
+	$('.item').eq(0).show();
+{/if}
+
+{if $act == 'edit'}
+$("input[name=starttime]").attr("disabled",true);
+$("input[name=endtime]").attr("disabled",true);
+$("input[name=submit]").click(function(){
+	$("input[name=starttime]").attr("disabled",false);
+	$("input[name=endtime]").attr("disabled",false);
+	});
+{/if} 
+});
+
+</script>
+<ul class="nav nav-tabs">
+     <li ><a href="javascript:void">添加</a></li>
+     <li class="active"><a href="javascript:void">管理</a></li>
+	 <li class="draw_code"><a href="javascript:void">开奖</a></li>
+</ul>
+<div class="main item" style="display:none;">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+		<div class="panel panel-default">
+        	<div class="panel-heading">规则设置</div>
+            <div class="panel-body">
+            	<div class="form-group">
+                	<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="title" class="form-control" value="{$info['title']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                	<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动商品</label>
+                    <div class="col-sm-9">
+						<select class="form-control" name="lid">
+							<option value="">请选择商品</option>
+							{loop $product_list $r}
+								<option value="{$r['id']}" {if $r['id']==$info['lid']}selected="selected"{/if}>{$r['title']}</option>
+							{/loop}
+							</select>						
+					</div>
+                </div>
+                <div class="form-group">
+                	<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动规则</label>
+                    <div class="col-sm-9">
+						<select class="form-control" name="rid">
+							<option value="">请选择规则</option>
+							{loop $rule_list $r}
+								<option value="{$r['id']}" {if $r['id']==$info['rid']}selected="selected"{/if}>{$r['title']}</option>
+							{/loop}
+							</select>						
+					</div>
+                </div>
+				<style>
+				.form-control[readonly],.form-control {
+                  cursor:pointer;
+
+                 }
+				</style>
+                <div class="form-group">
+                	<label  class="col-xs-12 col-sm-3 col-md-2 control-label">开始日期</label>
+					<div style="width:14%;"  class="col-sm-9">
+                        {php echo tpl_form_field_date('starttime', !empty($info['starttime']) ? date('Y-m-d H:i',$info['starttime']) : date('Y-m-d H:i'), 1)}
+                    </div>
+                	<label style="width:7%;"  class="col-xs-12 col-sm-3 col-md-2 control-label">截止日期</label>
+                    <div style="width:14%;"  class="col-sm-9">
+                        {php echo tpl_form_field_date('endtime', !empty($info['endtime']) ? date('Y-m-d H:i',$info['endtime']) : date('Y-m-d H:i'), 1)}
+                    </div>
+                </div>
+                <!-- 
+                <div class="form-group">
+                	<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动价格</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="zerobuy_price" class="form-control" value="0" disabled/>
+                    <span class="help-block">设置活动价格，为以后升级优惠购预留</span>
+                    </div>
+                </div>
+                 -->
+                <div class="form-group">
+                	<label class="col-xs-12 col-sm-3 col-md-2 control-label">积分兑换比例</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="exchange" class="form-control" value="{$info['exchange']}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div class="form-group col-sm-12">
+			<input type="hidden" name="act" value="{$act}" />
+		    <input type="hidden" name="id" value="{$info['id']}" />
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+	</form>
+</div>
+<div class="main item" >
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+		<div class="panel panel-default">
+        	<div class="panel-heading">规则管理</div>
+            <div class="panel-body">
+            	<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:5%;">ID</th>
+					<th style="width:16%;">活动名称</th>
+					<th style="width:16%;">商品名称</th>
+					<th style="width:12%;">开始时间</th>
+					<th style="width:12%;">结束时间</th>
+					<th style="width:27%;">开奖信息</th>
+					<th style="width:12%;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			{loop $list $r}
+				<tr>
+					<td>{$r['id']}</td>
+					<td>{$r['title']}</td>
+					<td>{$r['goods_title']}</td>
+					<td>{php echo date('Y-m-d H:i:s',$r['starttime'])}</td>
+					<td>{php echo date('Y-m-d H:i:s',$r['endtime'])}</td>
+                    <td>
+                    {if $r['status']==4}
+					   	开奖码：{$r['draw_code']} 中奖码:{$r['win_code']} mobile：{php $member = pdo_fetch("SELECT * FROM " . tablename('mc_members') . " WHERE uid=".$r['winner_uid']);echo $member['mobile'];}</td>
+					{else if $r['status']==5}
+					           开奖码：{$r['draw_code']} 本期无人中奖
+					{else}
+						未开奖
+				    {/if}
+                     		
+					<td style="text-align:left;">
+					{if $r['status']==4 || $r['status']==5}
+					    <a href="javascript:void(0)" class="btn btn-default btn-xs">已开奖</a>
+					{else if $r['status']==3}
+						<a href="{php echo $this->createWebUrl('detail', array('act'=>'clear','op' => 'display', 'id' => $r['id']))}" class="btn btn-primary btn-sm draw">开奖</a>
+					{else}
+					    <a href="#" class="btn btn-default btn-xs" disabled>等待开奖</a>
+				    {/if}
+						<a href="{php echo $this->createWebUrl('detail', array('act'=>'edit','op' => 'display', 'id' => $r['id']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="修改"><i class="fa fa-pencil"></i></a>
+						<a href="{php echo $this->createWebUrl('detail', array('act'=>'delete','op' => 'display', 'id' => $r['id']))}" onclick="return confirm('确认删除吗？');return false;" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="删除"><i class="fa fa-times"></i></a>
+					</td>
+				</tr>
+			{/loop}
+			</tbody>
+		</table>
+            </div>
+        </div>
+	</form>
+</div>
+<div class="main item" style="display:none;">
+    <form action="{php echo $this->createWebUrl('clear')}" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+		<div class="panel panel-default">
+        	<div class="panel-heading">开奖</div>
+            <div class="panel-body">
+            	<div class="form-group">
+                	<label class="col-xs-12 col-sm-3 col-md-2 control-label">开奖码</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="draw_code" class="form-control" />
+                    </div>
+                    <input type="hidden" name="id" class="form-control" value="{$draw_info['id']}" />
+                </div>
+            </div>
+        </div>
+		<div class="form-group col-sm-12">
+			<input type="submit" name="sub_draw" value="提交" class="btn btn-primary col-lg-1" />
+		</div>
+	</form>
+</div>
+<script language='javascript'>
+    require(['jquery', 'util'], function($, u){
+		$(function(){
+			//u.editor($('.richtext')[0]);
+		});
+    });
+
+</script>
+
+{template 'common/footer'}

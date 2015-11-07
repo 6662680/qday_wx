@@ -1,0 +1,44 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="{php echo $this->createWebUrl('entry');}">活动参与方式</a></li>
+    <li><a href="{php echo $this->createWebUrl('activity');}">活动管理</a></li>
+    <li><a href="{php echo $this->createWebUrl('gifts');}">礼品设置</a></li>
+    <li><a href="{php echo $this->createWebUrl('api');}">接口参数</a></li>
+</ul>
+<div class="clearfix">
+    <div class="alert alert-danger">
+        <h4>模块使用前需要注意</h4>
+        <p>
+            商户现金红包功能不同于市面上现有的红包功能. 用户领取后不需要提现, 打开后直接存入微信钱包零钱. <br>
+            主要功能使用 <mark>支持支付的认证服务号</mark>, 订阅号和未认证的服务号可以借用接口. <br>
+        </p>
+        <p><strong>注意: 借用的接口发布活动活动方式为: 在订阅号中参与活动, 领取红包后, 红包将在借用的服务号的聊天窗口发放(无论是否关注).</strong> </p>
+        <p><strong>注意: 微信红包接口生效时间为每天 08:00 - 23:59, 不在这个时间段, 将无法领取红包. 请通知粉丝重新领取红包</strong></p>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            使用关键字回复来参与
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-info">
+                <p>经典的方式: 可以使用关键字回复, 然后点击图文消息链接来参与活动</p>
+                <p>设置方式: 增加一条图文消息, 图文链接至活动链接(请在红包活动管理中获取链接)</p>
+                <p><strong>注意: 如果是订阅号为活动主体, 只能使用图文消息参与活动(不能设置在菜单上). 并且链接地址需要移除系统根目录部分 (链接格式应为: ./index.php?i=1&xxxxxxxxxxxx)</strong></p>
+                <p><strong>注意: 如果使用自动回复方式开展活动, 必须关闭掉系统的oAuth权限借用, 状态应该为"请选择公众号" <a class="alert-line" href="{url 'mc/passport/oauth'}">去设置</a></strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            使用微信自定义菜单来参与
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-info">
+                <p>可以将活动链接设置为自定义菜单的跳转链接, 粉丝直接点击链接即可参与活动</p>
+                <p><a class="alert-link" href="{url 'platform/menu'}">访问自定义菜单</a></p>
+                <p><strong>注意: 订阅号和未认证的服务号不能用这种方式(即: 没有oAuth权限, 不能使用菜单方式)</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+{template 'common/footer'}

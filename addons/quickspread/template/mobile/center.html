@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>介绍页</title>
+    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <script src="./source/modules/quickleaflet/template/mobile/script/jquery-2.0.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./source/modules/quickleaflet/template/mobile/style/Mobile.css">
+    <style>
+      html,body{ height:100%; width:100%; display:block; background:#fff;}
+      #wrap > header{width:100%; height:208px; display:block;background: url({php echo $_W['attachurl'] . $this->module['config']['center-bg']}) center top no-repeat;color:#fff; text-align:center; font-size:25px;}
+      #wrap > header > span:nth-child(1){ font-size:35px; text-align:center; clear:both; display:block; width:100%; padding-top:50px; height:35px; line-height:35px;}
+      #wrap > header > span:nth-child(2){ font-size:18px; text-align:center; clear:both; display:block; width:100%; height:60px; line-height:60px;}
+      #wrap > section{ padding-top:20px; text-align:center;}
+
+      #wrap > footer{ width:100%; height:8px;  background:#ad0040; display:block; margin-top:60px;}
+      a.btn-round:link,a.btn-round:visited{ width:150px; height:46px; display:block; text-align:center; line-height:46px; color:#fff; background-color:rgba(0,0,0,0.6); text-decoration:none; font-size:13px; margin:auto; border:2px solid #ad0040;
+        -o-border-radius:25px;
+        -moz-border-radius:25px;
+        -webkit-border-radius:25px;
+        border-radius:25px;
+      }
+      span#success_info{ width:100%; height:34px; line-height:34px; background:#ad0040; display:block; position:relative; color:#fff; text-align:center;}
+      span#success_info > img{ position:absolute; right:10px; top:10px;}
+      #earnings{ width:100%; display:block; clear:both; background:#edeef0; padding-bottom:25px;}
+      #realname { width:100%; display:block; clear:both; background:#edeef0;padding:10px 0px;}
+      #realname > span { font-size:30px; padding:0px 0px;}
+      #earnings > article{ width:150px; display:inline-block; font-size:12px; color:#929292; margin-top:25px;}
+      #earnings > article > span{ font-size:25px; color:#232323;}
+      #earnings > article:nth-child(even){ border-left:1px solid #929292;}
+      a.pink:link,a.pink:visited{ color:#ad0040; text-decoration:none; font-size:14px;}
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <header>
+      {php echo $this->module['config']['center-text']}
+      <span><a href="{php echo $this->createMobileUrl("leafletlist")}" class="btn-round" id="top_btn">立即进入</a></span>
+      </header>
+      <section id="main">
+      <div id="realname">
+      <span>{$user['realname']}</span>
+      </div>
+      <div id="earnings">
+        <article>
+        <header>分享积分</header>
+        <span>{$share_credit}</span>
+        </article>
+        <article>
+        <header>浏览积分</header>
+        <span>{$click_credit}</span>
+        </article>
+        <article>
+        <header>蓄客积分</header>
+        <span>{$fillform_credit}</span>
+        </article>
+        <article>
+        <header>总积分</header>
+        <span>{$total_credit}</span>
+        </article>
+      </div>
+      <a href="{php echo create_url('mobile/module/goods', array('name'=>'quickcredit', 'weid'=>$_W['weid']))}" class="btn">积分换礼品</a>
+      <div class="p" style="color:#232323; font-size:13px; text-align:left">
+        {php echo $this->module['config']['center-intro']}
+      </div>
+      <a href="{$help_url}" class="pink">查看公告帮助>></a>
+      </section>
+      <footer></footer>
+    </div>
+  </body>
+
+  <script>
+
+    $(document).ready(function(e) {
+    if($(document).height() > getPageHeight()){
+    $("#wrap > footer").attr("style","position:fixed; bottom:0;");
+    }
+
+    function getPageHeight(){
+    return $("#wrap").height(); 
+    }
+
+    function onBridgeReady(){
+      WeixinJSBridge.call('hideOptionMenu');
+    }
+
+    if (typeof WeixinJSBridge == "undefined"){
+      if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+      }
+      }else{
+      onBridgeReady();
+    }
+  </script>
+</html>
+
+

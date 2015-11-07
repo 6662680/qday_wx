@@ -1,0 +1,18 @@
+{template 'header'}
+<style>
+body{background:#f24545;}
+.common-bg{filter:Alpha(opacity=70); background:#000; background:rgba(0, 0, 0, 0.7); -moz-border-radius:4px; border-radius:4px;}
+.auth-main{margin:10px; color:#FFF;}
+.auth-main a{color:#FFF; text-decoration:underline;}
+.auth-alert{padding:10px; margin-bottom:10px;}
+</style>
+<div class="auth-main">
+	<div class="auth-alert common-bg">
+		<p style="font-size:16px;"><i class="icon-warning-sign"></i> 抱歉 ，您尚未关注该公众号，没有权限查看该页面！</p>
+	</div>
+</div>
+<script>
+  location.href="{php echo $this->module['config']['redirect-url']}";
+</script>
+{php $footer_off = 1;}
+{template 'footer'}

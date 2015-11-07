@@ -1,0 +1,199 @@
+<div class="main">
+    <form action="{php echo $this->createWebUrl('Spread')}" method="post" onsubmit="return shareHandler.doAdd(this)" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                新用户扫码关注后立即推送内容：
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 标题</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" id="title" name="title" class="form-control" value="{$item['title']}"  />
+                        <div class="help-block">例如：亲爱的[nickname]，您终于来了!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">封面</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('thumb', $item['thumb']);}
+                        <div class="help-block">大图片建议尺寸：900像素 * 500像素</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 说明</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" id="desc" name="desc" class="form-control" value="{$item['desc']}"  />
+                        <div class="help-block">例如：[nickname]，点击这里，进入财富的大门!</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 打开页面地址</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" id="url" name="url" class="form-control" value="{$item['url']}"  />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel-heading">
+                海报设置：
+            </div>
+            <div class="panel-body">
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 二维码海报背景图</label>
+                    <div class="col-sm-9 col-xs-12">
+                          {php echo tpl_form_field_image('bg', $item['bg']);}
+                         <div class="help-block">图片必须从本地上传，不支持直接使用网络图片；图片格式必须为jpg，大小建议为：530像素 * 800像素，图片大小建议控制在200KB以内</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">二维码</label>
+                  <div class="col-sm-9 col-xs-12">
+                        <div class="input-group">
+                            <div class="input-group-addon">左边距</div>
+                            <input type="text" class="form-control" placeholder="" name="qrleft" value="{$item['qrleft']}">
+                            <div class="input-group-addon">px</div>
+                            <div class="input-group-addon">上边距</div>
+                            <input type="text" class="form-control" placeholder="" name="qrtop" value="{$item['qrtop']}">
+                            <div class="input-group-addon">px</div>
+                            <div class="input-group-addon">宽度</div>
+                            <input type="text" class="form-control" placeholder="" name="qrwidth" value="{$item['qrwidth']}">
+                            <div class="input-group-addon">px</div>
+                            <div class="input-group-addon">高度</div>
+                            <input type="text" class="form-control" placeholder="" name="qrheight" value="{$item['qrheight']}">
+                            <div class="input-group-addon">px</div>
+                        </div>
+                    </div>
+                </div>
+                
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">头像</label>
+                   <div class="col-sm-9 col-xs-12">
+                       
+                        <div class="input-group">
+                            <div class="input-group-addon"><label class="checkbox-inline" style="margin-top:-10px;"><input type="checkbox" name="avatarenable" value="1" {if $item['avatarenable']} checked{/if}> 显示头像</label></div>
+                            <div class="input-group-addon">左边距</div>
+                            <input type="text" class="form-control" placeholder="" name="avatarleft" value="{$item['avatarleft']}">
+                            <div class="input-group-addon">px</div>
+                            <div class="input-group-addon">上边距</div>
+                            <input type="text" class="form-control" placeholder="" name="avatartop" value="{$item['avatartop']}">
+                            <div class="input-group-addon">px</div>
+                            <div class="input-group-addon">宽度</div>
+                            <input type="text" class="form-control" placeholder="" name="avatarwidth" value="{$item['avatarwidth']}">
+                             <div class="input-group-addon">px</div>
+                            <div class="input-group-addon">高度</div>
+                            <input type="text" class="form-control" placeholder="" name="avatarheight" value="{$item['avatarheight']}">
+                            <div class="input-group-addon">px</div>
+                        </div>
+                    </div>
+                </div>
+                
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">姓名</label>
+                      <div class="col-sm-9 col-xs-12">
+                       
+                        <div class="input-group">
+                            <div class="input-group-addon"><label class="checkbox-inline" style="margin-top:-10px;"><input type="checkbox" name="nameenable" value="1" {if $item['nameenable']} checked{/if}> 显示姓名</label></div>
+                            <div class="input-group-addon">左边距</div>
+                            <input type="text" class="form-control" placeholder="" name="nameleft" value="{$item['nameleft']}">
+                            <div class="input-group-addon">px</div>
+                            <div class="input-group-addon">上边距</div>
+                            <input type="text" class="form-control" placeholder="" name="nametop" value="{$item['nametop']}">
+                            <div class="input-group-addon">px</div>
+                            <div class="input-group-addon">字体大小</div>
+                            <input type="text" class="form-control" placeholder="" name="namesize" value="{$item['namesize']}">
+                             <div class="input-group-addon">px</div>
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"> <span class="red">*</span> 奖励详情(填入数字)</label>
+                       <div class="col-sm-9 col-xs-12">
+                       
+                        <div class="input-group">
+                            <div class="input-group-addon">首次关注积分</div>
+                            <input type="text" class="form-control" placeholder="" name="newbie_credit" value="{$item['newbie_credit']}">
+                            <div class="input-group-addon">分</div>
+                            
+                            <div class="input-group-addon">推广奖励积分</div>
+                            <input type="text" class="form-control" placeholder="" name="click_credit" value="{$item['click_credit']}">
+                            <div class="input-group-addon">分</div>
+                            
+                            <div class="input-group-addon">奖励上线积分</div>
+                            <input type="text" class="form-control" placeholder="" name="sub_click_credit" value="{$item['sub_click_credit']}">
+                            <div class="input-group-addon">分</div>
+                            
+                            
+                        </div>
+                        </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">首次生成图片文字提示</label>
+                    <div class="col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" placeholder="" name="genqr_info1" value="{$item['genqr_info1']}">
+                           <span class="help-block">因为首次获取二维码需要的时间较久，所以可以在这里提示用户等待若干秒。不希望推送本条文字，可以不填写。</span>
+                        </div>
+                </div>
+                
+                   <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">首次生成图片, 即将生成好文字提示</label>
+                    <div class="col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" placeholder="" name="genqr_info2" value="{$item['genqr_info2']}">
+                             <span class="help-block">因为首次获取二维码需要的时间较久，在生成途中再次提示一下用户，避免用户没有耐心等待。不希望推送本条文字，可以不填写。</span>
+                        </div>
+                </div>
+                
+                      <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">之后生成图片, 文字提示</label>
+                    <div class="col-sm-9 col-xs-12">
+                         <input type="text" class="form-control" placeholder="" name="genqr_info3" value="{$item['genqr_info3']}">
+                     <span class="help-block">用户经过首次生成图片之后，图片会被缓存起来，再次获取速度较快，直接提示用户正在生成即可。不希望推送本条文字，可以不填写。</span>
+                        </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+            <div class="form-group col-sm-12">
+                  <input type="hidden" name="channel" value="{$item['channel']}" />
+            <input type="hidden" name="op" value="post" />
+                <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+                <input type="hidden" name="token" value="{$_W['token']}" />
+            </div>
+
+
+      </form>  
+        
+</div>
+ 
+
+<script type="text/javascript">
+    var shareHandler = {
+        'doAdd': function(form) {
+            var parent = $(form);
+            if ($('#title', parent).val() == '') {
+                require(['util'],function(util){ util.message('请输入标题！', '', 'error'); });
+                return false;
+            }
+            if ($(':input[name=url]', parent).val() == '') {
+                require(['util'],function(util){ util.message('请输入打开页面连接！', '', 'error');});
+                return false;
+            }
+            if ($(':input[name=bg]', parent).val() == '') {
+                require(['util'],function(util){ util.message('请选择海报背景图片！', '', 'error');});
+                return false;
+            }
+            return true;
+        },
+    };
+</script>
+
+

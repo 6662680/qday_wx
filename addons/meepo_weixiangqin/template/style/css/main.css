@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ font-size:13px; margin:10px; padding:0; color:#666; }
+#messageBox{ width:460px; height:220px; background:#fff;}
+#sendBox{ width:460px; height:80px; background:#fff; margin-top:15px; border:1px #6CBFF5 solid;}
+a:link,a:visited{
+	color:#333;
+	text-decoration:none;
+}
+a:hover{
+	color:red;
+}

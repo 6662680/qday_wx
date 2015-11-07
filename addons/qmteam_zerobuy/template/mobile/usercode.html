@@ -1,0 +1,63 @@
+﻿<head>
+	<title>抽奖码 - {$_W['account']['name']}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- Mobile Devices Support @begin -->
+	<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+	<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+	<meta content="no-cache" http-equiv="pragma">
+	<meta content="0" http-equiv="expires">
+	<meta content="telephone=no, address=no" name="format-detection">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes"> <!-- apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<!-- Mobile Devices Support @end -->
+    <link href="{MODULE_URL}images/style.css" type="text/css" rel="stylesheet" >
+	<link href="{MODULE_URL}js/bootstrap3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resource/css/font-awesome.min.css" rel="stylesheet">
+	<script type='text/javascript' src="resource/js/lib/jquery-1.11.1.min.js"></script>
+	<script type='text/javascript' src='{MODULE_URL}js/bootstrap3.3/js/bootstrap.min.js'></script>
+	<script type='text/javascript' src='{MODULE_URL}js/common.js'></script>
+</head>
+<body >
+<style>
+a:visited,a:active,a:hover{
+color:#0088cc;
+text-decoration:none;
+}
+</style>
+<div class="detail-info group-detail">
+    <div class="con" >
+            <div class="info Fix" >
+                <div class="detail-box" style="margin-left:0px;">
+                  	<h3 style="margin-top:0px;color:#1288f4;padding-left:25px;" class="tit">抽奖码<span class="pull-right" style="padding-right:50px"><a href="{php echo $this->createMobileUrl('list')}">返回</a></span></h3>
+                  	
+                {if empty($code_info)}你还未参加任何活动，赶快参与吧{/if}
+                {loop $code_info $r}
+				    <div class="codelist" style="margin-top:0px;border-bottom:1px solid #ccc;">
+                          <div class="detail-tit">{$r['title']}</div>
+                          <div>开奖时间：{php echo date('Y-m-d H:i:s',$r['endtime'])}</div>
+						  <div><p style="color: #868686;">抽奖码：{$r['code']}&nbsp;&nbsp;&nbsp;
+						             <span>
+						                {if $r['status'] == 4 && $r['win_code'] == $r['code']}
+					                		<font color="red">中奖</font>
+				                		{elseif $r['status'] != 4 }
+				                		    <font color="#1C86EE">未开奖</font>
+				                		{else}
+				                			未中奖
+				                		{/if}
+	
+					            
+						             </span>
+						       </p>
+						  </div>
+						  {if $r['endtime']>$now}<div class="detail-act">进行中</div>{else}<div class="detail-act end">已结束</div>{/if}
+					</div>
+				{/loop}
+                </div>
+            </div>
+
+    </div>
+</div>
+
+</body>

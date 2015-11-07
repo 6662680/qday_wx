@@ -1,0 +1,31 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+<style>
+  td {
+    vertical-align:middle !important;
+  }
+  .followtime {
+    font-size:10px;
+    text-align:right;
+  }
+  body {
+    background-color:white;
+  }
+</style>
+
+<div class="">
+      {template 'fansinfo'}
+      <table class="table table-striped" style='width:100%;'>
+        <tbody>
+          {loop $mylist $c}
+          <tr>
+            <td>{php echo ++$seq}</td>
+            <td>{$c['type']}</td>
+            <td>{$c['credit']}</td>
+            <td class="followtime">{php echo date('Y-m-d H:i', $c['createtime'])}</td>
+          </tr>
+          {/loop}
+        </tbody>
+      </table>
+    </div>
+    {template 'footer'}

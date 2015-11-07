@@ -1,0 +1,26 @@
+<table class="table">
+    <tr>
+        <th style="width:150px;">游戏时间</th>
+        <th class="text-center" style="width:50px;">金额</th>
+        <th class="text-right">状态</th>
+    </tr>
+    {loop $records $row}
+    <tr>
+        <td>{php echo date('Y-m-d H:i', $row['created'])}</td>
+        <td class="text-center">
+            {if $row['status'] == 'complete'}
+            <span class="badge">{php echo sprintf('%.2f', $row['fee'])}</span>
+            {else}
+            <span class="badge">未领取</span>
+            {/if}
+        </td>
+        <td class="text-right">
+            {if $row['status'] == 'complete'}
+            <span class="label label-sucess">已领取</span>
+            {else}
+            <a href="javascript:;" onclick="doSend('{$row['id']}')">重新领取</a>
+            {/if}
+        </td>
+    </tr>
+    {/loop}
+</table>

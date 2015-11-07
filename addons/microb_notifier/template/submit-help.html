@@ -1,0 +1,55 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li><a href="{php echo $this->createWebUrl('submit');}">订单提交成功</a></li>
+    <li class="active"><a href="{php echo $this->createWebUrl('submit', array('t' => 'help'));}">设置帮助</a></li>
+</ul>
+<div class="clearfix">
+    <div class="alert alert-info">
+        <div class="page-header">
+            <h4>订单提交成功通知</h4>
+        </div>
+        <p>
+            这个功能是配合消息通知中心模块使用的, <a href="http://www.qdaygroup.com" target="_blank">了解详情</a> <br>
+            这个通知用于商城或其他支付完成时, 向粉丝发送一个通知消息. 效果示例:  <br><br>
+            <div>
+            </div>
+        </p>
+
+        <div class="page-header">
+            <h4>用于微信小店, 需要进行如下设置</h4>
+        </div>
+        <p>
+            由于系统机制不完善, 如果要使用消息通知中心功能, 必须添加转接桥规则. 造成的不便请见谅<br>
+            1. 以下步骤只需要操作一次, 请操作之前先确认不要重复操作 <br>
+            2. <a class="alert-link" href="{url 'platform/reply' array('m' => 'microb_notifier')}">添加回复规则</a>. 规则名称(消息通知中心转接桥), 关键字(消息通知中心转接桥) <br>
+            3. 保存这条回复规则 <br>
+            4. 访问<a class="alert-link" href="{url 'platform/special'}" target="_blank">特殊回复</a>, 并在 默认回复关键字 一项中输入关键字内容 (消息通知中心转接桥)
+        </p>
+        
+        <div class="page-header">
+            <h4>用于系统商城, 需要进行如下设置</h4>
+        </div>
+        <p>
+            由于商城模块还没有支持此功能, 需要改造一下模块的代码<br>
+            编辑文件 /addons/ewei_shopping/site.php <br>
+            搜索文件, 在代码 <br>
+            <pre>
+if ($params['from'] == 'return') {
+            </pre>
+            <strong>之后</strong>加上以下内容<br>
+            (编辑代码之前先搜索文件, 如果已经存在, 就不需要再处理了.) <br>
+            (<strong>注意: 不要使用windows自带的记事本处理代码, 会出问题. 请使用editplus或者Dreamweaver等专业编辑器</strong>)<br>
+            <pre>
+//需要附加的代码
+$file = IA_ROOT . '/addons/microb_notifier/inc/ShoppingHook.class.php';
+if(is_file($file)) {
+    require_once $file;
+    $hook = new ShoppingHook();
+    $hook->submitNotify($params['tid']);
+}
+//附加代码结束
+            </pre>
+        </p>
+    </div>
+</div>
+{template 'common/footer'}

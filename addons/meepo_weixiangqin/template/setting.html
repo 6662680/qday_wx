@@ -1,0 +1,212 @@
+{template 'common/header'}
+<div class="panel panel-success">
+	<div class="panel-heading">
+		公众平台配置参数以及相关参数设置
+	</div>
+	<form id="reply-form" class="form-horizontal form"  method="post" enctype="multipart/form-data">
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">公众平台appid</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="appid" value="{$settings['appid']}">
+				<span class="help-block">微信平台唯一appid
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">公众平台secret</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="secret" value="{$settings['secret']}">
+				<span class="help-block">微信平台唯一secret</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">上传含有公众平台二维码的图片</label>
+			<div class="col-sm-9">
+				{php echo tpl_form_field_image('accounterweima', $settings['accounterweima']);}
+				<span class="help-block">上传含有公众平台二维码的图片 用于个人魔方秀展示 规格:最大宽为300  基础标准300*400 </span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">积分充值比率</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="bilv" value="{$settings['bilv']}">
+				<span class="help-block">若设置为100 即为1元 充值100积分</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">粉丝上传图片是否需要审核</label>
+			<div class="col-sm-9">
+				<label class="radio-inline">
+					<input type="radio" name="isstatus" value="1" id="xh" {if $settings['isstatus'] == '1'}checked="true"{/if}> 是
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="isstatus" value="0" id="xh"  {if $settings['isstatus'] == '0'}checked="true"{/if}>否
+				</label>
+				<span class="help-block">默认需要审核，那么粉丝上传的图片均需到后台审核才能显示</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">每日分享可以奖励积分次数【请到基本设置里设置奖励积分】</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="sharenum" value="{$settings['sharenum']}">
+				<span class="help-block">即为每天奖励积分，最多分享几次，如设置为3，那么分享第4次将不会奖励积分！</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">客服消息图片</label>
+			
+			<div class="col-sm-9">
+				{php echo tpl_form_field_image('kefuimg', $settings['kefuimg']);}
+				<span class="help-block">客服消息图片</span>
+			</div>
+		</div>
+		
+		
+		
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">默认是否显示粉丝头像昵称等信息</label>
+			<div class="col-sm-9">
+				<label class="radio-inline">
+					<input type="radio" name="yingcang" value="1" id="xh" {if $settings['yingcang'] == '1'}checked="true"{/if}> 是
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="yingcang" value="2" id="xh"  {if $settings['yingcang'] == '2'}checked="true"{/if}>否
+				</label>
+				<span class="help-block">如果开启了本模式，那么即便你关闭了审核 粉丝录入信息后，首页不会显示该粉丝信息</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">客服消息限制</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="maxnum" value="{$settings['maxnum']}">
+				<span class="help-block">若发送者每日打开聊天窗看到接受者信息数量超过此处设置的次数 发送者发送消息将不会有消息推送给接受者 <strong>填写0 将任何时候都会推送</strong></span>
+			</div>
+		</div>
+</div>		
+</div>
+<div class="panel panel-danger">
+	<div class="panel-heading">
+		首页菜单项设置<br><br>
+		<font color=red>首页菜单名称自定义【请自己斟酌后命名  注意: 不填写的话 将会显示默认的菜单名字 填写的话最好不超过4个汉字 只可围绕默认文字去命名】</font>
+	</div>
+	
+	<div class="panel-body">
+	  
+        
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">第一个主菜单名称</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="firstcard" value="{$settings['firstcard']}">
+				<span class="help-block">第一个主菜单名称【默认为女神】</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">第二个主菜单名称</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="secondcard" value="{$settings['secondcard']}">
+				<span class="help-block">第二主菜单名称【默认为男神】</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">第三个主菜单名称</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="thirdcard" value="{$settings['thirdcard']}">
+				<span class="help-block">第三主菜单名称【默认为榜单】</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">第四个主菜单名称</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="fourcard" value="{$settings['fourcard']}">
+				<span class="help-block">第四主菜单名称【默认为我的资料】</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">第五个主菜单名称</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="fivecard" value="{$settings['fivecard']}">
+				<span class="help-block">第五主菜单名称【默认为与我相关】</span>
+			</div>
+		</div>
+</div>
+</div>
+<div class="panel panel-danger">
+	<div class="panel-heading">
+		关于部分积分设置<br><br>
+		<font color=red>
+		1:关于完善资料粉丝采取奖励积分策略<br><br>
+		2:关于告之粉丝积分使用以及如何快速获取积分
+		
+		</font>
+	</div>
+	
+	<div class="panel-body">
+	  
+        
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">完善资料奖励粉丝积分数目设置</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="awardjifen" value="{$settings['awardjifen']}">
+				<span class="help-block">完善资料奖励粉丝积分数目设置 不填写将不奖励</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">积分使用教程以及获取积分方法</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="jifenurl" value="{$settings['jifenurl']}">
+				<span class="help-block">此处需要运营者编辑一个详细图文来介绍 积分的使用以及增加积分策略 具体表现在粉丝个人中心按钮</span>
+			</div>
+		</div>
+		
+</div>
+</div>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		定义活动首页相关参数<br><br>
+        
+		<font color=red> 1 请注意：设置的此处的标题与图片  与相亲活动 关键词相关联</font><br><br>
+		<font color=red> 2 请注意：请到模块的回复规则列表内 添加一个触发关键词 为 相亲活动或者交友活动</font>
+	</div>
+	
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动首页标题</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="huodongtitle" value="{$settings['huodongtitle']}">
+				<span class="help-block">活动首页标题</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动首页图片链接</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="huodongurl" value="{$settings['huodongurl']}">
+				<span class="help-block"> 不填写默认即为内置活动首页 当你需要借用第三方进行活动报名需要填写对应的链接地址</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动首页图片</label>
+			<div class="col-sm-9">
+				{php echo tpl_form_field_image('huodongpicurl', $settings['huodongpicurl']);}
+				<span class="help-block">活动首页图片</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">活动详情页面客服电话【请填写手机号码】</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="kefuphone" value="{$settings['kefuphone']}">
+				<span class="help-block">活动详情页面客服手机号码</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<input name="submit" type="submit" value="保存" class="btn btn-primary btn-success" />
+				
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</div>
+		</div>
+	</form>
+</div>
+</div>
+{template 'common/footer'}

@@ -1,0 +1,28 @@
+<style>
+  
+  .list span{
+    text-align: center;
+    height: 2em;
+    display: block;
+    font-size: 1.2em;
+  }
+  .list textarea{
+    height: 6em;
+  }
+  
+</style>
+<ion-view title="{{set.title}}" hide-back-button="false">
+        <ion-content class="has-header">
+          <form class="list" ng-show="showForm">
+            <label class="item item-input">
+              <input type="text" placeholder="{{set.money}}" ng-model="item.money">
+            </label>
+            <label class="item item-input">
+              <textarea placeholder="{{set.message}}" ng-model="item.message"></textarea>
+            </label>
+            <div class="padding">
+              <button class="button button-block red" ng-click="submit()">{{set.submit}}</button>
+            </div>
+          </form>
+        </ion-content>
+      </ion-view>

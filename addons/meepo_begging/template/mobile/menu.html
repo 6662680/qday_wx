@@ -1,0 +1,47 @@
+<ion-side-menus>
+        <ion-side-menu-content>
+          <ion-nav-bar class="bar-positive">
+            <ion-nav-back-button class="button-icon icon ion-arrow-left-c"></ion-nav-back-button>
+          </ion-nav-bar>
+          <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+        </ion-side-menu-content>
+
+        <ion-side-menu side="left">
+          <header class="bar bar-header bar-assertive">
+            <div class="title">{{menu.lefttitle}}</div>
+          </header>
+          <ion-content class="has-header">
+            <ion-list can-swipe="true">
+                <ion-item ng-repeat="item in menu.left"
+                          class="item item-avatar-left item-icon-right"
+                          type="item-avatar" >
+                  <img src="{{item.avatar}}">
+                  <a ng-href="{{item.href}}">
+                  <h2>{{item.nickname}}</h2>
+                   </a>
+                  <span>{{item.createtime}}</span>
+                  <span class="badge badge-assertive">{{item.money}}元</span>
+                 
+                </ion-item>
+              </ion-list>
+          </ion-content>
+        </ion-side-menu>
+        <ion-side-menu side="right">
+          <header class="bar bar-header bar-assertive">
+            <div class="title">{{menu.righttitle}}</div>
+          </header>
+          <ion-content class="has-header">
+            <ion-list can-swipe="true">
+                <ion-item ng-repeat="item in menu.right"
+                          class="item item-avatar-left item-icon-right"
+                          type="item-avatar" >
+                  <img src="{{item.avatar}}">
+                  <h2>{{item.nickname}}</h2>
+                  <span>{{item.message}}</span>
+                  <span class="badge badge-assertive">{{item.money}}元</span>
+                </ion-item>
+              </ion-list>
+          </ion-content>
+        </ion-side-menu>
+
+      </ion-side-menus>

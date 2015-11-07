@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>合伙人</title>
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="./source/modules/quickleaflet/template/mobile/style/Mobile.css">
+<script src="./source/modules/quickleaflet/template/mobile/script/jquery-2.0.3.min.js"></script>
+<style>
+
+a.btn-round:link,a.btn-round:visited{ width:120px; height:46px; display:block; text-align:center; line-height:46px; color:#fff; background:none; text-decoration:none; font-size:13px; margin:auto; border:2px solid #ad0040; float:right; margin-top:7px; margin-right:10px;
+-o-border-radius:25px;
+-moz-border-radius:25px;
+ -webkit-border-radius:25px;
+ border-radius:25px;
+}
+
+a.pink:link,a.pink:visited{ color:#ad0040; text-decoration:none; font-size:14px; }
+#main > article{ height:220px; width:100%; display:block; position:relative;}
+#main > article > footer{ color:#fff;position:absolute; bottom:0; height:63px; line-height:63px; width:100%; display:block; background:rgba(0,0,0,0.6)}
+#main > article > footer > span{ float:left; clear:left; line-height:30px; font-size:13px; text-align:left; padding-left:10px;}
+
+#wrap > section{ padding-top:20px; text-align:center;}
+#wrap > footer{ width:100%; height:8px;  background:#ad0040; display:block; margin-top:60px;}
+</style>
+</head>
+<body>
+
+<div id="wrap">
+  <section id="main">
+  {loop $list $item}
+    <article style="background:url({php echo $_W['attachurl'] . $item['poster_img']}) center no-repeat; background-size:cover; margin-bottom:10px;">
+      <footer>
+        <span>{$item['share_title']}<br />推广奖励：{$item['share_award']}</span>
+        <a href="{php echo $this->createMobileUrl('leafletPreview', array('leafletid'=>$item['leafletid']))}" class="btn-round">立即推广</a>
+      </footer>
+    </article>
+  {/loop}
+  </section>
+  <footer></footer>
+</div>
+
+</body>
+
+<script>
+
+$(document).ready(function(e) {
+    if($(document).height() > getPageHeight()){
+    $("#wrap > footer").attr("style","position:fixed; bottom:0;");
+  }
+});
+
+function getPageHeight(){
+  return $("#wrap").height(); 
+}
+
+    function onBridgeReady(){
+        WeixinJSBridge.call('hideOptionMenu');
+    }
+
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    }else{
+        onBridgeReady();
+    }
+
+</script>
+</html>

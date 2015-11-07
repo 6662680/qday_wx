@@ -1,0 +1,46 @@
+.main_show{
+    display: block;position: fixed;left: 0;bottom: 0;z-index: 4;
+    border-radius: 20px;
+    width:40px;max-height: 86px;max-width:86px;min-height: 43px;min-width: 43px;
+}
+.main_key{
+    display: block;position: fixed;left: 3px;bottom: 3px;z-index: 3 ;
+    border-radius:19px;
+    width:38px;max-height: 76px;max-width:76px;min-height: 38px;min-width: 38px;
+    transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -webkit-transform:rotate(0deg);
+    -ms-transform:rotate(0deg);
+}
+.key_click{
+    display: block;position: fixed;z-index: 300;
+    width:38px;max-height: 76px;max-width:76px;min-height: 38px;min-width: 38px;
+    opacity: 0;
+}
+.mail_count{
+    background: none repeat scroll 0 0 rgba(255,90,120,1);
+    border-radius: 8px;
+    color: #FFFFFF;
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    line-height: 18px;
+    width: 30px;
+    height: 18px;
+    position: fixed;
+    left: 100px;
+    bottom: 100px;
+    z-index: 600;
+}
+.top44{margin-top: 44px;}
+.top86{top:86px;}
+.top42{top:42px;}
+.posFixed{position: fixed;}
+.posAbs{position: absolute;}
+.posR{position: relative;}
+.popupmailtip{ width:100%;height:64px;position:absolute;z-index:99999;top:0; overflow: hidden;}
+.popupmailtip .tip_info{ width: 100%; height: 44px; line-height: 44px;background:none repeat scroll 0 0 rgba(0,0,0,0.7);color:#FFF;line-height:44px;font-size:13px;}
+.popupmailtip  .tipclose{float:right;padding:16px 10px 12px 20px;}
+.popupmailtip  .tipmail{margin:0 4px 0 10px;position:relative;top:2px;}
+.popupmailtip  b{color:#FD5B78;font-size:13px;}
+.popupmailtip  span{color:#36B2DB;font-size:13px;}

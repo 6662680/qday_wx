@@ -1,0 +1,99 @@
+﻿{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{php echo $this->createWebUrl('set')}">基本设置</a></li>
+	<li><a href="{php echo $this->createWebUrl('pay_set')}">消费设置</a></li>
+</ul>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		分享以及前台首页显示设置注意事项<br><br>
+		
+		<font color=red>1 使用前一定要来配置基本设置以及消费设置的参数</font><br><br>
+		<font color=red>2 基本设置与消费设置 设置完一定要点击提交按钮</font>
+	</div>
+	<form id="reply-form" class="form-horizontal form"  method="post" enctype="multipart/form-data">
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">前台横向滚动提示文字</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="headtitle" value="{$settings['headtitle']}">
+				<span class="help-block">前台横向滚动提示文字
+				</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">前台标题</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="title" value="{$settings['title']}">
+				<span class="help-block">各个页面标题设置</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">前台每个页面的左上角logo</label>
+			<div class="col-sm-9">
+				{php echo tpl_form_field_image('logo', $settings['logo']);}
+				<span class="help-block">前台每个页面的左上角logo 规格 224*53</span>
+			</div>
+		</div>
+		
+</div>
+</div>
+       
+<div class="panel panel-info">
+	<div class="panel-heading">
+		关于分享设置
+	</div>
+	<div class="panel-body">
+	    <div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享标题</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="share_title" value="{$settings['share_title']}">
+				<span class="help-block">分享标题
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享连接</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="share_link" value="{$settings['share_link']}">
+				<span class="help-block">分享连接【请注意与分享转跳链接的区别】</span>
+			</div>
+		</div>
+		 <div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享显示图片</label>
+			
+			<div class="col-sm-9">
+				{php echo tpl_form_field_image('share_logo', $settings['share_logo']);}
+				<span class="help-block">分享显示图片</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享显示内容</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="share_content" value="{$settings['share_content']}">
+				<span class="help-block">分享显示内容
+				</span>
+			</div>
+		</div>
+	
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享后未关注的人转跳连接</label>
+			<div class="col-sm-9">
+				<input type="text"  class="form-control" name="url" value="{$settings['url']}">
+				<span class="help-block">分享后 若浏览者未关注本平台将转跳该连接【默认后台登陆页，请自行编辑关注图文，请其链接复制于此处】</span>
+			</div>
+		</div>
+        
+		<div class="form-group">
+			<div class="col-sm-12">
+				<input name="submit" type="submit" value="保存" class="btn btn-primary btn-danger" />
+				<input type="hidden" name="id" value="{$settings['id']}" />
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</div>
+		</div>
+	
+</div>
+</form>
+</div>
+
+{template 'common/footer'}

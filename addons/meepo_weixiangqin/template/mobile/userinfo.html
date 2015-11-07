@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<title>个人资料{if empty($res['weight']) && empty($res['height'])}【{if empty($res['telephone'])}请尽快完善{else}编辑{/if}个人资料】{/if}</title>
+<link rel="stylesheet" type="text/css" href="{MEEPORES}/static/friend/css/index.css"  />
+<link rel="stylesheet" href="{MEEPORES}/static/friend/css/jquery.mobile-1.4.3.css" />
+{php echo register_jssdk(false);}
+<script src="{MEEPORES}/static/friend/js/jquery.js"></script>
+<script src="{MEEPORES}/static/friend/js/index.js" ></script>
+<script src="{MEEPORES}/static/friend/js/jquery.mobile-1.4.3.min.js" ></script>
+<script src="{MEEPORES}/static/artDialog/jquery.artDialog.js-skin=default" ></script>
+<script src="{MEEPORES}/static/artDialog/plugins/iframeTools.js" ></script>
+
+</head>
+
+<body style="padding: 15px 10px 10px;">
+<div class="wrap">  
+<header class="mb15">
+  <h1><a href="{php echo  $this->createMobileUrl('alllist')}"  target="_blank" class="home fright"><img src="{if empty($settings['logo'])}{MEEPORES}/static/friend/images/logo.png{else}{php echo $_W['attachurl'].$settings['logo']}{/if}"  alt="{if empty($settings['title'])}微相亲{else}{$settings['title']}{/if}"></a><a href="{php echo  $this->createMobileUrl('alllist')}"  target="_blank" class="goback fleft" style="color:#fff">个人资料</a></h1>
+</header>
+<section class="myself">
+
+  <div class="myBrief">
+    <div class="indexItem">
+      <a href="" class="linka">
+        <div class="itemc">
+          <p class="hcolor" style="font-size:13px;">{php echo cutstr($res['realname'],5,true);}&nbsp;&nbsp;{if $res['gender']=='1'}男{elseif $res['gender']=='2'}女{else}保密{/if}&nbsp;&nbsp;</p>
+          <p class="lcolor" style="font-size:13px;">星座：{$res['constellation']}</p>
+		  <p class="lcolor" style="font-size:13px;">微信昵称：{$res['nickname']}</p>
+		 
+        </div>
+      </a>
+        <form action="{php echo  $this->createMobileUrl('userinfo')}" method="post" target="_self">
+         <input   type="hidden" name="pic" id="pic" value=""  />
+         <li>
+		{if !empty($res['avatar'])}{php $photo = $res['avatar'];}{else}{php $photo = 'images/cdhn80.jpg';}{/if}
+		{php echo $this->tpl_form_field_image('photo',$photo)}
+        </li>
+		<style type="text/css">
+		.upload-image-preview-photo{
+
+			 margin-left:20px;
+
+			}
+		#bianji{margin-left:20px;}
+	     .itemc{margin-left:20px;}
+		</style>
+      </form>
+    </div>
+    <div class="dottedLine"></div>    
+  </div>
+   <form action="{php echo  $this->createMobileUrl('gerennews',array('openid'=>$openid))}" method="post" target="_self">
+    <h2>基本资料</h2>
+    <ul class="basicList">
+      <li><label for="">身高：</label>{if $res['height'] != '0'}<span>{$res['height']}</span><input type="hidden" name="height" value="{$res['height']}" />cm{else}<span>未完善</span>{/if}</li>
+      <li><label for="">体重：</label>{if !empty($res['weight'])}<span>
+	  {if $res['weight']=='401'}
+		40kg以下
+		{elseif $res['weight']=='701'}
+		70kg以上
+		{else}
+		 {$res['weight']}kg
+		{/if}</span><input type="hidden" name="weight" value="{$res['weight']}" />{else}<span>未完善</span>{/if}</li>
+	  <li><label for="">年龄：</label>{if $res['age'] != '0'}<span>{$res['age']}</span><input type="hidden" name="age" value="{$res['age']}" />岁{else}<span>未完善</span>{/if}</li>
+	  <li><label for="">星座：</label>{if !empty($res['constellation'])}<span>{$res['constellation']}</span><input type="hidden" name="constellation" value="{$res['constellation']}" />{else}<span>未完善</span>{/if}</li>
+	   <li><label for="">联系方式：</label>{if !empty($res['telephone'])}<span>{$res['telephone']}</span><input type="hidden" name="telephone" value="{$res['telephone']}" />{else}<span>未完善</span>{/if}</li>
+      <li><label for="">所在省市：</label><span>{$res['resideprovincecity']}</span><input type="hidden" name="resideprovincecity" value="{$res['resideprovincecity']}" /></li>
+    </ul>    
+  </form> 
+  <div class="dottedLine mt10"></div> 
+ <form action="{php echo  $this->createMobileUrl('duixiangnews',array('openid'=>$openid))}" method="post" target="_self" >
+    <h2>理想对象基本要求</h2>
+    <ul class="basicList">
+       <li><label for="">身高要求：</label>{if $res['uheightL'] != '0'}<span>{$res['uheightL']}</span> <input type="hidden" name="uheightL" value="{$res['uheightL']}" />cm~~<span>{$res['uheightH']}</span><input type="hidden" name="uheightH" value="{$res['uheightH']}" />cm{else}<span>未完善</span>{/if}</li>
+	    <li><label for="">体重要求：</label>{if !empty($res['uweight'])}
+		<span>
+		{if $res['uweight']=='501'}
+		50kg以下
+		{elseif $res['uweight']=='5080'}
+		50~80kg以内
+		{elseif $res['uweight']=='801'}
+		80kg以上
+		{/if}
+		</span><input type="hidden" name="uweight" value="{$res['uweight']}" />{else}<span>未完善</span>{/if}</li>
+	 
+      
+    </ul>
+  </form>  
+  <style type="text/css">
+  .basicList li{height:40px !important;line-height:40px !important;}
+  </style>
+  </article>
+
+</section>
+<p class="basicbtn greenbtn mtb15"><a href="{php echo  $this->createMobileUrl('register')}" target="_blank" style="color:#fff">快捷{if empty($res['telephone'])}完善{else}编辑{/if}更多资料通道</a></p>
+
+<!-- 弹出层 -->
+<div class="open"><img src="{if preg_match('/http:(.*)/',$res['avatar'])}{$res['avatar']} {else if preg_match('/images(.*)/',$res['avatar'])} {$_W['attachurl']}{$res['avatar']}     {else}{MEEPORES}/static/friend/images/cdhn80.jpg{/if}" alt="用户头像" width=300px height=300px></div>
+<!-- 弹出层 -->
+<script type="text/javascript">
+
+$('#headimg').on('click',function(){
+$('.open').css('display','block');
+})
+$('.open').on('click',function(){
+$('.open').css('display','none');
+})
+
+</script>     
+<script type="text/javascript">
+  wx.ready(function () {
+    var shareData = {
+    title: "{$settings['title']}",
+    desc: "{$settings['share_content']}",
+    link: "{$settings['share_link']}",
+    imgUrl: "{$_W['attachurl']}{$settings['share_logo']}",
+  };
+  
+  //分享朋友
+  wx.onMenuShareAppMessage({
+       title: shareData.title,
+      desc: shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+        send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert(JSON.stringify(res));
+      }
+    });
+ //朋友圈
+  wx.onMenuShareTimeline({
+      title: shareData.title+"---"+shareData.desc,
+      link: shareData.link,
+      imgUrl:shareData.imgUrl,
+      trigger: function (res) {
+      },
+      success: function (res) {
+          send_intergal();
+      },
+      cancel: function (res) {
+      },
+      fail: function (res) {
+        alert("分享失败,网络超时！！！！");
+      }
+    });   
+    
+  });
+
+
+
+function send_intergal(){
+   $.ajax({
+			type:"POST",
+			url:"{php echo $this->createMobileUrl('shareajax')}",
+			data:{openid:'{$openid}}'},
+			cache:false,
+			success:function(data){
+				if(data=="no"){
+					alert("分享成功,抱歉，网络超时，获取积分失败！！！");
+                   
+				}
+				else if(data=="over"){
+				   alert("分享成功,你今天的分享次数已经超过上限哦，请明天再来吧！！！");
+				
+				}
+				else{
+				   alert("分享成功,恭喜您，获得{$settings['share_jifen']}个奖励积分！今天你还有"+data+"次分享赚积分机会哦！");
+				}
+			}
+		});
+}
+
+
+        </script>
+		{template 'footer'}
