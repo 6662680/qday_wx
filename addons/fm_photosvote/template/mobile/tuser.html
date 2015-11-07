@@ -1,0 +1,308 @@
+{template 'header'}
+
+<link rel="stylesheet" type="text/css" href="../addons/fm_photosvote/template/css/style.css">
+<style>
+ body {background: {$reply['zbgcolor']} url({php echo toimage($reply['zbg'])});}
+  .center {
+  padding: 0 10px;
+  overflow: inherit;
+  height: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+ .top {  overflow: hidden;  font-size: 14px;  line-height: 40px;  padding: 5px 0px;  background: #000;  position: fixed;  z-index: 9999;  width: 100%;  color: #fff;  }
+ .h {height:10px}
+.product{ border:0px solid #cfd4d0; padding:5px 0px; overflow: hidden;}
+.product .uli{ width: 100%; float: left; display: block;
+ margin:0 auto;
+  padding: 0;
+  line-height: 1.4;
+  transition: all 0.2s ease-in-out 0s;
+  border: medium none;
+  font-size: 14px;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  background-color: {if empty($bgarr['bodytscolor'])}#fff{else}{$bgarr['bodytscolor']}{/if};
+  background: {if empty($bgarr['bodytscolor'])} #FFFFFF{else}{$bgarr['bodytscolor']}{/if} url({php echo toimage($bgarr['bodytsbg'])}) center no-repeat {$bgarr['bodytscolor']};
+  }
+.product .uli dl{ overflow: hidden;}
+.product .uli dl .bnum{ color:{if empty($bgarr['bodynumcolor'])}#fff{else}{$bgarr['bodynumcolor']}{/if}}
+.product .uli dt{ overflow: hidden; position: relative; margin-bottom: 5px;}
+.product .uli dt span{ position: absolute;    padding: 0 5px;  border-radius: 5px;color:#fff;background: rgba(0, 0, 0, 0.5);}
+.product .uli dt img{ float: left; width: 100%;}
+.product .uli dt span img{ width: 100%; float: left; border:none;}
+.product .uli dd{
+line-height: 18px;
+ color: {if empty($bgarr['bodytextcolor'])}#555555{else}{$bgarr['bodytextcolor']}{/if};
+ font-size: 14px;overflow: hidden;white-space :normal ;  padding: 5px;
+ }
+ .product .uli dd .dda{
+	color: {if empty($bgarr['bodytextcolor'])}#555555{else}{$bgarr['bodytextcolor']}{/if};
+ }
+.product .uli dd span{ color: #f12500;}
+.product .uli dd .ulis{ width: 18%; float: left; display: block;
+ 
+  padding: 0;
+  line-height: 1.4;
+  transition: all 0.2s ease-in-out 0s;
+  border: medium none;
+  font-size: 14px;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  background-color: #FFFFFF;}
+
+  .pagination ul > li > a, .pagination ul > li > span {
+  padding: 5px 5px;
+}
+ .modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-top: 12%;
+}
+
+.bordertop {
+	border-top: 1px #FFFFFF solid;
+  box-shadow: inset 5px 5px 12px rgba(155, 155, 155, 0.2)
+}
+
+</style>
+
+
+{template 'hnav'}
+ <div class="center">
+ 	<div class="product">
+ 		<ul>
+				<li class="uli">
+					<dl>
+						<dt style="  width: 100%;max-height: 300px; ">
+							<a href="{php echo $this->createMobileUrl('tuserphotos', array('rid'=> $rid, 'tfrom_user' => $tfrom_user))}">
+								<img src="{if $user['photo']}{php echo toimage($user['photo'])}{else}{php echo toimage($user['avatar'])}{/if}" width="50"/>
+							</a>
+						
+							<span style="  right: 6px;  top: 6px;  padding: 17px 17px;  border-radius: 100px;  width: 70px;  height: 70px;  text-align: center;"> <strong class="bnum">ID<p>{$user['id']}</p></strong></span>
+							<span style="right:6px;bottom: 6px;">{$reply['tpsname']}: <strong>{php echo $user['photosnum'] + $user['xnphotosnum']} </strong></span>
+						</dt>
+						
+						<dd style="text-align:center;  text-decoration: none;"><strong >{php echo cutstr($user['photoname'], '20')}</strong></dd>
+						<dd style="text-decoration: none;">
+							<img src="{php echo toimage($user['avatar'])}" width="35" style="border-radius: 35px;margin-right:10px;"><strong >{if empty($user['realname'])}{php echo cutstr($user['nickname'], '6')}{else}{php echo cutstr($user['realname'], '6')}{/if} {if ($tfrom_user == $from_user)}<span> [<a href="{php echo $this->createMobileUrl('reg', array('rid' => $rid, 'from_user' => $from_user))}"><i class="fa fa-edit"></i> 编辑</a>]</span>{if $reply['mediatypem']}<span class="pull-right label label-info"><a href="{php echo $this->createMobileUrl('tregs', array('rid' => $rid, 'from_user' => $from_user))}" style="color:#fff;font-size:15px;"><i class="fa fa-youtube-play"></i>  录音室</a></span>{/if}{/if}</strong>
+						</dd>
+						<dd>
+						<strong ><i class="fa fa-list-ul"></i> 编号 ID： <strong class="bnum"> <span class="label " style="font-size:15px;">{$user['id']}</span> </strong>
+						<a style="text-align:right;float:right;margin-right:5px;" class="dda"><i class="fa fa-eye"></i> {$reply['rqname']}：<strong class="bnum"><span class="label" style="font-size:15px;">{php echo $user['hits'] + $user['xnhits']}</span></strong></a>
+						<a style="text-align:right;float:right;margin-right:5px;" class="dda"><i class="fa fa-external-link-square"></i> 转发量：<strong class="bnum"><span class="label" style="font-size:15px;">{php echo $sharenum}</span></strong></a>
+						</strong >						
+						</dd>
+						<dd style=" text-decoration: none;" class="bordertop">
+							<strong ><i class="fa fa-tag"></i> 介绍： </strong>
+							<p style=" text-indent: 2em;">{$user['description']}</p>
+						</dd>
+						<!--
+						{if $reply['mediatype'] || $reply['mediatypem'] || $reply['mediatypev']}
+							<dd class="bordertop"><strong><i class="fa fa-delicious"></i> 多媒体展示</strong></dd>
+						{/if}
+						-->
+						{if $reply['mediatype']}
+							{if $picarr}
+								<dd><strong><i class="fa fa-photo"></i> {if ($tfrom_user <> $from_user)}Ta的相册{else}我的相册{/if}</strong></dd>
+								<dd>
+									<ul>
+									<?php for ($i = 1; $i <= $reply['tpxz']; $i++) {
+									$n = $i -1;
+									if (!empty($picarr[$n])) {?>
+										<li class="ulis">
+											<a href="{php echo $this->createMobileUrl('tuserphotos', array('rid'=> $rid, 'tfrom_user' => $tfrom_user, 'ti' => $i))}">
+												<img src="{php echo toimage($picarr[$n])}" width="50"/>
+											</a>
+										</li>
+									<?php }} ?>	
+										
+									</ul>
+								</dd>
+							{/if}
+						{/if}
+						
+						{if $reply['mediatypem']}
+							{if $user['voice'] || $user['music']}
+								<!--<dd ><strong><i class="fa fa-volume-up"></i> 倾听好声音</strong></dd>-->
+								{if $user['voice']}
+									<dd style="  text-align: center;  margin: 0 auto; ">
+										<strong style="  float: left;"><i class="fa fa-volume-up"></i> 录音室： </strong>
+										<audio controls="controls" width="100%">
+											<source src="{php echo tomedia($user['voice'])}">
+											您的浏览器不支持 audio tag.
+										</audio>
+									</dd>
+								{/if}
+								{if $user['music']}
+									<dd style="  text-align: center;  margin: 0 auto; ">
+										<strong style="  float: left;"><i class="fa fa-volume-up"></i> 好声音： </strong>
+										<audio controls="controls" width="100%">
+											<source src="{php echo tomedia($user['music'])}">
+											您的浏览器不支持 audio tag.
+										</audio>
+									</dd>
+								{/if}
+							{/if}
+						{/if}						
+						{if $reply['mediatypev']}							
+							{if $user['vedio'] || $user['youkuurl']} 
+								<dd ><strong><i class="fa fa-video-camera"></i> 展示视频</strong></dd>	
+								<dd style="  text-align: center;  margin: 0 auto; ">
+									{if $user['vedio']}
+										<video controls preload="auto" width="100%" height="264" poster="{if $user['photo']}{php echo tomedia($user['photo'])}{else}{php echo tomedia($user['avatar'])}{/if}">
+											<source src="{php echo tomedia($user['vedio'])}" type='video/mp4' />
+											<p class="vjs-no-js">你的浏览器不支持该视频</a></p>
+										</video>
+									{else}
+										{if $user['youkuurl']}
+											<iframe  src="{if (substr($user['youkuurl'],0,7)=='http://')}{$user['youkuurl']}{else}http://player.youku.com/embed/{$user['youkuurl']}{/if}" frameborder="0" allowfullscreen="" style="width:100%; height: 200px;">
+											</iframe>
+										{/if}
+									{/if}
+																	
+										
+									
+								</dd>
+							{/if}
+						{/if}
+						
+						
+						{if $reply['isdaojishi']}
+								{if $totaltime == 0}
+									<dd style="text-decoration: none;margin:10px 0;background:red" >	
+									<div style="font-size: 23px;background:red;color:#fff" >{$reply['ttipvote']}</div></dd>
+								{else}
+									<h1 style="font-size: 23px;text-align:center;"><i class="fa fa-history"></i> 投票截止倒计时：  </h1>
+									<dd style="text-decoration: none;text-align:center;">	
+										<h1 style="font-size: 23px;"><strong id="RemainD">XX</strong>天<strong id="RemainH">XX</strong>小时<strong id="RemainI">XX</strong>分<strong id="RemainS">XX</strong>秒</h1>
+									<script language="JavaScript">
+									var runtimes = 0;
+									function GetRTime(){
+										var nMS = {$totaltime}*1000-runtimes*1000;
+										//var nY=Math.floor(nMS/(1000*60*60*24*30*12)) % 365;//一年
+										//var nM=Math.floor(nMS/(1000*60*60*24*30)) % 12;//一个月
+										var nD=Math.floor(nMS/(1000*60*60*24));//一天
+										var nH=Math.floor(nMS/(1000*60*60)) % 24;//一小时
+										var nI=Math.floor(nMS/(1000*60)) % 60;//1一分钟
+										var nS=Math.floor(nMS/1000) % 60;//60秒
+										//document.getElementById("RemainY").innerHTML=nY;
+										//document.getElementById("RemainM").innerHTML=nM;
+										document.getElementById("RemainD").innerHTML=nD;
+										document.getElementById("RemainH").innerHTML=nH;
+										document.getElementById("RemainI").innerHTML=nI;
+										document.getElementById("RemainS").innerHTML=nS;
+										if(nMS>5*59*1000&&nMS<=5*60*1000){
+											alert("还有最后五分钟！");
+										}
+										runtimes++;
+										setTimeout("GetRTime()",1000);
+									}
+									window.onload=GetRTime();
+
+									</script>
+									</dd>
+									
+								
+									<dd style="text-decoration: none;">
+									{if ($tfrom_user <> $from_user)}
+													
+									
+										{if $uallonetp >= $reply['allonetp']}
+											<a href="Javescript::;" class="btn btn-success" style="color:#fff;">已投</a>
+											
+										{else}	
+											{if $udayonetp >= $reply['dayonetp']}							
+												<a href="Javescript::;" class="btn btn-success" style="color:#fff;">已投</a>
+											{else}										
+												{if !empty($reply['tpname'])}<a href="javascript:void(0)" class="btn  btn-danger" onclick="tvote()" data-toggle="tooltip" data-placement="top" style="color:#fff;">{$reply['tpname']}</a>	{/if}
+
+											{/if}								
+										{/if}
+									{else}
+										<a href="{php echo $this->createMobileUrl('paihang', array('rid' => $rid, 'tfrom_user'=> $tfrom_user, 'votelog' => '1'))}" class="btn btn-info" style="color:#fff;"><i class="fa fa-align-center"></i> 我的票数：<span class="label label-info" style="font-size:15px;">{php echo $user['photosnum'] + $user['xnphotosnum']}</span></a>
+									{/if}
+										{if !empty($reply['lapiao'])}<a class="btn btn-info" id="share" onclick="button2()" style="color:#fff;text-align:right;float:right;margin-right:5px;"><i class="fa fa-share-alt-square"></i> {$reply['lapiao']}</a>{/if}
+									</dd>								
+							{/if}
+						{else}
+							<dd style="text-decoration: none;">
+							{if ($tfrom_user <> $from_user)}
+											
+							
+								{if $uallonetp >= $reply['allonetp']}
+									<a href="Javescript::;" class="btn btn-success" style="color:#fff;">已投</a>
+									
+								{else}	
+									{if $udayonetp >= $reply['dayonetp']}							
+										<a href="Javescript::;" class="btn btn-success" style="color:#fff;">已投</a>
+									{else}										
+										{if !empty($reply['tpname'])}<a href="javascript:void(0)" class="btn  btn-danger" onclick="tvote()" data-toggle="tooltip" data-placement="top" style="color:#fff;">{$reply['tpname']}</a>	{/if}
+
+									{/if}								
+								{/if}
+							{else}
+								<a href="{php echo $this->createMobileUrl('paihang', array('rid' => $rid, 'tfrom_user'=> $tfrom_user, 'votelog' => '1'))}" class="btn btn-info" style="color:#fff;"><i class="fa fa-align-center"></i> 我的票数：<span class="label label-info" style="font-size:15px;">{php echo $user['photosnum'] + $user['xnphotosnum']}</span></a>
+							{/if}
+								{if !empty($reply['lapiao'])}<a class="btn btn-info" id="share" onclick="button2()" style="color:#fff;text-align:right;float:right;margin-right:5px;"><i class="fa fa-share-alt-square"></i> {$reply['lapiao']}</a>{/if}
+							</dd>	
+						{/if}
+						
+					
+						{if ($reply['isbbsreply'] == 1) }
+							<dd style="text-decoration: none;"  class="bordertop"><strong ><i class="fa fa-comments-o"></i> {if ($tfrom_user <> $from_user)}Ta的评论{else}我的评论{/if}  <span class="bnum label label-info" style="font-size:15px;">{if !empty($btotal)}({$btotal}){else}(0){/if}</span></strong> </dd>
+							{loop $bbsreply $brow}
+								<dd style="text-decoration: none;overflow:none;height:auto;  white-space: normal;overflow:auto;">
+								<strong ><img src="{php echo toimage($brow['avatar'])}" width="30" style="border-radius:100px;"/>{php echo cutstr($brow['nickname'], '10')} ： </strong><span class="pull-right" style="line-height:30px;color:#e0e0e0;">{php echo date('Y-m-d H:i:s',$brow['createtime'])}</span>
+								<p style="text-indent:2em;">{$brow['content']}</p>
+								</dd>
+							{/loop}
+							<div style="margin:0 auto;padding:0;text-align:center;">{$pager}</div>
+							
+							<dd style="text-decoration: none;"><strong ><i class="fa fa-comment-o"></i> {if ($tfrom_user <> $from_user)}我也评一个{else}回复一个{/if} </strong> </dd>
+							
+							
+								<dd>
+								  <textarea style="height:50px; width: 100%;" class="span7 richtext-clone w" id="content" name="content" cols="70"></textarea>
+								</dd>								
+								<dd style="margin: 0 auto;  text-align: center;">
+									<input type="hidden" name="token" value="{$_W['token']}"/>
+									<input type="submit" class="btn btn-large btn-info submit" style="  float: right;" value="提交" name="submit">
+								</dd>	
+						{/if}
+					</dl>
+				</li>				
+ 		</ul>
+ 	</div>
+	
+	{if $reply['isvotexq'] == 1}{template 'zanzhu'}{/if}
+	<div class="copyright">
+	{if $reply['iscopyright']==1}<a href="{$reply['copyrighturl']}">&copy;{$reply['copyright']}</a>{else}<a href="javascript:;">&copy;{if empty($_W['account']['name'])}FantasyMoons Team团队{else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}</a>{/if}
+	</div>
+	
+ 	
+</div>
+{template 'fnav'}
+{template 'tvote'}
+
+	<script>
+		var iscode = "{$reply['iscode']}";		
+		$('.submit').click(function(){
+			var content = $('#content').val();
+			if(content == '' || content == null) {
+				fminfo("请输入回复内容！");
+				return false;
+			}
+			var bbstype = "bbsreply";
+			bbsreply(content, iscode, bbstype);
+			
+		});	
+		
+	</script>
+
+
+
+<div class="share-layer"></div>
+{template 'footer'}

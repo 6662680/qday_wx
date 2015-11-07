@@ -1,0 +1,57 @@
+/* Reset */
+html{font-size:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var,optgroup{font-style:inherit;}
+del,ins{text-decoration:none;}
+li{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+q:before,q:after{content:'';}
+abbr,acronym{border:0;font-variant:normal;}
+sup,sub{vertical-align:baseline;}
+/* because legend doesn't inherit in IE */
+legend{color:#000;}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}
+input,select{vertical-align:middle;}
+cite,em{font-style:normal}
+/* New Clearfix */
+.clear{clear:both;height:1px;margin:0;padding:0;font-size:15px;line-height:1px;}
+.clearfix:after,.content:after,#content:after,.bd:after{visibility:hidden;display: block;font-size:0;content:" ";clear: both;height:0;}
+
+* html .clearfix,* html .content,* html #content,* html .bd{zoom:1;}/* IE6 */
+*:first-child+html .clearfix,*:first-child+html .content,*:first-child+html #content,*:first-child+html .bd{zoom:1;}/* IE7 */
+/* Defaults */
+:focus{outline:0}
+a:link,a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+body{font:normal 12px 'Microsoft YaHei',Arial,Corbel,Verdana,Helvetica,sans-serif;}
+img{border:0;vertical-align:bottom}
+fieldset{border:0}
+p{margin:0}
+label{cursor:pointer;}
+
+.row {*zoom: 1;}
+
+.row:before,
+.row:after {display: table;line-height: 0;content: "";}
+.row:after {clear: both;}
+
+.page{width:100%;height:auto;position:relative;margin:0 auto;overflow:hidden;}
+
+.layer{position:absolute;}
+.container{position:absolute;width:100%;height:100%;}
+
+.sprite{display:none;position:absolute;user-select:none;-o-user-select:none;-moz-user-select: none;-khtml-user-select: none;-webkit-user-select: none;}
+.container{position:relative;width:100%;height:100%;}
+
+
+
+.alert_mask{background:#000000;opacity:0.7;-moz-opacity:0.7;z-index:8000;height:100%;width:100%;position:fixed;top:0;left:0;display:none;}
+
+.loading_alert{position:fixed;top:0;left:0;z-index:11000;display:none;width:100%;height:1008px;}
+.loading_alert .sun{width:270px;height:253px;background:url("../images/nuan.png");top:266px;left:192px;position:absolute;}
+.loading_alert .nuan{width:270px;height:253px;background:url("../images/nuan_text.png");top:266px;left:192px;position:absolute;z-index:5;}
+.loading_alert .tips{width:223px;height:40px;background:url("../imagesloading_text.png");top:535px;left:218px;position:absolute;z-index:5;}
+

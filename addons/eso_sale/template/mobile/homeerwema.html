@@ -1,0 +1,69 @@
+﻿
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>专属二维码</title>
+    <link rel="stylesheet" type="text/css" href="../addons/eso_sale/style/new/foundation.css">
+  <link rel="stylesheet" type="text/css" href="../addons/eso_sale/style/new/common-v4.0.css">
+</head>
+
+<body class="body-gray">
+
+    <!--topbar begin-->
+    <div class="fixed">
+        <nav class="tab-bar">
+            <section class="left-small">
+                <a href="javascript:history.back();" class="menu-icon"><span></span></a>
+            </section>
+            <section class="middle tab-bar-section">
+                <h1 class="title">分享下面的二维码赚佣金</h1>
+            </section>
+        </nav>
+    </div>
+    <!--topbar end-->
+    <!--content begin-->
+    <div class="qrcode">
+        <img src="../addons/eso_sale/style/images/share/share{$id}.png">
+        <a class="qrcode-address" href="#">可转发朋友圈或是印宣传单上</a>
+        <a href="#" class="qrcode-a">长按二维码可保存到手机</a>
+
+    </div>
+    <!--content end-->
+</body>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?v=20150120"></script>
+<script type="text/javascript">
+	     var wxData = {
+            "appId": "{$_W['account']['key']}",
+            "imgUrl" : '{$_W['siteroot']}{BJ_QMXK_ROOT}/style/images/icon.jpg',
+            "link" : '{php echo $_W['siteroot'].$this->createMobileUrl('list',array('id'=>$id))}',
+            "desc" : "{$signPackage['description']}",
+            "title" : '{$_W['account']['name']}'
+        };
+        
+                  wx.config({
+    debug: false,
+    appId: '{$signPackage['appId']}',
+    timestamp: {$signPackage['timestamp']}, 
+    nonceStr: '{$signPackage['nonceStr']}', 
+    signature: '{$signPackage['signature']}',
+     jsApiList: [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'hideMenuItems',
+        'showMenuItems',
+        'hideAllNonBaseMenuItem',
+        'showAllNonBaseMenuItem'
+      ]
+});
+        </script>
+<script src="../addons/eso_sale/style/js/wxaction.js?v=2015012103"></script>
+</html>

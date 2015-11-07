@@ -1,0 +1,82 @@
+`{php $bootstrap_type = 3;}
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/eso_sale/template/mobile/style1/style.css">
+<div class="head">
+	<a href="javascript:history.go(-1);" class="bn pull-left"><i class="icon-angle-left"></i></a>
+	<span class="title">我的订单</span>
+	<a href="{php echo $this->mturl('mycart')}" class="bn pull-right"><i class="icon-eso_sale-cart"></i></a>
+</div>
+{loop $list $item}
+<div class="myoder img-rounded">
+	<div class="myoder-hd">
+		<span class="pull-left">订单编号：{$item['ordersn']}</span>
+		<span class="pull-right">{php echo date('Y-m-d H:i', $item['createtime'])}</span>
+	</div>
+	{loop $item['goods'] $goods}
+	<div class="myoder-detail">
+		<a href="{php echo $this->mturl('detail', array('id' => $goods['id']))}"><img src="{$_W['attachurl']}{$goods['thumb']}" width="160"></a>
+		<div class="pull-left">
+			<div class="name"><a href="{php echo $this->mturl('detail', array('id' => $goods['id']))}">{$goods['title']}</a></div>
+			<div class="price">
+				<span>{$goods['marketprice']} 元{if $goods['unit']} / {$goods['unit']}{/if}</span>
+				<span class="num">{$item['total'][$goods['id']]['total']}{if $goods['unit']} {$goods['unit']}{/if}</span>
+			</div>
+		</div>
+	</div>
+	{/loop}
+	<div class="myoder-express">
+		<span class="express-company">状态</span>
+		<span class="express-num">
+		{if $item['paytype'] == 3}
+			{if $item['status'] == -1}
+			<span class="text-muted">订单取消</span>
+			{elseif $item['status'] < 3}
+			<span class="text-danger">货到付款 / 未付款</span>
+			{else}
+			<span class="text-success">已完成</span>
+			{/if}
+		{else}
+			{if $item['status'] == -1}
+			<span class="text-muted">订单取消</span>
+			{elseif $item['status'] == 0}
+			<span class="text-danger">未付款</span>
+			{elseif $item['status'] == 1}
+			<span class="text-warning">已付款</span>
+			{elseif $item['status'] == 2}
+			<span class="text-warning">已发货</span>
+			{else}
+			<span class="text-success">已完成</span>
+			{/if}
+		{/if}
+		</span>
+	</div>
+	<div class="myoder-express">
+		<span class="express-company">配送方式</span>
+		<span class="express-num">{if $item['sendtype'] == 1}快递{elseif $item['sendtype'] == 2}自提{/if}</span>
+	</div>
+	{if $item['status'] == '2' && !empty($item['expresssn'])}
+	<div class="myoder-express">
+		<span class="express-company">{$item['expresscom']}</span>
+		<span class="express-num">{$item['expresssn']}</span>
+	</div>
+	{/if}
+	<div class="myoder-total">
+		<span>共计：<span class="false">{$item['price']} 元</span></span>
+		{if $item['paytype'] != 3}
+		{if $item['status'] == 0}
+		<a href="{php echo $this->mturl('pay', array('orderid' => $item['id']))}" class="btn btn-danger pull-right btn-sm">立即支付</a>
+		{/if}
+		{/if}
+		{if $item['status'] == 2 || ($item['paytype'] == 3 && $item['status'] < 3)}
+		<a href="{php echo $this->mturl('myorder', array('orderid' => $item['id'], 'operation' => 'confirm'))}" class="btn btn-success pull-right btn-sm" onclick="return confirm('点击确认收货前，请确认您的商品已经收到。确定收货吗？'); ">确认完成订单</a>
+		{/if}
+	</div>
+</div>
+{/loop}
+{template 'footer'}
+{template 'footerbar'}
+<script>
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	WeixinJSBridge.call('hideOptionMenu');
+});
+</script>

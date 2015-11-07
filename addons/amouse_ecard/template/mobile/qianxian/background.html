@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+<title>选择背景</title>
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css">
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/flytip.css">
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/nameCard.css?v=2014122">
+<style type="text/css">
+    html, body {
+        background: #fff;
+    }
+</style>
+</head>
+<body class="namecard-choosebg">
+<div class="namecard-page">
+    <section class="choosebg-column js-choosebgColumn">
+        <div class="choosebg-title">
+            <a class="current" href="javascript:;">选择背景图片</a>
+            <a href="javascript:;">上传背景图片</a>
+        </div>
+        <div class="choosebg-conten">
+            <div class="choosebg-conten-box">
+                <ul class="choosebg-inner clearfix">
+
+                    {loop $images $img}
+                    <li class="choosebg-inner-item ">
+                        <a href="{php echo $this->createMobileUrl('background',array('id'=>$img['id'], 'op' =>'post','mid'=>$id))}">
+                            <img src="{$_W['attachurl']}{$img['img']}" data-path="{$_W['attachurl']}{$img['img']}"
+                                 class="choosebg-item-thumbnail"></a>
+
+                        <div class="choose-ok"></div>
+                    </li>
+                    {/loop}
+                </ul>
+            </div>
+            <div class="choosebg-conten-box" style="display: none;">
+                <div class="choosebg-upload">
+                    <div class="choosebg-upload-box">
+                        <a class="upload-btn" onclick="clickupload()"><span class="upload-text">点击上传图片</span></a>
+                        <div class="uploadbtn"></div>
+                        <form id="uploadAvatar" action="" method="post" enctype="multipart/form-data" target="">
+                            <input type="file" name="file" id="file" class="file-hidden" single accept="image/*">
+                        </form>
+                        <input type="hidden" class="picPath" value="">
+                        <div class="progress">0</div>
+                    </div>
+                </div>
+                <section class="fillIn-column avatar-column">
+                    <div class="fillIn-avatar">
+                        <span id="aaa"></span>
+                        <a class="upload-btn" href="#"><i class="ico-upload"></i></a>
+                    </div>
+                </section>
+
+                <form action="" class="validate" method="post" id="personForm">
+                    <!--上传图片地址-->
+                    <input type='hidden' id='pic_url' name='headimg' value="{$member['headimg']}"/>
+                    <input type='hidden' id='' name='op' value="imgupload"/>
+                    <input type='hidden' id='' name='mid' value="{$id}"/>
+                    <input type="hidden" name="uploadBgs" id="bizCardUploadBgs" value="">
+                    <input type="hidden" name="fontColor" id="bizCardFontColor" value="">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <a class="sync-btn" href=""><label for="headUpload"><img {if $member['headimg']}
+                style="display:block;position: relative;width: 90%;top:20px;left:5%;max-height:90%" {else}
+                style="display:none;position: relative;width: 90%;top:20px;left:5%;max-height:90%" {/if} id="fileimg"
+                src="{$_W['attachurl']}{$member['headimg']}" width="120px;"class="fillIn-avatar-thumbnail"></label></a>{if
+            $member['headimg']}{/if}
+        </div>
+<div class="urls">
+</div>
+</section>
+</div>
+
+<div style="height:80px"></div>
+<div class="create-next create-position" id="footerFixed">
+    <a class="create-next-btn" href="javascript:savePersonInfo()" id="saveBtn">完 成 </a>
+</div>
+</body>
+<script src="../addons/amouse_ecard/style/js/jquery.1.11.1.js"></script>
+<script src="../addons/amouse_ecard/style/js/flytip.js"></script>
+<script src="../addons/amouse_ecard/style/js/h5upload.js"></script>
+<script>
+    function clickupload() {
+        $('#file').click();
+    }
+    function savePersonInfo() {
+        $("#saveBtn").text("正在保存...");
+        $("#personForm").submit();
+    }
+</script>
+<script>
+    function uploadSuccess() {
+        var picPath = $(".picPath").val();
+        var urlsObj = $(".urls").find("input");
+        var uploadBgObj = $("#bizCardUploadBgs");
+
+        var liHtml = "";
+        var paths = [];
+        paths.push(picPath);
+        urlsObj.each(function (i) {
+            if (i > 0) {
+                var $this = $(this);
+                paths.push($this.data("path"));
+                liHtml += '<li class="choosebg-inner-item">' +
+                        '<img src="' + $this.val() + '" data-path="' + $this.data("path") + '" class="choosebg-item-thumbnail">' +
+                        '<div class="choose-ok"></div>'
+                '</li>';
+            }
+        });
+        $("#bgUrlPreView").html(liHtml);
+        if (paths.length > 3) {
+            paths = paths.slice(0, 3);
+        }
+        $("#bizCardUploadBgs").val(paths.join(","));
+
+        changeBg(picPath);
+    }
+
+    function changeBg(bg) {
+        $("#bizCardBg").val(bg);
+        $("#bizCardBgForm").submit();
+    }
+
+    $(document).ready(function (e) {
+        var $choosebgTitle = $(".choosebg-title >a");
+        var $choosebgConten = $(".choosebg-conten >div");
+        $choosebgTitle.each(function (i) {
+            $(this).click(function () {
+                choosebgTab(i);
+            });
+        });
+        function choosebgTab(index) {
+            $choosebgTitle.eq(index).addClass("current").siblings().removeClass("current");
+            $choosebgConten.eq(index).show().siblings("div").hide();
+        }
+
+        $(".choosecolor-list .choosecolor-item").click(function () {
+            if (!$(this).hasClass("current")) {
+                $(this).addClass("current").siblings().removeClass("current");
+            }
+
+            var colorObj = $(".choosecolor-list").find(".current");
+            $("#bizCardFontColor").val(colorObj.data("color"));
+            $("#bizCardBgForm").submit();
+        });
+        $("body").on("click", ".choosebg-inner-item", function () {
+            var $this = $(this);
+            $this.addClass("current").siblings().removeClass("current");
+
+            changeBg($this.find("img").data("path"));
+        });
+
+        $(".js-choosebgColumn").h5upload({uploadUrl: " ", number: 3, callback: uploadSuccess});
+    });
+</script>
+<script src="../addons/amouse_ecard/style/js/wx-hideShare.js"></script>
+<script type="text/javascript" src="../addons/amouse_ecard/style/js/zepto.form.js"></script>
+<script type="text/javascript">
+    //图片上传js
+    var btn = $("body");
+    $("#file").wrap('<form method="post" id="formUpload" action="{php echo $this->createMobileUrl('uploadimage',array(),true);}" enctype="multipart/form-data"></form>');
+    $("#file").change(function () {
+        document.getElementById('fileimg').style.display = 'none';
+        document.getElementById('aaa').innerHTML = '上传中...';
+        $("#formUpload").ajaxSubmit({
+            dataType: 'json',
+            beforeSend: function () {
+
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.error == 1) {
+                } else {
+                    var pic_url = data.filename;
+                    $('#fileimg').attr('src', '{$_W['attachurl']}' + pic_url);
+                    $('#pic_url').attr('value', pic_url);
+                    document.getElementById('fileimg').style.display = 'block';
+                    document.getElementById('aaa').innerHTML = '';
+                }
+            },
+            error: function (xhr) {
+                btn.html("上传失败3");
+            }
+        });
+    });
+</script>
+</html>

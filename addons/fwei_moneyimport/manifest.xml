@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[会员余额导入]]></name>
+		<identifie><![CDATA[fwei_moneyimport]]></identifie>
+		<version><![CDATA[3.0]]></version>
+		<type><![CDATA[services]]></type>
+		<ability><![CDATA[会员余额导入]]></ability>
+		<description><![CDATA[将已有系统的会员余额导入到微信系统]]></description>
+		<author><![CDATA[情天]]></author>
+		<url><![CDATA[http://www.qdaygroup.com]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+		<menu>
+			<entry title="导入余额" do="import" state="" direct="false" />
+		</menu>
+	</bindings>
+	<install><![CDATA[]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

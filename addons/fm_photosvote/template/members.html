@@ -1,0 +1,132 @@
+{template 'common/header'}
+
+    <div class="main">
+	{if $rid!=''}
+		{template 'nav'}
+	{/if}
+	
+	<div class="panel panel-info">
+		<div class="panel-heading">筛选</div>
+		<div class="panel-body">
+			<form action="./index.php" method="get" class="form-horizontal" role="form">
+				<input type="hidden" name="c" value="site" />
+				<input type="hidden" name="a" value="entry" />
+				<input type="hidden" name="m" value="fm_photosvote" />
+				<input type="hidden" name="do" value="members" />
+				<input type="hidden" name="rid" value="{$_GPC['rid']}" />
+				<div class="form-group">
+					<label class="col-xs-8 col-sm-8 col-md-8 col-lg-3 control-label">用户编号（ID）或者昵称或者手机号码或者主题宣言</label>
+					<div class="col-xs-12 col-sm-8 col-lg-7">
+						<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="用户编号（ID）或者昵称或者手机号码或者主题宣言"> 
+							{if $keyword}
+								<div class="help-block label label-info " style="position: relative;  top: 10px;  font-size: 15px;">当前系统已搜索到 {$total} 条包含 “{$keyword}” 的相关数据......</div>
+							{else}	
+								<div class="help-block label label-info " style="position: relative;  top: 10px;  font-size: 15px;">当前系统已搜索到 {$total} 条数据......</div>
+							{/if}
+					</div>
+					<button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">	
+			<div class="row-fluid">
+				<div class="span8 control-group">
+					<a class="btn btn-primary" href="{php echo $this->createWebUrl('download',array('rid'=>$rid))}"><i class="fa fa-download"></i> 导出用户信息
+					</a>
+				</div>
+			</div>
+		</div>
+	<form method="post" class="form-horizontal" id="formfans">
+	<input type="hidden" name="op" value="del" />
+	<div style="position:relative">
+		<div class="panel-body table-responsive">
+			<table class="table table-hover" style="position:relative">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:50px;">删？</th>
+					<th style="width:60px;">ID</th>
+					<th style="width:100px;">用户</th>
+					<th style="width:140px;">投稿主题宣言</th>
+					<th style="width:80px;">投稿照片</th>
+					<th style="width:60px;" class="row-hover">票数</th>
+					<th style="width:60px;" class="row-hover">人气值</th>
+					<th style="width:60px;" class="row-hover">转发量</th>
+					<th style="width:110px;" class="row-hover">手机</th>
+					<th style="width:140px;">投稿时间</th>
+					<th style="width:200px;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $members $mid $row}
+				{if $keyword}
+								<style>
+									.active {background:#FFFC00; color:red;}
+								</style>
+								
+							{/if}
+					<tr>
+						<td><input type="checkbox" name="uid[]" value="{$row['id']}" class=""></td>
+						<td class="row-hover"><span {if stristr($row['id'],$keyword)}class="active"{/if}>{$row['id']}</span></td>
+						<td class="info" style="text-align:left;"><img src="{php echo toimage($row['avatar'])}" width="50px;"/><span {if stristr($row['nickname'],$keyword)}class="active"{/if}>{$row['nickname']}</span>
+						<div>{if !empty($row['realname'])}姓名：{$row['realname']}<br/>{/if}{if !empty($row['weixin'])}微信号：{$row['weixin']}<br/>{/if}{if !empty($row['qqhao'])}QQ号：{$row['qqhao']}<br/>{/if}{if !empty($row['email'])}邮箱：{$row['email']}<br/>{/if}{if !empty($row['address'])}地址：{$row['address']}<br/>{/if}</div></a></td>				
+						<td><span {if stristr($row['photoname'],$keyword)}class="active"{/if}>{$row['photoname']}</span></td>
+						<td><img src="{php echo toimage($row['photo'])}" width="50px;"/></td>
+						<td class="row-hover">{php echo $row['photosnum'] + $row['xnphotosnum']}</td>
+						<td class="row-hover">{php echo $row['hits'] + $row['xnhits']}</td>
+						<td class="row-hover">{$sharenum[$mid]}</td>
+						<td class="row-hover"><span {if stristr($row['mobile'],$keyword)}class="active"{/if}>{$row['mobile']}</span></td>
+						<td>{php echo date('Y-m-d H:i', $row['createtime']);}</td>
+						<td>
+							<a href="{php echo $this->createWebUrl('provevote', array('status' => '1', 'member' => 1, 'foo' => 'post', 'rid' => $rid, 'from_user' => $row['from_user']))}" class="btn btn-default btn-sm manage"  data-toggle="tooltip" data-placement="top"><i class="fa fa-edit"></i>编辑</a>
+							<a href="{php echo $this->createWebUrl('votelog', array('tfrom_user' => $row['from_user'], 'rid' => $rid))}" class="btn btn-default btn-sm manage"  data-toggle="tooltip" data-placement="top"><i class="fa fa-search"></i>投票</a>
+							<a href="{php echo $this->createWebUrl('message', array('tfrom_user' => $row['from_user'], 'rid' => $rid))}" class="btn btn-default btn-sm manage"  data-toggle="tooltip" data-placement="top"><i class="fa fa-search"></i>留言</a>
+						</td>
+					</tr>
+				{/loop}
+				<tr>
+					<td><input type="checkbox" name="" onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck});"></td>
+					<td colspan="9"><input name="token" type="hidden" value="{$_W['token']}" /><input type="submit" name="submit" class="btn btn-primary" value="删除选中的粉丝"></td>
+				</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	</form>
+	</div>
+	{$pager}
+<div id="guanbi" class="hide">
+	<span type="button" class="pull-right btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</span>
+</div>
+<script>
+	require(['jquery', 'util'], function($, u){		
+		$('#formfans').submit(function(){
+		    if($(":checkbox[name='uid[]']:checked").size() > 0){
+			    var check = $(":checkbox[name='uid[]']:checked");
+			    if( confirm("确认要删除选择的粉丝中奖记录?")){
+		            var id = new Array();
+				    var rid = {$rid};
+		            check.each(function(i){
+			            id[i] = $(this).val();
+		            });
+		            $.post('{php echo $this->createWebUrl('deletefans')}', {idArr:id,rid:rid},function(data){
+			        if (data.errno ==0){
+						location.reload();
+			        } else {
+				        alert(data.error);
+			        }
+		            },'json');
+		        }
+		    }else{
+		        u.message('没有选择粉丝', '', 'error');
+		        return false;
+		    }		    
+	    });    
+		
+	});	
+</script>
+
+    </div>
+{template 'common/footer'}

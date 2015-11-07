@@ -1,0 +1,948 @@
+<script src="../addons/fm_photosvote/template/mobile/newfile/lib/mobileFix.mini.js?v={php echo time()}"></script>
+<script src="../addons/fm_photosvote/template/mobile/newfile/lib/exif.js?v={php echo time()}"></script>
+<script src="../addons/fm_photosvote/template/mobile/newfile/lrz.pc.min.js?v={php echo time()}"></script>
+{template 'common/header'}
+	{if $rid!=''}
+		{template 'nav'}
+	{/if}
+	<style>
+	.sub-search input,.sub-search select{margin-bottom:0;}
+	 #main{margin:100px auto;}
+	 #main .info{line-height:20px; border-bottom:1px dashed #FC0;}
+	 #main .info a{color:#666; text-decoration:none; position:relative; display:block;}
+	 #main .info a div{display:none;}
+	 #main .info a:hover{ visibility:visible; color:#333;}
+	 #main .info a:hover div{position:absolute; left:80px; top:-50px; border:1px solid #D4D4D4;background-color:#F2F2F2; display:block; width:200px; height:180px; color:#333; overflow:hidden;text-align:left; padding:10px;z-index:99;}
+	 .stat #table-list .table tbody td {
+  text-align: center;
+  color: #666;
+}
+	 </style>
+	 
+	{if $foo == 'display'}
+    <div class="main">
+	<div class="panel panel-info">
+		<div class="panel-heading">筛选</div>
+		<div class="panel-body">
+			<form action="./index.php" method="get" class="form-horizontal" role="form">
+				<input type="hidden" name="c" value="site" />
+				<input type="hidden" name="a" value="entry" />
+				<input type="hidden" name="m" value="fm_photosvote" />
+				<input type="hidden" name="do" value="provevote" />
+				<input type="hidden" name="rid" value="{$_GPC['rid']}" />
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-4 col-lg-3 control-label">用户编号（ID）或者昵称</label>
+					<div class="col-xs-12 col-sm-8 col-lg-7">
+						<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="用户编号（ID）或者昵称"> 
+					</div>
+					<button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+	<div class="panel panel-default">
+	<!--<div class="panel-heading">	
+		<div class="row-fluid">
+			<div class="span8 control-group">
+				<a class="btn btn-primary" href="{php echo $this->createWebUrl('download',array('rid'=>$rid))}"><i class="fa fa-download"></i> 导出用户信息</a>
+			</div>
+		</div>
+	</div>-->
+	<form method="post" class="form-horizontal" id="formfans">
+	<input type="hidden" name="op" value="del" />
+	<div style="position:relative">
+		<div class="panel-body table-responsive">
+			<table class="table table-hover" style="position:relative">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:50px;">删？</th>
+					<th style="width:40px;">编号ID</th>
+					<th style="width:120px;">昵称</th>
+					<th style="width:150px;">报名主题宣言</th>
+					<th style="width:100px;">报名照片</th>
+					<th style="width:60px;" class="row-hover">票数</th>
+					<th style="width:60px;" class="row-hover">人气</th>
+					<th style="width:60px;" class="row-hover">分享</th>
+					<th style="width:110px;" class="row-hover">手机</th>
+					<th style="width:150px;">报名时间</th>
+					<th style="width:200px;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list_praise $row}
+				{php $sm = $this->getsharenum($uniacid,  $row['tfrom_user'], $rid, $row['sharenum'])}
+				<tr>
+				
+					<td><input type="checkbox" name="uid[]" value="{$row['id']}" class=""></td>
+					<td>{$row['id']}</td>
+					<td class="info"><img src="{php echo toimage($row['avatar'])}" width="50px;"/>{$row['nickname']}
+									<div>{if !empty($row['realname'])}姓名：{$row['realname']}<br/>{/if}{if !empty($row['weixin'])}微信号：{$row['weixin']}<br/>{/if}{if !empty($row['qqhao'])}QQ号：{$row['qqhao']}<br/>{/if}{if !empty($row['email'])}邮箱：{$row['email']}<br/>{/if}{if !empty($row['address'])}地址：{$row['address']}<br/>{/if}</div></a></td>				
+									<td>{$row['photoname']}</td>
+					
+					<td><img src="{php echo toimage($row['photo'])}" width="50px;"/></td>
+					<td class="row-hover">{$row['photosnum']}</td>
+					<td class="row-hover">{$row['hits']}</td>
+					<td class="row-hover">{$sm}</td>
+					<td class="row-hover">{$row['mobile']}</td>
+					<td>{php echo date('Y-m-d H:i', $row['createtime']);}</td>
+					<td>
+						<a href="{php echo $this->createWebUrl('provevote', array('status' => '1', 'foo' => 'post', 'rid' => $rid, 'from_user' => $row['from_user']))}"  data-toggle="tooltip" data-placement="top"  class="btn btn-default btn-sm manage"><i class="fa fa-search"></i>查看</a>
+						<a href="{php echo $this->createWebUrl('provevote', array('status' => '1', 'sh' => '1', 'rid' => $rid, 'from_user' => $row['from_user'], 'foo' => 'display'))}"  data-toggle="tooltip" data-placement="top"  class="btn btn-default btn-sm manage"><i class="fa fa-edit"></i>通过</a>
+					</td>
+				</tr>
+				{/loop}
+				<tr>
+					<td><input type="checkbox" name="" onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck});"></td>
+					<td colspan="9"><input name="token" type="hidden" value="{$_W['token']}" /><input type="submit" name="submit" class="btn btn-primary" value="删除选中的粉丝"></td>
+				</tr>
+			</tbody>
+			</table>
+		</div>
+	</div>
+	</form>
+	</div>
+	{$pager}
+</div>
+<div id="guanbi" class="hide">
+	<span type="button" class="pull-right btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</span>
+</div>
+<script>
+	require(['jquery', 'util'], function($, u){		
+		$('#formfans').submit(function(){
+		    if($(":checkbox[name='uid[]']:checked").size() > 0){
+			    var check = $(":checkbox[name='uid[]']:checked");
+			    if( confirm("确认要删除选择的粉丝中奖记录?")){
+		            var id = new Array();
+				    var rid = {$rid};
+		            check.each(function(i){
+			            id[i] = $(this).val();
+		            });
+		            $.post('{php echo $this->createWebUrl('deletefans')}', {idArr:id,rid:rid},function(data){
+			        if (data.errno ==0){
+						location.reload();
+			        } else {
+				        alert(data.error);
+			        }
+		            },'json');
+		        }
+		    }else{
+		        u.message('没有选择粉丝', '', 'error');
+		        return false;
+		    }		    
+	    });    
+		
+	});	
+</script>
+
+
+
+	{elseif $foo == 'post'}
+<style>
+#progress,#progress0,#progress1,#progress2,#progress3,#progress4,#progress5,#progress6,#progress7,#progress8,#progressm,#progressv  {
+    border:1px solid #ccc;
+    display:none;
+    height:14px;
+
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+
+    background: -moz-linear-gradient(#66cc00, #4b9500);
+    background: -ms-linear-gradient(#66cc00, #4b9500);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #66cc00), color-stop(100%, #4b9500));
+    background: -webkit-linear-gradient(#66cc00, #4b9500);
+    background: -o-linear-gradient(#66cc00, #4b9500);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66cc00', endColorstr='#4b9500');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#66cc00', endColorstr='#4b9500')";
+    background: linear-gradient(#66cc00, #4b9500);
+	  padding: 10px;
+}
+.upsuccess {
+ text-align: center;  color: #000;  font-size: 15px;  /* margin: 0 90px; */  position: relative;  /* left: 60px; */  top: 15px;
+ }	
+ .uploadimg{  width: 150px;height: 250px;  line-height:250px;    float: left;  
+  border: 1px solid #FFFFFF;
+  -webkit-box-shadow:  inset 5px 5px 12px rgba(5, 110, 165, 0.2);
+  -moz-box-shadow:  inset 5px 5px 12px rgba(5, 110, 165, 0.2);
+  box-shadow:  inset 5px 5px 12px rgba(5, 110, 165, 0.2);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  text-align: center;
+  margin: 0 auto;
+}
+.uploadimg span{  color:#fff}
+</style>	
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				基本信息
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">排序</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="displayorder" class="form-control" value="{$item['displayorder']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者头像</label>
+					<div class="col-sm-9 col-xs-12">
+						{php echo tpl_fans_form('avatar', $item['avatar']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者昵称</label>
+					<div class="col-sm-9 col-xs-12">
+						
+						<input type="text" name="nickname" class="form-control " readonly value="{$item['nickname']}" />
+						<span class="help-block">参赛照片名字</span>
+					</div>
+				</div>
+				
+				{if $reply['isrealname'] == 1}
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者姓名</label>
+						<div class="col-sm-9 col-xs-12">						
+							<input type="text" name="realname" class="form-control" value="{$item['realname']}" />
+							<span class="help-block">参赛者姓名</span>
+						</div>
+					</div>
+				{/if}					
+				{if $reply['ismobile'] == 1}
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者手机</label>
+						<div class="col-sm-9 col-xs-12">						
+							<input type="text" name="mobile" class="form-control" value="{$item['mobile']}" />
+							<span class="help-block">参赛者手机</span>
+						</div>
+					</div>								
+				{/if}						
+				{if $reply['isweixin'] == 1}
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者微信号</label>
+						<div class="col-sm-9 col-xs-12">						
+							<input type="text" name="weixin" class="form-control" value="{$item['weixin']}" />
+							<span class="help-block">参赛者微信号</span>
+						</div>
+					</div>				
+				{/if}					
+				{if $reply['isqqhao'] == 1}
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者QQ</label>
+						<div class="col-sm-9 col-xs-12">						
+							<input type="text" name="qqhao" class="form-control" value="{$item['qqhao']}" />
+							<span class="help-block">参赛者QQ</span>
+						</div>
+					</div>			
+				{/if}					
+				{if $reply['isemail'] == 1}		
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者Email</label>
+						<div class="col-sm-9 col-xs-12">						
+							<input type="text" name="email" class="form-control" value="{$item['email']}" />
+							<span class="help-block">参赛者Email</span>
+						</div>
+					</div>				
+				{/if}						
+				{if $reply['isjob'] == 1}		
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者职业</label>
+						<div class="col-sm-9 col-xs-12">						
+							<input type="text" name="job" class="form-control" value="{$item['job']}" />
+							<span class="help-block">参赛者职业</span>
+						</div>
+					</div>				
+				{/if}					
+				{if $reply['isxingqu'] == 1}		
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者兴趣</label>
+						<div class="col-sm-9 col-xs-12">						
+							<input type="text" name="xingqu" class="form-control" value="{$item['xingqu']}" />
+							<span class="help-block">参赛者兴趣</span>
+						</div>
+					</div>				
+				{/if}		
+				{if $reply['isaddress'] == 1}	
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛者详细地址</label>
+						<div class="col-sm-9 col-xs-12">						
+							<input type="text" name="address" class="form-control" value="{$item['address']}" />
+							<span class="help-block">参赛者详细地址</span>
+						</div>
+					</div>
+				{/if}
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛图片宣言</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="photoname" class="form-control" value="{$item['photoname']}" />
+					<span class="help-block">参赛图片宣言</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">简介</label>
+					<div class="col-sm-9 col-xs-12">
+						<textarea name="description" class="form-control" cols="70">{$item['description']}</textarea>
+					<span class="help-block">参赛照片简介</span>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">多媒体操作</label>
+					<div class="col-sm-9 col-xs-12">
+						<div class="uploadimg" style="background: #87BDEA url({php echo toimage($item['photo'])}) no-repeat;  background-attachment: inherit;  background-size: cover; box-shadow: inset -5px -5px 15px rgba(5, 110, 165, 0.2);  " onclick="sendpic();"><span class="" style="color:#fff;  background: rgba(0, 0, 0, 0.68);  padding: 10px;  border-radius: 10px;">上传封面</span></div>
+					
+						<div class="uploadimg" style="background: #EC63FC url({php echo toimage($picarr[0])}) no-repeat;  background-attachment: inherit;  background-size: cover;  box-shadow: inset 10px -5px 15px rgba(5, 110, 165, 0.2);  " onclick="sendp();"><span class="" style="color:#fff;  background: rgba(0, 0, 0, 0.68);  padding: 10px;  border-radius: 10px;">上传图片</span></div>
+						<div class="uploadimg" style="background: #87EA9B url({php echo toimage($item['photo'])}) no-repeat;  background-attachment: inherit;  background-size: cover;   box-shadow: inset -5px 5px 15px rgba(5, 110, 165, 0.2);  " onclick="sendmusic();"><span class="" style="color:#fff;  background: rgba(0, 0, 0, 0.68);  padding: 10px;  border-radius: 10px;">上传好声音</span></div>
+						<div class="uploadimg"  style="background: #87EA9B url({php echo toimage($item['photo'])}) no-repeat; background-attachment: inherit;  background-size: cover; " onclick="sendvedio();"><span class="" style="color:#fff;  background: rgba(0, 0, 0, 0.68);  padding: 10px;  border-radius: 10px;">上传视频</span></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">参赛相册照片</label>
+					<div class="col-sm-9 col-xs-12">
+						<?php 
+							for ($i = 1; $i <= $reply['tpxz']; $i++) {	
+							$n = $i -1;		
+						?>
+						<a href="{php echo toimage($picarr[$n])}" target="_blank"><img src="{php echo toimage($picarr[$n])}" width="200"></a>		
+						<?php }?>			
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">录音间好声音</label>
+					<div class="col-sm-9 col-xs-12">
+						<a href="{php echo toimage($item['voice'])}" target="_blank" class="btn btn-success">点击试听</a>					
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">上传好声音</label>
+					<div class="col-sm-9 col-xs-12">
+						<a href="{php echo toimage($item['music'])}"  target="_blank" class="btn btn-success">点击试听</a>					
+						
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">视频</label>
+					<div class="col-sm-9 col-xs-12">
+						<a href="{php echo toimage($item['vedio'])}"  target="_blank" class="btn btn-success">点击查看</a>										
+												
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">网络视频</label>
+					<div class="col-sm-9 col-xs-12">
+						<a href="{if (substr($item['youkuurl'],0,7)=='http://')}{$item['youkuurl']}{else}http://player.youku.com/embed/{$item['youkuurl']}{/if}"  target="_blank" class="btn btn-success">点击查看</a>
+						<input type="text" name="youkuurl" class="form-control" value="{$item['youkuurl']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>票数</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="photosnum" class="form-control"  value="{$item['photosnum']}" />
+					<span class="help-block">真实票数</span>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>虚拟票数</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="xnphotosnum" class="form-control" value="{$item['xnphotosnum']}" />
+					<span class="help-block">总票数最终由真是票数与虚拟票数的总和</span>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>人气</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="hits" class="form-control"  value="{$item['hits']}" />
+					<span class="help-block">真实人气</span>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>虚拟人气</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="xnhits" class="form-control" value="{$item['xnhits']}" />
+					<span class="help-block">总人气最终由真是人气与虚拟人气的总和</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>转发</label>
+					<div class="col-sm-9 col-xs-12">
+						{php $sm = $this->getsharenum($uniacid,  $tfrom_user, $rid, $item['sharenum'])}
+						<input type="text" name="sharenum" class="form-control" value="{$item['sharenum']}" />
+					<span class="help-block">总转发最终由投票者转发加被投票者转发与虚拟转发的总和，此处设置为虚拟转发</span>
+					</div>
+				</div>
+				
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>手机号</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="mobile" class="form-control" readonly value="{$item['mobile']}" />
+					</div>
+					<span class="help-block"></span>
+				</div>
+				
+				
+				 <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">审核</label>
+					<div class="col-sm-9 col-xs-12">
+						<label class='radio-inline'>
+							<input type='radio' name='status' value=1' {if $item['status']==1}checked{/if} /> 通过
+						</label>
+						<label class='radio-inline'>
+							<input type='radio' name='status' value=0' {if $item['status']==0}checked{/if} /> 不通过
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-sm-12">
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+	</form>
+</div>
+<div class="modal fade" id="showpic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 20%;">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+     		 	<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        			<h4 class="modal-title" id="myModalLabel">照片</h4>
+      			</div>
+      			<div class="modal-body">
+
+				<img id="picpre" name="picpre" src="" class="img-thumbnail">
+      			</div>
+    		</div>
+  		</div>
+	</div>	
+
+<div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 60px;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">上传封面</h4>
+			</div>
+			<form class="form-inline" role="form" id="uploadform" name="uploadform" method="post" action="" enctype="multipart/form-data">					
+					
+					<input type="hidden" name="a" id="a" value="entry" />
+					<input type="hidden" name="m" id="m" value="fm_photosvote" />
+					<input type="hidden" name="do" id="do" value="upimages" />
+					<input type="hidden" name="rid" id="rid" value="{$rid}" />
+					<input type="hidden" name="upphotosone" id="upphotosone" value="start" />
+					<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+					<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+								
+				<div class="modal-body">
+						<div class="form-group">
+							<label>请选择封面照片(选择图片后，系统自动上传)：</label>
+							<input class="form-control" type="file" name="photo" id="photo" accept="image/*" readonly="readonly" capture="camera" onchange="changeone('photo', '0')" >
+						</div>
+						<img src="" id="uploadimg0"  onclick="showpic();" name="uploadimg0" style="display:none" >
+						<img src="{php echo toimage($item['photo'])}" id="preview0" name="pic" style="width:120px;  float: left;"  >
+						<div style="text-align:right; background-color: transparent;">
+							<div id="progressNumber0" style="  text-align:center;color: #000;  font-size: 15px;  margin-top: 0px;"></div>
+							<div style="  margin: 0 90px;   position: relative;  left: 60px;  top: 10px;"><div id="progress0">&nbsp;</div></div>
+						</div>
+				</div>
+				
+				<div class="modal-footer">
+					<!--<input type="submit" name="tijiao" id="tijiao" class="btn btn-success" value="开始上传">-->
+					<button type="button" class="btn btn-danger" data-dismiss="modal">上传完成，自动返回</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->			
+
+	<div class="modal fade" id="Modalp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 60px;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">上传参赛图片</h4>
+			</div>
+			<form class="form-inline" role="form" id="uploadforp" name="uploadforp" method="post" action="" enctype="multipart/form-data">					
+					<input type="hidden" name="a" id="a" value="entry" />
+					<input type="hidden" name="m" id="m" value="fm_photosvote" />
+					<input type="hidden" name="do" id="do" value="upimages" />
+					<input type="hidden" name="rid" id="rid" value="{$rid}" />
+					<input type="hidden" name="upphotos" id="upphotos" value="start" />
+					<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+					<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+				<div class="modal-body">
+					<style>
+					.form-group {  margin-bottom: 15px;  clear: both;  margin-top: 15px;}
+					</style>
+					<div class="form-group label label-info" style="padding: 2px 20px;">您还可以上传 {$reply['tpxz']} 张照片</div>
+					<?php for ($i = 1; $i <= $reply['tpxz']; $i++) {
+					$n = $i - 1;
+					?>				
+					
+							
+							<div class="form-group">
+								<label>请选择参赛照片：</label>
+								<input class="form-control" type="file" name="picarr_{$i}" id="picarr{$i}" accept="image/*" readonly="readonly" capture="camera" onchange="changeone('picarr{$i}', '{$i}')" style="  width: 100%;" >
+							<img src="" id="uploadimg{$i}"  onclick="showpic();" name="uploadimg{$i}" style="display:none">
+							<img src="{php echo toimage($item['picarr_'.$i])}" id="preview{$i}" name="pic{$i}" style="width:100px;"  >
+							<div style="text-align:right; background-color: transparent;">
+								<div id="progressNumber{$i}" style="  text-align:center;color: #000;  font-size: 15px;  margin-top: 0px;"></div>
+								<div style="  margin: 0 90px;   position: relative;  left: 60px;  top: 10px;"><div id="progress{$i}">&nbsp;</div></div>
+								
+								<div class="upsuccess"><div id="upsuccess" class="label label-danger" style="display:none;">&nbsp;</div></div>
+							</div>
+							
+							</div>
+							
+					<?php } ?>
+				</div>
+				<div class="modal-footer">
+					<!--<input type="submit" name="tijiaop" id="tijiaop" class="btn btn-success" value="开始上传">-->
+					<button type="button" class="btn btn-danger" data-dismiss="modal">完成</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 60px;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">上传好声音</h4>
+			</div>
+			<form class="form-inline" role="form" id="uploadformm" name="uploadformm" method="post" action="" enctype="multipart/form-data">					
+					<input type="hidden" name="a" id="a" value="entry" />
+					<input type="hidden" name="m" id="m" value="fm_photosvote" />
+					<input type="hidden" name="do" id="do" value="upaudios" />
+					<input type="hidden" name="rid" id="rid" value="{$rid}" />
+					<input type="hidden" name="upaudios" id="upaudios" value="start" />
+					<input type="hidden" name="audiotype" id="audiotype" value="music" />
+					<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+					<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+								
+				<div class="modal-body">
+						<div class="form-group">
+							<label>请选择好声音：</label>
+							<input class="form-control" type="file" name="music" id="music"  readonly="readonly" accept="audio/*"> <!--onchange="changeaudios('music', 'm')"-->
+							<div style="text-align:right; background-color: transparent;">
+								<div id="progressNumberm" style="  text-align:center;color: #000;  font-size: 15px;  margin-top: 0px;"></div>
+								<div style="    margin: 0 20px;  position: relative;  /* left: 60px; */  top: 10px;  margin-bottom: 20px;"><div id="progressm">&nbsp;</div></div>
+							</div>
+						
+						</div>
+						<div id="uploadm"  onclick="showmusic();" name="uploadm" ></div>
+						<input value="{$item['music']}"  name="music" id="previewm" type="text"  placeholder="请在此输入远程音频地址" style="width: 100%; "/>																													
+				</div>
+				<div class="modal-footer">
+					<input type="submit" name="tijiaom" id="tijiaom" class="btn btn-success" value="开始上传">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">上传完成，自动返回</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+									
+
+
+<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 60px;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">上传视频</h4>
+			</div>
+			<form class="form-inline" role="form" id="uploadformv" name="uploadformv" method="post" action="" enctype="multipart/form-data">					
+					<input type="hidden" name="a" id="a" value="entry" />
+					<input type="hidden" name="m" id="m" value="fm_photosvote" />
+					<input type="hidden" name="do" id="do" value="upaudios" />
+					<input type="hidden" name="rid" id="rid" value="{$rid}" />
+					<input type="hidden" name="upaudios" id="upaudios" value="start" />
+					<input type="hidden" name="audiotype" id="audiotype" value="vedio" />
+					<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+					<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+								
+				<div class="modal-body">
+						<div class="form-group">
+							<label>请选择视频(MP4格式)：</label>
+							<input class="form-control" type="file" name="vedio" id="vedio" readonly="readonly" accept="video/*">
+							<div style="text-align:right; background-color: transparent;">
+								<div id="progressNumberv" style="  text-align:center;color: #000;  font-size: 15px;  margin-top: 0px;"></div>
+								<div style="    margin: 0 20px;  position: relative;  /* left: 60px; */  top: 10px;  margin-bottom: 20px;"><div id="progressv">&nbsp;</div></div>
+							</div>
+						</div>
+						<div id="uploadv"  onclick="showvedio();" name="uploadv"></div>
+						<input value="{$item['vedio']}"  name="vedio" id="previewv" type="text" placeholder="请在此输入远程视频地址" style="width: 100%; "/>	
+				</div>
+				<div class="modal-footer">
+					<input type="submit" name="tijiaov" id="tijiaov" class="btn btn-success" value="开始上传">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">上传完成，自动返回</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+	
+<script type="text/javascript">
+
+	require(['jquery', 'util'], function($, u){		
+		$("#tijiaom").click(function(e){
+			
+			e.preventDefault();
+			var ismusic = document.getElementById("music");
+			//alert(ismusic);
+			
+			var mid = 'm'; 
+			var audio = 'music'; 		
+			audios(audio, mid);
+			return false;
+		});
+		//$("#uploadformv").submit(function(e){
+		$("#tijiaov").click(function(e){
+			e.preventDefault();
+			var mid = 'v'; 
+			var audio = 'vedio'; 		
+			audios(audio, mid);
+			return false;
+		});
+		function changeaudios(audio, mid) {
+			e.preventDefault();	
+			audios(audio, mid);
+		}
+
+		
+		function audios(audio, mid) {
+			var music = "#" + audio;
+			var uploadform = "uploadform" + mid;
+			  //空对象然后添加
+			  
+			var fd = new FormData();
+			 
+			fd.append(audio, $(music).val());
+			  //fd.append("file", $(":file")[0].files[0]); //jQuery 方式
+			
+			fd.append("audiotype", audio);
+			   
+			  //通过表单对象创建 FormData
+			var fd = new FormData(document.getElementById(uploadform));
+			  //var fd = new FormData($("uploadformm:eq(0)")[0]); //jquery 方式
+			setTimeout(function () {
+				var progress = 'progress' + mid;					
+				var oProgress = document.getElementById(progress);
+					oProgress.style.display = 'block';
+					oProgress.style.width = '0px';
+				//XMLHttpRequest 原生方式发送请求
+				var xhr = new XMLHttpRequest();  
+				xhr.upload.addEventListener('progress', function(e, m){ uploadProgress(e,mid); }, false);
+				xhr.addEventListener("load",  function(e, m){ uploadComplete(e,mid); }, false);
+				xhr.addEventListener("error", function(e, m){ uploadFailed(e,mid); }, false);
+				xhr.addEventListener("abort", function(e, m){ uploadCanceled(e,mid); }, false);
+			  
+				xhr.open("POST" ,"{php echo $this->createWebUrl('upaudios', array('from_user' => $from_user, 'upaudios' => 'start', 'rid' => $rid))}" , true);
+				xhr.send(fd);
+				//xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+				xhr.onload = function(e) {
+						if (this.readyState === 4 && this.status  === 200) {
+							var result = JSON.parse(xhr.response);
+							console.log(result);						
+							//uppic();
+							//alert(result.msg);
+							if (result.success == true) {
+								var preview = "#preview" + mid;
+								var upload = "#upload" + mid;
+								$(preview).hide();
+								//u.loaded();
+								$(upload).text(result.imgurl);
+								setTimeout(function () {								
+									window.location.reload();
+								},3000)
+								return 
+							} else {
+								if (result.success == 9) {
+									//windows.location.href = result.linkurl;
+									//alert(result.msg);
+									u.message(result.msg, '', 'error');
+									
+									setTimeout(function () {								
+										window.location.href = result.linkurl;
+									},1000)	
+									return false;
+								}
+								if (result.success == -1) {
+									//alert(result.msg);
+									u.message(result.msg, '', 'error');
+									return false;
+								}
+								return false;
+							}							
+							return false;						
+						}			
+				};
+			});
+			return false;
+		}					
+    });
+
+</script>	
+
+
+
+
+<script type="text/javascript">
+	function sendpic(){
+		 $('#Modal1').modal('toggle');
+	}
+	function sendmusic(){
+		 $('#Modal2').modal('toggle');
+	}
+	function sendvedio(){
+		 $('#Modal3').modal('toggle');
+	}
+	function sendp(){
+		 $('#Modalp').modal('toggle');
+	}
+	function showpic(imgurl){
+		 $('#showpic').modal('toggle');
+		 var picpre = document.getElementById("picpre");
+			picpre.src=imgurl;									
+			picpre.style.display = 'block';
+			picpre.style.width = '120px';
+	}
+	function uppic(){
+		 $('#uppic').modal('toggle');
+	}
+	
+		function upload(filename, posturl, mid) {
+			require(['jquery', 'util'], function($, util){
+				var width = "{$reply['autolitpic']}";
+				var zl = "{php echo $reply['autozl']/100}";
+				// 也可以传入图片路径：lrz('../demo.jpg', ...
+				lrz(filename.files[0], {
+					zwidth: width,
+					quality:zl,
+					before: function() {
+						document.getElementById('progressNumber' + mid).innerHTML = '正在压缩图片...' ;
+						//console.log('压缩开始');
+					},
+					fail: function(err) {
+						document.getElementById('progressNumber' + mid).innerHTML = '压缩失败' ;
+						//console.error(err);
+					},
+					always: function() {
+						document.getElementById('progressNumber' + mid).innerHTML = '压缩成功，开始上传图片...' ;
+						//console.log('压缩结束');
+					},
+					done: function (results) {
+					// 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
+					//var MB = 1000*1000;
+					var imgsize = "{$_W['setting']['upload']['image']['limit']}";
+					var imgmsize = imgsize/1024;
+					var ytsize = results.origin.size;
+					if (ytsize > imgsize*1024) {
+						var amsg = '图片大小不能超过 '+imgmsize+' MB';
+						alert(amsg);
+						//u.message('图片大小不能超过 '+imgmsize+' MB', '', 'error');
+						return false;
+					}
+					
+					
+					
+					//	console.log(results.base64.length);
+					//	u.message(results.base64, '', 'error');
+					//	return false;
+					setTimeout(function () {
+						var progress = 'progress' + mid;					
+						var oProgress = document.getElementById(progress);
+						oProgress.style.display = 'block';
+						oProgress.style.width = '0px';
+						// 发送到后端
+						var xhr = new XMLHttpRequest();
+						var data = {
+							base64: results.base64,
+							size: results.base64.length // 校验用，防止未完整接收
+						};
+					
+					
+					
+					xhr.upload.addEventListener('progress', function(e, m){ uploadProgress(e,mid); }, false);
+					xhr.addEventListener("load",  function(e, m){ uploadComplete(e,mid); }, false);
+					xhr.addEventListener("error", function(e, m){ uploadFailed(e,mid); }, false);
+					xhr.addEventListener("abort", function(e, m){ uploadCanceled(e,mid); }, false);
+						
+
+						xhr.open('POST', posturl);
+						xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState === 4 && xhr.status === 200) {
+								var result = JSON.parse(xhr.response);
+								//console.log(result);						
+								//uppic();
+								if (result.success == true) {
+									var preview = '#preview' + mid;
+									var uploadimg = 'uploadimg' + mid;
+									$(preview).hide();								
+									var bigimg = document.getElementById(uploadimg);
+									bigimg.src=result.imgurl;									
+									bigimg.style.display = 'block';
+									bigimg.style.width = '120px';
+									bigimg.style.float = 'left';
+									document.getElementById("upsuccess").innerHTML = result.msg;
+									document.getElementById("upsuccess").style.display = 'block';
+									if (mid == 0) {
+										setTimeout(function () {								
+											window.location.reload();
+										},3000)
+										return 
+									}
+									
+									
+								} else {
+									//alert(result.msg);
+									u.message(result.msg, '', 'error');
+								}
+								return						
+							}
+						};
+						xhr.send(JSON.stringify(data)); // 发送base64	
+						//results.base64 = null;
+						//xhr.Response.End();
+					}, 100);						
+					
+					}	
+				});
+			});	
+		}
+		
+		function uploadProgress(evt,mid) {			
+		   if (evt.lengthComputable) {
+				//iBytesUploaded = evt.loaded;
+				//iBytesTotal = evt.total;
+				var iPercentComplete = Math.round(evt.loaded * 100 / evt.total);
+				//var iBytesTransfered = bytesToSize(iBytesUploaded);
+				
+				
+				document.getElementById('progressNumber' + mid).innerHTML = iPercentComplete.toString() + '%' + '正在上传...' ;
+				document.getElementById('progress' + mid).style.width = (iPercentComplete * 1).toString() + '%';
+				
+				
+				//document.getElementById('b_transfered').innerHTML = iBytesTransfered;
+				if (iPercentComplete == 100) {
+					document.getElementById('progressNumber' + mid).innerHTML = '请稍等，正在上传云端...' ;
+					//oUploadResponse.style.display = 'block';
+				}			
+                //var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                //document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+            }
+            else {
+				document.getElementById('progressNumber' + mid).innerHTML = 'unable to compute';
+				
+            }
+        }
+		function bytesToSize(bytes) {
+			var sizes = ['Bytes', 'KB', 'MB'];
+			if (bytes == 0) return 'n/a';
+			var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+			return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+		};
+        function uploadComplete(evt,mid) {
+            /* This event is raised when the server send back a response */
+            //alert(evt.target.responseText);
+			
+			var progressNumber = 'progressNumber' + mid;
+			
+			document.getElementById(progressNumber).innerHTML = '100%(上传完成！)';
+        }
+ 
+        function uploadFailed(evt,mid) {
+			var progressNumber = 'progressNumber' + mid;
+			document.getElementById(progressNumber).innerHTML = '上传时出错！';
+           // alert("There was an error attempting to upload the file.");
+        }
+ 
+        function uploadCanceled(evt,mid) {
+		
+			var progressNumber = 'progressNumber' + mid;
+           // alert("The upload has been canceled by the user or the browser dropped the connection.");
+			document.getElementById(progressNumber).innerHTML = '取消上传！';
+        }
+		
+	function changeone(photo, mid) {
+		
+		var preview = 'preview' + mid,
+			pic = document.getElementById(preview),
+			file = document.getElementById(photo);
+	 
+		var ext=file.value.substring(file.value.lastIndexOf(".")+1).toLowerCase();
+		//alert(ext); 
+		 // gif在IE浏览器暂时无法显示
+		 if(ext!='png'&&ext!='jpg'&&ext!='jpeg'){
+			 alert("图片的格式必须为png或者jpg或者jpeg格式！"); 
+			 return;
+		 }
+		 
+		
+		var posturl = "{php echo $this->createWebUrl('upimages', array('from_user' => $from_user, 'upphotosone' => 'start','rid' => $rid))}&mid=" + mid;
+		//var mid = '0';
+		upload(file, posturl, mid);
+		 
+		 var isIE = navigator.userAgent.match(/MSIE/)!= null,
+			 isIE6 = navigator.userAgent.match(/MSIE 6.0/)!= null;
+
+		 if(isIE) {
+			file.select();
+			var reallocalpath = document.selection.createRange().text;
+	 
+			// IE6浏览器设置img的src为本地路径可以直接显示图片
+			 if (isIE6) {
+				pic.src = reallocalpath;
+			 }else {
+				// 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
+				 pic.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" + reallocalpath + "\")";
+				 // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
+				 pic.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+			 }
+		 }else {
+			html5Reader(file,mid);
+		 }
+		 
+		   
+	}
+	
+	
+	function html5Reader(file, mid){
+		 var file = file.files[0];
+		 var reader = new FileReader();
+		 reader.readAsDataURL(file);
+		 reader.onload = function(e){
+		 var preview = 'preview' + mid;
+		 var uploadimg = '#uploadimg' + mid;
+			$(uploadimg).hide();
+			var pic = document.getElementById(preview);
+			pic.src=this.result;
+			pic.style.display = 'block';
+				pic.style.width = '120px';
+				//pic.style.height = '100px';
+				pic.style.float = 'left';
+				//pic.style.css("margin-bottom","15px");
+		 }
+	 }
+	 
+	
+</script>    
+
+
+			
+			{/if}
+    
+
+{template 'common/footer'}

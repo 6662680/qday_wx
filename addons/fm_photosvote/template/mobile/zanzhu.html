@@ -1,0 +1,29 @@
+<style>
+.tips { height: 50px;  line-height: 50px;  color: #fff45c;}
+.tips i{ height:50px;background:url(../addons/fm_photosvote/template/mobile/photos/xin.png) no-repeat 0 center;display:block;background-size:24px;padding-left:30px;margin:0 auto;font-size:16px;}
+.zanzhu{ background:{if empty($bgarr['bodytscolor'])}rgba(46, 1, 68, 0.46){else}{$bgarr['bodytscolor']}{/if} url({php echo toimage($bgarr['bodytsbg'])}) center no-repeat;
+border:0px solid #5a009c;padding:10px 10px 0;margin-bottom:10px;overflow:hidden;}
+
+.zanzhu li{ 
+{if $reply['zanzhums'] == 1}
+width:49%;
+{elseif $reply['zanzhums'] == 2}
+width:100%;
+{else}
+width:49%;
+{/if}
+float:left;margin:0 2% 10px 0;overflow:hidden;}
+
+.zanzhu li:nth-child(2n){margin-right:0;}
+.zanzhu li img{ width:100%;}
+</style>
+<p class="tips"><i>活动赞助商</i></p>
+<ul class="zanzhu">
+	 {loop $advs $adv}
+	<li>
+		<a href="{if empty($adv['link'])}#{else}{$adv['link']}{/if}"><img src="{php echo toimage($adv['thumb'])}" alt="{$adv['bannername']}"/>
+		</a>
+	</li>
+	{/loop}
+	
+</ul>

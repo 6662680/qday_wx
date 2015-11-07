@@ -1,0 +1,78 @@
+{template 'common/header'}
+<div class="main">
+	<div class="form form-horizontal">
+		<h4>审核无效名单详细信息</h4>
+		<table class="tb">
+		<form action="">
+			<input type="hidden" name="id" value="{$info['id']}">
+			<input type="hidden" name="shareid" value="{$shareid}">
+			<input type="hidden" name="op" value="invalid">
+			<input type="hidden" name="opp" value="invalided">
+			<input type="hidden" name="act" value="module" />
+			<input type="hidden" name="name" value="eso_sale" />
+			<input type="hidden" name="do" value="commission" />
+			
+			<tr>
+				<th style="width:200px"><label>设置状态</label></th>
+				<td style="text-align: left;">
+					<label class="radio inline"><input type="radio" name="status" value="-1" {if $info['status']==-1}checked{/if}>无效</label>
+					<label class="radio inline" ><input type="radio" name="status" value="1" {if $info['status']==1}checked{/if}>暂不处理</label>
+					<label class="radio inline" ><input type="radio" name="status" value="2" {if $info['status']==2}checked{/if}>通过</label>
+				</td>
+			</tr>
+			<tr>
+				<th style="width:200px"><label for="">真实姓名</label></th>
+				<td>
+					{if $user['realname']!=""} {$user['realname']}{else}未完善{/if}
+				</td>
+			</tr>
+			<tr>
+				<th style="width:200px"><label for="">手机号码</label></th>
+				<td>
+					{if $user['mobile']!=""} {$user['mobile']}{else}未完善{/if}
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">审核时间</label></th>
+				<td>
+					{php echo date('Y-m-d H:i:s', $info['checktime']);}
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">商品名称</label></th>
+				<td>
+					{$info['title']}
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">商品价格</label></th>
+				<td>
+					{$info['price']}
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">购买数量</label></th>
+				<td>
+					{$info['total']}
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">备注</label></th>
+				<td>
+					<textarea name="content">{$info['content']}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<a href="{php echo $this->createWebUrl('commission', array('op'=>'invalid'))}"><input type="button" class="btn btn-primary span3" name="submit" value="返回" /></a>
+					<input type="submit" class="btn btn-primary span3" name="submit" onclick="return confirm('确认提交吗？');" value="提交" />
+				</td>
+			</tr>
+			</form>
+		</table>
+		
+	</div>
+</div>
+
+{template 'common/footer'}

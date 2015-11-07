@@ -1,0 +1,132 @@
+{template 'common/header'}
+
+    <div class="main">
+	{if $rid!=''}
+		{template 'nav'}
+	{/if}
+	<div class="panel panel-info">
+			<div class="panel-heading">筛选</div>
+			<div class="panel-body">
+				<form action="./index.php" method="get" class="form-horizontal" role="form">
+					<input type="hidden" name="c" value="site" />
+					<input type="hidden" name="a" value="entry" />
+					<input type="hidden" name="m" value="fm_photosvote" />
+					<input type="hidden" name="do" value="message" />
+					<input type="hidden" name="rid" value="{$_GPC['rid']}" />
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-4 col-lg-3 control-label">昵称或者评论内容或者IP</label>
+						<div class="col-xs-12 col-sm-8 col-lg-7">
+							<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="昵称或者评论内容或者IP"> 
+							{if $keyword}
+								<div class="help-block label label-info " style="position: relative;  top: 10px;  font-size: 15px;">当前系统已搜索到 {$total} 条包含 “{$keyword}” 的相关数据......</div>
+							{/if}
+						</div>
+						<button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+						
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">		{if $_W['role']=='founder'}
+				<div class="row-fluid pull-left" style="margin-right:30px;">
+					<div class="span8 control-group">
+						<a class="btn btn-danger" href="{php echo $this->createWebUrl('deleteallmessage',array('rid'=>$rid))}"><i class="fa fa-remove"></i> 清空数据</a>
+					</div>
+				</div>{/if}
+				<div class="row-fluid ">
+					<div class="span8 control-group">
+						<a class="btn btn-info" href="{php echo $this->createWebUrl('addmessage',array('rid'=>$rid))}"><i class="fa fa-edit"></i> 预设评论（弹幕管理）</a>
+					</div>
+				</div>
+			</div>
+			<form method="post" class="form-horizontal" id="formfans">
+			<input type="hidden" name="op" value="del" />
+			<div style="position:relative">
+				<div class="panel-body table-responsive">
+					<table class="table table-hover" style="position:relative">
+					<thead class="navbar-inner">
+						<tr>
+							<th style="width:50px;">删？</th>
+							<th style="width:60px;">序号</th>
+							<th style="width:150px;">评论人</th>
+							<th style="width:150px;">评论内容</th>
+							<th style="width:150px;">评论时间</th>									
+							<th style="width:150px;">评论IP</th>
+							<th style="width:150px;">评论地区</th>
+							<th style="width:150px;">被评论人</th>									
+							<th style="width:150px;">拉票人</th>
+						</tr>
+					</thead>
+					<tbody>
+						{loop $messages $row}
+							{php $fuser = $this->_getuser($row['rid'], $row['tfrom_user']);}
+							{php $auser = $this->_auser($row['rid'], $row['afrom_user']);}
+							{php $iparr = iunserializer($row['iparr']);}
+							{if $keyword}
+								<style>
+									.active {background:#FFFC00; color:red;}
+								</style>
+								{php $rn = stristr($row['nickname'],$keyword); $fn = stristr($fuser['nickname'],$keyword)}
+							{/if}
+						<tr>
+							<td><input type="checkbox" name="uid[]" value="{$row['id']}" class=""></td>
+							<td>{$row['id']}</td>									
+							<td><img src="{php echo toimage($row['avatar'])}" width="50px;"/>  <span {if stristr($row['nickname'],$keyword)}class="active"{/if}>{$row['nickname']}</span></td>
+							<td style="word-break: break-all;white-space: normal;"><span {if stristr($row['content'],$keyword)}class="active"{/if}>{$row['content']}</span></td>
+							<td>{php echo date('Y-m-d H:i:s', $row[createtime]);}</td>
+							<td><span {if strstr($keyword, $row['ip'])}class="active"{/if}>{$row['ip']}</span></td>
+							<td>{$iparr['country']}|{$iparr['province']}|{$iparr['city']}</td>
+							<td><img src="{php echo toimage($fuser['avatar'])}" width="50px;"/> <span {if stristr($fuser['nickname'],$keyword)}class="active"{/if}>{$fuser['nickname']}</span></td>									
+							<td>{if empty($row['afrom_user'])}没有{else}{/if}<img src="{php echo toimage($auser['avatar'])}" width="50px;"/> {$auser['nickname']}</td>
+						</tr>
+						{/loop}
+							{if $_W['role']=='founder'}
+						<tr>
+							<td><input type="checkbox" name="" onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck});"></td>
+							<td colspan="9"><input name="token" type="hidden" value="{$_W['token']}" /><input type="submit" name="submit" class="btn btn-primary" value="删除选中的评论"></td>
+						</tr>
+						{/if}
+					</tbody>
+					</table>
+				</div>
+			</div>
+			</form>
+			{$pager}
+		</div>
+		
+    </div>
+	
+<div id="guanbi" class="hide">
+	<span type="button" class="pull-right btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</span>
+</div>
+<script>
+	require(['jquery', 'util'], function($, u){		
+		$('#formfans').submit(function(){
+		    if($(":checkbox[name='uid[]']:checked").size() > 0){
+			    var check = $(":checkbox[name='uid[]']:checked");
+			    if( confirm("确认要删除选择的评论记录?")){
+		            var id = new Array();
+				    var rid = {$rid};
+		            check.each(function(i){
+			            id[i] = $(this).val();
+		            });
+		            $.post('{php echo $this->createWebUrl('deletemsg')}', {idArr:id,rid:rid},function(data){
+			        if (data.errno ==0){
+						location.reload();
+			        } else {
+				        alert(data.error);
+			        }
+		            },'json');
+		        }
+		    }else{
+		        u.message('没有选择评论', '', 'error');
+		        return false;
+		    }		    
+	    });    
+		
+	});	
+</script>
+	
+{template 'common/footer'}

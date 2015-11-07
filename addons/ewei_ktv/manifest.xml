@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	
+    <application setting="false">
+        <name><![CDATA[ktv]]></name>
+        <identifie><![CDATA[ewei_ktv]]></identifie>
+        <version><![CDATA[3.1]]></version>
+        <type><![CDATA[business]]></type>
+        <ability><![CDATA[ktv房间预定,单店版,多店版]]></ability>
+        <description><![CDATA[ktv房间预定，单店版, 多店版，类似携程]]></description>
+        <author><![CDATA[fan]]></author>
+        <url><![CDATA[]]></url>
+    </application>
+    <platform>
+        <subscribes>
+        </subscribes>
+        <handles>
+            <message type="text" />
+        </handles>
+        <rule embed="true" />
+    </platform>
+    <bindings>
+        <cover>
+            <entry title="微ktv入口设置" do="index" />
+        </cover>
+        <menu>
+            <entry title="ktv管理" do="ktv" state="" direct="false" />
+            <entry title="ktv房间管理" do="room" state="" direct="false" />
+            <entry title="品牌管理" do="brand" state="" direct="false" />
+            <entry title="商圈管理" do="business" state="" direct="false" />
+            <entry title="用户管理" do="member" state="" direct="false" />
+            <entry title="订单管理" do="order" state="" direct="false" />
+            <entry title="基本设置" do="ktvset" state="" direct="false" />
+        </menu>
+		 
+        <home call="getItemTiles"></home>
+    </bindings>
+	
+    <install><![CDATA[
+
+CREATE TABLE IF NOT EXISTS `ims_ktv2` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT '0',
+  `title` varchar(255) DEFAULT '',
+  `lng` decimal(10,2) DEFAULT '0.00',
+  `lat` decimal(10,2) DEFAULT '0.00',
+  `ordermax` int(11) DEFAULT '0',
+  `numsmax` int(11) DEFAULT '0',
+  `daymax` int(11) DEFAULT '0',
+  `address` varchar(255) DEFAULT '',
+  `location_p` varchar(50) DEFAULT '',
+  `location_c` varchar(50) DEFAULT 'F',
+  `location_a` varchar(50) DEFAULT '',
+  `roomcount` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '0',
+  `phone` varchar(255) DEFAULT '',
+  `mail` varchar(255) DEFAULT '',
+  `thumb` varchar(255) DEFAULT '',
+  `thumborder` varchar(255) DEFAULT '',
+  `description` text,
+  `content` text,
+  `traffic` text,
+  `thumbs` text,
+  `sales` text,
+  `displayorder` int(11) DEFAULT '0',
+  `level` int(11) DEFAULT '0',
+  `device` text,
+  `brandid` int(11) DEFAULT '0',
+  `businessid` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_ktv2_brand` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT '0',
+  `title` varchar(255) DEFAULT '',
+  `displayorder` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `indx_weid` (`weid`),
+  KEY `indx_displayorder` (`displayorder`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE IF NOT EXISTS `ims_ktv2_business` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT '0',
+  `title` varchar(255) DEFAULT '',
+  `location_p` varchar(255) DEFAULT '',
+  `location_c` varchar(255) DEFAULT '',
+  `location_a` varchar(255) DEFAULT '',
+  `displayorder` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_ktv2_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT '0',
+  `userid` varchar(50) DEFAULT '',
+  `from_user` varchar(50) DEFAULT '',
+  `realname` varchar(255) DEFAULT '',
+  `mobile` varchar(255) DEFAULT '',
+  `score` int(11) DEFAULT '0' COMMENT '积分',
+  `createtime` int(11) DEFAULT '0',
+  `userbind` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '0',
+  `username` varchar(30) DEFAULT '' COMMENT '用户名',
+  `password` varchar(200) DEFAULT '' COMMENT '密码',
+  `salt` varchar(8) NOT NULL DEFAULT '' COMMENT '加密盐',
+  `islogin` tinyint(3) NOT NULL DEFAULT '0',
+  `isauto` tinyint(1) NOT NULL DEFAULT '0' COMMENT '自动添加，0否，1是',
+  PRIMARY KEY (`id`),
+  KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_ktv2_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT '0',
+  `ktvid` int(11) DEFAULT '0',
+  `roomid` int(11) DEFAULT '0',
+  `memberid` int(11) DEFAULT '0',
+  `openid` varchar(255) DEFAULT '',
+  `name` varchar(255) DEFAULT '',
+  `mobile` varchar(255) DEFAULT '',
+  `btime` int(11) DEFAULT '0',
+  `etime` int(11) DEFAULT '0',
+  `style` varchar(255) DEFAULT '',
+  `nums` int(11) DEFAULT '0',
+  `oprice` decimal(10,2) DEFAULT '0.00' COMMENT '原价',
+  `cprice` decimal(10,2) DEFAULT '0.00' COMMENT '现价',
+  `mprice` decimal(10,2) DEFAULT '0.00' COMMENT '会员价',
+  `info` text,
+  `time` int(11) DEFAULT '0',
+  `status` int(11) DEFAULT '0',
+  `paytype` int(11) DEFAULT '0',
+  `paystatus` int(11) DEFAULT '0',
+  `msg` text,
+  `mngtime` int(11) DEFAULT '0',
+  `contact_name` varchar(30) NOT NULL DEFAULT '' COMMENT '联系人',
+  `day` tinyint(2) NOT NULL DEFAULT '0' COMMENT '住几晚',
+  `sum_price` decimal(10,2) DEFAULT '0.00' COMMENT '总价',
+  `ordersn` varchar(30) DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `indx_ktvid` (`ktvid`),
+  KEY `indx_weid` (`weid`),
+  KEY `indx_roomid` (`roomid`),
+  KEY `indx_memberid` (`memberid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_ktv2_room` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ktvid` int(11) DEFAULT '0',
+  `weid` int(11) DEFAULT '0',
+  `title` varchar(255) DEFAULT '',
+  `thumb` varchar(255) DEFAULT '',
+  `oprice` decimal(10,2) DEFAULT '0.00' COMMENT '原价',
+  `cprice` decimal(10,2) DEFAULT '0.00' COMMENT '现价',
+  `mprice` decimal(10,2) DEFAULT '0.00' COMMENT '会员价',
+  `thumbs` text,
+  `device` text,
+  `area` varchar(255) DEFAULT '',
+  `floor` varchar(255) DEFAULT '',
+  `smoke` varchar(255) DEFAULT '',
+  `bed` varchar(255) DEFAULT '',
+  `persons` int(11) DEFAULT '0',
+  `bedadd` varchar(30) DEFAULT '',
+  `status` int(11) DEFAULT '0',
+  `isshow` int(11) DEFAULT '0',
+  `sales` text,
+  `displayorder` int(11) DEFAULT '0',
+  `area_show` int(11) DEFAULT '0',
+  `floor_show` int(11) DEFAULT '0',
+  `smoke_show` int(11) DEFAULT '0',
+  `bed_show` int(11) DEFAULT '0',
+  `persons_show` int(11) DEFAULT '0',
+  `bedadd_show` int(11) DEFAULT '0',
+  `score` int(11) DEFAULT '0' COMMENT '订房积分',
+  `breakfast` tinyint(3) DEFAULT '0' COMMENT '0无早 1单早 2双早',
+  `sortid` int(11) NOT NULL DEFAULT '0' COMMENT '房间id，排序时使用',
+  PRIMARY KEY (`id`),
+  KEY `indx_ktvid` (`ktvid`),
+  KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_ktv2_room_price` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT '0',
+  `ktvid` int(11) DEFAULT '0',
+  `roomid` int(11) DEFAULT '0',
+  `roomdate` int(11) DEFAULT '0',
+  `thisdate` varchar(255) NOT NULL DEFAULT '' COMMENT '当天日期',
+  `oprice` decimal(10,2) DEFAULT '0.00' COMMENT '原价',
+  `cprice` decimal(10,2) DEFAULT '0.00' COMMENT '现价',
+  `mprice` decimal(10,2) DEFAULT '0.00' COMMENT '会员价',
+  `num` varchar(255) DEFAULT '-1',
+  `status` int(11) DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `indx_weid` (`weid`),
+  KEY `indx_ktvid` (`ktvid`),
+  KEY `indx_roomid` (`roomid`),
+  KEY `indx_roomdate` (`roomdate`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_ktv2_set` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT '0',
+  `user` tinyint(1) DEFAULT '0' COMMENT '用户类型0微信用户1独立用户',
+  `reg` tinyint(1) DEFAULT '0' COMMENT '是否允许注册0禁止注册1允许注册',
+  `bind` tinyint(1) DEFAULT '0' COMMENT '是否绑定',
+  `regcontent` text COMMENT '注册提示',
+  `ordertype` tinyint(1) DEFAULT '0' COMMENT '预定类型0电话预定1电话和网络预订',
+  `is_unify` tinyint(1) DEFAULT '0' COMMENT '0使用各分店电话,1使用统一电话',
+  `tel` varchar(20) DEFAULT '' COMMENT '统一电话',
+  `email` varchar(255) NOT NULL DEFAULT '' COMMENT '提醒接受邮箱',
+  `mobile` varchar(32) NOT NULL DEFAULT '' COMMENT '提醒接受手机',
+  `paytype1` tinyint(1) DEFAULT '0',
+  `paytype2` tinyint(1) DEFAULT '0',
+  `paytype3` tinyint(1) DEFAULT '0',
+  `version` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0单ktv版1多ktv版',
+  `location_p` varchar(50) DEFAULT '',
+  `location_c` varchar(50) DEFAULT '',
+  `location_a` varchar(50) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+CREATE TABLE IF NOT EXISTS `ims_ktv2_reply` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) NOT NULL,
+  `rid` int(11) NOT NULL,
+  `ktvid` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `indx_weid` (`weid`),
+  KEY `indx_rid` (`rid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+        
+	  ]]></install>
+	  
+    <uninstall><![CDATA[]]></uninstall>
+    <upgrade><![CDATA[upgrade.php]]></upgrade>
+
+</manifest>

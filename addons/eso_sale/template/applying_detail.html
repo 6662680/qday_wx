@@ -1,0 +1,95 @@
+{template 'common/header'}
+<div class="main">
+    <div class="panel panel-default">
+
+        <div class="panel-heading">审核详细信息</div>
+        <div class="panel-body">
+            <form action="" method="get" class="form-horizontal" role="form">
+
+                <input type="hidden" name="c" value="site" />
+                <input type="hidden" name="a" value="entry" />
+
+                <input type="hidden" name="id" value="{$info['id']}">
+                <input type="hidden" name="shareid" value="{$shareid}">
+                <input type="hidden" name="op" value="display">
+                <input type="hidden" name="opp" value="checked">
+                <input type="hidden" name="m" value="eso_sale" />
+                <input type="hidden" name="do" value="commission" />
+
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">设置审核状态</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        <label class="radio-inline"><input type="radio" name="status" value="-1" {if $info['status']==-1}checked{/if}>无效</label>
+                        <label class="radio-inline" ><input type="radio" name="status" value="1" {if $info['status']==1}checked{/if}>暂不处理</label>
+                        <label class="radio-inline" ><input type="radio" name="status" value="2" {if $info['status']==2}checked{/if}>通过</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">真实姓名</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        {if $user['realname']!=""} {$user['realname']}{else}未完善{/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">手机号码</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        {if $user['mobile']!=""} {$user['mobile']}{else}未完善{/if}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">申请时间</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        {php echo date('Y-m-d H:i:s', $info['applytime']);}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">商品名称</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        {$info['title']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">商品价格</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        {$info['price']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">购买数量</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        {$info['total']}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">申请佣金</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        <font color="red">{$info['commission']} (总：{php echo ($info['commission']*$info['total'])}元)</font>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">2级申请佣金</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        {$info['commission2']} (总：{php echo $info['commission2']*$info['total']}元)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">3级申请佣金</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        {$info['commission3']} (总：{php echo $info['commission3']*$info['total']}元)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">备注</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        <textarea name="content" class="form-control">{$info['content']}</textarea>
+                    </div>
+                </div>
+                <a href="{php echo $this->createWebUrl('commission', array('op'=>'display'))}"><input type="button" class="btn btn-primary span3" name="submit" value="返回" /></a>
+                <input type="submit" class="btn btn-primary span3" name="submit" onclick="return confirm('确认审核吗？');" value="审核" />
+            </form>
+        </div>
+    </div>
+</div>
+
+{template 'common/footer'}

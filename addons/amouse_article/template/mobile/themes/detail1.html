@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{$detail[title]}</title>
+<meta name="format-detection" content="telephone=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+<meta name="apple-touch-fullscreen" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="{$_W['siteroot']}app/resource/css/bootstrap.min.css" rel="stylesheet">
+<link href="{$_W['siteroot']}app/resource/css/font-awesome.min.css" rel="stylesheet">
+<link href="{$_W['siteroot']}app/resource/css/animate.css" rel="stylesheet">
+<link href="{$_W['siteroot']}app/resource/css/common.css" rel="stylesheet">
+<link href="{$_W['siteroot']}app/{php echo str_replace('./', '', url('utility/style'))}" rel="stylesheet">
+<script type="text/javascript">
+    {php define('HEADER', true);}
+    window.sysinfo = {
+    {if !empty($_W['uniacid'])}
+        'uniacid': '{$_W['uniacid']}',
+    {/if}
+    {if !empty($_W['acid'])}
+        'acid': '{$_W['acid']}',
+    {/if}
+    {if !empty($_W['openid'])}
+        'openid': '{$_W['openid']}',
+    {/if}
+    {if !empty($_W['uid'])}
+        'uid': '{$_W['uid']}',
+    {/if}
+        'siteroot': '{$_W['siteroot']}',
+            'siteurl': '{$_W['siteurl']}',
+            'attachurl': '{$_W['attachurl']}',
+    {if defined('MODULE_URL')}
+        'MODULE_URL': '{MODULE_URL}',
+    {/if}
+        'cookie' : {'pre': '{$_W['config']['cookie']['pre']}'}
+    };
+</script>
+</head>
+<body>
+<div class="container container-fill">
+<link href="../addons/amouse_article/template/mobile/css/news.css?v=20150404" rel="stylesheet" type="text/css"/>
+<div id="activity-detail">
+<style type="text/css">
+@charset "utf-8";
+html{background:#FFF;color:#000;}
+body, div, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset, img{border:0;}
+address, caption, cite, code, dfn,  th, var{font-style:normal;font-weight:normal;}
+ol, ul{list-style:none;}
+caption, th{text-align:left;}
+h1, h2, h3, h4, h5, h6{font-size:100%;font-weight:normal;}
+q:before, q:after{content:'';}
+abbr, acronym{border:0;font-variant:normal;}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+input, textarea, select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+input, textarea, select{font-size:100%;}
+legend{color:#000;}
+body{color:#222;font-family:Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;height:100%;position:relative;}
+body > .tips{display:none;left:50%;padding:20px;position:fixed;text-align:center;top:50%;width:200px;z-index:100;}
+.page{padding:15px;}
+.page .page-error, .page .page-loading{line-height:30px;position:relative;text-align:center;}
+#activity-detail .page-bizinfo{border-bottom:1px dotted #CCC;}
+#activity-detail .page-bizinfo .header{padding:10px 10px 10px;}
+#activity-detail .page-bizinfo .header #activity-name{color:#000;font-size:20px;margin-bottom:5px;font-weight:bold;word-break:normal;word-wrap:break-word;}
+#activity-detail .page-bizinfo .header #post-date{color:#8c8c8c;font-size:11px;margin:0;}
+#activity-detail .page-content{padding:10px;}
+#activity-detail .page-content .media{margin-bottom:18px;}
+#activity-detail .page-content .media img{width:100%;}
+#activity-detail .page-content .text{color:#3e3e3e;font-size:1.5;line-height:1.5;width: 100%;overflow: hidden;zoom:1;}
+#activity-detail .page-content .text p{min-height:1.5em;min-height: 1.5em;word-wrap: break-word;word-break:break-all;}
+#activity-list .header{font-size:20px;}
+#activity-list .page-list{border:1px solid #ccc;border-radius:5px;margin:18px 0;overflow:hidden;}
+#activity-list .page-list .line.btn{border-radius:0;margin:0;text-align:left;}
+#activity-list .page-list .line.btn .checkbox{height:25px;line-height:25px;padding-left:35px;position:relative;}
+#activity-list .page-list .line.btn .checkbox .icons{background-color:#ccc;left:0;position:absolute;top:0;}
+#activity-list .page-list .line.btn.off .icons{background-image:none;}
+#activity-list #save.btn{background-image:linear-gradient(#22dd22, #009900);background-image:-moz-linear-gradient(#22dd22, #009900);background-image:-ms-linear-gradient(#22dd22, #009900);background-image:-o-linear-gradient(#22dd22, #009900);background-image:-webkit-gradient(linear, left top, left bottom, from(#22dd22), to(#009900));background-image:-webkit-linear-gradient(#22dd22, #009900);}
+.vm{vertical-align:middle;}
+.tc{text-align:center;}
+.db{display:block;}
+.dib{display:inline-block;}
+.b{font-weight:700;}
+.clr{clear:both;}
+.text img{max-width:100%;}
+.page-url{padding-top:18px;}
+.page-url-link{color:#607FA6;font-size:14px;text-decoration:none;text-shadow:0 1px #ffffff;-webkit-text-shadow:0 1px #ffffff;-moz-text-shadow:0 1px #ffffff;}
+#mbutton{padding:15px 10px 15px 10px; overflow:hidden; border-bottom:1px #DDD solid;}
+#mbutton > span{float:right; display:inline-block; background:#666; border:1px #DDD solid; color:#FFF; height:30px; line-height:30px; padding:0 10px; margin-left:10px;}
+#mcover{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0, 0, 0, 0.7);display:none;z-index:20000;}
+#mcover img{position:fixed;right: 18px;top:5px;width:260px;height:180px;z-index:20001;}
+.head{height:40px; line-height:40px; background:#22292C; padding:0 5px; color:#FFF;}
+.head .bn{display:inline-block; height:30px; line-height:30px; padding:0 10px; margin-top:4px; font-size:20px; background:transparent; color:#FFF; text-decoration:none;}
+.head .bn.pull-left{border-right:1px solid #000;}
+.head .bn.pull-right{position:absolute; right:5px; top:0; border-left:1px solid #000;}
+.head .title{font-size:14pt;display:block;padding-left:10px;font-weight:bolder;margin-right:49px;text-align:center;height:40px;line-height:40px;text-overflow:ellipsis;white-space:nowrap;overflow: hidden;}
+.head .order{background:#F9F9F9; position:absolute; z-index:9999; right:0;}
+.head .order li > a{display:block; padding:0 10px; min-width:100px; height:35px; line-height:35px; font-size:16px; color:#333; text-decoration:none; border-top:1px #EEE solid;}
+.head .order li.fa-caret-up{font-size:20px;color:#F9F9F9;position:absolute;top:-11px;right:16px;}
+</style>
+    <script type="text/javascript">
+        var uin = "";
+        var key = "";
+        var pass_ticket = "";
+        //全局变量
+        gSound = '{$detail['musicurl']}';
+    </script>
+    <script type="text/javascript" src="../addons/amouse_article/template/mobile/js/weixin_new.js"></script>
+    <div id='audiocontainer'></div>
+<div class="page-bizinfo">
+	<div class="header">
+		<h1 id="activity-name">{$detail['title']}</h1>
+		<span id="post-date">
+			<span>{php echo date("Y-m-d", $detail['createtime']);}</span>
+			{if !empty($detail['source'])}<a href="{$detail['source']}">文章来源</a>{/if}
+			{if !empty($subscribeurl)}
+            <a href="{$subscribeurl}">
+                {if empty($detail['author'])}{$_W['account']['name']} {else}{$detail['author']}{/if}
+            </a>
+            {else}
+            <a href="{$set['guanzhuUrl']}">
+                {if empty($detail['author'])}{$_W['account']['name']} {else}{$detail['author']}{/if}
+            </a>
+            {/if}
+		</span>
+	</div>
+</div>
+<div class="page-content">
+	<div class="text">
+		{$detail['content']}
+	</div>
+</div>
+    {data module="amouse_article" func="amouse_article_weixin_hot" return="true" assign="result"}
+    {if !empty($result)}
+    <div class="mod-main">
+        <div class="module" id="recommedmodule" style="display: block;">
+            <h3 class="title">热门账号推荐</h3>
+            <div class="account-list">
+                <ul>
+                    {loop $result['list'] $row}
+                    <li>
+                        <a href="{$row['guanzhuUrl']}">
+                            <div class="logo">
+                                <img src="{php echo strpos($row['thumb'],'http://')===FALSE?($_W['attachurl'].$row['thumb']):$row['thumb']}" height="50" width="50">
+                            </div>
+                            <div class="nick nowrap">{$row[title]}</div>
+                            <div class="arrow"><span>+关注</span></div>
+                        </a>
+                    </li>
+                    {/loop}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {/if}
+</div>
+<!--<div id="mbutton">
+	<span class="" onclick="$('#mcover').show()"><i class="fa fa-share-alt"></i> 转发</span>
+	<span class="" onclick="$('#mcover').show()"><i class="fa fa-group"></i> 分享</span>
+</div>-->
+<div id="mcover" onclick="$(this).hide()"><img src="./resource/images/guide.png"></div>
+{php $_share = array('content' => $detail['description'], 'title' => $detail['title'], 'imgUrl' => $detail['thumb']);}
+<!--<script>
+	require(['jquery'], function($){
+		$('#category_show').click(function(){
+			$('.head .order').toggleClass('hide');
+		});
+ 		//阅读文章后,给分享人加积分
+		var url = "{php echo url('site/site/handsel/', array('id' => $detail['id'], 'action' => 'click', 'u' => $_GPC['u']));}";
+		$.post(url, function(dat){
+			if(dat != 'success') {
+				dat = $.parseJSON(dat);
+			} else {
+			}
+		});
+
+		//转发成功后事件
+		sharedata = {
+			success : function(){
+				var url = "{php echo url('site/site/handsel/', array('id' => $detail['id'], 'action' => 'share'));}";
+				$.post(url, function(dat){
+					if(dat != 'success') {
+						dat = $.parseJSON(dat);
+					} else {
+					}
+				});
+			}
+		};
+	});
+</script>-->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script language='javascript'>
+    <?php
+        $jssdk = new JSSDK();
+        $signPackage = $jssdk->GetSignPackage();
+    ?>
+    wx.config({
+        debug:false,
+        appId: "{$_W['account']['appid_share']}",
+        timestamp: {$signPackage["timestamp"]},
+        nonceStr: '{$signPackage["nonceStr"]}',
+        signature: '{$signPackage["signature"]}',
+        jsApiList: [
+            'onMenuShareTimeline','onMenuShareAppMessage','onMenuShareWeibo'
+        ]
+    });
+    var shareMeta = {
+        imgUrl:"{$shareimg}",
+        link :  "{$url}",
+        desc : "{$detail['title']}",
+        title : "{$detail['title']}"
+    };
+    wx.ready(function(){
+        wx.onMenuShareTimeline(shareMeta);
+        wx.onMenuShareAppMessage(shareMeta);
+        wx.onMenuShareWeibo(shareMeta);
+    });
+</script>
+<!--
+{template 'common/footer'}-->

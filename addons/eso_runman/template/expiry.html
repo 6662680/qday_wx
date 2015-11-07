@@ -1,0 +1,90 @@
+{template 'common/header'}
+<script type="text/javascript" src="{NOW_PATH}files/jquery.alert.js"></script>
+<div class="main">
+    <ul class="nav nav-tabs">
+        <li><a href="{php echo $this->createWebUrl('manage');}">返回活动列表</a></li>
+        <li><a href="{php echo $this->createWebUrl('managed',array('rid'=>$row['rid']))}">参与用户</a></li>
+        <li class="active"><a href="{php echo $this->createWebUrl('expiry',array('rid'=>$row['rid']))}">领取管理</a></li>
+    </ul>
+    <div class="panel panel-info">
+        <div class="panel-heading">筛选</div>
+        <div class="panel-body">
+            <form action="./index.php" method="get" class="form-horizontal" role="form">
+                <input type="hidden" name="c" value="site" />
+                <input type="hidden" name="a" value="entry" />
+                <input type="hidden" name="m" value="eso_red" />
+                <input type="hidden" name="do" value="expiry" />
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+                    <div class="col-xs-12 col-sm-8 col-lg-9">
+                        <input class="form-control" name="keywords" id="" type="text" value="{$_GPC['keywords']}">
+                    </div>
+                    <div class=" col-xs-12 col-sm-2 col-lg-2">
+                        <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body table-responsive">
+            <table class="table table-hover">
+                <thead class="navbar-inner">
+                <tr>
+                    <th>奖品</th>
+                    <th>提交昵称</th>
+                    <th>手机号码</th>
+                    <th>提交时间</th>
+                    <th style="width:150px;">状态</th>
+                    <th style="width:210px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {loop $lists $iow}
+                {php $setting = string2array($iow['setting'])}
+                <tr class="cclist">
+                    <td>{$iow['title']}</td>
+                    <td title="{$setting['realname']}">{$setting['realname']}</td>
+                    <td title="{$setting['mobile']}">{$setting['mobile']}</td>
+                    <td>{php echo date('Y-m-d H:i:s',$iow['indate'])}</td>
+                    <td>{if $iow['exchange']}已处理{else}<font color="#ff0000">未处理</font>{/if}</td>
+                    <td>
+                        <div class="btn-group pull-right">
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('expiry',array('type'=>1,'id'=>$iow['id'],'rid'=>$row['rid']))}" title="标记处理"><i class="fa fa-cog"></i> 标记处理</a>
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('expiry',array('type'=>2,'id'=>$iow['id'],'rid'=>$row['rid']))}" title="标记未处理"><i class="fa fa-cog"></i> 标记未处理</a>
+                        </div>
+                    </td>
+                </tr>
+                {/loop}
+                {if !$lists}
+                <tr>
+                    <td colspan="6" style="text-align:center">
+                        没有任何信息。
+                    </td>
+                </tr>
+                {/if}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {$pager}
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".cclist").find("td").click(function(){
+            if ($(this).attr("title")) {
+                $.alertb($(this).attr("title"), "<div style='color:#ff0000;cursor:pointer'>关闭</div>");
+            }
+        });
+    });
+    function drop_confirm(msg, url){
+        if (confirm(msg)){
+            window.location = url;
+        }
+    }
+</script>
+
+{template 'common/footer'}

@@ -1,0 +1,352 @@
+﻿<!doctype html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="format-detection" content="telephone=no">
+
+    <title>个人中心</title>
+
+    <link rel="stylesheet" type="text/css" href="../addons/eso_sale/style/new/foundation.css?v=3132323">
+
+   
+
+	 <link rel="stylesheet" type="text/css" href="../addons/eso_sale/style/new/common-v4.0.css?v=3133233">
+
+   
+
+  <style>
+
+
+
+	
+
+	.foot{width:100%;min-width:300px;margin-top:10px;margin-bottom:30px;padding:10px 0;color:#555;text-align:center;}
+
+.foot a{color:#555;margin:0 3px;}  
+
+
+
+   </style>
+
+	
+
+</head>
+
+
+
+<body class="body-gray">
+
+ 
+
+    
+
+    
+
+
+
+
+
+
+
+    <div class="panel memberhead">
+
+        <div class="header-l"><img class="icon-level-p" src="{if empty($myheadimg['avatar'])}.{BJ_QMXK_ROOT}/style/images/yh.png{else}{$myheadimg['avatar']}{/if}"/></div>
+
+        <div class="header-r">
+
+            
+
+                <a href="{php echo $this->createMobileUrl('register', array('id'=>$profile['id'], 'opp'=>'complate'))}">
+
+                <span class="name">{$profile['realname']}</span>
+
+                <i class="try-tip">正式代理</i>
+
+				
+
+                <span class="header-tip-text">资料修改</span>
+
+              
+
+                <i class="arrow"></i>  </a>
+
+        </div>
+
+    </div>
+
+    <!--head end-->
+
+    <!--count begin-->
+
+    <div class="row count">
+
+        <div class="small-4 large-3 columns mid">
+
+            <a href="#" class="count-a">
+
+                <p class="count-dis-mony">{$myheadimg['credit1']}</p>
+
+                <span class="count-title">总积分</span></a>
+
+        </div>
+
+        <div class="small-4 large-3 columns mid">
+
+            <a href="#" class="count-a">
+
+                <p class="count-dis-mony">{$myheadimg['credit2']}</p>
+
+                <span class="count-title">账户余额</span></a>
+
+        </div>
+
+		
+
+       <div class="small-4 large-3 columns last">
+
+            <a href="#" class="count-a">
+
+                <p class="count-dis-mony">{$profile['commission']}</p>
+
+                <span class="count-title">已结佣金</span></a>
+
+        </div>
+
+	
+
+    </div>
+
+    <!--count end-->
+
+
+
+    <div class="panel member-nav">
+
+        <ul class="side-nav">
+
+            <li><a href="{php echo $this->createMobileUrl('fansorder')}"><i class="icon-disorder"></i><span class="text">推广订单</span><i class="arrow"></i></a></li>
+
+            <li>
+
+                <a href="{php echo $this->createMobileUrl('myfans')}"><i class="icon-lowLevel"></i><span class="text">下级代理</span><i class="arrow"></i><span class="tip-number">{$count}</span>
+
+                    
+
+                </a>
+
+               
+
+            </li>
+
+            <li class="last"><a href="#"><i class="icon-myorder"></i><span class="text">推广点击</span><i class="arrow"></i> <span class="tip-number">{$userx['clickcount']}</span></a></li>
+
+        </ul>
+
+    </div>
+
+
+
+    <div class="panel member-nav">
+
+        <ul class="side-nav">
+
+            <li id="drpOrder"><a href="{php echo $this->createMobileUrl('myorder')}"><i class="icon-personal"></i><span class="text">我的订单</span><i class="arrow"></i>
+
+                </a></li>
+
+            <li id="brokerage"><a href="{php echo $this->createMobileUrl('award')}"><i class="icon-set"></i><span class="text">积分兑换</span><i class="arrow"></i>
+
+                
+
+
+
+            </a></li>
+
+        </ul>
+
+    </div>
+
+
+
+    <div class="panel member-nav">
+
+        <ul class="side-nav">
+
+            <li><a href="{php echo $this->createMobileUrl('commission')}"><i class="icon-commission"></i><span class="text">佣金明细</span><i class="arrow"></i></a></li>
+
+            <li><a href="{php echo $this->createMobileUrl('zhifu')}"><i class="icon-card"></i><span class="text">打款记录</span><i class="arrow"></i>
+
+                </a></li>
+
+			 <li><a href="{php echo $this->createMobileUrl('Erwema')}"><i class="icon-qrcode"></i><span class="text">专属二维码</span><i class="arrow"></i></a></li>
+
+         <li><a href="{php echo $this->createMobileUrl('rule')}"><i class="icon-client"></i><span class="text">帮助说明</span><i class="arrow"></i></a></li>
+
+        </ul>
+
+    </div>
+
+
+
+	
+
+	    <div class="panel member-nav">
+
+        <ul class="side-nav">
+
+           
+
+			 
+
+            <li class="last"><a href="{php echo $this->createMobileUrl('list')}"><i class="icon-shop"></i><span class="text">商城首页</span><i class="arrow"></i></a></li>
+
+        </ul>
+
+    </div>
+
+    <!--side nav end-->
+
+	
+
+   
+
+ <!--bottom begin
+
+    <div class="h50"></div>-->
+
+   <footer class="foot"><a>&copy; {$_W['account']['name']}</a></footer>
+
+    <!--bottom end-->
+
+
+
+</body>
+
+<script src="../addons/eso_sale/style/js/zepto.min.js"></script>
+
+<script>
+
+function report(){
+
+	if({$credit}!=-1){
+
+		return;
+
+	}
+
+	$.ajax({
+
+		type: "POST",
+
+		url: "{php echo $this->createMobileurl('home',array('op'=>'report'))}",
+
+		dataType: "text",
+
+		
+
+		success: function (d) {
+
+			if(d!=0){
+
+				window.document.getElementById('wxqd').innerHTML = '获得'+d+'分';
+
+				var credit = parseInt(window.document.getElementById('mygold').innerHTML);
+
+				var credit1 = credit + parseInt(d);
+
+				window.document.getElementById('mygold').innerHTML = credit1;
+
+			}
+
+		},
+
+		
+
+		error: function (xml, text, thrown){
+
+			TopBox.alert("出错啦!");
+
+		}
+
+	});
+
+}
+
+
+
+</script>
+
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?v=20150120"></script>
+
+
+
+<script type="text/javascript">
+
+	     var wxData = {
+
+            "appId": "{$_W['account']['key']}",
+
+            "imgUrl" : '{$_W['siteroot']}{BJ_QMXK_ROOT}/style/images/icon.jpg',
+
+            "link" : '{php echo $_W['siteroot'].$this->createMobileUrl('list',array('id'=>$id))}',
+
+            "desc" : "{$signPackage['description']}",
+
+            "title" : '{$_W['account']['name']}'
+
+        };
+
+        
+
+                  wx.config({
+
+    debug: false,
+
+    appId: '{$signPackage['appId']}',
+
+    timestamp: {$signPackage['timestamp']}, 
+
+    nonceStr: '{$signPackage['nonceStr']}', 
+
+    signature: '{$signPackage['signature']}',
+
+     jsApiList: [
+
+        'checkJsApi',
+
+        'onMenuShareTimeline',
+
+        'onMenuShareAppMessage',
+
+        'onMenuShareQQ',
+
+        'onMenuShareWeibo',
+
+        'hideMenuItems',
+
+        'showMenuItems',
+
+        'hideAllNonBaseMenuItem',
+
+        'showAllNonBaseMenuItem'
+
+      ]
+
+});
+
+        </script>
+
+<script src="../addons/eso_sale/style/js/wxaction.js?v=2015012103"></script>
+
+</html>
+

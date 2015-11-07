@@ -1,0 +1,47 @@
+{template 'common/header'}
+{php load()->func('tpl')}
+{template 'common'}
+<div class="main">
+    <ul class="nav nav-tabs">
+        <li><a href="{php echo $this->createWebUrl('item',array('op'=>'list'));}">套餐项目管理</a></li>
+        {if $op=='add'}
+             <li class="active"><a href="{php echo $this->createWebUrl('itemedit',array('op'=>'add'));}">添加套餐项目</a></li>
+        {else}
+             <li class="active"><a href="{php echo $this->createWebUrl('itemedit',array('op'=>'add'));}">修改套餐项目</a></li>
+        {/if}
+    </ul>
+    <form action="{php echo $url}"  method="post" enctype="multipart/form-data" onsubmit="return formcheck()">
+        <input type="hidden" name="id" value="{$item['id']}">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">套餐项目名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="name" value="{$item['item_name']}" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function formcheck() {
+        if ($("#name").val()=='') {
+           // Tip.focus("name", "请输入项目名称!", "right");
+            alert('请输入名称');
+            return false;
+        }else{
+
+            return true;
+        }
+    }
+    $(function(){
+
+    });
+
+</script>
+{template 'common/footer'}

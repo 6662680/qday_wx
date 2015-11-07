@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[奔跑吧兄弟撕名牌]]></name>
+		<identifie><![CDATA[eso_runman]]></identifie>
+		<version><![CDATA[2.9.5]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[奔跑吧兄弟撕名牌]]></ability>
+		<description><![CDATA[奔跑吧兄弟撕名牌]]></description>
+		<author><![CDATA[微动力]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<rule>
+			<entry title="管理" do="index" state="" />
+		</rule>
+		<menu>
+			<entry title="列表" do="manage" />
+		</menu>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS  `ims_eso_runman_plus` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(11) DEFAULT NULL,
+  `val` varchar(255) DEFAULT NULL COMMENT '加分-被加分',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='奔跑兄弟 - 加温记录';
+
+CREATE TABLE IF NOT EXISTS  `ims_eso_runman_reply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(11) DEFAULT NULL,
+  `title` varchar(255) DEFAULT '',
+  `content` text,
+  `background` varchar(255) DEFAULT '',
+  `thumb` varchar(255) DEFAULT '',
+  `description` text,
+  `share_title` varchar(255) DEFAULT '',
+  `share_desc` varchar(255) DEFAULT '',
+  `share_url` varchar(255) DEFAULT '',
+  `mp3` varchar(255) DEFAULT '',
+  `join` int(10) unsigned DEFAULT '0',
+  `view` int(10) unsigned DEFAULT '0',
+  `share_txt` text,
+  `regular` text,
+  `setting` text,
+  `starttime` bigint(18) unsigned DEFAULT '0',
+  `endtime` bigint(18) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='奔跑兄弟 - 回复规则';
+
+CREATE TABLE IF NOT EXISTS  `ims_eso_runman_submit` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) DEFAULT '',
+  `rid` int(11) DEFAULT NULL,
+  `openid` varchar(255) DEFAULT '',
+  `title` varchar(255) DEFAULT '0',
+  `did` int(10) unsigned DEFAULT '0',
+  `indate` bigint(18) unsigned DEFAULT '0',
+  `update` bigint(18) unsigned DEFAULT '0',
+  `money` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '提现金额',
+  `exchange` tinyint(3) unsigned DEFAULT '0' COMMENT '1为已处理',
+  `setting` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='奔跑兄弟 - 领取记录';
+
+CREATE TABLE IF NOT EXISTS  `ims_eso_runman_users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(11) DEFAULT NULL,
+  `ruid` int(11) DEFAULT NULL COMMENT '来源会员ID',
+  `rnum` int(10) unsigned DEFAULT '0' COMMENT '被访问次数',
+  `title` varchar(255) DEFAULT '',
+  `sex` varchar(10) DEFAULT '',
+  `tag` varchar(255) DEFAULT '',
+  `mobile` varchar(255) DEFAULT '',
+  `img` varchar(255) DEFAULT '',
+  `openid` varchar(255) DEFAULT '',
+  `indate` bigint(18) unsigned DEFAULT '0' COMMENT '入住时间',
+  `ladate` varchar(20) DEFAULT '',
+  `defaultval` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '初始暖值',
+  `ruidval` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '别人加的暖值',
+  `val` decimal(10,2) unsigned DEFAULT '0.00' COMMENT '当前暖值（暖值总）',
+  `one` tinyint(3) unsigned DEFAULT '0' COMMENT '第一次进入',
+  `setting` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='奔跑兄弟 - 会员';
+	]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

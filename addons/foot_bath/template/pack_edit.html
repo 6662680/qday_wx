@@ -1,0 +1,136 @@
+{template 'common/header'}
+{php load()->func('tpl')}
+{template 'common'}
+<div class="main">
+    <ul class="nav nav-tabs">
+        <li><a href="{php echo $this->createWebUrl('package',array('op'=>'list'));}">套餐管理</a></li>
+        {if $op=='add'}
+        <li class="active"><a href="{php echo $this->createWebUrl('packedit',array('op'=>'add'));}">添加套餐</a></li>
+        {else}
+        <li class="active"><a href="{php echo $this->createWebUrl('packedit',array('op'=>'edit','id'=>$id));}">编辑套餐</a></li>
+        {/if}
+    </ul>
+    <form action="{php echo $url;}" class="form-horizontal form" method="post" enctype="multipart/form-data" onsubmit="return formcheck()">
+        <input type="hidden" name="id" value="{$item['id']}">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">套餐名</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" id="title" value="{$item['p_name']}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">缩略图</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('thumb',$item['thumb'])}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">价格</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <div class="input-group">
+                            <input type="text" name="price" id="title" value="{$item['price']}" class="form-control">
+                            <span class="input-group-addon">元</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">会员价</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <div class="input-group">
+                            <input type="text" name="mprice" id="title" value="{$item['m_price']}" class="form-control">
+                            <span class="input-group-addon">元</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">服务项目</label>
+                        <div class="col-sm-9 col-xs-12">
+                            <div class="input-group col-sm-12">
+                                {loop $list $val}
+                                     <span class="col-sm-3">
+                                        <label class='checkbox-inline' style='margin-top:-5px;' > <input type='checkbox' id='area_show' name="item[]" value="{$val['id']}" {if  in_array($val['id'],$arr)}checked{/if} />{$val['item_name']}</label>
+                                     </span>
+                                {/loop}
+                            </div>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">详情</label>
+                    <div class="col-sm-9 col-xs-12">
+                            <textarea name="detail"  style="height:100px;width:100%;" class="form-control" cols="70">{$item['detail']}</textarea>
+                            <span class="help-block">套餐详情（选填）</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否显示</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="is_show" value="0" {if $item['is_show'] == 0}checked{/if}/>显示
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="is_show" value="1" {if $item['is_show'] == 1}checked{/if}/>隐藏
+                        </label>
+                        <span class='help-block'>手机前台是否显示</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否推荐</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="is_recommend" value="1" {if $item['is_recommend'] == 1}checked{/if}/>是
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="is_recommend" value="0" {if $item['is_recommend'] == 0}checked{/if}/>否
+                        </label>
+                        <span class='help-block'>手机轮播图显示</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="form-group col-sm-12">
+        <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+        <input type="hidden" name="token" value="{$_W['token']}" />
+    </div>
+
+    </form>
+</div>
+<script type="text/javascript">
+    // kindeditor($('.richtext-clone'));
+
+
+    function select_hotel(o) {
+        $("#hotelid").val(o.id);
+        $("#hotel").val( o.title );
+        $(".close").click();
+    }
+
+    function formcheck() {
+       /* if ($("#hotel").isEmpty()) {
+            Tip.focus("hotel", "请选择所属酒店!", "right");
+            return false;
+        }*/
+        if ($("#title").isEmpty()) {
+            Tip.focus("title", "请填写房型名称!", "right");
+            return false;
+        }
+        return true;
+    }
+    $(function(){
+
+        $('.change_breakfast').click(function() {
+            var value = $(this).val();
+            var name = $("#title").val();
+            var new_name = name.replace(/\[含早\]/g,'');
+
+            if (value == 0) {
+                $("#title").val(new_name);
+            } else  {
+                $("#title").val(new_name + "[含早]");
+            }
+        });
+    });
+
+</script>
+{template 'common/footer'}

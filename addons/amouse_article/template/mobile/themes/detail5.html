@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>{$detail['title']}</title>
+<link href="../addons/amouse_article/template/mobile/css/news.css?v=20150404" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="../addons/amouse_article/template/mobile/css/wemedia_style.css"/>
+<script type="text/javascript" src="../addons/amouse_article/template/mobile/js/jquery-1.9.1.js?v=20150404"></script>
+<script type="text/javascript" src="../addons/amouse_article/template/mobile/js/flipsnap.js?v=20150404"></script>
+<script type="text/javascript" src="../addons/amouse_article/template/mobile/js/jquery.lazyload.js?v=20150404"></script>
+<script type="text/javascript" src="../addons/amouse_article/template/mobile/js/jquery.slides.min.js?v=20150404"></script>
+<script type="text/javascript" src="../addons/amouse_article/template/mobile/js/main.js?v=20150404"></script>
+</head>
+<body>
+{if $detail[bg_music_switch]==1}
+<script type="text/javascript">
+    var uin = "";
+    var key = "";
+    var pass_ticket = "";
+    //全局变量
+    gSound = '{$detail['musicurl']}';
+</script>
+<script type="text/javascript" src="../addons/amouse_article/template/mobile/js/weixin_new.js"></script>
+<div id='audiocontainer'></div>
+{/if}
+<div id="page-wrapper">
+    <div id="page-news" class="vpage active">
+        <div id="content_main" class="news-main" style="min-height: 400px;">
+            <div class="news-wrapper">
+                <section class="news-content" id="news-content" style="display: block;">
+                    <h1 id="news-title" style="display: block;">{$detail['title']}</h1>
+                    
+					<div class="from" style="font-size: 14px;">
+                        <time id="news-time">{php echo date('Y-m-d H:i', $detail['createtime'])}</time>
+						<a class="rich_media_meta rich_media_meta_link rich_media_meta_nickname" href="javascript:void(0);" id="post-user">
+						{$_W['account']['name']}
+						</a>
+                    </div>
+ 
+                    <!--<a id="biz-link" class="btn" href="{set['guanzhuUrl']}" >
+                        <div class="arrow" style="top:20px;">
+                            <span style="display: inline-block;width: 60px; height: 33px;line-height: 33px;background-color: #0799ff;border-radius: 5px;text-align: center;color:#fff;">+关注</span>
+                        </div>
+                        <div class="logo">
+                        <div class="circle"></div>
+                            <img id="img" src="{$_W['attachurl']}headimg_{$_W['uniacid']}.jpg">
+                        </div>
+                        <div id="nickname">{$_W['account']['name']}</div>
+                        <div id="weixinid">微信号: {$wechat['account']}</div>
+                    </a>-->
+                    <br/>
+                    <br/>
+                    <article id="news-article" >
+                        {$detail['content']}
+                    </article>
+
+                    <div></div>
+                   <!-- <div class="share-area" style="text-align:center;" id="share-area">
+                        <div id="mess_share">
+                            <div id="share_1">
+                            <button class="button2" onclick="showtips();"><img src="http://res.wemedia.cn/mpshare/460.png">&nbsp;分享给好友</button>
+                            </div>
+                            <div class="clr"></div>
+                            <div id="share_2">
+                            <button class="button2" onclick="showtips();"><img src="http://res.wemedia.cn/mpshare/460.png">&nbsp;分享到朋友圈</button>
+                            </div>
+                        </div>
+                    </div>-->
+                </section>
+            </div>
+
+            {data module="amouse_article" func="amouse_article_weixin_hot" return="true" assign="result"}
+            {if !empty($result[list])}
+            <div class="mod-main">
+                <div class="module" id="recommedmodule" style="display: block;">
+                    <h3 class="title">热门账号推荐</h3>
+                    <div class="account-list">
+                        <ul>
+                        {loop $result['list'] $row}
+                        <li>
+                            <a href="{$row['guanzhuUrl']}">
+                                <div class="logo">
+									<img src="{php echo strpos($row['thumb'],'http://')===FALSE?($_W['attachurl'].$row['thumb']):$row['thumb']}" height="50" width="50">
+                                </div>
+                                <div class="nick nowrap">{$row[title]}</div>
+                                <div class="arrow"><span>+关注</span></div>
+                            </a>
+                        </li>
+                        {/loop}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {/if}
+        </div>
+    </div>
+</div>
+
+<!--<footer class="footer-toolbar-fix">
+    <a href="{if empty($set[tjgzhUrl])} {$set['guanzhuUrl']} {else}{$set[tjgzhUrl]}{/if}}">
+        {if !empty($set[tjgzh])}
+        <img src="{php echo strpos($set[tjgzh],'http://')===FALSE?($_W['attachurl'].$set[tjgzh]):$set[tjgzh]}"/>
+        {else}
+        <img src="{$_W['attachurl']}headimg_{$_W['uniacid']}.jpg"/> 关注
+        {/if}
+    </a>
+</footer>-->
+
+
+<footer class="footer-toolbar-fix">
+    <a id="biz-link" class="btn" href="{$set['guanzhuUrl']}" >
+        <div class="arrow" style="top:20px;">
+            <span style="display: inline-block;width: 60px; height: 33px;line-height: 33px;background-color: #0799ff;border-radius: 5px;text-align: center;color: white;">+关注</span>
+        </div>
+        <div class="logo">
+            <div class="circle"></div>
+            <img id="img" src="{$_W['attachurl']}headimg_{$_W['uniacid']}.jpg">
+        </div>
+        <div id="nickname" style="color:white;"> {$_W['account']['name']}</div>
+        <div id="weixinid" style="color:white;">微信号:{$wechat['account']}</div>
+    </a>
+</footer>
+
+<div class="footer">&nbsp;</div>
+<div id="mcover" onclick="hidetips();"><img src="http://res.wemedia.cn/mpshare/share2weixin.png"></div>
+<!--<div class="home-btn top">
+    <a href="javascript:window.history.go(-1)" title="返回">
+        <img alt="返回" src="http://res.wemedia.cn/mpshare/back_arrow.png" /></a>
+</div>
+<div style="display: none;">
+    {if !empty($set['cnzz'])}
+    {php echo htmlspecialchars_decode($set['cnzz']);}
+    {/if}
+</div>-->
+<script type="text/javascript">
+    function showtips(){
+        $("#mcover").show();
+    }
+    function hidetips(){
+        $("#mcover").hide();
+    }
+
+    $(document).ready(function() {
+        $(".vote_iframe").hide();
+        $(".vote_iframe").attr("src","");
+        $('.footer-toolbar-fix').show();
+    });
+</script>
+<script src="../addons/amouse_article/template/mobile/js/jquery.wipetouch.js?v=20150404"></script>
+</body>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script language='javascript'>
+    <?php
+           $jssdk = new JSSDK();
+           $signPackage = $jssdk->GetSignPackage();
+    ?>
+    wx.config({
+        debug:false,
+        appId: "{$_W['account']['appid_share']}",
+        timestamp: {$signPackage["timestamp"]},
+        nonceStr: '{$signPackage["nonceStr"]}',
+        signature: '{$signPackage["signature"]}',
+        jsApiList: [
+            'onMenuShareTimeline','onMenuShareAppMessage','onMenuShareWeibo'
+        ]
+    });
+    var shareMeta = {
+        imgUrl:"{$shareimg}",
+        link :  "{$url}",
+        desc : "{$detail['title']}",
+        title : "{$detail['title']}"
+    };
+    wx.ready(function(){
+        wx.onMenuShareTimeline(shareMeta);
+        wx.onMenuShareAppMessage(shareMeta);
+        wx.onMenuShareWeibo(shareMeta);
+    });
+</script>
+</html>

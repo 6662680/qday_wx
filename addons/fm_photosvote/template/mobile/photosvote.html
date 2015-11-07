@@ -1,0 +1,118 @@
+{template 'header'}
+<script type="text/javascript" src="../addons/fm_photosvote/template/js/swipe.js?{php echo time()}"></script>
+<link type="text/css" rel="stylesheet" href="../addons/fm_photosvote/template/mobile/photos/style.css?{php echo time()}" />
+<link rel="stylesheet" type="text/css" href="../addons/fm_photosvote/template/css/style.css?{php echo time()}">
+<style>
+body{background:#f5f5f5 no-repeat;background-size:100% auto;}
+ .h {height:10px}
+ .btn{  padding: 4px 8px;}
+ .pagination ul > li > a, .pagination ul > li > span {
+  padding: 5px 5px;
+}
+.con {
+  background: {$reply['zbgcolor']} url({php echo toimage($reply['zbg'])});
+  padding: 15px 10px 20px;
+  margin-top: -60px;
+  background-size: 100% auto; 
+  max-width: 640px;
+  margin: 0 auto;
+}
+.tongji {
+  width: 100%;
+  height: 60px;
+  background: url({php echo toimage($reply['zbgtj'])}) repeat-x -60px 0;
+  background-size: auto 100%;
+  position: relative;
+  z-index: 10px; 
+  max-width: 640px;
+  margin: 0 auto;
+}
+ .top { font-size: 14px; }
+ 
+ .modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-top: 12%;
+}
+.banner {
+  max-width: 640px;
+  margin: 0 auto;
+  max-height: 160px;
+}
+.usr_more {
+  width: 100%;
+  border: 0px solid #c4d4d0;
+  line-height: 35px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 0px;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.4);
+}
+</style>
+
+{template 'hnav'}
+<div id="banner_box" class="box_swipe" style="  max-width: 640px;  margin: 0 auto;">
+    <ul>
+        {loop $banners $banner}
+        <li>
+            <a href="{if empty($banner['link'])}#{else}{$banner['link']}{/if}"><img src="{php echo toimage($banner['thumb'])}" alt=""  width='100%' height='200px'/>
+            </a>
+            <span class="title" style="color:#fff;">{$banner['bannername']}</span>
+        </li>
+        {/loop}
+    </ul>
+    <ol>
+       {php $slideNum = 1;}
+	{loop $banners $banner}
+		<li{if $slideNum == 1} class="on"{/if}></li>
+		{php $slideNum++;}
+	{/loop}
+    </ol>
+</div>
+<script>
+	  
+		$(function() {
+		new Swipe($('#banner_box')[0], {
+		speed:500,
+				auto:3000,
+				callback: function(){
+				var lis = $(this.element).next("ol").children();
+						lis.removeClass("on").eq(this.index).addClass("on");
+				}
+		});
+		});
+		
+</script>
+{template 'tongji'}
+
+<div class="con">
+{if $reply['isedes'] == 1}
+	<p class="tips"><i>活动简介</i></p>
+    <p class="neirong" style="text-indent:2em;">{php echo cutstr($reply['description'], '90', '...')}<a href="{php echo $this->createMobileUrl('des', array('rid' => $rid))}" class="more">[更多]</a>
+	</p>
+{/if}	
+   <p class="tips"><i>投票区</i></p>
+	{template 'tmoshi'}
+	{if ($reply['tmoshi'] == 1 || $reply['tmoshi'] == 2 || $reply['tmoshi'] == 3)}
+		{if $total > $psize}	
+		<div align="center">  
+			<button class="usr_more load_more label label-info" id="load_more_button"><i class="fa fa-random"></i> 查看更多</button>
+			<div class="animation_image" style="display:none;width:50px;color:#fff"><img src="../addons/fm_photosvote/template/mobile/photos/ajax-loader.gif" width="50"> Loading...</div>  
+		</div>
+		
+		{/if}
+	{else}
+		<div style="margin:0 auto;padding:0;text-align:center;">{$pager}</div>
+	{/if}
+	
+	{if $reply['isindex'] == 1}{template 'zanzhu'}{/if}
+	
+	<div class="copyright">
+    {if $reply['iscopyright']==1}<a href="{$reply['copyrighturl']}">&copy;{$reply['copyright']}</a>{else}<a href="javascript:;">{if empty($footer_off)}&copy;{if empty($_W['account']['name'])}FantasyMoons Team团队{else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}{/if}</a>{/if}
+	</div>
+	<div class="h"></div>
+</div>
+{template 'fnav'}
+{template 'tvote'}
+{template 'footer'}

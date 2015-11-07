@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="description" content="酒店预订"/>
+<meta name="keywords" content="酒店预订,酒店查询,宾馆住宿预订,网上订酒店,手机订酒店"/>
+<title>足浴师选择</title>
+<meta name="viewport"content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-title" content="酒店预订"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta content="telephone=no" name="format-detection"/>
+<link href="{php echo $this->_css_url}css.css" rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="{php echo $this->_css_url}jquery-ui-1.10.3.css">
+<script language='javascript' src='{php echo $this->_script_url}jquery.js'></script>
+<script language='javascript' src='{php echo $this->_script_url}jquery-ui-1.10.3.min.js'></script>
+<script language='javascript' src='{php echo $this->_script_url}common.js'></script>
+<!--<script type="application/x-javascript">addEventListener('DOMContentLoaded', function () {-->
+<!--setTimeout(function () {-->
+<!--scrollTo(0, 1);-->
+<!--}, 0);-->
+<!--}, false);</script>-->
+<style type="text/css">
+	#menu0 li {height: 45px;line-height: 45px;border-bottom: 1px solid #f2f2f2;background: #fff;color: #666666;}
+	#content ul {padding: 0px;}
+	#content li {padding-left: 0px;letter-spacing: 1px;}
+	header {background-color: #1491c5;width: 100%;height: 48px;line-height: 48px;text-align: center;position: relative;}
+	header h1 {color: #fff;font: 600 1.286em/2.8 "STXihei";}
+	header h1 em {font-style: normal;margin-left: 10px;}
+	header i {position: absolute;left: 0;top: 0;width: 68px;height: 48px;background: #15a4d5;}
+	header i:hover, header i:active {opacity: 0.7;}
+	header i:before {background: url(../addons/ewei_hotel/template/style/css/comm_bg.png) no-repeat -100px -105px;background-size: 242px 260px;left: 25px;top: 16px;width: 12px;height: 20px;position: absolute;content: "";}
+	.write_list li {position: relative;padding: 0 15px;margin-bottom: 10px;line-height: 45px;background: #f2f2f2;color: #343434;}
+	.write_list li:last-child {margin-bottom: 0;}
+    #room .ui-grid-b .ui-block-a {
+        width: 24%;
+        margin: 5px 0 0 10px;
+    }
+    #hotelpic img, #room .ui-block-a img {
+        background: rgba(0, 0, 0, 0.5) url(../addons/ewei_hotel/template/style/css/loading2.gif) 50% 50% no-repeat;
+    }
+    .btn_blue {
+        display: block;
+        width: 50%;
+        height: 45px;
+        margin: 0 auto;
+        letter-spacing: 2px;
+        font: bold 1.286em/45px "STXihei";
+        color: #fff;
+        background-color: #FF9913;
+        border: none;
+    }
+    #room .ui-grid-b {
+        border-bottom: 1px solid #F5F5F5;
+        height: auto;
+        margin: 5px 0;
+        padding-bottom: 30px;
+    }
+</style>
+
+</head>
+<body>
+
+<div id="ctripPage">
+	<header>
+		<h1>选择足浴师</h1><i id="js_return" onClick="location.href='javascript:history.back();'"></i>
+	</header>
+        <form action="{php echo $this->createMobileUrl('checktechni')}" method="post">
+            <div id="d_list" style="padding: 10px;">
+                <ul id="room" class="block" style="margin-bottom: 10px;">
+                    {loop $list $item}
+                    <li>
+                        <div class="ui-grid-b roomlist" data-roomid="203806" data-index="0">
+                            <div class="ui-block-a room_img_a piclist">
+                                <a href="#" rel="external">
+                                    <img class="roompic" index="0" des="{$item['title']}" title="{$item['title']}" src="{php echo tomedia($item['photo'])}" style="width:67px;height:50px;">
+                                </a>
+                            </div>
+                            <div class="ui-block-b">
+                                编号：<span data-paytype="1" class="bold">{$item['name']}</span><br>
+                        <span class="txt_gray">
+                            性别：
+                        {if $item['gender']==0}
+                            <span>男</span>
+                            {else}
+                            <span>女</span>
+                        {/if}
+                        </span><br>
+                        <span class="">
+                            详情:{$item['detail']}
+                        </span><br>
+                            </div>
+
+                            <div class="ui-block-c" data-fan="1" data-cny="RMB" style="padding: 10px;">
+                                <input type="checkbox" value="{$item['id']}" name="checkmember" style="float:right;height: 15px;width: 15px;"/>
+                            </div>
+                        </div>
+                    </li>
+                    {/loop}
+                </ul>
+                <input type="submit" class="btn_blue" id="submitDate" value="确定" />
+            </div>
+        </form>
+</div>
+<script>
+    $('.roomlist .piclist').on('click',function(){
+        var self=$(this);
+        var checkImg=self.find('img');
+        var checkObj=self.parent().find("input[name=checkmember]");
+        if(checkObj.is(':checked')){
+            checkObj.prop('checked',false);
+           // self.find('img').css('opacity','1');
+        }else{
+            checkObj.prop('checked',true);
+           // self.find('img').css('opacity','0.5');
+            self.parent().parent().siblings().find("input[name=checkmember]").prop('checked',false);
+            //self.parent().parent().siblings().find('img').css('opacity','1');
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,810 @@
+@charset "utf-8";
+/*--------------------------
+ reset
+---------------------------*/
+html {
+    color: #000;
+    background: #FFF
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0)
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+fieldset,img {
+    border: 0
+}
+
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style: normal;
+    font-weight: normal
+}
+
+ol,ul {
+    list-style: none
+}
+
+caption,th {
+    text-align: left
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: normal
+}
+
+q:before,q:after {
+    content: ''
+}
+
+abbr,acronym {
+    border: 0;
+    font-variant: normal
+}
+
+sup {
+    vertical-align: text-top
+}
+
+sub {
+    vertical-align: text-bottom
+}
+
+input,textarea,select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit
+}
+
+input,textarea,select {
+    *font-size: 100%
+}
+
+legend {
+    color: #000
+}
+/*--------------------------
+ 快捷样式
+---------------------------*/
+.fl {
+    float: left
+}
+
+.fr {
+    float: right
+}
+
+.text-center {
+    text-align: center
+}
+
+.clearfix:before,.clearfix:after {
+    display: table;
+    content: " ";
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.vertical-m {
+    vertical-align: middle;
+}
+/*--------------------------
+ 模块：全局
+---------------------------*/
+html,body {
+    overflow-x: hidden;
+}
+html{
+    background: #eee url(../images/loading.gif) no-repeat center center;
+}
+body {
+    width: auto;
+    font-family: "Microsoft Yahei";
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+a:visited {
+    color: inherit;
+    text-decoration: inherit;
+}
+.oh{
+    overflow: hidden;
+}
+/*--------------------------
+ 模块：footer （通用页脚）
+---------------------------*/
+.footer {
+    width: 100%;
+    clear: both;
+    color: #BBB;
+    text-align: center;
+    background: #fff;
+}
+
+.footer .copyright {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0 auto;
+    padding: 10px 0;
+    overflow: hidden;
+}
+/*--------------------------
+ 模块：显示二维码
+---------------------------*/
+.ewmform {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 110;
+    background: rgba(0, 0, 0, .8);
+    display: none;
+}
+
+.ewmform .ewmform-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 315px;
+    margin-top: -180px;
+    margin-left: -150px;
+    background: #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 0 27px 27px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.ewmform-close {
+    position: absolute;
+    top: -15px;
+    right: -5px;
+    z-index: 10;
+    width: 38px;
+    height: 38px;
+    display: block;
+    background: url(../images/ewmform-close.png) no-repeat;
+    background-size: 38px;
+}
+
+.ewmform .ewmform-title {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    z-index: 9;
+    width: 100%;
+    height: 24px;
+    line-height: 24px;
+    padding: 16px 0;
+    text-align: center;
+    color: #000;
+    font-size: 20px;
+    background: #fff;
+}
+
+.ewmform .ewmform-des{
+    position: absolute;
+    bottom: 23px;
+    left: 0;
+    z-index: 9;
+    width: 100%;
+    color: #2B3890;
+    font-size:14px;
+    text-align: center;
+    background: #fff;
+    line-height: 19px;
+}
+
+.ewmform .ewmform-summary {
+    position: relative;
+    width: 246px;
+    height: 246px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-top: 34px;
+    background: #fff url(../images/loading.gif) no-repeat center center;
+}
+
+.ewmform .ewmform-summary .ewm-thumbnail {
+    width: 100%;
+    display: block;
+}
+
+.ewmform .ewmform-summary .avatar-thumbnail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -24px;
+    margin-top: -24px;
+    width: 48px;
+    height: 48px;
+    padding: 2px;
+    display: block;
+    background: #fff;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.ewm-download{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    width:232px;
+    opacity: 0;
+}
+/*--------------------------
+ 模块：底部菜单
+---------------------------*/
+.feature {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    color: #fff;
+    text-align: center;
+    background: rgba(0,0,0,.6);
+    display: block;
+    z-index: 100;
+    font-size: 0;
+    white-space: nowrap;
+    max-width: 640px;
+    margin: 0 auto;
+}
+.feature .feature-link{
+    color: #fff;
+}
+.feature .feature-w33{
+    width: 33.3%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.feature .feature-w66{
+    width: 66.6%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.feature .feature-favor {
+    display: inline-block;
+    height: 45px;
+    -webkit-tap-highlight-color: rgba(0,0,0,.9);
+}
+.feature .feature-favor:hover,
+.feature .feature-favor:active{
+    background: rgba(0,0,0,.9);
+}
+.feature .feature-more {
+    height: 45px;
+    display: inline-block;
+}
+.feature .more-relative{
+    position: relative;
+}
+.feature .dialog-num{
+    position: absolute;
+    right: -12px;
+    top: -6px;
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
+    padding: 2px;
+    text-align: center;
+    background: #fd000b;
+    color: #fff;
+    font-size: 8px;
+    -webkit-text-size-adjust: none;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    display: none;
+}
+.feature .ico-favor {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/ico-favor.png) no-repeat;
+    background-size: 18px;
+    vertical-align: middle;
+}
+.feature .ico-book {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    background: url(../images/ico-book.png) no-repeat;
+    background-size: 18px;
+    vertical-align: middle;
+}
+.feature .ico-share {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    background: url(../images/ico-share.png) no-repeat;
+    background-size: 15px;
+    vertical-align: middle;
+}
+.feature .ico-cancel {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    background: url(../images/ico-cancel.png) no-repeat;
+    background-size: 15px;
+    vertical-align: middle;
+}
+.feature .ico-more {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    background: url(../images/ico-more.png) no-repeat;
+    background-size: 15px;
+    vertical-align: middle;
+}
+.feature .ico-back {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    background: url(../images/ico-back.png) no-repeat;
+    background-size: 15px;
+    vertical-align: middle;
+}
+.feature .ico-card {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/icon-card.png) no-repeat;
+    background-size: 18px;
+    vertical-align: middle;
+}
+.feature .ico-mycard {
+    width: 22px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/ico-mycard.png) no-repeat;
+    background-size: 22px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.feature .ico-cash {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/ico-cash.png) no-repeat;
+    background-size: 18px;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+.feature .ico-change {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/ico-change.png) no-repeat;
+    background-size: 18px;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+.feature .ico-store {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/ico-store.png) no-repeat;
+    background-size: 18px;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+.feature .ico-net {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/ico-net.png) no-repeat;
+    background-size: 18px;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+.feature .ico-my {
+    width: 20px;
+    height: 16px;
+    line-height: 16px;
+    display: inline-block;
+    background: url(../images/ico-my.png) no-repeat;
+    background-size: 20px;
+    vertical-align: middle;
+    margin: 0 4px 0 2px;
+}
+
+.feature .ico-pro {
+    width: 19px;
+    height: 19px;
+    line-height: 19px;
+    display: inline-block;
+    background: url(../images/ico-pro.png) no-repeat;
+    background-size: 19px;
+    vertical-align: middle;
+    margin: 0 4px 0 3px;
+}
+
+.feature .ico-proxy {
+    width: 15px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/ico-proxy.png) no-repeat;
+    background-size: 15px;
+    vertical-align: middle;
+    margin: 0 6px 0 5px;
+}
+
+.feature .ico-concern {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    display: inline-block;
+    background: url(../images/ico-concern.png) no-repeat;
+    background-size: 18px;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+.info-box .ico-hand {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    background: url(../images/ico-hand.png) no-repeat;
+    background-size: 15px;
+    vertical-align: middle;
+    margin: -3px 4px 0;
+}
+.feature .ico-home {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    background: url(../images/ico-home.png) no-repeat;
+    background-size: 15px;
+    vertical-align: middle;
+}
+.feature .ico-msg {
+    width: 25px;
+    height: 15px;
+    line-height: 15px;
+    display: inline-block;
+    background: url(../images/ico-msg.png) no-repeat center center;
+    background-size: 22px;
+    vertical-align: middle;
+}
+
+.more-list-wrap{
+    position: fixed;
+    top: 0;
+    right: -282px;
+    z-index: 9000;
+    width: 280px;
+    height: 100%;
+    background: rgba(241,240,246,1);
+    border-left: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    transition: right .5s;
+    -webkit-transition: right .5s;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.more-list-wrap .more-list {
+    width: 100%;
+}
+.more-list-wrap .more-list-ul{
+    padding-bottom: 55px;
+}
+.toggle-transition-1s{
+    transition: left .5s;
+    -webkit-transition: left .5s;
+}
+.namecard-page-relative{
+    position: relative;
+    left: 0;
+    z-index: 100;
+}
+.toggle-page{
+    left: -160px !important;
+}
+.feature .more-list.cur{
+    right:0;
+}
+.more-list-wrap .more-list .more-list-item {
+    position: relative;
+    line-height: 22px;
+    text-align: left;
+    padding: 12px 0 12px 25px;
+    background: #fff;
+}
+.mb10{
+    margin-bottom: 10px;
+}
+.btop{
+    border-top: 1px solid rgb(241,240,246);
+}
+.more-list-wrap .more-list-item.item-back{
+    position: fixed;
+    right: -282px;
+    bottom: 0;
+    z-index: 111;
+    width: 280px;
+    height: 45px;
+    text-align: left;
+    border-top: 1px solid #C4C4C4;
+    line-height: 45px;
+    padding-left: 20px;
+    background: #fff;
+    color:#3e3e3e;
+    font-size: 16px;
+    transition: right .5s;
+    -webkit-transition: right .5s;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.more-list-wrap .more-list .more-list-item .more-item-anchor {
+    display: block;
+    line-height: 22px;
+    color: #3e3e3e;
+    font-size: 16px;
+}
+.more-list-wrap .more-list .more-avatar{
+    text-align: center;
+    padding-left: 0;
+}
+.more-list-wrap .more-list .more-avatar .more-item-anchor{
+    color: #666;
+    font-size: 14px;
+    min-height: 87px;
+    display: inline-block;
+}
+.more-list-wrap .more-list .more-list-item .more-avatar-thumb{
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #fff;
+    border-radius: 32px;
+    -webkit-border-radius: 32px;
+    margin: 0 auto;
+}
+.more-list-wrap .more-list .more-list-item .more-avatar-thumbnail{
+    width: 60px;
+    height: 60px;
+    display: block;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+}
+.more-list-wrap .more-list .more-list-item .icon-right{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    margin-top: -10px;
+    background: url(../images/select_ico.png) no-repeat;
+    background-size: contain;
+    width: 13px;
+    height: 20px;
+    display: inline-block;
+    opacity: .2;
+}
+.more-list-wrap .more-list .more-list-item:last-child{
+    border-bottom: 0;
+}
+.more-list-sh{
+    right: 0 !important;
+}
+.more-list-wrap .switch-icon{
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+    background: url(../images/switch.png) no-repeat center center;
+    background-size: contain;
+    vertical-align: top;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.more-list-wrap .icon-sok{
+    position: absolute;
+    right: -6px;
+    top: 0px;
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: url(../images/sok.png) no-repeat;
+    background-size: contain;
+    vertical-align: top;
+}
+.more-list-wrap .dialog-num{
+    position: absolute;
+    left: 100px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
+    padding: 2px;
+    text-align: center;
+    background: #fd000b;
+    color: #fff;
+    font-size: 8px;
+    -webkit-text-size-adjust: none;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    display: none;
+}
+/*首次使用提示可上下滑动*/
+.sideNav-tip{
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99991;
+    width: 280px;
+    height: 100%;
+    background: rgba(0,0,0,.7) url("/app_static/app/cardtemplate/images/icon-swipeUaD.png") no-repeat center center;
+    display: none;
+}
+/*--------------------------
+ 模块：sharebox （分享提示）
+---------------------------*/
+.sharetip{
+    position:fixed;
+    left:0;
+    right: 0;
+    top:0;
+    z-index:99999;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,.8);
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    max-width: 640px;
+    display:none;
+}
+.sharetip-cfriend{
+    background-image:url(../images/sharetips-cfriend.png?v=1);
+    background-size:100%;
+}
+.sharetip-collect{
+    background-image:url(../images/sharetips-collect.png);
+    background-size:100%;
+}
+
+/*--------------------------
+ 头像转动
+---------------------------*/
+.avatarPic{
+    transition: all 1s;
+    -webkit-transition: all 1s;
+}
+.avatarPic.rolling{
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+}
+/*--------------------------
+企业标注
+---------------------------*/
+.sp_source{
+    position: absolute;
+    right: -16px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: center;
+    background: #1b72e5;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+/*--------------------------
+ 全屏遮罩
+---------------------------*/
+.superMask{
+    position: fixed;
+    left:0;
+    top:0;
+    z-index:-10;
+    background: #000;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transition: all .5s;
+    -webkit-transition: all .5s;
+}
+.superMask.show{
+    opacity: .5;
+    z-index:8000;
+}
+/*--------------------------
+ 模块：音乐
+---------------------------*/
+.musicBox{
+    position:absolute;
+    right:10px;
+    top:10px;
+    width:25px;
+    height:25px;
+    background-image:url(../images/icon-music.png);
+    background-repeat:no-repeat;
+    background-size: 50px;
+    z-index:101;
+}
+.musicBox.play{
+    background-position:0 0;
+    animation:rotate360 3s linear 0s infinite;
+    -webkit-animation:rotate360 3s linear 0s infinite;
+}
+.musicBox.stop{
+    background-position:-25px 0;
+    animation:none;
+    -webkit-animation:none;
+}
+#musicPlayer{
+    position:absolute;
+    z-index:-10;
+    left:50%;
+    top:50%;
+    height: 0;
+    visibility:hidden;
+}
+@keyframes rotate360{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+@-webkit-keyframes rotate360{
+    from{
+        -webkit-transform:rotate(0deg);
+    }
+    to{
+        -webkit-transform:rotate(360deg);
+    }
+}

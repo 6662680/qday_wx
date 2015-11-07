@@ -1,0 +1,140 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1,user-scalable=no,maximum-scale=1,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no"> 
+<meta name="description" content="{if $title}{$title}{else}{if !empty($_W['account']['name'])}{$_W['account']['name']}{/if}{/if}{if $_W['account']['siteinfo']['sitename']}{$_W['account']['siteinfo']['sitename']}{/if}">
+
+ <link rel="stylesheet" href="/addons/amouse_article/template/mobile/css/common.css?v=20150320">
+    <link rel="stylesheet" href="../addons/amouse_article/template/mobile/css/site.css?v=20150320">
+<style>
+.bgcolor {
+	background-color: rgb(233, 86, 68);
+}
+
+.fontcolor {
+	color: rgb(233, 86, 68);
+}
+</style>
+<script type="text/javascript" src="http://cdn.bootcss.com/zepto/1.1.4/zepto.min.js?v=20150320"></script>
+ 
+<title>{if $title}{$title}{else}{if !empty($_W['account']['name'])}{$_W['account']['name']}{/if}{/if}{if $_W['account']['siteinfo']['sitename']}{$_W['account']['siteinfo']['sitename']}{/if}</title>
+</head>
+<body>
+	<div id="page">
+ 		
+ 
+<style>
+#mainmenu{
+	background: none;
+	border: none;
+	width: 98%;
+}
+#mainmenu li{
+	height: 185px;
+	padding: 0;
+	list-style: none;
+	margin-bottom: 3px;
+	position: relative;
+	border: 1px solid #dbdbdb;
+	float: left;
+	width: 49%;
+	background: #FFF;
+	-webkit-box-shadow: #d4d4d4 0px 1px 2px;
+	-moz-box-shadow: #d4d4d4 0px 1px 2px;
+	box-shadow: #d4d4d4 0px 1px 2px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+}
+#mainmenu li:nth-child(even){
+	margin-left: 3px;
+}
+#mainmenu li a{
+	display: block;
+}
+#mainmenu li .title{
+	line-height: 30px;
+	font-weight: 700;
+	text-align: center;
+	width: 95%;
+	margin: 0 auto;
+}
+#mainmenu li .summary{
+	text-align: center;
+	margin-top: 0px;
+	font-size: 12px;
+	overflow: hidden;
+	height: 40px;
+	width: 95%;
+	margin: 0 auto;
+}
+#mainmenu li img{
+	width: 100px;
+	height: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	display: block;
+	margin: 10px auto 8px;
+}
+</style>
+<div id="mainmenu" class="fn-clear">
+	<ul>
+	{data func="amouse_article_site_category" parentid=$cid return="true" assign="navs"}
+        {if empty($navs)}
+            {data module="amouse_article" func="amouse_article_site_article" cid=$cid return="true" assign="result"}
+            {loop $result['list'] $row}
+		<li style="width: 161px;">
+			 <a href="{php echo $this->createMobileUrl("detail",array("id" => $row['id']),true)}">
+				{if !empty($row['thumb'])}
+                <img src="{php echo strpos($row['thumb'],'http://')===FALSE?($_W['attachurl'].$row['thumb']):$row['thumb']}" height="65" width="45"/>
+                {/if}
+			 
+				<p class="title"title="{$row[title]}">{php echo cutstr($row[title],12)} </p>
+				<p class="summary" title="{$row[description]}">{php echo cutstr($row[description],12)}</p>
+			</a>
+		</li>
+		{/loop}
+        {else}
+        {loop $navs $nav}
+	
+		<li style="width: 161px;">
+			 <a href="{php echo $this->createMobileUrl("index",array("cid" => $nav['id']),true)}">
+            <p class="title"  title="{$nav[name]}"> 
+				{if !empty($nav['thumb'])}
+            <img src="{php echo strpos($nav['thumb'],'http://')===FALSE?($_W['attachurl'].$nav['thumb']):$nav['thumb']}" height="65" width="45"/>
+            {/if}
+				<p class="title" title="{$nav[name]}">
+                {php echo cutstr($nav[name],6)} </p>
+				<p class="summary" title="{$nav[description]}">
+                {php echo cutstr($nav[description],6)} </p>
+			</a>
+		</li>
+	 {/loop}
+        {/if} 
+	</ul>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var w = Math.floor(($("#mainmenu").width()-8)/2);
+		$("#mainmenu li").width(w);
+	});
+</script>
+        
+       <div id="footer">Copyright © {if !empty($set['copyright'])} {$set['copyright']} {else}{$_W['account']['name']}{/if}
+    </div>
+
+	<div id="toTop" style="position: fixed; display: none; bottom: 0px; left: 10px; z-index: 998; opacity: 0.8;">
+	    <a href="javascript:void(0);" onclick="javascript:window.scrollTo(0,0);"><img style="width:46px;height:46px;"  src="../addons/amouse_article/template/mobile/images/topplus.png" align="absmiddle"></a>
+	</div>
+	
+	 
+<style>
+body,#mainmenu{
+	background: rgba(0, 0, 0, 0);
+}
+</style>
+
+</body></html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+<title>谁给我点了赞？</title>
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css?v=2015040601">
+    <link rel="stylesheet" type="text/css" href="../addons/amouse_ecard/style/css/nameCard.css?v=2014122">
+</head>
+
+<body class="namecard-favourlist">
+
+<!--#=start page-->
+<div class="namecard-page">
+  <div class="favourlist-item favourlist-bar">被点赞：<span id="totalCount"></span> 次<span class="favourlist-bar-des">继续加油哦~</span></div>
+  
+  <div class="favourlist-box" id="favourlistBox">
+  </div>
+</div>
+<!--#=end page--> 
+
+<div class="loading" id="loading"><span class="icon-loading"></span></div>
+
+<!--#start JS--> 
+<script src="http://res2.eqianxian.com/app_static/common/js/jquery.js"></script>
+<script src="http://res2.eqianxian.com/app_static/common/js/scrollLoad.js"></script>
+<script>
+Date.prototype.Format = function(fmt){
+  var o = {   
+    "M+" : this.getMonth()+1,                 //月份   
+    "d+" : this.getDate(),                    //日   
+    "h+" : this.getHours(),                   //小时   
+    "m+" : this.getMinutes(),                 //分   
+    "s+" : this.getSeconds(),                 //秒   
+    "q+" : Math.floor((this.getMonth()+3)/3), //季度   
+    "S"  : this.getMilliseconds()             //毫秒   
+  };   
+  if(/(y+)/.test(fmt))   
+    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));   
+  for(var k in o)
+    if(new RegExp("("+ k +")").test(fmt))   
+  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+  return fmt;   
+};
+$(function(){
+	var $loading = $("#loading");
+	var defaultAvatar = "/app_static/app/bizCard/images/avatar.png";
+	var $favourlistBox = $("#favourlistBox");
+	var params = {"type":"LIKE"};
+	$favourlistBox.scrollLoad({
+		"url": "/app/bizcard/ajaxLoadActionLog.do",
+		"fromPage": 1, //从第几页开始
+		"scrollWrap": $(document), //滚动的对象
+		"pageSize": 20, //每页加载个数
+		"params":params,
+		"htmlTemp": function (data){ //func 数据的html结构 接受了返回的data
+			$("#totalCount").text(data.totalCount);
+			var r = data.result;
+			var l = r.length;
+			var htmls = [];
+			if (l > 0) {
+				for ( var i=0; i < l; i++) {
+					var me = r[i].weixinFan ? r[i].weixinFan : null;
+					var avatar = null;
+					var name = null;
+					var ztime = new Date(r[i].createTime).Format("yyyy-MM-dd hh:mm:ss");
+					if(me){
+						avatar = me.avatar ? me.avatar : defaultAvatar;
+						name = me.anyName != "游客" ? me.anyName : me.anyName+"(无名片)"
+					}else{
+						avatar = defaultAvatar;
+						name = "游客(无名片)";
+					}
+					
+					htmls.push('<div class="favourlist-item" onClick="window.location.href=\'/app/bizcard/showBizCard.do?openId='+r[i].openId+'\'">'+
+							  	'<div class="favourlist-item-avatar"><img src="'+avatar+'"></div>'+
+							  	'<div class="favourlist-item-group">'+
+							  		'<div class="favourlist-item-tit">'+name+'</div>'+
+							  		'<div class="favourlist-item-summary">'+ztime+' &nbsp;&nbsp;给你点了赞</div>'+
+							  	'</div>'+
+							  '</div>');
+				}
+			}else{
+				$favourlistBox.html("<span class='noFavour'>还没有人为你点赞哦~<br>赶快把你的微名片分享给朋友吧</span>")
+			}
+			return htmls.join("");
+		}, 
+		"bsCallback": function(){
+			$loading.show();
+		},
+		"callback": function(){//func 加载成功后的回调
+			$loading.hide();
+		}
+	});
+});
+</script>
+<!--#end JS-->
+</body>
+</html>

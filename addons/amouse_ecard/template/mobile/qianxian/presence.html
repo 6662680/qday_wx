@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+<title>个人风采</title>
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css">
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/article.css?v=2014122">
+</head>
+
+<body class="icx-mobi-detail">
+<div class="loading js-loading"></div>
+<div class="icx-mobi-page">
+  <main class="container">
+    <article class="detail-article">
+      <h1 class="detail-article-title">个人风采</h1>
+      <!--<div class="detail-article-date">阅读5次</div>-->
+      <div class="detail-article-content">
+      {loop $images $k $img}
+	  <div>
+      	<p style="text-align:center"><img src="{$_W['attachurl']}{$img}"></p>
+      	<p>{$content[$k]}</p>
+      </div>
+	  {/loop}
+      </div>
+      <div class="sharebox js-sharebox">
+        <ul class="sharebox-inner">
+          </ul>
+        
+        <div class="sharetip sharetip-cfriend js-sharetip-cfriend"></div>
+        
+      </div>
+    </article>
+  </main>
+  <footer class="footer">
+    <div class="copyright"></div>
+  </footer>
+</div>
+<script src="../addons/amouse_ecard/style/js/jquery.1.11.1.js?v=20150405"></script>
+<script src="../addons/amouse_ecard/style/js/wx-share.js"></script> 
+<script src="../addons/amouse_ecard/style/js/common.js"></script> 
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script language='javascript'>
+    <?php
+            $jssdk = new JSSDK();
+    $signPackage = $jssdk->GetSignPackage();
+    ?>
+    wx.config({
+        debug: false,
+        appId: '<?php echo $signPackage["appId"];?>',
+        timestamp: <?php echo $signPackage["timestamp"];?>,
+        nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+        signature: '<?php echo $signPackage["signature"];?>',
+        jsApiList: [
+        'onMenuShareAppMessage',
+        'onMenuShareTimeline',
+        'onMenuShareQQ'
+    ]
+    });
+
+    var shareMeta = {
+        title: "{$member['realname']}的微名片",
+        desc: "公司:{$member['company']}\n职位:{$member['job']}\n点击查看更多信息",
+        link: "{$linkUrl}",
+        imgUrl: "{$shareimg}"
+    };
+    wx.ready(function(){
+        wx.onMenuShareTimeline(shareMeta);
+        wx.onMenuShareAppMessage(shareMeta);
+        wx.onMenuShareWeibo(shareMeta);
+    });
+</script>
+</body>
+</html>

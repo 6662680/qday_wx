@@ -1,0 +1,11 @@
+{php echo register_jssdk();}
+<script type="text/javascript">
+	wx.ready(function () {
+		sharedata = {
+			desc: document.title + " - {$_W['account']['name']}",
+			imgUrl: "{$_W['siteroot']}addons/ewei_exam/preview.jpg"
+		};
+		wx.onMenuShareAppMessage(sharedata);
+		wx.onMenuShareTimeline(sharedata);
+	});
+</script>

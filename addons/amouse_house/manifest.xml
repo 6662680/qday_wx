@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[微二手房]]></name>
+		<identifie><![CDATA[amouse_house]]></identifie>
+		<version><![CDATA[1.1]]></version>
+		<type><![CDATA[business]]></type>
+		<ability><![CDATA[出租,求购，求租，出售新房，二手房，新楼盘发布]]></ability>
+		<description><![CDATA[微房产，出租,求购，求租，出售新房，二手房，最新房产信息平台，可以出租,求购，求租，出售新房，二手房，新楼盘信息,本地时尚生活互动平台]]></description>
+		<author><![CDATA[微动力]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+		<cover>
+  			<entry title="最新房产信息入口" do="index" />
+		</cover>
+		<menu>
+			<entry title="房产管理" do="house" direct="false" />
+            <entry title="新楼盘管理" do="premises" direct="false" />
+
+			<entry title="参数设置" do="sysset" state="" direct="false" />
+		</menu>
+        <home>
+            <entry title="微站首页" do="index" />
+        </home>
+    </bindings>
+	<install>
+	<![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_amouse_house` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT NULL,
+  `title` varchar(25) NOT NULL COMMENT '标题',
+  `price` varchar(100) NOT NULL COMMENT '租金总价',
+  `square_price` varchar(100) NOT NULL COMMENT '每平方价格',
+  `area` varchar(100) NOT NULL COMMENT '面积',
+  `house_type` varchar(100) NOT NULL COMMENT '户型',
+  `floor` varchar(100) NOT NULL COMMENT '楼层',
+  `orientation` varchar(100) NOT NULL COMMENT '朝向',
+  `type` varchar(2) NOT NULL COMMENT '0：出租；1：求租；2：出售/3：求购',
+  `status` varchar(2) NOT NULL COMMENT '是否显示/审核',
+  `recommed` int(1) NOT NULL COMMENT '推荐 0未推荐 1推荐',
+  `contacts` varchar(100) NOT NULL COMMENT '联系人',
+  `phone` varchar(13) NOT NULL COMMENT '联系电话',
+  `introduction` text NOT NULL COMMENT '详细描述',
+  `openid` varchar(25) NOT NULL COMMENT '微信OPENID',
+  `thumb1` varchar(1000) NOT NULL DEFAULT '',
+  `thumb2` varchar(1000)  DEFAULT '',
+  `thumb3` varchar(1000)  DEFAULT '',
+  `thumb4` varchar(1000)  DEFAULT '',
+  `place` varchar(200) NOT NULL DEFAULT '',
+  `lat` decimal(18,10) NOT NULL DEFAULT '0.0000000000' COMMENT '经度',
+  `lng` decimal(18,10) NOT NULL DEFAULT '0.0000000000' COMMENT '纬度',
+  `location_p` varchar(100) NOT NULL DEFAULT '' COMMENT '省',
+  `location_c` varchar(100) NOT NULL DEFAULT '' COMMENT '市',
+  `location_a` varchar(100) NOT NULL DEFAULT '' COMMENT '区',
+  `createtime` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='租房出售';
+
+CREATE TABLE IF NOT EXISTS `ims_amouse_newflats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL COMMENT '姓名',
+  `thumb` varchar(255) NOT NULL COMMENT '图片',
+  `price` varchar(100) NOT NULL COMMENT '价格',
+  `type` varchar(200) NOT NULL COMMENT '建筑类型',
+  `years` varchar(100) NOT NULL COMMENT '产权年限',
+  `wytype` varchar(100)  NOT NULL COMMENT '物业类别',
+  `cqtype` varchar(100)  NOT NULL COMMENT '产权类型',
+  `jzarea` varchar(100)  NOT NULL COMMENT '建筑面积',
+  `ratio` varchar(100)  NOT NULL COMMENT '容积率',
+  `floor_area` varchar(100) NOT NULL COMMENT '房屋面积',
+  `afforestation` varchar(100) NOT NULL COMMENT '绿化率',
+  `total` varchar(100) NOT NULL COMMENT '总户型',
+  `door_area` varchar(100) NOT NULL COMMENT '户型面积',
+  `road_transport` varchar(100) NOT NULL COMMENT '道路交通',
+  `investors` varchar(100) NOT NULL COMMENT '投资商',
+  `developers` varchar(100) NOT NULL COMMENT '开发商',
+  `property_compay` varchar(100) NOT NULL COMMENT '物业公司',
+  `propertypay` varchar(100) NOT NULL COMMENT '物业费',
+  `features` varchar(100) NOT NULL COMMENT '楼盘特色',
+  `sales_addres` varchar(100) NOT NULL COMMENT '售楼地址',
+  `checkin_time` varchar(100) NOT NULL COMMENT '入住时间',
+  `sales_status` varchar(100) NOT NULL COMMENT '销售状况',
+  `average_price` varchar(100) NOT NULL COMMENT '均价',
+  `discounted_costs` varchar(100) NOT NULL COMMENT '折扣价格',
+  `payment` varchar(100) NOT NULL COMMENT '付款方式',
+  `business` varchar(100) NOT NULL COMMENT '商业配套',
+  `banks` varchar(100) NOT NULL COMMENT '银行',
+  `trading_area` varchar(100) NOT NULL COMMENT '商圈',
+  `park` varchar(100) NOT NULL COMMENT '公园',
+  `hotel` varchar(100) NOT NULL COMMENT '酒店',
+  `supermarket` varchar(100) NOT NULL COMMENT '超市',
+  `humanities` varchar(100) NOT NULL COMMENT '人文自然景观',
+  `supporting` varchar(100) NOT NULL COMMENT '社区内配套',
+  `internal` varchar(100) NOT NULL COMMENT '内部配套',
+  `parking_number` varchar(100) NOT NULL COMMENT '车位数',
+  `base` varchar(100) NOT NULL COMMENT '基本参数',
+  `equally` varchar(100) NOT NULL COMMENT '公摊系数',
+  `surrounding` varchar(100) NOT NULL COMMENT '周边商业',
+  `landscape` varchar(100) NOT NULL COMMENT '周边景观',
+  `hospitals` varchar(100) NOT NULL COMMENT '周边医院',
+  `school` varchar(100) NOT NULL COMMENT '周边学校',
+  `traffic` varchar(100) NOT NULL COMMENT '交通',
+  `construction` varchar(100) NOT NULL COMMENT '建筑施工单位',
+  `design` varchar(100) NOT NULL COMMENT '规划设计单位',
+  `salecom` varchar(100) NOT NULL COMMENT '销售公司',
+  `address` varchar(255) NOT NULL COMMENT '销售公司所在位置图片',
+  `introduction` text NOT NULL COMMENT '详细描述',
+  `readcount` int(11) DEFAULT '0' COMMENT '阅读量',
+  `openid` varchar(25) NOT NULL COMMENT '微信OPENID',
+  `like` int(11) DEFAULT '0'  COMMENT '点赞',
+  `createtime` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='';
+
+CREATE TABLE IF NOT EXISTS `ims_amouse_sysset`(
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) DEFAULT '0',
+  `jjrmobile` varchar(13) NOT NULL COMMENT '手机',
+  `broker`  varchar(200)  NOT NULL COMMENT '经纪人',
+  `guanzhuUrl` varchar(255) DEFAULT '1' COMMENT '引导关注',
+  `copyright` varchar(255) DEFAULT '' COMMENT '版权',
+  `newflat_images` varchar(255) DEFAULT '' COMMENT '楼盘图片设置',
+  `isoauth` int(10) DEFAULT '1' COMMENT '是否开启高级权限',
+  `isshow` int(10) DEFAULT '1' COMMENT '是否只显示经纪人信息',
+  `cnzz` varchar(255) DEFAULT '' COMMENT '统计',
+  `appid` varchar(255) DEFAULT '',
+  `appsecret` varchar(255) DEFAULT '',
+  `appid_share` varchar(255) DEFAULT '',
+  `appsecret_share` varchar(255) DEFAULT '',
+  `defcity` varchar(1000) DEFAULT '中国',
+  PRIMARY KEY (`id`),KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `ims_amouse_house_slide` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `weid` int(10) unsigned NOT NULL,
+    `url` varchar(200) NOT NULL DEFAULT '',
+    `slide` varchar(200) NOT NULL DEFAULT '',
+    `listorder` int(10) unsigned NOT NULL DEFAULT '0',
+    `isshow` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否显示',
+    `createtime` int(10) unsigned NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+]]></install>
+	<uninstall><![CDATA[
+        DROP TABLE IF EXISTS `ims_amouse_house`;
+	DROP TABLE IF EXISTS `ims_amouse_sysset`;
+	DROP TABLE IF EXISTS `ims_amouse_newflats`;
+	DROP TABLE IF EXISTS `ims_amouse_weilife_sysset`;
+	DROP TABLE IF EXISTS `ims_amouse_house_slide`;
+    ]]></uninstall>
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>

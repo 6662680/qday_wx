@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[分享达人]]></name>
+		<identifie><![CDATA[eso_share]]></identifie>
+		<version><![CDATA[2.9.6]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[分享达人]]></ability>
+		<description><![CDATA[分享达人是您的微信公众号运营的利器，是您涨粉和宣传最好的工具。]]></description>
+		<author><![CDATA[微动力]]></author>
+		<url><![CDATA[http://www.qdaygroup.com]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<rule>
+			<entry title="达人管理" do="eso_sharelist" />
+		</rule>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_eso_share_data` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则id',
+  `from_user` varchar(50) NOT NULL DEFAULT '' COMMENT '用户openid',
+  `userid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户uid',
+  `eso_shareip` varchar(15) NOT NULL DEFAULT '' COMMENT '分享达人IP',
+  `eso_sharetime` int(10) unsigned NOT NULL COMMENT '分享时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='分享达人' AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `ims_eso_share_list` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则id',
+  `from_user` varchar(50) NOT NULL DEFAULT '' COMMENT '用户openid',
+  `userid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户uid',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '姓名',
+  `tel` varchar(50) NOT NULL DEFAULT '' COMMENT '电话',
+  `eso_sharenum` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分享量',
+  `eso_sharetime` int(10) unsigned NOT NULL COMMENT '最后分享时间',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '是否禁止',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='分享达人' AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `ims_eso_share_reply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '规则id',
+  `isname` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '是否需要绑定个人信息',
+  `parentid` int(10) unsigned NOT NULL DEFAULT '0',
+  `title` varchar(50) NOT NULL COMMENT '规则标题',
+  `checkkeyword` varchar(50) NOT NULL COMMENT '查询关键词',
+  `picture` varchar(100) NOT NULL COMMENT '图片',
+  `start_time` int(10) unsigned NOT NULL COMMENT '开始时间',
+  `end_time` int(10) unsigned NOT NULL COMMENT '结束时间',
+  `description` varchar(255) NOT NULL COMMENT '描述',
+  `content` text NOT NULL COMMENT '内容',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '开关状态',
+  `r` int(10) unsigned NOT NULL DEFAULT '0',
+  `z` int(10) unsigned NOT NULL DEFAULT '0',
+  `u`  varchar(255) NULL,
+  `share_url`  text NULL,
+  `share_txt`  text NULL,
+  `share_desc`  text NULL,
+  `share_title`  text NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='分享达人' AUTO_INCREMENT=1 ;
+	]]></install>
+	<uninstall><![CDATA[
+	drop table `ims_eso_share_data`;
+	drop table `ims_eso_share_list`;
+	drop table `ims_eso_share_reply`;
+	]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

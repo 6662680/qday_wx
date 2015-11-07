@@ -1,0 +1,190 @@
+<input type="hidden" name="reply_id" value="{$reply['id']}" />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        回复设置
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">标题</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" value="{$reply['title']}" class="form-control" name="title">
+                <div class="help-block">用户发送关键词返回的图文主题。</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">封面</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('thumb', $reply['thumb'])}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">描述</label>
+            <div class="col-sm-9 col-xs-12">
+                <textarea name="description" class="form-control" cols="60">{$reply['description']}</textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        活动设置
+    </div>
+    <div class="panel-body">
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动时间</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_daterange('datelimit', array('starttime'=>date('Y-m-d',$reply['starttime']),'endtime'=>date('Y-m-d',$reply['endtime'])))}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">LOGO</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('setting[logo]', $reply['setting']['logo'])}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动规则说明</label>
+            <div class="col-sm-9 col-xs-12">
+                <textarea style="height:150px;" id='shuoming' name="setting[shuoming]" class="form-control richtext">{$reply['setting']['shuoming']}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">撕中名牌说明</label>
+            <div class="col-sm-9 col-xs-12">
+                <textarea style="height:150px;" id='sizhong' name="setting[sizhong]" class="form-control richtext" placeholder="比如撕中以后提示用户什么兑奖之类的">{$reply['setting']['sizhong']}</textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">默认昵称</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" value="{$reply['setting']['nicheng']}" class="form-control" name="setting[nicheng]">
+                <div class="help-block">留空默认：匿名</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">撕中倍概率</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" value="{$reply['setting']['gailv']}" class="form-control" name="setting[gailv]">
+                <div class="help-block">用户撕中名牌的倍概率（填写范围1-100）。留空或填写0为25%（概率=撕中倍概率*25%）。</div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        规则设置
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">默认获得抽奖机会</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group">
+                    <input type="text" value="{$reply['setting']['default']['min']}" class="form-control" name="setting[default][min]">
+                    <span class="input-group-addon">至</span>
+                    <input type="text" value="{$reply['setting']['default']['max']}" class="form-control" name="setting[default][max]">
+                </div>
+                <div class="help-block">参与活动默认获得的抽奖机会（留空默认1）。</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">关注获得抽奖机会</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group">
+                    <input type="text" value="{$reply['setting']['attention']['min']}" class="form-control" name="setting[attention][min]">
+                    <span class="input-group-addon">至</span>
+                    <input type="text" value="{$reply['setting']['attention']['max']}" class="form-control" name="setting[attention][max]">
+                </div>
+                <div class="input-group" style="margin-top:8px;">
+                    <span class="input-group-addon">关注引导页</span>
+                    <input type="text" value="{$reply['setting']['introduction']}" class="form-control" name="setting[introduction]">
+                </div>
+                <div class="help-block">第一次关注获得抽奖机会（留空取消此功能）。</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享获得抽奖机会</label>
+            <div class="col-sm-9 col-xs-12">
+                <div class="input-group">
+                    <input type="text" value="{$reply['setting']['shareplus']['min']}" class="form-control" name="setting[shareplus][min]">
+                    <span class="input-group-addon">至</span>
+                    <input type="text" value="{$reply['setting']['shareplus']['max']}" class="form-control" name="setting[shareplus][max]">
+                </div>
+                <div class="help-block">分享朋友圈获得抽奖机会（留空取消此功能）。</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="panel panel-default" style="display:none;">
+    <div class="panel-heading">
+        订阅号借用服务号app接口
+    </div>
+    <div class="panel-body">
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">借用</label>
+            <div class="col-sm-9 col-xs-12">
+                <select name="setting[borrow]" class="form-control">
+                    <option value="0">请选择公众号</option>
+                    {loop $accounts $acid $name}
+                    <option value="{$acid}" {if $reply['setting']['borrow'] == $acid}selected{/if}>{$name}</option>
+                    {/loop}
+                    {if !$accounts}
+                    <option value="0">=没有可借用的=</option>
+                    {/if}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        分享设置（可使用 “@会员名” 变量）
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享标题</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="share_title" class="form-control" placeholder="" name="share_title" value="{$reply['share_title']}">
+            </div>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享地址</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="share_url" class="form-control" placeholder="" name="share_url" value="{$reply['share_url']}">
+                <div class="help-block">分享的链接，留空为首页地址! 推荐转成短地址。<a target="_blank" href="http://www.dwz.cn/">短网址转换</a></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享图片</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('share_txt',$reply['share_txt']);}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享描述</label>
+            <div class="col-sm-9 col-xs-12">
+                <textarea style="height:150px;" id='share_txt' name="share_desc" class="form-control richtext">{$reply['share_desc']}</textarea>
+            </div>
+        </div>
+    </div>
+</div>

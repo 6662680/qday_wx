@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    <title>栏目编辑-图文</title>
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css">
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/flytip.css">
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/nameCard.css?v=2014122">
+</head>
+
+<body class="namecard-editor">
+
+<!--#=start page-->
+<div class="namecard-page">
+    <form action="" class="validate" method="get" id="personForm">
+        <input type="hidden" name="c" value="entry" />
+        <input type="hidden" name="id" value="{$id}">
+        <input type="hidden" name="m" value="amouse_ecard">
+        <input type="hidden" name="do" value="presence">
+        <input type="hidden" name="op" value="post">
+        <input type="hidden" name="i" value="{$_W['uniacid']}">
+        <!--#=end column-->
+
+        <!--#=start column-editcontent-->
+        <section class="editcontent-column">
+            <div class="editcontent-inner">
+                <div class="editcontent-inner-title">个人风采</div>
+                <div id="photoList">
+                    {php $i=0}
+                    {loop $images $k $img}
+                    {if $img || $content[$k]}
+                    <div class="editcontent-box">
+                        <div class="editcontent-image">
+                            <div class="editcontent-upload">
+                                <a class="upload-btn" href="javascript:;">
+                                    <img style="display: block;" id="fileimg{$i}" src="{$_W['attachurl']}{$img}" width="100%;" height="100%;" class="fillIn-avatar-thumbnail">
+                                    <span class="upload-text">点击上传图片</span>
+                                    <input type="file" id="{$i}" name="file" onchange="imageupload(this)" class="uploadFile" single="" accept="image/*">
+                                    <input type="hidden" id="pic_url{$i}" name="headimg[]" value="{$img}">
+                                    <div class="progress">{$i}</div>
+                                </a>
+
+                                <div class="editcontent-editor-btn">
+                                    <a class="image-btn edit-btn up-btn" href="javascript:;">上移</a>
+                                    <a class="image-btn detele-btn" href="javascript:;">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="editcontent-text" name="content[]" placeholder="请输入段落文字内容">{$content[$k]}</textarea>
+                    </div>
+                    {/if}
+                    {php $i=$i+1}
+                    {/loop}
+                </div>
+                <div class="editcontent-addbox"><span class="editcontent-addbtn" id="addbtn">添加新段落</span></div>
+            </div>
+        </section>
+
+        <div style="height:60px"></div>
+        <!--#=end column-editcontent-->
+        <div class="editor-confirm" id="footerFixed">
+            <a class="editor-btn" href="javascript:;" id="subBtn">确 定</a>
+        </div>
+
+</div>
+<!--#=end page-->
+<input type='hidden' id='' name='op' value="post"/>
+<input type="hidden" name="id" value="{$id}"/>
+<input type="hidden" name="cid" value="{$cid}"/>
+</form>
+<div class="icons-list" id="iconsList">
+    <ul class="icons-list-inner" id="iconsListInner"></ul>
+</div>
+<!--#start JS-->
+<script src="../addons/amouse_ecard/style/js/jquery.1.11.1.js?v=20150405"></script>
+<script src="../addons/amouse_ecard/style/js/flytip.js?v=20150405"></script>
+<script src="../addons/amouse_ecard/style/js/bottomFixed.js?v=20150405"></script>
+<script>
+    var fileNum = $('.uploadFile');
+    var count = fileNum.length;
+
+    function addNewphoto() {
+        var $photoList = $("#photoList");
+        var $temp = $('<div class="editcontent-box">' +
+                '<div class="editcontent-image">' +
+                '<div class="editcontent-upload">' +
+                '<a class="upload-btn" href="javascript:;">' +
+                '<img {if $list['headimg']} style="display:block;" {else} style="display:none" {/if} id="fileimg' + count + '" src="{$_W['attachurl']}{$list['headimg']}" width="100%;" height="100%;"class="fillIn-avatar-thumbnail">{if $list['headimg']}{/if}' +
+                '<span class="upload-text">点击上传图片</span>' +
+                '<input type="file" id="' + count + '" name="file" onchange="imageupload(this)" class="uploadFile" single accept="image/*">' +
+                '<input type="hidden" id="pic_url' + count + '" name="headimg[]" value=""/>' +
+                '<div class="progress">0</div>' +
+                '</a>' +
+                '<div class="editcontent-editor-btn"><a class="image-btn edit-btn up-btn" href="javascript:;">上移</a><a class="image-btn detele-btn" href="javascript:;">删除</a></div>' +
+                '</div>' +
+                '</div>' +
+                '<textarea class="editcontent-text" name="content[]" placeholder="请输入段落文字内容"></textarea>' +
+        '</div>');
+        count = count + 1;
+        $temp.find(".detele-btn").click(function () {
+            $temp.remove();
+        });
+        $photoList.append($temp);
+
+    }
+    //图片上传
+    function imageupload(obj) {
+        inputId = "#" + obj.id;
+        fileimgId = "#fileimg" + obj.id;
+        fileimgElementId = "fileimg" + obj.id;
+        pic_urlId = "#pic_url" + obj.id;
+        $(inputId).wrap('<form method="post" id="formUpload" action="{php echo $this->createMobileUrl('uploadimage');}" enctype="multipart/form-data"></form>');
+        document.getElementById(fileimgElementId).style.display = 'none';
+        //document.getElementById('aaa').innerHTML = '上传中...';
+        $("#formUpload").ajaxSubmit({
+            dataType: 'json',
+            beforeSend: function () {
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                if (data.error == 1) {
+                } else {
+                    var picurl = data.filename;
+                    $(fileimgId).attr('src', '{$_W['attachurl']}'+picurl);
+                    $(pic_urlId).attr('value', picurl);
+                    document.getElementById(fileimgElementId).style.display = 'block';
+                }
+            },
+            error: function (xhr) {
+                btn.html("上传失败了,请重试!");
+            }
+        });
+    }
+
+    //组装数据
+    function pushData() {
+        var $photoList = $("#photoList");
+        var $photoListLi = $photoList.find(".editcontent-box");
+        var items = [];
+        $photoListLi.each(function () {
+            var $this = $(this);
+            var pic = $this.find(".picPath").val();
+            var content = $this.find(".editcontent-text").val();
+            if (pic || content) {
+                items.push({"pic": pic, "content": content});
+            }
+        });
+
+        var datas = {"items": items};
+        return datas;
+    }
+
+    //插入ICON列表
+    function iconsList() {
+        var $iconsListInner = $("#iconsListInner");
+        var items = "";
+        for (var i = 1; i <= 35; i++) {
+            items += '<li class="icons-list-item"><img src="../addons/amouse_ecard/style/images/icon/ico-' + i + '.png"></li>';
+        }
+        $iconsListInner.append(items);
+    }
+
+    $(function () {
+        $("#photoList .editcontent-box").each(function () {
+
+        });
+        //addNewphoto();
+        //添加
+        $("#addbtn").click(function () {
+            //--不能超过30个
+            if ($(".editcontent-box").length >= 30) {
+                $.flytip("最多上传 30 个段落！");
+                return false;
+            }
+            addNewphoto();
+        });
+
+        //上移
+        $("#photoList").on("click", ".up-btn", function () {
+            var $thisP = $(this).parents(".editcontent-box");
+            if ($thisP.index() > 0) {
+                $thisP.prev().before($thisP);
+            } else {
+                $.flytip("已经是最顶了");
+            }
+        });
+        //删除
+        $("#photoList").on("click", ".detele-btn", function () {
+            $(this).parents(".editcontent-box").remove();
+        });
+
+
+        $("#subBtn").click(function () {
+            var $this = $(this);
+            var $itemTitle = $("#itemTitle");
+            var jsonDatas = pushData();
+            if (jsonDatas.items.length < 1) {
+                $.flytip("最少填写一个段落！");
+                return false;
+            }
+            $("#personForm").submit();
+        });
+
+        //图标
+        iconsList();
+
+        var $iconsList = $("#iconsList");
+        var $iconsPrev = $("#iconsPrev");
+        $iconsPrev.click(function () {
+            $iconsList.show();
+        });
+
+        $iconsList.on("click", ".icons-list-item", function () {
+            var $this = $(this);
+            var url = $this.find("img").attr("src");
+            $("#iconsPath").val(url);
+            $iconsPrev.find("img").attr("src", url);
+            $iconsList.hide();
+        });
+
+        $("#footerFixed").bottomFixed();
+
+    });
+</script>
+<script src="../addons/amouse_ecard/style/js/wx-hideShare.js"></script>
+<script type="text/javascript" src="../addons/amouse_ecard/style/js/zepto.form.js"></script>
+<!--#end JS-->
+</body>
+</html>

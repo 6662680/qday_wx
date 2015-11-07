@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    <title>谁给我点了赞？</title>
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css?v=2015040601">
+    <link rel="stylesheet" type="text/css" href="../addons/amouse_ecard/style/css/nameCard.css?v=2014122">
+</head>
+<body class="namecard-favourlist">
+
+<!--#=start page-->
+<div class="namecard-page">
+    <div class="favourlist-item favourlist-bar">被点赞：<span id="totalCount"></span>{$num}次<span
+            class="favourlist-bar-des">继续加油哦~</span></div>
+    {loop $zanList $zan}
+    <a href="{php echo $this->createMobileUrl('Share',array('id'=>$zan['id'], 'op'=>'renmai'))}">
+        <div class="favourlist-box" id="favourlistBox" style="border-bottom: 4px solid #d1d1d1;">
+            <div class="favourlist-item-avatar">
+                {if $zan['headimg']}<img src="{$_W['attachurl']}{$zan['headimg']}">{else}
+                <img src="../addons/amouse_ecard/style/images/header.png">{/if}
+            </div>
+            <div class="favourlist-item-group">
+                <div class="favourlist-item-tit">{$zan['realname']}</div>
+                <div class="favourlist-item-summary">{php echo date('Y-m-d H:i:s',$zan['createtime'])}
+                    &nbsp;&nbsp;给你点了赞
+                </div>
+            </div>
+        </div>
+    </a>
+    {/loop}
+</div>
+<!--#=end page-->
+<!--#start JS-->
+<script src="../addons/amouse_ecard/style/js/jquery.1.11.1.js?v=2015040601"></script>
+<script src="../addons/amouse_ecard/style/js/scrollLoad.js?v=2015040601"></script>
+
+</body>
+</html>

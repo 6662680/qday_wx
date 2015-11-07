@@ -1,0 +1,74 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/eso_sale/images/style.css">
+<div class="head">
+	<a href="javascript:history.go(-1);" class="bn pull-left"><i class="icon-angle-left"></i></a>
+	<span class="title">{$goods['title']}</span>
+	<a href="{php echo $this->mturl('mycart')}" class="bn pull-right"><i class="icon-eso_sale-cart"></i><span class="buy-num img-circle" id="carttotal">{$carttotal}</span></a>
+</div>
+<div class="detail-main">
+	<div class="detail-img">
+		{if !empty($goods['thumb'])}<img class="img-rounded" src="{$_W['attachurl']}{$goods['thumb']}" />{/if}
+	</div>
+	<div class="detail-div img-rounded">
+		<div class="detail-group text-center" style="line-height:20px;">{$goods['title']}</div>
+		<div class="detail-group">
+			<span class="col-xs-4">价格</span>
+			<span class="col-xs-8">
+				¥ <span class="text-danger" style="font-size:18px; font-weight:bold;">{$goods['marketprice']}</span> / {$goods['unit']}
+			</span>
+		</div>
+		<a href="javascript:order.add({$goods['id']});" class="btn btn-danger col-xs-12" style="margin-top:10px;"><i class="icon-plus"></i> 添加到购物车</a>
+	</div>
+	<div class="detail-div img-rounded other-detail">
+		{if $goods['total'] != -1}
+		<div class="detail-group">
+			<span class="col-xs-4">库存</span>
+			<span class="col-xs-8">{$goods['total']}</span>
+		</div>
+		{/if}
+		{if !empty($goods['goodssn'])}
+		<div class="detail-group">
+			<span class="col-xs-4">商品编号</span>
+			<span class="col-xs-8">{$goods['goodssn']}</span>
+		</div>
+		{/if}
+		{if !empty($goods['productsn'])}
+		<div class="detail-group">
+			<span class="col-xs-4">条形码</span>
+			<span class="col-xs-8">{$goods['productsn']}</span>
+		</div>
+		{/if}
+	</div>
+	<div class="detail-div img-rounded detail-content">
+		{$goods['content']}
+	</div>
+</div>
+<script>
+$(function() {
+	$('.other-detail .detail-group:last').css("border-bottom", "0");
+});
+var order = {
+	'add' : function(goodsid) {
+		var $this = this;
+		$this.cart(goodsid, 'add');
+	},
+	'cart' : function(goodsid, operation) {
+		if (!goodsid) {
+			alert('请选择商品！');
+			return;
+		}
+		operation = operation ? operation : 'add';
+		$.getJSON('{php echo $this->mturl('updatecart');}', {'op' : operation, 'goodsid' : goodsid}, function(s){
+			if (s.message.status) {
+				$('#carttotal').css({'width':'50px', 'height':'50px', 'line-height':'50px'}).html(s.message.carttotal).animate({'width':'20px', 'height':'20px', 'line-height':'20px'}, 'slow');
+			} else {
+				alert(s.message.message);
+			}
+		});
+	}
+};
+</script>
+{php $footer_off = 1;}
+{template 'footer'}
+{template 'footerbar'}

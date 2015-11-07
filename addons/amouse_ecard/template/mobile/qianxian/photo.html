@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    <title>精彩相册</title>
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css">
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/flytip.css">
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/album.css?v=2014122">
+    <script>
+        function showView() {
+            $(".photo-viewbtn").show();
+        }
+    </script>
+</head>
+
+<body class="appwrap">
+<div class="app">
+    <div class="app-inner">
+        <div class="app-content">
+            <div class="app-page album current" style="background-image: url({$_W['attachurl']}{$card['bgimg']});">
+                <div class="artbox artboxD">
+                    <div class="artbox-title">精彩相册</div>
+                    <div class="content">
+                        <!--#=start photo-->
+                        <div class="photo js-photoBox">
+                            <div class="photo-inner js-photo" data-url="{loop $thumb $img}
+								{$_W['attachurl']}{$img},{/loop}">
+                                <div class="photo-item">
+                                    <img class="photo-item-pic" src="{$_W['attachurl']}{$thumb[0]}" onload="showView()">
+                                </div>
+                                <div class="photo-title"></div>
+                                <div class="photo-viewbtn" style="display:none">点击查看</div>
+                            </div>
+                            <div class="photo-nums">共 <span class="photoNums"></span> 张</div>
+                        </div>
+                        <!--#=end photo-->
+                    </div>
+                </div>
+                <div class="pics js-pics">
+                    <div class="picsPage js-back"></div>
+                    <div class="picsPage-box-title">
+                        <span class="picTit"></span><span class="picNum"><code class="code-num js-num">1</code> / <code
+                            class="code-total js-total"></code></span>
+                    </div>
+                    <div class="picsPage-slideBtn picsPage-slideLeft"></div>
+                    <div class="picsPage-slideBtn picsPage-slideRight"></div>
+                </div>
+                <a href="{php echo $this->createMobileUrl('index',array('op'=>'list','wid'=>$from_user))}">
+                    <div class="mpview-btn">返回我的名片</div></div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="../addons/amouse_ecard/style/js/jquery.1.11.1.js?v=20150405"></script>
+<script src="../addons/amouse_ecard/style/js/album.js?v=2014122"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script language='javascript'>
+    <?php
+        $jssdk = new JSSDK();
+        $signPackage = $jssdk->GetSignPackage();
+    ?>
+    wx.config({
+        debug: false,
+        appId: '<?php echo $signPackage["appId"];?>',
+        timestamp: <?php echo $signPackage["timestamp"];?>,
+        nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+        signature: '<?php echo $signPackage["signature"];?>',
+        jsApiList: [
+        'onMenuShareAppMessage',
+        'onMenuShareTimeline',
+        'onMenuShareQQ'
+    ]
+    });
+
+    var wxShareDate = {
+        "title": "精彩相册",
+        "content": "热烈欢迎浏览我的相册，精美图片不容错过哦！",
+        "imgUrl": $(".album img").eq(0).attr("src"),
+        "shareUrl": window.location.href
+    }
+    wx.ready(function(){
+        wx.onMenuShareTimeline(wxShareDate);
+        wx.onMenuShareAppMessage(wxShareDate);
+        wx.onMenuShareWeibo(wxShareDate);
+    });
+</script>
+
+
+</body>
+</html>

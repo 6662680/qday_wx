@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[疯狂划算]]></name>
+		<identifie><![CDATA[ewei_money]]></identifie>
+		<version><![CDATA[1.02]]></version>
+		<type><![CDATA[wdlgame]]></type>
+		<ability><![CDATA[疯狂划算, 数钱数到手抽筋]]></ability>
+		<description><![CDATA[疯狂划算, 数钱数到手抽筋]]></description>
+		<author><![CDATA[情天]]></author>
+		<url><![CDATA[www.qdaygroup.com]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<menu>
+			<entry title="活动管理" do="manage" state="" direct="false" />
+            <entry title="授权管理" do="sysset" state="" direct="false" />
+		</menu>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_ewei_money_award` (
+  `id` int(11)  AUTO_INCREMENT,
+  `rid` int(11) default 0 ,
+  `uid` int(11) default 0 ,
+  `sum` float DEFAULT NULL,
+  `info` int(11) DEFAULT 0 ,
+  `from_user` varchar(50) default 0 COMMENT '用户ID',
+  `name` varchar(50) DEFAULT '' COMMENT '名称',
+  `description` varchar(200) DEFAULT '' COMMENT '描述',
+  `prizetype` varchar(10) DEFAULT '' COMMENT '类型',
+  `award_sn` varchar(50) DEFAULT '' COMMENT 'SN',
+  `createtime` int(10) DEFAULT 0 ,
+  `consumetime` int(10) DEFAULT 0 ,
+  `status` tinyint(1) DEFAULT 0 ,
+  `exchange` double DEFAULT '0',
+  `useable` double DEFAULT '0',
+  `shopUrl` varchar(300) NOT NULL COMMENT '购物链接地址',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_ewei_money_fans` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则ID',
+  `weid` int(10) unsigned NOT NULL COMMENT '公众号ID',
+  `isplay` tinyint(1) default 0,
+  `info` tinyint(1) default 0,
+  `from_user` varchar(50) NOT NULL,
+  `nickname` varchar(20) NOT NULL DEFAULT '' COMMENT '昵称',
+  `mobile` varchar(11) NOT NULL DEFAULT '' COMMENT '手机号码',
+  `sum` float DEFAULT NULL,
+  `remain` int(11) NOT NULL,
+  `max_score` float NOT NULL,
+  `alltimes` int(11) NOT NULL COMMENT '总剩余次数',
+  `daytimes` int(11) NOT NULL COMMENT '当天剩余次数',
+  `lasttime` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_ewei_money_reply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则ID',
+            
+  `isfollow` tinyint(1) NOT NULL COMMENT '是否关注',
+  `isshow` tinyint(1) DEFAULT 0,
+  `info` int(11) DEFAULT 0 ,
+  `c_rate_one` tinyint(1) DEFAULT 0,
+  `c_rate_two` tinyint(1) DEFAULT 0,
+  `c_rate_three` tinyint(1) DEFAULT 0,
+  `c_rate_four` tinyint(1) DEFAULT 0,
+  `c_rate_five` tinyint(1) DEFAULT 0,
+  `c_rate_six` tinyint(1) DEFAULT 0,
+  `c_rate_seven` tinyint(1) DEFAULT 0,
+  `c_rate_eight` tinyint(1) DEFAULT 0,
+  `c_rate_nine` tinyint(1) DEFAULT 0,
+  `game_time` int(11) NOT NULL,
+  `title` varchar(200)  DEFAULT '',
+  `start_picurl` varchar(200)  DEFAULT '',
+  `reg_first` tinyint(1) NOT NULL COMMENT '游戏前后注册',
+  `max_sum` int(11) NOT NULL,
+  `min_sum` int(11) NOT NULL,
+  `total_remain` int(11) NOT NULL,
+  `remain` int(11) NOT NULL,
+  `remain_stime` int(11) NOT NULL,
+  `remain_etime` int(11) NOT NULL,
+  `remain_name` varchar(50) NOT NULL COMMENT '现金劵名称',
+  `remain_sm` varchar(15) NOT NULL COMMENT '兑奖密码',
+  `valid_time` varchar(100) NOT NULL COMMENT '现金劵有效时间',
+  `remain_rule` varchar(100) NOT NULL COMMENT '现金劵规则',
+  `rule` text NOT NULL COMMENT '规则',
+  `description` text NOT NULL COMMENT '活动简介',
+  `alltimes` int(3) unsigned NOT NULL COMMENT '最大抽奖数',
+  `daytimes` int(11) NOT NULL COMMENT '每天最大抽奖数',
+  `homeurl` varchar(300) NOT NULL COMMENT '微站链接地址',
+  `homepicurl` varchar(200)  DEFAULT '',
+  `followurl` varchar(300) NOT NULL COMMENT '提示关注网址',
+  `homename` varchar(50) NOT NULL COMMENT '微站名称',
+  `starttime` int(11) NOT NULL,
+  `endtime` int(11) NOT NULL,
+  `create_time` int(11) NOT NULL,
+  `view_times` int(11) NOT NULL,
+  `play_times` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_ewei_money_sysset` (
+  `id` int(11)  AUTO_INCREMENT,
+  `weid` int(11) DEFAULT 0 ,
+  `appid` varchar(255) default '',
+    `appsecret` varchar(255) default '',
+    `appid_share` varchar(255) default '',
+    `appsecret_share` varchar(255) default '',
+  PRIMARY KEY (`id`),KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8; 
+            
+]]></install>
+	<uninstall><![CDATA[
+drop table if exists ims_ewei_money_reply;
+drop table if exists ims_ewei_money_fans;
+drop table if exists ims_ewei_money_award;
+drop table if exists ims_ewei_money_sysset;
+            
+]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

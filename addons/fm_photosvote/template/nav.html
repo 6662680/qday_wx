@@ -1,0 +1,33 @@
+<style>
+.nav-tabs>li>a {
+  padding: 10px 10px;
+}
+</style>
+<ul class="nav nav-tabs">
+	<li  {if $_GPC['do'] == 'members'}class="active"{/if}><a href="{php echo $this->createWebUrl('members', array('rid' => $rid))}">投票管理</a></li>
+	<li {if $_GPC['do'] == 'provevote'}{if $_GPC['foo'] == 'display'}class="active"{/if}{/if}><a href="{php echo $this->createWebUrl('provevote', array('rid' => $rid, 'foo' => 'display'))}">审核管理</a></li>
+	
+	{if $reply['addpv'] == '1'}<li {if $_GPC['do'] == 'addprovevote'}class="active"{/if}><a href="{php echo $this->createWebUrl('addprovevote', array('rid' => $rid))}">添加投稿</a></li>{/if}
+	
+	{if $_GPC['foo'] == 'post'}<li class="active"><a href="{php echo $this->createWebUrl('provevote', array('status' => '1', 'foo' => 'post', 'rid' => $rid, 'from_user' => $from_user))}">{if !empty($from_user)}编辑投搞{/if}</a></li>{/if}
+	<li {if $_GPC['do'] == 'votelog'}class="active"{/if}><a href="{php echo $this->createWebUrl('votelog', array('rid' => $rid))}">投票记录</a></li>
+	<li {if $_GPC['do'] == 'message'}class="active"{/if}><a href="{php echo $this->createWebUrl('message', array('rid' => $rid))}">留言管理</a></li>								
+	<li {if $_GPC['do'] == 'addmessage'}class="active"{/if}><a href="{php echo $this->createWebUrl('addmessage', array('rid' => $rid))}">弹幕管理</a></li>								
+	<li {if $_GPC['do'] == 'rankinglist'}class="active"{/if}><a href="{php echo $this->createWebUrl('rankinglist', array('rid' => $rid))}">排行榜</a></li>
+	<li {if $_GPC['do'] == 'banner' && $_GPC['op'] <> 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('banner', array('rid' => $rid))}">幻灯片</a></li>
+	{if $_GPC['do'] == 'banner'}
+		<li {if $_GPC['op'] == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('banner', array('rid' => $rid, 'op' => 'post' ))}">添加幻灯片</a></li>
+	{/if}
+	<li {if $_GPC['do'] == 'adv' && $_GPC['op'] <> 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('adv', array('rid' => $rid))}">赞助商管理</a></li>
+	{if $_GPC['do'] == 'adv'}
+		<li {if $_GPC['op'] == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('adv', array('rid' => $rid, 'op' => 'post' ))}">添加赞助商</a></li>
+	{/if}
+	<li {if $_GPC['do'] == 'fmqf' && $_GPC['op'] <> 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('fmqf', array('rid' => $rid))}">群发</a></li>
+	{if $_GPC['do'] == 'fmqf'}
+		<li {if $_GPC['op'] == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('fmqf', array('rid' => $rid, 'op' => 'post' ))}">添加群发</a></li>
+	{/if}
+	<li {if $_GPC['do'] == 'iplist'}class="active"{/if}><a href="{php echo $this->createWebUrl('iplist', array('rid' => $rid))}">禁止ip设置</a></li>
+	<li {if $_GPC['do'] == 'announce'}class="active"{/if}><a href="{php echo $this->createWebUrl('announce', array('rid' => $rid))}">公告</a></li>
+	<li {if $_GPC['do'] == 'index'}class="active"{/if}><a href="{php echo $this->createWebUrl('index', array('rid' => $rid))}">活动首页</a></li>	
+	<li><a href="{php echo url('platform/reply/post',array('m'=>'fm_photosvote','rid'=>$rid));}">编辑活动</a></li>	
+</ul>

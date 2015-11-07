@@ -1,0 +1,150 @@
+/*----------------------------------------------------
+ 元素：基本样式
+-----------------------------------------------------*/
+html,body {
+	position: relative;
+  font-family: "Microsoft YaHei";
+  background: #f4f4f4;
+  color: #000;
+  line-height: 24px;
+}
+body{
+  overflow-x: hidden;
+	max-width: 640px;
+	margin: 0 auto;
+}
+a:link, a:visited, a:hover, a:active {
+  color: #000;
+  text-decoration: none;
+}
+.vertical-m{
+	vertical-align: middle;	
+}
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: " ";
+}
+.clearfix:after {
+  clear: both;
+}
+.relative{
+	position: relative;
+}
+/*--------------------------
+ 元素：列表
+---------------------------*/
+.v-title{
+	padding: 5px 0 3px 15px;
+	font-size: 14px;
+	color: #8d8d8d;
+	line-height: 15px;
+}
+.v-list{
+	background: #fff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.v-list-item{
+  position: relative;
+	padding-left: 15px;
+}
+.v-list-item:hover{
+	background: rgba(0,0,0,.1);
+}
+.v-list-item-inner{
+	border-bottom: 1px solid #eee;
+}
+.v-list-item:last-child .v-list-item-inner{
+  border-bottom: 0;
+}
+/*--------------------------
+ 模块：选择背景音乐
+---------------------------*/
+.namecard-music .music-inner{
+	padding-left: 10px;
+	border-bottom: 1px solid #eee;
+}
+.namecard-music .music-inner-item{
+	position: relative;
+	height: 54px;
+	display: block;
+	padding: 6px 80px 6px 0;
+	border-bottom: 1px solid #eee;
+}
+.namecard-music .music-inner-item:last-child{
+	border-bottom: 0;
+}
+.namecard-music .music-inner-item .music-name{
+	height: 27px;
+	line-height: 27px;
+	color: #676767;
+	font-size: 16px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.namecard-music .music-inner-item .music-singer{
+	height: 27px;
+	line-height: 27px;
+	font-size: 14px;
+	color: #676767;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.namecard-music .music-inner-item .music-avatar{
+	height: 54px;
+	padding-left: 72px;
+}
+.namecard-music .music-inner-item .music-avatar-thumbnail{
+	position: absolute;
+	left: 0;
+	top: 6px;
+	width: 54px;
+	height: 54px;
+	display: block;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+.namecard-music .music-inner-item .music-choose{
+	position: absolute;
+	top: 3px;
+	left: 42px;
+	width: 15px;
+  height: 15px;
+  display: block;
+  background-image: url(../images/choose-music.png);
+  background-repeat: no-repeat;
+  background-size: 30px;
+  vertical-align:middle;
+}
+.namecard-music .music-inner-item .music-choose.cur{
+	background-position: -15px 0;
+}
+.namecard-music .music-inner-item .play-btn{
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	width: 35px;
+  height: 35px;
+  display: block;
+  background-image: url(../images/play.png);
+  background-repeat: no-repeat;
+  background-size: 70px;
+  vertical-align:middle;
+}
+.namecard-music .music-inner-item:hover{
+	background: none;
+}
+.namecard-music .music-inner-item .play-btn.cur{
+	background-position: -35px 0;
+}
+#musicPlayer{
+	position:absolute;
+	z-index:-10;
+	left:50%;
+	top:50%;
+	visibility:hidden;
+}

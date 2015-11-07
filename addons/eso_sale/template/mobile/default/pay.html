@@ -1,0 +1,9 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+{php $this->pay($params);}
+{template 'footerbar'}
+<script>
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	WeixinJSBridge.call('hideOptionMenu');
+});
+</script>

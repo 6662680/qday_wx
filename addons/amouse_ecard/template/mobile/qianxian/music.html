@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    <title>选择背景音乐</title>
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css?v=20150407001">
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/flytip.css?v=20150407001">
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/music.css?v=20150407001">
+</head>
+<body class="namecard-music">
+
+<!--#=start page-->
+<div class="namecard-page">
+    <section class="music-column">
+        <ul class="v-list music-inner">
+            {loop $musics $music}
+
+            <li class="v-list-item music-inner-item">
+                <div class="music-avatar">
+                    <img src="{php echo strpos($music['musicImg'],'http://')===FALSE?($_W['attachurl'].$music['musicImg']):$music['musicImg']}"  class="music-avatar-thumbnail" />
+                    <span class="music-choose"></span>
+                    <h3 class="music-name">{$music['musicName']}</h3>
+                    <p class="music-singer">{$music['musicSinger']}</p>
+                </div>
+                <span class="play-btn" data-music="{php echo strpos($music['musicUrl'],'http://')===FALSE?($_W['attachurl'].$music['musicUrl']):$music['musicUrl']}"></span>
+                <input type="hidden" class="play-btn2" name="musicId" id="musicId" data-music="{$music['id']}" />
+
+            </li>
+            {/loop}
+            <input type="hidden" name="mId" id="mId" value="{$id}" />
+        </ul>
+    </section>
+</div>
+<!--#=end page-->
+<audio id="musicPlayer" loop></audio>
+<script src="../addons/amouse_ecard/style/js/jquery.1.11.1.js?v=2015040501"></script>
+<script src="../addons/amouse_ecard/style/js/flytip.js?v=2015040501"></script>
+<!--<script src="../addons/amouse_ecard/style/js/wx.js?v=201503231714a"></script>-->
+<script type="text/javascript">
+    var pushUrl = "{php echo murl('entry//savemusic',array('m'=>'amouse_ecard'),true)}";
+    var chooseMusic = "";
+    $(function () {
+        //是否已经选择了
+        $(".music-inner-item").each(function () {
+            var $this = $(this);
+            var $choose = $this.find(".music-choose");
+            var $playbtn = $this.find(".play-btn");
+            if ($playbtn.data("music") == chooseMusic) {
+                $choose.addClass("cur");
+            }
+        });
+
+        //选择音乐
+        $(".music-avatar").click(function () {
+            var $this = $(this);
+            var $choose = $this.find(".music-choose");
+            var musicUrl;
+            var musicid;
+            if ($choose.hasClass("cur")) {
+                musicUrl = "";
+                $.flytip("音乐已关闭");
+            } else {
+                $this.parent().siblings().find(".music-choose").removeClass("cur");
+                musicUrl = $this.parent().find(".play-btn").data("music");
+                musicid=$this.parent().find(".play-btn2").data("music");
+                $.flytip("音乐选择成功");
+            }
+            $choose.toggleClass("cur");
+            $.ajax({
+                "type": "POST",
+                "url": pushUrl,
+                "data": {musicid: musicid,mid:'{$id}'},
+                "dataType": "json",
+                "beforeSend": function () {
+                },
+                "error": function () {
+                    $.flytip("发生错误，请重试");
+                },
+                "success": function (data) {
+                    if (data && data.resultCode==1) {
+                        setTimeout(function () {
+                            window.location.href="{php echo murl('entry//index',array('m'=>'amouse_ecard'),true)}";
+                        }, 1000);
+                    }
+                }
+            });
+        });
+        //播放音乐
+        var $playBtn = $(".play-btn");
+        var musicPlayer = document.getElementById("musicPlayer");
+        $playBtn.click(function () {
+            var $this = $(this);
+            var music = $this.data("music");
+            if ($(this).hasClass("cur")) {
+                musicPlayer.pause();
+                $playBtn.removeClass("cur");
+            } else {
+                musicPlayer.setAttribute("src", music);
+                musicPlayer.play();
+                $playBtn.removeClass("cur");
+                $(this).addClass("cur");
+            }
+        });
+    });
+</script>
+<!--#end JS-->
+</body>
+</html>

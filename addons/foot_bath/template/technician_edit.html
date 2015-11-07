@@ -1,0 +1,84 @@
+{template 'common/header'}
+{php load()->func('tpl')}
+{template 'common'}
+<div class="main">
+    <ul class="nav nav-tabs">
+        <li><a href="{php echo $this->createWebUrl('technician',array('op'=>'list'));}">技师管理</a></li>
+        {if $op=='add'}
+        <li class="active"><a href="{php echo $this->createWebUrl('TechnicianEdit',array('op'=>'add'));}">添加技师</a></li>
+        {else}
+        <li class="active"><a href="{php echo $this->createWebUrl('TechnicianEdit',array('op'=>'edit','id'=>$id));}">编辑技师</a></li>
+        {/if}
+    </ul>
+    <form action="{php echo $url;}" class="form-horizontal form" method="post" enctype="multipart/form-data" onsubmit="return formcheck()">
+        <input type="hidden" name="id" value="{$item['id']}">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">名字（编号）</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="name" value="{$item['name']}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">性别</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="gender" value="0" {if $item['gender'] == 0}checked{/if}/>男
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="gender" value="1" {if $item['gender'] == 1}checked{/if}/>女
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">照片</label>
+                    <div class="col-sm-9 col-xs-12">
+                        {php echo tpl_form_field_image('photo',$item['photo'])}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">等级</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="lever" id="title" value="{$item['lever']}" class="form-control">
+                        <span class="help-block">数字越大，等级越高</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">详情</label>
+                    <div class="col-sm-9 col-xs-12">
+                            <textarea name="detail"  style="height:100px;width:100%;" class="form-control" cols="70">{$item['detail']}</textarea>
+                            <span class="help-block">套餐详情（选填）</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否显示</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label class="radio-inline">
+                            <input type="radio" name="state" value="0" {if $item['state'] == 0}checked{/if}/>显示
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="state" value="1" {if $item['state'] == 1}checked{/if}/>隐藏
+                        </label>
+                        <span class='help-block'>手机前台是否显示</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="form-group col-sm-12">
+        <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+        <input type="hidden" name="token" value="{$_W['token']}" />
+    </div>
+
+    </form>
+</div>
+<script type="text/javascript">
+    // kindeditor($('.richtext-clone'));
+
+
+
+
+
+
+</script>
+{template 'common/footer'}

@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>{php if(isset($title)) $_W['page']['title'] = $title}{if !empty($_W['page']['title'])}{$_W['page']['title']} - {/if}{if !empty($_W['account']['name'])}{$_W['account']['name']}{/if}{if !empty($_W['page']['sitename'])} - {$_W['page']['sitename']}{else}{if IMS_FAMILY != 'x'} - Powered by qdaygroup.com{/if}{/if}</title>
+	<meta name="format-detection" content="telephone=no, address=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+	<meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="keywords" content="{if empty($_W['page']['keywords'])}{if IMS_FAMILY != 'x'}情天科技,微信,微信公众平台,qdaygroup.com{/if}{else}{$_W['page']['keywords']}{/if}" />
+	<meta name="description" content="{if empty($_W['page']['description'])}{if IMS_FAMILY != 'x'}公众平台自助引擎（www.qdaygroup.com），简称情天科技，情天科技是一款免费开源的微信公众平台管理系统，是国内最完善移动网站及移动互联网技术解决方案。{/if}{else}{$_W['page']['description']}{/if}" />
+	<link rel="shortcut icon" href="{$_W['siteroot']}{$_W['config']['upload']['attachdir']}/{if !empty($_W['setting']['copyright']['icon'])}{$_W['setting']['copyright']['icon']}{else}images/global/wechat.jpg{/if}" />
+	<link href="{$_W['siteroot']}app/resource/css/bootstrap.min.css" rel="stylesheet">
+	<link href="{$_W['siteroot']}app/resource/css/font-awesome.min.css" rel="stylesheet">
+	<link href="{$_W['siteroot']}app/resource/css/animate.css" rel="stylesheet">
+	<link href="{$_W['siteroot']}app/resource/css/common.css" rel="stylesheet">
+	<link href="{$_W['siteroot']}app/{php echo str_replace('./', '', url('utility/style'))}" rel="stylesheet">
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	
+	<script src="../addons/fm_photosvote/template/mobile/newfile/lib/mobileFix.mini.js?{php echo time()}"></script>
+	<script src="../addons/fm_photosvote/template/mobile/newfile/lib/exif.js?{php echo time()}"></script>
+	<script src="../addons/fm_photosvote/template/mobile/newfile/lrz.mobile.min.js?{php echo time()}"></script>
+	<!--<script src="../addons/fm_photosvote/template/mobile/newfile/lrz.js?{php echo time()}"></script>-->
+	<script src="{$_W['siteroot']}app/resource/js/require.js"></script>
+	<script src="{$_W['siteroot']}app/resource/js/app/config.js"></script>
+	<script type="text/javascript" src="{$_W['siteroot']}app/resource/js/lib/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../addons/fm_photosvote/template/mobile/photos/js/main.js?{php echo time()}"></script>
+	<link rel="stylesheet" type="text/css" href="../addons/fm_photosvote/template/css/style.css?{php echo time()}">
+	<script type="text/javascript">
+	if(navigator.appName == 'Microsoft Internet Explorer'){
+		if(navigator.userAgent.indexOf("MSIE 5.0")>0 || navigator.userAgent.indexOf("MSIE 6.0")>0 || navigator.userAgent.indexOf("MSIE 7.0")>0) {
+			alert('您使用的 IE 浏览器版本过低, 推荐使用 Chrome 浏览器或 IE8 及以上版本浏览器.');
+		}
+	}
+	{php define('HEADER', true);}
+	window.sysinfo = {
+{if !empty($_W['uniacid'])}
+		'uniacid': '{$_W['uniacid']}',
+{/if}
+{if !empty($_W['acid'])}
+		'acid': '{$_W['acid']}',
+{/if}
+{if !empty($_W['openid'])}
+		'openid': '{$_W['openid']}',
+{/if}
+{if !empty($_W['uid'])}
+		'uid': '{$_W['uid']}',
+{/if}
+		'siteroot': '{$_W['siteroot']}',
+		'siteurl': '{$_W['siteurl']}',
+		'attachurl': '{$_W['attachurl']}',
+{if defined('MODULE_URL')}
+		'MODULE_URL': '{MODULE_URL}',
+{/if}
+		'cookie' : {'pre': '{$_W['config']['cookie']['pre']}'}
+	};
+	
+	// jssdk config 对象
+	jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || {};
+	
+	// 是否启用调试
+	jssdkconfig.debug = false;
+	
+	jssdkconfig.jsApiList = [
+		'checkJsApi',
+		'onMenuShareTimeline',
+		'onMenuShareAppMessage',
+		'onMenuShareQQ',
+		'onMenuShareWeibo',
+		'hideMenuItems',
+		'showMenuItems',
+		'hideAllNonBaseMenuItem',
+		'showAllNonBaseMenuItem',
+		'translateVoice',
+		'startRecord',
+		'stopRecord',
+		'onRecordEnd',
+		'playVoice',
+		'pauseVoice',
+		'stopVoice',
+		'uploadVoice',
+		'downloadVoice',
+		'chooseImage',
+		'previewImage',
+		'uploadImage',
+		'downloadImage',
+		'getNetworkType',
+		'openLocation',
+		'getLocation',
+		'hideOptionMenu',
+		'showOptionMenu',
+		'closeWindow',
+		'scanQRCode',
+		'chooseWXPay',
+		'openProductSpecificView',
+		'addCard',
+		'chooseCard',
+		'openCard'
+	];
+	
+	</script>
+	
+	<script>
+	function _removeHTMLTag(str) {
+		if(typeof str == 'string'){
+			str = str.replace(/<script[^>]*?>[\s\S]*?<\/script>/g,'');
+			str = str.replace(/<style[^>]*?>[\s\S]*?<\/style>/g,'');
+			str = str.replace(/<\/?[^>]*>/g,'');
+			str = str.replace(/\s+/g,'');
+			str = str.replace(/&nbsp;/ig,'');
+		}
+		return str;
+	}
+	</script>
+	
+
+</head>
+<body>
+<div class="container container-fill">
+
+
+<style>
+.container {
+   padding-right: 0px; 
+   padding-left: 0px; 
+  margin-right: auto;
+  margin-left: auto;
+}
+.h {height:10px;}
+ body {background: {$reply['zbgcolor']} url({php echo toimage($reply['zbg'])}); background-size: 100% auto;} 
+ .top {  overflow: hidden;  font-size: 14px;  line-height: 40px;  padding: 5px 0px;  background: #000;  position: fixed;  z-index: 999;  width: 100%;  color: #fff;  top: 0; }
+ .hh {height:10px}
+.product{ border:0px solid #cfd4d0; padding:5px 0px; overflow: hidden;}
+.product li{ width: 100%; float: left; display: block;
+ margin:0 auto;
+  padding: 0;
+  line-height: 1.4;
+  transition: all 0.2s ease-in-out 0s;
+  border: medium none;
+  font-size: 14px;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  background-color: {if empty($bgarr['bodytscolor'])}#fff{else}{$bgarr['bodytscolor']}{/if};
+  background: {if empty($bgarr['bodytscolor'])} #FFFFFF{else}{$bgarr['bodytscolor']}{/if} url({php echo toimage($bgarr['bodytsbg'])}) center no-repeat {$bgarr['bodytscolor']};
+  
+  }
+.product li dl{ overflow: hidden;}
+.product li dt{ overflow: hidden; position: relative; margin-bottom: 5px;}
+.product li dt span{ position: absolute;    padding: 0 5px;  border-radius: 5px;color:#fff;background: rgba(0, 0, 0, 0.5);}
+
+.product li dt img{ float:none; width: 35%;  padding: 10px;border-radius:300px;}
+.product li dt span img{ width: 100%; float: left; border:none;}
+.product li dd{line-height: 18px; 
+color: {if empty($bgarr['bodytextcolor'])}#555555{else}{$bgarr['bodytextcolor']}{/if};
+
+font-size: 14px;overflow: hidden;white-space :nowrap ;  padding: 5px;}
+.product li dd span{ color: #f12500;}
+.product li .s{   width: 25%;}
+.product li .w{   width: 100%;}
+.product li dd li{ width: 18%; float: left; display: block;
+ 
+  padding: 0;
+  line-height: 1.4;
+  transition: all 0.2s ease-in-out 0s;
+  border: medium none;
+  font-size: 14px;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  background-color: #FFFFFF;}
+  
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+  display: inline-block;
+  padding: 4px 6px;
+  border:1px solid #E2E2E2;
+  font-size: 14px;
+  line-height: 20px;
+  color: #555555;
+  vertical-align: middle;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  }
+  
+
+  .select {
+    display: inline-block;
+  font-size: 14px;
+  color: #555555;
+  vertical-align: middle;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+   height: 30px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;  
+  
+  margin-bottom: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;  
+    padding: 0 73px;
+  line-height: 28px;
+  -webkit-appearance: button;
+  }
+
+.fileupload .thumbnail {
+  overflow: hidden;
+  display: inline-block;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  text-align: center;
+}
+.thumbnail {
+  display: block;
+  padding: 4px;
+  line-height: 20px;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav {
+  margin-bottom: 0;
+  margin-left: 0;
+  list-style: none;
+}
+.txt {
+  width: 78%;
+  height: 30px;
+  line-height: 30px;
+  background: #fff;
+  border-radius: 3px;
+  float: left;
+  color: #333;
+  padding-left: 5px;
+}
+.modal-body {
+  position: relative;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+#progress,#progress0,#progress1,#progress2,#progress3,#progress4,#progress5,#progress6,#progress7,#progress8,#progressm,#progressv  {
+    border:1px solid #ccc;
+    display:none;
+    height:14px;
+
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+
+    background: -moz-linear-gradient(#66cc00, #4b9500);
+    background: -ms-linear-gradient(#66cc00, #4b9500);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #66cc00), color-stop(100%, #4b9500));
+    background: -webkit-linear-gradient(#66cc00, #4b9500);
+    background: -o-linear-gradient(#66cc00, #4b9500);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66cc00', endColorstr='#4b9500');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#66cc00', endColorstr='#4b9500')";
+    background: linear-gradient(#66cc00, #4b9500);
+	  padding: 10px;
+}
+.upsuccess {
+ text-align: center;  color: #000;  font-size: 15px;  /* margin: 0 90px; */  position: relative;  /* left: 60px; */  top: 15px;
+ }
+</style>
+{template 'hnav'}
+<div class="banner"{if $reply['ipannounce'] == 1}  style="  margin-top: 90px;  margin: 0 auto;  max-width: 640px;"{/if}><img src="{php echo toimage($reply['picture'])}" style="max-width: 100%;"></div>
+
+ <div class="center">
+ 	<div class="product">
+ 		<ul>
+				<li>
+					<dl>					
+						<dt style="margin:0 auto;text-align:center;  padding: 10px 0;  font-size: 18px;color: {if empty($bgarr['bodytextcolor'])}#555555{else}{$bgarr['bodytextcolor']}{/if};">
+							{$reply['userinfo']}
+						</dt>
+						<dt style="margin:0 auto;text-align:center;">
+							<a href="" >
+								<img src="{if !empty($mygift['avatar'])}{$mygift['avatar']}{else}{$myavatar}{/if}" width="50" style="border-radius:1000px;"/>
+							</a>
+						</dt>
+						<dd style="text-align:center; text-decoration: none;"><strong >{php echo cutstr($mygift['nickname'], '20')}</strong></dd>
+						<dd>
+							<dd >
+								<div class="container" style="  max-width: 640px;">
+									<div class="col-md-11">
+										<div align="center">
+										<style>
+											.uploadimg{  width: 50%;height: 100px;  line-height: 100px;    float: left;  
+											  border: 1px solid #FFFFFF;
+											  -webkit-box-shadow:  inset 5px 5px 12px rgba(5, 110, 165, 0.2);
+											  -moz-box-shadow:  inset 5px 5px 12px rgba(5, 110, 165, 0.2);
+											  box-shadow:  inset 5px 5px 12px rgba(5, 110, 165, 0.2);
+											  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+											  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+											  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+											  transition: border linear 0.2s, box-shadow linear 0.2s;
+											  overflow: hidden;
+											
+											}
+											.uploadimg span{  color:#fff}
+											
+											
+										</style>
+										
+											<div  class="uploadimg" style="background: #87BDEA url({php echo toimage($mygift['photo'])}) no-repeat;background-position: 100% 100%;  background-attachment: inherit;  background-size: cover; box-shadow: inset -5px -5px 15px rgba(5, 110, 165, 0.2);  " onclick="sendpic();"><img id="fmupimg0" src="" width="100%" style="display:none;"><span class="" style="color:#fff;  background: rgba(0, 0, 0, 0.68);  padding: 10px;  border-radius: 10px;">上传封面</span></div>
+											{if $reply['mediatype']}
+											<div class="uploadimg" style="background: #EC63FC url({php echo toimage($mygift['picarr_1'])}) no-repeat;background-position: 100% 100%;  background-attachment: inherit;  background-size: cover;  box-shadow: inset 10px -5px 15px rgba(5, 110, 165, 0.2);  " onclick="sendp();"><span class="" style="color:#fff;  background: rgba(0, 0, 0, 0.68);  padding: 10px;  border-radius: 10px;">上传相册图片</span></div>
+											{/if}
+											{if $reply['mediatypem']}
+											<div class="uploadimg" style="background: #87EA9B url({php echo toimage($mygift['photo'])}) no-repeat;background-position: 100% 100%;  background-attachment: inherit;  background-size: cover;   box-shadow: inset -5px 5px 15px rgba(5, 110, 165, 0.2);  " onclick="sendmusic();"><span class="" style="color:#fff;  background: rgba(0, 0, 0, 0.68);  padding: 10px;  border-radius: 10px;">上传好声音</span></div>
+											{/if}
+											{if $reply['mediatypev']}
+											<div class="uploadimg"  style="background: #87EA9B url({php echo toimage($mygift['photo'])}) no-repeat;background-position: 100% 100%;  background-attachment: inherit;  background-size: cover; " onclick="sendvedio();"><span class="" style="color:#fff;  background: rgba(0, 0, 0, 0.68);  padding: 10px;  border-radius: 10px;">上传视频</span></div>
+											{/if}
+											
+										</div>
+									</div>
+								</div>
+							
+								<div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 60px;">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+												<h4 class="modal-title">上传封面</h4>
+											</div>
+											<form class="form-inline" role="form" id="uploadform" name="uploadform" method="post" action="" enctype="multipart/form-data">					
+													<input type="hidden" name="i" id = "i" value="{$uniacid}" />
+													<input type="hidden" name="c" id="c" value="entry" />
+													<input type="hidden" name="m" id="m" value="fm_photosvote" />
+													<input type="hidden" name="do" id="do" value="treg" />
+													<input type="hidden" name="rid" id="rid" value="{$rid}" />
+													<input type="hidden" name="upphotosone" id="upphotosone" value="start" />
+													<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+													<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+																
+												<div class="modal-body">
+														<div class="form-group">
+															<label>请选择封面照片(选择图片后，系统自动上传)：</label>
+															<input class="form-control" type="file" name="photo" id="photo" accept="image/*" readonly="readonly" capture="camera" onchange="changeone('photo', '0')" >
+														</div>
+														<img src="" id="uploadimg0"  onclick="showpic();" name="uploadimg0" style="display:none" >
+														<img src="{php echo toimage($mygift['photo'])}" id="preview0" name="pic" style="width:120px;  float: left;"  >
+														<div style="text-align:right; background-color: transparent;">
+															<div id="progressNumber0" style="  text-align:center;color: #000;  font-size: 15px;  margin-top: 0px;"></div>
+															<div style="  margin: 0 90px;   position: relative;  left: 60px;  top: 10px;"><div id="progress0">&nbsp;</div></div>
+														</div>
+												</div>
+												
+												<div class="modal-footer">
+													<!--<input type="submit" name="tijiao" id="tijiao" class="btn btn-success" value="开始上传">-->
+													<button type="button" class="btn btn-danger" data-dismiss="modal">上传完成,自动返回</button>
+												</div>
+											</form>
+										</div><!-- /.modal-content -->
+									</div><!-- /.modal-dialog -->
+								</div><!-- /.modal -->
+								
+								
+								<div class="modal fade" id="Modalp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 60px;">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+											<h4 class="modal-title">上传相册图片</h4>
+										</div>
+										<form class="form-inline" role="form" id="uploadforp" name="uploadforp" method="post" action="" enctype="multipart/form-data">					
+												<input type="hidden" name="i" id = "i" value="{$uniacid}" />
+												<input type="hidden" name="c" id="c" value="entry" />
+												<input type="hidden" name="m" id="m" value="fm_photosvote" />
+												<input type="hidden" name="do" id="do" value="treg" />
+												<input type="hidden" name="rid" id="rid" value="{$rid}" />
+												<input type="hidden" name="upphotos" id="upphotos" value="start" />
+												<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+												<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+											<div class="modal-body">
+												<style>
+												.form-group {  margin-bottom: 15px;  clear: both;  margin-top: 15px;}
+												</style>
+												<div class="form-group label label-info" style="padding: 2px 20px;">您还可以上传 {$reply['tpxz']} 张照片</div>
+												<?php for ($i = 1; $i <= $reply['tpxz']; $i++) {
+												$n = $i - 1;
+												?>				
+												
+														
+														<div class="form-group">
+															<label>请选择相册照片：</label>
+															<input class="form-control" type="file" name="picarr_{$i}" id="picarr{$i}" accept="image/*" readonly="readonly" capture="camera" onchange="changeone('picarr{$i}', '{$i}')" >
+														<img src="" id="uploadimg{$i}"  onclick="showpic();" name="uploadimg{$i}" style="display:none">
+														<img src="{php echo toimage($mygift['picarr_'.$i])}" id="preview{$i}" name="pic{$i}" style="width:100px;"  >
+														<div style="text-align:right; background-color: transparent;">
+															<div id="progressNumber{$i}" style="  text-align:center;color: #000;  font-size: 15px;  margin-top: 0px;"></div>
+															<div style="  margin: 0 90px;   position: relative;  left: 60px;  top: 10px;"><div id="progress{$i}">&nbsp;</div></div>
+															
+															<div class="upsuccess"><div id="upsuccess" class="label label-danger" style="display:none;">&nbsp;</div></div>
+														</div>
+														
+														</div>
+														
+												<?php } ?>
+											</div>
+											<div class="modal-footer">
+												<!--<input type="submit" name="tijiaop" id="tijiaop" class="btn btn-success" value="开始上传">-->
+												<button type="button" class="btn btn-danger" data-dismiss="modal">完成</button>
+											</div>
+										</form>
+									</div><!-- /.modal-content -->
+								</div><!-- /.modal-dialog -->
+							</div><!-- /.modal -->
+									
+									<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 60px;">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+													<h4 class="modal-title">上传好声音</h4>
+												</div>
+												<form class="form-inline" role="form" id="uploadformm" name="uploadformm" method="post" action="" enctype="multipart/form-data">					
+														<input type="hidden" name="i" id = "i" value="{$uniacid}" />
+														<input type="hidden" name="c" id="c" value="entry" />
+														<input type="hidden" name="m" id="m" value="fm_photosvote" />
+														<input type="hidden" name="do" id="do" value="treg" />
+														<input type="hidden" name="rid" id="rid" value="{$rid}" />
+														<input type="hidden" name="upaudios" id="upaudios" value="start" />
+														<input type="hidden" name="audiotype" id="audiotype" value="music" />
+														<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+														<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+																	
+													<div class="modal-body">
+															<div class="form-group">
+																<label>请选择好声音：</label>
+																<input class="form-control" type="file" name="music" id="music"  readonly="readonly" accept="audio/*" capture="microphone"> <!--onchange="changeaudios('music', 'm')"-->
+																<div style="text-align:right; background-color: transparent;">
+																	<div id="progressNumberm" style="  text-align:center;color: #000;  font-size: 15px;  margin-top: 0px;"></div>
+																	<div style="    margin: 0 20px;  position: relative;  /* left: 60px; */  top: 10px;  margin-bottom: 20px;"><div id="progressm">&nbsp;</div></div>
+																</div>
+															</div>
+															<div id="uploadm"  onclick="showmusic();" name="uploadm" ></div>
+															<input value="{$mygift['music']}"  name="music" id="previewm" type="text"  placeholder="请在此输入远程音频地址" style="width: 100%; "/>
+													</div>
+													<div class="modal-footer">
+														<input type="submit" name="tijiaom" id="tijiaom" class="btn btn-success" value="开始上传">
+														<button type="button" class="btn btn-danger" data-dismiss="modal">上传完成,自动返回</button>
+													</div>
+												</form>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
+																		
+								
+									
+									<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 60px;">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+													<h4 class="modal-title">上传视频</h4>
+												</div>
+												<form class="form-inline" role="form" id="uploadformv" name="uploadformv" method="post" action="" enctype="multipart/form-data">					
+														<input type="hidden" name="i" id = "i" value="{$uniacid}" />
+														<input type="hidden" name="c" id="c" value="entry" />
+														<input type="hidden" name="m" id="m" value="fm_photosvote" />
+														<input type="hidden" name="do" id="do" value="treg" />
+														<input type="hidden" name="rid" id="rid" value="{$rid}" />
+														<input type="hidden" name="upaudios" id="upaudios" value="start" />
+														<input type="hidden" name="audiotype" id="audiotype" value="vedio" />
+														<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+														<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+																	
+													<div class="modal-body">
+															<div class="form-group">
+																<label>请选择视频 （<a onclick="webinfo();">上传说明</a>）：</label>
+																<input class="form-control" type="file" name="vedio" id="vedio" readonly="readonly" accept="video/*" capture="camcorder">
+																<div style="text-align:right; background-color: transparent;">
+																	<div id="progressNumberv" style="  text-align:center;color: #000;  font-size: 15px;  margin-top: 0px;"></div>
+																	<div style="    margin: 0 20px;  position: relative;  /* left: 60px; */  top: 10px;  margin-bottom: 20px;"><div id="progressv">&nbsp;</div></div>
+																</div>
+															</div>
+															<div id="uploadv"  onclick="showvedio();" name="uploadv"></div>
+															<input value="{$mygift['vedio']}"  name="vedio" id="previewv" type="text" placeholder="请在此输入远程视频地址" style="width: 100%; "/>	
+													</div>
+													<div class="modal-footer">
+														<input type="submit" name="tijiaov" id="tijiaov" class="btn btn-success" value="开始上传">
+														<button type="button" class="btn btn-danger" data-dismiss="modal">上传完成,自动返回</button>
+													</div>
+												</form>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
+								
+													
+								<form class="form-horizontal" role="form" id="formbasic" name="formbasic" method="post" action="" enctype="multipart/form-data">					
+									<input type="hidden" name="i" id = "i" value="{$uniacid}" />
+									<input type="hidden" name="c" id="c" value="entry" />
+									<input type="hidden" name="m" id="m" value="fm_photosvote" />
+									<input type="hidden" name="do" id="do" value="treg" />
+									<input type="hidden" name="treg" id="treg" value="1" />
+									<input type="hidden" name="rid" id="rid" value="{$rid}" />
+									<input type="hidden" name="from_user" id="from_user" value="{$from_user}" />
+									<input type="hidden" name="token" id="token" value="{$_W['token']}"/>
+								<dd class="">照片主题宣言</dd>
+								<dd><input type="text" id="photoname" name="photoname"  class=" w" value="{$mygift['photoname']}"></dd>
+								
+								<dd class="">介绍（投票宣言或个人介绍）</dd>
+								<dd>
+								  <textarea style="height:50px; " class="span7 richtext-clone w" id="description" name="description" cols="70">{$mygift['description']}</textarea>
+								</dd>
+								{if $reply['mediatypev']}
+									<dd class="">网络视频  (<a onclick="webinfo();">查看上传说明</a>)</dd>
+									<dd>
+									  <textarea style="height:50px; " class="span7 richtext-clone w" id="youkuurl" name="youkuurl" cols="70">{$mygift['youkuurl']}</textarea>
+									</dd>
+								{/if}
+								{if $reply['isrealname'] == 1}
+								<dd class="pull-left s">真实姓名</dd>
+								<dd><input type="text" id="realname" name="realname" value="{$mygift['realname']}"></dd>{/if}					
+								{if $reply['ismobile'] == 1}														
+								<dd class="pull-left s">手机</dd>
+								<dd><input type="text" id="mobile" name="mobile" value="{$mygift['mobile']}" /></dd>{/if}						
+								{if $reply['isweixin'] == 1}
+								<dd class="pull-left s">微信号</dd>
+								<dd><input type="text" id="weixin" name="weixin" value="{$mygift['weixin']}"></dd>			
+								{/if}					
+								{if $reply['isqqhao'] == 1}
+								<dd class="pull-left s">QQ</dd>
+								<dd><input type="text" id="qqhao" name="qqhao" value="{$mygift['qqhao']}" /></dd>{/if}					
+								{if $reply['isemail'] == 1}				
+								<dd class="pull-left s">Email</dd>
+								<dd><input type="text" id="email" name="email" value="{$mygift['email']}"></dd>
+								{/if}				
+								{if $reply['isjob'] == 1}				
+								<dd class="pull-left s">职业</dd>
+								<dd><input type="text" id="job" name="job" value="{$mygift['job']}"></dd>
+								{/if}				
+								{if $reply['isxingqu'] == 1}				
+								<dd class="pull-left s">兴趣</dd>
+								<dd><input type="text" id="xingqu" name="xingqu" value="{$mygift['xingqu']}"></dd>
+								{/if}			
+								{if $reply['isaddress'] == 1}
+								<dd class="pull-left s">详细地址</dd>
+								<dd><input type="text" id="address" name="address" value="{$mygift['address']}"></dd>			
+								{/if}
+								<dd style="margin: 0 auto;  text-align: center;">
+									<input type="hidden" name="token" value="{$_W['token']}" /><input type="submit" class="btn btn-large btn-info submit" onclick = "" style="  padding: 6px 44%;" value="提交" name="submit">
+								</dd>	
+									
+							</form>
+						</dd>
+					</dl>
+				</li>
+ 		</ul>
+ 	</div>
+	{if $reply['isreg'] == 1}{template 'zanzhu'}{/if}
+	<div class="copyright" style="padding-bottom: 70px;">
+    {if $reply['iscopyright']==1}<a href="{$reply['copyrighturl']}">&copy;{$reply['copyright']}</a>{else}<a href="javascript:;">{if empty($footer_off)}&copy;{if empty($_W['account']['name'])}FantasyMoons Team团队{else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}{/if}</a>{/if}
+	</div>
+</div>
+
+{template 'fnav'}
+<!-- Modal -->
+	<div class="modal fade" id="showpic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 20%;">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+     		 	<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        			<h4 class="modal-title" id="myModalLabel">照片</h4>
+      			</div>
+      			<div class="modal-body">
+
+				<img id="pic" name="pic" src="{php echo toimage($mygift['photo'])}" class="img-thumbnail">
+      			</div>
+    		</div>
+  		</div>
+	</div>	
+	
+<!-- Modal -->
+	<div class="modal fade" id="webinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="  margin-top: 20%;">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+     		 	<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        			<h4 class="modal-title" id="myModalLabel">视频上传说明</h4>
+      			</div>
+      			<div class="modal-body" style="width:100%">
+					{$reply['webinfo']}
+      			</div>
+    		</div>
+  		</div>
+	</div>	
+{template 'tvote'}	
+
+	
+<script type="text/javascript">
+
+
+		
+		
+			
+			var mygift = "{$mygift}";
+			if	(mygift == '' || mygift == null) {
+				var now = "{$now}";
+				var bstart_time = "{$reply['bstart_time']}";
+				var bend_time = "{$reply['bend_time']}";
+				var btipstart = "{$reply['btipstart']}";
+				var btipend = "{$reply['btipend']}";
+				if (now <= bstart_time) {
+					//u.message(btipstart, '', 'success');	
+					fminfo(btipstart);
+					//return false;
+				}
+				if (now >= bend_time) {
+					//u.message(btipend, '', 'success');	
+					fminfo(btipend);
+					//return false;
+				}
+			}
+			
+			$('.submit').click(function(){
+			
+			
+				
+				//u.loading();
+				var now = "{$now}";
+				var bstart_time = "{$reply['bstart_time']}";
+				var bend_time = "{$reply['bend_time']}";
+				var btipstart = "{$reply['btipstart']}";
+				var btipend = "{$reply['btipend']}";
+				var isrealname = "{$reply['isrealname']}";
+				var ismobile = "{$reply['ismobile']}";
+				var isphoto = "{$mygift['photo']}";
+				var youkuurl = "{$mygift['youkuurl']}";
+				
+
+
+				var subscribe = "{$reply['subscribe']}";
+				var follow = "{$follow}";
+			
+				if (subscribe == 1) {
+					if (follow == 0) {
+						
+						subsribe();
+						
+						return false;
+					}
+				}
+				if (now <= bstart_time) {
+					//u.message(btipstart, '', 'success');
+					fminfo(btipstart);
+					return false;
+				}
+				if (now >= bend_time) {
+					//u.message(btipend, '', 'success');	
+					fminfo(btipend);
+					return false;
+				}
+				
+				if ($('#photoname').val() == '' ) {
+					//alert("照片主题名没有填写");
+					//u.message('照片主题名没有填写', '', 'success');	
+					fminfo('照片主题名没有填写');
+					return false;
+				}
+				if ($('#description').val() == '') {
+					//alert("介绍没有填写");
+					//u.message('介绍没有填写', '', 'success');	
+					fminfo('介绍没有填写');
+					return false;
+				}
+				if (isrealname == 1) {
+					if ($('#realname').val() == '') {
+						//alert("真实姓名没有填写");
+						//u.message('真实姓名没有填写', '', 'success');	
+						fminfo('真实姓名没有填写');
+						return false;
+					}
+				}
+				if (ismobile == 1) {
+					if ($('#mobile').val() == '') {
+					
+						//alert("手机号码没有填写");
+					//	u.message('手机号码没有填写', '', 'success');
+						fminfo('手机号码没有填写');						
+						return false;
+					}
+				}
+				
+				var submitData = {
+						photoname: $('#photoname').val(),
+						description: $('#description').val(),
+						youkuurl: $('#youkuurl').val(),
+						realname: $('#realname').val(),
+						mobile: $('#mobile').val(),
+						weixin: $('#weixin').val(),
+						qqhao: $('#qqhao').val(),
+						email: $('#email').val(),
+						job: $('#job').val(),
+						xingqu: $('#xingqu').val(),
+						address: $('#address').val(),
+					};
+					
+					$.post("{php echo $this->createMobileUrl('Treg', array( 'treg' => '1', 'from_user' => $from_user, 'rid' => $rid))}", submitData, function(data) {	
+
+						
+					
+						if (data.success == true) {														
+							//u.message(data.msg, '', 'success');
+							fminfo(data.msg);	
+							setTimeout(function () {
+								window.location.href = data.linkurl;
+							},3000)	
+							return 
+							
+						} else {
+							
+							if (data.success == -1) {
+								//$("#result_info_tip").text(data.msg);	
+								//u.message(data.msg, '', 'error');
+								fminfo(data.msg);	
+								return 
+							}
+							
+							if (data.success == 3) {
+								//windows.location.href = data.linkurl;
+								//u.message(data.msg, '', 'error');
+								fminfo(data.msg);	
+								setTimeout(function () {								
+									window.location.href = data.linkurl;
+								},1000)	
+								return
+							}
+						}
+					},"json")
+					return false;
+			});	
+		
+
+
+		$("#tijiaom").click(function(e){
+			
+			e.preventDefault();
+			var ismusic = document.getElementById("music");
+			//alert(ismusic);
+			
+			var mid = 'm'; 
+			var audio = 'music'; 		
+			audios(audio, mid);
+			return false;
+		});
+		//$("#uploadformv").submit(function(e){
+		$("#tijiaov").click(function(e){
+			e.preventDefault();
+			var mid = 'v'; 
+			var audio = 'vedio'; 		
+			audios(audio, mid);
+			return false;
+		});
+		function changeaudios(audio, mid) {
+			e.preventDefault();	
+			audios(audio, mid);
+		}
+
+		
+		function audios(audio, mid) {
+			var music = "#" + audio;
+			var uploadform = "uploadform" + mid;
+			  //空对象然后添加
+			  
+			var fd = new FormData();
+			 
+			fd.append(audio, $(music).val());
+			  //fd.append("file", $(":file")[0].files[0]); //jQuery 方式
+			
+			fd.append("audiotype", audio);
+			   
+			  //通过表单对象创建 FormData
+			var fd = new FormData(document.getElementById(uploadform));
+			  //var fd = new FormData($("uploadformm:eq(0)")[0]); //jquery 方式
+			setTimeout(function () {
+				var progress = 'progress' + mid;					
+				var oProgress = document.getElementById(progress);
+					oProgress.style.display = 'block';
+					oProgress.style.width = '0px';
+				//XMLHttpRequest 原生方式发送请求
+				var xhr = new XMLHttpRequest();  
+				xhr.upload.addEventListener('progress', function(e, m){ uploadProgress(e,mid); }, false);
+				xhr.addEventListener("load",  function(e, m){ uploadComplete(e,mid); }, false);
+				xhr.addEventListener("error", function(e, m){ uploadFailed(e,mid); }, false);
+				xhr.addEventListener("abort", function(e, m){ uploadCanceled(e,mid); }, false);
+			  
+				xhr.open("POST" ,"{php echo $this->createMobileUrl('Treg', array('from_user' => $from_user, 'upaudios' => 'start', 'rid' => $rid))}" , true);
+				xhr.send(fd);
+				//xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+				xhr.onload = function(e) {
+						if (this.readyState === 4 && this.status  === 200) {
+							var result = JSON.parse(xhr.response);
+							console.log(result);						
+							//uppic();
+							if (result.success == true) {
+								var preview = "#preview" + mid;
+								var upload = "#upload" + mid;
+								$(preview).hide();
+								//u.loaded();
+								$(upload).text(result.imgurl);
+								var myinfo = "{$mygift}";
+								var myinfophotoname = "{$mygift['photoname']}";
+								if (!myinfo || !myinfophotoname) {
+									fminfo('恭喜你，上传成功！请继续完成以下资料来完成报名');
+									if (mid == 'm') {
+										sendmusic();
+									}else {
+										sendvedio();
+									}
+								}else {
+									setTimeout(function () {								
+										window.location.reload();
+									},3000)
+								}
+								return 
+							} else {
+								if (result.success == 3) {
+									//windows.location.href = result.linkurl;
+								//	u.message(result.msg, '', 'error');
+									fminfo(result.msg);	
+									setTimeout(function () {								
+										window.location.href = result.linkurl;
+									},1000)	
+									return false;
+								}
+								if (result.success == -1) {
+									//u.message(result.msg, '', 'error');
+									fminfo(result.msg);	
+									return false;
+								}
+								return false;
+							}							
+							return false;						
+						}			
+				};
+			});
+			return false;
+		}			
+</script>	
+
+
+
+<script type="text/javascript">
+	function sendpic(){
+
+				var subscribe = "{$reply['subscribe']}";
+				var follow = "{$follow}";
+			
+				if (subscribe == 1) {
+					if (follow == 0) {
+						
+						subsribe();
+						
+						return false;
+					}
+				}
+		 $('#Modal1').modal('toggle');
+	}
+	function sendmusic(){
+
+				var subscribe = "{$reply['subscribe']}";
+				var follow = "{$follow}";
+			
+				if (subscribe == 1) {
+					if (follow == 0) {
+						
+						subsribe();
+						
+						return false;
+					}
+				}
+		 $('#Modal2').modal('toggle');
+	}
+	function sendvedio(){
+
+				var subscribe = "{$reply['subscribe']}";
+				var follow = "{$follow}";
+			
+				if (subscribe == 1) {
+					if (follow == 0) {
+						
+						subsribe();
+						
+						return false;
+					}
+				}
+		 $('#Modal3').modal('toggle');
+	}
+	function webinfo(){
+		 $('#webinfo').modal('toggle');
+	}
+	function sendp(){
+		
+				var subscribe = "{$reply['subscribe']}";
+				var follow = "{$follow}";
+			
+				if (subscribe == 1) {
+					if (follow == 0) {
+						
+						subsribe();
+						
+						return false;
+					}
+				}
+		 $('#Modalp').modal('toggle');
+	}
+	function showpic(){
+		 $('#showpic').modal('toggle');
+	}
+	function uppic(){
+		 $('#uppic').modal('toggle');
+	}
+	
+		function upload(filename, posturl, mid) {
+				var width = "{$reply['autolitpic']}";
+				var zl = "{php echo $reply['autozl']/100}";
+				
+				// 也可以传入图片路径：lrz('../demo.jpg', ...
+				lrz(filename.files[0], {
+					zwidth: width,
+					quality:zl,
+					before: function() {
+						document.getElementById('progressNumber' + mid).innerHTML = '正在压缩图片...' ;
+						//console.log('压缩开始');
+					},
+					fail: function(err) {
+						document.getElementById('progressNumber' + mid).innerHTML = '压缩失败' ;
+						//console.error(err);
+					},
+					always: function() {
+						document.getElementById('progressNumber' + mid).innerHTML = '压缩成功，开始上传图片...' ;
+						//console.log('压缩结束');
+					},
+					done: function (results) {
+						// 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
+						
+						console.log(results);
+										
+					
+					//var MB = 1000*1000;
+					var imgsize = "{$_W['setting']['upload']['image']['limit']}";
+					var imgmsize = imgsize/1024;
+					var ytsize = results.origin.size;
+					if (ytsize > imgsize*1024) {
+						var amsg = '图片大小不能超过 '+imgmsize+' MB';
+						//alert(amsg);
+						fminfo(amsg);	
+						//u.message('图片大小不能超过 '+imgmsize+' MB', '', 'error');
+						return false;
+					}
+					
+					
+					
+						//console.log(results.base64);
+					//	u.message(results.base64, '', 'error');
+						//return false;
+					setTimeout(function () {
+						var progress = 'progress' + mid;					
+						var oProgress = document.getElementById(progress);
+						oProgress.style.display = 'block';
+						oProgress.style.width = '0px';
+						// 发送到后端
+						var xhr = new XMLHttpRequest();
+						var data = {
+							base64: results.base64,
+							size: results.base64.length // 校验用，防止未完整接收
+						};
+					
+					
+					
+					xhr.upload.addEventListener('progress', function(e, m){ uploadProgress(e,mid); }, false);
+					xhr.addEventListener("load",  function(e, m){ uploadComplete(e,mid); }, false);
+					xhr.addEventListener("error", function(e, m){ uploadFailed(e,mid); }, false);
+					xhr.addEventListener("abort", function(e, m){ uploadCanceled(e,mid); }, false);
+						
+
+						xhr.open('POST', posturl);
+						xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+						xhr.onreadystatechange = function () {
+							if (xhr.readyState === 4 && xhr.status === 200) {
+								var result = JSON.parse(xhr.response);
+								//console.log(result);						
+								//uppic();
+								if (result.success == true) {
+									var preview = '#preview' + mid;
+									var uploadimg = 'uploadimg' + mid;
+									var fmupimg = 'fmupimg' + mid;
+									$(preview).hide();								
+									var bigimg = document.getElementById(uploadimg);
+									bigimg.src=result.imgurl;								
+									bigimg.style.display = 'block';		
+
+									if (mid==0) {
+									var displayfmupimg = document.getElementById(fmupimg);							
+									displayfmupimg.src=result.imgurl;	
+									displayfmupimg.style.display = 'block';
+									}
+									
+									bigimg.style.width = '120px';
+									bigimg.style.float = 'left';
+									document.getElementById("upsuccess").innerHTML = result.msg;
+									document.getElementById("upsuccess").style.display = 'block';
+									//$(fmupimg).css("background",result.imgurl);
+									//document.getElementById(fmupimg).innerHTML = result.imgurl;
+									var myinfo = "{$mygift}";
+									var myinfophotoname = "{$mygift['photoname']}";
+									if (!myinfo || !myinfophotoname) {
+										
+										if (mid == 0) {
+											fminfo('恭喜你，上传成功！请继续完成以下资料来完成报名');
+											sendpic();
+										}else {
+											sendp();
+										}
+									}else {
+										
+										if (mid == 0) {
+											setTimeout(function () {								
+												window.location.reload();
+											},3000)
+											return 
+										}
+										
+									}
+								} else {
+									if (result.success == 3) {
+										//windows.location.href = result.linkurl;
+										//u.message(result.msg, '', 'error');
+										fminfo(result.msg);	
+										setTimeout(function () {								
+											window.location.href = result.linkurl;
+										},1000)	
+										return false;
+									}
+									if (result.success == -1) {
+										//u.message(result.msg, '', 'error');
+										fminfo(result.msg);	
+										return false;
+									}
+								}
+								return						
+							}
+						};
+						xhr.send(JSON.stringify(data)); // 发送base64
+						//results.base64 = null;
+						//xhr.Response.End();
+					}, 100);						
+					
+					}	
+				});
+		}
+		
+		function uploadProgress(evt,mid) {			
+		   if (evt.lengthComputable) {
+				//iBytesUploaded = evt.loaded;
+				//iBytesTotal = evt.total;
+				var iPercentComplete = Math.round(evt.loaded * 100 / evt.total);
+				//var iBytesTransfered = bytesToSize(iBytesUploaded);
+				
+				
+				document.getElementById('progressNumber' + mid).innerHTML = iPercentComplete.toString() + '%' + '正在上传...' ;
+				document.getElementById('progress' + mid).style.width = (iPercentComplete * 1).toString() + '%';
+				
+				
+				//document.getElementById('b_transfered').innerHTML = iBytesTransfered;
+				if (iPercentComplete == 100) {
+					document.getElementById('progressNumber' + mid).innerHTML = '请稍等，正在上传云端...' ;
+					//oUploadResponse.style.display = 'block';
+				}			
+                //var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+                //document.getElementById('progressNumber').innerHTML = percentComplete.toString() + '%';
+            }
+            else {
+				document.getElementById('progressNumber' + mid).innerHTML = 'unable to compute';
+				
+            }
+        }
+		function bytesToSize(bytes) {
+			var sizes = ['Bytes', 'KB', 'MB'];
+			if (bytes == 0) return 'n/a';
+			var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+			return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+		};
+        function uploadComplete(evt,mid) {
+            /* This event is raised when the server send back a response */
+            //alert(evt.target.responseText);
+			
+			var progressNumber = 'progressNumber' + mid;
+			
+			document.getElementById(progressNumber).innerHTML = '100%(上传完成！)';
+        }
+ 
+        function uploadFailed(evt,mid) {
+			var progressNumber = 'progressNumber' + mid;
+			document.getElementById(progressNumber).innerHTML = '上传时出错！';
+           // alert("There was an error attempting to upload the file.");
+        }
+ 
+        function uploadCanceled(evt,mid) {
+		
+			var progressNumber = 'progressNumber' + mid;
+           // alert("The upload has been canceled by the user or the browser dropped the connection.");
+			document.getElementById(progressNumber).innerHTML = '取消上传！';
+        }
+		
+	function changeone(photo, mid) {
+		
+		var preview = 'preview' + mid,
+			pic = document.getElementById(preview),
+			file = document.getElementById(photo);
+	 
+		var ext=file.value.substring(file.value.lastIndexOf(".")+1).toLowerCase();
+		//alert(ext); 
+		 // gif在IE浏览器暂时无法显示
+		 if(ext!='png'&&ext!='jpg'&&ext!='jpeg'){
+			 alert("图片的格式必须为png或者jpg或者jpeg格式！"); 
+			 return;
+		 }
+		 
+		
+		var posturl = "{php echo $this->createMobileUrl('treg', array('from_user' => $from_user, 'upphotosone' => 'start','rid' => $rid))}&mid=" + mid;
+		//var mid = '0';
+		upload(file, posturl, mid);
+		 
+		 var isIE = navigator.userAgent.match(/MSIE/)!= null,
+			 isIE6 = navigator.userAgent.match(/MSIE 6.0/)!= null;
+
+		 if(isIE) {
+			file.select();
+			var reallocalpath = document.selection.createRange().text;
+	 
+			// IE6浏览器设置img的src为本地路径可以直接显示图片
+			 if (isIE6) {
+				pic.src = reallocalpath;
+			 }else {
+				// 非IE6版本的IE由于安全问题直接设置img的src无法显示本地图片，但是可以通过滤镜来实现
+				 pic.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image',src=\"" + reallocalpath + "\")";
+				 // 设置img的src为base64编码的透明图片 取消显示浏览器默认图片
+				 pic.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+			 }
+		 }else {
+			html5Reader(file,mid);
+		 }
+		 
+		   
+	}
+	
+	
+	function html5Reader(file, mid){
+		 var file = file.files[0];
+		 var reader = new FileReader();
+		 reader.readAsDataURL(file);
+		 reader.onload = function(e){
+		 var preview = 'preview' + mid;
+		 var uploadimg = '#uploadimg' + mid;
+			$(uploadimg).hide();
+			var pic = document.getElementById(preview);
+			pic.src=this.result;
+			pic.style.display = 'block';
+				pic.style.width = '120px';
+				//pic.style.height = '100px';
+				pic.style.float = 'left';
+				//pic.style.css("margin-bottom","15px");
+		 }
+	 }
+	 
+	
+</script>    
+
+{template 'footer'}

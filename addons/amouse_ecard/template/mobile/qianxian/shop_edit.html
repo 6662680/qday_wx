@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+<title>栏目编辑-链接</title>
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css">
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/flytip.css">
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/nameCard.css?v=2014122">
+</head>
+
+<body class="namecard-editor">
+<div class="namecard-page">
+  <form action="" class="validate" method="post" id="shopForm">
+  <section class="editcontent-column">
+      
+      <div class="editcontent-inner">
+      	<div class="editcontent-inner-title">链接地址</div>
+        <div class="editcontent-box">
+        	{if $card['shopUrl']}<textarea class="editcontent-text editcontent-link" name="shopUrl" placeholder="网址以 http:// 开头前面不要加文字" id="itemUrl">{$card['shopUrl']}</textarea>
+			{else}<textarea class="editcontent-text editcontent-link" name="shopUrl" placeholder="网址以 http:// 开头前面不要加文字" id="itemUrl"></textarea>{/if}
+        		
+        	（请不要输入中文，否则无法打开）
+        </div>
+      </div>
+      
+  </section>
+  <div class="editcontent-tips">也可以点击 更多->编辑名片 进入编辑模式</div>
+  <!--#=end column-editcontent-->
+  <div class="editor-confirm" id="footerFixed"> <a class="editor-btn" href="javascript:savePersonInfo()" id="subBtn">确 定</a> </div>
+</div>
+<!--#=end page-->
+<input type="hidden" name="op" value="post">
+</form>
+<div class="icons-list" id="iconsList">
+	<ul class="icons-list-inner" id="iconsListInner"></ul>
+</div>
+
+<!--#start JS--> 
+<script src="../addons/amouse_ecard/style/js/jquery.1.11.1.js"></script>
+<script src="../addons/amouse_ecard/style/js/flytip.js"></script>
+<script src="../addons/amouse_ecard/style/js/bottomFixed.js?v=2014122"></script>
+<script>
+
+//数据提交
+function savePersonInfo() {
+	$("#saveBtn").text("正在保存...");
+	$("#shopForm").submit();
+}
+
+//插入ICON列表
+function iconsList(){
+	var $iconsListInner = $("#iconsListInner");
+	var items = "";
+	for(var i=1; i<=35; i++){
+		items += '<li class="icons-list-item"><img src="../addons/amouse_ecard/style/images/icon/ico-'+i+'.png"></li>';
+	}
+	$iconsListInner.append(items);
+}
+
+$(function(){
+	$("#subBtn").click(function(){
+		var $this = $(this);
+		var $itemTitle = $("#itemTitle");
+		var $itemUrl = $("#itemUrl");
+		var itemTitle = $itemTitle.val();
+		var itemUrlVal = $.trim($itemUrl.val());
+		
+
+		if(!itemUrlVal){
+			$.flytip("请输入栏目链接");
+			return false;
+		}
+		if(!/^http:\/\//.test(itemUrlVal) && !/^https:\/\//.test(itemUrlVal)){
+			itemUrlVal = "http://"+$itemUrl.val();
+		}
+		
+	});
+	
+	//图标
+	iconsList();
+	
+	var $iconsList = $("#iconsList");
+	var $iconsPrev = $("#iconsPrev");
+	
+	$iconsPrev.click(function(){
+		$iconsList.show();
+	});
+	
+	$iconsList.on("click", ".icons-list-item", function(){
+		var $this = $(this);
+		var url = $this.find("img").attr("src");
+		$("#iconsPath").val(url);
+		$iconsPrev.find("img").attr("src",url);
+		$iconsList.hide();
+	});
+	
+	$("#footerFixed").bottomFixed();
+});
+</script>
+<script src="../addons/amouse_ecard/style/js/wx-hideShare.js"></script>
+<!--#end JS-->
+</body>
+</html>

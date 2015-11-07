@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <title>{if $title} {$title} {else}  {if !empty($set['copyright'])} {$set['copyright']} {else}{$_W['account']['name']}{/if} {/if} {if $_W['account']['siteinfo']['sitename']}{$_W['account']['siteinfo']['sitename']} {/if}</title>
+    <script src="../addons/amouse_article/template/mobile/js/jquery.min.js?v=1.0.0.0.1426898548" type="text/javascript"></script>
+    <script src="../addons/amouse_article/template/mobile/js/amazeui.min.js?v=1.0.0.0.1426898548" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../addons/amouse_article/template/mobile/css/amazeui.css?v=1.0.0.0.1426903163" />
+    <link rel="stylesheet" href="../addons/amouse_article/template/mobile/css/base.css?v=1.0.0.0.1426903163" />
+    <link rel="stylesheet" href="../addons/amouse_article/template/mobile/css/public.css?v=1.0.0.0.1426903163" />
+</head>
+<body>
+
+<div id="menutipBox" class="share">
+    <div class="overcast"></div>
+    <div class="window">
+        <div class="menutip-body">
+            <div class="title">
+                分享成功
+            </div>
+            <div class="text">
+                <a href="{$set['guanzhuUrl']}" id="goMoneyBtn"> <span> 确定 </span> </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+    <a href="#top" title="回到顶部"> <span class="am-gotop-title"> 回到顶部 </span> <i class="am-gotop-icon am-icon-chevron-up"> </i> </a>
+</div>
+<div id="wrapper">
+    <div data-am-widget="header" class="am-header am-header-default" id="header">
+        <div class="am-header-left am-header-nav">
+            <!---->
+            <a href="javascript:history.back(-1);" class=""> <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;" /> </a>
+        </div>
+        <h1 class="am-header-title"> {if $title} {$title} {else}  {if !empty($set['copyright'])} {$set['copyright']} {else}{$_W['account']['name']}{/if} {/if} {if $_W['account']['siteinfo']['sitename']}{$_W['account']['siteinfo']['sitename']} {/if}  </h1>
+        <div class="am-header-right am-header-nav">
+            <!--<a href="#" class="list"> <i class="am-header-icon am-icon-bars">
+                   </i>
+                   </a>
+                   <ul style="display: none;">
+                       <span class="triangle"> </span>
+                       <li><a href="/wx_order/index"> 我的订单 </a></li>
+                       <li><a href="/wx_propagate/center"> 我的活动 </a></li>
+                       <li class="clear-border"><a href="/wx_wallet/index">
+                               我的红包 </a></li>
+                   </ul>-->
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="../addons/amouse_article/template/mobile/css/culture.css?v=1.0.0.0.1426903163" />
+<script>
+    var g_musicBox = {};
+</script>
+<div id="container">
+    <div class="people-box">
+        <ul id="loadmore">
+            {data func="amouse_article_site_category" parentid=$cid return="true" assign="navs"}
+            {if empty($navs)}
+            {data module="amouse_article" func="amouse_article_site_article" cid=$cid return="true" assign="result"}
+            {loop $result['list'] $row}
+
+            <a href="{php echo $this->createMobileUrl("detail",array("id" => $row['id']),true)}">
+            <li>
+                <div class="img">
+                    {if !empty($row['thumb'])}
+                    <img src="{php echo strpos($row['thumb'],'http://')===FALSE?($_W['attachurl'].$row['thumb']):$row['thumb']}" height="100" width="115"/>
+                    {/if}
+                </div>
+                <div class="text">
+                    <div class="title" title="{$row[title]}">
+                      {php echo cutstr($row[title],6)}
+                    </div>
+                    <div class="txt">
+                        {php echo cutstr($row[description],16)}
+                    </div>
+                </div>
+                <div class="right"></div>
+            </li>
+            </a>
+            {/loop}
+            {else}
+            {loop $navs $nav}
+            <a href="{php echo $this->createMobileUrl("index",array("cid" => $row['id']),true)}">
+            <li>
+                <div class="img">
+                    {if !empty($nav['thumb'])}
+                    <img src="{php echo strpos($nav['thumb'],'http://')===FALSE?($_W['attachurl'].$nav['thumb']):$nav['thumb']}" height="100" width="115"/>
+                    {/if}
+                </div>
+                <div class="text">
+                    <div class="title" title="{$nav[name]}">
+                       {php echo cutstr($nav[name],6)}
+                    </div>
+                    <div class="txt">
+                        {php echo cutstr($nav[description],16)}
+                    </div>
+                </div>
+                <div class="right"></div>
+            </li>
+            </a>
+            {/loop}
+            {/if}
+        </ul>
+    </div>
+</div>
+<div style="display: none;">
+    {if !empty($set['cnzz'])}
+    {php echo htmlspecialchars_decode($set['cnzz']);}
+    {/if}
+</div>
+</body>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script language='javascript'>
+    <?php
+        $jssdk = new JSSDK();
+        $signPackage = $jssdk->GetSignPackage();
+    ?>
+    wx.config({
+        debug:false,
+        appId: "{$_W['account']['appid_share']}",
+        timestamp: {$signPackage["timestamp"]},
+        nonceStr: '{$signPackage["nonceStr"]}',
+        signature: '{$signPackage["signature"]}',
+        jsApiList: [
+            'onMenuShareTimeline','onMenuShareAppMessage','onMenuShareWeibo'
+        ]
+    });
+    var shareMeta = {
+        imgUrl:"{$shareimg}",
+        link:"{$url}",
+        desc:"{if !empty($category['description'])}{$category['description']}{else}{$_W['account']['name']}的精美图文{/if}",
+        title:"{if !empty($category['title'])}{$category['title']}{else}{$_W['account']['name']}的精美图文{/if}"
+    };
+    wx.ready(function(){
+        wx.onMenuShareTimeline(shareMeta);
+        wx.onMenuShareAppMessage(shareMeta);
+        wx.onMenuShareWeibo(shareMeta);
+    });
+</script>
+</html>

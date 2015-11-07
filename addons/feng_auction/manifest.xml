@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+    <application setting="true">
+        <name><![CDATA[微拍卖]]></name>
+        <identifie><![CDATA[feng_auction]]></identifie>
+	<version><![CDATA[3.0]]></version>
+		<type><![CDATA[business]]></type>
+        <ability><![CDATA[微信拍卖,粉丝互动]]></ability>
+        <description><![CDATA[免费更新QQ群:455672593,微拍卖集限时拍卖购物、账户明细管理、余额充值提现等功能一身，微拍卖可以用于任何有商品出售的平台，如家电、汽车、数码或绝大部分实体商户]]></description>
+	<author><![CDATA[免费更新QQ群:455672593]]></author>
+	<url><![CDATA[http://www.qdaygroup.com]]></url>
+    </application>
+    <platform>
+        <subscribes>
+        </subscribes>
+        <handles>
+            <message type="text" />
+        </handles>
+        <rule embed="false" />
+    </platform>
+    <bindings>
+        <cover>
+            <entry title="拍卖首页" do="index" />
+	    <entry title="个人中心" do="profile" />
+        </cover>
+        <menu>
+            <entry title="拍品管理" do="goods" />
+            <entry title="充值记录" do="record" />
+			<entry title="拍品发货" do="sendout" />
+            <entry title="会员管理" do="member" />
+			<entry title="提现管理" do="withdrawals" />
+            <entry title="幻灯片管理" do="adv" />
+        </menu>
+        <home>
+            <entry title="拍卖首页" do="index" />
+			<entry title="个人中心" do="profile" />
+        </home>
+    </bindings>
+    <install><![CDATA[install.php]]></install>
+    <uninstall><![CDATA[]]></uninstall>
+    <upgrade><![CDATA[]]></upgrade>
+</manifest>

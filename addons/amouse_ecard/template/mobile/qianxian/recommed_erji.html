@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    <title>人脉推荐</title>
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/reset.css">
+    <link rel="stylesheet" href="../addons/amouse_ecard/style/css/nameCard.css?v=201410282">
+    <link rel="stylesheet" type="text/css" href="../addons/amouse_ecard/style/css/flytip.css">
+    <style type="text/css">
+        html, body {
+            background: #efefef;
+        }
+    </style>
+</head>
+
+<body class="namecard-recommend">
+<!--#=start page-->
+<div class="namecard-page">
+    <section class="recommend-column">
+        <ul class="recommend-inner">
+            <li class="recommend-inner-item current">
+                <a class="recommend-item-link" href="/app/bizcard/listRecommendFan.do?type=top">
+                    <span class="recommend-tit">{$member['realname']}的人脉</span>
+                </a>
+            </li>
+            <li class="recommend-inner-item ">
+                <a class="recommend-item-link" id="search"">
+                <span class="recommend-tit">随机推荐</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!--#=end column-->
+
+    <!--#=start recommend-column-->
+    <section class="recommend-box">
+        <ul class="recommend-box-inner" id="recommendListBox">
+            {loop $renmai $r}
+            <li class="recommend-box-item">
+                <a class="recommend-box-link">
+                    {if $r['headimg']}
+
+                    {if substr($r['headimg'],0,9) == 'http://wx'}
+                    <img src="{$r['headimg']}" class="recommend-avatar-thumbnail">
+                    {else}
+                    <img src="{$_W['attachurl']}{$r['headimg']}" class="recommend-avatar-thumbnail">
+                    {/if}
+                    {else}<img src="../addons/amouse_ecard/style/images/header.png" class="recommend-avatar-thumbnail">
+                    {/if}
+                    <h3 class="recommend-name">{$r['realname']}</h3>
+
+                    <p class="recommend-company">{php echo $this->hehe($r['qianming'])}</p>
+                    <!--<span class="rec-state">查看TA的人脉</span>-->
+                </a>
+            </li>
+
+            {/loop}
+        </ul>
+    </section>
+    <!--#=end recommend-column-->
+    <footer class="footer">
+        <div class="copyright"><a href="#"></a></div>
+    </footer>
+</div>
+<!--#=end page-->
+
+<!--#start JS-->
+<script src="../addons/amouse_ecard/style/js/jquery.1.11.1.js"></script>
+<script src="../addons/amouse_ecard/style/js/scrollLoad.js"></script>
+<script src="../addons/amouse_ecard/style/js/flytip.js"></script>
+
+<script>
+    $('#search').click(
+            function () {
+                $.flytip("功能即将上线，敬请期待！");
+            }
+    );
+
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+
+</script>
+<!--#end JS-->
+</body>
+</html>

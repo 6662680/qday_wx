@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>GPS导航</title>
+    <link href="../addons/amouse_ecard/style/css/css.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        #container {
+            height: 100%
+        }
+        a.ico-map {
+            float: left;
+            width: 16%;
+            height: 24px;
+            display: block;
+            padding-top: 26px;
+            text-align: center;
+            font-size: 12px;
+        }
+        .mapFinddingCanvasLabelStyle3 {
+            color: white;
+            height: 40px;
+            overflow: Visible;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .mapFinddingCanvasLabelStyle3 .s1 {
+            height: 28px;
+            width: 5px;
+            background: url(/style/imgl_left.png) no-repeat 1px top;
+        }
+
+        .mapFinddingCanvasLabelStyle3 .s2 {
+            margin-left: 2px;
+            margin-top: -28px;
+            white-space: nowrap;
+            background: url(/style/imgl_middle.png) repeat-x;
+            height: 28px;
+            line-height: 28px;
+            color: #fff;
+            text-align: center;
+            padding: 0 10px;
+            font-size: 12px;
+            font-family: Lucida Grande, Verdana, Lucida, Arial;
+        }
+
+        .mapFinddingCanvasLabelStyle3 .s3 {
+            height: 28px;
+            width: 5px;
+            background: url(/style/imgl_right.png) no-repeat;
+            _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src = '/style/imgl_right.png');
+            _background-image: none;
+        }
+
+        .mapFinddingCanvasLabelStyle3 .s4 {
+            clear: both;
+            font-size: 1px;
+            width: 1px;
+            height: 0;
+            visibility: hidden;
+            line-height: 0;
+        }
+        .mapFinddingCanvasLabelStyle3 .s5 {
+            position: absolute;
+            left: 1px;
+            top: 23px;
+            width: 26px;
+            height: 17px;
+            background: url(/style/imgl_jt.png) no-repeat;
+            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src = '/style/imgl_jt.png');
+            _background-image: none;
+        }
+        .newqipao {
+            width: 200px;
+            z-index: 98;
+            position: absolute;
+            display: none;
+            background: white;
+        }
+    </style>
+</head>
+<body class="indexBody color-a">
+<div class="wrap">
+    <div id="items" class="rbox6"
+         style="background:#FFFFFF; -webkit-box-shadow:0 0 8px rgba(0,0,0,0.8); position:absolute; left:8px; right:8px; top:0px; z-index:10">
+        <div class="rbox6"
+             style="background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F1F0F6), color-stop(1, #CED2DB)); margin-top:2px; height:50px; padding:0px ">
+            <a class="ico-map" href="javascript:void(0)"
+               style="background:url(../addons/amouse_ecard/style/img/ico-map-1-0.png) no-repeat center 6px ; background-size:20px 20px; color:#565D68"
+               onclick="Search.gotosearchnear(this,'公交车站');" flag="0">公交</a>
+            <a class="ico-map" href="javascript:void(0)"
+               style="background:url(../addons/amouse_ecard/style/img/ico-map-2-0.png) no-repeat center 6px ; background-size:20px 20px; color:#565D68"
+               onclick="Search.gotosearchnear(this,'地铁站');" flag="0">地铁</a>
+            <a class="ico-map" href="javascript:void(0)"
+               style="background:url(../addons/amouse_ecard/style/img/ico-map-3-0.png) no-repeat center 6px ; background-size:20px 20px; color:#565D68"
+               onclick="Search.gotosearchnear(this,'学校');" flag="0">学校</a>
+            <a class="ico-map" href="javascript:void(0)"
+               style="background:url(../addons/amouse_ecard/style/img/ico-map-5-0.png) no-repeat center 6px ; background-size:20px 20px; color:#565D68"
+               onclick="Search.gotosearchnear(this,'医院');" flag="0">医院</a>
+            <a class="ico-map" href="javascript:void(0)"
+               style="background:url(../addons/amouse_ecard/style/img/ico-map-6-0.png) no-repeat center 6px ; background-size:20px 20px; color:#565D68"
+               onclick="Search.gotosearchnear(this,'银行');" flag="0">银行</a>
+            <a class="ico-map" href="javascript:void(0)"
+               style="background:url(../addons/amouse_ecard/style/img/ico-map-7-0.png) no-repeat center 6px ; background-size:20px 20px; color:#565D68"
+               onclick="Search.gotosearchnear(this,'超市');" flag="0">购物</a>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div id="container"></div>
+
+    <div id="mapx" class="none">{$member['lng']}</div>
+    <div id="mapy" class="none">{$member['lat']}</div>
+    <div id="maptip" class="newqipao"></div>
+</div>
+<input type="hidden" id="merSit" value="../addons/amouse_ecard/style/img">
+<input type="hidden" id="buildingName" value="{$theone['title']}">
+<input type="hidden" id="address" value="{$member['companyAddress']}">
+<input type="hidden" id="mobile" value="{$theone['mobile']}">
+<input type="hidden" id="positionFlag" value="true">
+</body>
+<script type="text/javascript" src="../addons/amouse_ecard/style/js/zepto.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=s6vFvPKgaEnI2ImqBpKGDj0m&v=1.0"></script>
+<script type="text/javascript" src="../addons/amouse_ecard/style/js/searchmap.js"></script>
+</html>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="true">
+		<name><![CDATA[精美图文]]></name>
+		<identifie><![CDATA[amouse_article]]></identifie>
+		<version><![CDATA[3.1]]></version>
+		<type><![CDATA[business]]></type>
+		<ability><![CDATA[精美图文,官方微文章增加版，内置8套列表模板，很愉快的切换列表显示。可以完全兼容微文章,更好的展示公众号，图文里面可以包含音乐]]></ability>
+		<description><![CDATA[更新QQ群:455672593,精美图文,官方微文章增加版，内置8套列表模板，很愉快的切换列表显示。可以完全兼容微文章,更好的展示公众号，图文里面可以包含音乐.打通一键关注（此一键关注为我精美图文内置模块）与精美图文，现在文章上面可以推荐公众号了。让更多的人来关注，也可以很方便运维管理多个公众号，可以跟别人来交换公众号。
+精美图文内置12套列表页面模板，5套内容页。每个内容页都可以 放置要推荐的公众号，都可以后台设置背景音乐]]></description>
+		<author><![CDATA[更新QQ群:455672593]]></author>
+		<url><![CDATA[http://www.qdaygroup.com]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+        <cover>
+            <entry title="精美图文入口" do="index" />
+            <entry title="微信互推入口" do="tuijian" />
+        </cover>
+		<menu>
+			<entry title="文章管理" do="paper" />
+            <entry title="文章分类" do="category" />
+            <entry title="幻灯片管理" do="adv" state="" direct="false" />
+            <entry title="一键关注管理" do="hutui" />
+            <entry title="精美图文参数设置" do="sysset" state="" direct="false" />
+		</menu>
+    </bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_wx_tuijian` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `title` varchar(100) NOT NULL DEFAULT '' COMMENT '公众号名称',
+  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '公众号名称',
+  `guanzhuUrl` varchar(255) NOT NULL DEFAULT '' COMMENT '引导关注',
+  `type` varchar(1)  NOT NULL DEFAULT '1',
+  `clickNum` int(10) unsigned NOT NULL  DEFAULT '0',
+  `ipclient` varchar(50) NOT NULL DEFAULT '' COMMENT 'ip',
+  `thumb` varchar(500) NOT NULL DEFAULT '' COMMENT '缩略图',
+  `createtime` int(10) unsigned NOT NULL DEFAULT '0',
+  `hot` int(1) NOT NULL COMMENT '是否热门 0默认 1热门',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_fineness_article` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `title` varchar(100) NOT NULL DEFAULT '',
+  `musicurl` varchar(100) NOT NULL DEFAULT '' COMMENT '上传音乐',
+  `content` text NOT NULL,
+  `credit` varchar(255) DEFAULT '0',
+  `pcate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '一级分类',
+  `ccate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '二级分类',
+  `template` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '内容模板目录',
+  `templatefile` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '分类模板名称',
+  `bg_music_switch` varchar(1)  NOT NULL DEFAULT '1',
+  `clickNum` int(10) unsigned NOT NULL  DEFAULT '0',
+  `zanNum` int(10) unsigned NOT NULL  DEFAULT '0',
+  `thumb` varchar(500) NOT NULL DEFAULT '' COMMENT '缩略图',
+  `description` varchar(500) NOT NULL DEFAULT '' COMMENT '简介',
+  `createtime` int(10) unsigned NOT NULL DEFAULT '0',
+  `displayorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `outLink` varchar(500)   DEFAULT '0' COMMENT '外链',
+  `author` varchar(100)   DEFAULT '' COMMENT '作者',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_fineness_article_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号',
+  `name` varchar(50) NOT NULL COMMENT '分类名称',
+  `parentid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级分类ID,0为第一级',
+  `displayorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `thumb` varchar(1024) NOT NULL DEFAULT '' COMMENT '分类图片',
+  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '分类描述',
+  `template` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '分类模板目录',
+  `templatefile` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '分类模板名称',
+  `createtime` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE if not exists `ims_fineness_adv` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) default 0,
+  `pcateid` int(11) default 0,
+  `link` varchar(255) DEFAULT '',
+  `title` varchar(255) DEFAULT '',
+  `thumb` varchar(255) DEFAULT '',
+  PRIMARY KEY (`id`),KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8  COMMENT='幻灯片';
+
+CREATE TABLE IF NOT EXISTS `ims_fineness_sysset`(
+  `id` int(11)  AUTO_INCREMENT,
+  `weid` int(11) DEFAULT 0 ,
+  `guanzhuUrl` varchar(255) DEFAULT '' comment '引导关注',
+  `guanzhutitle` varchar(255) DEFAULT '' comment '引导关注名称',
+  `historyUrl` varchar(255) DEFAULT '' comment '历史记录外链',
+  `copyright` varchar(255) DEFAULT '' comment '版权',
+  `cnzz` varchar(800) DEFAULT '' comment '统计',
+  `appid` varchar(255) default '',
+  `logo` varchar(255) default '',
+  `footlogo` varchar(255) default '',
+  `appsecret` varchar(255) default '',
+  `appid_share` varchar(255) default '',
+  `isopen` varchar(1) default '1',
+  `title` varchar(255) default '',
+  `tjgzh` varchar(255) DEFAULT '1' comment '推荐公众号图片',
+  `tjgzhUrl` varchar(255) DEFAULT '1' comment '推荐公众号引导关注',
+  `appsecret_share` varchar(255) default '',
+  PRIMARY KEY (`id`),KEY `indx_weid` (`weid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+	]]></install>
+<uninstall><![CDATA[drop table `ims_fineness_article`;drop table `ims_fineness_sysset`;drop table `ims_fineness_article_category`;drop table `ims_wx_tuijian`;drop table `ims_fineness_adv`;]]></uninstall>
+<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>

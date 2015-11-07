@@ -1,0 +1,118 @@
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/fm_photosvote/template/mobile/photos/style.css?v{php echo time();}" />
+<script type="text/javascript" src="../addons/fm_photosvote/template/mobile/photos/js/jquery.js"></script>
+<script type="text/javascript" src="../addons/fm_photosvote/template/mobile/photos/js/Tip.js"></script>
+<style>
+body{background:#f5f5f5 no-repeat;background-size:100% auto;}
+
+.tongji {
+  width: 100%;
+  height: 60px;
+  background: url({php echo toimage($reply['zbgtj'])}) repeat-x -60px 0;
+  background-size: auto 100%;
+  position: relative;
+  z-index: 10px;
+  max-width: 640px;
+  margin: 0 auto; 
+  margin-top: -10px;
+}
+ .top {  overflow: hidden;  font-size: 14px;  line-height: 40px;  padding: 5px 0px;  background: #000;  position: fixed;  z-index: 9999;  width: 100%;  color: #fff;  }
+ .top div {
+  padding: 0 5px;
+}
+.top span {
+  color: #fff;
+}
+.top a {
+  padding: 0 5px;
+  color: #fff;
+}
+.top .topa {
+  float: right;
+  margin-top: 5px;
+  background:url(../addons/fm_photosvote/template/images/bm.png) center no-repeat #fe7160;
+  background-size: 100% 100%;
+  line-height: 30px;
+  height: 30px;
+  font-weight: bold;
+  border-radius: 5px;
+  color: #fff;
+  width: 100px;
+}
+
+.con {
+  background: {$reply['zbgcolor']} url({php echo toimage($reply['zbg'])});
+  padding: 20px 10px;
+  margin-top: -60px;
+  background-size: 100% auto;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.nav>li>a {
+  position: relative;
+  display: block;
+  padding: 0;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #28013B;
+}
+
+ .h {height:10px}
+</style>
+ 	
+{template 'hnav'}
+<div class="banner" style="  max-height: 100%;"><img src="{$picture}"></div>
+{template 'tongji'}
+
+<div class="con">
+	<p class="tips"><span><i>活动简介</i></span></p>
+	<div class="neirong">
+		{$reply['content']}
+	</div>
+	{if $reply['isdes'] == 1}{template 'zanzhu'}{/if}
+	<div class="copyright" style="  text-align: center;">
+    {if $reply['iscopyright']==1}<a href="{$reply['copyrighturl']}" >&copy;{$reply['copyright']}</a>{else}<a href="javascript:;" style="  ">{if empty($footer_off)}&copy;{if empty($_W['account']['name'])}FantasyMoons Team团队{else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}{/if}</a>{/if}
+	</div>
+</div>
+
+{template 'fnav'}
+	
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+	// jssdk config 对象
+	jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || { jsApiList:[] };
+	
+	// 是否启用调试
+	// jssdkconfig.debug = true;
+	
+	// 已经注册了 jssdk 文档中所有的接口
+	jssdkconfig.jsApiList = [
+		'checkJsApi',
+		'onMenuShareTimeline',
+		'onMenuShareAppMessage',
+		'onMenuShareQQ',
+		'onMenuShareWeibo',
+		'showOptionMenu',		
+	];
+	
+	wx.config(jssdkconfig);
+
+	sharedata = {
+		title : "{$reply['sharetitle']}",
+		link : "{$shareurl}",
+		desc : "{$reply['sharecontent']}",
+		imgUrl :"{$sharephoto}"
+	};
+	
+	wx.ready(function () {
+		wx.showOptionMenu();
+		wx.onMenuShareAppMessage(sharedata);
+		wx.onMenuShareTimeline(sharedata);
+		wx.onMenuShareQQ(sharedata);
+		wx.onMenuShareWeibo(sharedata);
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<script type="text/javascript">  
+$(document).ready(function() {
+    var track_click = 0; //track user click on "load more" button, righ now it is 0 click  
+    var total_pages = {$total_pages};
+    $('#results').load("{php echo $this->createMobileUrl('pagedata', array('rid' => $rid,'pagesnum' => $psize,'keyword' => $keyword))}", {'page':track_click}, function() {track_click++;}); //initial data to load   
+    $(".load_more").click(function (e) { //user clicks on button      
+        $(this).hide(); //hide load more button on click  
+        $('.animation_image').show(); //show loading image   
+        if(track_click <= total_pages) //make sure user clicks are still less than total pages  
+        {  
+            $.post('{php echo $this->createMobileUrl('pagedata', array('rid' => $rid,'pagesnum' => $psize,'keyword' => $keyword))}',{'page': track_click}, function(data) {  
+                $(".load_more").show(); //bring back load more button  
+                $("#results").append(data); //append data received from server  
+                $("html, body").animate({scrollTop: $("#load_more_button").offset().bottom}, 500);  
+                $('.animation_image').hide(); //hide loading image once data is received  
+                track_click++; //user click increment on load button  
+            }).fail(function(xhr, ajaxOptions, thrownError) {   
+                alert(thrownError); //alert any HTTP error  
+                $(".load_more").show(); //bring back load more button  
+                $('.animation_image').hide(); //hide loading image once data is received  
+            });  
+            if(track_click >= total_pages-1)  
+            {  
+                $(".load_more").attr("disabled", "disabled");
+				$(".load_more").html("全部加载完成");
+            }  
+         }  
+        });  
+});  
+</script> 
+{if $reply['tmoshi'] == 1}
+<!--单行-->
+<style>
+.falls ul {
+  width: 100%;
+  padding: 0 10px;
+  float: left;
+  box-sizing: border-box;
+}
+</style>
+<section class="falls">
+      <ul class="columns" id="results">
+		 
+      </ul>
+    </section>
+{elseif $reply['tmoshi'] == 2}
+<!--双行-->
+
+<style>
+.falls ul {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+.falls ul li{
+  width: 48%;
+  
+  margin: 0 2% 8px 0;
+  
+  height: 180px;
+}
+.xs_pic {
+  position: relative;
+  overflow: hidden;
+  height: 100px;
+}
+.falls ul li img {
+  width: 100%;
+}
+</style>
+<section class="falls">
+      <ul class="columns" id="results">
+		  
+      </ul>
+    </section>
+
+{elseif $reply['tmoshi'] == 3}
+<!--三行-->
+
+<style>
+.falls ul {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+.falls ul li{
+  width: 33%;
+  margin: 0;
+}
+.falls ul li img {
+  width: 100%;
+  max-height: 100px;
+}
+.btn {
+  padding: 2px 4px;
+}
+.xs_pic {
+  position: relative;
+  height: 100px;
+  width: 90%;
+  text-align: center;
+  margin: 0 auto;
+}
+</style>
+<section class="falls">
+      <ul class="columns" id="results">
+		 
+      </ul>
+    </section>
+{else}
+<!--默认-->
+<!--双行-->
+<style>
+.xs_pic {
+	min-height: 120px;
+}
+ 
+  
+</style>
+<section class="falls">
+      <ul class="columns">
+		    {loop $userlist $mid $row}
+<input type="hidden" name="ucreatetime" id="ucreatetime" value="{$row['createtime']}" />	
+			<?php if (($mid+1)%2 == 1) {
+				continue;}
+			?>
+			<li style="cursor: pointer;">
+				
+				<div class="li_box">
+					
+					<a href="{if $reply['moshi'] == 2}{php echo $this->createMobileUrl('tuser', array('rid' => $rid, 'tfrom_user'=> $row['from_user']))}{elseif $reply['moshi'] == 1}{php echo $this->createMobileUrl('tuserphotos', array('rid' => $rid, 'tfrom_user'=> $row['from_user']))}{/if}">
+						<div class="xs_pic">
+							<img src="{if $row['photo']}{php echo toimage($row['photo'])}{else}{php echo toimage($row['avatar'])}{/if}">
+							<span style="  left: 6px;  top: 6px;  position: absolute;  color: #fff;  background: rgba(0, 0, 0, 0.51);  padding: 1px 6px;  border-radius: 5px;">ID: {$row['id']}</span>
+							<div class="biaozhu_s"><img src="{php echo toimage($row['avatar'])}" width="35" style="border-radius: 35px;margin-right:10px;width:30px;"><strong >{if empty($row['realname'])}{php echo cutstr($row['nickname'], '6')}{else}{php echo cutstr($row['realname'], '6')}{/if}</strong></div>
+						</div>
+					</a>
+					<div class="toupiao" id="{$row['id']}" style=" padding: 0px 10px 0px;  height: 70px;">
+						<span class="piaoshu">{$reply['tpsname']} {php echo $row['photosnum'] + $row['xnphotosnum']}</span>
+						
+						<dd style="text-align:center;  text-decoration: none;">
+							{if !empty($reply['tpname'])}<a href="javascript:void(0)" id="{$row['id']}" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" onclick="tvotep('{$row['from_user']}', '{if $row['realname']}{$row['realname']}{else}{$row['nickname']}{/if}')" style="color:#fff;  background-color: #e2216f;">{$reply['tpname']}</a>{/if}
+							
+							
+						</dd>
+					</div>
+				</div>  
+			</li>
+			
+		  {/loop} 		
+      </ul>
+      <ul class="fr columns">
+	  	{loop $userlist $mid $row}
+			<input type="hidden" name="ucreatetime" id="ucreatetime" value="{$row['createtime']}" />	
+		 <?php if (($mid+1)%2 == 0) {
+				continue;}
+		  ?>
+			<li style="cursor: pointer;">
+				
+				<div class="li_box">
+					
+					<a href="{if $reply['moshi'] == 2}{php echo $this->createMobileUrl('tuser', array('rid' => $rid, 'tfrom_user'=> $row['from_user']))}{elseif $reply['moshi'] == 1}{php echo $this->createMobileUrl('tuserphotos', array('rid' => $rid, 'tfrom_user'=> $row['from_user']))}{/if}">
+						<div class="xs_pic">
+							<img src="{if $row['photo']}{php echo toimage($row['photo'])}{else}{php echo toimage($row['avatar'])}{/if}">
+							<span style="  left: 6px;  top: 6px;  position: absolute;  color: #fff;  background: rgba(0, 0, 0, 0.51);  padding: 1px 6px;  border-radius: 5px;">ID: {$row['id']}</span>
+							<div class="biaozhu_s"><img src="{php echo toimage($row['avatar'])}" width="35" style="border-radius: 35px;margin-right:10px;width:30px;"><strong >{if empty($row['realname'])}{php echo cutstr($row['nickname'], '6')}{else}{php echo cutstr($row['realname'], '6')}{/if}</strong></div>
+						</div>
+					</a>
+					<div class="toupiao" id="{$row['id']}" style=" padding: 0px 10px 0px;  height: 70px;">
+						<span class="piaoshu">{$reply['tpsname']} {php echo $row['photosnum'] + $row['xnphotosnum']}</span>
+						
+						<dd style="text-align:center;  text-decoration: none;">							
+							{if !empty($reply['tpname'])}<a href="javascript:void(0)" id="{$row['id']}" class="btn btn-danger"  data-toggle="tooltip" data-placement="top" onclick="tvotep('{$row['from_user']}', '{if $row['realname']}{$row['realname']}{else}{$row['nickname']}{/if}')" style="color:#fff;  background-color: #e2216f;">{$reply['tpname']}</a>{/if}
+							
+						</dd>
+					</div>
+				</div>  
+			</li>
+		  {/loop} 		
+      </ul>
+    </section>
+{/if}
+

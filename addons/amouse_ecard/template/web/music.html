@@ -1,0 +1,107 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $op == 'display'} class="active" {/if}><a href="{php echo $this->createWebUrl('music',array('op' =>'display'))}">音乐管理</a></li>
+    <li{if empty($music['id']) && $op== 'post'} class="active" {/if}><a href="{php echo $this->createWebUrl('music',array('op' =>'post'))}">添加音乐</a></li>
+    {if !empty($music['id']) &&  $op== 'post'}<li  class="active"><a href="{php echo $this->createWebUrl('music',array('op' =>'post','id'=>$music['id']))}">编辑音乐</a></li>{/if}
+</ul>
+
+{if $op == 'display'}
+<link rel="stylesheet" href="../addons/amouse_ecard/style/css/jquery-ui-tooltip.min.css?v=20140603" />
+<script type="text/javascript" src="../addons/amouse_ecard/style/js/jquery-ui-tooltip.min.js?v=20140601" ></script>
+<div class="main panel panel-default">
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th>音乐名称</th>
+                <th>歌手</th>
+                <th>封面</th>
+                <th>外链</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {loop $list $music}
+            <tr>
+                <td>{$music['musicName']}</td>
+                <td>{$music['musicSinger']}</td>
+                <td  class="qrcode">
+<img src="{php echo strpos($music['musicImg'],'http://')===FALSE?($_W['attachurl'].$music['musicImg']):$music['musicImg']}" height="45px" width="45px" />
+                </td>
+                <td>
+                    {$music['musicUrl']}
+                </td>
+                <td style="text-align:left;">
+                    <a href="{php echo $this->createWebUrl('music', array('op' => 'post', 'id' => $music['id']))}" class="btn btn-mini btn-primary"><i class="fa fa-edit"></i></a>
+                    <a onclick="return confirm('此操作不可恢复，确认吗？'); return false;"
+                       href="{php echo $this->createWebUrl('music', array('id' => $music['id'],'op'=>'deleteop'))}" title="删除" class="btn btn-mini btn-danger">
+                        <i class="fa fa-times"></i></a>
+
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+        <div style="margin:0 auto;margin-right: auto;vertical-align: middle;text-align: center;" >
+            {$pager}
+        </div>
+    </div>
+</div>
+<script>
+    $("td.qrcode").tooltip({
+        items:'img',
+        content: function() {
+            return "<img width='300px' height='300px' src='"  + $(this).attr("src") + "'></img>";
+        },
+        position: {
+            my : "right bottom-300",
+            collision: "fit"
+        }
+    });
+</script>
+{elseif $op == 'post'}
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit='return formcheck()'>
+        <input type="hidden" name="id" value="{$music['id']}" />
+        <div class="panel panel-default">
+        <div class="panel-heading">
+           音乐设置
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">音乐图片</label>
+                <div class="col-sm-9">
+                    {php echo tpl_form_field_image('musicImg', $music['musicImg'])}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">音乐名称</label>
+                <div class="col-sm-8 col-xs-12">
+                    <input type="text" class="form-control" id="musicName" name="musicName" value="{$music['musicName']}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">歌手</label>
+                <div class="col-sm-8 col-xs-12">
+                    <input type="text" class="form-control" id="musicSinger" name="musicSinger" value="{$music['musicSinger']}">
+                </div>
+            </div>
+            <div class="form-group" id="js_music_div">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">音频链接</label>
+                <div class="col-sm-9 col-xs-12">
+                    {php echo tpl_form_field_audio('musicUrl', $music['musicUrl'],array('type'=>'audio'));}
+                    <span class="help-block">
+                        选择上传的音频文件或直接输入URL地址，常用格式：mp3 (保证浏览网页的加载速度,上传音乐最大为2MB )
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+        <div class="form-group col-sm-12">
+            <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+{/if}

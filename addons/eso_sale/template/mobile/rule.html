@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<title>帮助说明</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../addons/eso_sale/style/css/style.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
+<meta name="mobileOptimized" content="width" />
+<meta name="handheldFriendly" content="true" />
+<meta http-equiv="Cache-Control" content="max-age=0" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+<body style="background: #e7e7e7 url(../addons/eso_sale/style/images/bg5.jpg);">
+	
+<section class="main animated fadeInDown">
+	<div class="main-box">
+	
+		<div class="rule-detail border-box">
+			{$rule}
+		</div>
+	</div>
+</section>
+<nav class="nav fn-clear">
+	<a style=" width: 100%;filter:alpha(opacity=50); background:rgba(255, 255, 255, 0.2) none repeat scroll 0 0 !important;color:#fff;" href="{php echo $this->mturl('fansindex')}"><i class="icon-adult"></i>个人中心</a>
+</nav>
+<footer class="foot"><a>&copy; {$_W['account']['name']}</a></footer>
+<script src="http://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+<script src="../addons/eso_sale/style/js/com.js"></script>
+</body>
+<?php
+    require_once IA_ROOT."/jssdk.class.php";
+    $appid = $this->module['config']['appid'];
+    $secret = $this->module['config']['secret'];
+    $weixin = new jssdk($appid,$secret);
+    $wx = $weixin->get_sign();
+?>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    wx.config({
+        appId: "{$wx['appId']}",
+        timestamp: {$wx['timestamp']},
+        nonceStr: "{$wx['nonceStr']}",
+        signature: "{$wx['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+    wx.ready(function () {
+        var mid=getCookie("mid");
+        var shareData = {
+            title: '赶快来邀请好友赚佣金！',
+            desc: '赶快来邀请好友赚佣金！',
+            link: "{$wx['url']}",
+            imgUrl: '{$_W['siteroot']}/addons/eso_sale/style/images/icon.jpg',
+        };
+        //分享朋友
+        wx.onMenuShareAppMessage({
+            title: shareData.title,
+            desc: shareData.desc,
+            link: shareData.link,
+            imgUrl:shareData.imgUrl,
+            trigger: function (res) {
+            },
+            success: function (res) {
+                window.location.href ='{php echo $_W['siteroot']."app/".$this->mturl('fansindex',array('id'=>$id))}';
+                TopBox.alert("分享后成功,等着收佣金吧!");
+            },
+            cancel: function (res) {
+                TopBox.alert("分享后获得积分,还有可能得到佣金哦!不要错过发大财的机会!");
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+        //朋友圈
+        wx.onMenuShareTimeline({
+            title: shareData.title+"---"+shareData.desc,
+            link: shareData.link,
+            imgUrl:shareData.imgUrl,
+            trigger: function (res) {
+            },
+            success: function (res) {
+                window.location.href ='{php echo $_W['siteroot']."app/".$this->mturl('fansindex',array('id'=>$id))}';
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+        //显示分享
+        wx.showOptionMenu();
+    });
+</script>
+</html>

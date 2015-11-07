@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head> <meta charset="UTF-8"/>
+<title>{if $title} {$title} {else} {if !empty($set['copyright'])} {$set['copyright']}
+    {else}{$_W['account']['name']}{/if} {/if} {if
+    $_W['account']['siteinfo']['sitename']}{$_W['account']['siteinfo']['sitename']} {/if}</title>
+<meta name="description" content="{if $title} {$title} {else}  {if !empty($set['copyright'])} {$set['copyright']} {else}{$_W['account']['name']}{/if} {/if} {if $_W['account']['siteinfo']['sitename']}{$_W['account']['siteinfo']['sitename']} {/if}"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" href="../addons/amouse_article/template/mobile/css/wemedia_style.css"/>
+<link rel="stylesheet" href="../addons/amouse_article/template/mobile/css/add2home.css"/>
+<script src="../addons/amouse_article/template/mobile/js/jquery-1.9.1.js?v=20150404"></script>
+<script src="../addons/amouse_article/template/mobile/js/flipsnap.js"></script>
+<script src="../addons/amouse_article/template/mobile/js/jquery.lazyload.js"></script>
+<script src="../addons/amouse_article/template/mobile/js/jquery.slides.min.js"></script>
+<script src="../addons/amouse_article/template/mobile/js/main.js"></script>
+<!-- IOS -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-title" content="WE阅读"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="format-detection" content="telephone=no"/>
+<script src="../addons/amouse_article/template/mobile/js/add2home.js?v=201"></script>
+</head>
+<body>
+
+<div class="top-container" data-role="header">
+    <div class="avatar index">
+        <a href="{$set['guanzhuUrl']}">
+        {if !empty($set['logo'])}
+    <img src="{php echo strpos($set['logo'],'http://')===FALSE?($_W['attachurl'].$set['logo']):$set['logo']}" height="80" width="80"/>
+        {else}
+        <img src="http://res.wemedia.cn/mpshare/logo_80.png"  alt="Logo"/>
+        {/if}
+    </a>
+    </div>
+    <div class="account-info">
+        <h1 class="name">{if $title} {$title} {else} {if !empty($set['copyright'])} {$set['copyright']}
+            {else}{$_W['account']['name']}{/if} {/if} {if
+            $_W['account']['siteinfo']['sitename']}{$_W['account']['siteinfo']['sitename']} {/if}
+        </h1>
+        <h2 class="desc">
+            <span>{if empty($category)}
+                   {if !empty($set['copyright'])}{$set['copyright']}{else}{$_W['account']['name']}{/if}阅读,微观点
+                  {else}{$category['name']}{/if}</span>
+            <span class="button-follow-container">
+                <a href="javascript:;" id="side_menu_button">
+                <img src="http://res.wemedia.cn/mpshare/list_right.png"/>
+                </a>
+            </span>
+        </h2>
+    </div>
+</div>
+
+<div class="list-container">
+
+    {loop $result  $row}
+    <div class="article-item">
+        <a href="{php echo $this->createMobileUrl("detail",array("id" => $row['id'],'op'=>'wemedia'),true)}">
+            <div class="item-cover">
+   <img src="http://res.wemedia.cn/mpshare/loading.gif" data-original="{php echo strpos($row['thumb'],'http://')===FALSE?($_W['attachurl'].$row['thumb']):$row['thumb']}" alt="{$row[title]}" />
+            </div>
+            <div class="item-summary">
+                <div class="item-title">{$row[title]}</div>
+                <div class="item-text">By&nbsp;{if empty($row['author'])}{$_W['account']['name']}{else}{$row['author']}{/if}
+                    
+					<span class="item-text-right"> {php echo date('Y-m-d',$row['createtime'])} </span>
+                </div>
+            </div>
+        </a>
+    </div>
+    {/loop}
+</div>
+
+<div class="side-right-menu">
+    <div class="sidebox">
+        <ul>
+            <li>&nbsp;</li>
+            <li><a href="{php echo $this->createMobileUrl("index",array("cid" =>0,'op'=>'wemedia'),true)}">首页</a></li>
+        </ul>
+        <hr/>
+        <ul>
+           {data func="amouse_article_site_pcategory" parentid=$cid return="true" assign="navs"}
+            {loop $navs $nav}
+                <li> <a href="{php echo $this->createMobileUrl("index",array("cid" => $nav['id'],'op'=>'wemedia'),true)}">{$nav[name]}</a></li>
+            {/loop}
+        </ul>
+    </div>
+</div>
+ 
+<footer class="footer-toolbar-fix">
+ <a id="biz-link" class="btn" href="{if empty($set[tjgzhUrl])} {$set['guanzhuUrl']} {else}{$set[tjgzhUrl]}{/if}}" >
+	<div class="arrow" style="top:20px;">
+		<span style="display: inline-block;width: 60px; height: 33px;line-height: 33px;background-color: #0799ff;border-radius: 5px;text-align: center;color: white;">+关注</span>
+	</div>
+	<div class="logo">
+	<div class="circle"></div>
+		<img id="img" src="{$_W['attachurl']}headimg_{$_W['uniacid']}.jpg">
+	</div>
+	<div id="nickname" style="color:white;"> {$_W['account']['name']}</div>
+	<div id="weixinid" style="color:white;">微信号:{$wechat['account']}</div>
+</a>  
+</footer>
+
+<div class="footer">&nbsp;</div>
+<script src="../addons/amouse_article/template/mobile/js/jquery.wipetouch.js"></script>
+<script src="../addons/amouse_article/template/mobile/js/main.index.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.footer-toolbar-fix').show();
+    });
+</script>
+</body>
+</html>

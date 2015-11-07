@@ -1,0 +1,102 @@
+{template 'common/header'}
+<div class="main">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            分享达人详细数据  |  总数:{$total}　　
+            <a class="btn btn-info" href="{php echo $this->createWebUrl('eso_sharelist',array('id'=>$_GPC['id']))}">分享达人管理</a>　
+            <a class="btn btn-default" href="{php echo $this->createWebUrl('eso_sharedata',array('id'=>$_GPC['id']))}">分享点击数据管理</a>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-body table-responsive">
+            <table class="table table-hover goodslist">
+                <thead class="navbar-inner">
+                <tr>
+                    <th style="width:40px;" class="row-first">选择</th>
+                    <th style="width:100px;" class="row-hover">排名<i></i></th>
+                    <th style="width:120px;">姓名<i></i></th>
+                    <th style="width:120px;">电话<i></i></th>
+                    <th style="width:200px;">from_user<i></i></th>
+                    <th style="width:100px;">分享量<i></i></th>
+                    <th style="width:200px;">最后分享时间<i></i></th>
+                    <th style="width:60px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {php $i=1;}
+                {loop $list_eso_share $row}
+                <tr>
+
+                    <td class="row-first"><input type="checkbox" name="select[]" value="{$row['id']}" /></td>
+                    <td class="row-hover">{$i}</td>
+                    <td>{$row['name']}</td>
+                    <td>{$row['tel']}</td>
+                    <td><a href="{php echo url('mc/member/post', array('uid'=>$row['userid']))}">{$row['from_user']}</a></td>
+                    <td>{$row['eso_sharenum']}</td>
+                    <td>{php echo date('Y-m-d h:i:s', $row[eso_sharetime]);}</td>
+                    <td style="width:40px;font-size:12px; color:#666;" id="status">
+                        {if $row['status']}
+                        <a href="{php echo create_url('site/entry/dos', array('m' => 'eso_share','rid' => $row['rid'], 'id' => $row['id'], 'status' => 0))}" class="">未屏蔽</a>
+                        {else}
+                        <a href="{php echo create_url('site/entry/dos', array('m' => 'eso_share','rid' => $row['rid'], 'id' => $row['id'],'status' => 1))}" class="">已屏蔽</a>
+                        {/if}
+                    </td>
+                </tr>
+                {php $i++;}
+                {/loop}
+                {if !$list_eso_share}
+                <tr>
+                    <td colspan="8" align="center">
+                        <div>无</div>
+                    </td>
+                </tr>
+                {else}
+                <tr>
+                    <td style="width:40px;" class="row-first"><input type="checkbox" class="check_all"/></td>
+                    <td colspan="7">
+                        <input type="submit" name="deleteall" value="删除" class="btn btn-primary" />
+                        <input type="hidden" name="token" value="{$_W['token']}" />
+                    </td>
+                </tr>
+                {/if}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {$pager}
+</div>
+<script>
+    $(function(){
+        $("td#status").each(function(){
+            if ($(this).find("a").text() == '已屏蔽') {
+                $(this).find("a").css('color','#ff0000');
+            }
+        });
+        $(".check_all").click(function(){
+            var checked = $(this).get(0).checked;
+            $("input[type=checkbox]").prop("checked", checked);
+        });
+        $("input[name=deleteall]").click(function(){
+
+            var check = $("input:checked");
+            if (check.length < 1){
+                alert('请选择要删除的记录!');
+                return false;
+            }
+            if (confirm("确认要删除选择的记录?")){
+                var id = new Array();
+                check.each(function(i){
+                    id[i] = $(this).val();
+                });
+                $.post('./index.php?c=site&a=entry&do=eso_sharelist&m=eso_share', {idArr:id}, function(data){
+                    location.reload();
+                }, 'json');
+            }
+
+        });
+    });
+</script>
+
+{template 'common/footer'}

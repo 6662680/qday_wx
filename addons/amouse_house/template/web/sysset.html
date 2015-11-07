@@ -1,0 +1,133 @@
+{template 'common/header'}
+<div class='container'
+	style='padding: 0 5px 10px; margin: 0; width: 100%'>
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#">参数设置</a></li>
+	</ul>
+	<div class="panel panel-success">
+		<div class="panel-heading">参数设置</div>
+		<div class="panel-body">
+			<form class="form-horizontal" action="" method="post">
+				<input type="hidden" id="isoauth_hid" name="status_hid" value="{$set['isoauth']}"/>
+				<div class="form-group" >
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">引导关注</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="guanzhuUrl" class="form-control" value="{$set['guanzhuUrl']}" />
+					</div>
+				</div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">新楼盘顶部图片</label>
+                    <div class="col-sm-9">
+                    {php echo tpl_form_field_image('newflat_images', $set['newflat_images'])}
+					<span class="help-block">
+						建议图片大小为： 720*280
+						比如：<img src="../addons/amouse_house/ui/images/new_flat.jpg" width="180px" height="70px;">
+					</span>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">版权信息</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="copyright" class="form-control" value="{$set['copyright']}" />
+                        <span class="help-block">
+						如果没空的话，默认是本公众号
+					</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">第三方统计代码</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="cnzz" class="form-control"  value="{$set['cnzz']}" />
+                     <span class="help-block"> 借助第三方统计代码,如百度,量子,51la,chinaz</span>
+                    </div>
+                </div>
+                <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">是否借用OAUTH认证</label>
+					<div class="col-sm-9 col-xs-12"> 
+                    <input type="radio" name="isoauth" value="0" id="form-oauth-0"{if $set['isoauth']==0}checked="true"{/if} />是
+                    <input type="radio" name="isoauth" value="1" id="form-oauth-1"{if $set['isoauth']==1}checked="true"{/if} />否
+					<span class="help-block">如果开启oauth认证，需要认证的服务号才能使用此功能。</span>
+					</div>
+				</div>
+				<div class="form-group" id="appid_div">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">AppId</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="appid" class="form-control" value="{$set['appid']}" />
+					</div>
+				</div>
+				<div class="form-group" id="appsecret_div">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">AppSecret</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="appsecret" class="form-control" value="{$set['appsecret']}" />
+					</div>
+				</div>
+  
+				<div class="form-group" id="image_div">>
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+					<div class="col-sm-9 col-xs-12">
+						借用说明：必需设置借用高级认证号的OAuth2.0网页授权的回调域名为你公众号第三方平台的全域名。
+						如：你的系统域名为：wx.weixin.com
+						，你必需让借用高级认证号设置OAuth2.0网页授权的回调域名为:wx.weixin.com <br /> 
+						<img src="../addons/amouse_house/ui/images/oauth2.jpg">
+					</div>
+				</div>
+
+                <div class="form-group" id="appid_div">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享AppId</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="appid_share" class="form-control"  value="{$set['appid_share']}" />
+                    </div>
+                </div>
+                <div class="form-group" id="appsecret_div">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">分享AppSecret</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="appsecret_share" class="form-control" value="{$set['appsecret_share']}" />
+                    </div>
+                </div>
+
+                <div class="form-group" id="image_div">>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-sm-9 col-xs-12">
+                        借用说明：必需设置借用认证号的JS接口安全域名。在公众号设置-功能设置中，可以找到。
+                        <img src="../addons/amouse_house/ui/images/jssdk.png">
+                    </div>
+                </div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<input name="token" type="hidden" value="{$_W['token']}" />
+						<button type="submit" class="btn btn-success col-sm-2" name="submit" value="提交">
+							<i class="fa fa-check-circle"></i> 提交
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+$(function(){
+	$("#form-oauth-{php echo $set['isoauth'];}").attr("checked", true);
+	var isoauth_hid =$("#isoauth_hid").val();
+	if(isoauth_hid==1){
+		$("#appid_div").hide();
+		$("#appsecret_div").hide();
+		$("#image_div").hide();
+	}
+	$("input[name='isoauth']").on("change", function(){
+		var type = $("input[name='isoauth']:checked").val();
+		//不弹出
+		if(type == 0) {
+			$("#appid_div").show();
+			$("#appsecret_div").show();
+			$("#image_div").show();
+		} else {
+			$("#appid_div").hide();
+			$("#appsecret_div").hide();
+			$("#image_div").hide();
+		}
+	});
+});
+</script>
+{template 'common/footer'}

@@ -1,0 +1,37 @@
+{loop $list $item}
+<ul class="new_orderlist" id="order_list" style="">
+	<a href="{php echo $this->createMobileUrl('orderdetail',array('id' => $item['id']))}">
+		<li>
+			<h4 class="new_ordername ">{$item['title']}</h4>
+		    <div class="new_orderstate new_ordersok">
+		        {if $item['status'] == 0}
+		        确认中
+		        {else if $item['status'] == -1}
+		        已取消
+		        {else if $item['status'] == 1}
+		        已通过
+		        {else if $item['status'] == 2}
+		        已拒绝
+		        {else if $item['status'] == 3}
+		        已完成
+		        {/if}
+		    </div>
+		    <p class="newprice ">¥<i>{$item['sum_price']}</i></p>
+		    <p class="new_ordernb">订单编号：{$item['ordersn']}</p>
+		    <p class="new_ordertime">入住日期：{php echo date("Y-m-d",$item['btime'])}</p>
+		    <p class="new_ordernb">支付方式：
+				{if $item['paytype']==1}
+				余额支付 
+				{else if $item['paytype']==21}
+				微信支付
+				{else if $item['paytype']==22}
+				支付宝
+				{else}
+				到店付款
+				{/if}
+			</p>
+		<!--    {if $item['paystatus']==0} <div class="new_orderpay" onclick="location.href='{php echo $this->createMobileUrl('orderpay',array('id' => $item['id']))}'">立即支付</div> {/if}-->
+		</li>
+	</a>
+</ul>
+{/loop}

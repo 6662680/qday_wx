@@ -1,0 +1,247 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/fm_photosvote/template/mobile/photos/style.css?v{php echo time();}" />
+
+<script type="text/javascript" src="../addons/fm_photosvote/template/mobile/photos/js/Tip.js"></script>
+
+<style>
+body{background:#f5f5f5 no-repeat;background-size:100% auto;}
+
+.con {
+  background: {$reply['zbgcolor']} url({php echo toimage($reply['zbg'])});
+  padding: 15px 10px 20px;
+  margin-top: -60px;
+  background-size: 100% auto;
+    max-width: 640px;
+  margin: 0 auto;
+}
+ .top {  overflow: hidden;  font-size: 14px;  line-height: 40px;  padding: 5px 0px;  background: #000;  position: fixed;  z-index: 9999;  width: 100%;  color: #fff;  }
+ 
+ .top div {
+  padding: 0 5px;
+}
+.top span {
+  color: #fff;
+}
+.top a {
+  padding: 0 5px;
+  color: #fff;
+}
+.top .topa {
+  float: right;
+  margin-top: 5px;
+  background:url(../addons/fm_photosvote/template/images/bm.png) center no-repeat #fe7160;
+  background-size: 100% 100%;
+  line-height: 30px;
+  height: 30px;
+  font-weight: bold;
+  border-radius: 5px;
+  color: #fff;
+  width: 100px;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #28013B;
+}
+.nav > li > a {
+  padding: 0;
+}
+
+
+.pagination ul > li > a, .pagination ul > li > span {
+  padding: 5px 5px;
+}
+ .h {height:10px}
+ .copyright {
+  padding: 0 auto;
+  margin: 0 auto;
+  height: 40px;
+  text-align: center;
+  color: #E0E0E0;
+  position: relative;
+  bottom: auto;
+  font-size: 12px;
+}
+
+.tongji {
+  max-width: 640px;
+  margin:0 auto;
+  height: 60px;
+  background: url({php echo toimage($reply['zbgtj'])}) repeat-x -60px 0;
+  background-size: auto 100%;
+  position: relative;
+  z-index: 10px;  margin-top: -10px;
+}
+.copyright a{
+  color: #E0E0E0;}
+  
+  * {
+  -webkit-box-sizing: initial;
+  -moz-box-sizing: initial;
+  box-sizing: initial;
+}
+
+.btns {
+  width: auto;
+  padding-right: 5px;
+}
+.txt {
+
+  width: 68%;
+}
+.banner {
+  max-width: 640px;
+  margin: 0 auto;  max-height: 100%;
+}
+.one1 {
+  text-align: center;
+  margin: 0 auto;
+}
+.one2 {
+  text-align: center;
+  margin: 0 auto;
+}
+.one3 {
+  text-align: center;
+  margin: 0 auto;
+}
+.two {
+  text-align: center;
+  margin: 0 auto;
+}
+.usr_more {
+  width: 100%;
+  border: 0px solid #c4d4d0;
+  line-height: 35px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 0px;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.4);
+}
+</style>
+ 	
+{template 'hnav'}
+<div class="banner"><img src="{$picture}"></div>
+{template 'tongji'}
+
+
+{if $_GPC['votelog'] == 1}
+
+<script type="text/javascript">  
+$(document).ready(function() {
+    var track_click = 0; //track user click on "load more" button, righ now it is 0 click  
+    var total_pages = {$total_pages};
+    $('#results').load("{php echo $this->createMobileUrl('phdata', array('rid' => $rid,'tfrom_user' => $tfrom_user,'pagesnum' => $psize,'phdata' => 'votelog'))}", {'page':track_click}, function() {track_click++;}); //initial data to load   
+    $(".load_more").click(function (e) { //user clicks on button      
+        $(this).hide(); //hide load more button on click  
+        $('.animation_image').show(); //show loading image   
+        if(track_click <= total_pages) //make sure user clicks are still less than total pages  
+        {  
+            $.post('{php echo $this->createMobileUrl('phdata', array('rid' => $rid,'tfrom_user' => $tfrom_user,'pagesnum' => $psize,'phdata' => 'votelog'))}',{'page': track_click}, function(data) {  
+                $(".load_more").show(); //bring back load more button  
+                $("#results").append(data); //append data received from server  
+                $("html, body").animate({scrollTop: $("#load_more_button").offset().bottom}, 500);  
+                $('.animation_image').hide(); //hide loading image once data is received  
+                track_click++; //user click increment on load button  
+            }).fail(function(xhr, ajaxOptions, thrownError) {   
+                alert(thrownError); //alert any HTTP error  
+                $(".load_more").show(); //bring back load more button  
+                $('.animation_image').hide(); //hide loading image once data is received  
+            });  
+            if(track_click >= total_pages-1)  
+            {  
+                $(".load_more").attr("disabled", "disabled");
+				$(".load_more").html("全部加载完成");
+            }  
+         }  
+        });  
+});  
+</script> 
+	<div class="con" style="    padding: 15px 10px 20px;">
+		<p class="tips"><span><i>{$tuser['nickname']} 的投票用户</i></span></p>
+		<div class="paihang">
+			<div class="biaotou">
+				<div style="width:25%;  text-align: center;">序号</div>
+				<div style="width:45%;  text-align: center;">用户</div>
+				<div style="width:30%;  text-align: center;">投票时间</div>
+			</div>
+			<ul id="results"></ul>
+			
+		</div>
+		{if $total > $psize}	
+		<div align="center">  
+			<button class="usr_more load_more label label-info" id="load_more_button"><i class="fa fa-random"></i> 查看更多</button>
+			<div class="animation_image" style="display:none;width:50px;color:#fff"><img src="../addons/fm_photosvote/template/mobile/photos/ajax-loader.gif" width="50"> Loading...</div>  
+		</div>
+		{/if}
+		{if $reply['ispaihang'] == 1}{template 'zanzhu'}{/if}
+		<div class="copyright">
+		{if $reply['iscopyright']==1}<a href="{$reply['copyrighturl']}">&copy;{$reply['copyright']}</a>{else}<a href="javascript:;">{if empty($footer_off)}&copy;{if empty($_W['account']['name'])}FantasyMoons Team团队{else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}{/if}</a>{/if}
+		</div>
+	</div>
+{else}
+
+<script type="text/javascript">  
+$(document).ready(function() {
+    var track_click = 0; //track user click on "load more" button, righ now it is 0 click  
+    var total_pages = {$total_pages};
+    $('#results').load("{php echo $this->createMobileUrl('phdata', array('rid' => $rid,'pagesnum' => $psize,'phdata' => 'phb'))}", {'page':track_click}, function() {track_click++;}); //initial data to load   
+    $(".load_more").click(function (e) { //user clicks on button      
+        $(this).hide(); //hide load more button on click  
+        $('.animation_image').show(); //show loading image   
+        if(track_click <= total_pages) //make sure user clicks are still less than total pages  
+        {  
+            $.post('{php echo $this->createMobileUrl('phdata', array('rid' => $rid,'pagesnum' => $psize,'phdata' => 'phb'))}',{'page': track_click}, function(data) {  
+                $(".load_more").show(); //bring back load more button  
+                $("#results").append(data); //append data received from server  
+                $("html, body").animate({scrollTop: $("#load_more_button").offset().bottom}, 500);  
+                $('.animation_image').hide(); //hide loading image once data is received  
+                track_click++; //user click increment on load button  
+            }).fail(function(xhr, ajaxOptions, thrownError) {   
+                alert(thrownError); //alert any HTTP error  
+                $(".load_more").show(); //bring back load more button  
+                $('.animation_image').hide(); //hide loading image once data is received  
+            });  
+            if(track_click >= total_pages-1)  
+            {  
+                $(".load_more").attr("disabled", "disabled");
+				$(".load_more").html("全部加载完成");
+            }  
+         }  
+        });  
+});  
+</script> 
+
+	<div class="con" style="    padding: 15px 0px 20px;">
+		<p class="tips"><span><i>排行榜</i></span></p>
+		<div class="paihang">
+			<div class="biaotou">
+				<div style="width:15%;  text-align: center;">名次</div>
+				<div style="width:35%;  text-align: center;">选手</div>
+				<div style="width:25%;  text-align: center;">票数</div>
+				<div style="width:25%;  text-align: center;">人气</div>
+			</div>
+			<ul id="results"></ul>
+		</div>
+		{if $total > $psize}	
+		<div align="center">  
+			<button class="usr_more load_more label label-info" id="load_more_button"><i class="fa fa-random"></i> 查看更多</button>
+			<div class="animation_image" style="display:none;width:50px;color:#fff"><img src="../addons/fm_photosvote/template/mobile/photos/ajax-loader.gif" width="50"> Loading...</div>  
+		</div>
+		{/if}
+		{if $reply['ispaihang'] == 1}{template 'zanzhu'}{/if}
+		<div class="copyright">
+		{if $reply['iscopyright']==1}<a href="{$reply['copyrighturl']}">&copy;{$reply['copyright']}</a>{else}<a href="javascript:;">{if empty($footer_off)}&copy;{if empty($_W['account']['name'])}FantasyMoons Team团队{else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}{/if}</a>{/if}
+		</div>
+	</div>
+
+{/if}
+<style>
+.s_up {
+  padding: 10px 15px 0;
+  height: 33px;
+}
+</style>
+{template 'fnav'}
+{template 'footer'}

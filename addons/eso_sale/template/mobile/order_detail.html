@@ -1,0 +1,224 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/eso_sale/images/style.css">
+<div class="head">
+	<a href="javascript:history.back();" class="bn pull-left"><i class="fa fa-angle-left"></i></a>
+	<span class="title">订单详情</span>
+	<a href="{php echo $this->createMobileUrl('mycart')}" class="bn pull-right"><i class="fa fa-shopping-cart"></i></a>
+</div>
+<div style='margin-top: 50px;'>
+</div>
+<div class="myoder img-rounded" style='padding-bottom: 10px;'>
+    <div class="myoder-hd">
+        <span class="pull-left">订单编号：{$item['ordersn']}</span>
+        <span class="pull-right">{php echo date('Y-m-d H:i', $item['createtime'])}</span>
+    </div>
+
+    {loop $goods $g}
+    <div class="myoder-detail">
+        <a href="{php echo $this->mturl('detail', array('id' => $g['id']))}"><img src="{$_W['attachurl']}{$g['thumb']}" width="160"></a>
+        <div class="pull-left">
+            <div class="name"><a href="{php echo $this->mturl('detail', array('id' => $g['id']))}">{$g['title']}</a></div>
+            <div class="price">
+                <span>{$g['marketprice']} 元{if $g['unit']} / {$g['unit']}{/if}</span>
+                <span class="num">{$g['total']}{if $g['unit']} {$g['unit']}{/if}</span>
+            </div>
+        </div>
+    </div>
+    {/loop}
+    <div class="myoder-express">
+        <span class="express-company">状态</span>
+		<span class="express-num">
+		{if $item['paytype'] == 3}
+			{if $item['status'] == -1}
+			<span class="text-muted">订单取消</span>
+			{elseif $item['status'] < 3}
+			<span class="text-danger">货到付款 / 未付款</span>
+			{else}
+			<span class="text-success">已完成</span>
+			{/if}
+		{else}
+			{if $item['status'] == -1}
+			<span class="text-muted">订单取消</span>
+			{elseif $item['status'] == 0}
+			<span class="text-danger">未付款</span>
+			{elseif $item['status'] == 1}
+			<span class="text-warning">已付款</span>
+			{elseif $item['status'] == 2}
+			<span class="text-warning">已发货</span>
+			{else}
+			<span class="text-success">已完成</span>
+			{/if}
+		{/if}
+		</span>
+    </div>
+    <div class="myoder-express">
+        <span class="express-company">配送方式</span>
+        <span class="express-num">{$dispatch['dispatchname']}</span>
+    </div>
+    {if ($item['status'] == '2' || $item['status']==3) && !empty($item['expresssn'])}
+    <div class="myoder-express">
+        <span class="express-company">快递: {$item['expresscom']}</span>
+		<span class="express-num">
+                    单号: {$item['expresssn']}
+		 </span>
+    </div>
+    <div class="myoder-total" style='margin:5px 0;'>
+        <a href="http://m.kuaidi100.com/index_all.html?type={$item['express']}&postid={$item['expresssn']}#input" class="btn btn-success pull-right btn-sm" >查看快递</a>
+    </div>
+    {/if}
+    {if !empty($item['remark'])}
+    <div class="myoder-express" style='margin-top:5px;'>
+        <span class="express-company">订单备注</span>
+    </div>
+    <div style='float:left;margin:10px;overflow:hidden;word-break:break-all;width:100%;'>
+        {$item['remark']}
+    </div>
+    {/if}
+    <div class="myoder-total" style='margin-bottom:5px;'>
+		<span>共计：<span class="false">
+                {if $item['dispatchprice']<=0}
+                 {$item['price']} 元
+                {else}
+                    {$item['price']} 元 (含运费 {$item['dispatchprice']} 元)
+                {/if}
+              </span>
+        </span>
+        {if $item['paytype'] != 3}
+        {if $item['status'] == 0}
+        <a href="{php echo $this->mturl('pay', array('orderid' => $item['id']))}" class="btn btn-danger pull-right btn-sm">
+            立即支付
+        </a>
+        {/if}
+        {/if}
+        {if $item['status'] == 2 || ($item['paytype'] == 3 && $item['status'] < 3)}
+        <a href="{php echo $this->mturl('myorder', array('orderid' => $item['id'], 'op' => 'confirm'))}" class="btn btn-success pull-right btn-sm" onclick="return confirm('点击确认收货前，请确认您的商品已经收到。确定收货吗？'); ">
+            确认收货
+        </a>
+        {/if}
+    </div>
+</div>
+ <div class="wx_nav">
+        <a href="{php echo $this->mturl('list')}" data-href="###" ptag="37080.1.1" class="nav_index on">首页</a>
+        <a href="{php echo $this->mturl('listCategory')}"  ptag="37080.1.2" class="nav_search" style="display:">分类</a>
+        <a href="{php echo $this->mturl('tuiguang',array('gid'=>$goods['id'],'mid'=>$member['id']))}"  ptag="37080.1.3" class="nav_shopcart">我要分销</a>
+        <a href="{php echo $this->mturl('myorder')}"  ptag="37080.1.4" class="nav_me">我的订单</a>
+		<a href="{php echo $this->mturl('fansindex')}"  ptag="37080.1.4" class="nav_me">会员中心</a>
+    </div>
+	<link href="../addons/eso_sale/recouse/css/xin_v3.s.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    //获取指定cookes函数
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+
+</script>
+<?php
+    require_once IA_ROOT."/jssdk.class.php";
+    $appid = $this->module['config']['appid'];
+    $secret = $this->module['config']['secret'];
+    $weixin = new jssdk($appid,$secret);
+    $wx = $weixin->get_sign();
+?>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    wx.config({
+        appId: "{$wx['appId']}",
+        timestamp: {$wx['timestamp']},
+        nonceStr: "{$wx['nonceStr']}",
+        signature: "{$wx['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+    wx.ready(function () {
+        var mid=getCookie("mid");
+        var shareData = {
+            title: '赶快来邀请好友赚佣金！',
+            desc: '赶快来邀请好友赚佣金！',
+            link: "{$wx['url']}",
+            imgUrl: '{$_W['siteroot']}/addons/eso_sale/style/images/icon.jpg',
+        };
+        //分享朋友
+        wx.onMenuShareAppMessage({
+            title: shareData.title,
+            desc: shareData.desc,
+            link: shareData.link,
+            imgUrl:shareData.imgUrl,
+            trigger: function (res) {
+            },
+            success: function (res) {
+                window.location.href ='{php echo $_W['siteroot']."app/".$this->mturl('list',array('id'=>$id))}&mid='+mid;
+                TopBox.alert("分享后成功,等着收佣金吧!");
+            },
+            cancel: function (res) {
+                TopBox.alert("分享后获得积分,还有可能得到佣金哦!不要错过发大财的机会!");
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+        //朋友圈
+        wx.onMenuShareTimeline({
+            title: shareData.title+"---"+shareData.desc,
+            link: shareData.link,
+            imgUrl:shareData.imgUrl,
+            trigger: function (res) {
+            },
+            success: function (res) {
+                window.location.href ='{php echo $_W['siteroot']."app/".$this->mturl('list',array('id'=>$id))}&mid='+mid;
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+
+        //显示分享
+        wx.showOptionMenu();
+    });
+</script>
+<script>
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideOptionMenu');
+    });
+</script>
+{template 'footerbar'}
