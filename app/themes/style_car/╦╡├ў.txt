@@ -1,0 +1,3 @@
+1.这个模板需要修改系统文件的东西
+\source\model\mobile.mod.php中的第26行，需要把displayorder显示出来
+2.模板中，如果displayorder小于20则在第一个区域，如果大于=20，再上上面小区域

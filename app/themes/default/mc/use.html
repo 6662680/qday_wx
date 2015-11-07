@@ -1,0 +1,137 @@
+{template 'common/header'}
+<style>
+ body{background-color:#d2e6e9;}
+.btn-group-top-box{padding:10px 0; border-bottom:1px solid #a5d7de;}
+.btn-group-top{margin:0 auto; overflow:hidden; width:200px; display:block;}
+.btn-group-top .btn{width:100px; -webkit-box-shadow:none; box-shadow:none; border-color:#5ac5d4; color:#5ac5d4; background:#d1e5e9;}
+.btn-group-top .btn:hover{color:#FFF; background:#addbe1;}
+.btn-group-top .btn.active{color:#FFF; background:#5ac5d4;}
+ .btn.use{background:#56c6d6; color:#FFF; border:0; border-radius:1px;}
+/*优惠券*/
+.read-coupon{padding:10px;}
+.read-coupon .coupon-title{font-size:14px; color:#444; padding:20px 15px 10px; margin:0;}
+.read-coupon .coupon-content{background:url('resource/images/coupon02.png') no-repeat center bottom; -webkit-background-size:100% auto; padding-bottom:2%; min-height:100px;}
+.read-coupon .coupon-content > img{width:85%; max-width:595px; max-height:320px; display:block; margin:0 auto; border:8px solid transparent; border-width:10px 0 0 0; border-image:url('resource/images/coupon-hd-bg.png') 31;}
+.read-coupon .coupon-sn{height:55px; padding:8px 15px; -webkit-box-sizing:border-box; background:#5ac5d4; color:#d0f2f7; line-height:20px; font-size:14px; vertical-align:middle;}
+.read-coupon .coupon-sn p:first-of-type{font-size:14px;}
+.read-coupon .coupon-sn p:first-of-type span{color:#FFF; font-size:18px;}
+.coupon-form{padding:30px 5px 0 5px;}
+.coupon-form .form-group{margin:10px 0;}
+.coupon-form .form-group .btn{border-radius:2px;}
+.coupon-form .form-group:first-child .btn{background:#5ac5d4; border-color:#5ac5d4; color:#FFF;}
+
+/*代金券*/
+.voucher-main{overflow:hidden;}
+.voucher-main .list-cash-coupon{padding:10px 0 0 0; list-style:none; margin:10px auto;}
+.voucher-main .list-cash-coupon li{margin:10px 0;}
+.voucher-main .list-cash-coupon a{display:block;width:281px;height:109px;margin:auto;background:url('resource/images/voucher.png') no-repeat 0 -9px;-webkit-background-size:575px auto;position:relative;}
+.voucher-main .list-cash-coupon a>p{position: absolute;max-width:200px;height:20px;color:#FFF;-webkit-box-sizing:border-box;}
+.voucher-main .list-cash-coupon a>p:nth-of-type(1){left:25px;top:20px;font-size:14px;}
+.voucher-main .list-cash-coupon a>p:nth-of-type(1)>span{font-size:30px;}
+.voucher-main .list-cash-coupon a>p:nth-of-type(2){left: 26px;top: 62px;font-size: 14px;}
+.voucher-main .list-cash-coupon a>p:nth-of-type(2):first-letter{font-size:14px;margin-right:3px;}
+.voucher-main .list-cash-coupon a>p:nth-of-type(3){left: 26px;top: 83px;font-size: 12px;}
+.voucher-main .list-cash-coupon a>p:nth-of-type(4){left: 160px;top: 42px;font-size: 11px;}
+.voucher-main .list-cash-coupon a>p:nth-of-type(5){right: 12px;top:18px;font-size:14px;width:25px; line-height:18px;}
+.voucher-main .list-cash-coupon li:nth-of-type(4n+2) a, .list-cash-coupon li .a2{background-position: 0 -133px;}
+.voucher-main .list-cash-coupon li:nth-of-type(4n+3) a, .list-cash-coupon li .a3{background-position: 0 -256px;}
+.voucher-main .list-cash-coupon li:nth-of-type(4n) a, .list-cash-coupon li .a4{background-position: 0 -378px;}
+.voucher-main .list-cash-coupon li[disabled] a{background-position: 0 -502px;}
+.voucher-main .list-cash-coupon li[disabled] a:after{content: "";background: url('resource/images/voucher01.png') no-repeat 75% center;-webkit-background-size: 110px auto;position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 100;pointer-events: none;}
+.voucher-main .list-cash-coupon li[disabled="expire"] a:after{background-image: url('resource/images/voucher02.png');}
+.voucher-main .list-cash-coupon li[disabled] a>p{color:rgba(255,255,255,0.3)!important;}
+.voucher-main .list-cash-coupon li.used a{background-position-x:right!important;}
+.voucher-main .list-cash-coupon li.used:nth-of-type(4n+1) a>p:nth-of-type(5){color:#ee5375;}
+.voucher-main .list-cash-coupon li.used:nth-of-type(4n+2) a>p:nth-of-type(5){color:#ffa619;}
+.voucher-main .list-cash-coupon li.used:nth-of-type(4n+3) a>p:nth-of-type(5){color:#92c427;}
+.voucher-main .list-cash-coupon li.used:nth-of-type(4n) a>p:nth-of-type(5){color:#2f9abd;}
+.voucher-main .read-coupon .list-cash-coupon a>p:nth-of-type(3){left:190px; top:65px; font-size:10px; text-align:right;padding-right:10px;}
+</style>
+
+<div class="clearfix">
+{if $do == 'coupons'}
+<!-- 优惠券 -->
+	<div class="read-coupon">
+		<h4 class="coupon-title">{$data['title']}</h4>
+		<div class="coupon-content">
+			<img src="resource/images/coupon.jpg">
+		</div>
+  		<div class="coupon-sn">
+			<p>序列号：<span>A00203239320362559</span><br>请提供序列号给工作人员或在当前页面消费</p>
+		</div>
+		<div class="coupon-form">
+			<form role="form" action="" method="post" class="form-horizontal" >
+				{if ($data['endtime'] > time()) && ($data['status'] == 1)}
+					<div class="form-group">
+						<input class="form-control" type="password" name="password" placeholder="请输入您的消费密码（向店员索要）" />
+					</div>
+					<div class="form-group">
+						<input type="submit" name="submit" class="btn btn-default btn-block use" value="确定使用" />
+						<input name="token" value="{$_W['token']}" type="hidden" />
+					</div>
+				{elseif $data['status'] == 2}
+					<a class="btn btn-default btn-block use">该优惠券已使用</a>
+				{else}
+					<a class="btn btn-default btn-block use">该优惠券已过期</a>
+				{/if}
+			</form>
+			<div class="form-group">
+				{if ($_GPC['type'] == 'used')}
+					<a href="{php echo url('mc/bond/coupons', array('type' => 'used'));}" class="btn btn-default btn-block">返回</a>
+				{else}
+					<a href="{php echo url('mc/bond/coupons');}" class="btn btn-default btn-block">返回</a>
+				{/if}
+			</div>
+		</div>
+	</div>
+{/if}
+
+{if $do == 'tokens'}
+<!-- 代金券 -->
+	<div class="voucher-main">
+		<div class="read-coupon">
+			<h4 class="coupon-title">{$data['title']}</h4>
+			<div class="coupon-content">
+				<ul class="list-cash-coupon">
+					<li>
+						<a href="javascript:;" class="a2">
+							<p><span>{$data['discount']}</span>元</p>
+							<p>★订单满 {$data['condition']}元可使用 </p>
+							<p>有效期至{php echo date('Y/m/d', $data['endtime'])}</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="coupon-sn">
+				<p>序列号：<span>A00203239320362559</span><br>请提供序列号给工作人员或在当前页面消费</p>
+			</div>
+			<div class="coupon-form">
+				<form role="form" action="" method="post" class="form-horizontal" >
+					{if ($data['endtime'] > time()) && ($data['status'] == 1)}
+						<div class="form-group">
+							<input class="form-control" type="password" name="password" placeholder="请输入您的消费密码（向店员索要）"/>
+						</div>
+						<div class="form-group">
+							<input type="submit" name="submit" class="btn btn-default btn-block use" value="确定使用" />
+							<input name="token" value="{$_W['token']}" type="hidden" />
+						</div>
+					{elseif $data['status'] == 2}
+						<a class="btn btn-default btn-block use">该代金券已使用</a>
+					{else}
+						<a class="btn btn-default btn-block use">该代金券已过期</a>
+					{/if}
+				</form>
+				<div class="form-group">
+					{if ($_GPC['type'] == 'used')}
+						<a href="{php echo url('mc/bond/tokens', array('type' => 'used'));}" class="btn btn-default btn-block">返回</a>
+					{else}
+						<a href="{php echo url('mc/bond/tokens');}" class="btn btn-default btn-block">返回</a>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+</div>
+{template 'mc/footer'}
+{template 'common/footer'}

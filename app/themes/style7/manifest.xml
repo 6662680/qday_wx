@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest versionCode="0.6">
+    <identifie><![CDATA[style7]]></identifie>
+    <title><![CDATA[情天style7]]></title>
+	<type><![CDATA[often]]></type>
+    <description><![CDATA[由情天提供默认微站模板套系]]></description>
+    <author><![CDATA[情天]]></author>
+    <url><![CDATA[http://www.qdaygroup.com]]></url>
+	<sections><![CDATA[0]]></sections>
+	<settings>
+	</settings>
+</manifest>
