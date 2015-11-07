@@ -1,5 +1,4 @@
 <?php defined('IN_IA') or exit('Access Denied');?>
-<!--<script>window.location.href="/www/index.php"</script>-->
 <?php (!empty($this) && $this instanceof WeModuleSite || 0) ? (include $this->template('common/header-base', TEMPLATE_INCLUDEPATH)) : (include template('common/header-base', TEMPLATE_INCLUDEPATH));?>
 
 <div class="home">
