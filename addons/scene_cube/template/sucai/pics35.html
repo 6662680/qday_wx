@@ -1,0 +1,66 @@
+<div class="control-group js_scene_style js_pics35 hide">
+    <label class="control-label">多图展示：</label>
+    <div class="controls">
+        <div class="span12" style="margin-bottom:10px;">
+            <a href="javascript:void(0)" class="btn" id="add_menu"><i class="icon-plus"></i>添加图片</a>
+        </div>
+        <table class="table table-bordered table-hover dataTable">
+            <thead>
+            <tr>
+                <th>图片地址</th>
+                <th class="norightborder">操作</th>
+            </tr>
+            </thead>
+
+            <tbody id="listTable">
+            {if empty($data['thumbs'])}
+            <tr class="copy_rows">
+                <td>
+                    <div id="map_image_uploads" style="width:330px;">
+                        {php echo tpl_form_field_image('pics35[thumbs][]', $data['mthumb'])}
+                    </div>
+                    <div class="help-inline">（建议尺寸:宽560像素,高250像素或等比图片）</div>
+                </td>
+                <td><a href="javascript:;" class="del">删除</a></td>
+            </tr>
+            {else}
+            {loop $data['thumbs'] $row}
+            <tr class="copy_rows">
+                <td>
+                    <div id="map_image_uploads" style="width:330px;">
+                        {php echo tpl_form_field_image('pics35[thumbs][]', $row)}
+                    </div>
+                    <div class="help-inline">（建议尺寸:宽560像素,高250像素或等比图片）</div>
+                </td>
+                <td><a href="javascript:;" class="del">删除</a></td>
+            </tr>
+            {/loop}
+            {/if}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    //页面事件监听
+    $(document).ready(function(){
+        //新增门店实景
+        $("#add_menu").click(function(){
+            $('.copy_rows:first').clone(true).appendTo('#listTable').find('input[type=text]').val('');
+            $('.copy_rows:last').find('img').attr({src:'',alt:'',title:''});
+            //$('.copy_rows:last').find('script').remove();
+        });
+
+        //删除门店实景
+        $("#listTable .del").click(function () {
+            var removeObj = $(this).parent('td').parent('tr');
+            var className = removeObj.attr('class');
+            if($("." + className).length <= 1){
+                removeObj.find('img').attr("src","");
+                return removeObj.find('input[type=text],input[type=hidden]').val('');
+
+            }
+            return removeObj.remove();
+
+        });
+    });
+</script> 

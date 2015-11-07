@@ -1,0 +1,122 @@
+{template 'common/header'}
+
+<div class="main">
+	<div style="padding:15px;">
+		<h3 class="title">模块信息</h3>
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="max-width:10px;">标题</th>
+					<th style="min-width:200px">信息</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>模块名称:</td>
+					<td>微场景</td>
+				</tr>
+				<tr>
+					<td>模块版本:</td>
+					<td>0.3</td>
+				</tr>
+				<tr>
+					<td>模块标识:</td>
+					<td>scene_cube</td>
+				</tr>
+				<tr>
+					<td>模块功能:</td>
+					<td>炫酷独特的宣传方式 让我们一起场景化</td>
+				</tr>
+				<tr>
+					<td>模块作者:</td>
+					<td>场景应用</td>
+				</tr>
+				<tr>
+					<td>版权所有:</td>
+					<td>场景应用</td>
+				</tr>
+				<tr>
+					<td>适用版本:</td>
+					<td>0.52向下兼容</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3 class="title">操作步骤</h3>
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="max-width:10px;">步骤</th>
+					<th style="min-width:200px">说明</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>第一步:新增场景</td>
+					<td>点击场景菜单;接着点击头部导航里的新建场景;根据页面选项&提示进行场景的创建;创建完成后点击保存</td>
+				</tr>
+				<tr>
+					<td colspan="2"><img src="../addons/scene_cube/default/a.jpg"></td>
+				</tr>
+				<tr>
+					<td>第二步:上传场景内页图片(1)</td>
+					<td>创建完成后;页面自动跳转到场景管理页面。在此页面可对场景进行编辑,场景内页上传,场景预览,场景删除。点击“+”跳转到场景图片上传页面</td>
+				</tr>
+				<tr>
+					<td colspan="2"><img src="../addons/scene_cube/default/b.jpg"></td>
+				</tr>
+				<tr>
+					<td>第三步:上传场景内页图片(2)</td>
+					<td>点击上传场景图片后;弹出上传窗口(支持批量上传);点击添加图片选择您要上传的图片;然后点击开始上传;最后点击全部插入将上传好的图片插入页面;
+					上传窗口消失后可对上传图片进行删除以及顺序设置</td>
+				</tr>
+				<tr>
+					<td colspan="2"><img src="../addons/scene_cube/default/c.jpg"></td>
+				</tr>
+				<tr>
+					<td>第四步:上传场景内页图片(3)</td>
+					<td>重要提示：不管任何操作;不论修改;还是新上传图片;都请记得点击保存;提交数据。</td>
+				</tr>
+								<tr>
+						<td colspan="2"><img src="../addons/scene_cube/default/d.jpg"></td>
+				</tr>
+				<tr>
+					<td>第五步:编辑内页高级功能</td>
+					<td>目前内页支持地图定位和视频播放功能;可支持批量快捷设置以及单张设置。在不确定精确坐标的情况下可进入单张设置进行定位查询;地图编辑菜单内的宣传图为定位图标所在的背景小图片</td>
+				</tr>
+								<tr>
+						<td colspan="2"><img src="../addons/scene_cube/default/f.jpg"></td>
+				</tr>
+				<tr>
+						<td colspan="2"><img src="../addons/scene_cube/default/g.jpg"></td>
+				</tr>
+				<tr>
+						<td colspan="2"><img src="../addons/scene_cube/default/h.jpg"></td>
+				</tr>
+				<tr>
+					<td>第六步:设置触发关键字</td>
+					<td>点击关键字触发列表在导航栏选择添加关键字;点击选择要展示的场景;让关键字和场景建立关联</td>
+				</tr>
+					<tr>
+						<td colspan="2"><img src="../addons/scene_cube/default/e.jpg"></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3 class="title">注意:</h3>
+		<table class="table table-striped">
+			<tbody>
+				<tr class="success">
+					<td>1：本模块在场景内展示的图片推荐尺寸为=>宽：640px;高：960px;尺寸的变更会影响显示效果</td>
+				</tr>
+			</tbody>
+		</table>
+		{if $_W['isfounder']}
+		<h3 class="title">后续扩展功能:(管理员可见)</h3>
+			<script type="text/javascript" src="http://cc.izhice.com/notice/scene_cube/show.js?v=0.3"></script>
+		{else}
+		<h3 class="title">感谢您的使用!</h3>
+		{/if}
+	</div>
+</div>
+{template 'common/footer'}

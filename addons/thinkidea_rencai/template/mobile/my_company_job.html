@@ -1,0 +1,37 @@
+{template 'common_header'}
+<div class="am-g">
+    {loop $job_lists $job}
+    <div class="am-panel am-panel-default" style="margin-bottom:5px">
+        <div class="am-panel-hd">
+            <h3 class="am-panel-title"><a href="{php echo $this->createMobileUrl('JobShow', array('job_id' => $job['id']));}">{$job['title']}</a> <small>{$job['dateline']}</small></h3>
+        </div>
+        <div class="am-panel-bd" style="padding: 5px">
+            <a class="am-btn am-btn-primary am-round am-btn-xs" href="{php echo $this->createMobileUrl('EditJob', array('id' => $job['id']));}" role="button">编辑</a>
+            <a class="am-btn am-btn-danger am-round am-btn-xs" href="javascript:delete_info({$job['id']});"  role="button">删除</a>
+        </div>
+        <!--<ul class="am-list am-list-static">-->
+             <!--<li class="am-text-sm"><font color="red">{$config['payroll'][$job['payroll']]}</font></li> -->
+            <!--<li class="am-text-xs">-->
+                <!--<em>{$job['dateline']}</em>-->
+            <!--</li>-->
+        <!--</ul>-->
+    </div>
+    {/loop}
+</div>
+        <script>
+            function delete_info(jobid){
+                $.post(
+                    "{php echo $this->createMobileUrl('DeleteAjax')}",
+                        {'jobid': jobid},
+                        function (data){
+                            if(data == '1'){
+                                alert('删除成功');
+                            }else{
+                                alert('删除失败');
+                            }
+                            location.reload();
+                        }
+                );
+            }
+        </script>
+{template 'common_footer'}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<title>{$list['title']}</title>
+<meta charset="utf-8" />
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+ <meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="pragram" content="no-cache" />
+<script src="../addons/scene_cube/resource/js/app/offline.js?1397525361"></script> 
+<script type="text/javascript">
+	if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+		var version = parseFloat(RegExp.$1);
+		if(version>2.3){
+			var phoneScale = parseInt(window.screen.width)/640;
+			document.write('<meta name="viewport" content="width=640, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+		}else{
+			document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+		}
+	}else{
+		document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+	}
+	//微信去掉下方刷新栏
+	if(navigator.userAgent.indexOf('MicroMessenger') >= 0){
+		document.addEventListener('WeixinJSBridgeReady', function() {
+			//WeixinJSBridge.call('hideToolbar');
+		});
+	}
+	</script>
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/resource/22/assets/styles/app.min.css?ver=3.8"/>
+<head>
+<body class="app" data-app-id="4101" data-ad="true">
+<div id="app-loading" class="app-loading">
+<div class="cycleWrap">
+<span class="cycle cycle-1"></span>
+<span class="cycle cycle-2"></span>
+<span class="cycle cycle-3"></span>
+<span class="cycle cycle-4"></span>
+</div>
+<div class="lineWrap">
+<span class="line line-1"></span>
+<span class="line line-2"></span>
+<span class="line line-3"></span>
+</div>
+</div>
+{if $list['bg_music_switch']==1}	
+	<header class="app-header">
+		<a href="javascript:void(0);" class="u-globalAudio">
+		<i class="icon-music"></i>
+		<audio src="{$list['bg_music_url']}" autoplay="autoplay" loop="loop"></audio>
+		</a>
+	</header>
+{/if}
+<section class="app-content">
+<section class="page page-index z-current" data-plugin-type="info_front">
+	<section class="page-content">
+	<div class="m-animationBox m-meteorShower"></div>
+	<img class="m-foregroundImg" src="{php echo toimage($list['cover'])}">
+	</section>
+</section>
+	{loop $items $item}
+		<!-- 内页 -->
+		{php $data=iunserializer($item['param']);}
+		{if $item['m_type']==1}
+			<section class="page page-link" data-plugin-type="info_link" style="background-image: url({php echo toimage($item['thumb'])})">
+				<section class="page-content">
+				</section>
+			</section>
+		{elseif $item['m_type']==4}	
+			<section class="page page-video" data-plugin-type="video_brand" style="background-image: url({php echo toimage($item['thumb'])});">
+			<section class="page-content">
+				<a href="javascript:void(0);" class="m-btnPlay a-bouncein">
+				<i></i>
+				<div></div>
+				</a>
+				<div class="u-maskLayer m-youkuVideoLayer z-hide">
+				<div class="m-youkuVideo" data-devid="" data-src="{$data['url']}"></div>
+				</div>
+				</section>
+			</section>	
+		{elseif $item['m_type']==2}
+		<section class="page page-link" data-plugin-type="info_link" style="background-image: url({php echo toimage($item['thumb'])});">
+			<section class="page-content">
+				<div class="m-link">
+					<a href="{$data['url']}" class="imgLink">
+					<img src="{php echo toimage($data['btnimg'])}"/>
+					</a>
+				</div>
+			</section>
+		</section>		
+		{elseif $item['m_type']==31}
+		<section class="page page-link" data-plugin-type="info_link" style="background-image: url({php echo toimage($item['thumb'])});">
+			<section class="page-content">
+				<div class="m-link">
+					<a href="{php echo $this->createMobileurl('map',array('title'=>$data['sname'],'lng'=>$data['lng'],'lat'=>$data['lat'],'tel'=>$data['tel'],'addr'=>$data['place']))}" class="imgLink">
+					<img src="{php echo toimage($data['btnimg'])}"/>
+					</a>
+				</div>
+			</section>
+		</section>	
+		{elseif $item['m_type']==7}
+		<section class="page page-link" data-plugin-type="info_link" style="background-image: url({php echo toimage($item['thumb'])});">
+			<section class="page-content">
+				<div class="m-link">
+					<a href="tel:{$data['url']}" class="imgLink">
+					<img src="{php echo toimage($data['btnimg'])}"/>
+					</a>
+				</div>
+			</section>
+		</section>		
+		{elseif $item['m_type']==3}			
+		<section class="page page-link" data-plugin-type="info_link" style="background-image: url({php echo toimage($item['thumb'])});">
+			<section class="page-content">
+				<div class="m-link">
+				<a href="weixin:share" class="imgLink">
+				<img src="{php echo toimage($data['btnimg'])}"/>
+				</a>
+				<div class="u-maskLayer m-weixinShareLayer z-hide">
+					{if empty($data['share_thumb'])}
+					<img src="../addons/scene_cube/resource/22/data/images/link/weixin-share-guide.png">
+					{else}
+					<img src="{php echo toimage($data['share_thumb'])}">
+					{/if}
+				</div>
+				</div>
+			</section>
+		</section>			
+		{elseif $item['m_type']==6}
+		<section class="page page-teletext" data-plugin-type="info_list" style="background:url({php echo toimage($item['thumb'])});">
+			<section class="page-content">
+			<ul class="m-cascadingTeletext">
+				
+				{loop $data[thumbs] $row}
+				<li>
+					<img src="{php echo toimage($row)}"/>
+					<div class="imgText"></div>
+				</li>
+				{/loop}
+			</ul>
+			<a href="javascript:void(0);" class="u-guidePrev z-move">prev</a>
+			<a href="javascript:void(0);" class="u-guideNext z-move">next</a>
+			</section>
+		</section>
+		{/if}
+ 	{/loop}
+</section>
+<footer class="app-footer">
+</footer>
+<script type="text/javascript" src="../addons/scene_cube/resource/22/assets/scripts/init.min.js?ver=3.8"></script>
+{template 'share'}
+</body>
+</html>
+

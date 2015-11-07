@@ -1,0 +1,53 @@
+{template 'common_header'}
+    <div class="col-xs-12" style="margin-top: -5px">
+        <img class="am-radius" alt="{$company['name']}（公司形象照待上传）" src="{$_W['attachurl']}/thinkidea_rencai/{$company['avatar']}" width="100%" height="180px"/>
+    </div>
+
+    <div class="am-g" style="margin-bottom:5px;background-color: #ffffff">
+        <h4 style="margin-bottom: 0;font-size: 2rem;text-align: center;padding-top: 5px">{$company['name']}</h4>
+        {if empty($company['logo']) || empty($company['avatar'])}
+        <div class="am-alert am-alert-success" data-am-alert>
+            <button type="button" class="am-close">&times;</button>
+            <small>你还没有完善资料，请点击“企业信息”完善</small>
+        </div>
+        {/if}
+        <div class="am-u-sm-12">
+            创建时间：{php echo date('Y-m-d', $company['dateline']);}
+        </div>
+        <div class="am-u-sm-12" style="margin: 10px 0">
+            {if $company['isauth'] == 0}
+            <button class="am-btn am-btn-default am-btn-xs am-fl">未认证</button>
+            &nbsp;&nbsp;<small><a data-am-modal="{target: '#my-alert', width: 320, height: 180}">点击我要认证</a></small>
+            {else}
+            <span class="am-badge am-badge-success">已认证</span>
+            {/if}
+        </div>
+        <div class="am-u-sm-12" style="margin: 10px 0">
+            <ul class="am-list am-list-border">
+                <li><a href="{php echo $this->createMobileUrl('MyPublicJob', array('companyid' => $company['id']));}">我发布的职位</a></li>
+                <li><a href="{php echo $this->createMobileUrl('PublicIndex', array('type' => 1));}">发布职位</a></li>
+                <li><a href="{php echo $this->createMobileUrl('MyCompanyInfo');}">企业信息</a></li>
+                <li><a href="{php echo $this->createMobileUrl('ComeApply', array('companyid' => $company['id']));}">来应聘的</a></li>
+                <li><a href="{php echo $this->createMobileUrl('LogoutIdentity');}" onclick="if(confirm('确定注销?')){return true;}else{return false;}">注销身份</a></li>
+            </ul>
+        </div>
+        <div class="am-u-sm-12" style="margin: 10px 0">
+            "注销身份":表示从新选择“求职者”或“招聘者”。
+        </div>
+    </div>
+    <!--认证提示-->
+	<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+	  <div class="am-modal-dialog">
+	  	<div class="am-panel am-panel-default">
+		  <div class="am-panel-hd">认证方式</div>
+		  <div class="am-panel-bd">
+		    1、通过拨打下方的电话<br /><a href="tel:{$telephone}" type="button" class="am-btn am-btn-danger">电话认证</a>
+		  </div>
+		  <div class="am-panel-bd">
+		    2、点击进入“我的企业信息”,<br />上传企业营业执照。
+		  </div>		  
+		</div>
+	  </div>
+	</div>
+
+    {template 'common_footer'}

@@ -1,0 +1,192 @@
+<link type="text/css" rel="stylesheet" href="../addons/scene_cube/style/css/wanimation.css" />
+<script type="text/javascript">
+    function testAnim(x) {
+        $('#drag').removeClass().addClass(x + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $(this).removeClass();
+        });
+    };
+    $(document).ready(function () {
+        $('#animations').change(function(){
+            var anim = $(this).val();
+            testAnim(anim);
+        });
+        $("#drag").css({
+            top:{if ($item['y'])}{php echo $item['y']/2}{else}0{/if}, left: {if ($item['x'])}{php echo $item['x']/2}{else}0{/if}
+        });
+    });
+    var _down = false;
+    var _x,_y,imgID;
+    function dragImage(obj){
+        imgID = obj;
+        _x = event.x - parseInt(imgID.style.left);
+        _y = event.y - parseInt(imgID.style.top);
+        _down=true;
+    }
+    function cancelDrag(){	_down=false;	}
+    function moveImage(){
+        if(_down){
+            var x = event.x - _x;
+            var y = event.y - _y;
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            show(x, y);
+            $(imgID).css({ top: y, left: x });
+            event.returnValue = false;
+        }
+    }
+    function show(x, y) {
+        $("#x").val(2*x);
+        $("#y").val(2*y);
+    }
+    $(document).bind("mousemove", moveImage);
+    $(document).bind("mouseup", cancelDrag);
+</script>
+<form action="" method="post" enctype="multipart/form-data">
+    <div id="image-container-win" style="overflow:hidden;">
+        <div style="width:250px;float:left;">
+            <span class="help-block">请上传图片，一般为背景透明的图片</span>
+            <div id="firstimg_image_uploads_sucai" style="width:230px;margin-bottom:10px;">
+                {php echo tpl_form_field_image('item', $item['item'])}
+                <input type="hidden" value="" name="item_old" id="upload-image-url-item-old">
+            </div>
+            <input id="url" type="text" value="{$item['url']}" name="url" style="width:230px">
+            <input id="itype" type="hidden" value="{$item['itype']}" name="itype">
+            <span class="help-block">请填写元素链接的网址，可以不填</span>
+
+            <div class="alert-block" style="padding:0 0;">
+                <a href="javascript:;" class="icon-external-link" onclick="$('#url').val('');$('#itype').val('1');">链接</a>&nbsp;
+                <a href="javascript:;" class="icon-external-link" onclick="$('#url').val('#share');$('#itype').val('2')">分享</a>&nbsp;
+                <a href="javascript:;" class="icon-external-link" onclick="$('#url').val('tel:');$('#itype').val('3')">拨号</a>&nbsp;
+                <a href="javascript:;" class="icon-external-link" onclick="$('#url').val('');$('#itype').val('4')">视频</a>&nbsp;
+
+            </div>
+            <input type="hidden" value="" name="x" id="x">
+            <input type="hidden" value="" name="y" id="y">
+            <span class="help-block">请选择元素的动画特效</span>
+            <select name="animation" id="animations" class="input span2">
+                <optgroup label="基本特效">
+                    <option value="flash" {if ($item['animation']=='flash')}selected="selected"{/if}>闪光</option>
+                    <option value="bounce" {if ($item['animation']=='bounce')}selected="selected"{/if}>弹起</option>
+                    <option value="shake" {if ($item['animation']=='shake')}selected="selected"{/if}>摇摆</option>
+                    <option value="tada" {if ($item['animation']=='tada')}selected="selected"{/if}>秋千</option>
+                    <option value="swing" {if ($item['animation']=='swing')}selected="selected"{/if}>悬挂</option>
+                    <option value="wobble" {if ($item['animation']=='wobble')}selected="selected"{/if}>摆动</option>
+                    <option value="pulse" {if ($item['animation']=='pulse')}selected="selected"{/if}>脉冲</option>
+                </optgroup>
+                <optgroup label="翻转特效">
+                    <option value="flipx" {if ($item['animation']=='flipx')}selected="selected"{/if}>垂直翻转</option>
+                    <option value="flipy" {if ($item['animation']=='flipy')}selected="selected"{/if}>水平翻转</option>
+                </optgroup>
+                <optgroup label="淡入特效">
+                    <option value="fadedown" {if ($item['animation']=='fadedown')}selected="selected"{/if}>上方淡入</option>
+                    <option value="fadeup" {if ($item['animation']=='fadeup')}selected="selected"{/if}>下方淡入</option>
+                    <option value="fadeleft" {if ($item['animation']=='fadeleft')}selected="selected"{/if}>左方淡入</option>
+                    <option value="faderight" {if ($item['animation']=='faderight')}selected="selected"{/if}>右方淡入</option>
+                    <option value="fadedownbig" {if ($item['animation']=='fadedownbig')}selected="selected"{/if}>顶部淡入</option>
+                    <option value="fadeupbig" {if ($item['animation']=='fadeupbig')}selected="selected"{/if}>底部淡入</option>
+                    <option value="fadeleftbig" {if ($item['animation']=='fadeleftbig')}selected="selected"{/if}>左侧淡入</option>
+                    <option value="faderightbig" {if ($item['animation']=='faderightbig')}selected="selected"{/if}>右侧淡入</option>
+                </optgroup>
+                <optgroup label="跳弹特效">
+                    <option value="bouncein" {if ($item['animation']=='bouncein')}selected="selected"{/if}>跳弹放大</option>
+                    <option value="bouncedown" {if ($item['animation']=='bouncedown')}selected="selected"{/if}>跳弹降落</option>
+                    <option value="bounceup" {if ($item['animation']=='bounceup')}selected="selected"{/if}>跳弹升起</option>
+                    <option value="bounceleft" {if ($item['animation']=='bounceleft')}selected="selected"{/if}>左侧跳弹</option>
+                    <option value="bounceright" {if ($item['animation']=='bounceright')}selected="selected"{/if}>右侧跳弹</option>
+                </optgroup>
+                <optgroup label="旋转特效">
+                    <option value="rotatein" {if ($item['animation']=='rotatein')}selected="selected"{/if}>旋转淡入</option>
+                    <option value="rotateindownleft" {if ($item['animation']=='rotateindownleft')}selected="selected"{/if}>左下旋转</option>
+                    <option value="rotateindownright" {if ($item['animation']=='rotateindownright')}selected="selected"{/if}>右下旋转</option>
+                    <option value="rotateinupleft" {if ($item['animation']=='rotateinupleft')}selected="selected"{/if}>左上旋转</option>
+                    <option value="rotateinupright" {if ($item['animation']=='rotateinupright')}selected="selected"{/if}>左下旋转</option>
+                </optgroup>
+                <optgroup label="其他特效">
+                    <option value="rollin" {if ($item['animation']=='rollin')}selected="selected"{/if}>翻滚进入</option>
+                    <option value="zoomindown" {if ($item['animation']=='zoomindown')}selected="selected"{/if}>顶部砸入</option>
+                    <option value="lightspeedin" {if ($item['animation']=='lightspeedin')}selected="selected"{/if}>摇摆进入</option>
+                </optgroup>
+            </select>
+            <div style="text-align:left;margin-top:20px">
+                <button type="button" class="btn btn-primary span3" name="submit" value="确定" id="ok" data-dismiss="modal"
+                        style="width:230px;height:32px;">确定</button>
+                <input type="hidden" name="token" value="{$_W['token']}" />
+            </div>
+        </div>
+        <div id="upload-image-preview-piece"
+             style="width:320px;height:504px;background:url({$_W['attachurl']}{$photo['attachment']}) no-repeat;background-size:320px 504px;float:left;">
+            {if $item['item']}
+            {php $size = GetImageSize($_W['attachurl'].$item['item']);}
+            <img class="upload-image-preview-item" id="drag" style="width:{php echo $size[0]/2}px;height:{php echo $size[1]/2}px;cursor: move;position: relative;left:0;top: 0;" src="{$_W['attachurl']}{$item['item']}" />
+            {else}
+            <img class="upload-image-preview-item" id="drag" style="cursor: move;position: relative;left:0;top: 0;" src="../addons/scene_cube/resource/images/module-nopic-small.jpg" onmousedown="dragImage(this)"/>
+            {/if}
+        </div>
+</form>
+<script type="text/javascript">
+    /*var editor = KindEditor.editor({
+     allowFileManager : true,
+     uploadJson : "./index.php?act=attachment&do=upload",
+     fileManagerJson : "./index.php?act=attachment&do=manager",
+     afterUpload : function(url, data) {
+
+     }
+     });
+     $("#upload-image-item").click(function() {
+     editor.loadPlugin("image", function() {
+     editor.plugin.imageDialog({
+     tabIndex : 1,
+     imageUrl : $("#upload-image-url-item").val(),
+     clickFn : function(url) {
+     editor.hideDialog();
+     var val = url;
+     if(url.toLowerCase().indexOf("http://") == -1 && url.toLowerCase().indexOf("https://") == -1) {
+     var filename = /images(.*)/.exec(url);
+     if(filename && filename[0]) {
+     val = filename[0];
+     }
+     }
+     $("#upload-image-url-item-old").val($("#upload-image-url-item").val());
+     $("#upload-image-url-item").val(val);
+     $(".upload-image-preview-item").css("width","");
+     $(".upload-image-preview-item").css("height","");
+     $(".upload-image-preview-item").attr("src",url);
+     $(".upload-image-preview-item").css("-webkit-transform-origin","0 0");
+     $(".upload-image-preview-item").css("-webkit-transform","scale(0.5,0.5)");
+     }
+     });
+     });
+     });*/
+    $("#ok").click(function(){
+        var thumb = $("#firstimg_image_uploads_sucai").find("input").eq(0).val();
+        if(!thumb){
+            alert('图片不能为空');
+            return false;
+        }else{
+            $tempstr = $('<tr class="copy_rows"><td><div id="map_image_uploads" class=""><img upload="image-single" style="max-height:50px;" src="'+$("#drag").attr('src')+'" /><input type="hidden" value="'+thumb+'" name="second[thumbs][]" id="mapimage" /></div></td><td><input type="hidden" value="'+$("#animations").val()+'" name="second[animations][]">'+$("#animations").val()+'</td><td><input type="hidden" value="'+$("#x").val()+'" name="second[x][]">'+$("#x").val()+'</td><td><input type="hidden" value="'+$("#y").val()+'" name="second[y][]">'+$("#y").val()+'</td><td><input type="hidden" value="'+$("#itype").val()+'" name="second[itype][]"><input type="hidden" value="'+$("#url").val()+'" name="second[url][]"><a href="javascript:;" class="del">删除</a></td></tr>');
+            $tempstr.find(".del").click(function () {
+                var removeObj = $(this).parent('td').parent('tr');
+                return removeObj.remove();
+            });
+            $("#listTable").append($tempstr);
+        }
+    });
+
+    window.time_firstimg_image_url = "";
+    function time_firstimg_image() {
+        var thumb = $("#firstimg_image_uploads_sucai").find("input").eq(0).val();
+        if (thumb != window.time_firstimg_image_url) {
+            window.time_firstimg_image_url = thumb;
+            $("#drag").attr('src', $("#firstimg_image_uploads_sucai").find("img").attr("src"))
+        }
+        setTimeout(function(){
+            time_firstimg_image();
+        },200)
+    }
+    $(function () {
+        time_firstimg_image();
+        //
+        $("#upload-image-preview-piece").attr("style","width:320px;height:504px;background:url("+$("#firstimg_image_uploads img").attr('src')+") no-repeat;background-size:320px 504px;float:left;");
+    });
+</script>
+</div>

@@ -1,0 +1,71 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" href="../addons/str_takeout/template/resource/css/main.css">
+<script src="../addons/str_takeout/template/resource/js/main.js"></script>
+<script src="../addons/str_takeout/template/resource/js/menu.js"></script>
+<header class="nav menu">
+	<div>
+		<a style="width:33%" href="javascript:;" class="on">订单详情</a>
+		<a style="width:33%" href="{php echo $this->createMobileUrl('dish', array('sid' => $_GPC['sid']))}">菜单</a>
+		<a style="width:33%" href="{php echo $this->createMobileUrl('store', array('sid' => $_GPC['sid']))}">门店详情</a>
+	</div>
+</header>
+<div class="container">
+	<form name="cart_confirm_form" action="{php echo $this->createMobileUrl('orderconfirm', array('sid' => $sid), true)}" method="post">
+		<section class="menu_wrap">
+			<ul class="menu_list order_list" id="orderList">
+			{loop $dish_info $li}
+				<li>
+					<div>
+						<img src="{php echo tomedia($li['thumb']);}" alt="">
+					</div>
+					<div>
+						<h3>{$li['title']}</h3>
+						<div>
+							<div class="fr" max="{$li['total']}">
+								<a href="javascript:void(0);" class="btn_n add active"></a>
+							</div>
+							<input autocomplete="off" class="number" type="hidden" name="dish[{$li['id']}]" value="{$dishes[$li['id']]}">
+							<span class="count">{$dishes[$li['id']]}</span>
+							<strong>￥<span class="unit_price">{$li['price']}</span></strong>
+						</div>
+					</div>
+				</li>
+			{/loop}
+			</ul>
+		</section>
+		<footer class="order_fixed">
+			<div class="fixed">
+				<p>
+					<span class="fr">总计：<strong>￥<span id="totalPrice"></span></strong> / <span id="cartNum" class="has_num"></span>份</span>
+					配送费：￥{$store['delivery_price']}		
+				</p>
+				<span class="comm_btn disabled" style="display: none;">还差￥<span id="sendCondition">{$store['send_price']}</span>满最低起送价</span>
+				<a href="javascript:document.cart_confirm_form.submit();" class="comm_btn" style="display: inline-block;">订单确认</a>
+			</div>
+		</footer>
+	</form>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var amountCb = $.amountCb();
+
+		$('#orderList li').each(function(){
+			var count = parseInt($(this).find('.count').text()),
+				_add = $(this).find('.add'),
+				i = 0;
+
+			for(; i < count; i++){
+				amountCb.call(_add, '+');
+			}
+
+			_add.amount(count, amountCb);
+		});
+
+	});
+	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+		WeixinJSBridge.call('hideOptionMenu');
+	});
+
+</script>
+{template 'common'}
+{template 'common/footer'}

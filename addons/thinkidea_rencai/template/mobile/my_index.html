@@ -1,0 +1,39 @@
+{template 'common_header'}
+    
+    <!-- 头部 -->
+    <header class="am-topbar am-topbar-inverse am-topbar-fixed-top">
+        <ul class="am-avg-sm-3">
+             <li class="am-text-left" style="padding:10px 0 0 5px"><a href="javascript:history.back();" class="am-icon-mail-reply">&nbsp;返回</a></li>
+             <li class="am-text-center" style="padding-top:10px">用户中心</li>
+             <li class="am-text-right" style="padding:10px 5px 0 0"><a href="{php echo $this->createMobileUrl('PublicIndex');}" class="am-icon-plus" style="color:#FFF">&nbsp;发布</a></li>
+        </ul>
+    </header>
+
+    <!--头像、昵称-->
+    <!-- <div class="am-g" style="margin-top:15px">
+        <div class="am-u-sm-3">
+            <img class="am-circle" src="{$userinfo['headimgurl']}" width="100" height="100"/>
+        </div>
+
+        <div class="am-u-sm-9">
+            <p>{$userinfo['nickname']}</p>
+            <p>{$userinfo['province']} {$userinfo['city']}</p>
+        </div>
+    </div> -->
+    
+    <div class="am-g" style="margin-top:20px">
+    	<div class="am-u-sm-12">
+    		<div class="am-alert am-alert-warning am-round">
+    		  <strong>您好，您还未发布任何信息</strong>
+    		</div>
+    		
+    	</div>
+    </div>
+    
+    <div class="am-g" style="margin-top:20px">
+        <div class="am-u-sm-12">
+            <button onclick="location.href='{php echo $this->createMobileUrl('PublicIndex');}'" class="am-btn am-btn-block am-btn-primary am-round">我要发布</button>
+        </div>
+    </div>    
+    
+{template 'common_footer'}   

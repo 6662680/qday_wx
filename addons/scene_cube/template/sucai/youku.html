@@ -1,0 +1,18 @@
+<div class="control-group js_scene_style js_youku hide">
+ 	<div class="control-group">    
+		<label for="" class="control-label">视频背景：</label>
+		<div class="margin-top10 controls">
+            <div id="video_image_uploads" style="width:330px;">
+                {php echo tpl_form_field_image('youku[vthumb]', $data['vthumb'])}
+            </div>
+            <div class="help-inline">（建议尺寸:宽640像素,高300像素或等比图片）</div>
+		</div>
+	</div>
+ 	<div class="control-group">    
+		<label for="" class="control-label">优酷链接：</label>
+		<div class="controls">
+			<input type="text" class="input-xlarge" name="youku[url]" value="{$data['url']}" placeholder="请输入链接地址" data-rule-required="true" data-rule-url="true"/>
+			<span class="help-block">形如：http://v.youku.com/v_show/id_XNzgzMTgyMzIw.html)</span>
+		</div>
+	</div>
+</div>

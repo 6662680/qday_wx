@@ -1,0 +1,85 @@
+{template 'nav_new.inc'}
+<style>
+.alert {padding:6px}
+</style>
+<div class="container" style="margin-top:10px">
+  <div class="row">
+    <div class="col-xs-8">
+        <ol class="breadcrumb alert alert-success">
+            <li>首页</li>
+            <li class="am-active">查看二手信息</li>
+        </ol>
+    </div>
+    <div class="col-xs-2">
+      <a href="{php echo $this->createMobileUrl('list')}" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;返回</a>
+    </div>
+  </div>
+</div>
+<div class="container" style="margin-top:5px">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">{$detail['title']}</div>
+      <div class="panel-body">
+        <b>价格：</b>{$detail['price']}元
+      </div>
+      <div class="panel-body">
+        <b>成色：</b>
+             {if $detail['rolex'] == 1}9.9成新
+             {elseif $detail['rolex'] == 2}9.5成新
+             {elseif $detail['rolex'] == 3}9成新
+             {elseif $detail['rolex'] == 4}8成新
+             {elseif $detail['rolex'] == 5}7成新
+             {elseif $detail['rolex'] == 6}6成新
+             {/if}
+      </div>
+      <div class="panel-body">
+        <b>联系人：</b>{$detail['realname']}{if empty($detail['sex'])}先生{else}女士{/if}
+      </div>
+      <div class="panel-body">
+        <b>发布时间：</b>{php echo date('Y-m-d', $detail['createtime'])}
+      </div>
+      <div class="panel-body">
+        <a href="tel:{$detail['mobile']}" class="btn btn-primary"> <i class="icon-phone"></i>联系卖家</a>
+      </div>
+      <div class="panel-body">
+          <div>
+          <a href="{$_W['attachurl']}{$detail['thumb1']}">
+            <img src="{$_W['attachurl']}{$detail['thumb1']}" style='width:95%;'>
+          </a>
+          </div>
+          {if $detail['thumb2']}
+          <br />
+          <div>
+            <a href="{$_W['attachurl']}{$detail['thumb2']}">
+              <img src="{$_W['attachurl']}{$detail['thumb2']}" style='width:95%;'>
+            </a>
+          </div>
+          {/if}
+          {if $detail['thumb3']}
+          <br />
+          <div>
+            <a href="{$_W['attachurl']}{$detail['thumb3']}">
+             <img src="{$_W['attachurl']}{$detail['thumb3']}" style='width:95%;'>
+            </a>
+          </div>
+          {/if}
+      </div>
+    </div>
+</div>
+<div class="container" style="margin-top:5px">
+    <div class="alert alert-warning" role="alert">
+    <h5>友情提示：网络交易需谨慎</h5>
+    <p class="text-left">1.请认真核实资料信息，严禁发布虚假广告信息等行为，如若违反且情节严重，我们会立即报警!</p>
+    <p class="text-left">2.本平台是一个免费的信息发布平台，当事人必须提供真实资料.</p>
+    <p class="text-left">3.网络有风险，交易需谨慎。一定要严格审查发布人的资料，保护个人人身财产安全!</p>
+    </div>
+</div>
+<script>
+sharedata = {
+    'title' : "{$detail['title']}-二手市场",
+    'desc' : "{$detail['title']}-二手市场—{$_W['account']['name']}",
+    'link' : '',
+    'imgUrl' : "{$_W['attachurl']}{$detail['thumb1']}"
+}
+</script>
+{template 'common/footer'}

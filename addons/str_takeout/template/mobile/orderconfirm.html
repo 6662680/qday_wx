@@ -1,0 +1,226 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" href="../addons/str_takeout/template/resource/css/main.css">
+<script src="../addons/str_takeout/template/resource/js/dialog.js"></script>
+<div class="container">
+	<section class="pay_wrap">
+		<ul class="box">
+			<li>
+				<a href="javascript:void(0);" id="addresBtn">
+					<strong style="width:500px">
+						<span id="showAddres">{$member['address']}</span><br>
+						<span id="showName">{$member['realname']}</span>
+						<span id="showTel">{$member['mobile']}</span>
+					</strong>
+					<strong style="width:150px;text-align:right">点击添加收货人信息</strong>
+					<div><i class="ico_arrow"></i></div>
+				</a>
+			</li>
+		</ul>
+		<ul class="box pay_box">
+			<li>
+				<a href="javascript:void(0);" id="timeBtn">
+					<strong>送达时间</strong>
+					<span id="arriveTime">尽快送出</span>
+					<div><i class="ico_arrow"></i></div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:void(0);" id="remarkBtn">
+					<strong>订单备注</strong>
+					<span id="remarkTxt">点击添加订单备注</span>
+					<div><i class="ico_arrow"></i></div>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<footer class="go_menu">
+		<div class="fixed">
+			<a id="submit_order" href="javascript:void(0);">提交订单</a>
+		</div>
+	</footer>
+</div>
+
+<div class="addres_box" id="addresBox">
+	<ul>
+		<li><input class="txt" placeholder="预定人" id="userName"></li>
+		<li class="get_code">
+			<span><input class="txt" placeholder="手机" maxlength="11" id="userTel"></span>
+		</li>
+		<li><textarea class="txt" placeholder="送餐地址" id="userAddres"></textarea></li>
+		<li class="btns_wrap">
+			<span><a href="javascript:void(0);" class="comm_btn higher disabled" id="cancleAddres">取消</a></span>
+			<span><a href="javascript:void(0);" class="comm_btn higher" id="saveAddres">确认</a></span>
+		</li>
+	</ul>
+</div>
+
+<div id="timeBox" class="timeBox">
+	<div>
+		<a href="javascript:void(0);">尽快送出</a>
+		{$str}
+	</div>
+</div>
+
+<div class="addres_box" id="remarkBox">
+	<ul>
+		<li><textarea class="txt max" placeholder="请填写备注" id="userMark"></textarea></li>
+		<li class="btns_wrap">
+			<span><a href="javascript:void(0);" class="comm_btn higher disabled" id="cancleRemark">取消</a></span>
+			<span><a href="javascript:void(0);" class="comm_btn higher" id="saveRemark">确认</a></span>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+	var addressBox = {
+		init: function(){
+			this.differTime = 60;
+			this.box = $('#addresBox');
+			this.errorMsg = {
+				userName: '预定人不能为空',
+				userTel: '手机不能为空',
+				userAddres: '送餐地址不能为空'
+			};
+
+			var _this = this;
+
+			$('#addresBtn').click(function(){
+				_this.show.call(this, _this);
+			});
+			$('#saveAddres').click(function(){
+				_this.save.call(this, _this);
+			});
+			$('#cancleAddres').click(function(){
+				_this.close();
+			});
+		},
+		show: function(obj){
+			var addressTxt = $.trim($(this).find('strong').text());
+
+			if(addressTxt == '' || addressTxt == '请添加送餐地址'){
+				$('#getCode').removeClass('disabled');
+			}else{
+				$('#userName').val($('#showName').text());
+				$('#userTel').val($('#showTel').text());
+				$('#userAddres').val($('#showAddres').text());
+
+				obj.validateTel = $('#showTel').text();
+			}
+
+			obj.box.dialog({title: '送餐地址', closeCb: function(){
+				
+			}});
+		},
+		save: function(obj){
+			var error = '',
+				tel = $('#userTel').val();
+			$('#userName, #userTel, #userAddres').each(function(){
+				if(this.value == ''){
+					error += obj.errorMsg[this.id] + '\n';
+				}
+			});
+			function fillData(){
+				$('#showAddres').text($('#userAddres').val());
+				$('#showName').text($('#userName').val());
+				$('#showTel').text(tel);
+				obj.close();
+			}
+
+			// 判断是否为空
+			if(error){
+				alert(error);
+				return false;
+			}
+			if(!/^.{5,20}$/gi.test(tel) || !/^(\+\s?)?(\d*\s?)?(?:\(\s?(\d+[-\s])?\d+\s?\)\s?)?\s?(\d+[-\s]?)+\d+$/gi.test(tel)){
+				alert('请输入正确的手机号码');
+				return false
+			}
+			fillData();
+		},
+		close:function(){
+			this.box.dialog('close');
+		}
+	}
+	$(function(){
+		addressBox.init();
+
+		var _timeBox = $('#timeBox'),
+			_addresBox = $('#addresBox'),
+			_remarkBox = $('#remarkBox'),
+			_remarkInput = _remarkBox.find('textarea');
+
+		// 选择送餐时间
+		$('#timeBtn').bind('click', function(){
+			_timeBox.dialog({title: '选择送达时间'});
+		});
+
+		_timeBox.find('a').bind('click', function(){
+			$('#arriveTime').text($(this).text());
+			_timeBox.dialog('close');
+		});
+
+		// 添加备注
+		$('#remarkBtn').bind('click', function(){
+			var remark = $('#remarkTxt').text();
+			if(remark == '点击添加订单备注') remark = '';
+			$('#userMark').val(remark);
+			_remarkBox.dialog({title: '添加备注'});
+		});
+
+		$('#cancleRemark').bind('click', function(){
+			_remarkBox.dialog('close');
+		});
+
+		$('#saveRemark').bind('click', function(){
+			$('#remarkTxt').text(_remarkInput.val());
+			_remarkInput.val('');
+			_remarkBox.dialog('close');
+		});
+
+		$("#submit_order").click(function(){
+			if(!$(this).hasClass('disabled')){
+				$(this).addClass('disabled');
+				var wo_user_name = $.trim($("#showName").html());
+				var wo_receiver_mobile = $.trim($("#showTel").html());
+				var wo_receiver_address = $.trim($("#showAddres").html());
+				if(wo_receiver_address == '请添加送餐地址') {
+					wo_receiver_address = '';
+				}
+				var wo_memo = $.trim($("#remarkTxt").html());
+				if(wo_memo == '点击添加订单备注') {
+					wo_memo = '';
+				}
+				if(wo_user_name == '' || wo_receiver_mobile == '' || wo_receiver_address == ''){
+					alert("请完善送餐地址信息");
+					$(this).removeClass('disabled');
+					return false;
+				}
+				var wo_delivery_time = $.trim($("#arriveTime").html());
+				if(wo_delivery_time == '尽快送出'){
+					wo_delivery_time = '';
+				}
+				$.post("{php echo $this->createMobileUrl('orderconfirm', array('sid' => $sid));}",{
+					'username':wo_user_name,
+					'mobile':wo_receiver_mobile,
+					'address':wo_receiver_address,
+					'note':wo_memo,
+					'delivery_time':wo_delivery_time,
+					'dish':'{$dish}'
+				},function(e){
+					if(e.errno == 0) {
+						window.location.href = e.url;
+						return false;
+					}else{
+						alert(e.error);
+						$("#submit_order").removeClass('disabled');
+					}
+				},'json');
+			}
+			return false;
+		});
+	});
+	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+		WeixinJSBridge.call('hideOptionMenu');
+	});
+</script>
+{template 'common'}
+{template 'common/footer'}

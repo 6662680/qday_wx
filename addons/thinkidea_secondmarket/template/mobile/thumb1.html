@@ -1,0 +1,154 @@
+
+<style>
+    .uploadimg{margin: 0;padding: 0;}
+
+    .uploadimg li{ list-style: none;width:22%;float: left; margin:5px 0 5px 4%;position: relative;}
+
+    .uploadimg li:first-child{margin-left: 0;}
+
+    .uploadimg li:nth-child(5n){ list-style: none;width:22%;margin:5px 0 5px 0;}
+
+    .uploadimg img{width: 100%;}
+
+
+    .upload_btn {
+        background: url("../addons/thinkidea_secondmarket/template/static/nmLine_bg.png") no-repeat;
+        background-size: cover;
+        position: relative;
+        border: 2px dashed #78B0C6;
+        border-radius: 5px;
+        margin-top:10px;
+        display:inline-block;
+        margin-right:15px;
+        margin-bottom: -2px;
+    }
+    .upload_btn.img{margin-bottom: 0;}
+    .clear{clear:both;}
+    .upload_btn input {
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        overflow: hidden;
+        width: 56px;
+        height: 56px;
+    }
+
+
+    .cBtnOn {
+        background-image: url(../addons/thinkidea_secondmarket/template/static/sprNewBg.png);
+        background-position: -22px 0;
+    }
+    .cBtn {
+        right: -10px;
+        top: -10px;
+    }
+
+    .cBtn {
+        width: 22px;
+        height: 22px;
+        background: url(../addons/thinkidea_secondmarket/template/static/sprNewBg.png) no-repeat;
+        background-size: 316px auto;
+        -webkit-background-size: 316px auto;
+        font-size: 0;
+    }
+
+    .pa {
+        position: absolute;
+    }
+    .db {
+        display: block;
+    }
+
+</style>
+<input type="hidden" id="image" name="image" value="" />
+
+<ul class="uploadimg">
+    <li class="upload_btn" style="height: 72px;">
+        <input type="button" id="chooseImage" />
+    </li>
+    <div style="clear: both;"></div>
+</ul>
+{php echo register_jssdk(false);}
+<script>
+    // 5 图片接口
+    // 5.1 拍照、本地选图
+    var images = {
+        localId: [],
+        serverId: []
+    };
+
+    var height = $(window).width() * 0.22;
+
+    $('.upload_btn').height(height);
+
+    document.querySelector('#chooseImage').onclick = function () {
+        wx.chooseImage({
+            success: function (res) {
+                images.localId = res.localIds;
+                //alert('已选择 ' + res.localIds.length + ' 张图片');
+                var ss = images.localId;
+                for (var i = 0; i < ss.length; i++) {
+                    a = $('<a href="javascript:;" class="cBtn cBtnOn pa db" title="">关闭</a>');
+                    $li = $("<li><img src='" + ss[i] + "' style='height:" + height + "px'</li>");
+                    a.click(function () {
+                        images.serverId.splice($(this).parent().index(), 1);
+                        $(this).parent().remove();
+                    });
+                    $li.append(a);
+                    $('.uploadimg li.upload_btn').before($li);
+                }
+                uploadImg();
+            }
+        });
+    };
+
+    // 5.3 上传图片
+    function uploadImg() {
+        if (images.localId.length == 0) {
+            alert('无任何图片。');
+            return;
+        }
+
+        if (images.localId.length > 3) {
+            alert('图片不能超过三张，请删除多余的图片。');
+            return;
+        }
+        var i = 0, length = images.localId.length;
+        //serverId = [];
+        function upload() {
+            wx.uploadImage({
+                localId: images.localId[i],
+                isShowProgressTips: 1, // 默认为1，显示进度提示-
+                success: function (res) {
+                    i++;
+                    //alert('已上传：' + i + '/' + length);
+                    images.serverId.push(res.serverId);
+                    if (i < length) {
+                        upload();
+                    } else {
+                    }
+                },
+                fail: function (res) {
+                    alert(JSON.stringify(res));
+                }
+            });
+        }
+
+        upload();
+    };
+
+
+    function checkform() {
+        var mobile = $("input[name='mobile']").val();
+        if(mobile == ''){
+            alert('请输入手机号');
+            return false;
+        }else if(mobile.search(/^([0-9]{11})?$/) == -1) {
+            alert('请输入正确的手机号码！');
+            return false;
+        }
+        $('#image').val(images.serverId);
+    }
+</script>

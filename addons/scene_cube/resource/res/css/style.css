@@ -1,0 +1,69 @@
+/* 
+ *  云+轻App项目特殊css（页面级）
+ * ----------------------------------
+ *  作者：Charles
+ *  时间：2014-04-01
+ *  准则：NEC CSS规范
+ *  联系：16295853（qq）
+ *****************************************************************************************/
+
+/*推荐首页*/
+.m-recommend{}
+.m-recommend .m-imgBox{width: 640px; height: 260px; margin-top: -20px;}
+.m-recommend .g-content{margin-bottom: 120px;}
+.m-recommend .g-content :last-child{border-bottom: 0px;}
+/*推荐首页 end*/
+
+/*更多列表页*/
+.m-moreApp{}
+.m-moreApp .g-content{margin: 0px; position: absolute; top: 0px; bottom: 99px;}
+.m-moreApp .g-content .m-scrollLoading{position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; width: 640px;}
+/*更多列表页 end*/
+
+/*评论页*/
+.m-comments{}
+.m-comments .g-content{margin: 0px; position: absolute; top: 0px; bottom: 99px;}
+.m-comments .g-content .m-scrollLoading{position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; width: 640px;}
+/*评论页 end*/
+
+/*发现页*/
+.m-discovery .m-appSearchBar .u-close{position: absolute; right: 138px; top: 33px; display: none; background: #b3b5b7; border-radius: 50%; width: 36px; height: 36px; line-height: 32px; text-align: center; text-decoration: none; color: #fff; font-size: 33px; font-weight: normal;}
+.m-discovery.z-search .g-header{bottom: 0px;}
+.m-discovery.z-search .g-footer{display: none;}
+.m-discovery.z-search .m-appSearchBar .u-textbox{width: 498px;}
+.m-discovery.z-search .m-appSearchBar .u-btn{opacity: 1; display: block;}
+.m-discovery.z-search .m-switchBar{display: none;}
+.m-discovery .m-appDefaultKeywords{position: fixed; z-index: 10; background: #fff; top: 103px; bottom: 0px; width: 640px; display: none;}
+.m-discovery.z-search .m-appDefaultKeywords{display: block;}
+
+.m-discovery .g-content{margin-top: 190px; -webkit-transition: 0.2s ease all; -moz-transition: 0.2s ease all; width: 1920px; position: fixed; top: 0px; bottom: 0px;}
+.m-discovery .m-switchBar{margin: 0px auto; padding: 15px 0px 12px 0px; border-bottom: 1px solid #c8c7cd; overflow: hidden; width: 610px;}
+.m-discovery .m-discoveryPanel{width: 640px; float: left; height: 100%;}
+.m-discovery .m-discoveryPanel > ul{background: #fff;}
+
+.iphone .m-discovery .g-content{left: 0px;}
+/*发现页 end*/
+
+/*发现搜索页*/
+.m-discoverySearch .u-switchGroup label{padding: 0px 102.5px;}
+/*发现搜索页 end*/
+
+/*获取页*/
+.m-get .g-header{height: 472px; position: relative;}
+.m-get .g-header img{position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; width: 640px;}
+.m-get .g-header span{font-size: 26px; color: #fff; font-weight: normal; text-align: center; text-shadow: 1px 1px 2px #333; background: rgba(0, 41, 94, 0.14); border-radius: 26px; padding: 10px 25px; display: inline-block; position: absolute; bottom: 22px; left: 50%;}
+.m-get .g-header span::before{content: ''; background: url(img/icons.png) no-repeat -144px -66px; padding: 0px 15px;}
+.m-get .g-header span strong{display:inline-block; text-align:left; font-weight: normal;}
+
+.m-get .g-content{padding-bottom: 20px;}
+
+.m-get .m-getLightApp{text-align: center; margin: 0px 20px; border-bottom: 1px solid #d6d6d6;}
+.m-get .m-getLightApp h1{font-size: 28px; color: #777b7c; line-height: 78px; padding: 0px; margin: 0px;}
+.m-get .m-getLightApp p{font-size: 22px; color: #777b7c; margin: 0px 0px 30px 0px;}
+.m-get .m-getLightApp img{width: 216px; height: 216px; border: 1px solid #d6d6d6;}
+.m-get .m-getLightApp a{padding: 8px; display: inline-block; height: 218px; width: 218px;}
+.m-get .m-getLightApp a:active{background: #F1F1F1;}
+
+.m-get .m-telLink{display: block; font-size: 28px; color: #3772cf; text-decoration: none; background: #f5f5f5; margin: 15px 20px; height: 80px; line-height: 80px; padding-left: 18px; letter-spacing: 3px;}
+.m-get .m-telLink::after{content: ''; background: url(img/icons.png) no-repeat -144px -20px; padding: 24px; float: right; margin: 16px 36px;}
+/*获取页 end*/

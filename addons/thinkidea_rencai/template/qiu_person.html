@@ -1,0 +1,54 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">入驻企业管理</a></li>
+</ul>
+    <div id="show_msg" style="display:none">操作成功</div>
+    <div style="padding:15px;">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>手机</th>
+                    <th>专业</th>
+                    <th>工作经验</th>
+                    <th>微信</th>
+                    <th>QQ</th>
+                    <th>学历</th>
+                    <th>期望薪资</th>
+                    <th>发布时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {loop $lists $row}
+                <tr>
+                    <td>{$row['name']}</td>
+                    <td>{$row['age']}</td>
+                    <td>{$row['gender']}</td>
+                    <td>{$row['mobile']}</td>
+                    <td>{$row['professional']}</td>
+                    <td>{$row['workexperience']}年</td>
+                    <td>{$row['weixin']}</td>
+                    <td>{$row['qq']}</td>
+                    <td>{$row['educational']}</td>
+                    <td>{$row['payroll']}元</td>
+                    <td>{php echo date('Y-m-d',$row['dateline'])}</td>
+                </tr>
+                {/loop}
+            </tbody>
+        </table>
+    </div>
+    
+<script>
+    function audit_change_company_status(company_id, change_to){
+    	$.post(
+    			'{php echo $this->createWebUrl("AuditCompanyStatusAjax")}',
+    	        {"company_id":company_id, "change_to":change_to},
+    	        function (data){
+    	        	location.reload();
+    	        }
+    	);
+    }
+</script>
+{template 'common/footer'}

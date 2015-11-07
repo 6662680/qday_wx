@@ -1,0 +1,36 @@
+{template 'common_header'}
+    <div class="am-g" style="margin-top:10px">
+        <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-gallery-default" data-am-gallery="{ pureview: true }">
+            <li>
+                <div class="am-gallery-item">
+                    <a href="{php echo $this->createMobileUrl('PublicJob');}" style="display: block;position: relative">
+                        <div style="width: 100%;height: 100%;position: absolute;z-index: 1"></div>
+                        <img src="../addons/thinkidea_rencai/template/static/images/zhaoren.jpg" alt="全职招聘" style="height:158px"/>
+                        <h2 class="am-gallery-title" style="font-size: 1.8rem;font-weight: bold;text-align: center">全职招聘</h2>
+                    </a>
+                </div>
+            </li>
+            {if $type != 1}
+            <li>
+                <div class="am-gallery-item">
+                    <a href="{php echo $this->createMobileUrl('PublicResumeBasic');}"  style="display: block;position: relative">
+                        <div style="width: 100%;height: 100%;position: absolute;z-index: 1"></div>
+                        <img src="../addons/thinkidea_rencai/template/static/images/qiuzhi.jpg" alt="我要求职" style="height:158px"/>
+                        <h2 class="am-gallery-title" style="font-size: 1.8rem;font-weight: bold; text-align: center">我要求职</h2>
+                    </a>
+                </div>
+            </li>
+            {/if}
+            <li>
+                <div class="am-gallery-item">
+                    <a href="{php echo $this->createMobileUrl('PublicRartTime');}"  style="display: block;position: relative">
+                        <div style="width: 100%;height: 100%;position: absolute;z-index: 1"></div>
+                        <img src="../addons/thinkidea_rencai/template/static/images/jianzhi.jpg" alt="发布兼职" style="height:158px"/>
+                        <h2 class="am-gallery-title" style="font-size: 1.8rem;font-weight: bold; text-align: center">发布兼职</h2>
+                    </a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+{template 'common_footer'}

@@ -1,0 +1,30 @@
+{template 'common_header'}
+    {if $coordinate}
+        <div class="am-u-sm-12" style="background-color:#FFF">
+            <style type="text/css">
+                #allmap {width: 100%;height: 480px;overflow: hidden;margin:0;}
+            </style>
+            <div id="allmap"></div>
+        </div>
+        <script>
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point({$coordinate['lng']}, {$coordinate['lat']});
+        map.centerAndZoom(point, 12);
+        map.addControl(new BMap.ZoomControl());
+
+        var marker = new BMap.Marker(new BMap.Point({$coordinate['lng']}, {$coordinate['lat']}));  //创建标注
+        map.addOverlay(marker);    // 将标注添加到地图中
+        var opts = {
+        width : 240,    // 信息窗口宽度
+        height: 60,     // 信息窗口高度
+        title : "{$company['name']}", // 信息窗口标题
+        enableAutoPan : true //自动平移
+        }
+        var infoWindow = new BMap.InfoWindow("地址：{$info['address']}", opts);  // 创建信息窗口对象
+        map.openInfoWindow(infoWindow,point); //开启信息窗口
+        </script>
+    {else}
+        <p>该公司未设置地图</p>
+    {/if}
+{template 'common_footer'}

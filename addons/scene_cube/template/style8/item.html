@@ -1,0 +1,162 @@
+{template 'common/header'}
+<link href="../addons/scene_cube/style/css/global.css?&versin=12" rel="stylesheet" type="text/css" />
+<section class="p-store m-storeDetail">
+<div class="m-storeDetail-top s-bg-fff">
+<!--修改 by 场景应用-->
+<div class="top-con" style="margin-left:20px;">
+<div class="u-pathStore f-size16">
+<span class="path-icon icon-home css_sprite s-bg-pathH"></span>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">App Store</a>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">{$app['title']}</a>
+</div>
+</div>
+</div>
+<!--修改 by 场景应用-->
+<div class="m-storeDetail-con f-mag-t-20" style="margin-left:20px;">
+<div class="con-left m-cardScan" style="left: 0;">
+<div class="u-listShow f-card">
+<div class="item-top">
+<img alt="{$app['title']}" src="{php echo toimage($app['thumb'])}" />
+<span></span>
+<p class='f-tc'><img src="{php echo toimage($app['qrcode'])}" alt="二维码" /></p>
+</div>
+<div class="item-bottom s-bg-fff">
+<div class="tit">
+<h4 title="{$app['title']}">{$app['title']}</h4>
+<p title="{$app['author']}">by {$app['author']}</p>
+<span class="css_sprite s-bg-qr_icon icon-qr f-cur"></span>
+</div>
+<div class="con">
+<div class="con">
+<p>
+</p>
+<strong class="f-tr">【{$app['series']}】</strong>
+</div>
+</div>
+</div>
+</div>
+<p class="u-btn01 f-flow222 f-tc opacity j-detail-buy" data-free="" data-msg="">
+{if $isallow['status']==1}
+	{if $leftnum==0}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">已使用完</span> 购买 </a>
+	{else}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">制作场景</span>  </a>
+	{/if}
+{else}
+<a href="javascript:alert('请联系管理人员购买开通！')" class="f-size18 s-col-fff dingzhi">
+<span class="f-size18">{php echo $this->doFormatMoney($app['price'])}/年</span>购买 </a>
+{/if}
+</p>
+</div>
+<div class="con-right m-cardInfo s-bg-fff s-col-333">
+<div class="top">
+<h3 class="f-size24">{$app['title']}<span class="f-size16 s-col-999">by {$app['series']}</span></h3>
+<div class="u-share">
+<div class="jiathis_style_24x24 s-col-444 f-size14">
+分享到：
+<a class="jiathis_button_qzone css_sprite"></a>
+<a class="jiathis_button_tsina css_sprite"></a>
+<a class="jiathis_button_tqq css_sprite"></a>
+<a class="jiathis_button_weixin css_sprite"></a>
+</div>
+</div>
+</div>
+<div class="bd">
+<div class="bd-ui bd-txt">
+<h4 class="f-size18">界面预览<span class='s-col-666 f-size14'> / Preview</span></h4>
+<div class="imgBox">
+<ul style="width:1600px;">
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/5416415f18501.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/5416415fb6d2f.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/54164160dfd24.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/54164162164b3.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/5416416342b94.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/54164163ca1bc.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/541641644db27.png" style="width:100%;height:auto;">
+</li>
+</ul>
+</div>
+</div>
+<div class="bd-intro bd-txt">
+<h4 class="f-size18">基本介绍<span class='s-col-666 f-size14'> / Introduction</span></h4>
+<p>本应用原价12000元，现参加“新品9999”优惠活动！您只须在线支付购买即可享受优惠，活动有效期：2014年9月15日-2014年9月22日。湖南海归协会是国际性民间组织，致力于构建回国创业和就业的平台、推广文化产业与微慈善公益。首次与场景应用（LiveApp）合作，展示出NEW FUN激情四射的现场，直击年轻男女的心，将时尚主题趴的概念深深植入年轻消费者脑海，取得了点击量过万的优质宣传效果。</p>
+</div>
+<div class="bd-detail bd-txt">
+<h4 class="f-size18">详情介绍<span class='s-col-666 f-size14'> / Details</span></h4>
+<div>
+<p class="MsoNormal" align="left">
+<b>渐近式封面</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+封面运用渐亮渐近的形式将“来，不是来装酷”的泳池主题趴拉近用户的视野，从一开始就展示出前卫性感的内涵
+</p>
+<p class="MsoNormal" align="left">
+<b>&nbsp;</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>滚动图文展示</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+精美的排版设计绚丽的色彩将文字与活动安排，清晰表达，自动左右水平滚动的场景使画面立体动感
+</p>
+<p class="MsoNormal" align="left">
+<b>&nbsp;</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>悬浮按钮</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+悬浮按钮可方便用户浏览自己感兴趣的信息，将火爆的现场活动亮点一一展示，塑造小而美的细节精致
+</p>
+<p class="MsoNormal" align="left">
+<b>&nbsp;</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>背景音乐效果</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+贯穿整个LiveApp的背景主题摩登的电子乐增强了派对广告的感染力，仿佛在现场体验炫酷的热辣气氛
+</p>
+<p class="MsoNormal" align="left">
+<b>&nbsp;</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>资讯热线，马上分享</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+看完你心动了吗，点击“咨询热线”就可以报名啦，这么有趣的派对分享给朋友一起参加吧
+</p> </div>
+</div>
+{template 'contact'}
+</div>
+</div>
+</div>
+</section>
+<script>
+
+$(".icon-qr").hover(function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.addClass('show');
+},function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.removeClass('show');	
+});
+</script>
+ {template 'common/footer'}

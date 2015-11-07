@@ -1,0 +1,107 @@
+{template 'common_header'}
+    <!-- 头部 -->
+    <header class="am-topbar am-topbar-inverse am-topbar-fixed-top">
+        <ul class="am-avg-sm-3">
+             <li class="am-text-left" style="padding:10px 0 0 5px"><a href="javascript:history.back();" class="am-icon-mail-reply">&nbsp;返回</a></li>
+             <li class="am-text-center" style="padding-top:10px">招聘频道</li>
+             <li class="am-text-right" style="padding:10px 5px 0 0"><a href="{php echo $this->createMobileUrl('PublicIndex');}" class="am-icon-plus" style="color:#FFF">&nbsp;发布</a></li>
+        </ul>
+    </header>
+
+<header class="am-topbar am-topbar-inverse am-topbar-fixed-top">
+    <ul class="am-avg-sm-3">
+        <li class="am-text-left" style="padding:10px 0 0 5px"><a href="javascript:history.back();" class="am-icon-mail-reply">&nbsp;返回</a></li>
+        <li class="am-text-center" style="padding-top:10px">求职频道</li>
+        <li class="am-text-right" style="padding:10px 5px 0 0"><a href="{php echo $this->createMobileUrl('PublicIndex');}" class="am-icon-plus" style="color:#FFF">&nbsp;发布</a></li>
+    </ul>
+</header>
+
+
+    <!-- 搜索框 -->
+    <!-- <div class="am-g" style="margin-top:5px;background-color:#FFF">
+
+         <div class="am-u-sm-12" style="padding-left:0px">
+            <form  action="{php echo $this->createMobileUrl('JobList')}" class="am-form" method="POST">
+                <div class="am-u-sm-10">
+                    <input type="text" name="keyword" class="am-input-sm" placeholder="输入职位名称">
+                </div>
+                <div class="am-u-sm-2">
+                    <input type="submit" type="submit" class="am-btn am-btn-success am-btn-sm" value="搜索" required />
+                </div>
+            </form>
+        </div>
+	</div>-->
+
+	<!-- <div class="am-g" style="margin-top:5px;">
+        <div class="am-btn am-btn-block am-btn-primary am-text-left">&nbsp;&nbsp;<span class="am-icon-ils"></span>所有工作职位</div>
+	</div> -->
+    <div class="am-g">
+        <div class="am-btn am-btn-block am-btn-warning am-text-left am-icon-rss-square">&nbsp;&nbsp;最新加入公司 </div>
+            {loop $last_company $key $company}
+            <div class="am-panel am-panel-default" style="margin-bottom: 1px" onclick="location.href='{php echo $this->createMobileUrl('CompanyShow', array('companyid' => $company['id']));}';">
+            <div class="am-panel-hd" style="background-color: #e7e7e7">
+                <h3 class="am-panel-title">
+                    <span><img src="../addons/thinkidea_rencai/template/static/images/new.gif"></span>
+                    {$company['name']}
+                </h3>
+            </div>
+            <ul class="am-list am-list-static">
+                <li class="am-text-sm">
+                    {if $company['isauth'] == 0}
+                    <span class="am-badge am-badge-default">未认证</span>
+                    {elseif $company['isauth'] == 1}
+                    <span class="am-badge am-badge-success">电话认证</span>
+                    {elseif $company['isauth'] == 2}
+                    <span class="am-badge am-badge-success">营业执照已认证</span>
+                    {elseif $company['isauth'] == -1}
+                    <span class="am-badge">认证失败</span>
+                    {/if}
+                    {$company['dateline']}
+                </li>
+            </ul>
+            </div>
+            {/loop}
+    </div>
+
+    <div class="am-g" style="margin-top:0;">
+        <div class="am-btn am-btn-block am-btn-warning am-text-left">&nbsp;&nbsp;所有职位分类</div>
+        <style>
+           .item{border-bottom: 2px solid #e5e6e7;}
+           .hr{height: 10px; background: #efeff4;}
+
+           .title{ height: 45px; line-height: 45px; border-bottom: 1px solid #e7e7e7; background: #fff; padding: 5px 20px;}
+           .title span{ font-size: 18px;}
+           .am-avg-sm-{$colspan} li{ text-align: center;}
+           .am-avg-sm-{$colspan} li a{display: block; padding: 10px;}
+           .am-avg-sm-{$colspan} li a:active{background: #eee; }
+        </style>
+        {loop $parent_cate $key $parent}
+        <div class='item'>
+            <div class="title">
+               <span>{$parent['name']}</span>
+            </div>
+            <ul class="am-avg-sm-{$colspan}" style="background-color: #fff">
+               {loop $parent['sub'] $k $sub}
+               <li><a href="{php echo $this->createMobileUrl('JobList',array('pcate' => $c['id']))}" style="color:#333;">{$sub['name']}</a></li>
+               {/loop}
+            </ul>
+        </div>
+        {/loop}
+    </div>
+    <script>
+        wx.ready(function () {
+            sharedata = {
+                title: "{$_W['mobile']['share']['zhao_title']}",
+                desc: "{$_W['mobile']['share']['zhao_desc']}",
+                link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('JobIndex')}",
+                imgUrl: "{$_W['attachurl']}{$_W['mobile']['share']['zhao_pic']}",
+                success: function(){
+                },
+                cancel: function(){
+                }
+            };
+            wx.onMenuShareAppMessage(sharedata);
+            wx.onMenuShareTimeline(sharedata);
+        });
+    </script>
+{template 'common_footer'}

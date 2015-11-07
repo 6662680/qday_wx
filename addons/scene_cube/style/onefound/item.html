@@ -1,0 +1,159 @@
+{template 'common/header'}
+<link href="./addons/scene_cube/style/css/global.css?&versin=12" rel="stylesheet" type="text/css" />
+
+<section class="p-store m-storeDetail">
+<div class="m-storeDetail-top s-bg-fff">
+<!--修改 by 伊索科技-->
+<div class="top-con" style="margin-left:20px;">
+<div class="u-pathStore f-size16">
+<span class="path-icon icon-home css_sprite s-bg-pathH"></span>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">App Store</a>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">{$app['title']}</a>
+</div>
+</div>
+</div>
+<!--修改 by 伊索科技-->
+<div class="m-storeDetail-con f-mag-t-20" style="margin-left:20px;">
+<div class="con-left m-cardScan" style="left: 0;">
+<div class="u-listShow f-card">
+<div class="item-top">
+<img alt="{$app['title']}" src="{php echo toimage($app['thumb'])}" />
+<span></span>
+<p class='f-tc'><img src="{php echo toimage($app['qrcode'])}" alt="二维码" /></p>
+</div>
+<div class="item-bottom s-bg-fff">
+<div class="tit">
+<h4 title="{$app['title']}">{$app['title']}</h4>
+<p title="{$app['author']}">by {$app['author']}</p>
+<span class="css_sprite s-bg-qr_icon icon-qr f-cur"></span>
+</div>
+<div class="con">
+<div class="con">
+<p>
+</p>
+<strong class="f-tr">【{$app['series']}】</strong>
+</div>
+</div>
+</div>
+</div>
+<p class="u-btn01 f-flow222 f-tc opacity j-detail-buy" data-free="" data-msg="">
+{if $isallow['status']==1}
+	{if $leftnum==0}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">已使用完</span> 购买 </a>
+	{else}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">制作场景</span>  </a>
+	{/if}
+{else}
+<a href="javascript:alert('请联系管理人员购买开通！')" class="f-size18 s-col-fff dingzhi">
+<span class="f-size18">{php echo $this->doFormatMoney($app['price'])}/年</span>购买 </a>
+{/if}
+</p>
+</div>
+
+<div class="con-right m-cardInfo s-bg-fff s-col-333">
+<div class="top">
+<h3 class="f-size24">{$app['title']}<span class="f-size16 s-col-999">by {$app['series']}</span></h3>
+<div class="u-share">
+<div class="jiathis_style_24x24 s-col-444 f-size14">
+分享到：
+<a class="jiathis_button_qzone css_sprite"></a>
+<a class="jiathis_button_tsina css_sprite"></a>
+<a class="jiathis_button_tqq css_sprite"></a>
+<a class="jiathis_button_weixin css_sprite"></a>
+</div>
+</div>
+</div>
+<div class="bd">
+<div class="bd-ui bd-txt">
+<h4 class="f-size18">界面预览<span class='s-col-666 f-size14'> / Preview</span></h4>
+<div class="imgBox">
+<ul style="width:1160px;">
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/5435e860e20ad.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/5435e86156425.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/5435e861ec76d.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/5435e86298f0f.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/5435e8635ee45.png" style="width:100%;height:auto;">
+</li>
+</ul>
+</div>
+</div>
+<div class="bd-intro bd-txt">
+<h4 class="f-size18">基本介绍<span class='s-col-666 f-size14'> / Introduction</span></h4>
+<p>壹基金在本届慈展会期间，通过场景应用（LiveApp）进行募捐行动。表达了壹生益起走的主题内涵，良好的交互体验更让公益活动深入人心。让共鸣成为一种行动，在线已筹的捐款共2261万，捐赠人数高达85万多。</p>
+</div>
+<div class="bd-detail bd-txt">
+<h4 class="f-size18">详情介绍<span class='s-col-666 f-size14'> / Details</span></h4>
+<div>
+<p class="MsoNormal">
+<b>重力感应启动页</b><b></b>
+</p>
+<p class="MsoNormal">
+摇晃你的手机，画面随着你动作展示更多的内容，透明质感的参照物增强了视觉体验，立体页面表现形式，给人眼前一亮的感觉，充满了现代时尚感
+</p>
+<p class="MsoNormal">
+<br />
+</p>
+<p class="MsoNormal">
+<b>音乐配合阅读</b><b></b>
+</p>
+<p class="MsoNormal">
+在感受创意盛宴的同时，灵动音乐始终伴随左右，不是只在阅读那么枯燥，感受公益给人的真实感觉
+</p>
+<p class="MsoNormal">
+<br />
+</p>
+<p class="MsoNormal">
+<b>Gif</b><b>式的动感页面</b><b></b>
+</p>
+<p class="MsoNormal">
+通过精致图文，介绍壹基金以及慈展会的行动理念，并且生动形象的展现慈善进入互联网时期的一系列奇迹
+</p>
+<p class="MsoNormal">
+<br />
+</p>
+<p class="MsoNormal">
+<b>即时分享朋友圈</b><b></b>
+</p>
+<p class="MsoNormal">
+如果你觉得这是个有趣的活动，肯定会立马分享。即时分享既满足了用户的利他心理，同时也使得品牌传播范围更为广泛
+</p>
+<p class="MsoNormal">
+<br />
+</p>
+<p class="MsoNormal">
+<b>在线捐款</b>
+</p>
+<p class="MsoNormal">
+点击按钮立即进入公益捐款在线支付页面，随时抓取用户需求，便捷 ，优化用户交互体验
+</p> </div>
+</div>
+{template 'contact'}
+</div>
+</div>
+ </div>
+ </section>
+ <script>
+
+$(".icon-qr").hover(function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.addClass('show');
+},function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.removeClass('show');	
+});
+</script>
+ {template 'common/footer'}
+ 

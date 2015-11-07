@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>求职招聘—微人才—启信通</title>
+  <!-- Set render engine for 360 browser -->
+  <meta name="renderer" content="webkit">
+  <!-- No Baidu Siteapp-->
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileColor" content="#0e90d2">
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.2.1/css/amazeui.min.css">
+  <link rel="stylesheet" href="../addons/thinkidea_rencai/amaze/css/app.css">
+  <!--[if (gte IE 9)|!(IE)]><!-->
+    <script src="../addons/thinkidea_rencai/amaze/assets/js/jquery.min.js"></script>
+    <!--<![endif]-->
+    <!--[if lte IE 8 ]>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  <![endif]-->
+  <script src="../addons/thinkidea_rencai/amaze/assets/js/amazeui.min.js"></script>
+  <script src="../addons/thinkidea_rencai/amaze/assets/js/handlebars.min.js"></script>
+</head>
+<body>
+    
+    <!-- 头部 -->
+    <header class="am-topbar am-topbar-inverse am-topbar-fixed-top">
+        <ul class="am-avg-sm-3">
+             <li class="am-text-left" style="padding:10px 0 0 5px"><a href="javascript:history.back();" class="am-icon-mail-reply">&nbsp;返回</a></li>
+             <li class="am-text-center" style="padding-top:10px">关于微人才</li>
+             <li class="am-text-right" style="padding:10px 5px 0 0"><a href="{php echo $this->createMobileUrl('PublicIndex');}" class="am-icon-plus" style="color:#FFF">&nbsp;发布</a></li>
+        </ul>
+    </header>
+    
+    <div class="am-g" style="margin-top:15px">
+        <div class="am-u-sm-12">
+	        <blockquote>
+	            <p>微人才，是由<strong>启微信通</strong>原创的产品</p>
+	            <p>（官网：http://www.thinkidea.net/）。</P>
+	            <p>基于情天0.6系统开发的大型模块。</p>
+	            <p>官方微信公众账号为：<strong>qixintong365</strong>。</p>
+	            <p>官方接受微信端产品定制业务。</p>
+	            <p>情天企业QQ:800083075</p>
+	        </blockquote>
+	        <img src="../addons/thinkidea_rencai/template/static/images/qrcode.jpg" class="img-rounded">
+        </div>
+    </div>
+    
+
+    
+{template 'common_footer'}

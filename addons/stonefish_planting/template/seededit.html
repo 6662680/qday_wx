@@ -1,0 +1,186 @@
+{template 'common/header'}
+<div class="main">
+	<ul class="nav nav-tabs">
+		<li><a href="{php echo $this->createWebUrl('manage');}">种植乐园管理</a></li>
+		<li><a href="{php echo url('platform/reply/post',array('m'=>'stonefish_planting'));}">添加种植乐园规则</a></li>
+		<li><a href="{php echo $this->createWebUrl('seed');}">种子管理</a></li>
+		<li class="active"><a href="{php echo $this->createWebUrl('seededit',array('id' =>$id));}">{if $id!=''}编辑{else}添加{/if}种子</a></li>
+	</ul> 
+	<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="{$item['id']}">
+	<input type="hidden" name="uniacid" value="{$item['uniacid']}">
+    <div class="panel panel-default">
+	    <div class="panel-heading">种子配置</div>
+	        <div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label" style="color:red">种子名称</label>
+					<div class="col-sm-8">
+						<input type="text" name="seedname" value="{if !empty($item['seedname'])}{$item['seedname']}{/if}" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label" style="color:red">种子广告词</label>
+					<div class="col-sm-8">
+						<input type="text" name="seedad" value="{if !empty($item['seedad'])}{$item['seedad']}{/if}" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">种植效果</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg',$item['seedimg']);}
+					</div>
+				</div>				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">胚胎值</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+					        <span class="input-group-addon">邀请</span>
+                            <input type="text" id="" name="seed01" value="{if isset($item['seed01'])}{$item['seed01']}{else}0{/if}"  class="form-control" />
+                            <span class="input-group-addon">位好友帮其浇水后显示的下面胚胎图　并可参与奖品相同值的抽奖</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">胚胎图</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg01',$item['seedimg01']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">发芽值</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+					        <span class="input-group-addon">邀请</span>
+                            <input type="text" id="" name="seed02" value="{if isset($item['seed02'])}{$item['seed02']}{else}5{/if}"  class="form-control" />
+                            <span class="input-group-addon">位好友帮其浇水后显示的下面发芽图　并可参与奖品相同值的抽奖</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">发芽图</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg02',$item['seedimg02']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">生长值</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+					        <span class="input-group-addon">邀请</span>
+                            <input type="text" id="" name="seed03" value="{if isset($item['seed03'])}{$item['seed03']}{else}10{/if}"  class="form-control" />
+                            <span class="input-group-addon">位好友帮其浇水后显示的下面生长图　并可参与奖品相同值的抽奖</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">生长图</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg03',$item['seedimg03']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">发枝值</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+					        <span class="input-group-addon">邀请</span>
+                            <input type="text" id="" name="seed04" value="{if isset($item['seed04'])}{$item['seed04']}{else}15{/if}"  class="form-control" />
+                            <span class="input-group-addon">位好友帮其浇水后显示的下面发枝图　并可参与奖品相同值的抽奖</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">发枝图</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg04',$item['seedimg04']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">繁荣值</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+					        <span class="input-group-addon">邀请</span>
+                            <input type="text" id="" name="seed05" value="{if isset($item['seed05'])}{$item['seed05']}{else}25{/if}"  class="form-control" />
+                            <span class="input-group-addon">位好友帮其浇水后显示的下面繁荣图　并可参与奖品相同值的抽奖</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">繁荣图</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg05',$item['seedimg05']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">开花值</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+					        <span class="input-group-addon">邀请</span>
+                            <input type="text" id="" name="seed06" value="{if isset($item['seed06'])}{$item['seed06']}{else}35{/if}"  class="form-control" />
+                            <span class="input-group-addon">位好友帮其浇水后显示的下面开花图　并可参与奖品相同值的抽奖</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">开花图</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg06',$item['seedimg06']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">结果值</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+					        <span class="input-group-addon">邀请</span>
+                            <input type="text" id="" name="seed07" value="{if isset($item['seed07'])}{$item['seed07']}{else}45{/if}"  class="form-control" />
+                            <span class="input-group-addon">位好友帮其浇水后显示的下面结果图　并可参与奖品相同值的抽奖</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">结果图</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg07',$item['seedimg07']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">成熟值</label>
+					<div class="col-sm-8">
+						<div class="input-group">
+					        <span class="input-group-addon">邀请</span>
+                            <input type="text" id="" name="seed08" value="{if isset($item['seed08'])}{$item['seed08']}{else}60{/if}"  class="form-control" />
+                            <span class="input-group-addon">位好友帮其浇水后显示的下面成熟图　并可参与奖品相同值的抽奖</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">成熟图</label>
+					<div class="col-sm-8">
+						{php echo tpl_form_field_image('seedimg08',$item['seedimg08']);}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">种子简介说明</label>
+					<div class="col-sm-8">
+						<textarea style="height:60px;" id="seedinfo" name="seedinfo" class="form-control richtext" cols="60">{$item['seedinfo']}</textarea>
+					</div>
+				</div>				
+	        </div>			
+        </div>
+		<div class="form-group">
+		            <div class="col-sm-12">
+			            <button type="submit" class="btn btn-primary col-lg-1" name="submit" value="保存种子信息">保存种子信息</button>
+			            <input type="hidden" name="token" value="{$_W['token']}" />
+		            </div>
+	            </div>
+    </div>
+	</form>
+</div>
+<script type="text/javascript">
+
+	require(['jquery', 'util'], function($, u){
+		$(function(){
+			u.editor($('.richtext')[0]);
+		});
+    });
+</script>
+{template 'common/footer'}

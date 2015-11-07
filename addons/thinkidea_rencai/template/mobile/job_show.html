@@ -1,0 +1,239 @@
+{template 'common_header'}
+    <style>
+        .amtxt {margin: 5px 0 0 0}
+    </style>
+    <div class="am-g" style="margin:5px 0 10px 0">
+    	<div class="am-u-sm-12" style="background-color:#FFF">
+			<!-- 职位详情 -->
+            <h4 style="margin-bottom: 0;font-size: 2rem"><strong>{$job['title']}</strong></h4>
+        </div>
+        <div class="am-u-sm-12" style="background-color:#FFF">
+            <h4><font color="red">{$config['payroll'][$job['payroll']]}</font></h4>
+            <p  class="am-text-xs" style="margin-top: -10px;margin-bottom: 2px ">{$job['dateline']}&nbsp;&nbsp;{$job['views']}次浏览</p>
+        </div>
+        <div class="am-u-sm-12" style="background-color:#FFF;margin-top: 5px;padding: 10px" onclick="location.href='{php echo $this->createMobileUrl('CompanyShow', array('companyid' => $company['id']));}';">
+            <strong style="margin-left: 5px;">{$company['name']}</strong> <span class="am-icon-chevron-right" style="float: right;margin-right: 5px"></span>
+            <p style="margin: 5px 0 ">
+                {if $is_has_welfare}
+                {loop $job['welfare'] $welfare}
+                <span type="button" class="am-btn am-btn-default am-btn-xs am-radius" style="background-color:#F9F7F7;margin: 5px">{$config['welfare'][$welfare]}</span>
+                {/loop}
+                {else}
+                <span class="am-badge am-badge-default">无</span>
+                {/if}
+            </p>
+        </div>
+        <div class="am-u-sm-12" style="background-color:#FFF;margin-top: 5px;padding: 10px">
+            <h4 style="margin-left: 5px;">
+                <span style="border-left: 4px #ff8000 solid;height: 25px;display: inline-block;vertical-align: middle;margin-right: 10px;float: left;"></span>
+                公司概况
+            </h4>
+            <p class="am-text-default amtxt">规模&nbsp;&nbsp;<span style="color: #777">{$config['companytype'][$company['scale']]}</span></p>
+            <p class="am-text-default amtxt">性质&nbsp;&nbsp;<span style="color: #777">{$config['scale'][$company['type']]}</span></p>
+            <p class="am-text-default amtxt">行业&nbsp;&nbsp;<span style="color: #777">{$industry['name']}</span></p>
+            <p class="am-text-default amtxt">认证&nbsp;&nbsp;
+                {if $company['isauth'] == 0}
+                <span class="am-btn am-btn-default am-btn-xs">未认证</span>
+                {else}
+                <span class="am-badge am-badge-success">认证</span>
+                {/if}
+            </p>
+        </div>
+        <div class="am-u-sm-12" style="background-color:#FFF;margin-top: 5px;padding-top: 10px">
+            <h4 style="margin-left: 5px;">
+                <span style="border-left: 4px #ff8000 solid;height: 25px;display: inline-block;vertical-align: middle;margin-right: 10px;float: left;"></span>
+                职位信息
+            </h4>
+            <p class="am-text-default amtxt">招聘职位&nbsp;&nbsp;<span style="color: #777">{$category['name']}</span></p>
+            <p class="am-text-default amtxt">截止日期&nbsp;&nbsp;<span style="color: #777">{$job['end_time']}</span></p>
+            <p class="am-text-default amtxt">工作地点&nbsp;&nbsp;<span style="color: #777">{$job['workaddress']}</span></p>
+            <p class="am-text-default amtxt">招聘人数&nbsp;&nbsp;<span style="color: #777">{$job['nums']}人</span></p>
+        </div>
+
+            <div class="am-u-sm-12" style="background-color:#FFF;margin-top: 5px;padding-top: 10px">
+            <h4 style="margin-left: 5px;">
+                <span style="border-left: 4px #ff8000 solid;height: 25px;display: inline-block;vertical-align: middle;margin-right: 10px;float: left;"></span>
+                岗位要求
+            </h4>
+            <p class="am-text-default amtxt">学历要求&nbsp;&nbsp;<span style="color: #777">{$config['educational'][$job['educational']]}</span></p>
+            <p class="am-text-default amtxt">工作年限&nbsp;&nbsp;<span style="color: #777">{$config['workexperience'][$job['workexperience']]}</span></p>
+            </div>
+
+            <div class="am-u-sm-12" style="background-color:#FFF;margin-top: 5px;padding-top: 10px">
+            <h4 style="margin-left: 5px;">
+                <span style="border-left: 4px #ff8000 solid;height: 25px;display: inline-block;vertical-align: middle;margin-right: 10px;float: left;"></span>
+                职位描述
+            </h4>
+            <p>{$job['description']}</p>
+    	</div>
+
+        <div class="am-u-sm-12" style="background-color:#FFF;margin-top: 5px;padding: 10px">
+            <h4 style="margin-left: 5px;">
+                <span style="border-left: 4px #ff8000 solid;height: 25px;display: inline-block;vertical-align: middle;margin-right: 10px;float: left;"></span>
+                公司介绍
+            </h4>
+            {$company['description']}
+        </div>
+
+        <div class="am-u-sm-12" style="background-color:#FFF;margin-top: 5px;padding: 10px">
+            <h4 style="margin-left: 5px;">
+                <span style="border-left: 4px #ff8000 solid;height: 25px;display: inline-block;vertical-align: middle;margin-right: 10px;float: left;"></span>
+                联系方式
+            </h4>
+            <p style="margin: 0">
+                {$company['contact']}
+                <font color="red">{$company['mobile']}</font>
+                <a href="tel:{$company['mobile']}"><img class="am-circle" src="../addons/thinkidea_rencai/template/static/images/phone.jpg" width="18px" height="18px"></a>
+            </p>
+            <p class="am-text-default amtxt">
+                <span style="color: #777">{$company['address']}</span>
+                <a href="{php echo $this->createMobileUrl('ShowCompanyMap', array('companyid' => $company['id']));}">查看地图</a>
+            </p>
+        </div>
+
+        <div class="am-u-sm-12" style="background-color: #ffffff;margin-top: 10px;padding: 10px">
+            {if $iscollect}
+            <button type="button" class="am-btn am-btn-default am-btn-block">已收藏</button>
+            {else}
+            <button type="button" class="am-btn am-btn-success am-btn-block" id="collect">收藏职位</button>
+            {/if}
+            {if $isapply}
+            <button type="button" class="am-btn am-btn-default am-btn-block">已申请</button>
+            {else}
+            <button type="button" class="am-btn am-btn-success am-btn-block" id="apply">申请职位</button>
+            {/if}
+        </div>
+
+        <div class="am-u-sm-12"  style="margin-top:5px;background-color:#FFF">
+            {loop $comments $comment}
+            <article class="am-comment" style="margin-top:2px;background-color:#FFF"> <!-- 评论容器 -->
+                <a href="">
+                    <img class="am-comment-avatar" alt="" src="{$persons[$comment['mid']]['headimgurl']}"/> <!-- 评论者头像 -->
+                </a>
+                <div class="am-comment-main">
+                    <header class="am-comment-hd">
+                        <div class="am-comment-meta"> <!-- 评论元数据 -->
+                            <a href="#link-to-user" class="am-comment-author">{$persons[$comment['mid']]['username']}</a> <!-- 评论者 -->
+                            评论于<time datetime="">{$comment['dateline']}</time>
+                        </div>
+                    </header>
+                    <div class="am-comment-bd">
+                        {$comment['content']}
+                    </div> <!-- 评论内容 -->
+                </div>
+            </article>
+            {/loop}
+        </div>
+
+        <div class="am-u-sm-12" style="margin-top:5px;background-color:#FFF">
+            <form action="" class="am-form am-form-horizontal" method="POST" data-am-validator>
+                <input type="hidden" name="mid" value="{$uid}">
+                <input type="hidden" name="jobid" value="{$job_id}">
+                <div class="am-form-group" style="margin-bottom:2px">
+                    <textarea name="content" minlength="2" maxlength="500" placeholder="发表你的评论" rows="5" required></textarea>
+                </div>
+                <div class="am-form-group">
+                    <input type="button" id="comments_button" value="我要评论" class="am-btn am-btn-block am-btn-warning"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        wx.ready(function () {
+            sharedata = {
+                title: "{$job['title']}—{$company['name']}",
+                desc: "{$company['name']}-{$company['description']}",
+                link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('JobShow', array('job_id' => $job['id']))}",
+                imgUrl: "{MODULE_URL}/template/static/images/share_img.jpg",
+                success: function(){
+                },
+                cancel: function(){
+                }
+            };
+            wx.onMenuShareAppMessage(sharedata);
+            wx.onMenuShareTimeline(sharedata);
+        });
+    </script>
+    <script>
+        //收藏
+        $("#collect").click(function(data){
+        	$.get(
+        		'{php echo $this->createMobileUrl("CollectJobAjax", array("job_id" => $job_id, "company_id" => $company[id]))}',
+        		{},
+        		function (data){
+        			if(data == '-3'){
+						alert('你是企业用户，无法收藏');
+					}
+        			if(data == '-2'){
+						alert('你还不是求职者，请先完善资料');
+					}
+					if(data == '-1'){
+						alert('已经收藏');
+					}        			
+                    if(data == 1){
+                        alert('收藏成功');
+                    }
+                    if(data == 0){
+                        alert('收藏失败');
+                    }
+					return false;
+        		}
+        	);
+        });
+        
+        //申请职位
+        $("#apply").click(function(data){
+            $.get(
+                    '{php echo $this->createMobileUrl("ApplyJobAjax", array("job_id" => $job_id, "company_id" => $company[id]))}',
+                    {},
+                    function (data){
+            			if(data == '-3'){
+    						alert('你是企业用户，无法申请');
+    					}
+            			if(data == '-2'){
+    						alert('你还为成为求职者，请先完善资料');
+    					}
+    					if(data == '-1'){
+    						alert('已经申请');
+    					}        			
+                        if(data == 1){
+                            alert('申请成功');
+                        }
+                        if(data == 0){
+                            alert('申请失败');
+                        } 
+						return false;   
+                    }
+                );            
+        });
+        //评论
+        $("#comments_button").click(function(){
+            $.ajax({
+                type: "GET",
+                dataType: 'html',
+                url: '{php echo $this->createMobileUrl("CommentAjax");}',
+                data: $("form").serialize(),
+                success:function(data){
+                    if(data == '1'){
+                        alert('评论成功');
+                    }
+                    if(data == '-1'){
+                        alert('评论失败');
+                    }
+                    if(data == '-2'){
+                        alert('未注册成为求职者');
+                    }
+                    if(data == '-3'){
+                        alert('企业用户无法评论');
+                    }
+                    location.reload();
+                },
+                error: function(data){
+                    alert('评论失败');
+                    return false;
+                }
+            });
+        });
+
+    </script>
+{template 'common_footer'}

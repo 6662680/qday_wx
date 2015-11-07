@@ -1,0 +1,21 @@
+{template 'common_header'}
+	<table class="am-table">
+    <thead>
+        <tr>
+            <th>用户</th>
+            <th>时间</th>
+            <th>职位</th>
+        </tr>
+    </thead>
+    <tbody>
+    	{loop $applys $apply}
+        <tr>
+            <td><a href="{php echo $this->createMobileUrl('ShowResumeInfo', array('person_id' => $apply['person_id']))}">{$person[$apply['person_id']]['username']}</a></td>
+            <td>{$apply['dateline']}</td>
+            <td>{$jobs[$apply['job_id']]['title']}</td>
+        </tr>
+        {/loop}
+    </tbody>
+    </table>
+{template 'common_footer'}
+    

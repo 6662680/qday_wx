@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="ch" manifest="/appcache/act/5261?_t=1410955446">
+<head>
+<meta charset="utf-8" />
+
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="pragram" content="no-cache" />
+<script src="../addons/scene_cube/resource/js/app/offline.js?1397525361"></script> 
+<title>{$list['title']}</title>
+<script type="text/javascript">
+	//移动端版本兼容
+	if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+		var version = parseFloat(RegExp.$1);
+		if(version>2.3){
+			var phoneScale = parseInt(window.screen.width)/640;
+			document.write('<meta name="viewport" content="width=640, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+		}else{
+			document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+		}
+	}else{
+		document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+	}
+	//微信去掉下方刷新栏
+	if(RegExp("MicroMessenger").test(navigator.userAgent)){
+		document.addEventListener('WeixinJSBridgeReady', function() {
+		    //WeixinJSBridge.call('hideToolbar');
+		});
+	}
+	</script>
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/resource/21/assets/styles/app.min.css?ver=3.6"/>
+</head>
+<body class="app" data-app-id="5261" data-ad="1">
+<span style="display:none;" id="activity_id">5261</span>
+<img style='display:none;' src="../addons/scene_cube/resource/20/res/img/loading_large.gif" />
+
+{if $list['bg_music_switch']==1}	
+	<header class="app-header">
+		<a href="javascript:void(0);" class="u-globalAudio">
+		<i class="icon-music"></i>
+		<audio src="{$list['bg_music_url']}" autoplay="autoplay" loop="loop"></audio>
+		</a>
+	</header>
+{/if}
+
+<section class="app-content">
+<div class="app-pages">
+<section class="page m-index" data-plugin-type="info_word">
+	<section class="page-content">
+		<img src="{php echo toimage($list['cover'])}" class="m-bg">
+		<div class="m-title">
+			<h1></h1>
+			<h2></h2>
+		</div>
+	</section>
+	<a href="javascript:void(0);" class="u-guideTop f-hide"></a>
+</section>
+	{loop $items $item}
+		<!-- 内页 -->
+	{php $data=iunserializer($item['param']);}
+		{if $item['m_type']==1}
+		<section class="page m-introduce" data-plugin-type="info_word">
+			<section class="page-content">
+			<img class="m-bg" src="{php echo toimage($item['thumb'])}">
+				<div class="m-introduce-text">
+				<a href="javascript:void(0);" class="icon icon-add"></a>
+				</div>
+				<div class="u-maskLayer m-weixinShareLayer f-hide">
+				<img src="../addons/scene_cube/resource/21/data/weixin-share-guide.png"/>
+				</div>
+				<a href="javascript:void(0);" class="u-guideTop"></a>
+			</section>
+		</section>	
+		{elseif $item['m_type']==5}
+		<section class="page m-introduce" data-plugin-type="info_word">
+			<section class="page-content">
+			<img class="m-bg" src="{php echo toimage($item['thumb'])}">
+				<div class="m-introduce-text">
+				<a href="javascript:void(0);" class="icon icon-add"></a>
+				</div>
+				<div class="u-maskLayer m-weixinShareLayer f-hide">
+				<img src="../addons/scene_cube/resource/21/data/weixin-share-guide.png"/>
+				</div>
+				<a href="javascript:void(0);" class="u-guideTop"></a>
+			</section>
+		</section>			
+		{elseif $item['m_type']==6}			
+		<section class="page m-detail" style="background-image:url({php echo toimage($item['thumb'])});" data-plugin-type="info_time">
+			<section class="page-content">
+				<div id="cardListScroll" class="m-detail-cardListBox">
+					<ul class="m-detail-cardList">
+						{loop $data['nails'] $row}
+						<li> <img src="{php echo toimage($row)}"/> </li>
+						{/loop}
+					</ul>
+				</div>
+				<div class="u-maskLayer f-hide">
+					<div class="m-detail-detailListBox">
+						<ul class="m-detail-detailList">
+							{loop $data['thumbs'] $row}
+							<li> <img src="{php echo toimage($row)}"/> </li>
+							{/loop}
+						</ul>
+					</div>
+					<a href="javascript:void(0);" class="prev"></a>
+					<a href="javascript:void(0);" class="next"></a>
+				</div>
+				<a href="javascript:void(0);" class="u-guideTop"></a>
+			</section>
+		</section>
+		{elseif $item['m_type']==2}	
+			<section class="page m-introduce" data-plugin-type="info_word">
+			<section class="page-content">
+			<img class="m-bg" src="{php echo toimage($item['thumb'])}">
+			<div class="m-introduce-linkBox">
+			<a href="{$data['url']}" class="m-introduce-link">{$data['str']}</a>
+			</div>
+			<div class="u-maskLayer m-weixinShareLayer f-hide">
+			<img src="../addons/scene_cube/resource/21/data/weixin-share-guide.png"/>
+			</div>
+			<a href="javascript:void(0);" class="u-guideTop"></a>
+			</section>
+			</section>	
+		{elseif $item['m_type']==3}	
+			<section class="page m-introduce" data-plugin-type="info_word">
+			<section class="page-content">
+			<img class="m-bg" src="{php echo toimage($item['thumb'])}">
+				<div class="m-introduce-linkBox">
+					<a href="weixin:share" class="m-introduce-link">{$data['str']}</a>
+				</div>
+			<div class="u-maskLayer m-weixinShareLayer f-hide">
+				<img src="../addons/scene_cube/resource/21/data/weixin-share-guide.png"/>
+			</div>
+			<a href="javascript:void(0);" class="u-guideTop"></a>
+			</section>
+			</section>				
+		{elseif $item['m_type']==7}	
+			<section class="page m-introduce" data-plugin-type="info_word">
+			<section class="page-content">
+			<img class="m-bg" src="{php echo toimage($item['thumb'])}">
+			<div class="m-introduce-linkBox">
+			<a href="tel:{$data['url']}" class="m-introduce-link">{$data['str']}</a>
+			</div>
+			<div class="u-maskLayer m-weixinShareLayer f-hide">
+			<img src="../addons/scene_cube/resource/21/data/weixin-share-guide.png"/>
+			</div>
+			<a href="javascript:void(0);" class="u-guideTop"></a>
+			</section>
+			</section>	
+		{elseif $item['m_type']==31}	
+			<section class="page m-introduce" data-plugin-type="info_word">
+			<section class="page-content">
+			<img class="m-bg" src="{php echo toimage($item['thumb'])}">
+			<div class="m-introduce-linkBox">
+			<a href="{php echo $this->createMobileurl('map',array('title'=>$data['sname'],'lng'=>$data['lng'],'lat'=>$data['lat'],'tel'=>$data['tel'],'addr'=>$data['place']))}" class="m-introduce-link">{$data['str']}</a>
+			</div>
+			<div class="u-maskLayer m-weixinShareLayer f-hide">
+			<img src="../addons/scene_cube/resource/21/data/weixin-share-guide.png"/>
+			</div>
+			<a href="javascript:void(0);" class="u-guideTop"></a>
+			</section>
+			</section>				
+		
+		{/if}
+	{/loop}
+
+</div>
+</section>
+<footer class="app-footer">
+</footer>
+<script type="text/javascript" src="../addons/scene_cube/resource/21/assets/scripts/init.min.js?ver=3.8"></script>
+{template 'share'}
+</body>
+</html>

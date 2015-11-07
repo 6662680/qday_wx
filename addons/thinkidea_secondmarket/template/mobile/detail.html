@@ -1,0 +1,115 @@
+{template 'nav_new.inc'}
+<div data-am-widget="slider" class="am-slider am-slider-c3" data-am-slider='{&quot;controlNav&quot;:false}'>
+    <ul class="am-slides">
+        <li style="height: 180px; overflow: hidden;">
+            <img src="{$_W['attachurl']}{$detail['thumb1']}">
+            <div class="am-slider-desc" style="background-color: rgba(0,0,0,0);right: inherit;">
+                <div class="am-slider-counter">
+                    <span class="am-active">1</span>/{$size}</div></div>
+        </li>
+        {if $detail['thumb2']}
+        <li>
+            <img src="{$_W['attachurl']}{$detail['thumb2']}">
+            <div class="am-slider-desc" style="background-color: rgba(0,0,0,0);right: inherit;">
+                <div class="am-slider-counter">
+                    <span class="am-active">2</span>/$size</div></div>
+        </li>
+        {/if}
+        {if $detail['thumb3']}
+        <li>
+            <img src="{$_W['attachurl']}{$detail['thumb3']}">
+            <div class="am-slider-desc" style="background-color: rgba(0,0,0,0);right: inherit;">
+                <span class="am-active">3</span>/$size</div>
+        </li>
+        {/if}
+    </ul>
+</div>
+<div class="am-panel-bd">
+    <h2>{$detail['title']}</h2>
+    <hr data-am-widget="divider" style="margin: 0;" class="am-divider am-divider-default" />
+</div>
+<style>
+    .am-panel-bd strong{color:#fc4226; font-size: 22px;}
+    .am-panel-bd span{color:#808080; font-size: 14px;}
+    .am-panel-bd div{color:#222;font-family: "Microsoft YaHei UI", "微软雅黑";}
+</style>
+<div class="am-panel-bd"style="padding-top: 0;">
+    <div><span>价格：</span><strong>{$detail['price']}</strong>元</div>
+    <div>
+        <span>成色：</span>
+        {if $detail['rolex'] == 1}9.9成新
+        {elseif $detail['rolex'] == 2}9.5成新
+        {elseif $detail['rolex'] == 3}9成新
+        {elseif $detail['rolex'] == 4}8成新
+        {elseif $detail['rolex'] == 5}7成新
+        {elseif $detail['rolex'] == 6}6成新
+        {/if}
+    </div>
+    <div>
+        <span>发布时间：</span>
+        {php echo date('Y-m-d', $detail['createtime'])}
+    </div>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+    <div><span>联系人：</span>{$detail['realname']} {if empty($detail['sex'])}先生{else}女士{/if}</div>
+    {if $user['follow'] == 1}
+    <div><strong>{$detail['mobile']}</strong>&nbsp;&nbsp;&nbsp;<span id="city">归属地：滁州</span></div>
+    <a style="margin: 10px 0;" class="am-btn am-btn-success am-btn-block am-radius" href="tel:{$detail['mobile']}">拨打电话</a>
+    {else}
+    您还未关注 {$_W['account']['childname']} 无法查看手机号。
+    {/if}
+    <hr data-am-widget="divider" style="margin-bottom: 0;" class="am-divider am-divider-default" />
+</div>
+<div class="am-panel-bd" style="padding-top: 0;">
+    <h2>物品描述</h2>
+    <h3 style="padding: 0;margin: 0;">{$detail['description']}</h3>
+    <h3 style="padding: 0;margin: 10px 0 0 0; font-size: 14px;">联系我时，请说是在{$_W['account']['name']}上看到的，谢谢！</h3>
+    <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
+</div>
+<div class="am-panel am-panel-default" style="margin: 0 1.25rem;">
+    <div class="am-panel-hd">友情提示：网络交易需谨慎</div>
+    <div class="am-panel-bd">
+        <p class="text-left">1.请认真核实资料信息，严禁发布虚假广告信息等行为，如若违反且情节严重，我们会立即报警!</p>
+        <p class="text-left">2.本平台是一个免费的信息发布平台，当事人必须提供真实资料.</p>
+        <p class="text-left">3.网络有风险，交易需谨慎。一定要严格审查发布人的资料，保护个人人身财产安全!</p>
+    </div>
+</div>
+<footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
+    <div class="am-footer-miscs ">
+        <p>由 <a href="#" title="{$_W['account']['name']}" target="_blank" class="">{$_W['account']['name']}</a> 提供技术支持</p>
+        <!--<p>CopyRight©2015 ThinkIdea Inc.</p>-->
+    </div>
+</footer>
+{php echo register_jssdk(false);}
+<script>
+    // 5.2 图片预览
+    document.querySelector('.am-slides li').onclick = function () {
+        wx.previewImage({
+             current: '{$_W['attachurl']}{$detail['thumb1']}',
+             urls: [
+                 '{$_W['attachurl']}{$detail['thumb1']}',
+                 {if $detail['thumb2']}
+                 '{$_W['attachurl']}{$detail['thumb2']}',
+                 {/if}
+                 {if $detail['thumb3']}
+                 '{$_W['attachurl']}{$detail['thumb3']}'
+                 {/if}
+             ]
+         });
+     };
+sharedata = {
+    'title' : "{$detail['title']}-二手市场",
+    'desc' : "{$detail['title']}-二手市场—{$_W['account']['name']}",
+    'link' : '',
+    'imgUrl' : "{$_W['attachurl']}{$detail['thumb1']}"
+}
+    var a = eval('('+{$c}+')');
+
+        if(a['province'] == '未知'){
+            document.getElementById('city').innerHTML = "";
+        }else{
+            document.getElementById('city').innerHTML = "归属地:"+a['cityname'];
+        }
+
+
+
+</script>

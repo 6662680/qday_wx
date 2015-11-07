@@ -1,0 +1,170 @@
+{template 'common_header'}
+
+	<div class="am-g" style="margin-top:10px">
+		<div class="am-u-sm-12">
+			<!-- <div class="am-alert am-alert-success" data-am-alert>
+			  <p>完善企业信息，将会有更多的应聘者</p>
+			</div> -->
+
+			<form action="" class="am-form am-form-horizontal" method="POST"  enctype="multipart/form-data" data-am-validator>
+	            <input type="hidden" value="{$_W['token']}" name="token">
+	            <input type="hidden" value="{$row['id']}" name="id">
+	            
+	            <div class="am-form-group">
+	              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">公司名称</label>
+	              <div class="am-u-sm-9">
+	                <input type="text" name="data[name]" value="{$row['name']}" class="am-input-sm" placeholder="输入公司名称"  minlength="2" required>
+	                <em class="am-text-xs">至少两个汉字</em>
+	              </div>
+	            </div>
+	            
+	            <div class="am-form-group">
+	              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">公司地址</label>
+	              <div class="am-u-sm-9">
+	                <input type="text" name="data[address]" value="{$row['address']}" class="am-input-sm" placeholder="输入公司地址"  minlength="2" required>
+	                <em class="am-text-xs">至少两个汉字</em>
+	              </div>
+	            </div>
+	            
+	            
+	            
+	            <div class="am-form-group">
+	              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">联系人</label>
+	              <div class="am-u-sm-9">
+	                <input type="text" name="data[contact]" value="{$row['contact']}" class="am-input-sm" placeholder="输入联系人"  minlength="2" required>
+	                <em class="am-text-xs">至少两个汉字</em>
+	              </div>
+	            </div>
+	            
+	            <div class="am-form-group">
+	              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">联系方式</label>
+	              <div class="am-u-sm-9">
+	                <input type="text" name="data[mobile]" value="{$row['mobile']}" class="am-input-sm" placeholder="联系方式"  minlength="2" required>
+	                <em class="am-text-xs">至少两个汉字</em>
+	              </div>
+	            </div>
+	            
+	            <div class="am-form-group">
+	              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">公司规模</label>
+	              <div class="am-u-sm-9">
+	                  <select id="doc-select-1" class="am-input-sm" name="data[scale]">
+	                    {loop $config['scale'] $key $scale}
+	                    <option value="{$key}" {if $row['scale'] == $key} selected {/if}>{$scale}</option>
+	                    {/loop}
+	                  </select>
+	              </div>
+	            </div>
+	            
+	           <div class="am-form-group">
+	              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">所属行业</label>
+	              <div class="am-u-sm-9">
+	                  <select name="data[industry]" class="am-input-sm">
+	                    {loop $parent_industry $key $industry}
+	                    	<option value="{$industry['id']}" {if !empty($industry['sub'])} disabled="disabled" {/if} {if $row['industry'] == $industry['id'] }selected{/if} >{$industry['name']}</option>
+	                    	{loop $industry['sub'] $k $subs}
+	                    		<option value="{$subs['id']}" {if $row['industry'] == $subs['id']}selected{/if} {if $row['industry'] == $subs['id'] }selected{/if} >&nbsp;|— {$subs['name']}</option>
+	                    	{/loop}
+	                    {/loop}
+	                  </select>
+	              </div>
+	            </div>
+               <div class="am-form-group">
+	           <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">公司性质</label>
+                    <div class="am-u-sm-9">
+                      <select class="am-input-sm" name="data[type]">
+                        {loop $config['companytype'] $key $companytype}
+                        <option value="{$key}" {if $row['type'] == $key} selected {/if}>{$companytype}</option>
+                        {/loop}
+                      </select>
+                    </div>
+	           </div>
+	            
+	           <div class="am-form-group">
+	              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">公司简介</label>
+	              <div class="am-u-sm-9">
+	                <textarea name="data[description]" minlength="10" maxlength="500" class="" rows="8" required>{$row['description']}</textarea>
+	                <em class="am-text-xs">至少10个汉字，最多500个。</em>
+	              </div>
+	           </div>
+
+                <div class="am-form-group">
+                    <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">公司Logo</label>
+                    <div class="am-u-sm-9">
+                        <input id="logo" class="am-input-sm" type="file" name="logo" accept="image/*" />
+                    </div>
+                    <em class="am-text-xs">用于首页名企推荐</em>
+                </div>
+                <div class="am-form-group">
+                    <div class="am-u-sm-9">
+                        <div id="showlogomsg"><img src="{$_W['attachurl']}thinkidea_rencai/{$row['logo']}" /></div>
+                    </div>
+                </div>
+
+               <div class="am-form-group">
+                    <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">公司封面</label>
+                    <div class="am-u-sm-9">
+                        <input id="avatar" class="am-input-sm" type="file" name="avatar" accept="image/*" />
+                    </div>
+                   <em class="am-text-xs">公司介绍顶部展示</em>
+               </div>
+               <div class="am-form-group">
+                    <div class="am-u-sm-9">
+                        <div id="showavatarmsg"><img src="{$_W['attachurl']}thinkidea_rencai/{$row['avatar']}" /></div>
+                    </div>
+               </div>
+
+				{if $isopenlicense}
+                <div class="am-form-group">
+                  <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">营业执照</label>
+                  <div class="am-u-sm-9">
+                    <input id="license" class="am-input-sm" type="file" name="license" accept="image/*" />
+                  </div>
+                </div>
+	      
+	      		<div class="am-form-group">
+	      			<div class="am-u-sm-9">
+	      				<div id="showmsg"><img src="{$_W['attachurl']}thinkidea_rencai/{$row['license']}" /></div>
+	      			</div>
+	      		</div>
+	      		{/if}
+
+	            <div class="am-form-group">
+	              <input type="submit" name="savejobsubmit" value="保存" class="am-btn am-btn-block am-btn-primary">
+	            </div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('#license').change(function(){
+				var file = this.files[0]; //选择上传的文件
+				var r = new FileReader();
+				r.readAsDataURL(file); //Base64
+				$(r).load(function(){
+				    $("#showmsg").html();
+					$('#showmsg').html('<img  class="am-img-thumbnail am-radius" src="'+ this.result +'" alt="" />');
+				});
+			});
+
+            $('#logo').change(function(){
+                var file = this.files[0]; //选择上传的文件
+                var r = new FileReader();
+                r.readAsDataURL(file); //Base64
+                $(r).load(function(){
+                    $("#showlogomsg").html();
+                    $('#showlogomsg').html('<img  class="am-img-thumbnail am-radius" src="'+ this.result +'" alt="" />');
+                });
+            });
+
+            $('#avatar').change(function(){
+                var file = this.files[0]; //选择上传的文件
+                var r = new FileReader();
+                r.readAsDataURL(file); //Base64
+                $(r).load(function(){
+                    $("#showavatarmsg").html();
+                    $('#showavatarmsg').html('<img  class="am-img-thumbnail am-radius" src="'+ this.result +'" alt="" />');
+                });
+            });
+		});
+	</script>
+{template 'common_footer'}

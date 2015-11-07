@@ -1,0 +1,298 @@
+{template 'common/header'}
+<style type="text/css">
+	.require{color:red;}
+	.info{padding:6px;width:400px;margin:-20px auto 3px auto;text-align:center;}
+</style>
+<div class="alert alert-info info">
+	<i class="fa fa-info-circle"></i>
+	当前门店名称: {$store['title']}
+</div>
+<ul class="nav nav-tabs">
+	<li><a href="{php echo $this->createWebUrl('store');}"><i class="fa fa-reply-all"></i> 返回门店列表</a></li>
+	<li {if $op == 'cate_list'}class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'cate_list'));}">菜品分类</a></li>
+	<li {if $op == 'cate_post' && !$id} class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'cate_post'));}">添加菜品分类</a></li>
+	<li {if $op == 'dish_list'}class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'dish_list'));}">菜品列表</a></li>
+	<li {if $op == 'dish_post' && !$id} class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'dish_post'));}">添加菜品</a></li>
+	{if $op == 'dish_post' && $id} <li class="active"><a href="{php echo $this->createWebUrl('manage', array('op' => 'dish_post', array('id' => $id)));}">编辑菜品</a></li>{/if}
+	<li {if $op == 'order'}class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'order'));}">订单管理</a></li>
+	{if $op == 'orderdetail'}<li class="active"><a href="{php echo $this->createWebUrl('manage', array('op' => 'orderdetail', 'id' => $id));}">订单详情</a></li>{/if}
+</ul>
+{if $op == 'order'}
+	<div class="main">
+		<div class="panel panel-info">
+			<div class="panel-heading">筛选</div>
+			<div class="panel-body">
+				<form action="./index.php" method="get" class="form-horizontal" role="form">
+					<input type="hidden" name="c" value="site">
+					<input type="hidden" name="a" value="entry">
+					<input type="hidden" name="m" value="str_takeout">
+					<input type="hidden" name="do" value="manage"/>
+					<input type="hidden" name="op" value="order"/>
+					<input type="hidden" name="status" value="{$_GPC['status']}"/>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">订单状态</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<a class="btn btn-default {if $_GPC['status'] == ''}btn-primary{/if}" href="{php echo $this->createWebUrl('manage', array('op' => 'order', 'status' => ''))}">不限</a>
+							<a class="btn btn-default {if $_GPC['status'] == 1}btn-primary{/if}" href="{php echo $this->createWebUrl('manage', array('op' => 'order', 'status' => 1))}">已完成</a>
+							<a class="btn btn-default {if $_GPC['status'] == 2}btn-primary{/if}" href="{php echo $this->createWebUrl('manage', array('op' => 'order', 'status' => 2))}">待付款</a>
+							<a class="btn btn-default {if $_GPC['status'] == 3}btn-primary{/if}" href="{php echo $this->createWebUrl('manage', array('op' => 'order', 'status' => 3))}">待送餐</a>
+							<a class="btn btn-default {if $_GPC['status'] == 6}btn-primary{/if}" href="{php echo $this->createWebUrl('manage', array('op' => 'order', 'status' => 6))}">送餐中</a>
+							<a class="btn btn-default {if $_GPC['status'] == 4}btn-primary{/if}" href="{php echo $this->createWebUrl('manage', array('op' => 'order', 'status' => 4))}">待收餐</a>
+							<a class="btn btn-default {if $_GPC['status'] == 5}btn-primary{/if}" href="{php echo $this->createWebUrl('manage', array('op' => 'order', 'status' => 5))}">已取消</a>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">支付方式</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<label class="radio-inline"><input type="radio" name="pay_type" value="" {if $_GPC['pay_type'] == ""}checked{/if}>不限</label>
+							{loop $pay_type $li_type}
+								<label class="radio-inline"><input type="radio" name="pay_type" value="{$li_type}" {if $_GPC['pay_type'] == $li_type}checked{/if}>{$pay_types[$li_type]}</label>
+							{/loop}
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">用户信息</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<input class="form-control" name="keyword" placeholder="输入用户名或手机号" type="text" value="{$_GPC['keyword']}">
+						</div>	
+					</div>
+					<div class="form-group clearfix">
+						<label class="col-xs-12 col-sm-2 col-md-2 control-label">下单时间</label>
+						<div class="col-sm-7 col-lg-8 col-md-8 col-xs-12">
+							{php echo tpl_form_field_daterange('addtime', array('start' => date('Y-m-d', $starttime), 'end' => date('Y-m-d', $endtime)));}
+						</div>
+						<div class="col-xs-12 col-sm-3 col-md-2 col-lg-1">
+							<button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<form class="form-horizontal" action="" method="post">
+			<div class="panel panel-default">
+				<div class="panel-body table-responsive">
+					<table class="table table-hover">
+						<thead class="navbar-inner">
+							<tr>
+								<th>预定人</th>
+								<th>电话</th>
+								<th>份数/总价</th>
+								<th width="90">支付方式</th>
+								<th width="90">订单状态</th>
+								<th>下单时间</th>
+								<th style="width:150px; text-align:right;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							{loop $data $dca}
+							<tr>
+								<td>{$dca['username']}</td>
+								<td>{$dca['mobile']}</td>
+								<td>{$dca['num']}份/{$dca['price']}元</td>
+								<td>
+									{if $dca['pay_type'] == 'alipay'}
+										<span class="label label-info">支付宝</span>
+									{elseif $dca['pay_type'] == 'wechat'}
+										<span class="label label-default">微信支付</span>
+									{elseif $dca['pay_type'] == 'credit'}
+										<span class="label label-danger">余额支付</span>
+									{else}
+										<span class="label label-warning">餐到付款</span>
+									{/if}
+								</td>
+								<td style="overflow:visible;">
+									<div class="btn-group">
+										<button title="点击修改状态" class="btn {if $dca['status'] == 1}btn-success{elseif $dca['status'] == 2}btn-danger{elseif $dca['status'] == 3}btn-info{elseif $dca['status'] == 4}btn-warning{elseif $dca['status'] == 6}btn-primary{else}btn-default{/if} btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+											<span class="old_status" id="{$dca['pay_status']}">
+												{if $dca['status'] == 1}
+													已完成
+												{elseif $dca['status'] == 2}
+													待付款
+												{elseif $dca['status'] == 3}
+													待送餐
+												{elseif $dca['status'] == 4}
+													待收餐
+												{elseif $dca['status'] == 5}
+													已取消
+												{elseif $dca['status'] == 6}
+													送餐中
+												{/if}
+											</span>
+											<span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu" style="z-index:10000">
+											<li><a href="javascript:;" class="status" data-value="1" data-oid="{$dca['id']}" data-column="status">已完成</a></li>
+											<li><a href="javascript:;" class="status" data-value="2" data-oid="{$dca['id']}" data-column="status">待付款</a></li>
+											<li><a href="javascript:;" class="status" data-value="3" data-oid="{$dca['id']}" data-column="status">待送餐</a></li>
+											<li><a href="javascript:;" class="status" data-value="6" data-oid="{$dca['id']}" data-column="status">送餐中</a></li>
+											<li><a href="javascript:;" class="status" data-value="4" data-oid="{$dca['id']}" data-column="status">待收餐</a></li>
+											<li><a href="javascript:;" class="status" data-value="5" data-oid="{$dca['id']}" data-column="status">已取消</a></li>
+										</ul>
+									</div>
+								</td>
+								<td>{php echo date('Y-m-d H:i', $dca['addtime'])}</td>
+								<td style="text-align:right;">
+									<a href="{php echo $this->createWebUrl('manage', array('op' => 'orderdetail', 'id' => $dca['id']))}" class="btn btn-success btn-sm" title="查看详情" data-toggle="tooltip" data-placement="top">查看详情</a>
+									<a href="{php echo $this->createWebUrl('manage', array('op' => 'orderdel', 'id' => $dca['id']))}" class="btn btn-default btn-sm" title="删除" data-toggle="tooltip" data-placement="top" onclick="if(!confirm('删除后将不可恢复，确定删除吗?')) return false;"><i class="fa fa-times"> </i></a>
+								</td>
+							</tr>
+							{/loop}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input name="token" type="hidden" value="{$_W['token']}" />
+					<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+				</div>
+			</div>
+			{$pager}
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('.pay_status, .status').click(function(){
+				var value = $(this).attr('data-value');
+				var oid = $(this).attr('data-oid');
+				var column = $(this).attr('data-column');
+				if(value) {
+					$.post("{php echo $this->createWebUrl('manage', array('op' => 'ajaxorder'))}", {'oid' : oid, 'status' : value, 'column' : column}, function(data){
+						if(data == 'success') {
+							location.reload();
+							return false;
+						} else {
+							alert(data);
+						}
+					});
+				}
+			});
+		});
+	</script>
+{elseif $op == 'orderdetail'}
+	<div class="main">
+		<form action="./index.php" method="get" class="form-horizontal" role="form">
+			<div class="panel panel-default">
+				<div class="panel-heading">菜品信息【共 <strong>{$order['num']}</strong> 份,总价 <strong>{$order['price']}</strong> 元】</div>
+				<div class="panel-body table-responsive">
+					<table class="table table-hover">
+						<thead class="navbar-inner">
+							<tr>
+								<th>菜品</th>
+								<th>份数</th>
+								<th>小计(元)</th>
+								<th>评价</th>
+								<th></th>
+							</tr>
+							{if !empty($order['dish'])}
+								{loop $order['dish'] $or}
+									<tr>
+										<td>{$or['title']}</td>
+										<td>{$or['num']} 份</td>
+										<td>{$or['price']} 元</td>
+										<td>
+											{if empty($comment)}
+												客户尚未评价
+											{else}
+												<?php
+													for($i = 0; $i < $comment[$or['id']]['score']; $i++) {
+														echo '<i class="fa fa-star"></i>';
+													}
+													for($i = $comment[$or['id']]['score']; $i < 5; $i++) {
+														echo '<i class="fa fa-star-o"></i>';
+													}
+
+												?>
+											{/if}
+										</td>
+										<td>
+											<a class="btn btn-success" target="_blank" href="{php echo $this->createWebUrl('manage', array('op' => 'dish_post', 'id' => $order['id']));}">菜品信息</a>
+										</td>
+									</tr>
+								{/loop}
+							{/if}
+						</thead>
+					</table>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">订单信息</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">配送时间:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">{if $order['delivery_time']}{$order['delivery_time']}{else}尽快送出{/if}</p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">备注:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">{if $order['note']}{$order['note']}{else}无{/if}</p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">总计:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">{$order['price']} 元</p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">付款方式:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">{$pay_types[$order['pay_type']]}</p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">订单状态:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">
+								{if $order['status'] == 1}
+									<span class="label label-success">已完成</span>
+								{elseif $order['status'] == 2}
+									<span class="label label-danger">待付款</span>
+								{elseif $order['status'] == 3}
+									<span class="label label-info">待送餐</span>
+								{elseif $order['status'] == 4}
+									<span class="label label-warning">待收餐</span>
+								{elseif $order['status'] == 5}
+									<span class="label label-default">已取消</span>
+								{/if}
+							</p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">下单时间:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">{php echo date('Y-m-d H:i', $order['addtime']);}</p>
+						</div>	
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">用户信息</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">用户名:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">{$order['username']}</p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">电话:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">{$order['mobile']}</p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">送餐地址:</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<p class="form-control-static">{$order['address']}</p>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+{/if}
+{template 'common'}
+{template 'common/footer'}

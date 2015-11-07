@@ -1,0 +1,48 @@
+<div class="control-group js_scene_style js_layer32 hide">
+	<div class="control-group">
+		<label for="" class="control-label">浮层图片：</label>
+		<div class="margin-top10 controls">
+            <div id="video_image_uploads" style="width:330px;">
+                {php echo tpl_form_field_image('layer32[pic1]', $data['pic1'])}
+            </div>
+            <div class="help-block">（以顶部对齐,建议尺寸:宽640像素,高300像素或等比图片，PNG格式）</div>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="" class="control-label">展现方式：</label>
+		<div class="margin-top10 controls">
+			<select  class="input-medium js_type" name="layer32[show1]">
+				<option value="z-center" {if $data['show1']=='z-center'}selected{/if}>从上往下</option>
+				<option value="z-left" {if $data['show1']=='z-left'}selected{/if}>从左往右</option>
+			 </select><span class="help-inline"></span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="" class="control-label">浮层图片2：</label>
+		<div class="margin-top10 controls">
+            <div id="video_image_uploads" style="width:330px;">
+                {php echo tpl_form_field_image('layer32[pic2]', $data['pic2'])}
+            </div>
+            <div class="help-block">（以右下为对齐，PNG格式,可为空）</div>
+		</div>
+	</div>
+	<div class="control-group hide">
+		<label for="" class="control-label">浮层图片3：</label>
+		<div class="margin-top10 controls">
+            <div id="video_image_uploads" style="width:330px;">
+                {php echo tpl_form_field_image('layer32[pic3]', $data['vthumb'])}
+            </div>
+            <div class="help-block">（PNG格式,可为空）</div>
+		</div>
+	</div>
+	<div class="control-group hide">
+		<label for="" class="control-label">浮层图片4：</label>
+		<div class="margin-top10 controls">
+            <div id="video_image_uploads" style="width:330px;">
+                {php echo tpl_form_field_image('layer32[pic4]', $data['vthumb'])}
+            </div>
+            <div class="help-block">（PNG格式,可为空）</div>
+		</div>
+	</div>
+</div>
+ 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{$reply['title']}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=yes;" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="../addons/stonefish_scratch/template/css/square.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../addons/stonefish_scratch/template/js/WeixinApi.js"></script>
+</head>
+<body>
+<div style="max-width:500px;">
+    <div class="nou">
+	    <div style="max-width:100%">
+		{if !empty($reply['adpic'])}{if !empty($reply['adpicurl'])}<a href="{$reply['adpicurl']}">{/if}<img id="top_img" style="max-width: 100%;height: auto;width: auto\9;"  src="{php echo toimage($reply['adpic'])}" width="100%" border="0">{if !empty($reply['adpicurl'])}</a>{/if}{/if}
+        </div>       
+        <div class="zhuan1">
+		    <div class="mingdan">
+                <h2 class="biaoti">活动规则</h2>
+            </div>
+            <div class="mingdaninfo">
+				<div>{php echo htmlspecialchars_decode($share['share_txt'])}</div>					
+            </div>
+			{if !empty($share['share_url'])&&$follow}
+			<div class="mingdaninfo">
+				<h2 class="biaoti"><a href="{$share['share_url']}">关注参与活动</a></h2>					
+            </div>
+			{/if}
+			<div style="height:45px;">&nbsp;&nbsp;</div>
+        </div>
+    </div>
+</div>
+{template 'footer'}
+{template 'jssdkhide'}
+</body>
+</html>

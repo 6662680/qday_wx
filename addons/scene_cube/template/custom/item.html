@@ -1,0 +1,155 @@
+{template 'common/header'}
+<link href="../addons/scene_cube/style/css/global.css?&versin=12" rel="stylesheet" type="text/css" />
+<section class="p-store m-storeDetail">
+<div class="m-storeDetail-top s-bg-fff">
+<!--修改 by 场景应用-->
+<div class="top-con" style="margin-left:20px;">
+<div class="u-pathStore f-size16">
+<span class="path-icon icon-home css_sprite s-bg-pathH"></span>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">App Store</a>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">{$app['title']}</a>
+</div>
+</div>
+</div>
+<!--修改 by 场景应用-->
+<div class="m-storeDetail-con f-mag-t-20" style="margin-left:20px;">
+<div class="con-left m-cardScan" style="left: 0;">
+<div class="u-listShow f-card">
+<div class="item-top">
+{if empty($row['thumb'])}
+<img alt="{$app['title']}" src="../addons/scene_cube/style/img/nopic.jpg" />
+{else}
+<img alt="{$app['title']}" src="{php echo toimage($app['thumb'])}" />
+{/if}
+<span></span>
+<p class='f-tc'><img src="{php echo toimage($app['qrcode'])}" alt="二维码" /></p>
+</div>
+<div class="item-bottom s-bg-fff">
+<div class="tit">
+<h4 title="{$app['title']}">{$app['title']}</h4>
+<p title="{$app['author']}">by {$app['author']}</p>
+<span class="css_sprite s-bg-qr_icon icon-qr f-cur"></span>
+</div>
+<div class="con">
+<div class="con">
+<p>
+</p>
+<strong class="f-tr">【{$app['series']}】</strong>
+</div>
+</div>
+</div>
+</div>
+<p class="u-btn01 f-flow222 f-tc opacity j-detail-buy" data-free="" data-msg="">
+{if $isallow['status']==1}
+	{if $leftnum==0}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">已使用完</span> 购买 </a>
+	{else}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">制作场景</span>  </a>
+	{/if}
+{else}
+<a href="javascript:alert('请联系管理人员购买开通！')" class="f-size18 s-col-fff dingzhi">
+<span class="f-size18">{php echo $this->doFormatMoney($app['price'])}/年</span>购买 </a>
+{/if}
+</p>
+</div>
+<div class="con-right m-cardInfo s-bg-fff s-col-333">
+<div class="top">
+<h3 class="f-size24">{$app['title']}<span class="f-size16 s-col-999">by {$app['series']}</span></h3>
+<div class="u-share">
+<div class="jiathis_style_24x24 s-col-444 f-size14">
+分享到：
+<a class="jiathis_button_qzone css_sprite"></a>
+<a class="jiathis_button_tsina css_sprite"></a>
+<a class="jiathis_button_tqq css_sprite"></a>
+<a class="jiathis_button_weixin css_sprite"></a>
+</div>
+</div>
+</div>
+<div class="bd">
+<div class="bd-ui bd-txt">
+<h4 class="f-size18">界面预览<span class='s-col-666 f-size14'> / Preview</span></h4>
+<div class="imgBox">
+<ul style="width:1380px;">
+<li>
+<img src="../addons/scene_cube/template/custom/1.jpg" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="../addons/scene_cube/template/custom/2.jpg" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="../addons/scene_cube/template/custom/3.jpg" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="../addons/scene_cube/template/custom/4.jpg" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="../addons/scene_cube/template/custom/5.jpg" style="width:100%;height:auto;">
+</li>
+
+</ul>
+</div>
+</div>
+<div class="bd-intro bd-txt">
+<h4 class="f-size18">基本介绍<span class='s-col-666 f-size14'> / Introduction</span></h4>
+<p> </p>
+</div>
+<div class="bd-detail bd-txt">
+<h4 class="f-size18">详情介绍<span class='s-col-666 f-size14'> / Details</span></h4>
+<div>
+ 
+<p class="MsoNormal">
+自定义元素，动态<br />
+</p>
+ 
+<p class="MsoNormal">
+ </p>
+<p class="MsoNormal">
+<br />
+</p>
+<p class="MsoNormal">
+ 
+</p>
+<p class="MsoNormal">
+ 
+</p>
+<p class="MsoNormal">
+<br />
+</p>
+<p class="MsoNormal">
+<b></b>
+</p>
+<p class="MsoNormal">
+ </p>
+<p class="MsoNormal">
+<br />
+</p>
+<p class="MsoNormal">
+ </p>
+<p class="MsoNormal">
+ </p> </div>
+</div>
+{template 'contact'}
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+<script>
+
+$(".icon-qr").hover(function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.addClass('show');
+},function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.removeClass('show');	
+});
+</script>
+ {template 'common/footer'}

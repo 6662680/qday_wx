@@ -1,0 +1,108 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">设置各个页面的分享</a></li>
+</ul>
+
+<div class="main">
+    <form class="form-horizontal form" id="form2" action="" method="post">
+        <input type="hidden" name="shareid" value="{$share['id']}" />
+        
+        <div class="panel panel-danger">
+            <div class="panel-heading">默认分享设置</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-2">标题(title)</div>
+                    <div class="col-sm-4">
+                        <input type="text" name="data[default_title]" class="form-control" value="{$share['default_title']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">描述(Description)</div>
+                    <div class="col-sm-4">
+                        <input type="text" name="data[default_desc]" class="form-control" value="{$share['default_desc']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">图(Pic)</div>
+                    <div class="col-sm-4">
+                        {php echo tpl_form_field_image('data[default_pic]', $share['default_pic']);}
+                    </div>
+                </div>                
+            </div>
+        </div>
+        
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">首页</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-2">标题(title)</div>
+                    <div class="col-sm-4">
+                        <input type="text" name="data[index_title]" class="form-control" value="{$share['index_title']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">描述(Description)</div>
+                    <div class="col-sm-4">
+                        <input type="text" name="data[index_desc]" class="form-control" value="{$share['index_desc']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">图(Pic)</div>
+                    <div class="col-sm-4">
+                        {php echo tpl_form_field_image('data[index_pic]', $share['index_pic']);}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">招聘——列表页</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-2">标题(title)</div>
+                    <div class="col-sm-4">
+                        <input type="text" name="data[zhao_title]" class="form-control" value="{$share['zhao_title']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">描述(Description)</div>
+                    <div class="col-sm-4">
+                        <input type="text" name="data[zhao_desc]" class="form-control" value="{$share['zhao_desc']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">图(Pic)</div>
+                    <div class="col-sm-4">
+                        {php echo tpl_form_field_image('data[zhao_pic]', $share['zhao_pic']);}
+                    </div>
+                </div>                
+            </div>
+        </div>
+
+        <!-- <div class="panel panel-success">
+            <div class="panel-heading">求职——列表页</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-sm-2">标题(title)</div>
+                    <div class="col-sm-4">
+                        <input type="text" name="data[qiu_title]" class="form-control" value="{$share['qiu_title']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">描述(Description)</div>
+                    <div class="col-sm-4">
+                        <input type="text" name="data[qiu_desc]" class="form-control" value="{$share['qiu_desc']}" />
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        
+        <div class="form-group col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="save_shareinfo_submit" value="提交" />
+        </div>
+</form>
+</div>
+{template 'common/footer'}

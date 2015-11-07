@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="true">
+		<name><![CDATA[二手市场]]></name>
+		<identifie><![CDATA[thinkidea_secondmarket]]></identifie>
+		<version><![CDATA[3.3]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[二手市场]]></ability>
+		<description><![CDATA[类似58、赶集发布二手信息的模块.后期将继续推出新版本，使其功能更强大]]></description>
+		<author><![CDATA[情天]]></author>
+		<url><![CDATA[http://www.qdaygroup.com]]></url>
+	</application>
+	<platform>
+		<subscribes>
+			<message type="text" />
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<home call="gethometiles"></home>
+		<menu>
+			<entry title="物品管理" do="goods" />
+			<entry title="物品分类" do="category" />
+		</menu>
+	</bindings>
+	<install>
+	  <![CDATA[
+CREATE TABLE `ims_thinkidea_secondmarket_category` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`parentid` INT(11) NOT NULL DEFAULT '0' COMMENT '父栏目id',
+	`weid` INT(11) NOT NULL,
+	`name` VARCHAR(30) NOT NULL,
+	`enabled` TINYINT(1) UNSIGNED NOT NULL DEFAULT '1' COMMENT '是否开启',
+	PRIMARY KEY (`id`)
+)COLLATE='utf8_general_ci' ENGINE=MyISAM ;
+
+CREATE TABLE `ims_thinkidea_secondmarket_goods` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`weid` INT(10) UNSIGNED NOT NULL,
+	`openid` VARCHAR(50) NOT NULL,
+	`title` VARCHAR(20) NOT NULL,
+	`rolex` VARCHAR(30) NOT NULL,
+	`pcate` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`ccate` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`price` INT(10) NOT NULL,
+	`realname` VARCHAR(18) NOT NULL,
+	`sex` INT(1) NOT NULL,
+	`mobile` VARCHAR(12) NOT NULL,
+	`description` LONGTEXT NOT NULL,
+	`thumb1` VARCHAR(200) NULL DEFAULT NULL,
+	`thumb2` VARCHAR(200) NULL DEFAULT NULL,
+	`thumb3` VARCHAR(200) NULL DEFAULT NULL,
+	`createtime` INT(11) NOT NULL,
+	`status` INT(1) NOT NULL,
+	PRIMARY KEY (`id`)
+)COLLATE='utf8_general_ci' ENGINE=MyISAM;
+
+CREATE TABLE `ims_thinkidea_secondmarket_reply` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`rid` INT(11) NOT NULL,
+	`acid` INT(11) NOT NULL,
+	`title` TEXT NOT NULL,
+	`avatar` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`dateline` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+)COLLATE='utf8_general_ci' ENGINE=MyISAM ;
+
+	  ]]>
+	</install>
+	<uninstall>
+	  <![CDATA[
+	    drop table if exists `ims_thinkidea_secondmarket_goods`;
+	    drop table if exists `ims_thinkidea_secondmarket_category`;
+	    drop table if exists `ims_thinkidea_secondmarket_reply`;
+	  ]]>
+	</uninstall>
+	<upgrade>
+		<![CDATA[]]>
+	</upgrade>
+</manifest>

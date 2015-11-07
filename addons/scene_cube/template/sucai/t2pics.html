@@ -1,0 +1,86 @@
+ <div class="control-group js_scene_style js_t2pics hide">
+	<label class="control-label">多图展示：</label>
+	<div class="controls">
+		<div class="span12"><a href="javascript:void(0)" class="btn" id="add_menu"><i class="icon-plus"></i>添加图片</a></div>
+		<table class="table table-bordered table-hover dataTable">
+
+			<thead>
+				<tr>
+					<th>缩略图</th>
+					<th>图片地址</th>
+					<th class="norightborder">操作</th>
+				</tr>
+			</thead>
+			<tbody id="listTable">
+				{if empty($data['thumbs'])}
+					<tr class="copy_rows">
+						<td>
+						<div id="map_image_uploads" class="">
+						<img upload="image-single" style="max-height:50px;" src="" />
+						<input type="hidden" value="{$data['mthumb']}" name="t2pics[nails][]" />
+						<span class="help-inline"><button name="button" class="btn select_img" type="button">传小图</button><span class="help-inline">（建议尺寸:宽250像素,高350像素或等比图片）</span></span></div>
+							</td>												
+						<td>
+						<div id="map_image_uploads" class="">
+						<img upload="image-single" style="max-height:50px;" src="" />
+						<input type="hidden" value="{$data['mthumb']}" name="t2pics[thumbs][]" />
+						<span class="help-inline"><button name="button" class="btn select_img" type="button">传大图</button><span class="help-inline">（建议尺寸:宽400像素,高700像素或等比图片）</span></span></div>
+							</td>
+						<td><a href="javascript:;" class="del">删除</a></td>
+					</tr>
+				{else}	
+					{loop $data['thumbs'] $key $row} 
+					<tr class="copy_rows">
+					<td>
+						{if isset($data['nails'][$key])}
+						<div id="map_image_uploads" class="">
+						<img upload="image-single" style="max-height:50px;" src="{php echo toimage($data['nails'][$key])}" />
+						<input type="hidden" value="{$data['nails'][$key]}" name="t2pics[nails][]"/>
+						<span class="help-inline"><button name="button" class="btn select_img" type="button">传小图</button><span class="help-inline">（建议尺寸:宽400像素,高700像素或等比图片）</span></span></div>
+						{else}
+						<div id="map_image_uploads" class="">
+						<img upload="image-single" style="max-height:50px;" src="" />
+						<input type="hidden" value="{$data['nails'][$key]}" name="t2pics[nails][]"/>
+						<span class="help-inline"><button name="button" class="btn select_img" type="button">传背景图</button><span class="help-inline">（建议尺寸:宽250像素,高350像素或等比图片）</span></span></div>
+					
+						{/if}
+					</td>
+					<td>
+						<div id="map_image_uploads" class="">
+						<img upload="image-single" style="max-height:50px;" src="{php echo toimage($row)}" />
+						<input type="hidden" value="{$row}" name="t2pics[thumbs][]" />
+						<span class="help-inline"><button name="button" class="btn select_img" type="button">传大图</button><span class="help-inline">（建议尺寸:）</span></span></div>
+					</td>
+					<td><a href="javascript:;" class="del">删除</a></td>
+					</tr>
+					{/loop}
+				{/if}
+			</tbody>
+		</table>
+		<span class="help-block">大图小图必须配对上传，否则会出错</span>
+	</div>
+</div>
+<script>
+//页面事件监听
+		$(document).ready(function(){
+			//新增门店实景
+			$("#add_menu").click(function(){
+				$('.copy_rows:first').clone(true).appendTo('#listTable').find('input[type=text]').val('');
+				$('.copy_rows:last').find('img').attr({src:'',alt:'',title:''});
+				//$('.copy_rows:last').find('script').remove();
+			});
+			
+			//删除门店实景
+			$("#listTable .del").click(function () {
+					var removeObj = $(this).parent('td').parent('tr');
+					var className = removeObj.attr('class');
+					if($("." + className).length <= 1){
+						removeObj.find('img').attr("src","");
+						return removeObj.find('input[type=text],input[type=hidden]').val('');
+						
+					}
+					return removeObj.remove();
+				
+			});
+		});
+</script>

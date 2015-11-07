@@ -1,0 +1,43 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">求职者与职位信息管理</a></li>
+</ul>
+    <div id="show_msg" style="display:none">操作成功</div>
+    <div style="padding:15px;">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+                <tr>
+                    <th>求职者ID</th>
+                    <th>求职者</th>
+                    <th>公司ID</th>
+                    <th>公司名称</th>
+                    <th>申请的职位</th>
+                    <th>申请时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {loop $lists $row}
+                <tr>
+                    <td>{$row['personid']}</td>
+                    <td>{$persons_array[$row['personid']]['name']}</td>
+                    <td>{$row['companyid']}</td>
+                    <td>{$companys_array[$row['companyid']]['name']}</td>
+                    <td>{$jobs_array[$row['jobid']]['title']}</td>
+                    <td>{php echo date('Y-m-d',$row['dateline'])}</td>
+                </tr>
+                {/loop}
+            </tbody>
+        </table>
+    </div>
+<script>
+    function audit_change_company_status(company_id, change_to){
+    	$.post(
+    			'{php echo $this->createWebUrl("AuditCompanyStatusAjax")}',
+    	        {"company_id":company_id, "change_to":change_to},
+    	        function (data){
+    	        	location.reload();
+    	        }
+    	);
+    }
+</script>
+{template 'common/footer'}

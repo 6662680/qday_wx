@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" type="text/css" href="./resource/components/kindeditor/themes/default/default.css?v=2014-05-21" />
+ <script type="text/javascript" src="../addons/scene_cube/src/jQuery.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/bootstrap_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/mini_audio_player/jquery_jplayer_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/mini_audio_player/jquery_mb_miniPlayer.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/daterangepicker/daterangepicker.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/daterangepicker/moment_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/form/jquery_form_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/validation/jquery_validate_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/validation/jquery_validate_methods.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/inside.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/resource2.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/mulresources.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/components/kindeditor/kindeditor-min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/components/kindeditor/lang/zh_CN.js?v=2014-05-21"></script>
+
+ <title>高级微场景后台设置</title>
+        <!--[if IE 7]>
+            <link href="../addons/scene_cube/css/font_awesome_ie7.css?v=2014-05-21" rel="stylesheet" />
+        <![endif]-->
+        <!--[if lte IE 8]>
+            <script src="../addons/scene_cube/js/excanvas_min.js?v=2014-05-21"></script>
+        <![endif]-->
+        <!--[if lte IE 9]>
+            <script src="../addons/scene_cube/js/watermark.js?v=2014-05-21"></script>
+        <![endif]-->
+    </head>
+	<body>
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/bootstrap_min.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/bootstrap_responsive_min.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/todc_bootstrap_button.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/plugins/daterangepicker/daterangepicker.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/style.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/resource.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/themes.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/plugins/mini_audio_player/miniplayer.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/inside.css?v=2014-05-21" />
+ 
+    </head>
+	<body>
+ 	<div id="main">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="box">
+                    <div class="box-title">
+                        <div class="span12">
+                            <h3><i class="icon-edit"></i>授权微场景应用</h3>
+                        </div>
+                    </div>
+                    <form action="" method="post" class="form-horizontal form-validate">
+                         <div class="box-content">
+								<div class="control-group">
+                                    <label for="listorder" class="control-label">账户名称：</label>
+                                    <div class="controls">
+										<input type="text" class="span3" value="{$_W['username']}" style="width:274px;" />
+                                      </div>
+								</div>
+								<div class="control-group">
+                                    <label class="control-label" for="brief">授权code</label>
+                                    <div class="controls">
+                                       <textarea id="brief" name="brief" class="input-xlarge ui-wizard-content ui-helper-reset ui-state-default" style="resize:none; width:274px; height:120px;" >{$session}</textarea>
+										<span class="help-block">此代码，复制到平台授权中</span>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+ 
+	 
+</html>

@@ -1,0 +1,188 @@
+{template 'common/header'}
+<link href="../addons/scene_cube/style/css/global.css?&versin=12" rel="stylesheet" type="text/css" />
+
+<section class="p-store m-storeDetail">
+<div class="m-storeDetail-top s-bg-fff">
+<!--修改 by 场景应用-->
+<div class="top-con" style="margin-left:20px;">
+<div class="u-pathStore f-size16">
+<span class="path-icon icon-home css_sprite s-bg-pathH"></span>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">App Store</a>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">{$app['title']}</a>
+</div>
+</div>
+</div>
+<!--修改 by 场景应用-->
+<div class="m-storeDetail-con f-mag-t-20" style="margin-left:20px;">
+<div class="con-left m-cardScan" style="left: 0;">
+<div class="u-listShow f-card">
+<div class="item-top">
+<img alt="{$app['title']}" src="{php echo toimage($app['thumb'])}" />
+<span></span>
+<p class='f-tc'><img src="{php echo toimage($app['qrcode'])}" alt="二维码" /></p>
+</div>
+<div class="item-bottom s-bg-fff">
+<div class="tit">
+<h4 title="{$app['title']}">{$app['title']}</h4>
+<p title="{$app['author']}">by {$app['author']}</p>
+<span class="css_sprite s-bg-qr_icon icon-qr f-cur"></span>
+</div>
+<div class="con">
+<div class="con">
+<p>
+</p>
+<strong class="f-tr">【{$app['series']}】</strong>
+</div>
+</div>
+</div>
+</div>
+<p class="u-btn01 f-flow222 f-tc opacity j-detail-buy" data-free="" data-msg="">
+{if $isallow['status']==1}
+	{if $leftnum==0}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">已使用完</span> 购买 </a>
+	{else}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">制作场景</span>  </a>
+	{/if}
+{else}
+<a href="javascript:alert('请联系管理人员购买开通！')" class="f-size18 s-col-fff dingzhi">
+<span class="f-size18">{php echo $this->doFormatMoney($app['price'])}/年</span>购买 </a>
+{/if}
+</p>
+</div>
+<div class="con-right m-cardInfo s-bg-fff s-col-333">
+<div class="top">
+<h3 class="f-size24">{$app['title']}<span class="f-size16 s-col-999">by {$app['series']}</span></h3>
+<div class="u-share">
+<div class="jiathis_style_24x24 s-col-444 f-size14">
+分享到：
+<a class="jiathis_button_qzone css_sprite"></a>
+<a class="jiathis_button_tsina css_sprite"></a>
+<a class="jiathis_button_tqq css_sprite"></a>
+<a class="jiathis_button_weixin css_sprite"></a>
+</div>
+</div>
+</div>
+<div class="bd">
+<div class="bd-ui bd-txt">
+<h4 class="f-size18">界面预览<span class='s-col-666 f-size14'> / Preview</span></h4>
+<div class="imgBox">
+<ul style="width:1600px;">
+<li>
+<img src="http://www.liveapp.cn/userfiles//orm/tmp/541647e56b4a0.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles//orm/tmp/541647e78ff4e.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles//orm/tmp/541647e9d1b57.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles//orm/tmp/541647ea68869.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles//orm/tmp/541647eb16368.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles//orm/tmp/541647eb96032.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles//orm/tmp/541647ec38fe0.png" style="width:100%;height:auto;">
+</li>
+</ul>
+</div>
+</div>
+<div class="bd-intro bd-txt">
+<h4 class="f-size18">基本介绍<span class='s-col-666 f-size14'> / Introduction</span></h4>
+<p>本应用原价12000元，现参加“新品9999”优惠活动！您只须在线支付购买即可享受优惠，活动有效期：2014年9月15日-2014年9月22日。在云来三周年之际，发出“不二”主题生日邀请函，寓意着他在不二之年的年纪里作为场景应用运营商的不二之选，在互联网的世界里独一不二。通过展示一路走来的艰辛历程，因爱与理解，报着感恩之心特此邀约。上线以来得到了极大的关注与点击量，感谢众多新老朋友的祝福。</p>
+</div>
+<div class="bd-detail bd-txt">
+<h4 class="f-size18">详情介绍<span class='s-col-666 f-size14'> / Details</span></h4>
+<div>
+<p class="MsoNormal" align="left">
+<b>动态式封面</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+采用LOGO的颜色作为封面的背景，醒目的派对主题缓缓落于用户眼中，流动的视觉体验令LiveApp充满生机与活力
+</p>
+<p class="MsoNormal" align="left">
+<b><br />
+</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>背景音乐效果</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+背景主题轻松的节奏增强了LiveApp的感染力，带用户进入云来的世界
+</p>
+<p class="MsoNormal" align="left">
+<b><br />
+</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>渐近式页面，一切都在成长</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+从23.6开始，一页页的展示了云来的历史与感恩，立体页面表现形式，让人眼前一亮的感觉，充满了现代时尚感
+</p>
+<p class="MsoNormal" align="left">
+<b><br />
+</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>视频界面</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+全屏的背景画面，看起来简洁大方，让用户没有观看视频之前首先看到了公司中熟悉的面庞，而通过具有震撼力的播放，让用户更直观的了解企业文化，更有亲切感、更加感动，也使员工们更有归属感
+</p>
+<p class="MsoNormal" align="left">
+<b><br />
+</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>留下你的祝福</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+点击“悬浮按钮”即可说出你对云来的祝福，细致了用户交互体验
+</p>
+<p class="MsoNormal" align="left">
+<b><br />
+</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>为您导航，见证梦想</b><b></b>
+</p>
+<p class="MsoNormal" align="left">
+点击导航标识按钮，直接地图导航至派对地点，方便快捷了解时间与周边信息
+</p>
+<p class="MsoNormal" align="left">
+<b><br />
+</b>
+</p>
+<p class="MsoNormal" align="left">
+<b>一键拨打，关注公众号</b>
+</p>
+<p class="MsoNormal" align="left">
+你是不是已经被场景应用深深震撼了？想要了解更多的企业信息，赶紧关注我们的官方微信吧
+</p> </div>
+</div>
+{template 'contact'}
+</div>
+</div>
+</div>
+ </section>
+ 
+ 
+ <script>
+$(".icon-qr").hover(function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.addClass('show');
+},function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.removeClass('show');	
+});
+</script>
+ {template 'common/footer'}

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ch">
+<head>
+	<title>{$list['title']}</title>
+	<meta charset="utf-8" />
+	<meta name="apple-touch-fullscreen" content="YES" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta http-equiv="Expires" content="-1" />
+	<meta http-equiv="pragram" content="no-cache" />
+	<link rel="stylesheet" type="text/css" href="../addons/scene_cube/resource/copyright.css" />
+	<link rel="stylesheet" type="text/css" href="../addons/scene_cube/resource/main.css" />
+	<script type="text/javascript" src="../addons/scene_cube/resource/offline.js" ></script>	<!--移动端版本兼容 -->
+	<script type="text/javascript">
+		var jsVer = 8.222;
+		var phoneWidth = parseInt(window.screen.width);
+		var phoneScale = phoneWidth/640;
+
+		var ua = navigator.userAgent;
+		if (/Android (\d+\.\d+)/.test(ua)){
+			var version = parseFloat(RegExp.$1);
+			// andriod 2.3
+			if(version>2.3){
+				document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+			// andriod 2.3以上
+			}else{
+				document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+			}
+			// 其他系统
+		} else {
+			document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+		}
+	</script>
+<!--移动端版本兼容 end -->
+<!--微信分享统计 -->
+<script type="text/javascript" src="../addons/scene_cube/style/src/WeixinApi.js" ></script>		
+</head>
+
+<body>
+	<!--模版加载提示-->
+	<section class="u-alert">
+		<img style='display:none;' src="../addons/scene_cube/resource/loading_large.gif" />
+		<div class='alert-loading z-move'>
+			<div class='cycleWrap'>
+				<span class='cycle cycle-1'></span>
+				<span class='cycle cycle-4'></span>
+				<span class='cycle cycle-2'></span>
+				<span class='cycle cycle-3'></span>
+				
+			</div>
+			<!--<div class="lineWrap">
+				<span class='line line-1'></span>
+				<span class='line line-2'></span>
+				<span class='line line-3'></span>
+			</div>-->
+		</div>
+	</section>
+	<!--模版加载提示 end-->
+	
+			<!-- 声音控件 -->
+	<section class='u-audio f-hide' data-src="{php echo toimage($list['music'])}">
+		<p id='coffee_flow' class="btn_audio">
+			<strong class='txt_audio z-hide'>关闭</strong>
+			<span class='css_sprite01 audio_open'></span>
+		</p>
+	</section>
+	<!-- 声音控件 end-->
+																																	<!-- 箭头指示引导 -->
+	<section class='u-arrow f-hide'><p class="css_sprite01"></p></section>
+	<!-- 箭头指示引导 end-->
+
+	<!-- page页面内容 -->
+	<section class='p-ct'>
+		<!-- 旋转正面 -->
+		<div id="j-mengban" class='translate-front'>
+			<div class='mengban-warn'></div>
+		</div>
+		<!-- 旋转正面 end-->
+		
+		<!-- 旋转反面 -->
+		<div class='translate-back f-hide'>
+			<!-- 封页 1-->
+				<!-- 擦一擦 --><input id="ca-tips"   type="hidden" value="{$list['cover_title']}" />
+				<!-- 蒙板背景图 --><input id="r-cover"   type="hidden" value="{$list['cover']}"/>
+			<div class='m-page m-fengye f-hide' data-page-type='info_pic3' data-statics='info_pic3'>
+				<div class="page-con lazy-img" data-src="{php echo toimage($list['thumb'])}"></div>
+			</div>
+			<!-- 封页 end-->
+				{loop $items $item}
+								<!-- 内页 -->
+				{if $item['lng']!=0&&$item['lat']!=0}
+					<div class='m-page m-book f-hide' data-page-type='book' data-statics='multi_contact'>
+				<div class="page-con lazy-img" data-src="{php echo toimage($item['attachment'])}">
+					<div class="book-bd f-tc">
+					{php $address = $item['address'];}
+					{php $tel = $item['tel'];}
+					<div class="bd-map j-map" data-mapIndex='42627' data-detal='{"sign_name":"","contact_tel":"{$tel}","address":"{$address}"}' data-longitude="{$item['lng']}" data-latitude="{$item['lat']}">
+							<img class='lazy-img' data-src="{php echo toimage($item['map_thumb'])}" />
+							<span class='css_sprite01'></span>
+							<p class='map-animate'><strong></strong><strong></strong></p>
+						</div>
+						
+						<div class='bd-tit'>
+							<h3 class='f-tc'></h3>
+						</div>
+						{if $tel!=''||$item['wechat']!=''}
+						<div class='bd-form'>
+							{if $tel!=''}<p class="tel"><span class='css_sprite01'></span><a href="tel:{$tel}">{$tel}</a></p>{/if}
+							{if $item['wechat']!=''}<p class="wx"><span class='css_sprite01'></span><a {if $item['wurl']!=''}href="{$item['wurl']}"{/if}>{$item['wechat']}</a></p>{/if}
+							</div>{/if}
+					</div>
+									</div>
+			</div>
+				{else}
+			<div class='m-page m-bigTxt f-hide' data-page-type='bigTxt' data-statics='info_list'>
+				<div class="page-con j-txtWrap lazy-img" data-src="{php echo toimage($item['attachment'])}">
+				{if $item['video']!=''}
+					<div class="video-title" style='color:#ff005e;'>
+						<h3 class='f-tc'></h3>
+					</div>
+										<div class="video-con j-video" 
+						data-width='640' 
+						data-height='480' 
+						data-src="{$item['video']}" 
+						data-poster="{php echo toimage($item['video_thumb'])}">
+						<div class="img lazy-img" data-src="{php echo toimage($item['video_thumb'])}">
+							<span class="css_sprite01"></span>
+						</div>
+					</div>
+					{/if}
+				
+									</div>
+							</div>
+							{/if}
+			<!-- 内页 end-->
+		
+		{/loop}		
+
+
+<!--表单提交开始-->
+{if $list['isadvanced']==1}
+<div class='m-page m-book f-hide' data-page-type='book' data-statics='multi_contact'>
+<div class="page-con lazy-img" data-src="{php echo toimage($list['advanced_thumb'])}">
+<div class="book-bd f-tc">
+<div class='bd-tit'>
+<h3 class='f-tc'></h3>
+</div>
+<div class='bd-form'>
+<div class="btn" data-submit='false'>点击预约</div>
+</div>
+</div>
+<div class="book-bg f-hide">
+<div class="book-form f-hide">
+<h3>免费预约</h3>
+<form id='j-signUp'>
+<table>
+<colgroup>
+<col width='20%' />
+<col width='80%' />
+</colgroup>
+<tbody>
+<tr>
+<th>姓名:</th>
+<td><input type="text" placeHolder='真实姓名' name='username' /></td>
+</tr>
+<tr>
+<th>电话:</th>
+<td><input type="text" placeHolder='真实联系方式' name='tel' /></td>
+<input type="hidden" id="weid" value="{$_W['weid']}">
+<input type="hidden" id="email" value="{$list['email']}" name="email">
+<input type="hidden" id="emailtitle" value="{$list['emailtitle']}" name="emailtitle">
+</tr>
+<tr>
+<td class='btn' colspan='2'>
+<p id='j-signUp-submit'>提交</p>
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<div class="j-close"><img class="lazy-img j-close-img" data-src="../addons/scene_cube/img/form_close_img01.png" /></div>
+<p class="u-note u-note-error" data-type="提交失败"></p>
+<p class="u-note u-note-sucess" data-type="提交成功"></p>
+</div>
+</div>
+</div>
+</div>
+{/if}
+
+
+<!--表单结束-->
+
+
+
+
+
+					<div class='m-page m-bigTxt f-hide' data-page-type='bigTxt' data-statics='info_list'>
+				<div class="page-con j-txtWrap lazy-img" data-src="{php echo toimage($list['share_cover'])}">
+									</div>
+				{if !empty($list['share_button'])}
+				<!-- 微信 分享 -->
+				{if $list['diyurl']!=''}
+				<div class="bigTxt-btn bigTxt-btn-wx lazy-img" data-src="{$list['share_button']}"><a href="{$list['diyurl']}"></a></div>
+				{else}
+				<div class="bigTxt-btn bigTxt-btn-wx lazy-img" data-src="{$list['share_button']}"><a href="javascript:void(0)"></a></div>
+				{if empty($list['share_tips'])}
+					<div class="bigTxt-weixin"><img src="../addons/scene_cube/resource/19/img/weixin-share-guide.png"></div>
+					{else}
+					<div class="bigTxt-weixin"><img src="{$list['share_tips']}"></div>
+					{/if}
+				{/if}
+				<!-- 微信 end-->
+				{/if}
+				</div>
+		</div>
+		<!-- 旋转反面 end-->
+	</section>
+	<!-- 正文介绍 end-->
+
+	 
+	<!--pageLoading-->
+	<section class="u-pageLoading">
+		<img src="../addons/scene_cube/resource/14/img/load.gif" alt="loading" />
+	</section>
+	<div class="ylmap bigOpen">
+<div class='bk'><span class='css_sprite01'></span></div>
+</div>
+	<!--pageLoading end-->
+	
+	<!-- 资源传递 -->
+	<!-- 模版ID --><input id="activity_id" type="hidden" value='3464' />	
+	<!-- 微信分享信息 --><input id="r-wx-title" type="hidden" value="{$list['share_title']}" />
+	<!-- 微信分享信息 --><input id="r-wx-img"   type="hidden" value="{$list['share_thumb']}" />
+	<!-- 微信分享信息 --><input id="r-wx-con"   type="hidden" value="{$list['share_txt']}" />
+	
+	
+	<!-- 资源传递 end-->
+
+	<!--脚本加载-->
+	<script src="../addons/scene_cube/resource/init_mobile.js" type="text/javascript" charset="utf-8"></script>
+	
+	<!--脚本加载 end-->	
+ </html>

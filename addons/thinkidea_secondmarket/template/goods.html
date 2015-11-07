@@ -1,0 +1,62 @@
+{template 'common/header'}
+
+	<div style="padding:15px;">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+				
+					<th>分类ID</th>
+					<th>分类名称</th>
+					<th>商品名称</th>					
+					<th>商品价格</th>
+					<th>成色</th>
+					<th>联系人</th>
+					<th>联系电话</th>
+					<th>发布时间</th>
+					<th>{if !empty($this->module['config']['status'])}状态{/if}</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $goods $good}
+				<tr>
+
+					<td>{$good['id']}</td>
+					<td>{$good['name']}</td>
+					<td>{$good['title']}</td>
+					<td>{$good['price']}元</td>
+					<td>{if $good['rolex'] == '1'}
+				9.9成新
+				{elseif $good['rolex'] == '2'}
+				9.5成新
+				{elseif $good['rolex'] == '3'}
+				9成新
+				{elseif $good['rolex'] == '4'}
+				8成新
+				{elseif $good['rolex'] == '5'}
+				7成新
+				{elseif $good['rolex'] == '6'}
+				6成新
+				{/if}</td>
+					<td>{$good['realname']}</td>
+					<td>{$good['mobile']}</td>
+					<td>{php echo date('Y-m-d',$good['createtime'])}</td>
+					<td>
+						{if !empty($this->module['config']['status'])}
+							{if empty($good['status'])}
+							<a href='{php echo $this->createWebUrl('goods', array('foo' => 'update','id' => $good['id'],'status' => 1))}'>未审核</a>
+							{else}
+							<a href='{php echo $this->createWebUrl('goods', array('foo' => 'update','id' => $good['id'],'status' => 0))}'>已审核</a>
+							{/if}
+						{/if}
+					</td>
+					<td>
+						<a href="{php echo $this->createWebUrl('goods', array('foo' => 'delete','id' => $good['id']))}" onclick="return confirm('确认删除此商品吗？');return false;" title="删除" class="btn btn-small"><i class="icon-remove"></i>
+						删除</a>
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+		</table>
+	</div>
+{template 'common/footer'}

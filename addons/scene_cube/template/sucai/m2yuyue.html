@@ -1,0 +1,60 @@
+<div class="control-group js_scene_style js_m2yuyue hide">
+	<div class="control-group">
+		<label class="control-label" for="tel">电话号码</label>
+		<div class="controls">
+			<input type="text" id="tel" class="input-large" name="m2yuyue[tel]" data-rule-phone="true" value="{$data['tel']}"/>
+			<span class="maroon">*</span><span class="help-inline">(为空,不显示)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="mail">邮件</label>
+		<div class="controls">
+			<input type="text" id="mail" class="input-large" name="m2yuyue[email]" data-rule-email="true" value="{$data['email']}"/>
+			<span class="maroon">*</span><span class="help-inline">(为空,不显示)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="wxurl">微信链接</label>
+		<div class="controls">
+			<input type="text" id="wxurl" class="input-xxlarge" name="m2yuyue[wxurl]" value="{$data['wxurl']}"/>
+			<span class="maroon">*</span><span class="help-inline">(微信链接地址)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="weixin">微信</label>
+		<div class="controls">
+			<input type="text" id="weixin" class="input-large" name="m2yuyue[weixin]" value="{$data['weixin']}"/>
+			<span class="maroon">*</span><span class="help-inline">(为空,不显示)</span>
+		</div>
+	</div>										
+	<div class="control-group">
+		<label class="control-label" for="str1">预约字段重定义1</label>
+		<div class="controls">
+			<input type="text" id="str1" class="input-large" name="m2yuyue[str1]" value="{$data['str1']}"  placeholder="姓名" />
+			<span class="maroon">*</span><span class="help-inline">(为空,不显示)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="str2">预约字段重定义2</label>
+		<div class="controls">
+			<input type="text" id="str2" class="input-large" name="m2yuyue[str2]"   value="{$data['str2']}"  placeholder="电话" />
+			<span class="maroon">*</span><span class="help-inline">(为空,不显示)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="str3">预约字段重定义3</label>
+		<div class="controls">
+			<input type="text" id="str3" class="input-large" name="m2yuyue[str3]"  value="{$data['str3']}"  placeholder="地址" />
+			<span class="maroon">*</span><span class="help-inline">(为空,不显示)</span>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label for="" class="control-label">顶部展示图片：</label>
+		<div class="margin-top10 controls">
+            <div id="map_image_uploads" style="width:330px;">
+                {php echo tpl_form_field_image('m2yuyue[mthumb]', $data['mthumb'])}
+            </div>
+		</div>
+	</div>
+</div>

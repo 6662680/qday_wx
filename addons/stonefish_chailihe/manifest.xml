@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+
+	<application setting="true">
+
+		<name><![CDATA[幸运拆礼盒]]></name>
+
+		<identifie><![CDATA[stonefish_chailihe]]></identifie>
+
+		<version><![CDATA[2.20150213]]></version>
+
+		<type><![CDATA[activity]]></type>
+
+		<ability><![CDATA[幸运拆礼盒－领取礼盒分享给朋友，让朋友帮其拆礼盒，成功达到设置拆开礼盒的人数，则有机会得到设置的礼品！]]></ability>		<description><![CDATA[幸运拆礼盒－通过关健词触发活动，或通过朋友分享的活动链接领取礼盒，分享给朋友或朋友圈，朋友点击打开页面，计入拆礼盒人数，当达到活动设置拆开礼盒的人数后，则有机会得到设置的礼品！概率得到礼品或成功拆开即可领取礼品！]]></description>
+
+		<author><![CDATA[情天]]></author>
+
+		<url><![CDATA[www.qdaygroup.com]]></url>
+
+	</application>
+
+	<platform>
+
+		<subscribes>
+
+		</subscribes>
+
+		<handles>
+
+			<message type="text" />
+
+		</handles>
+
+		<rule embed="true" />
+
+	</platform>
+
+	<bindings>
+
+		<cover>
+
+			<entry title="幸运拆礼盒入口设置" do="listentry" />
+
+		</cover>
+
+		<menu>			
+
+			<entry title="拆礼盒管理" do="eventlist" />
+
+			<entry title="粉丝达人" do="userlist" />
+
+			<entry title="分享数据" do="sharedata" />
+
+			<entry title="奖品数据" do="prizedata" />			
+
+		</menu>
+
+		<rule>
+
+			<entry title="粉丝达人" do="userlist" state="" />
+
+			<entry title="分享数据" do="sharedata" state="" />
+
+			<entry title="奖品数据" do="prizedata" state="" />
+		</rule>
+		<home call="gettiles">
+		</home>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_stonefish_chailihe_gift` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '规则id',  
+  `title` varchar(50) NOT NULL COMMENT '奖品名称',
+  `lihetitle` varchar(50) NOT NULL COMMENT '礼盒名称',
+  `total` int(11) NOT NULL COMMENT '数量',
+  `daytotal` int(11) NOT NULL COMMENT '每天最多中奖数量',
+  `probalilty` varchar(5) NOT NULL COMMENT '概率单位%',
+  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '描述',
+  `inkind` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否是实物',
+  `activation_code` varchar(50) NOT NULL COMMENT '激活码',
+  `activation_url` varchar(200) NOT NULL COMMENT '激活地址',  
+  `gift` varchar(225) DEFAULT '' COMMENT '礼盒图片',
+  `giftVoice` varchar(225) DEFAULT '' COMMENT '礼盒声音',
+  `break` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '需要帮拆的人数',
+  `awardpic` varchar(512) NOT NULL COMMENT '奖品图片', 
+  `awardpass` varchar(500) NOT NULL COMMENT '兑奖地点列表',  
+  PRIMARY KEY (`id`),
+  KEY `indx_rid` (`rid`)
+) ENGINE = MYISAM DEFAULT CHARSET = utf8;
+CREATE TABLE IF NOT EXISTS `ims_stonefish_chailihe_giftmika` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '规则id',
+  `giftid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '礼盒ID', 
+  `from_user` varchar(50) NOT NULL DEFAULT '' COMMENT '用户openid',  
+  `mika` varchar(50) NOT NULL COMMENT '密卡字符串',
+  `activationurl` varchar(200) NOT NULL COMMENT '激活地址',
+  `typename` varchar(20) NOT NULL DEFAULT '' COMMENT '类型说明',
+  `description` varchar(50) NOT NULL DEFAULT '' COMMENT '描述',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否领取1为领取过',
+ PRIMARY KEY (`id`),
+  KEY `indx_rid` (`rid`)
+) ENGINE = MYISAM DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_stonefish_chailihe_reply` (
+
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '规则id',
+
+  `weid` int(10) unsigned NOT NULL COMMENT '公众号ID',
+
+  `title` varchar(50) NOT NULL COMMENT '规则标题',
+
+  `shareurl` varchar(255) NOT NULL COMMENT '活动网址',
+
+  `sharetitle` varchar(50) NOT NULL COMMENT '分享标题',
+
+  `sharecontent` varchar(100) NOT NULL COMMENT '分享简介',
+
+  `picture` varchar(225) NOT NULL COMMENT '图片',
+
+  `music` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '背景音乐开关',
+
+  `musicbg` varchar(225) NOT NULL COMMENT '背景音乐',
+
+  `picnojiang` varchar(255) NOT NULL COMMENT '没有中奖的提示图',
+
+  `bgcolor` varchar(10) NOT NULL COMMENT '背景色',
+
+  `text01color` varchar(10) NOT NULL COMMENT '文字色',
+
+  `text02color` varchar(10) NOT NULL COMMENT '版权文字色',
+
+  `text03color` varchar(10) NOT NULL COMMENT '弹出层文字色',
+
+  `text04color` varchar(10) NOT NULL COMMENT '帮助或兑奖点背景色',
+
+  `text05color` varchar(10) NOT NULL COMMENT '帮助或兑奖点文字色',
+
+  `picbg01` varchar(225) NOT NULL COMMENT '背景图片一',
+
+  `picbg02` varchar(225) NOT NULL COMMENT '背景图片二',
+
+  `picbg03` varchar(225) NOT NULL COMMENT '底部图片',
+
+  `start_time` int unsigned NOT NULL COMMENT '开始时间',
+
+  `end_time` int unsigned NOT NULL COMMENT '结束时间',
+
+  `description` varchar(255) NOT NULL COMMENT '描述',
+
+  `activityinfo` varchar(255) NOT NULL COMMENT '领奖说明',
+
+  `content` text NOT NULL COMMENT '内容',
+
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '开关状态',
+
+  `miao` varchar(2) NOT NULL DEFAULT '5' COMMENT '秒数',
+
+  `email` varchar(100) NOT NULL COMMENT '通知邮箱',
+
+  `zhongjiang` varchar(200) NOT NULL COMMENT '中奖提醒词',
+
+  `xuninum` int(10) unsigned NOT NULL DEFAULT '50' COMMENT '虚拟人数',
+
+  `xuninumtime` int(10) unsigned NOT NULL DEFAULT '86400' COMMENT '虚拟间隔时间',
+
+  `xuninuminitial` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '虚拟随机数值1',
+
+  `xuninumending` int(10) unsigned NOT NULL DEFAULT '50' COMMENT '虚拟随机数值2',
+
+  `xuninum_time` int(10) unsigned NOT NULL COMMENT '虚拟更新时间',
+
+  `helpnum` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '显示帮助人数',
+
+  `share_shownum` int(3) unsigned NOT NULL DEFAULT '50' COMMENT '中奖用户显示数',
+
+  `subscribe` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否强制需要关注公众号才能领取礼盒',
+
+  `opensubscribe` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否强制关注公众号才能拆礼盒0为不需要1为需要关注',
+
+  `openshare` varchar(255) NOT NULL COMMENT '拆礼盒强制关注公众号分享网址',
+
+  `opentype` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '打开礼盒方式0为访问1为点击',
+
+  `helpchai` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '互拆设置',
+
+  `helpren` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '拆礼盒对象',
+
+  `chainum` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '同人多礼盒',
+
+  `awarding` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '兑奖地点选择',
+
+  `number_num` tinyint unsigned NOT NULL DEFAULT '0' COMMENT '每人最多领取礼盒个数',
+
+  `number_num_day` tinyint unsigned NOT NULL DEFAULT '0' COMMENT '每人每天最多领取礼盒个数',
+
+  `showlihe` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否显示礼盒名称和奖品名称',
+
+  `showline` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否礼盒线0为不显示',
+
+  `repeatzj` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否可以重复中奖0为一次',
+
+  `shangjia` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否显示赞助商',
+
+  `shangjianame` varchar(50) NOT NULL COMMENT '赞助商名称',
+
+  `shangjiapic` varchar(512) NOT NULL COMMENT '赞助商图片展示',
+
+  `shangjialogo` varchar(512) NOT NULL COMMENT '赞助商图片LOGO',
+
+  `shangjiatel` varchar(50) NOT NULL COMMENT '赞助商联系电话',
+
+  `shangjiaaddress` varchar(90) NOT NULL COMMENT '赞助商联系地址',
+
+  `shangjiamap` varchar(50) NOT NULL COMMENT '赞助商地图导航',
+
+  `shangjialink` varchar(250) NOT NULL COMMENT '赞助商链接',
+
+  `imgpic01` varchar(225) NOT NULL COMMENT '幻灯片图一',
+
+  `imgpic02` varchar(225) NOT NULL COMMENT '幻灯片图二',
+
+  `imgpic03` varchar(225) NOT NULL COMMENT '幻灯片图三',
+
+  `imgpic04` varchar(225) NOT NULL COMMENT '幻灯片图三',
+
+  `imgpic05` varchar(225) NOT NULL COMMENT '幻灯片图四',
+
+  `userinfo` varchar(200) NOT NULL COMMENT '输入姓名或手机时的提示词',
+
+  `isinfo` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '兑奖参数是领取填写还是中奖填写0为领取填写', 
+
+  `isrealname` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否需要输入姓名0为不需要1为需要',
+
+  `ismobile` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否需要输入手机号0为不需要1为需要',
+
+  `isqq` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入QQ号0为不需要1为需要',
+
+  `isemail` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入邮箱0为不需要1为需要',
+
+  `isaddress` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入地址0为不需要1为需要',
+
+  `isgender` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入性别0为不需要1为需要',
+
+  `istelephone` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入固定电话0为不需要1为需要',
+
+  `isidcard` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入证件号码0为不需要1为需要',
+
+  `iscompany` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入公司名称0为不需要1为需要',
+
+  `isoccupation` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入职业0为不需要1为需要',
+
+  `isposition` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入职位0为不需要1为需要',
+
+  `isfansname` varchar(225) NOT NULL DEFAULT '真实姓名,手机号码,QQ号,邮箱,地址,性别,固定电话,证件号码,公司名称,职业,职位' COMMENT '显示字段名称',
+
+  `isfans` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0只保存本模块下1同步更新至官方FANS表',
+
+  `iscopyright` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0显示公众号版权1为显示自定义版权',
+
+  `copyrighturl` varchar(255) NOT NULL COMMENT '版权链接',
+
+  `copyright` varchar(50) NOT NULL COMMENT '版权',
+
+  `messageto` varchar(500) NOT NULL COMMENT '消息模板',
+
+  `randlihe` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '显示礼盒方式1为随机0为全部',
+
+  PRIMARY KEY (`id`)
+
+) ENGINE = MYISAM DEFAULT CHARSET = utf8;
+
+
+
+CREATE TABLE IF NOT EXISTS `ims_stonefish_chailihe_userlist` (
+
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '规则id',
+
+  `weid` int(10) unsigned NOT NULL COMMENT '公众号ID',
+
+  `from_user` varchar(50) NOT NULL DEFAULT '' COMMENT '用户openid',
+
+  `avatar` varchar(512) NOT NULL DEFAULT '' COMMENT '微信头像',  
+
+  `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '微信昵称',
+
+  `liheid` int unsigned NOT NULL DEFAULT '0' COMMENT '礼盒id',
+
+  `mikaid` int unsigned NOT NULL DEFAULT '0' COMMENT '密卡id',  
+
+  `realname` varchar(20) NOT NULL DEFAULT '' COMMENT '真实姓名',
+
+  `mobile` varchar(20) NOT NULL DEFAULT '' COMMENT '联系电话',  
+
+  `qq` varchar(15) NOT NULL DEFAULT '' COMMENT '联系QQ号码',
+
+  `email` varchar(50) NOT NULL DEFAULT '' COMMENT '联系邮箱',
+
+  `address` varchar(255) NOT NULL DEFAULT '' COMMENT '联系地址',
+
+  `gender` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别',
+
+  `telephone` varchar(15) NOT NULL DEFAULT '' COMMENT '固定电话',
+
+  `idcard` varchar(30) NOT NULL DEFAULT '' COMMENT '证件号码',
+
+  `company` varchar(50) NOT NULL DEFAULT '' COMMENT '公司名称',
+
+  `occupation` varchar(30) NOT NULL DEFAULT '' COMMENT '职业',
+
+  `position` varchar(30) NOT NULL DEFAULT '' COMMENT '职位',
+
+  `sharenum` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分享量',
+
+  `sharetime` int unsigned NOT NULL COMMENT '最后分享时间',
+
+  `datatime` int unsigned NOT NULL COMMENT '注册时间',
+
+  `zhongjiang` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否中奖',  
+
+  `awardingid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '兑奖地址ID',
+
+  `awardingtypeid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '兑奖地址区域ID',
+
+  `openlihe` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否打开过',
+
+  `xuni` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否虚拟中奖',
+
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否禁止',
+
+  PRIMARY KEY (`id`)
+
+) ENGINE = MYISAM DEFAULT CHARSET = utf8;	
+
+
+
+CREATE TABLE IF NOT EXISTS `ims_stonefish_chailihe_data` (
+
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+
+  `weid` int(10) unsigned NOT NULL COMMENT '公众号ID',
+
+  `from_user` varchar(50) NOT NULL DEFAULT '' COMMENT '用户openid',
+
+  `fromuser` varchar(50) NOT NULL DEFAULT '' COMMENT '分享人openid',
+
+  `avatar` varchar(512) NOT NULL DEFAULT '' COMMENT '微信头像',
+
+  `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '微信昵称',
+
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '规则id',
+
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分享人UID',
+
+  `visitorsip` varchar(15) NOT NULL DEFAULT '' COMMENT '访问IP',
+
+  `visitorstime` int unsigned NOT NULL COMMENT '访问时间',
+
+  `viewnum` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '查看次数',
+
+  PRIMARY KEY (`id`)
+
+) ENGINE = MYISAM DEFAULT CHARSET = utf8;
+
+	]]></install>
+
+	<uninstall><![CDATA[
+
+drop table `ims_stonefish_chailihe_gift`;
+
+drop table `ims_stonefish_chailihe_reply`;
+
+drop table `ims_stonefish_chailihe_userlist`;
+
+drop table `ims_stonefish_chailihe_data`;
+
+drop table `ims_stonefish_chailihe_giftmika`;
+
+	]]></uninstall>
+
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
+
+</manifest>

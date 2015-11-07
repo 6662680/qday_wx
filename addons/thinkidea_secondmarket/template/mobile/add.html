@@ -1,0 +1,91 @@
+{template 'nav_new.inc'}
+<style>
+.alert {padding:6px}
+</style>
+<div class="container" style="margin-top:5px">
+    <div class="row">
+    <div class="col-xs-12">
+        <form action="" class="am-form" data-am-validator method="post" onsubmit="return checkform();">
+            <fieldset>
+                <legend>填写二手信息</legend>
+                <input type="hidden" name="token" value="{$_W['token']}" />
+                <input type="hidden" name="id"  value="{$good['id']}" />
+                <div class="am-form-group">
+                    <label for="title">标题：</label>
+                    <input type="text" id="title"  name="title" class="form-control" value="{$good['title']}" minlength="3" placeholder="输入标题（至少 3 个字符）" required/>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="rolex">成色</label>
+                    <select id="rolex" required name="rolex" >
+                        <option value='1' {if $good['rolex'] == 1}selected{/if}>9.9成新</option>
+                        <option value='2' {if $good['rolex'] == 2}selected{/if}>9.5成新</option>
+                        <option value='3' {if $good['rolex'] == 3}selected{/if}>9成新</option>
+                        <option value='4' {if $good['rolex'] == 4}selected{/if}>8成新</option>
+                        <option value='5' {if $good['rolex'] == 5}selected{/if}>7成新</option>
+                        <option value='6' {if $good['rolex'] == 6}selected{/if}>6成新</option>
+                    </select>
+                    <span class="am-form-caret"></span>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="pcate">分类</label>
+                    <select name="pcate"id="pcate">
+                        {loop $categorys $category}
+                        <option value="{$category['id']}" {if $good['pcate'] == $category['id']}selected{/if} {if $category['parentid'] == 0}disabled='disabled'{/if}>
+                        {if $category['parentid'] > 0}
+                        &nbsp;&nbsp;&nbsp;&nbsp;|—
+                        {/if}
+                        {$category['name']}
+                        </option>
+                        {/loop}
+                    </select>
+                    <span class="am-form-caret"></span>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="doc-vld-age-2">转让价：</label>
+                    <input type="number" name="price"  id="doc-vld-age-2" value="{$good['price']}" placeholder="输入价格" required />
+                </div>
+
+                <div class="am-form-group">
+                    <label>性别： </label>
+                    <label class="am-radio-inline">
+                        <input type="radio"  value="0" name="sex" required  checked> 男
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" name="sex" value="1"> 女
+                    </label>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="realname">联系人：</label>
+                    <input type="text"  name="realname" id="realname" class="form-control" value="{$good['realname']}" minlength="2" placeholder="输入姓名" required/>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="mobile">手机：</label>
+                    <input type="tel" id="mobile"  name="mobile" class="form-control" value="{$good['mobile']}" maxlength="11" placeholder="输入手机号" required/>
+                </div>
+
+                <div class="am-form-group">
+                    <label for="doc-vld-ta-2">商品描述(至少5个汉字)：</label>
+                    <textarea id="doc-vld-ta-2" minlength="5" name="description" maxlength="100"></textarea>
+                </div>
+                {if $_W['account']['level'] > 2}
+                {template 'thumb1'}
+                {else}
+                {template 'thumb2'}
+                {/if}
+                <button class="am-btn am-btn-secondary am-btn-block" type="submit">提交</button>
+            </fieldset>
+        </form>
+    </div>
+  </div>
+</div>
+<footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
+    <div class="am-footer-miscs ">
+        <p>由 <a href="#" title="{$_W['account']['name']}" target="_blank" class="">{$_W['account']['name']}</a> 提供技术支持</p>
+        <!--<p>CopyRight©2015 ThinkIdea Inc.</p>-->
+    </div>
+</footer>

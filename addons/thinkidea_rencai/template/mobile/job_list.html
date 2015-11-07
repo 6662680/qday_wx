@@ -1,0 +1,112 @@
+{template 'common_header'}
+    <div class="am-g" style="margin-top:5px">
+    	<!-- 搜索框 -->
+    	<div class="am-u-sm-12" style="padding-left:0px;background-color: #FFF;padding-top:5px;height: 45px">
+		    <form  action="" class="am-form" method="POST">
+		    	<div class="am-u-sm-10" style="padding-left: 0;padding-right: 0">
+		    		<input type="text" name="keyword" class="am-input-sm" placeholder="输入职位名称">
+		    	</div>
+		    	<div class="am-u-sm-2">
+		    		<input type="submit" type="submit" class="am-btn am-btn-success am-btn-sm" value="搜索" required />
+		    	</div>
+			</form>
+		</div>
+		
+		<!-- 显示检索条件 -->
+		<div class="am-u-sm-12" style="margin-top:5px;line-height:40px;background-color: #FFF">
+			条件：
+            <em>
+            {$cname}
+			{if $query_positiontype}&nbsp;&nbsp;+ {$config['positiontype'][$query_positiontype]}{/if}
+			{if $query_payroll}&nbsp;&nbsp;+ {$config['payroll'][$query_payroll]}{/if}
+			{if $keyword}&nbsp;&nbsp;+ "{$keyword}"{/if}
+            </em>
+		</div>
+
+        <!-- 下拉框搜索 -->
+		<div class="am-u-sm-12" style="margin-top:5px;background-color:#FFF">
+			<div class="am-avg-sm-3" style="padding: 5px 0">
+                <div class="am-dropdown" data-am-dropdown style="width:32%">
+                    <button class="am-btn am-btn-block am-btn-default am-dropdown-toggle" style="border-color:#FFF; background-color: #FFF" data-am-dropdown-toggle>职位 <span class="am-icon-caret-down"></span></button>
+                    <ul class="am-dropdown-content" id="JobCategory">
+                        <li><a href="{php echo $this->createMobileUrl('JobList', array('cid' => $parent_id));}">不限</a></li>
+                        {loop $offices $vo}
+                            <li>
+                                <a href="{php echo $this->createMobileUrl('JobList', array('cid' => $sub['id']));}">{$vo['name']}</a>
+                            <ul style="margin-top: 0;margin-bottom: 0;list-style:none">
+                            {loop $vo['sub'] $v}
+                                <li style=""><a href="{php echo $this->createMobileUrl('JobList', array('cid' => $v['id']));}">|-{$v['name']}</a></li>
+                            {/loop}
+                            </ul>
+                            </li>
+                        {/loop}
+                    </ul>
+                </div>
+
+                <div class="am-dropdown" data-am-dropdown style="width:32%">
+                    <button class="am-btn am-btn-block am-btn-default am-dropdown-toggle" style="border-color:#FFF; background-color: #FFF" data-am-dropdown-toggle>薪资 <span class="am-icon-caret-down"></span></button>
+                    <!--<a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">菜单 <span class="am-icon-caret-down"></span>-->
+                    <ul class="am-dropdown-content" id="Payroll">
+                    <li><a href="{php echo $this->createMobileUrl('JobList', array('cid' => $cid));}">不限</a></li>
+                    {loop $config['payroll'] $k $payroll}
+                    <li><a href="{php echo $this->createMobileUrl('JobList', array('cid' => $cid, 'payroll' => $k, 'positiontype' => $query_positiontype));}">{$payroll}</a></li>
+                    {/loop}
+                    </ul>
+                </div>
+
+                <div class="am-dropdown" data-am-dropdown style="width:32%">
+                    <button class="am-btn am-btn-block am-btn-default am-dropdown-toggle" style="border-color:#FFF; background-color: #FFF" data-am-dropdown-toggle>类型<span class="am-icon-caret-down"></span></button>
+                    <ul class="am-dropdown-content" id="Positiontype">
+                    <li><a href="{php echo $this->createMobileUrl('JobList', array('cid' => $cid));}">不限</a></li>
+                    {loop $config['positiontype'] $k $positiontype}
+                    <li><a href="{php echo $this->createMobileUrl('JobList', array('cid' => $cid, 'positiontype' => $k, 'payroll' => $query_payroll));}">{$positiontype}</a></li>
+                    {/loop}
+                    </ul>
+                </div>
+
+			</div>
+        </div>
+    </div>
+
+<div data-am-widget="list_news" class="am-list-news am-list-news-default" style="margin: 0">
+    <ul class="am-list">
+        {loop $job_lists $job}
+        <li class="am-g am-list-item-desced" style="padding-left: 1rem">
+            <a href="{php echo $this->createMobileUrl('JobShow', array('job_id' => $job['id']));}" class="am-list-item-hd ">
+                {$job['title']}&nbsp;<font color="red">{$config['payroll'][$job['payroll']]}</font>
+            </a>
+            <div class="am-list-item-text" style="font-size: 1.4rem">
+                {$companys[$job['mid']]['name']}
+                {if $companys[$job['mid']]['isauth'] == 0}
+                <span class="am-badge am-badge-default">未认证</span>
+                {else}
+                <span class="am-badge am-badge-success">已认证</span>
+                {/if}
+            </div>
+            <div class="am-list-item-text" style="max-height: 5.6rem;padding-bottom:0.2rem">
+                {loop $job['welfare'] $key $welfare}
+                <span type="button" class="am-btn am-btn-default am-btn-xs am-radius" style="background-color: #FFF;padding: 0.4rem;margin: 2px">{$config['welfare'][$welfare]}</span>
+                {/loop}
+            </div>
+        </li>
+        {/loop}
+    </ul>
+</div>
+
+    <script>
+        wx.ready(function () {
+            sharedata = {
+                title: "{$_W['mobile']['share']['zhao_title']}",
+                desc: "{$_W['mobile']['share']['zhao_desc']}",
+                link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('JobList')}",
+                imgUrl: "{$_W['attachurl']}{$_W['mobile']['share']['zhao_pic']}",
+                success: function(){
+                },
+                cancel: function(){
+                }
+            };
+            wx.onMenuShareAppMessage(sharedata);
+            wx.onMenuShareTimeline(sharedata);
+        });
+    </script>
+{template 'common_footer'}

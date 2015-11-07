@@ -1,0 +1,79 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" href="../addons/str_takeout/template/resource/css/main.css">
+<header>
+	<div class="search">
+		<input type="text" value="" id="searchTxt" placeholder="搜索店名">
+	</div>
+</header>
+<div class="container">
+	<section>
+		<ul class="store_list">
+			<div id="storeList"></div>
+			<li class="text-center" style="color:#ff510c" id="more" data-page="1"><i class="fa fa-plus-circle"></i> 加载更多数据</li>
+		</ul>
+	</section>
+	<footer class="order_btns">
+		<div class="fixed">
+			<a href="" class="on"><i class="ico_takeout"></i>叫外卖</a>
+			<a href="{php echo $this->createMobileUrl('myorder');}"><i class="ico_order"></i>我的订单</a>
+		</div>
+	</footer>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var pattern = /[`~!@#$%^&*()=|{}':;',\\.<>《》\/?~！@#￥……&*（）—|{}【】‘；：”“'。，、？]/;
+		$('#searchTxt').on('keydown', function(e){
+			if(e.keyCode == 13){
+				var search_content = $.trim($("#searchTxt").val());
+				var pattern = /[`~!@#$%^&*()=|{}':;',\\.<>《》\/?~！@#￥……&*（）—|{}【】‘；：”“'。，、？]/;
+				if(pattern.test(search_content)){
+					alert('搜索关键字不能包含特殊字符');
+					return false;
+				}			
+				$.post('{php echo $this->createMobileUrl("index")}', {'key' : search_content, 'page' : 1}, function(data){
+					var data = $.parseJSON(data);
+					if(data.code == 1) {
+						$('#storeList').html(data.str);
+						$('#more').attr('data-page', data.page);
+						$('#more').html('<i class="fa fa-plus-circle"></i> 加载更多数据');
+					} else {
+						$('#more').attr('data-page', -1);
+						$('#storeList').html(data.str);
+						$('#more').html('<i class="fa fa-info-circle"></i> 没有符合条件的记录');
+					}
+				});
+			}
+		});
+		$.post('{php echo $this->createMobileUrl("index")}', {'key' : '', 'page' : 1}, function(data){
+			var data = $.parseJSON(data);
+			if(data.code == 1) {
+				$('#page').attr('data-id', data.page);
+				$('#storeList').append(data.str);
+			}
+		});
+		$(document).on('click', '#more', function(){
+			var page = $(this).attr('data-page');
+			page = parseInt(page);
+			if(page == '-1') return false;
+			var key = $.trim($("#searchTxt").val());
+			$.post('{php echo $this->createMobileUrl("index")}', {'key' : key, 'page' : page + 1}, function(data){
+				var data = $.parseJSON(data);
+				if(data.code == 1) {
+					$('#storeList').append(data.str);
+					$('#more').attr('data-page', data.page);
+				} else {
+					$('#more').attr('data-page', -1);
+					$('#more').html('<i class="fa fa-info-circle"></i> 已加载全部数据');
+				}
+			});
+		});
+
+		$(document).on('click', '.url', function(){
+			location.href = $(this).attr('data-url');
+			return false; 
+		});
+
+	});
+</script>
+{template 'common'}
+{template 'common/footer'}

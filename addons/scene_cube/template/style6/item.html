@@ -1,0 +1,147 @@
+{template 'common/header'}
+<link href="../addons/scene_cube/style/css/global.css?&versin=12" rel="stylesheet" type="text/css" />
+
+<section class="p-store m-storeDetail">
+<div class="m-storeDetail-top s-bg-fff">
+<!--修改 by 场景应用-->
+<div class="top-con" style="margin-left:20px;">
+<div class="u-pathStore f-size16">
+<span class="path-icon icon-home css_sprite s-bg-pathH"></span>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">App Store</a>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">{$app['title']}</a>
+</div>
+</div>
+</div>
+<!--修改 by 场景应用-->
+<div class="m-storeDetail-con f-mag-t-20" style="margin-left:20px;">
+<div class="con-left m-cardScan" style="left: 0;">
+<div class="u-listShow f-card">
+<div class="item-top">
+<img alt="{$app['title']}" src="{php echo toimage($app['thumb'])}" />
+<span></span>
+<p class='f-tc'><img src="{php echo toimage($app['qrcode'])}" alt="二维码" /></p>
+</div>
+<div class="item-bottom s-bg-fff">
+<div class="tit">
+<h4 title="{$app['title']}">{$app['title']}</h4>
+<p title="{$app['author']}">by {$app['author']}</p>
+<span class="css_sprite s-bg-qr_icon icon-qr f-cur"></span>
+</div>
+<div class="con">
+<div class="con">
+<p>
+</p>
+<strong class="f-tr">【{$app['series']}】</strong>
+</div>
+</div>
+</div>
+</div>
+<p class="u-btn01 f-flow222 f-tc opacity j-detail-buy" data-free="" data-msg="">
+{if $isallow['status']==1}
+	{if $leftnum==0}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">已使用完</span> 购买 </a>
+	{else}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">制作场景</span>  </a>
+	{/if}
+{else}
+<a href="javascript:alert('请联系管理人员购买开通！')" class="f-size18 s-col-fff dingzhi">
+<span class="f-size18">{php echo $this->doFormatMoney($app['price'])}/年</span>购买 </a>
+{/if}
+</p>
+</div>
+<div class="con-right m-cardInfo s-bg-fff s-col-333">
+<div class="top">
+<h3 class="f-size24">{$app['title']}<span class="f-size16 s-col-999">by {$app['series']}</span></h3>
+<div class="u-share">
+<div class="jiathis_style_24x24 s-col-444 f-size14">
+分享到：
+<a class="jiathis_button_qzone css_sprite"></a>
+<a class="jiathis_button_tsina css_sprite"></a>
+<a class="jiathis_button_tqq css_sprite"></a>
+<a class="jiathis_button_weixin css_sprite"></a>
+</div>
+</div>
+</div>
+<div class="bd">
+<div class="bd-ui bd-txt">
+<h4 class="f-size18">界面预览<span class='s-col-666 f-size14'> / Preview</span></h4>
+<div class="imgBox">
+<ul style="width:1380px;">
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/53d0d4ec2eadd.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/53d0d4ef83676.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/53d0d4f21b2a7.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/53d0d4f456be3.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/53d0d4f6f2833.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/orm/tmp/53d0d522579db.png" style="width:100%;height:auto;">
+</li>
+</ul>
+</div>
+</div>
+<div class="bd-intro bd-txt">
+<h4 class="f-size18">基本介绍<span class='s-col-666 f-size14'> / Introduction</span></h4>
+<p>特斯拉重新定义的汽车，海尔重新定义了冰箱。当冰箱逐渐从电器变成了艺术品，这代表着我们对电器的要求越来越高，不仅要求实用，更主要的也是美观，更是一种品味的体现。在这个传播模式不断颠覆的今天，如何让这种划时代的产品匹配移动互联网时代做最好的传播？海尔的最新产品，朗度智能交互式冰箱。启用了云来LiveApp，通过小而美的场景应用以社交网络为基点，来与粉丝进行互动沟通和交流，掀起一场全新的传播热潮。</p>
+</div>
+<div class="bd-detail bd-txt">
+<h4 class="f-size18">详情介绍<span class='s-col-666 f-size14'> / Details</span></h4>
+<div>
+<p class="MsoNormal">
+<b>交互式冰箱，互动式场景<span><br />
+</span></b>首页擦一擦特效，海尔的交互式冰箱搭配互动性极高的最新场景应用，擦开冰雪，感受海尔最新产品带来的创新力量；<span></span>
+</p>
+<p class="MsoNormal">
+<b><br />
+</b><b>新时代的产品，更重要的品牌态度<span><br />
+</span></b>场景应用中的海尔，让产品有了活力，细节介绍与产品格调融于一体，在消费者进入之时，更多的是带着对于情感共鸣的过程中了解产品，这代表着一种新的生活方式；<span></span>
+</p>
+<p class="MsoNormal">
+<b><br />
+</b><b>将产品内容变成话题性的内容，植入到消费者的场景中<span><br />
+</span></b>“<span>TA</span>依然安静”“<span>TA</span>不在单一”等等场景，让产品变成了话题，一幕幕的连接，让产品的每一环节一气呵成的呈现你的面前；<span></span>
+</p>
+<p class="MsoNormal">
+<b><br />
+</b><b>视频与分享的多层面了解新事物，信息越来越对称<span><br />
+</span></b>对于喜欢新事物的你来说，这再妙不过了。喜欢新奇家用电器的还可以通过这里把它直接分享给好友或者朋友圈；<span></span>
+</p>
+<p class="MsoNormal">
+<b><br />
+</b><b>引导关注公众号，完成完整的传播闭环<span><br />
+</span></b>未来，人们对于碎片化信息的要求会越来越高，过碎片化信息建立一个以产品为中心的用户社群是重中之重。对此，我们在最后直接让用户回到公众号去，可以集中的与粉丝直接互动。<b><span></span></b>
+</p>
+<p class="MsoNormal">
+<br />
+</p> </div>
+</div>
+{template 'contact'}
+</div>
+</div>
+</div>
+</section>
+ 
+ 
+ <script>
+
+$(".icon-qr").hover(function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.addClass('show');
+},function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.removeClass('show');	
+});
+</script>
+ {template 'common/footer'}

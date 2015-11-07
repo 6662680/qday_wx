@@ -1,0 +1,30 @@
+    <div class="table-responsive" style="height:300px;overflow-Y: auto; overflow-X:hidden;">
+	    <table class="table" style="min-width:568px;">
+				<tr>
+				    <td style="border-top:none;vertical-align:middle;"><strong>用户ID</strong> {$profile['uid']}</td>
+				    <td style="border-top:none;vertical-align:middle;"><strong>姓名</strong> {if $profile['realname']} {$profile['realname']} {else} 未完善 {/if}</td>
+				    <td style="border-top:none;vertical-align:middle"><strong>手机</strong> {if $profile['mobile']} {$profile['mobile']} {else} 未完善 {/if}</td>
+				</tr>
+		</table>
+		<table class="table" style="min-width:568px;">
+				<tr>
+					<th style="border-top:none;vertical-align:middle;width:50px;">好友</th>
+					<th style="border-top:none;vertical-align:middle;">昵称</th>
+					<th style="border-top:none;vertical-align:middle;width:100px;">助力量</th>
+					<th style="border-top:none;vertical-align:middle;width:120px;">访问IP</th>
+					<th style="border-top:none;vertical-align:middle;width:150px;">访问时间</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $share $sharerow}
+				<tr>
+					<td><img src="{$sharerow['avatar']}" width="30"></td>
+					<td>{$sharerow['nickname']}</td>
+					<td>{$sharerow['viewnum']}</td>
+					<td>{$sharerow['visitorsip']}</td>
+					<td>{php echo date('Y/m/d H:i',$sharerow['visitorstime']);}</td>
+				</tr>
+				{/loop}
+			</tbody>
+		</table>
+	</div>

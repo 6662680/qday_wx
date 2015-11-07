@@ -1,0 +1,193 @@
+{template 'common/header'}
+<div class="main">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="./index.php?c=platform&amp;a=reply&amp;m=thinkidea_secondmarket">微人才参数设置</a></li>
+	</ul>
+	
+    <form class="form-horizontal form" id="form2" action="" method="post">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">薪资</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" name="payroll" rows="5">{php echo $this->module['config']['payroll']}</textarea>
+                </div>
+                <div><em>一行一条，下同</em></div>
+            </div>
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">福利</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" name="welfare" rows="5">{php echo $this->module['config']['welfare']}</textarea>
+                </div>
+            </div>
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">学历</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" name="educational" rows="5">{php echo $this->module['config']['educational']}</textarea>
+                </div>
+            </div>
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">职位类型</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" name="positiontype" rows="5">{php echo $this->module['config']['positiontype']}</textarea>
+                </div>
+            </div>
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">工作经验</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" name="workexperience" rows="5">{php echo $this->module['config']['workexperience']}</textarea>
+                </div>
+            </div>
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">公司性质</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" name="companytype" rows="5">{php echo $this->module['config']['companytype']}</textarea>
+                </div>
+            </div>
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">公司规模</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" name="scale" rows="5">{php echo $this->module['config']['scale']}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">企业用户是否审核</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="isopenaudit">
+                        <option value="1" {if $settings['isopenaudit'] == 1}selected{/if}>是</option>
+                        <option value="0" {if isset($settings['isopenaudit']) && $settings['isopenaudit'] == 0}selected{/if}>否</option>
+                    </select>
+                </div>
+                <em>“是”：通过审核才能发布招聘信息；“否”：无须审核，招聘信息直接通过显示。</em>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">是否开启首页“热门职位推荐”</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="isopenindexhot">
+                        <option value="1" {if $settings['isopenindexhot'] == 1}selected{/if}>是</option>
+                        <option value="0" {if isset($settings['isopenindexhot']) && $settings['isopenindexhot'] == 0}selected{/if}>否</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">首页“置顶职位”条数</label>
+                <div class="col-sm-4">
+                    <input type="text" value="{php echo $this->module['config']['indextopnums']}" class="form-control" name="indextopnums">
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">首页“热门职位推荐”条数</label>
+                <div class="col-sm-4">
+                    <input type="text" value="{php echo $this->module['config']['indexhotnums']}" class="form-control" name="indexhotnums">
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">首页“最新招聘职位”条数</label>
+                <div class="col-sm-4">
+                    <input type="text" value="{php echo $this->module['config']['indexlastnums']}" class="form-control" name="indexlastnums">
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">首页“名企推荐”条数</label>
+                <div class="col-sm-4">
+                    <input type="text" value="{php echo $this->module['config']['indexcompanynums']}" class="form-control" name="indexcompanynums">
+                </div>
+            </div>
+
+        </div>
+
+        <!--<div class="panel panel-default">-->
+            <!--<div class="panel-heading">首页分类一行几列？</div>-->
+            <!--<div class="panel-body">-->
+                <!--<label class="col-sm-4 control-label">几列？</label>-->
+                <!--<div class="col-sm-4">-->
+                    <!--<input type="text" value="{php echo $this->module['config']['colspan']}" class="form-control" name="colspan">-->
+                    <!--<em>考虑到分类的名字长短问题，容易出现折行，请自行设置(此设置项只对<font color="red">分类</font>有效)</em>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    	<div class="panel panel-default">
+	        <div class="panel-body">
+	        	<label class="col-sm-4 control-label">请上传你公众号的二维码</label>
+	            <div class="col-sm-4">
+	                {php echo tpl_form_field_image('qrcode', $settings['qrcode']);}
+	            </div>
+	        </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-body">
+            	<label class="col-sm-4 control-label">你的联系电话</label>
+             	<div class="col-sm-4">
+                	<input type="text" value="{php echo $this->module['config']['telephone']}" class="form-control" name="telephone">
+	             </div>
+            </div>
+        </div>  
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+            	<label class="col-sm-4 control-label">企业查看简历数初始免费数</label>
+             	<div class="col-sm-4">
+                	<input type="text" value="{php echo $this->module['config']['viewresumenums']}" class="form-control" name="viewresumenums">
+	             </div>
+            </div>
+        </div>  
+        
+        <div class="panel panel-default">
+            <div class="panel-body">
+            	<label class="col-sm-4 control-label">是否开启营业执照</label>
+             	<div class="col-sm-4">
+	              <select class="form-control" name="isopenlicense">
+	                <option value="1" {if $settings['isopenlicense'] == 1}selected{/if}>是</option>
+	                <option value="0" {if $settings['isopenlicense'] == 0}selected{/if}>否</option>
+	              </select>
+	             </div>
+            </div>
+            
+             <div class="panel-body">
+            	<label class="col-sm-4 control-label">营业执照/企业LOGO/企业封面允许上传最大值</label>
+             	<div class="col-sm-4">
+	              <input type="text" value="{php echo $this->module['config']['maxfilesize']}" class="form-control" name="maxfilesize">
+	              <p><em>0:为不限制。默认2M。单位：M，直接输入数字</em></p>
+	             </div>
+                <div class="col-sm-4">
+                    <em>此处需要服务器配置支持，否则上传报错。</em>
+                </div>
+            </div>           
+        </div> 
+
+        <div class="panel panel-default">
+           <div class="panel-body">
+                <label class="col-sm-4 control-label">头像允许上传最大值</label>
+                <div class="col-sm-4">
+                  <input type="text" value="{php echo $this->module['config']['headimgurlsize']}" class="form-control" name="headimgurlsize">
+                  <p><em>0:为不限制。默认2M。单位：M，直接输入数字</em></p>
+                 </div>
+            </div> 
+            
+            <div class="panel-body">
+                <label class="col-sm-4 control-label">头像尺寸宽度</label>
+                <div class="col-sm-4">
+                    <input type="text" value="{php echo $this->module['config']['headimgurlwidth']}" class="form-control" name="headimgurlwidth">
+                    <p><em>系统将按此尺寸进行缩略。建议尺寸为200。</em></p>
+                    <p><em>(Tips:头像尺寸：最好是正方形 200X200，最清晰的头像，但具体取决于用户上传)</em></p>
+                 </div>
+            </div>
+        </div>  
+
+        <div class="form-group col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+        </div>
+    </form>
+</div>
+{template 'common/footer'}

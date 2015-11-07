@@ -1,0 +1,43 @@
+{template 'common/header'}
+<style>
+    header .am-header-title{line-height: 49px;  }
+</style>
+<div class="form-group">
+    <div class="input-group">
+        <span class=""><em>*</em>照片1</span>
+    </div>
+    {php echo tpl_form_field_image('thumb1', $good['thumb1'], '', array('width' => 400, 'height' => 120, 'thumb'  => true));}
+</div>
+
+<div class="form-group">
+    <div class="input-group">
+        <span class=""><em>*</em>照片2</span>
+    </div>
+    {php echo tpl_form_field_image('thumb2', $good['thumb2']);}
+</div>
+
+<div class="form-group">
+    <div class="input-group">
+        <span class=""><em>*</em>照片3</span>
+    </div>
+    {php echo tpl_form_field_image('thumb3', $good['thumb3']);}
+</div>
+<script>
+    function checkform() {
+        var mobile = $("input[name='mobile']").val();
+        if(mobile == ''){
+            alert('请输入手机号');
+            return false;
+        }else if(mobile.search(/^([0-9]{11})?$/) == -1) {
+            alert('请输入正确的手机号码！');
+            return false;
+        }
+
+        if($("input[name='thumb1']").val() == ''){
+            alert('请输上传照片');
+            return false;
+        }
+
+        // $('#image').val(images.serverId);
+    }
+</script>

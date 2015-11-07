@@ -1,0 +1,89 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" href="../addons/str_takeout/template/resource/css/main.css">
+<script src="../addons/str_takeout/template/resource/js/dialog.js"></script>
+<div class="container">
+	<section class="pay_wrap">
+		<div class="menu_tt"><h2>现有订单<strong style="color:#ff510c"> ({$now_count}单)</strong></h2></div>
+		<ul class="my_order">
+			{if !empty($now)}
+				{loop $now $row}
+					<li>
+						<a href="{php echo $this->createMobileUrl('orderdetail', array('id' => $row['id'], 'sid' => $row['sid']))}">
+							<div>
+								{if $row['status'] == 2}
+									<div class="ico_status pending"><i></i>待付款</div>
+								{elseif $row['status'] == 3}
+									<div class="ico_status inhand"><i></i>待送餐</div>
+								{elseif $row['status'] == 4}
+									<div class="ico_status confirm"><i></i>待收餐</div>
+								{elseif $row['status'] == 6}
+									<div class="ico_status confirm"><i></i>送餐中</div>
+								{/if}
+							</div>
+							<div>
+								<h3 class="highlight">{$row['title']}</h3>
+								<p>{$row['num']}份/￥{$row['price']}</p>
+								<div>{php echo date('Y-m-d H:i', $row['addtime'])}</div>
+							</div>
+						</a>
+					</li>
+				{/loop}
+				<li class="text-center" style="color:#ff510c;height:35px;line-height:35px;" id="now-more" data-id="{$now_minid}" data-type="now"><i class="fa fa-plus-circle"></i> 加载更多数据</li>			
+			{/if}
+		</ul>
+		<div class="menu_tt"><h2>历史订单<strong style="color:#ff510c"> ({$history_count}单)</strong></h2></div>
+		<ul class="my_order">
+			{if !empty($history)}
+				{loop $history $row}
+					<li>
+						<a href="{php echo $this->createMobileUrl('orderdetail', array('id' => $row['id'], 'sid' => $row['sid']))}">
+							<div>
+								{if $row['status'] == 1}
+									<div class="ico_status complete"><i></i>已完成</div>
+								{elseif $row['status'] == 5}
+									<div class="ico_status cancle"><i></i>已取消</div>
+								{/if}
+							</div>
+							<div>
+								<h3 class="highlight">{$row['title']}</h3>
+								<p>{$row['num']}份/￥{$row['price']}</p>
+								<div>{php echo date('Y-m-d H:i', $row['addtime'])}</div>
+							</div>
+						</a>
+					</li>
+				{/loop}
+				<li class="text-center" style="color:#ff510c;height:35px;line-height:35px;" id="history-more" data-id="{$history_minid}" data-type="history"><i class="fa fa-plus-circle"></i> 加载更多数据</li>			
+			{/if}
+		</ul>
+	</section>
+	<footer class="order_btns">
+		<div class="fixed">
+			<a href="{php echo $this->createMobileUrl('index');}"><i class="ico_takeout"></i>叫外卖</a>
+			<a href="{php echo $this->createMobileUrl('myorder');}" class="on"><i class="ico_order"></i>我的订单</a>
+		</div>
+	</footer>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$('#now-more, #history-more').click(function(){
+			var minid = parseInt($(this).attr('data-id'));
+			var type = $(this).attr('data-type');
+			var _this = $(this);
+			if(minid > 0) {
+				$.post("{php echo $this->createMobileUrl('myorder')}", {'minid' : minid, 'type' : type}, function(data) {
+					data = $.parseJSON(data);
+					_this.attr('data-id', data.minid);
+					_this.before(data.str);
+					if(!data.minid) {
+						_this.html('<i class="fa fa-info-circle"></i> 已加载全部数据');
+					}
+				});
+			}
+		});
+	});
+	document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+		WeixinJSBridge.call('hideOptionMenu');
+	});
+</script>
+{template 'common'}
+{template 'common/footer'}

@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+	
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" type="text/css" href="./resource/components/kindeditor/themes/default/default.css?v=2014-05-21" />
+ <script type="text/javascript" src="http://api.map.baidu.com/api?key=24ffad3855e675265336a4cfb46d32b4&amp;v=1.1&amp;services=true"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/jQuery.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/bootstrap_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/mini_audio_player/jquery_jplayer_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/mini_audio_player/jquery_mb_miniPlayer.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/daterangepicker/daterangepicker.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/daterangepicker/moment_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/form/jquery_form_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/validation/jquery_validate_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/plugins/validation/jquery_validate_methods.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/inside.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/resource2.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/src/mulresources.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/components/kindeditor/kindeditor-min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/components/kindeditor/lang/zh_CN.js?v=2014-05-21"></script>
+
+ <title>高级微场景后台设置</title>
+        <!--[if IE 7]>
+            <link href="../addons/scene_cube/css/font_awesome_ie7.css?v=2014-05-21" rel="stylesheet" />
+        <![endif]-->
+        <!--[if lte IE 8]>
+            <script src="../addons/scene_cube/js/excanvas_min.js?v=2014-05-21"></script>
+        <![endif]-->
+        <!--[if lte IE 9]>
+            <script src="../addons/scene_cube/js/watermark.js?v=2014-05-21"></script>
+        <![endif]-->
+    </head>
+	<body>
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/bootstrap_min.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/bootstrap_responsive_min.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/todc_bootstrap_button.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/plugins/daterangepicker/daterangepicker.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/style.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/resource.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/themes.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/plugins/mini_audio_player/miniplayer.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/css/inside.css?v=2014-05-21" />
+<div id="main">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="box">
+                    <div class="box-title">
+                        <div class="span12">
+                            <h3><i class="icon-edit"></i>新增微场景</h3>
+                        </div>
+                    </div>
+                    <form action="" method="post" class="form-horizontal form-validate">
+                         <div class="box-content">
+                                <div class="control-group">
+                                    <label for="title" class="control-label">微场景名称：</label>
+                                    <div class="controls">
+                                        <input type="text" name="title" id="title" class="input-medium" data-rule-required="true" data-rule-maxlength="50"><span class="maroon">*</span>
+                                        <span class="help-inline">不能超过50个字</span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="weixin" class="control-label">微场景有效期：</label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                        <input type="text" name="valid_time" id="valid_time" class="daterangepick input-xlarge" value="" readonly />
+                                        <span class="add-on"><i class="icon-calendar"></i></span>
+                                    </div>
+
+                                    </div>
+                                </div> 
+                               
+                                <div class="control-group">
+                                    <label for="wxname" class="control-label">图文封面：</label>
+                                    <div class="controls">
+                                        <div id="image_uploads" class=""><img upload="image-single" style="max-height:50px;" src="http://318410.m.yvkj.cn/manual/img/default_cover.jpg" alt="http://318410.m.yvkj.cn/manual/img/default_cover.jpg" /><input type="hidden" value="http://318410.m.yvkj.cn/manual/img/default_cover.jpg" name="conver" id="conver" /><span class="help-inline"><button name="button" class="btn select_img" type="button">选择封面</button><span class="help-inline">建议尺寸:宽540像素,高300像素或等比图片</span></span></div>
+                                     </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="wxname" class="control-label">图文简介：</label>
+                                    <div class="controls">
+                                        <textarea class="input-xxlarge" rows="4" name="summary"></textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="wxname" class="control-label">分享标题设置：</label>
+                                    <div class="controls">
+                                        <input type="text" name="share_title" id="share_title" class="input-medium" data-rule-required="true" data-rule-maxlength="25"><span class="maroon">*</span>
+                                        <span class="help-inline">不能超过25个字符</span>
+                                    </div>
+                                </div>
+								<div class="control-group">
+                                    <label for="wxname" class="control-label">分享内容设置：</label>
+                                    <div class="controls">
+                                        <textarea class="input-xxlarge" rows="4" name="share_content" data-rule-required="true" data-rule-maxlength="500">{$item['share_content']}</textarea><span class="maroon">*</span>
+                                        <span class="help-inline">不能超过500个字符</span>
+                                    </div>
+                                </div>
+
+                                <!--分享跳转 开始 -->
+                                <div class="control-group hide">
+                                    <label class="control-label">分享跳转：</label>
+                                    <div id="res_block1" class="js_res_block">
+                                        <!--分享跳转 类型选择 开始 -->
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <select  class="input-medium js_type" name="share_cb_select">
+                                                    <option value="0">请选择</option>
+                                                    <option value="link">链接</option>
+                                                    <option value="tel">电话</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--分享跳转 类型选择 结束 -->
+
+                                        <!-- 分享跳转 按钮图关联单链接开始 -->
+                                        <div id="r_link" class="control-group r-module hide js_link" >
+                                            <div class="control-group">
+                                                <label class="control-label" for="source_url">页面URL</label>
+                                                <div class="controls">
+                                                    <input type="text" id="source_url" class="input-xlarge" name="share_cb_url" data-rule-required="true" data-rule-url="true" kl_vkbd_parsed="true">
+                                                    <span class="maroon">*</span><span class="help-inline">(必填,必须是正确的URL格式)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 分享跳转 按钮图关联单链接结束 -->
+
+                                        <!-- 分享跳转 按钮图关联电话开始 -->
+                                        <div id="r_tel" class="control-group r-module hide js_tel" >
+                                            <div class="control-group">
+                                                <label class="control-label" for="tel">电话号码</label>
+                                                <div class="controls">
+                                                    <input type="text" id="tel" class="input-large" name="share_cb_tel" data-rule-required="true" data-rule-phone="true" kl_vkbd_parsed="true">
+                                                    <span class="maroon">*</span><span class="help-inline">(必填,必须是正确的号码)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 分享跳转 按钮图关联电话结束 -->
+                                    </div>
+                                </div>
+                                <!--分享跳转 结束 -->
+
+                                <!-- 开场画面 第一屏 开始 -->
+                                <div class="js_scene_picture">
+                                    <div class="control-group">
+                                        <label for="wxname" class="control-label">微场景开场画面：</label>
+                                        <!-- 开场画面 类型 开始 -->
+                                        <div class="controls">
+                                            <select class="inpit-medium js_scene_style_select valid" name="first_type" data-rule-required="true">
+                                                <option value="1" data-type="pure">纯图片式</option>
+                                                <option value="2" data-type="dim">刮卡图片式</option>
+                                                <option value="3" data-type="btn" >带按钮图片式</option>
+                                                <option value="4" data-type="video">视频</option>
+                                            </select>
+                                            <span for="first_type" class="help-block error valid"></span>
+                                        </div>
+                                        <!-- 开场画面 类型 结束 -->
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="" class="control-label">画面内容：</label>
+                                        <div class="controls">
+                                            <!-- 开场画面 刮刮图上传 开始 -->
+                                            <div class="js_scene_style js_dim hide">
+                                                <div id="first_dim_image_uploads" class=""><img upload="image-single" style="max-height:50px;" src="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" alt="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" /><input type="hidden" value="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" name="first_dim" id="first_dim" /><span class="help-inline"><button name="button" class="btn select_img" type="button">传图</button><span class="help-inline">（建议尺寸:宽640像素,高960像素或等比图片）</span></span></div>
+                                            </div>
+                                            <!-- 开场画面 刮刮图上传 结束 -->
+
+                                            <!-- 开场画面 纯图上传 开始 -->
+                                            <div class="js_scene_style js_pure">
+                                                <div id="first_pure_image_uploads" class=""><img upload="image-single" style="max-height:50px;" src="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" alt="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" /><input type="hidden" value="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" name="first_pure" id="first_pure" /><span class="help-inline"><button name="button" class="btn select_img" type="button">传图</button><span class="help-inline">（建议尺寸:宽640像素,高960像素或等比图片）</span></span></div>
+                                            </div>
+                                            <!-- 开场画面 纯图上传 结束 -->
+
+                                            <!-- 开场画面 按钮图 开始 -->
+                                            <div class="js_scene_style js_btn hide">
+                                                <div class="margin-top10 controls">
+                                                    <div id="first_btn_bg_image_uploads" class=""><img upload="image-single" style="max-height:50px;" src="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" alt="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" /><input type="hidden" value="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" name="first_btn_bg" id="first_btn_bg" /><span class="help-inline"><button name="button" class="btn select_img" type="button">传背景图</button><span class="help-inline">（建议尺寸:宽640像素,高960像素或等比图片）</span></span></div>
+                                                 </div>
+                                                <div class="margin-top10 controls">
+                                                    <div id="first_btn_btn_image_uploads" class="">
+                                                        <img upload="image-single" style="max-height:50px;" src="http://318410.m.yvkj.cn/manual/img/default_btn.png" alt="http://318410.m.yvkj.cn/manual/img/default_btn.png" />
+                                                        <input type="hidden" value="http://318410.m.yvkj.cn/manual/img/default_btn.png" name="first_btn_btn" id="first_btn_btn" />
+                                                        <span class="help-inline"><button name="button" class="btn select_img" type="button">传按钮图</button></span></div>
+												</div>
+                                                <select class="input-medium margin-top10" name="first_btn_position">
+                                                    <option value="1">按钮靠上</option>
+                                                    <option value="2">按钮居中</option>
+                                                    <option value="3">按钮靠下</option>
+                                                </select>
+                                            </div>
+                                            <!-- 开场画面 按钮图 结束 -->
+
+                                            <!-- 开场画面 视频图 开始 -->
+                                            <div class="js_scene_style js_video hide">
+                                                <div class="margin-top10 controls">
+                                                    <div id="first_video_bg_image_uploads" class=""><img upload="image-single" style="max-height:50px;" src="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" alt="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" /><input type="hidden" value="http://318410.m.yvkj.cn/manual/img/default_bg.jpg" name="first_video_bg" id="first_video_bg" /><span class="help-inline"><button name="button" class="btn select_img" type="button">传背景图</button><span class="help-inline">（建议尺寸:宽640像素,高960像素或等比图片）</span></span></div>
+                                   </div>
+                                                <div class="margin-top10 controls">
+                                                    <select class="input-medium" name="first_video_btn" data-rule-required="true">
+                                                        <option value="1">绿色特效播放按钮</option>
+                                                        <option value="2">长方形播放按钮</option>
+                                                        <option value="3">圆形播放按钮</option>
+                                                   </select>
+                                                </div>
+                                            </div>
+                                            <!-- 开场画面 视频图 结束 -->
+                                        </div>
+                                    </div>
+                                    <div class="control-group js_scene_style js_btn hide">
+                                        <label for="" class="control-label">链接：</label>
+                                        <div id="res_block3" class="js_res_block">
+                                            <!-- 开场画面 按钮图 连接类型选择 开始 -->
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <select class="input-medium js_type" name="first_btn_select">
+                                                        <option value="">请选择</option>
+                                                        <option value="link">链接</option>
+                                                        <option value="tel">电话</option>
+                                                        <!--<option value="map">导航</option>-->
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- 开场画面 按钮图 连接类型选择 结束 -->
+
+                                            <!-- 开场画面 按钮图 单链接 开始 -->
+                                            <div class="control-group r-module hide js_link" >
+                                                <div class="control-group">
+                                                    <label class="control-label" for="source_url">页面URL</label>
+                                                    <div class="controls">
+                                                        <input type="text" id="source_url" class="input-xlarge" name="first_btn_url" data-rule-required="true" data-rule-url="true" kl_vkbd_parsed="true">
+                                                        <span class="maroon">*</span><span class="help-inline">(必填,必须是正确的URL格式)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 开场画面 按钮图 单链接 结束 -->
+
+                                            <!-- 开场画面 按钮图 电话链接 开始 -->
+                                            <div class="control-group r-module hide js_tel" >
+                                                <div class="control-group">
+                                                    <label class="control-label" for="tel">电话号码</label>
+                                                    <div class="controls">
+                                                        <input type="text" id="tel" class="input-large" name="first_btn_tel" data-rule-required="true" data-rule-phone="true" kl_vkbd_parsed="true">
+                                                        <span class="maroon">*</span><span class="help-inline">(必填,必须是正确的号码)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 开场画面 按钮图 电话链接 结束 -->
+
+                                        </div>
+                                    </div>
+
+                                    <!-- 开场画面 视频图 链接 开始 -->
+                                    <div class="control-group js_scene_style js_video hide">
+                                        <label for="" class="control-label">链接：</label>
+                                        <div class="controls">
+                                            <input type="text" class="input-xlarge" name="first_video_url" placeholder="请输入视频链接" data-rule-required="true" data-rule-url="true" kl_vkbd_parsed="true">
+                                            <span class="help-block">暂时只支持MP4、ogv、webm格式的视频,视频链接格式为http://您的域名/视频文件名.mp4(或ogv/webm)</span>
+                                        </div>
+                                    </div>
+                                    <!-- 开场画面 视频图 链接 结束 -->
+                                </div>
+                                <!-- 开场画面 第一屏 结束 -->
+
+                             
+         
+                                <div class="control-group">
+                                    <label for="wxname" class="control-label">微场景效果：</label>
+                                    <div class="controls">
+                                       <select name="page_effect" class="input-medium">
+                                            <option value="1">上下滑动</option>
+                                            <option value="2">左右滑动</option>
+                                       </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="" class="control-label">背景音乐：</label>
+                                    <div class="controls clearfix">
+                                        <label class="radio inline"><input type="radio" name="bg_music_switch" value="1" class="js_music_open" checked/>开启</label>
+                                        <label class="radio inline"><input type="radio" name="bg_music_switch" value="2" class="js_music_close" />关闭</label>
+                                    </div>
+                                    <div class="controls margin-top10 js_music_div">
+                                        <div id="image_upload_"><div class="inline mp3"><a id="m1" href="http://video.yvkj.cn/wedding/YouGotMe.mp3" class="audio {skin:&#039;blue&#039;}" style="display:none;">YouGotMe.mp3</a></div><input type="hidden" value="http://video.yvkj.cn/wedding/YouGotMe.mp3" name="bg_music_url" id="bg_music_url" /><span class="help-inline"><button name="button" class="btn addmp3" type="button">选择音乐</button></span><span class="help-inline">(保证浏览网页的加载速度,上传音乐最大为<span class="red">3MB</span>)</span></div>
+                                     </div>
+									 <script>
+											/*KindEditor.ready(function(K){
+												var editor = KindEditor.editorObj || K.editor({
+													themeType: 'simple',
+													allowFileManager: true,
+													uploadJson : "./index.php?act=attachment&do=upload",
+													fileManagerJson : "./index.php?act=attachment&do=manager",
+												});
+												var image_upload_audio_index = 0;
+
+												K('#image_upload button.addmp3').click(function(e){
+													editor.loadPlugin('mp3', function(){
+														editor.plugin.imageDialog({
+															mp3Url: $(e.target).parent().prev().val(),
+															clickFn: function(url, title, width, height, border, align){
+																$(e.target).parent().prev().val(url);
+
+																image_upload_audio_index++;
+																var mp3_object = $(e.target).parent().prev().prev();
+																var audio_object = mp3_object.find('a.audio');
+																var  audio_filename = url.match(/[^\/]*$/)[0];
+																if(audio_filename.lastIndexOf('.') > -1){
+																	audio_filename = audio_filename.substring(0, audio_filename.lastIndexOf('.'));
+																}
+
+																if(false && 0 < audio_object.length){
+																	audio_object.mb_miniPlayer_changeFile({mp3:url}, audio_filename);
+																	audio_object.mb_miniPlayer_play();
+																}else{
+																	while(0 < $('#mimage_upload_audio_index').length){
+																		image_upload_audio_index++;
+																	}
+																	var linkButton = '<a id="m{1}" class="audio {skin:\'blue\'}" href="{0}">{2}</a> ';
+																	mp3_object.html(linkButton.format(url, image_upload_audio_index, audio_filename));
+																	mp3_object.find('a.audio').mb_miniPlayer();
+																	mp3_object.find('#mp_m1').css({'display':'inline-block', 'vertical-align':'middle'});
+																	var index = mp3_object.find('a.audio').attr('id');
+																	setTimeout(function(){
+																		$('#'+index).mb_miniPlayer_play();
+																	}, 1000);
+																}
+
+																editor.hideDialog();
+															}
+														});
+													});
+												});
+											});*/
+										</script>
+                                </div>
+                                <div class="control-group">
+                                    <label for="wxname" class="control-label">音乐图标及效果：</label>
+                                    <div class="controls">
+                                       <select name="bg_music_icon" class="input-medium">
+                                            <option value="1">音乐旋转效果</option>
+                                            <option value="2">音阶效果</option>
+                                       </select>
+                                    </div>
+                                </div>
+								<div class="control-group">
+                                    <label for="" class="control-label">统计代码：</label>
+                                    <div class="controls">
+                                        <textarea class="input-xxlarge" rows="4" name="tongji" data-rule-maxlength="1000">{$item['tongji']}</textarea><span class="maroon">*</span>
+                                        <span class="help-inline">不能超过1000个字符</span>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="form-actions" style="margin-left: 178px;">
+                                <button type="submit" class="btn btn-primary">保存</button>
+                                <button type="button" class="btn" onclick="window.history.go(-1)">取消</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+$(function () {
+    $(".js_music_close").on("change",function(){
+        $(".js_music_div").toggleClass('hide',$(this).prop("checked"));
+    });
+    $(".js_music_open").on("change",function(){
+        $(".js_music_div").toggleClass('hide',!$(this).prop("checked"));
+    });
+
+    $(".js_scene_picture").each(function(){
+        var type=$(this).find(".js_scene_style_select option:selected").data("type");
+        $(this).find(".js_scene_style").addClass('hide');
+        $(this).find(".js_"+type).removeClass('hide');
+    });
+
+    $(document).on("change",".js_scene_style_select",function(){
+        var $p=$(this).parents(".js_scene_picture"),type=$(this).find("option:selected").data("type");
+        $p.find(".js_scene_style").addClass('hide');
+        $p.find(".js_"+type).removeClass('hide');
+    });
+
+
+    var resources1 = MulResources.create({//分享跳转
+        "id":"res_block1",
+        "wuid":262,
+        "getbusiness_path":"/plus/ajaxform.php",//业务模块
+        "car_path":"/plus/activity.php",//汽车
+        "act_path":"/microsite/getactivity",//活动
+        "estate_path":"/microsite/getbusiness"//房产
+    });
+    var inss1 = MulResources.instance['res_block1'];
+    inss1.result = inss1.result || {};
+    inss1.result.wuid = 262;
+
+
+    var resources2 = MulResources.create({//收藏跳转
+        "id":"res_block2",
+        "wuid":262,
+        "getbusiness_path":"/plus/ajaxform.php",//业务模块
+        "car_path":"/plus/activity.php",//汽车
+        "act_path":"/microsite/getactivity",//活动
+        "estate_path":"/microsite/getbusiness"//房产
+    });
+    var inss2 = MulResources.instance['res_block2'];
+    inss2.result = inss2.result || {};
+    inss2.result.wuid = 262;
+
+
+    var resources3 = MulResources.create({//开场画面
+        "id":"res_block3",
+        "wuid":262,
+        "getbusiness_path":"/plus/ajaxform.php",//业务模块
+        "car_path":"/plus/activity.php",//汽车
+        "act_path":"/microsite/getactivity",//活动
+        "estate_path":"/microsite/getbusiness"//房产
+    });
+    var inss3 = MulResources.instance['res_block3'];
+    inss3.result = inss3.result || {};
+    inss3.result.wuid = 262;
+
+
+
+    /*单resource 用于显示地图
+    var resource = Resource.create({
+        "id":"res_block",
+        "wuid":262,
+        "map":{
+            "lng": 116.331398,
+            "lat": 39.897445,
+            "adr": "北京市丰台区马连道北路"
+        },
+        "getbusiness_path":"/plus/ajaxform.php",//业务模块
+        "car_path":"/plus/activity.php",//汽车
+        "act_path":"/microsite/getactivity",//活动
+        "estate_path":"/microsite/getbusiness"//房产
+    });
+    var ins = Resource.instance['res_block'];
+    ins.result = ins.result || {};
+    ins.result.wuid = 262;
+    */
+});
+    /* KindEditor.ready(function(K){
+        var editor = KindEditor.editorObj || K.editor({
+            themeType: 'simple',
+            allowFileManager: true,
+			uploadJson : "./index.php?act=attachment&do=upload",
+			fileManagerJson : "./index.php?act=attachment&do=manager",
+		});
+
+        $('.select_img').click(function(e){
+            editor.loadPlugin('image', function(){
+                editor.plugin.imageDialog({
+                    imageUrl: $(e.target).parent().prev().val(),
+                    clickFn: function(url, title, width, height, border, align){
+                        $(e.target).parent().prev().val(url);
+
+                            if('image-single' == $(e.target).parent().prev().prev().attr('upload')){
+                                $(e.target).parent().prev().prev().attr('src', url);
+                                $(e.target).parent().prev().prev().attr('alt', url)
+                            }
+                        
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });		
+    });*/
+ 
+window.document.onkeydown = function(e) {
+    if ('BODY' == event.target.tagName.toUpperCase()) {
+        var e=e || event;
+        var currKey=e.keyCode || e.which || e.charCode;
+        if (8 == currKey) {
+            return false;
+        }
+    }
+};
+</script>
+{template 'common/footer'}

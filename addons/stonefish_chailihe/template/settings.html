@@ -1,0 +1,56 @@
+{template 'common/header'}
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1"> 
+
+		<div class="alert alert-info">请根据自身活动设置选择不同的权限.(温馨提示：没有授权的非认证公众号，无法领取礼盒！借用或自己本身是认证公众号的，才可以正常使用！)</div>
+
+		<div class="panel panel-default">
+		<div class="panel-heading">借用参数</div>
+			{if $stonefish_branch}
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">商家网点权限</label>
+					<div class="col-sm-9">
+						<label class="radio-inline">
+					        <input type="radio" name="stonefish_redenvelope_num" value="1" {if $setting['stonefish_redenvelope_num']==0 || $setting['stonefish_redenvelope_num'] == 1} checked="checked"{/if}/>审核生效
+					    </label>
+						<label class="radio-inline">
+					        <input type="radio" name="stonefish_redenvelope_num" value="2" {if $setting['stonefish_redenvelope_num'] == 2} checked="checked"{/if}/>立即生效
+					    </label>
+					    <div class="help-block"><strong>审核生效：</strong>商家网点添加的红包领取资格需要管理员审核后才能生效</div>
+					    <div class="help-block"><strong>立即生效：</strong>商家网点添加的红包领取资格粉丝即可参与活动抽奖</div>
+					</div>
+				</div>
+			</div>
+			{/if}			
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">借用AppId</label>
+					<div class="col-sm-4">
+					    <input type="text" name="appid" class="form-control" value="{$setting['appid']}" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">借用AppSecret</label>
+					<div class="col-sm-4">
+					    <input type="text" name="secret" class="form-control" value="{$setting['secret']}" />
+					</div>
+				</div>
+				<div class="form-group col-sm-12">
+			        <input type="submit" name="submit" value="保存" class="btn btn-primary col-lg-1" />
+			        <input type="hidden" name="token" value="{$_W['token']}" />
+		        </div>
+			</div>
+	    </div>
+	
+		<div class="panel panel-default">
+		<div class="panel-heading">借用说明</div>
+			<div class="panel-body">
+				<div class="help-block">借用说明：必需设置借用高级认证号的OAuth2.0网页授权的回调域名为你公众号第三方平台的全域名。如：你的平台域名为：www.weixin.com ，你必需让借用高级认证号设置OAuth2.0网页授权的回调域名为:www.weixin.com</div>
+				<div class="help-block">使用的AppId和AppSecret在功能-高级功能-开发模式-开发者凭据中，可以找到。这个也是借用的高级证号</div>
+				<div class="help-block"><img src="../addons/stonefish_chailihe/template/images/appidappsecret.jpg"></div>
+			</div>
+	    </div>
+	</form>
+</div>
+{template 'common/footer'}

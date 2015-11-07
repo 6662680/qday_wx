@@ -1,0 +1,261 @@
+{template 'common/header'}
+{template 'nav'}
+<style>
+.album_list{overflow:hidden; padding-top:15px;}
+.album_list li{border:1px #DDD solid; width:237px; float:left; margin-left:15px; margin-bottom:10px;}
+.album_list li .album_pic{display:block; width:237px; height:130px; overflow:hidden;}
+.album_list li .album_pic img{width:237px;}
+.album_list li .album_main{padding:10px; overflow:hidden;}
+.album_list li .album_main .album_title{font-size:16px; height:20px; width:217px; overflow:hidden;}
+.album_list li .album_main .pull-left{color:#999;}
+.album_manage .table th{width:120px;}
+.album_manage #albums_head img{margin-right:10px; max-height:70px;}
+</style>
+<link type="text/css" rel="stylesheet" href="./resource/components/kindeditor/themes/default/default.css" />
+<script type="text/javascript" src="./resource/components/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="./resource/components/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+ 
+	$(function(){
+		var i = 0;
+		$('#selectimage').click(function() {
+			var editor = KindEditor.editor({
+				allowFileManager : false,
+				imageSizeLimit : '30MB',
+				uploadJson : './index.php?act=attachment&do=upload'
+			});
+			editor.loadPlugin('multiimage', function() {
+				editor.plugin.multiImageDialog({
+					clickFn : function(list) {
+						if (list && list.length > 0) {
+							for (i in list) {
+								if (list[i]) {
+									html = '<div class="alert alert-block alert-new">' +
+											'<input type="hidden" name="attachment-new[]" value="'+list[i]['filename']+'" />'+
+											'<span class="pull-right">  <a href="javascript:;" onclick="var $this = this;if (confirm(\'删除操作不可恢复，确定码？\')){ajaxopen(\'site.php?act=module&name=scene_cube&do=itemer&weid={$_W['weid']}&foo=delete&attachment='+list[i]['filename']+'\', function(s) {$($this).parent().parent().remove();})}; return false;">删除</a></span>' +
+											'<div class="photo_preview pull-left"><label class="radio inline"><img src="'+list[i]['url']+'"></label></div>' +
+											'<table class="pull-left"><tr><th>排序</th><td><input type="text" name="index-new[]" value="0" class="span1"></td></tr>'+
+											'<tr><th></th><td style="color:red">请先保存数据以后，在进行编辑</td></tr></table></div>';
+									$('#listimage').append(html);
+									i++;
+								}
+							}
+							editor.hideDialog();
+						} else {
+							alert('请先选择要上传的图片！');
+						}
+					}
+				});
+			});
+		});
+	   
+	});
+</script>
+<script>
+KindEditor.ready(function (K) {
+    var editor = K.editor({
+        themeType: "simple",
+        allowFileManager: true,
+		uploadJson : "./index.php?act=attachment&do=upload",
+		fileManagerJson:"./index.php?act=attachment&do=manager",	
+    }); 
+    $('button.select_img').live("click",function (e) {
+        editor.loadPlugin('image', function () {
+            editor.plugin.imageDialog({
+                imageUrl: $(e.target).parent().prevAll("input[type=text]").val(),
+                clickFn: function (url, title, width, height, border, align) {
+                    var $input = $(e.target).parent().prevAll("input[type=text]")
+                    var val = url;
+					if(url.toLowerCase().indexOf("http://") == -1 && url.toLowerCase().indexOf("https://") == -1) {
+						var filename = /images(.*)/.exec(url);
+						if(filename && filename[0]) {
+							val = filename[0];
+						}
+					}
+                    $input.val(val)
+                    //$input.hide();
+                    var t_img = $(e.target).parent().find(".thumb_img");
+                    if (t_img.length == 0) {
+                        var tmp = '<td><img class="thumb_img" src="'+url+'" style="max-height: 150px;"></td>';
+                        //$input.before(tmp.format(url))
+                        $(e.target).parent().parent().append(tmp);
+                    } else {
+                        t_img.attr("src", url);
+                    }
+
+                    editor.hideDialog();
+                }
+            });
+        });
+    });
+});
+</script>
+
+<style>
+ 
+.photo_list{padding:15px 0;}
+
+.photo_list .alert{width:auto; margin-top:10px; overflow:hidden;}
+
+.photo_list .photo_preview{width:130px;}
+
+.photo_list .photo_preview img{width:130px; margin-bottom:5px;}
+
+.photo_list .photo_preview label{padding:0;}
+
+.photo_list .photo_preview input[type="radio"]{margin-left:0; margin-right:10px;}
+
+.photo_list table{margin-left:40px;}
+
+.photo_list table th,.photo_list table td{padding-bottom:5px;}
+
+.photo_list table th{width:60px; font-size:14px;}
+
+.photo_list table input,.photo_list table select{margin-bottom:0;}
+
+ </style>
+<div class="main">
+	<div class="photo_list">
+	<form name="form1" method="post" class="form" action="">
+	<input name="token" type="hidden" value="{$_W['token']}" />
+	<input name="aid" type="hidden" value="{$list['id']}" />
+	<span id="selectimage" class="btn btn-primary"><i class="icon-plus"></i>上传照片</span>
+	<input type="submit" name="submit" class="btn" value="保存" /> <span style="color:red;">上传照片后，请保存照片数据！然后在编辑高级属性!</span><br>
+	{if !empty($items)}
+		<div style="padding:10px 0;">场景访问地址：<a target="_blank" href="{php echo $_W['siteroot'].$this->createMobileUrl('show',array('id'=>$list['id']))}">{php echo $_W['siteroot'].$this->createMobileUrl('show',array('id'=>$list['id']))}</a></div>
+ 	{/if}
+	<div class="alert">
+	新添加图片，然后可以2种方式编辑，直接在左侧编辑，或点击场景图片进入内页编辑。<br>
+	地图坐标选择，可以进入内页编辑进行修改.
+	</div>
+	<div id="listimage"></div>
+	{loop $items $item}
+	{php $itemid = $item['id'];}
+	
+	<div class="alert alert-block alert-new">
+		<input type="hidden" value="{$item['attachment']}" name="attachment[{$item['id']}]">
+		<span class="pull-right"><a  href="{php echo $this->createWebUrl('editsingler',array('id'=>$item['id'],'attachment'=>$item['attachment']));}">编辑</a> <a class="delete" onclick="return confirm('删除操作不可恢复，确定码？'); return false;" href="{php echo $this->createWebUrl('itemer', array('foo' => 'delete', 'id' => $item['id'],'attachment'=>$item['attachment']))}">删除</a></span>
+		<div class="photo_preview pull-left">
+			<label class="radio inline">
+				<a href="{php echo $this->createWebUrl('editsingler',array('id'=>$item['id'],'attachment'=>$item['attachment']));}"><img src="{$_W['attachurl']}{$item['attachment']}"></a>
+			</label>
+		</div>
+		<div class="pull-left item" id="item_{$item['id']}" date-id="{$item['id']}">
+			<table class="pull-left">
+				<tr>
+					<th>排序</th>
+					<td>
+					<input type="text" class="span1" value="{$item['index']}" name="index[{$item['id']}]">
+					</td>
+				</tr>
+				<tr>
+			        <th><label for="">展示方式</label></th>
+			        <td>
+			            <label for="itype[{$item['id']}]_1" class="radio inline">
+			            	<input type="radio" id="itype[{$item['id']}]_1" name="itype[{$item['id']}]" value="1" {if $item['video']==''&&$item['lng']==0}checked="true"{/if} class="radio_item">普通</label>
+			            &nbsp;&nbsp;&nbsp;
+						<label for="itype[{$item['id']}]_2" class="radio inline">
+							<input type="radio" id="itype[{$item['id']}]_2" name="itype[{$item['id']}]" value="2" {if $item['video']!=''}checked="true"{/if} class="radio_item">视频展示</label>
+			            &nbsp;&nbsp;&nbsp;
+			            <label for="itype[{$item['id']}]_3" class="radio inline">
+			            	<input type="radio" id="itype[{$item['id']}]_3" name="itype[{$item['id']}]" value="3" {if $item['lng']!=0}checked="true"{/if} class="radio_item">地图展示</label>
+			        </td>
+			    </tr>
+			    <tbody class="box1">
+
+			    </tbody>
+			    <tbody class="box2">
+				    <tr>
+						<th><label for="">视频：</label></th>
+						<td><input type="text" name="video[{$item['id']}]" id="video" value="{$item['video']}" class="span5"></td>
+						</tr>
+						<tr >
+						<th><label for="">封面：</label></th>
+						{php $name='video_thumb['.$itemid.']';}
+						<td><input  type="text" name="{$name}" value="{$item['video_thumb']}"> <span class="help-inline"> <button class="btn select_img" type="button">选择封面</button>
+						</span>
+						{if !empty($item['video_thumb'])}<br><img class="thumb_img" src="{php echo toimage($item['video_thumb'])}" style="max-height: 150px;">{/if}
+						</td>
+					</tr>
+			    </tbody>
+			    <tbody class="box3">
+			      	<tr>
+						<th><label for="">坐标：</label></th>
+						<td><input type="text" name="lng[{$item['id']}]" value="{$item['lng']}" class="span3"> - <input type="text"  name="lat[{$item['id']}]" value="{$item['lat']}" class="span3"></td>
+					</tr>
+					<tr>
+						<th><label for="">地址：</label></th>
+						<td><input type="text" name="address[{$item['id']}]" value="{$item['address']}" class="span6">
+					</tr>
+					<tr>
+						<th><label for="">电话：</label></th>
+						<td><input type="text" name="tel[{$item['id']}]" value="{$item['tel']}" class="span3">
+					</tr>
+					<tr>
+						<th><label for="">宣传图：</label></th>
+						<td><input  type="text" name="map_thumb[{$item['id']}]" value="{$item['map_thumb']}"> <span class="help-inline"> <button class="btn select_img" type="button">选择宣传图</button></span>
+						{if !empty($item['map_thumb'])}<br><img class="thumb_img" src="{php echo toimage($item['map_thumb'])}" style="max-height: 150px;">{/if}
+						</td>
+					</tr>
+					<tr>
+						<th><label for="">微信号：</label></th>
+						<td><input type="text" name="wechat[{$item['id']}]" value="{$item['wechat']}" class="span3">
+					</tr>
+					<tr>
+						<th><label for="">微链接：</label></th>
+						<td><input type="text" name="wurl[{$item['id']}]" value="{$item['wurl']}" class="span5">
+					</tr>
+			    </tbody>
+			</table>
+	 	</div>	
+	</div>
+	{/loop}
+	</form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".item").each(function(){
+			item_id=$(this).attr('date-id');
+			v=$(':radio[name="itype['+item_id+']"]:checked').val();
+			box1=$(this).find('.box1');
+			box2=$(this).find('.box2');
+			box3=$(this).find('.box3');
+			if(v==1){
+				box1.show();
+				box2.hide();
+				box3.hide();
+			}else if(v==2){
+				box1.hide();
+				box2.show();
+				box3.hide();
+			}else{
+				box1.hide();
+				box2.hide();
+				box3.show();
+			}
+			//alert('aaa');
+		});
+		$(".radio_item").click(function(){
+			v=$(this).val();
+ 			obj=$(this).parent().parent().parent().parent().parent();
+ 			box1=obj.find('.box1');
+			box2=obj.find('.box2');
+			box3=obj.find('.box3');
+			if(v==1){
+				box1.show();
+				box2.hide();
+				box3.hide();
+			}else if(v==2){
+				box1.hide();
+				box2.show();
+				box3.hide();
+			}else{
+				box1.hide();
+				box2.hide();
+				box3.show();
+			}
+		});		
+	});	
+</script>
+{template 'common/footer'}

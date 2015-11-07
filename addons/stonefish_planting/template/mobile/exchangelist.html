@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{$reply['title']}</title>
+	<meta http-equiv="Expires" Content="-1">
+    <meta name="description" content="{$reply['description']}">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> -->
+    <script type="text/javascript">
+		var phoneWidth = parseInt(window.screen.width);
+		var phoneScale = phoneWidth/640;
+		
+		var ua = navigator.userAgent;
+		if (/Android (\d+\.\d+)/.test(ua)){
+			var version = parseFloat(RegExp.$1);
+			// andriod 2.3
+			if(version>2.3){
+				document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+			// andriod 2.3以上
+			}else{
+				document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+			}
+			// 其他系统
+		} else {
+			document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+		}
+	</script>	
+    <!-- <meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi"> -->
+    <link rel="stylesheet" type="text/css" href="../addons/stonefish_planting/template/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../addons/stonefish_planting/template/css/mobile.css?20150303"/>
+	<script type="text/javascript" src="../addons/stonefish_planting/template/js/zepto.js"></script>
+</head>
+<body><!--  -->
+	<div style="max-width:100%">
+		{if !empty($reply['adpic'])}{if !empty($reply['adpicurl'])}<a href="{$reply['adpicurl']}">{/if}<img id="top_img" style="max-width: 100%;height: auto;width: auto\9;"  src="{php echo toimage($reply['adpic'])}" width="100%" border="0">{if !empty($reply['adpicurl'])}</a>{/if}{/if}   
+	</div>
+    <div class="rule">
+		<div class='guize'>
+        <p>&nbsp;&nbsp;&nbsp;</p>
+		<p><img src="../addons/stonefish_planting/template/images/jiangpin.png"></p>
+        {loop $award $row}
+		    <p style="text-align:center; margin:10px"><img src="{php echo toimage($row['prizepic'])}"></p>
+			<p style="text-align:center; margin:10px;">{$row['prizetype']} - {$row['prizename']}</p>
+			<p style="text-align:center; margin:10px;">
+			{if $row['status']==1}
+			    {if $reply['tickettype']>=2}
+				<a class="btnduihuan" style="margin:0px 10%;" onclick="showdiv({$row['id']})">{if $reply['tickettype']==2}店员{else}商家网点{/if}点击兑换</a>
+			    {else}
+			    等待审核
+			    {/if}
+			{/if}
+			{if $row['status']==2}<span class="btn_duihuan" style="margin:0px 10%;">{if $reply['tickettype']==2}店员{else}商家网点{/if}已确认兑换</span>{/if}
+			</p>
+        {/loop}
+    	</div>
+		<div class="guize">
+		<p>&nbsp;&nbsp;&nbsp;</p>
+		<p>&nbsp;&nbsp;&nbsp;</p>
+		<a class="btnLink" href="{php echo $this->createMobileUrl('index', array('rid' => $rid,'from_user' => $page_from_user))}">返回</a>
+		</div>
+    </div>
+	<div class="panel-box" id="panel_box">
+        <div class="panel-content" id="panel-content" style="height:520px;">
+            <div class="panel-close" id="panel-close"></div>
+            <span><img src="../addons/stonefish_planting/template/images/duijiang.png" height="90"></span>
+			<div id="result_info">
+			<div id="isfans">请选择你的账号输入兑奖密码<br/>确认给客户兑奖</div>
+			    <hr class="common-hr" />
+                <input name="awardid" id="awardid" type="hidden" value="奖品">
+				<div style="float: left;width:100%;"><label>{if $reply['tickettype']==2}店员账号{else}商家网点{/if}</label><select name="dianmian" id="dianmian" class="form-control">
+						<option value="0" selected>选择{if $reply['tickettype']==2}店员账号{else}商家网点{/if}</option>
+						{loop $shangjia $shangjias}
+						<option value="{$shangjias['id']}">{$shangjias['shangjianame']}</option>
+						{/loop}
+					</select></div>
+				<div style="float: left;width:100%;"><label>兑奖密码</label><input name="mima" class="px" id="mima" type="text" placeholder="请输入兑奖密码"></div>
+                <div id="result_info_tip"></div>
+				<div class="btn-layout">
+					<input class="btn-confirm" name="确定" id="save-btn" type="button" value="确认兑奖">
+                </div>
+            </div>			
+        </div>
+    </div>
+{template 'jssdkhide'}
+<script type="text/javascript">
+$("#panel-close").click(function(){
+	$("#panel_box").hide();
+});
+{if $reply['tickettype']>=2}
+function showdiv(id){
+	$("#panel_box").show();
+	$("#awardid").val(id);
+}
+$("#save-btn").bind("click",function () {
+    var btn = $(this);
+	var awardid = $("#awardid").val();
+	var mima = $("#mima").val();
+    if (mima == '') {
+		$("#result_info_tip").text("请输入兑奖密码");
+        return
+    }
+	var dianmian = $("#dianmian").val();
+    if (dianmian == '0') {
+	    {if $reply['tickettype']==2}
+		$("#result_info_tip").text("请选择店员账号");
+		{else}
+		$("#result_info_tip").text("请选择商家网点");
+		{/if}        
+        return
+    }	
+    var submitData = {
+        mima: mima,
+		dianmian: dianmian,
+		awardid: awardid,
+    };
+    $.post('{php echo $this->createMobileUrl('exchange', array('rid' => $rid,'uid' => $uid))}', submitData, function(data) {
+		if (data.success == 1) {
+			$("#result_info").html("<br/><br/>" + data.msg + "<br/><div id='share_miao'>3秒后自动关闭</div>");
+			djstime(3);
+			setTimeout(function () {
+				$("#panel_box").hide();
+				location.reload();
+			},4000)
+			return
+		} else {
+			$("#result_info_tip").text(data.msg);
+			return
+		}
+	},"json")
+});
+/*倒计时*/
+function djstime(miao){
+	var e1=$("#share_miao").first();
+	var i=miao;
+	var interval=setInterval(function(){
+		e1.html(i+"秒自动关闭");
+		$("#share_miao").css("line-height","35px");
+		i--;
+		if(i<0){
+			$("#share_miao").css({cursor:"pointer"});
+			$("#share_miao").css("line-height","18px");						
+			clearInterval(interval);	
+		}
+	},1000);
+}
+{/if}
+</script>
+</body>
+</html>

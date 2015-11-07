@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[幸运大转盘]]></name>
+		<identifie><![CDATA[stonefish_bigwheel]]></identifie>
+		<version><![CDATA[1.6]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[幸运大转盘营销抽奖]]></ability>
+		<description><![CDATA[幸运大转盘营销抽奖-结合商家网点模块，每个商家可送抽奖机会,分享还可以额外获得抽奖机会哟]]></description>
+		<author><![CDATA[情天]]></author>
+		<url><![CDATA[http://www.qdaygroup.com/]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<menu>
+			<entry title="大转盘管理" do="manage" state="" direct="false" />
+		</menu>
+		<home call="gethome">
+		</home>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_stonefish_bigwheel_award` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT '0',
+  `rid` int(11) DEFAULT '0',
+  `fansID` int(11) DEFAULT '0',
+  `from_user` varchar(50) DEFAULT '0' COMMENT '用户ID',
+  `name` varchar(50) DEFAULT '' COMMENT '名称',
+  `description` varchar(200) DEFAULT '' COMMENT '描述',
+  `prizetype` varchar(10) DEFAULT '' COMMENT '类型',
+  `prize` int(11) DEFAULT '0' COMMENT '奖品ID',
+  `award_sn` varchar(50) DEFAULT '' COMMENT 'SN',
+  `createtime` int(10) DEFAULT '0',
+  `consumetime` int(10) DEFAULT '0',
+  `status` tinyint(1) DEFAULT '0',
+  `xuni` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `indx_rid` (`rid`),
+  KEY `indx_uniacid` (`uniacid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_stonefish_bigwheel_fans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rid` int(11) DEFAULT '0',
+  `uniacid` int(11) DEFAULT '0',
+  `fansID` int(11) DEFAULT '0',
+  `from_user` varchar(50) DEFAULT '' COMMENT '用户ID',
+  `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '微信头像',  
+  `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '微信昵称',
+  `realname` varchar(20) NOT NULL DEFAULT '' COMMENT '真实姓名',
+  `mobile` varchar(20) NOT NULL DEFAULT '' COMMENT '联系电话',  
+  `qq` varchar(15) NOT NULL DEFAULT '' COMMENT '联系QQ号码',
+  `email` varchar(50) NOT NULL DEFAULT '' COMMENT '联系邮箱',
+  `address` varchar(255) NOT NULL DEFAULT '' COMMENT '联系地址',
+  `gender` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别',
+  `telephone` varchar(15) NOT NULL DEFAULT '' COMMENT '固定电话',
+  `idcard` varchar(30) NOT NULL DEFAULT '' COMMENT '证件号码',
+  `company` varchar(50) NOT NULL DEFAULT '' COMMENT '公司名称',
+  `occupation` varchar(30) NOT NULL DEFAULT '' COMMENT '职业',
+  `position` varchar(30) NOT NULL DEFAULT '' COMMENT '职位',
+  `sharenum` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分享量',
+  `sharetime` int(10) DEFAULT '0' COMMENT '最后分享时间',
+  `awardingid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '兑奖地址ID',
+  `todaynum` int(11) DEFAULT '0',
+  `totalnum` int(11) DEFAULT '0',
+  `awardnum` int(11) DEFAULT '0',
+  `last_time` int(10) DEFAULT '0',
+  `zhongjiang` tinyint(1) DEFAULT '0',
+  `xuni` tinyint(1) DEFAULT '0',
+  `createtime` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `indx_rid` (`rid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_stonefish_bigwheel_data` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '规则id',
+  `uniacid` int(10) unsigned NOT NULL COMMENT '公众号ID',
+  `from_user` varchar(50) NOT NULL DEFAULT '' COMMENT '用户openid',
+  `fromuser` varchar(50) NOT NULL DEFAULT '' COMMENT '分享人openid',
+  `avatar` varchar(512) NOT NULL DEFAULT '' COMMENT '微信头像',
+  `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '微信昵称',  
+  `visitorsip` varchar(15) NOT NULL DEFAULT '' COMMENT '访问IP',
+  `visitorstime` int unsigned NOT NULL COMMENT '访问时间',
+  `viewnum` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '查看次数',
+  PRIMARY KEY (`id`),
+  KEY `indx_rid` (`rid`),
+  KEY `indx_uniacid` (`uniacid`)
+) ENGINE = MYISAM DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_stonefish_bigwheel_reply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned DEFAULT '0',
+  `uniacid` int(11) DEFAULT '0',
+  `title` varchar(50) DEFAULT '',
+  `description` varchar(255) DEFAULT '',
+  `start_picurl` varchar(200) DEFAULT '',
+  `isshow` tinyint(1) DEFAULT '0',
+  `ticket_information` varchar(200) DEFAULT '',
+  `starttime` int(10) DEFAULT '0',
+  `endtime` int(10) DEFAULT '0',
+  `repeat_lottery_reply` varchar(50) DEFAULT '',
+  `end_theme` varchar(50) DEFAULT '',
+  `end_instruction` varchar(200) DEFAULT '',
+  `end_picurl` varchar(200) DEFAULT '',
+  `turntable` tinyint(1) DEFAULT '0',
+  `turntablenum` tinyint(1) DEFAULT '6',
+  `adpic` varchar(200) DEFAULT '',
+  `adpicurl` varchar(200) DEFAULT '',
+  `total_num` int(11) DEFAULT '0' COMMENT '总获奖人数(自动加)',
+  `award_info` text NOT NULL,
+  `probability` double DEFAULT '0',
+  `award_times` int(11) DEFAULT '0',
+  `number_times` int(11) DEFAULT '0',
+  `most_num_times` int(11) DEFAULT '0',
+  `credit_times` int(11) DEFAULT '0',
+  `credittype` varchar(20) DEFAULT '',
+  `credit_type` varchar(20) DEFAULT '',
+  `credit1` int(11) DEFAULT '0',
+  `credit2` int(11) DEFAULT '0',
+  `sn_code` tinyint(4) DEFAULT '0',
+  `sn_rename` varchar(20) DEFAULT '',
+  `copyright` varchar(20) DEFAULT '',
+  `show_num` tinyint(1) DEFAULT '0',
+  `viewnum` int(11) DEFAULT '0' COMMENT '浏览次数',
+  `awardnum` int(10) unsigned NOT NULL DEFAULT '50' COMMENT '首页滚动中奖人数显示',
+  `fansnum` int(11) DEFAULT '0' COMMENT '参与人数',
+  `createtime` int(10) DEFAULT '0',
+  `share_acid` int(10) DEFAULT '0',
+  `ticketinfo` varchar(50) DEFAULT '' COMMENT '兑奖参数提示词',
+  `isrealname` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否需要输入姓名0为不需要1为需要',
+  `ismobile` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否需要输入手机号0为不需要1为需要',
+  `isqq` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入QQ号0为不需要1为需要',
+  `isemail` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入邮箱0为不需要1为需要',
+  `isaddress` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入地址0为不需要1为需要',
+  `isgender` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入性别0为不需要1为需要',
+  `istelephone` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入固定电话0为不需要1为需要',
+  `isidcard` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入证件号码0为不需要1为需要',
+  `iscompany` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入公司名称0为不需要1为需要',
+  `isoccupation` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入职业0为不需要1为需要',
+  `isposition` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要输入职位0为不需要1为需要',
+  `isfans` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0只保存本模块下1同步更新至官方FANS表',  
+  `isfansname` varchar(225) NOT NULL DEFAULT '真实姓名,手机号码,QQ号,邮箱,地址,性别,固定电话,证件号码,公司名称,职业,职位' COMMENT '显示字段名称',
+  `xuninum` int(10) unsigned NOT NULL DEFAULT '500' COMMENT '虚拟人数',  
+  `xuninumtime` int(10) unsigned NOT NULL DEFAULT '86400' COMMENT '虚拟间隔时间',
+  `xuninuminitial` int(10) unsigned NOT NULL DEFAULT '10' COMMENT '虚拟随机数值1',
+  `xuninumending` int(10) unsigned NOT NULL DEFAULT '100' COMMENT '虚拟随机数值2',
+  `xuninum_time` int(10) unsigned NOT NULL COMMENT '虚拟更新时间',
+  `homepictime` int(3) unsigned NOT NULL COMMENT '首页秒显图片显示时间', 
+  `homepic` varchar(225) NOT NULL COMMENT '首页秒显图片',
+  `opportunity` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '抽奖次数选项 0活动设置次数1商户赠送次数', 
+  `opportunity_txt` text NOT NULL COMMENT '商户赠送参数说明', 
+  `bigwheelpic` varchar(225) NOT NULL COMMENT '转盘图',
+  `bigwheelimg` varchar(225) NOT NULL COMMENT '指针图',
+  `bigwheelimgan` varchar(225) NOT NULL COMMENT '九宫格按钮',
+  `bigwheelimgbg` varchar(225) NOT NULL COMMENT '九宫格转动背景图',
+  `prizeDeg` varchar(225) NOT NULL COMMENT '中奖角度设置',
+  `lostDeg` varchar(225) NOT NULL COMMENT '未中奖角度设置',
+  `showparameters` varchar(1000) NOT NULL COMMENT '显示界面参数：背景色、背景图以及文字色等',
+  PRIMARY KEY (`id`),
+  KEY `indx_rid` (`rid`),
+  KEY `indx_uniacid` (`uniacid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_stonefish_bigwheel_share` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) DEFAULT '0',
+  `rid` int(11) DEFAULT '0',
+  `acid` int(11) DEFAULT '0',
+  `share_title` varchar(200) DEFAULT '',
+  `share_desc` varchar(300) DEFAULT '',
+  `share_url` varchar(100) DEFAULT '',
+  `share_txt` text NOT NULL COMMENT '参与活动规则',
+  `share_imgurl` varchar(255) NOT NULL COMMENT '分享朋友或朋友圈图',
+  `share_picurl` varchar(255) NOT NULL COMMENT '分享图片按钮',
+  `share_pic` varchar(255) NOT NULL COMMENT '分享弹出图片',
+  `sharenumtype` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '分享赠送抽奖类型',
+  `sharenum` int(11) DEFAULT '0' COMMENT '分享赠送抽奖基数',
+  `sharetype` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '分享赠送类型',
+  `share_confirm` varchar(200) DEFAULT '' COMMENT '分享成功提示语',
+  `share_fail` varchar(200) DEFAULT '' COMMENT '分享失败提示语',
+  `share_cancel` varchar(200) DEFAULT '' COMMENT '分享中途取消提示语',
+  PRIMARY KEY (`id`),
+  KEY `indx_rid` (`rid`),
+  KEY `indx_acid` (`acid`),
+  KEY `indx_uniacid` (`uniacid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_stonefish_bigwheel_prize` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) NOT NULL,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则ID',
+  `turntable` int(10) unsigned NOT NULL COMMENT '转盘类型',
+  `prizetype` varchar(50) NOT NULL COMMENT '奖品类别',
+  `prizename` varchar(50) NOT NULL COMMENT '奖品名称',
+  `prizepro` double DEFAULT '0' COMMENT '奖品概率',
+  `prizetotal` int(10) NOT NULL COMMENT '奖品数量',
+  `prizedraw` int(10) NOT NULL COMMENT '中奖数量',
+  `prizepic` varchar(255) NOT NULL COMMENT '奖品图片',
+  `prizetxt` text NOT NULL COMMENT '奖品说明',
+  `credit` int(10) NOT NULL COMMENT '积分',
+  `credit_type` varchar(20) DEFAULT '' COMMENT '积分类型',
+  PRIMARY KEY (`id`),
+  KEY `indx_rid` (`rid`),
+  KEY `indx_uniacid` (`uniacid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+	]]></install>
+	<uninstall><![CDATA[
+drop table `ims_stonefish_bigwheel_award`;
+drop table `ims_stonefish_bigwheel_fans`;
+drop table `ims_stonefish_bigwheel_data`;
+drop table `ims_stonefish_bigwheel_reply`;
+drop table `ims_stonefish_bigwheel_share`;
+drop table `ims_stonefish_bigwheel_prize`;
+	]]></uninstall>
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>

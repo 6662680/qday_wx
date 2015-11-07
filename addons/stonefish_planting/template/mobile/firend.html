@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{$reply['title']}</title>
+	<meta http-equiv="Expires" Content="-1">
+    <meta name="description" content="{$reply['description']}">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> -->
+    <script type="text/javascript">
+		var phoneWidth = parseInt(window.screen.width);
+		var phoneScale = phoneWidth/640;
+		
+		var ua = navigator.userAgent;
+		if (/Android (\d+\.\d+)/.test(ua)){
+			var version = parseFloat(RegExp.$1);
+			// andriod 2.3
+			if(version>2.3){
+				document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+			// andriod 2.3以上
+			}else{
+				document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+			}
+			// 其他系统
+		} else {
+			document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+		}
+	</script>	
+    <!-- <meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi"> -->
+    <link rel="stylesheet" type="text/css" href="../addons/stonefish_planting/template/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../addons/stonefish_planting/template/css/mobile.css?20130310"/>
+	<script type="text/javascript" src="../addons/stonefish_planting/template/js/zepto.js"></script>
+</head>
+<body><!--  -->
+<div class="wrap" ontouchmove="event.preventDefault()">
+	<div class="none"><img src="../addons/stonefish_planting/template/images/share.jpg" alt=""></div>
+	<img src="../addons/stonefish_planting/template/images/bg.png" class="img">
+	<img src="../addons/stonefish_planting/template/images/land.png" class="spirit land">
+	<img src="../addons/stonefish_planting/template/images/cloud_front.png" class="spirit cloud">
+	<img src="../addons/stonefish_planting/template/images/mountain_1.png" class="spirit mountain_1">
+	<img src="../addons/stonefish_planting/template/images/mountain_2.png" class="spirit mountain_2">
+	<img src="../addons/stonefish_planting/template/images/mountain_3.png" class="spirit mountain_3">
+	<img src="../addons/stonefish_planting/template/images/cloud_far_1.png" class="spirit cloud_far_1">
+	<img src="../addons/stonefish_planting/template/images/cloud_far_2.png" class="spirit cloud_far_2">
+	<img src="../addons/stonefish_planting/template/images/cloud_far_3.png" class="spirit cloud_far_3">
+	<img src="../addons/stonefish_planting/template/images/cloud_near_1.png" class="spirit cloud_near_1">
+	<img src="../addons/stonefish_planting/template/images/cloud_near_2.png" class="spirit cloud_near_2">
+	<img src="../addons/stonefish_planting/template/images/cloud_near_3.png" class="spirit cloud_near_3">
+	<img src="../addons/stonefish_planting/template/images/cloud_mountain_1.png" class="spirit cloud_mountain">
+	<img src="../addons/stonefish_planting/template/images/mountain.png" class="spirit mountain mountain_d4">
+	<img src="../addons/stonefish_planting/template/images/temple.png" class="spirit temple temple_d4">
+	<div class="mask_day mask_d{$seednum}"></div>
+	<!-- 0~4次 -->
+	<div class="rain rain_{if $seednum<=4}1{else}2{/if} none">
+		<img src="../addons/stonefish_planting/template/images/rain_{$seednum}.png" class="rainline">
+	</div>
+	<div class="waterpoint waterpoint_{$seednum}">
+		<img src="../addons/stonefish_planting/template/images/water_1.png" alt="" class="wp1">
+		<img src="../addons/stonefish_planting/template/images/water_2.png" alt="" class="wp2">
+		<img src="../addons/stonefish_planting/template/images/water_3.png" alt="" class="wp3">
+		<img src="../addons/stonefish_planting/template/images/water_4.png" alt="" class="wp4">
+		<img src="../addons/stonefish_planting/template/images/water_5.png" alt="" class="wp5">
+		<img src="../addons/stonefish_planting/template/images/water_6.png" alt="" class="wp6">
+		<img src="../addons/stonefish_planting/template/images/water_5.png" alt="" class="wp7">
+		<img src="../addons/stonefish_planting/template/images/water_3.png" alt="" class="wp8">
+		<img src="../addons/stonefish_planting/template/images/water_2.png" alt="" class="wp9">
+		<img src="../addons/stonefish_planting/template/images/water_4.png" alt="" class="wp10">
+	</div>
+
+	<img src="../addons/stonefish_planting/template/images/cloud_1.png" class="spirit cloud_touch zhiyin{if $haswatered==0} none{/if}">
+	{if $haswatered==0}<img src="../addons/stonefish_planting/template/images/cloud_1.png" id="zhiyin" class="spirit cloud_touch cloud_animate">{/if}
+	<div class="cloud_mask" id="cloud_touch"></div>
+	{if $haswatered==0}<img src="{$seedimg0}" class="spirit tree tree_0" id ="tree_0" style="opacity:1;">{/if}
+	<img src="{$seedimg}" class="spirit tree tree_{$seednum}{if $haswatered==0} none{/if}" id ="tree_1" style="opacity:1;">
+	{if $seednum<7}<img src="{$seedimg1}" class="spirit tree tree_{php echo $seednum+1}" style="opacity:0;">{/if}
+	<div class="tree_shine shine_{$seednum}">
+		<img src="../addons/stonefish_planting/template/images/shine.png" class="shine1{if $haswatered==0} none{/if}">
+		<img src="../addons/stonefish_planting/template/images/shine.png" class="shine2{if $haswatered==0} none{/if}">
+		<img src="../addons/stonefish_planting/template/images/shine.png" class="shine3{if $haswatered==0} none{/if}">
+		<img src="../addons/stonefish_planting/template/images/shine.png" class="shine4{if $haswatered==0} none{/if}">
+		<img src="../addons/stonefish_planting/template/images/shine.png" class="shine5{if $haswatered==0} none{/if}">
+		<img src="../addons/stonefish_planting/template/images/shine.png" class="shine6{if $haswatered==0} none{/if}">
+		<img src="../addons/stonefish_planting/template/images/shine.png" class="shine7{if $haswatered==0} none{/if}">
+	</div>
+	<div class="yaoqing" id="shareimg">
+		<img src="{php echo toimage($share['share_picurl'])}">
+	</div>
+	<div class="jifen">
+		<img src="../addons/stonefish_planting/template/images/text_jifen.png" class="fl">
+		<span class="num">
+		    {if $haswatered==0}<span><img src="../addons/stonefish_planting/template/images/num_1.png" alt=""></span>
+		    <span><img src="../addons/stonefish_planting/template/images/num_2.png" alt=""></span>
+		    <span><img src="../addons/stonefish_planting/template/images/num_3.png" alt=""></span>
+		    <span><img src="../addons/stonefish_planting/template/images/num_4.png" alt=""></span>
+		    <span><img src="../addons/stonefish_planting/template/images/num_5.png" alt=""></span>{/if}
+		<span>
+	</div>
+	{if $haswatered==0}
+	<div class="mask_zhiyin"></div>
+	<!-- <img src="../addons/stonefish_planting/template/images/zhiyin.png" class="img_zhiyin" id="zhiyin"> -->
+	<div class="img_zhiyin" id="zhiyin1">
+		<img src="../addons/stonefish_planting/template/images/zhiyin_1.png" class="img">
+	</div>
+	<img src="../addons/stonefish_planting/template/images/icon_hand.png" class="img_hand">
+	<!-- <img src="../addons/stonefish_planting/template/images/icon_arrow.png" class="img_arrow"> -->
+	<div class="jiafen">
+		<img src="../addons/stonefish_planting/template/images/jifen_day0.png" alt="">
+	</div>
+	{/if}
+	<div class="info">
+		<img src="../addons/stonefish_planting/template/images/info.png" alt="">
+	</div>
+	<div class="zjmd">
+	    <marquee behavior="scroll" scrolldelay="200" height="60">
+			{loop $zjmd $zjmdrow}
+				{$zjmdrow['realname']}领取了[{$zjmdrow['zhongzi']}]种子&nbsp;&nbsp;摇中了{$zjmdrow['prizetype']}({$zjmdrow['prizename']})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			{/loop}
+        </marquee>
+	</div>
+	<a href="{php echo $this->createMobileUrl('index',array('rid'=>$rid,'from_user'=>$page_from_user))}"><img src="../addons/stonefish_planting/template/images/{$firendExistsimg}.png" class="btn_rule"></a>
+</div>
+<audio preload="auto" id="audio1" controls="controls">
+	<source src="../addons/stonefish_planting/template/audio/rain.mp3" type="audio/mpeg">
+</audio>
+<audio preload="auto" id="audio2" controls="controls">
+	<source src="../addons/stonefish_planting/template/audio/tree.mp3" type="audio/mpeg">
+</audio>
+<div id="pop_share"><img src="{php echo toimage($share['share_pic'])}" width="100%" alt="分享到朋友圈"/></div>
+<script type="text/javascript">
+	var waterday = {$seednum};
+	var htmlpath = '../addons/stonefish_planting/template/';
+	var clickEvent = 'touchstart';
+	var haswatered = {$haswatered};
+	var rainInterval = '';
+    var infoInterval = '';
+    var canTouch = true;
+	var shengzhang = 0;
+	var showinfopng = {$showinfopng};
+	$(function() {
+	    if({$haswatered} == 0){
+			zhiyinEvent();
+        }else{
+		    setJifen({$sharenum},true);
+		}
+		$("#shareimg").click(function(){
+		   	$("#pop_share").show(500);
+	   	});
+
+	   	$("#pop_share").click(function(){
+		  	$("#pop_share").hide(500);
+	    });
+		//$('.cloud_touch').click(function(){
+		$('.zhiyin').bind("touchend",function(){
+			$.ajax({type: "POST",url:"{php echo $this->createMobileUrl('FirendFanpai',array('rid'=>$rid,'uid'=>$fans['id']))}",data: {fopenid: "{$firend['openid']}",fnickname: "{$firend['nickname']}",fheadUrl:"{$firend['headimgurl']}"},dataType: "json",async: true,timeout: 3000,success: function(data) {
+				if(data.code==200){
+					$('.cloud_touch').css({'-webkit-transform':'translate(150px,0)'});
+		            $('.cloud_touch').css({'-webkit-transform':'scale(2)','-webkit-transition':'all .3s'});
+		            $('#cloud_touch').hide();
+		            $("audio")[0].play();
+		            shengzhang = data.shengzhang;					
+		            rainEvent();
+		            addJifen();
+		            setTimeout(function(){
+		                rainOverEvent();
+		            },3000);
+					showinfopng = data.showinfopng;
+		        }else{
+					showInfo();
+		        }
+		    },error: function(xhr, type) {
+		        alert("发送网络请求失败！")
+		    }});
+	   	});
+	});		
+    function showInfo(){//显示还剩几天
+        if(!canTouch) return;
+        canTouch = false;
+        if(showinfopng > 0){
+            $('.info img').attr('src',htmlpath+'images/infoday.png');
+        }else if(showinfopng == 0){
+            $('.info img').attr('src',htmlpath+'images/infoend.png');
+        }else{
+		    $('.info img').attr('src',htmlpath+'images/info.png');
+		}
+        $('.info').addClass('info_on').show();
+        clearTimeout(infoInterval);
+        infoInterval = setTimeout(function(){
+            $('.info').removeClass('info_on').hide();
+            haswatered = 1;
+            canTouch = true;
+            $('#cloud_touch').show();
+        },6000);
+    }
+    function setJifen(num,isfirst){//设置积分
+        var _strNum = String(num);
+        var _jifen = '';
+        if(isfirst){
+            for(var i=0; i<_strNum.length; i++){
+                _jifen += '<span><img src="'+htmlpath+'images/num_'+_strNum[i]+'.png" alt=""></span>';
+            }
+            $('.jifen .num').html(_jifen);
+        }else{
+            var _oldL = $('.jifen .num span').length;
+            var _newL = _strNum.length;
+            for(var i=0; i<_newL - _oldL; i++){
+                $('.jifen .num').prepend('<span><img src="'+htmlpath+'images/num_0.png" alt=""></span>');
+            }
+            for(var i=0; i<_strNum.length; i++){
+                //'var _jifen'+i+' = \'<img src="\'+htmlpath+\'images/num_\'+_strNum[i]+\'.png" alt="">\'';
+                eval('var _jifen'+i+' = \'<img src="\'+htmlpath+\'images/num_\'+_strNum[i]+\'.png" alt="">\'');
+                $('.jifen .num span').eq(i).append(eval('_jifen'+i));
+            }
+            setTimeout(function(){
+                setJifenAnimate(num);
+            },100);
+            setTimeout(function(){
+                $('.jifen .num span').each(function(i){
+                    $(this).find('img').css({'-webkit-transform':'translate(0,0)','-webkit-transition':'0s all 0s'}).eq(0).remove();
+                });
+            },2000);
+        }
+     }
+    function setJifenAnimate(num){
+        var _start = 0;
+        if(String({$sharenum}).length == String(num).length){
+            if(String({$sharenum})[0] == String(num)[0]){
+                _start = 1;
+            }
+        }
+        for(var i=_start; i<$('.jifen .num span').length; i++){
+            //setTimeout(function(){
+                $('.jifen .num span').eq(i).find('img').css({'-webkit-transform':'translate(0,-42px)','-webkit-transition':0.1*($('.jifen .num span').length-i)*0.5+'s all .3s'});
+            //},100);
+        }
+    }
+    function addJifen(){//增加当前积分
+        var _jifenArr = [1,2,3,4,5,6,7];
+        //var _jifen = _jifenArr[waterday] + {$sharenum};
+		var _jifen = 1 + {$sharenum};
+        setJifen(_jifen,false);
+        addJifenAnimate();
+    }
+    function addJifenAnimate(){//浇水加分动画
+        $('.jiafen').html('<img src="'+htmlpath+'images/jifen_day0.png" alt="">');
+        $('.jiafen').addClass('jiafen_on');
+        setTimeout(function(){
+            $('.jiafen').removeClass('jiafen_on');
+        },4000);
+    }
+    function treeGrowup(day,sz){//树成长
+        /*var _nextTree = '<img src="'+htmlpath+'images/tree_'+(day+1)+'.png" class="spirit tree tree_'+(day+1)+'">'
+        $(_nextTree).insertAfter('.tree_'+day);*/
+		if (sz==1){
+		    $('.tree_'+day).animate({'opacity':0},1000);
+            $('.tree_'+(day+1)).animate({'opacity':1},1000);
+			setTimeout(function(){
+                $('.tree_shine').attr('class','tree_shine shine_'+(waterday+1)).show();
+            },1000);
+		}
+        //addJifen();
+        setTimeout(function(){
+            showinfopng = -1;
+			showInfo();
+        },1000);
+        $("audio")[0].pause();
+        $("audio")[1].play();
+    }
+    function rainOverEvent(){//雨停
+        //setTimeout(function(){
+            clearInterval(rainInterval);
+            $('.rain,.waterpoint').hide();
+            if(waterday == 7){
+                $('.cloud_touch').css({'-webkit-transform':'scale(.9)','-webkit-transition':'all .3s'});
+            }else{
+                $('.cloud_touch').css({'-webkit-transform':'scale(1)','-webkit-transition':'all .3s'});
+            }
+        //},1000);
+        treeGrowup(waterday,shengzhang);
+    }
+    function waterEvent(){//雨滴动画
+        var _waters = $('.waterpoint img');
+        var _num = parseInt(Math.random()*_waters.length);
+        $('.waterpoint img').hide();
+        for(var i=0; i<_num; i++){
+            var _point = parseInt(Math.random()*_waters.length);
+            $('.waterpoint img').eq(_point).show();
+        }
+        setTimeout(function(){
+            waterEvent();
+        },200);
+    }
+    function rainEvent(){//下雨动画
+        var _height = '';
+        waterday > 3 ? _height='470px' : _height='340px';
+        setTimeout(function(){
+            $('.rain').show();
+            $('.rain').animate({'height':_height},600);
+            rainInterval = setInterval(function(){
+                $('.rain').toggleClass('raining');
+            },200);
+        },300);
+        setTimeout(function(){
+            waterEvent();
+        },600);
+    }
+    function zhiyinEvent(){//玩法提示
+        //if(waterday > 0) touchCloudEvent();
+        $("#zhiyin").on(clickEvent,function(){
+			_hideZhiyin();
+        });
+		$("#zhiyin1").on(clickEvent,function(){
+			_hideZhiyin();
+        });
+        function _hideZhiyin(){
+            // $("#touchBox").Swipe(args);
+            $('.mask_zhiyin,.img_zhiyin,.img_hand,.img_arrow').hide();
+			//$('.cloud_animate').removeClass("cloud_animate");
+			$('.cloud_animate').hide();
+			$('#tree_0').hide();
+			$('#tree_1').show();
+			$('.shine1').show();
+			$('.shine2').show();
+			$('.shine3').show();
+			$('.shine4').show();
+			$('.shine5').show();
+			$('.shine6').show();
+			$('.shine7').show();
+			$('.zhiyin').show();
+            setJifen({$sharenum},true);
+        }
+    }
+</script>
+{template 'jssdk'}	
+</body>
+</html>

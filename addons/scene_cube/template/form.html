@@ -1,0 +1,84 @@
+<style type="text/css">
+    .reply-news{}
+    .reply-news-list{background:#EEE; color:#333; border:0;}
+    .reply-news-list .reply-news-list-cover{width:150px;height:100px;overflow:hidden;margin-left:10px;float:right;background:#CCC;}
+    .reply-news-list .reply-news-list-cover img{width:150px;}
+    .reply-news-list-detail .title{font-size:16px;font-weight:600;}
+    .reply-news-list-first .reply-news-list-cover{border:0;padding:0;margin:0;float:none;width:100%;height:200px;}
+    .reply-news-list-first .reply-news-list-cover img{width:100%;}
+    .reply-news-list-first .reply-news-list-detail{position:absolute;bottom:8px;width:603px;padding:4px 6px;vertical-align:middle;color:#FFF;filter:Alpha(opacity=70);background:#000;background:rgba(0, 0, 0, 0.7);text-shadow:none;font-family:arial,宋体b8b\4f53,sans-serif;}
+    .reply-news-edit-button{font-size:14px;background:#eee;padding:5px !important;text-align:center !important; overflow:hidden;}
+    .reply-news-edit-button a{width:200px;}
+</style>
+<div class="panel panel-default" id="form">
+    <div class="panel-heading">
+        选择要展示的场景
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">操作</label>
+            <div class="col-sm-9 col-xs-12">
+                <button class="btn btn-info" type="button" onclick="$('#modal-module-menus').modal('show');">选择要展示的场景</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">场景信息</label>
+            <div class="col-sm-9 col-xs-12">
+                <div id="entry-preview" class="alert alert-info reply-news-list reply-news-list-first"
+                     style="width:400px;height:200px;{if !$activity}display:none;{/if}">
+                    <div class="reply-news-list-cover"><img src="{$activity['reply_thumb']}" alt=""></div>
+                    <div class="reply-news-list-detail" style="width:370px;">
+                        <div class="title">{$activity['reply_title']}</div>
+                        <div class="content">{$activity['reply_description']}</div>
+                    </div>
+                </div>
+                <input type="hidden" name="activity" value="{$activity['id']}"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal-module-menus" class="modal fade in" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>选择要展示的项目</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">场景搜索</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="keyword" id="search-kwd" value="" placeholder="输入搜索关键字">
+                  <span class="input-group-btn">
+                  <button class="btn btn-default btn-browser" type="button" onclick="search_entries();">搜索</button>
+                  </span></div>
+                    </div>
+                </div>
+                <div id="module-menus"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	function search_entries() {
+		var kwd = $.trim($('#search-kwd').val());
+		$.post('{php echo $this->createWebUrl('query');}', {keyword: kwd}, function(dat){
+			$('#module-menus').html(dat);
+		});
+	}
+	function select_entry(o) {
+		$('#entry-preview img').attr('src',o.thumb);
+		$('#entry-preview .title').html(o.title);
+		$('#entry-preview .content').html(o.description);
+		$('#entry-preview').show();
+		$(':hidden[name="activity"]').val(o.mid);
+        $('#modal-module-menus').modal("hide");;
+	}
+</script>

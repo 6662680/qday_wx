@@ -1,0 +1,47 @@
+<div class="control-group js_scene_style js_yuyue22 hide">
+	<div class="control-group">
+		<label class="control-label" for="str0">预约标题</label>
+		<div class="controls">
+			<input type="text" id="str0" class="input-large" name="yuyue22[title]" value="{$data['title']}"  placeholder="预约标题" />
+			<span class="maroon">*</span><span class="help-inline">(为空,默认：看房指引)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="str1">预约字段重定义1</label>
+		<div class="controls">
+			<input type="text" id="str1" class="input-large" name="yuyue22[str1]" value="{$data['str1']}"  placeholder="姓名" />
+			<span class="maroon">*</span><span class="help-inline">(为空,不显示)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="str2">预约字段重定义2</label>
+		<div class="controls">
+			<input type="text" id="str2" class="input-large" name="yuyue22[str2]"   value="{$data['str2']}"  placeholder="电话" />
+			<span class="maroon">*</span><span class="help-inline">(为空,不显示)</span>
+		</div>
+	</div>
+	<div class="control-group form-horizontal">
+		<label class="control-label">预约时间开启</label>
+
+		<div class="controls clearfix">
+			<label class="radio inline"><input type="radio" value="1" name="yuyue22[str3]" {if $data['str3']==1}checked="checked"{/if}>显示</label>
+			<label class="radio inline"><input type="radio" value="0" name="yuyue22[str3]" {if $data['str3']==0||empty($data['str3'])}checked="checked"{/if}>隐藏</label>
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label" for="str4">成功提示</label>
+		<div class="controls">
+			<input type="text" id="str4" class="input-large" name="yuyue22[tips]"   value="{$data['tips']}"  placeholder="成功提示" />
+			<span class="maroon">*</span><span class="help-inline">(为空,默认：预约完成，稍后会有大客户经理与您联系。)</span>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="" class="control-label">顶部展示图片：</label>
+		<div class="margin-top10 controls">
+            <div id="map_image_uploads" style="width:330px;">
+                {php echo tpl_form_field_image('yuyue22[mthumb]', $data['mthumb'])}
+            </div>
+            <div class="help-inline">（建议尺寸:700*320）</div>
+		</div>
+	</div>
+</div>

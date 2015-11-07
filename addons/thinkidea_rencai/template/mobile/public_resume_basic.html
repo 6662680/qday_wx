@@ -1,0 +1,141 @@
+{template 'common_header'}
+    <!-- 基本信息 -->
+    <div class="am-g" style="background-color:#FFF;">
+        <div class="am-u-sm-12">
+            <div class="am-u-sm-6" style="padding-right:0">
+                <a class="am-btn am-btn-block am-btn-success" style="color:aliceblue" href="{php echo $this->createMobileUrl('PublicResumeBasic', array('person_id' => $person['id']));}">基本信息</a>
+            </div>
+            <div class="am-u-sm-6" style="padding-left:0">
+                <a class="am-btn am-btn-block am-btn-default" style="color:black" href="{php echo $this->createMobileUrl('PublicResumeWorkExperience', array('person_id' => $person['id']));}">工作经验</a>
+            </div>
+        </div>
+        
+        <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>
+        
+		<div class="am-u-sm-12" style="margin-top:5px">
+          <form action="" class="am-form am-form-horizontal" enctype="multipart/form-data" method="POST" data-am-validator>
+            <input type="hidden" value="{$_W['token']}" name="token">
+            <input type="hidden" value="{$person_id}" name="person_id">
+            
+            <div class="am-form-group">
+                  <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">照片</label>
+                  <div class="am-u-sm-9">
+                    <input id="img" class="am-input-sm" type="file" name="uploadfile" accept="image/*"  style="width: 200px"/>
+                  </div>
+            </div>
+              {if $person['headimgurl']}
+            <div class="am-form-group">
+                  <div class="am-u-sm-3"></div>
+                  <div class="am-u-sm-9">
+                      <div id="showmsg"><img class="am-img-thumbnail am-radius" style="width:200px;height:200px" src="{$person['headimgurl']}" /></div>
+                  </div>
+            </div>
+              {/if}
+            <div class="am-form-group">
+              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">姓名</label>
+              <div class="am-u-sm-9">
+                <input type="text" name="data[username]" value="{$person['username']}" class="am-input-sm" placeholder="输入姓名" minlength="2" required>
+              </div>
+            </div>
+            
+            <div class="am-form-group">
+              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">性别</label>
+              <div class="am-u-sm-9">
+                  <select id="doc-select-1" class="am-input-sm" name="data[sex]">
+                    <option value="1" {if $person['sex'] == 1}selected{/if}>男</option>
+                    <option value="0" {if $person['sex'] == 0}selected{/if}>女</option>
+                  </select>
+              </div>
+            </div>
+            
+            <div class="am-form-group">
+              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">手机</label>
+              <div class="am-u-sm-9">
+				<input type="text" name="data[mobile]" value="{$person['mobile']}" class="am-input-sm" placeholder="输入手机号码" minlength="2" pattern="^1((3|5|8){1}\d{1}|70)\d{8}$"  required>
+              </div>
+            </div>
+
+              <div class="am-form-group">
+                  <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">QQ</label>
+                  <div class="am-u-sm-9">
+                      <input type="number" name="data[qq]" value="{$person['qq']}" class="am-input-sm" placeholder="输入qq" minlength="2" required>
+                  </div>
+              </div>
+
+              <div class="am-form-group">
+              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">年龄</label>
+              <div class="am-u-sm-9">
+              	<input type="number" name="data[age]" value="{$person['age']}" class="am-input-sm" placeholder="输入年龄" min=1 required>
+              </div>
+            </div>
+
+           <div class="am-form-group">
+                 <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">教育程度</label>
+                 <div class="am-u-sm-9">
+                  <select name="data[educational]" class="am-input-sm">
+                    {loop $config['educational'] $key $educational}
+                    <option value="{$key}" {if $person['educational'] == $key}selected{/if}>{$educational}</option>
+                    {/loop}
+                  </select>
+                 </div>
+               </div>
+
+               <div class="am-form-group">
+                 <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">所学专业</label>
+                 <div class="am-u-sm-9">
+                   <input type="text" name="data[professional]" value="{$person['professional']}" class="am-input-sm" placeholder="输入专业" minlength="2" required>
+                 </div>
+               </div>
+                
+               <div class="am-form-group">
+                 <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">工作经验</label>
+                 <div class="am-u-sm-9">
+                   <input type=number name="data[workexperience]" value="{$person['workexperience']}" class="am-input-sm" placeholder="工作经验" min=1 required>
+                 </div>
+               </div>
+
+              <div class="am-form-group">
+                  <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">期望工作地</label>
+                  <div class="am-u-sm-9">
+                      <input type="text" name="data[workaddress]" value="{$person['workaddress']}" class="am-input-sm" placeholder="期望工作地点" min=1 required>
+                  </div>
+              </div>
+
+            <div class="am-form-group">
+              <label class="am-u-sm-3 am-text-sm am-form-label" style="padding-right:0">自我评价</label>
+              <div class="am-u-sm-9">
+                <textarea name="data[assessment]" minlength="10" maxlength="500" class="" rows="10" required>{$person['assessment']}</textarea>
+                <em class="am-text-xs">10~500个汉字</em>
+              </div>
+            </div> 
+            
+            <div class="am-form-group">
+              <input type="submit" name="save_basic_submit" value="保存" class="am-btn am-btn-block am-btn-success">
+            </div>
+          </form>
+       </div>
+    </div>
+
+    <script type="text/javascript">
+	$(function() {
+		  $('#doc-datepicker').datepicker().on('changeDate.datepicker.amui', function(event) {
+		      var year = event.date.getFullYear();
+		      var month = event.date.getMonth() + 1;
+		      var day = event.date.getDate();
+		      $("#birthday").val(year+'-'+month+'-'+day);
+		    });
+		});
+
+    $(function(){
+        $('#img').change(function(){
+            var file = this.files[0]; //选择上传的文件
+            var r = new FileReader();
+            r.readAsDataURL(file); //Base64
+            $(r).load(function(){
+                $("#showmsg").html();
+                $('#showmsg').html('<img  class="am-img-thumbnail am-radius" src="'+ this.result +'" alt="" />');
+            });
+        });
+    });
+    </script>
+{template 'common_footer'}

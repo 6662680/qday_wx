@@ -1,0 +1,117 @@
+{template 'common/header'}
+{template 'nav_new.inc'}
+<style>
+/*手机端分页*/
+.pagination ul > li > a, .pagination ul > li > span{padding:3px 3px;}
+.alert {padding:6px}
+    .am-header-title{line-height: 49px;}
+</style>
+<div>
+    <a href="{php echo $this->createMobileUrl('add')}" class="am-btn am-btn-success am-radius am-btn-block" style="margin: 10px; width: auto;">
+        <i class="am-icon-edit"></i>&nbsp;&nbsp;&nbsp;发布商品
+    </a>
+</div>
+<style>
+    .box{padding: 10px;}
+    .box a{float: left;}
+    .caption{float: left; margin-left: 4px; width: 65%;}
+    .caption p{padding: 0 5px; margin:0;height: 22px;overflow: hidden;}
+    .caption strong{font-size: 20px; color:#ff4400;}
+
+    .caption span{float: right;margin-top: 5px; color:#9D8E8E; font-size: 14px;}
+
+    .swipeLeft{
+        animation: swipeLeft .3s;
+        -webkit-animation: swipeLeft .3s;	/* Safari 和 Chrome */
+        transform:translate(-100px);
+    }
+    @keyframes swipeLeft
+    {
+        from {transform:translate(0px)}
+        to {transform:translate(-100px)}
+    }
+    @-webkit-keyframes swipeLeft /* Safari 和 Chrome */
+    {
+        from {transform:translate(0px)}
+        to {transform:translate(-100px)}
+    }
+    .swipeRight{
+        animation: swipeRight .3s;
+        -webkit-animation: swipeRight .3s;	/* Safari 和 Chrome */
+        transform:translate(0px);
+    }
+    @keyframes swipeRight
+    {
+        from {transform:translate(-100px)}
+        to {transform:translate(0px)}
+    }
+    @-webkit-keyframes swipeRight /* Safari 和 Chrome */
+    {
+        from {transform:translate(-100px)}
+        to {transform:translate(0px)}
+    }
+
+
+</style>
+
+
+<ul class="am-list" id="scroller">
+    {loop $list $key $row}
+    <li>
+        <div class="box">
+            <a href="{php echo $this->createMobileUrl('detail', array('name' => 'detail', 'id' => $row['id'], 'weid' => $_W['weid']))}" style="width: 30%;">
+                <img src="{$_W['attachurl']}{$row['thumb1']}" alt="{$row['title']}" class="img-rounded" style="width:100%;height:54px;">
+            </a>
+            <a href="{php echo $this->createMobileUrl('detail', array('name' => 'detail', 'id' => $row['id'], 'weid' => $_W['weid']))}" style="float: none; color: #333;">
+                <div class="caption">
+                    <p>{$row['title']}</p>
+                    <strong>￥{$row['price']}</strong>
+                    <span>20分钟前</span>
+                    <div style="clear:both;"></div>
+                </div>
+            </a>
+            <div style="clear:both;"></div>
+        </div>
+        <a class="edit" href="{php echo $this->createMobileUrl('add',array('id' => $row['id']))}" style="display:none;position: absolute;top:0;right:50px;background: #ccc; height: 100%;color:#fff; text-align: center;width: 50px;">编辑</a>
+        <a class="del" onclick="return confirm('确认删除？');" href="{php echo $this->createMobileUrl('mygoods',array('id' => $row['id'],'op' => 'delete'))}" style="display:none;position: absolute;top:0;right:0;background: red; height: 100%; text-align: center;width: 50px; color:#fff;">删除</a>
+    </li>
+    {/loop}
+    {$pager}
+</ul>
+<script src="../addons/thinkidea_secondmarket/template/static/amaze/js/zepto.min.touch.js"></script>
+<script>
+    $(function(){
+        var img = $('.img-rounded');
+        var img_h = img.width()*4/5;
+        img.height(img_h);
+        var h = $('.caption p').height();
+        var s =$('.caption strong').height();
+
+        var d = img_h-h-s-5;
+
+        $('.caption p').css({'height':(d+h)+'px','line-height':((d+h)/2)+'px'});
+
+        $('.del').css('line-height',$('.del').height()+'px');
+        $('.edit').css('line-height',$('.edit').height()+'px');
+
+
+        $('#scroller li').on('swipeLeft',function(){
+            $(this).find('.box').removeClass('swipeRight').addClass('swipeLeft');
+            $(this).find('.del').show();
+            $(this).find('.edit').show();
+        });
+        $('#scroller li').on('swipeRight',function(){
+            $(this).find('.box').removeClass('swipeLeft').addClass('swipeRight');
+            $(this).find('.del').hide();
+            $(this).find('.edit').hide();
+        })
+
+    });
+
+</script>
+<footer data-am-widget="footer" class="am-footer am-footer-default" data-am-footer="{  }">
+    <div class="am-footer-miscs ">
+        <p>由 <a href="#" title="{$_W['account']['name']}" target="_blank" class="">{$_W['account']['name']}</a> 提供技术支持</p>
+        <!--<p>CopyRight©2015 ThinkIdea Inc.</p>-->
+    </div>
+</footer>

@@ -1,0 +1,229 @@
+{template 'common/header'}
+<div class="main">
+<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+	<h4>单张场景内页设置</h4>
+	<div style="float: left;margin-left: 50px;"><img src="{php echo toimage($item['attachment'])}" width="320px" height="480px" style="border:10px solid black;"></div>
+	<div style="float: left;margin-left: 50px;"><table class="tb">
+			<tr>
+			   <th><label for="">展示方式</label></th>
+			   <td><label for="itype_1" class="radio inline" name="l1"><input type="radio" name="itype" id="itype_1" value="1" checked="true" class="items_r">普通</label>
+			            &nbsp;&nbsp;&nbsp;
+				<label for="itype_2" class="radio inline" name="l1"><input type="radio" name="itype"  id="itype_2" value="2" {if $item['video']!=''}checked="true"{/if} class="items_r">视频展示</label>
+			            &nbsp;&nbsp;&nbsp;
+			    <label for="itype_3" class="radio inline" name="l1"><input type="radio" name="itype"  id="itype_3" value="3" {if $item['lng']!=118.792496&&$item['lng']!=32.026304}checked="true"{/if} class="items_r">地图展示</label>
+			    </td>
+			    </tr>
+			    <tbody class="box1">
+
+			    </tbody>
+			    <tbody class="box2">
+				    <tr>
+						<th><label for="">视频：</label></th>
+						<td><input type="text" name="video" id="video" value="{$item['video']}" class="span5"></td>
+						</tr>
+						<tr>
+						<th><label for="">频封：</label></th>
+						<td>{php echo tpl_form_field_image('video_thumb', $item['video_thumb']);}</td>
+					</tr>
+			    </tbody>
+			    <tbody class="box3">
+				    <tr>
+				    <th>地区</th>
+				    <td>
+				<select name="resideprovince" id="sel-provance" onChange="selectCity();bmap.searchMapByPCD();" style="width:100px;">
+					<option value="" selected="true">省/直辖市</option>
+				</select>
+				<select name="residecity" id="sel-city" onChange="selectcounty();bmap.searchMapByPCD();" style="width:100px;">
+					<option value="" selected="true">请选择</option>
+				</select>
+				<select name="residedist" id="sel-area" onchange="bmap.searchMapByPCD();" style="width:100px;">
+					<option value="" selected="true">请选择</option>
+				</select>
+				<span class="help-block">先选择地区，可以快速的定位地图位置。</span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="">地点搜索</label></th>
+			<td><div class="input-append"><input type="text" id="address" name="address" value="{$setting['address']}"  class="span5" /><button type="button" class="btn" name="submit" value="搜索" onclick="bmap.searchMapByAddress($('#address').val())">搜索</button></div><span class="help-block">可以通过查询地址，快速定位地图位置。</span></td>
+		</tr>
+		<tr>
+			<th><label for="">坐标：</label></th>
+			<td><input type="text" name="lng" id="lng" value="{$item['lng']}"  class="span3" /> - <input type="text" id="lat" name="lat" value="{$item['lat']}"  class="span3" /></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><div id="baidumap" style="width:500px; height:400px;"></div></td>
+		</tr>
+		<tr>
+						<th><label for="">详细地址：</label></th>
+						<td><input type="text" name="address1" value="{$item['address']}" class="span6">
+					</tr>
+					<tr>
+						<th><label for="">电话：</label></th>
+						<td><input type="text" name="tel" value="{$item['tel']}" class="span3">
+					</tr>
+					<tr>
+						<th><label for="">宣传图：</label></th>
+						<td>{php echo tpl_form_field_image('map_thumb', $item['map_thumb']);}</td>
+					</tr>
+					<tr>
+						<th><label for="">微信号：</label></th>
+						<td><input type="text" name="wechat" value="{$item['wechat']}" class="span3">
+					</tr>
+					<tr>
+						<th><label for="">微链接：</label></th>
+						<td><input type="text" name="wurl" value="{$item['wurl']}" class="span5">
+					</tr>
+			    </tbody>
+		<tr>
+			<th></th>
+			<td>
+				<button type="submit" class="btn btn-primary span3" name="submit" value="提交">提交</button>
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</td>
+		</tr>
+	</table></div>
+</form>
+<script type="text/javascript" src="./resource/script/cascade.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		v=$('[name="itype"]:checked').val();
+			if(v==1){
+				$('.box1').show();
+				$('.box2').hide();
+				$('.box3').hide();
+			}else if(v==2){
+				$('.box1').hide();
+				$('.box2').show();
+				$('.box3').hide();
+			}else{
+				$('.box1').hide();
+				$('.box2').hide();
+				$('.box3').show();
+			}
+	});
+	$('.items_r').click(function(){
+		v = $(this).val();
+		obj=$(this).parent().parent().parent().parent().parent().parent();
+ 			box1=obj.find('.box1');
+			box2=obj.find('.box2');
+			box3=obj.find('.box3');
+			if(v==1){
+				box1.show();
+				box2.hide();
+				box3.hide();
+			}else if(v==2){
+				box1.hide();
+				box2.show();
+				box3.hide();
+			}else{
+				box1.hide();
+				box2.hide();
+				box3.show();
+			}
+	});
+
+</script>
+
+
+
+<script type="text/javascript">
+cascdeInit('{$setting['province']}','{$setting['city']}','{$setting['dist']}'); //开启地区三级联动
+var bmap = {
+	'option' : {
+		'lock' : false,
+		'container' : 'baidumap',
+		'infoWindow' : {'width' : 250, 'height' : 100, 'title' : ''},
+		'point' : {'lng' : {$item['lng']}, 'lat' : {$item['lat']}}
+	},
+	'init' : function(option) {
+		var $this = this;
+		$this.option = $.extend({},$this.option,option);
+
+		$this.option.defaultPoint = new BMap.Point($this.option.point.lng, $this.option.point.lat);
+		$this.bgeo = new BMap.Geocoder();
+		$this.bmap = new BMap.Map($this.option.container);
+		$this.bmap.centerAndZoom($this.option.defaultPoint, 15);
+		$this.bmap.enableScrollWheelZoom();
+		$this.bmap.enableDragging();
+		$this.bmap.enableContinuousZoom();
+		$this.bmap.addControl(new BMap.NavigationControl());
+		$this.bmap.addControl(new BMap.OverviewMapControl());
+		//添加标注
+		$this.marker = new BMap.Marker($this.option.defaultPoint);
+		$this.marker.setLabel(new BMap.Label('请您移动此标记，选择您的坐标！', {'offset':new BMap.Size(10,-20)}));
+		$this.marker.enableDragging();
+		$this.bmap.addOverlay($this.marker);
+		//$this.marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+		$this.showPointValue($this.marker.getPosition());
+		//拖动地图事件
+		$this.bmap.addEventListener("dragging", function() {
+			$this.setMarkerCenter();
+			$this.option.lock = false;
+		});
+		//缩入地图事件
+		$this.bmap.addEventListener("zoomend", function() {
+			$this.setMarkerCenter();
+			$this.option.lock = false;
+		});
+		//拖动标记事件
+		$this.marker.addEventListener("dragend", function (e) {
+			$this.showPointValue();
+			$this.showAddress();
+			$this.bmap.panTo(new BMap.Point(e.point.lng, e.point.lat));
+			$this.option.lock = false;
+			$this.marker.setAnimation(null);
+		});
+	},
+	'searchMapByAddress' : function(address) {
+		var $this = this;
+		 $this.bgeo.getPoint(address, function (point) {
+			if (point) {
+				$this.showPointValue();
+				$this.showAddress();
+				$this.bmap.panTo(point);
+				$this.setMarkerCenter();
+			}
+		});
+	},
+	'searchMapByPCD' : function(address) {
+		var $this = this;
+		$this.option.lock = true;
+		$this.searchMapByAddress($('#sel-provance').val()+$('#sel-city').val()+$('#sel-area').val());
+	},
+	'setMarkerCenter' : function() {
+		var $this = this;
+		var center = $this.bmap.getCenter();
+		$this.marker.setPosition(new BMap.Point(center.lng, center.lat));
+		$this.showPointValue();
+		$this.showAddress();
+	},
+	'showPointValue' : function() {
+		var $this = this;
+		var point = $this.marker.getPosition();
+		$('#lng').val(point.lng);
+		$('#lat').val(point.lat);
+	},
+	'showAddress' : function() {
+		var $this = this;
+		var point = $this.marker.getPosition();
+		$this.bgeo.getLocation(point, function (s) {
+			if (s) {
+				$('#address').val(s.address);
+				if (!$this.option.lock) {
+					cascdeInit(s.addressComponents.province,s.addressComponents.city,s.addressComponents.district);
+				}
+			}
+		});
+	}
+};
+$(function(){
+	var option = {};
+	{if !empty($setting['lng']) && !empty($setting['lat'])}
+	option = {'point' : {'lng' : '{$setting['lng']}', 'lat' : '{$setting['lat']}'}}
+	{/if}
+	bmap.init(option);
+});
+</script>
+{template 'common/footer'}

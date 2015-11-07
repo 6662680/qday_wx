@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[场景魔方]]></name>
+		<identifie><![CDATA[scene_cube]]></identifie>
+		<version><![CDATA[2.6]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[商业信息华丽展示，高级授权]]></ability>
+		<description><![CDATA[商业信息华丽展示，高级授权]]></description>
+		<author><![CDATA[微动力]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+    <platform>
+        <subscribes>
+            <message type="text" />
+        </subscribes>
+        <handles>
+            <message type="text" />
+        </handles>
+        <rule embed="true" />
+    </platform>
+	<bindings>
+		<menu>
+			<entry title="场景菜单" do="manager"/>
+		</menu>
+	</bindings>
+	<install><![CDATA[CREATE TABLE IF NOT EXISTS `ims_scene_cube_app` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `listorder` int(11) NOT NULL,
+  `iden` varchar(50) NOT NULL,
+  `price` int(11) NOT NULL,
+  `title` varchar(300) NOT NULL DEFAULT '',
+  `thumb` varchar(300) NOT NULL,
+  `qrcode` varchar(300) NOT NULL,
+  `author` varchar(300) NOT NULL,
+  `series` varchar(50) NOT NULL,
+  `isshow` tinyint(2) NOT NULL,
+  `create_time` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_scene_cube_book` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL DEFAULT '0',
+  `list_id` int(11) NOT NULL,
+  `from_user` varchar(50) NOT NULL DEFAULT '',
+  `str1` varchar(200) NOT NULL DEFAULT '',
+  `str2` varchar(200) NOT NULL DEFAULT '',
+  `str3` varchar(200) NOT NULL DEFAULT '',
+  `status` tinyint(4) NOT NULL,
+  `create_time` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_scene_cube_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weid` int(11) NOT NULL,
+  `list_id` int(11) NOT NULL,
+  `from` varchar(10) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `create_time` int(10) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `from_user` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_scene_cube_list` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `title` varchar(50) NOT NULL DEFAULT '',
+  `s_id` int(11) NOT NULL,
+  `iden` varchar(50) NOT NULL,
+  `cover` varchar(300) NOT NULL,
+  `cover_title` varchar(50) NOT NULL,
+  `cover_subtitle` varchar(50) DEFAULT NULL,
+  `cover1` varchar(300) NOT NULL,
+  `cover2` varchar(300) NOT NULL,
+  `thumb` varchar(300) NOT NULL,
+  `share_title` varchar(200) NOT NULL DEFAULT '',
+  `share_thumb` varchar(300) NOT NULL DEFAULT '',
+  `share_content` varchar(1000) NOT NULL,
+  `share_cb_url` varchar(500) NOT NULL,
+  `share_cb_tel` varchar(20) NOT NULL,
+  `diyurl` varchar(100) NOT NULL DEFAULT '',
+  `share_cover` varchar(300) NOT NULL DEFAULT '',
+  `share_url` varchar(300) NOT NULL DEFAULT '',
+  `share_txt` varchar(500) NOT NULL DEFAULT '',
+  `share_button` varchar(300) NOT NULL,
+  `share_tips` varchar(300) NOT NULL,
+  `reply_title` varchar(50) NOT NULL,
+  `reply_thumb` varchar(300) NOT NULL,
+  `reply_description` varchar(1000) NOT NULL,
+  `isadvanced` int(3) NOT NULL DEFAULT '0',
+  `advanced_thumb` varchar(300) NOT NULL,
+  `email` varchar(300) NOT NULL DEFAULT '',
+  `emailtitle` varchar(100) NOT NULL,
+  `first_type` tinyint(2) NOT NULL,
+  `first_btn_select` varchar(10) NOT NULL,
+  `first_btn_value` varchar(500) NOT NULL,
+  `bg_music_switch` tinyint(4) NOT NULL,
+  `bg_music_icon` tinyint(4) NOT NULL,
+  `bg_music_url` varchar(300) NOT NULL,
+  `start_time` int(10) NOT NULL,
+  `end_time` int(10) NOT NULL,
+  `hits` int(10) NOT NULL,
+  `shares` int(10) NOT NULL,
+  `tongji` varchar(1000) NOT NULL,
+  `isyuyue` tinyint(1) NOT NULL DEFAULT '0',
+  `iscomment` tinyint(1) NOT NULL DEFAULT '0',
+  `isdemo` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_scene_cube_manage` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(11) NOT NULL,
+  `appid` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `appnums` int(11) NOT NULL,
+  `start_time` int(10) NOT NULL,
+  `end_time` int(10) NOT NULL,
+  `create_time` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_scene_cube_page` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `list_id` varchar(50) NOT NULL DEFAULT '',
+  `listorder` int(11) NOT NULL,
+  `m_type` tinyint(4) NOT NULL,
+  `thumb` varchar(300) NOT NULL,
+  `param` text NOT NULL,
+  `create_time` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `ims_scene_cube_reply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL DEFAULT '0',
+  `list_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_rid` (`rid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+INSERT INTO `ims_scene_cube_app` (`listorder`, `iden`, `price`, `title`, `thumb`, `qrcode`, `author`, `series`, `isshow`, `create_time`) VALUES
+('0','style2','800','【再一次•极致诱惑】唤起你对性感的记忆','http://wx.yvkj.cn/attachment/images/1/2014/12/j0YfUxEXY3S3qKKZykQioTHioqMkhe.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/Ubwy8t5BWPHpW7TpP8TYY5PYp8EjRS.png','Scene App','伊索科技','1','0'),
+('0','style4','800','我与自己久别重逢（EVERGREEN）','http://wx.yvkj.cn/attachment/images/1/2014/12/NoP2uo7u1IXZil7TT8uU181789aSJS.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/P0XRrm01GLD2d624Dy016l0l6890L1.png','Scene App','伊索科技','1','0'),
+('0','style6','800','一场冰冷世界的革命','http://wx.yvkj.cn/attachment/images/1/2014/12/e91N18rB6BOG6d31R16k8Oi9Nr6bvR.png','http://wx.yvkj.cn/attachment/images/1/2014/12/xfMT3R33RZhTprKnzHEiyfnRRuIftH.png','Scene App','伊索科技','1','0'),
+('0','style3','800','变形金刚4•绝迹重生','http://wx.yvkj.cn/attachment/images/1/2014/12/ES5X5F1MMDf1i41e111m51s5PDdIrG.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/IBGQ6hb5qgBDtGKk8m16W1zkM1p6wH.png','Scene App','伊索科技','1','0'),
+('0','style7','800','iPhone6 再一次创造','http://wx.yvkj.cn/attachment/images/1/2014/12/GA3VVffFuJtXT225kMXUVrtVz6xuTT.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/n3N42iK3i2RqrR4r493Z1152e92f4T.png','Scene App','伊索科技','1','0'),
+('0','style8','800','2014 NEW FUN 泳池趴','http://wx.yvkj.cn/attachment/images/1/2014/12/sVVIoZSOgg9O9AVGgOa8lisaSov3Gu.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/EA310BKa1oUuH145B24zkT4H2k4725.png','Scene App','伊索科技','1','1411316941'),
+('0','style9','800','办公家具 就选优的！','http://wx.yvkj.cn/attachment/images/1/2014/12/HC4GSkNhMs4CXMSMSmq1u1EPSm3Qz1.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/hW5hPH88sk2gg8GCv8v51s7eiu8sI2.png','Scene App','伊索科技','1','1411372542'),
+('0','custom','800','自定义场景','http://wx.yvkj.cn/attachment/images/1/2014/12/xSIVVg3JIv36O6GCrsgookvP3jOWOo.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/kTLGl3TT6lR538JO6ETJo36uvtgbBg.jpg','Scene App','伊索科技','1','1411372542'),
+('0','style5','800','周年邀请函','http://wx.yvkj.cn/attachment/images/1/2014/12/r58jb4JXbp549pv1ZVNBJjhYpYPV4p.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/Yzf3Bn3bDnsnbaaBvbTk3KATkDnSsZ.png','Scene App','伊索科技','1','1418961963'),
+('0','style10','800','飞跃彩虹','http://wx.yvkj.cn/attachment/images/1/2014/12/c2gAZa2GgA0afrGcGmZLM8rpfPGRPF.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/BW9Q2tjV0wI29cZ1Ts1Cq0c92s1S1w.png','Scene App','伊索科技','1','1418967102'),
+('0','style12','800','九章别墅','http://wx.yvkj.cn/attachment/images/1/2014/12/iL0KI0B2SbsbCu12BucBeEpG1LPHuJ.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/rlUOEUUjulxzxoSb0Go9Bsr9gUogJA.png','Scene App','伊索科技','1','1418967212'),
+('0','onefound','800','壹基金','http://wx.yvkj.cn/attachment/images/1/2014/12/oo1oYPy7J474y71E1OLP1jEoslojS7.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/sjTi9T9W42DOt2Z2xOWw72ZJi9gojJ.png','Scene App','伊索科技','1','1418970832'),
+('0','employ','800','改变世界非你莫属','http://wx.yvkj.cn/attachment/images/1/2014/12/vRAx3d1GXu88Qa2xep3YpD19PplURZ.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/cT9gtVfVpedqyGJrz49fqt9Jqzy1bS.png','Scene App','伊索科技','1','1418971650'),
+('0','style13','800','3D相册','http://wx.yvkj.cn/attachment/images/1/2014/12/cQ86tfRUbERZtBBrFZBRQqzf7qK0aK.jpg','http://wx.yvkj.cn/attachment/images/1/2014/12/lo6346qeV4jKWeqWnn34EfhYqkyJhN.png','Scene App','伊索科技','1','1418974137'),
+('0','hammer','800','锤子手机','http://wx.yvkj.cn/attachment/images/1/2014/12/hgTWayViyBjL9Zr9ALYR5Rj9ygDQ5k.png','http://wx.yvkj.cn/attachment/images/1/2014/12/q49H4IHV9dy4iZh44d9I1IiLid4dHH.png','Scene App','伊索科技','1','1418975113');
+	]]></install>
+	<uninstall><![CDATA[
+	DROP TABLE IF EXISTS `ims_scene_cube_reply`;
+	DROP TABLE IF EXISTS `ims_scene_cube_page`;
+	DROP TABLE IF EXISTS `ims_scene_cube_manage`;
+	DROP TABLE IF EXISTS `ims_scene_cube_list`;
+	DROP TABLE IF EXISTS `ims_scene_cube_app`;
+	DROP TABLE IF EXISTS `ims_scene_cube_book`;
+  ]]></uninstall>
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>

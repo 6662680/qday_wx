@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+	<li {if $foo == 'create'}class="active"{/if}><a href="{php echo $this->createWebUrl('manager', array('foo' => 'create'));}">新增场景</a></li>
+	<li {if $foo == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('manager', array('foo' => 'display'));}">场景管理</a></li>
+	{if $_GPC['do']=='itemer'}
+	<li class="active"><a>场景图片上传</a></li>
+	{/if}
+	{if $_W['isfounder']}
+		<li {if $_GPC['do'] == 'templet'&& $foo == 'create'}class="active"{/if}><a href="{php echo $this->createWebUrl('templet', array('foo' => 'display'));}">模板制作</a></li>
+	{/if}
+	
+</ul>

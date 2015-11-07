@@ -1,0 +1,55 @@
+{template 'common/header'}
+{template 'nav_new.inc'}
+<style>
+/*手机端分页*/
+.pagination ul > li > a, .pagination ul > li > span{padding:3px 3px;}
+.alert {padding:6px}
+</style>
+<div class="container" style="margin-top:10px">
+  <div class="row">
+    <div class="col-xs-8">
+        <ol class="breadcrumb alert alert-success" >
+            <li>首页</li>
+            <li class="am-active">我发布的信息</li>
+        </ol>
+    </div>
+    <div class="col-xs-4">
+      <a href="{php echo $this->createMobileUrl('list')}" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;返回首页</a>
+    </div>
+  </div>
+</div>
+<div class="top-bar">		
+	<a href="{php echo $this->createMobileUrl('list')}"><i class="icon-home"></i></a><div class="vline"></div>
+	<a href="tel:{php echo $this->module['config']['tel'];}"><i class="icon-phone"></i></a>
+</div>
+<div class="container" style="margin-top:5px">
+  <div class="row">
+    <div class="col-xs-12">
+	{loop $list $row}
+	<div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="zhao_{$key}">
+              <div class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$key}" aria-expanded="true" aria-controls="collapse{$key}">
+                 <small>{$row['title']}</small>
+                </a>
+                <a class="btn btn-default" href="{php echo $this->createMobileUrl('detail', array('name' => 'detail', 'id' => $row['id'], 'weid' => $_W['weid']))}">查看</a>
+              </div>
+            </div>
+            <div id="collapse{$key}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="zhao_{$key}">
+              <div class="panel-body">
+                <img src="{$_W['attachurl']}{$row['thumb1']}" class="img-rounded" style="width:80px;height:80px"/>
+                <span class="label label-primary">价格</span>&nbsp;&nbsp;¥{$row['price']} 
+                <span class="label label-primary">发布时间</span>&nbsp;&nbsp;{php echo date('Y-m-d', $row['createtime'])}
+              </div>
+              <div class="panel-body">
+                <a class="btn btn-primary" href="{php echo $this->createMobileUrl('add',array('id' => $row['id']))}">编辑</a>
+                <a class="btn btn-danger" onclick="return confirm('确认删除？');" href="{php echo $this->createMobileUrl('mygoods',array('id' => $row['id'],'op' => 'delete'))}">删除</a>
+              </div>
+            </div>
+          </div>
+    {/loop}
+    {$pager}
+    </div>
+  </div>
+</div>
+{template 'common/footer'}

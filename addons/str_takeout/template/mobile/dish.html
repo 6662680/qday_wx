@@ -1,0 +1,156 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" href="../addons/str_takeout/template/resource/css/main.css">
+<script src="../addons/str_takeout/template/resource/js/dialog.js"></script>
+<script src="../addons/str_takeout/template/resource/js/main.js"></script>
+<script src="../addons/str_takeout/template/resource/js/menu.js"></script>
+<div class="container" onselectstart="return true;" ondragstart="return false;">
+	<header class="nav menu">
+		<div>
+			<a href="{php echo $this->createMobileUrl('dish', array('sid' => $_GPC['sid']))}" class="on">菜单</a>
+			<a href="{php echo $this->createMobileUrl('store', array('sid' => $_GPC['sid']))}">门店详情</a>
+		</div>
+	</header>
+	<form name="cart_form" action="{php echo $this->createMobileUrl('order', array('sid' => $sid), true);}" method="post">
+		<section class="menu_wrap" id="menuWrap">
+			{if !$store['business_hours_flag']}
+				<div class="tips">本店休息中，{$hour_str}营业</div>
+			{/if}
+			<div class="tips" style="color:#ff510c"><i class="fa fa-info-circle"></i> 点击分类列表可获取菜品</div>
+			<div id="menuNav" class="menu_nav">
+				<div class="ico_menu_wrap clearfix"><span class="ico_menu" id="icoMenu"><i></i></span></div>
+				<div class="side_nav" id="sideNav">
+					<ul>
+						{loop $category $cate}
+							<li><a href="javascript:void(0);" class="" data-cid="{$cate['id']}">{$cate['title']}</a></li>
+						{/loop}
+					</ul>
+				</div>
+			</div>		
+			<div class="menu_container">
+				<div class="menu_tt" id="cate-{$first_cate['id']}"><h2 class="">{$first_cate['title']}</h2></div>
+				<ul class="menu_list">
+					{loop $dish $ds}
+						<li>
+							<div>
+								{if $ds['thumb']}
+									<div><img src="{php echo tomedia($ds['thumb']);}" alt=""></div>
+								{else}
+									<div class="nopic"></div>
+								{/if}								
+							</div>
+							<div>
+								<h3>{$ds['title']}</h3>
+								<p>已售<span class="sale_num">{$ds['sailed']}</span>份<span class="sales"><strong class="sale_0"></strong></span></p>
+								<div class="info">{$ds['description']}</div>
+							</div>
+							<div class="price_wrap">
+								<strong>￥<span class="unit_price">{$ds['price']}</span></strong>
+								{if $store['business_hours_flag']}
+									<div class="fr" max="{$ds['total']}">
+										<a href="javascript:void(0);" class="btn_n add" data-num=""></a>
+									</div>
+									<input autocomplete="off" class="number" type="hidden" name="dish[{$ds['id']}]" value="">
+								{/if}
+							</div>
+						</li>
+					{/loop}
+				</ul>
+			</div>
+		</section>
+		<footer class="shopping_cart">
+			<div class="fixed">
+				<div class="cart_bg">
+					<span class="cart_num" id="cartNum"></span>
+				</div>
+				<div>￥<span id="totalPrice">0</span></div>
+				<div>
+					<span class="comm_btn disabled">还差<span id="sendCondition">{$store['send_price']}元</span>起送</span>
+					<a id="settlement" href="javascript:document.cart_form.submit();" class="comm_btn" style="display: none;">去结算</a>
+				</div>
+			</div>
+		</footer>
+	</form>
+	<div class="menu_detail" id="menuDetail">
+		<img style="display: none;">
+		<div class="nopic"><img src=""></div>
+		<a href="javascript:void(0);" class="comm_btn" id="detailBtn">来一份</a>
+		<dl>
+			<dt>价格：</dt>
+			<dd class="highlight">￥<span class="price"></span></dd>
+		</dl>
+		<p>月售<span class="sale_num"></span>份<span class="sales"><strong></strong></span></p>
+		<dl>
+			<dt>介绍：</dt>
+			<dd class="info"></dd>
+		</dl>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var offsetAry = [0];
+	var curIndex = 0;
+
+	$(function(){
+		var first_cid = "{$first_cate['id']}";
+		var sid = '{$sid}';
+
+		$('#sideNav li a').click(function(data){
+			$(this).parent().siblings().find('a').removeClass('on');
+			$(this).addClass('on');
+			var cid = parseInt($(this).attr('data-cid'));
+			if($('#cate-'+cid).length) {
+				return false;
+			}
+			$.post('{php echo $this->createMobileUrl("ajaxdish");}', {'cid' : cid, 'sid' : sid}, function(data){
+				if(data != 'empty') {
+					$('.menu_tt h2').removeClass('menu_fixed');
+					//$('#cate-' +cid+' h2').addClass('menu_fixed');
+
+					$('.menu_container').append(data);
+					offsetAry=[0];
+					$('.menu_tt h2').each(function(){
+						offsetAry.push($(this).offset().top);
+					});
+					$(window).scrollTop($('#cate-'+cid).offset().top);
+					$(window).scroll();
+				}				
+			});
+		});
+
+		$(window).bind('scroll', function(){
+			var st = $(document).scrollTop();
+			var i = 0;
+			var index = '';
+			var flag = 0;
+			for(; i < offsetAry.length; i++){
+				if(st >= offsetAry[i] && st < offsetAry[i + 1]){
+					flag = 1;
+					index = i;
+				}
+			}
+			if(!flag) index = offsetAry.length -1;
+			var j = index -1;
+			if(curIndex !== index){ // 判断分类是否切换
+				$('.menu_tt h2').removeClass('menu_fixed');
+				$('#sideNav').find('a').removeClass('on');
+				if(j >= 0){
+					$('#menuNav').addClass('menu_fixed');
+					$('.menu_tt').eq(j).find('h2').addClass('menu_fixed');
+					$('#sideNav').find('a').eq(j).addClass('on');	
+				}else{
+					$('#menuNav').removeClass('menu_fixed');
+				}
+				curIndex = index;
+			}
+			if(!index && st > 0) {
+				$('#menuNav').addClass('menu_fixed');
+				$('.menu_tt').eq(0).find('h2').addClass('menu_fixed');
+			} else if(!index && st == 0) {
+				$('#menuNav').removeClass('menu_fixed');
+				$('.menu_tt').eq(0).find('h2').removeClass('menu_fixed');
+			}
+		});
+	});
+</script>
+{template 'common'}
+{template 'common/footer'}

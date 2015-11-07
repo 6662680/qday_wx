@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/bootstrap_min.css?2014-08-28" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/bootstrap_responsive_min.css?2014-08-28" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/style.css?2014-08-28" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/todc_bootstrap.css?2014-08-28" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/themes.css?2014-08-28" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/inside.css?2014-08-28" media="all" />
+<script type="text/javascript" src="../addons/scene_cube/style/src/jQuery.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/bootstrap_min.js?2014-08-28"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/inside.js?2014-08-28"></script>
+<title>高级微场景后台</title>
+        <!--[if IE 7]>
+			<link rel="stylesheet" href="./resource/style/font-awesome-ie7.min.css">
+        <![endif]-->
+        <!--[if lte IE 8]>
+            <script src="../addons/scene_cube/style/js/excanvas_min.js?v=2014-05-21"></script>
+        <![endif]-->
+        <!--[if lte IE 9]>
+            <script src="../addons/scene_cube/style/js/watermark.js?v=2014-05-21"></script>
+        <![endif]-->
+<body>
+	<div id="main">
+    <div class="container-fluid">
+
+        <div class="row-fluid">
+            <div class="span12">
+
+                <div class="box">
+
+                    <div class="box-title">
+                        <div class="span10">
+                            <h3><i class="icon-edit"></i>留言管理 <small>{$app['title']}</small></h3>
+                        </div>
+                        <div class="span2"><a class="btn" href="Javascript:window.history.go(-1)">返回</a></div>
+                    </div>
+                    <div class="box-content">
+
+                        <div class="row-fluid">
+                            <div class="span12 control-group">
+                                <div class="span2">
+
+                                    <a class="btn" href="javascript:location.reload()"><i class="icon-refresh"></i></a>
+                                </div>
+                                <div class="pull-left datatabletool">
+                                    <a class="btn" attr="Batchsh" title="通过审核"><i class="icon-ok"></i>通过审核</a>
+                                    <a class="btn" attr="BatchDel" title="删除"><i class="icon-trash"></i>删除</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid dataTables_wrapper">
+
+
+                            <table id="listTable" class="table table-bordered   table-hover  dataTable">
+                                <thead>
+                                    <tr>
+                                        <th class='with-checkbox'>
+                                            <input type="checkbox" class="check_all" /></th>
+                                        <th>用户名</th>
+                                        <th>留言内容</th>
+                                        <th>时间</th>
+                                        <th class="norightborder">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+									{loop $list $row}
+                                    <tr>
+                                        <td class="with-checkbox">
+                                            <input type="checkbox" name="check" value="{$row['id']}" /></td>
+                                        <td>{$row['from']}</td>
+										<td>{$row['content']}</td>
+                                        <td>{php echo date('Y-m-d H:i:s',$row['create_time'])}</td>
+                                        <td>
+											{if $row['status']==0}
+										  <a class="btn" title="通过审核" href="javascript:G.ui.tips.confirm('您确定要通过这条留言？','{php echo $this->createWeburl('comment',array('op'=>'ok','cid'=>$row['id'],'list_id'=>$row['list_id']))}');"><i class="icon-ok"></i></a>
+										  {/if}
+											<a class="btn" title="删除" href="javascript:javascript:G.ui.tips.confirm('您确定要删除？','{php echo $this->createWeburl('comment',array('op'=>'del','cid'=>$row['id'],'list_id'=>$row['list_id']))}');"><i class="icon-remove"></i></a></td>
+
+                                    </tr>  
+                                    {/loop}
+                                </tbody>
+                            </table>
+                            <div class="dataTables_paginate paging_full_numbers"><span>       </span></div>
+                        </div>
+						{$pager}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+$(function(){
+    $("[attr='BatchDel']").click(function(){
+        var check = $("input:checked");
+        if(check.length<1){
+            alert('请选择删除项');
+            return false;
+        }
+        var id = new Array();
+			check.each(function(i){
+            id[i] = $(this).val();
+        });
+
+        $.post("{php echo $this->createWeburl('comment_ajax',array('list_id'=>$list_id))}", {tid:id,op:'del'},function(data){
+            if (data.errno ==0)
+            {
+                location.reload();
+            } else {
+                alert(data.error);
+            }
+        },'json');
+    });
+    $("[attr='Batchsh']").click(function(){
+        var check = $("input:checked");
+        if(check.length<1){
+            alert('请选择审核项');
+            return false;
+        }
+        var id = new Array();
+         check.each(function(i){
+            id[i] = $(this).val();
+        });
+
+        $.post("{php echo $this->createWeburl('comment_ajax',array('list_id'=>$list_id))}", {tid:id,op:'sh'},function(data){
+            if (data.errno ==0){
+                location.reload();
+            } else {
+                alert(data.error);
+            }
+
+
+        },'json');
+
+    });
+});
+</script>
+</body>
+</html>

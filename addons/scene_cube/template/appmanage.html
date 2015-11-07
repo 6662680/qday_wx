@@ -1,0 +1,318 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/style.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/btn.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/themes.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/inside.css?v=2014-05-21" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/powerFloat.css" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/plugins/daterangepicker/daterangepicker.css?v=2014-05-21" />
+<style type="text/css">
+    .table-bordered>thead>tr>th,.table-bordered>thead>tr>td{border-bottom-width:1px}
+    .norightborder{width:200px}
+    .box-content{line-height:26px}
+    .box-content .control-group{padding:5px}
+    .box-content .span12.control-group{height:30px;margin-bottom:10px;padding:0}
+    .form-horizontal .control-label{float:left;width:160px;padding-top:5px}
+    .col-xs-12.control-label{width:92px;text-align:right}
+    .form-horizontal .controls .radio{margin-left:20px;float:left;padding-right:20px}
+    .form-actions{margin-top:20px;margin-left:160px}
+    input{padding:2px 3px;vertical-align:middle}
+    .input-mini{width:60px}
+    .input-small-z{width:77px}
+    .input-small{width:90px}
+    .input-medium{width:150px}
+    .input-large{width:210px}
+    .input-xlarge{width:270px}
+    .input-xxlarge{width:530px}
+    .range_inputs label{display:block}
+    label.control-label{width:auto}
+    .range_inputs>div{margin-bottom:10px}
+    input[disabled],select[disabled],textarea[disabled],input[readonly],select[readonly],textarea[readonly]{cursor:not-allowed;background-color:#eee;border:1px solid #ccc}
+    .box-content input[type=text]{width:250px}
+    .input-append{height:36px}
+    .input-append input.daterangepick{vertical-align:inherit;float:left}
+    .input-append span.add-on{float:left;margin-left:-1px;height:32px;line-height:20px;background-color:#eee}
+    .input-group-btn button.btn-default{padding: 7px 12px;}
+</style>
+<script type="text/javascript" src="../addons/scene_cube/style/src/jQuery.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/bootstrap_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/inside.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/jquery-powerFloat.js"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/plugins/daterangepicker/daterangepicker.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/plugins/daterangepicker/moment_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/plugins/form/jquery_form_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/plugins/validation/jquery_validate_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/plugins/validation/jquery_validate_methods.js?v=2014-05-21"></script>
+
+
+{if $_GPC['op']=='accredit'}
+<div id="main">
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="box">
+                <div class="box-title">
+                    <div class="span12">
+                        <h3><i class="icon-edit"></i>授权微场景应用</h3>
+                    </div>
+                </div>
+                <form action="" method="post" class="form-horizontal form-validate">
+                    <div class="box-content">
+                        <div class="control-group">
+                            <label for="listorder" class="control-label">微信账户：</label>
+                            <div class="controls">
+                                {$_W['account']['name']}({$_W['weid']})
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="listorder" class="control-label">场景信息：</label>
+                            <div class="controls">
+                                {$app['title']}({$app['iden']})
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="weixin" class="control-label">微场景有效期：</label>
+                            <div class="controls">
+                                <div class="input-append">
+                                    <input type="text" name="valid_time" id="valid_time" class="daterangepick input-xlarge" value="{php echo date('Y/m/d H:i:s',$item['start_time'])} - {php echo date('Y/m/d H:i:s',$item['end_time'])}" readonly /><span class="add-on"><i class="icon-calendar"></i></span>
+                                </div>
+                                <span class="help-block" style="color:red">此有效期仅供参考,不在程序中控制</span>
+                            </div>
+                        </div>
+                        <div class="control-group clearfix">
+                            <label class="control-label">是否授权：</label>
+                            <div class="controls">
+                                <label class="radio inline"><input type="radio" value="1" name="status" {if $item['status']==1}checked="checked"{/if}>是</label>
+                                <label class="radio inline"><input type="radio" value="0" name="status"{if $item['status']==0}checked="checked"{/if} >否</label>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="appnums" class="control-label">授权数量：</label>
+                            <div class="controls">
+                                <input type="text" id="appnums" name="appnums" value="{$item['appnums']}" class="input-mini valid" data-rule-required="true" data-rule-number="true">
+                                <span class="help-inline">授权数量，开启状况下，0为不限制</span>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">保存</button>
+                            <button type="button" class="btn" onclick="window.history.go(-1)">取消</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+{elseif $_GPC['op']=='post'}
+<div id="main">
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="box">
+                <div class="box-title">
+                    <div class="span12">
+                        <h3><i class="icon-edit"></i>{if $item['title']}修改{else}新增{/if}微场景应用</h3>
+                    </div>
+                </div>
+                <form action="" method="post" class="form-horizontal form-validate">
+                    <div class="box-content">
+                        <div class="control-group">
+                            <label for="listorder" class="control-label">显示顺序：</label>
+                            <div class="controls">
+                                <input type="text" id="listorder" name="listorder" value="{$item['listorder']}" class="input-mini valid" data-rule-required="true" data-rule-number="true">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="title" class="control-label">微场景名称：</label>
+                            <div class="controls">
+                                <input type="text" name="title" id="title" value="{$item['title']}" class="input-medium" data-rule-required="true" data-rule-maxlength="50"><span class="maroon">*</span>
+                                <span class="help-inline">不能超过50个字</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="price" class="control-label">显示价格：</label>
+                            <div class="controls">
+                                <input type="text" id="price" name="price" value="{$item['price']}" class="input valid" data-rule-required="true" data-rule-number="true">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="iden" class="control-label">微场景标识：</label>
+                            <div class="controls">
+                                <input type="text" name="iden" id="iden" class="input-medium" value="{$item['iden']}" data-rule-required="true" data-rule-maxlength="25"><span class="maroon">*</span>
+                                <span class="help-inline">不能超过25个字符</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="thumb" class="control-label">展示图片：</label>
+                            <div class="controls">
+                                <div id="thumb" style="width:330px;">{php echo tpl_form_field_image('thumb', $item['thumb'])}</div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="qrcode" class="control-label">二维码：</label>
+                            <div class="controls">
+                                <div id="qrcode" style="width:330px;">{php echo tpl_form_field_image('qrcode', $item['qrcode'])}</div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="author" class="control-label">作者：</label>
+                            <div class="controls">
+                                <input type="text" name="author" id="author" value="{$item['author']}" class="input-medium" data-rule-required="true" data-rule-maxlength="25"><span class="maroon">*</span>
+                                <span class="help-inline">不能超过25个字符</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="series" class="control-label">作者：</label>
+                            <div class="controls">
+                                <input type="text" name="series" id="series" value="{$item['series']}" class="input-medium" data-rule-required="true" data-rule-maxlength="25"><span class="maroon">*</span>
+                                <span class="help-inline">不能超过25个字符</span>
+                            </div>
+                        </div>
+                        <div class="control-group clearfix">
+                            <label class="control-label">是否显示：</label>
+                            <div class="controls">
+                                <label class="radio inline"><input type="radio" value="1" name="isshow" {if $item['isshow']==1}checked="checked"{/if}>是</label>
+                                <label class="radio inline"><input type="radio" value="0" name="isshow"{if $item['isshow']==0}checked="checked"{/if} >否</label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">保存</button>
+                            <button type="button" class="btn" onclick="window.history.go(-1)">取消</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{else}
+<div id="main">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+
+                <div class="box">
+                    <div class="box-title">
+                        <div class="pull-left">
+                            <h3><i class="icon-table"></i>微场景-后台授权管理</h3>
+                        </div>
+                        <div class="pull-right">
+                            <form action="" method="get" class="form-horizontal">
+                                <input type="text" id="keyword-input" name="keyword" placeholder="请输入关键词" data-rule-required="true"/>
+                                <button class="btn">查询</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="box-content">
+
+                        <div class="row-fluid">
+                            <div class="span12 control-group clearfix" style="margin-bottom:10px">
+                                <div class="pull-left">
+                                    <a class="btn" href="{php echo $this->createWebUrl('app', array('op' => 'post'));}"><i class="icon-plus"></i>新增</a>
+                                    <a class="btn" href="javascript:location.reload()"><i class="icon-refresh"></i>刷新</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row-fluid dataTables_wrapper">
+                            <form action="/plus/formajax.php" method="post" class="form-horizontal">
+                                <table id="listTable" class="table table-bordered table-hover dataTable">
+                                    <thead>
+                                    <tr>
+                                        <!--<th class='with-checkbox'>
+                                            <input type="checkbox" class="check_all" /></th>-->
+                                        <th width="100">ID</th>
+                                        <th>微场景名称</th>
+
+                                        <th>授权</th>
+                                        <th>价格</th>
+                                        <th>标识</th>
+                                        <th>图片</th>
+                                        <th width="100">二维码</th>
+                                        <th>作者</th>
+                                        <th class="norightborder">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {loop $list $row}
+                                    {php $vo=pdo_fetch("select * from ".tablename('scene_cube_manage')."  where weid=:weid AND appid=:appid",array(':weid'=>$_W['weid'],':appid'=>$row['id']));}
+                                    <tr>
+                                        <td>{$row['id']}</td>
+                                        <td>{$row['title']}</td>
+                                        <td>
+                                            {if $vo['status']==0}
+                                            <span class="label label-red">未授权</span>
+                                            {else}
+                                            <span class="label label-green">授权</span>
+                                            {if $vo['appnums']==0}
+                                            (无限)
+                                            {else}
+                                            (上限{$vo['appnums']}个)
+                                            {/if}
+                                            {/if}
+                                        </td>
+                                        <td>{$row['price']}</td>
+                                        <td>{$row['iden']}</td>
+                                        <td><img src="{php echo toimage($row['thumb'])}" style="max-height:50px;"></td>
+                                        <td><img src="{php echo toimage($row['qrcode'])}" style="max-height:50px;"></td>
+                                        <td>{$row['series']}</td>
+                                        <td class="norightborder">
+                                            <a class="btn" href="{php echo $this->createWeburl('app',array('op'=>'import','appid'=>$row['id']))}" rel="tooltip" title="导入演示数据"><i class="icon-cloud-upload"></i></a>
+                                            <a class="btn" href="{php echo $this->createWeburl('app',array('op'=>'post','appid'=>$row['id']))}" rel="tooltip" title="微场景画面管理"><i class="icon-edit"></i></a>
+
+                                            <a class="btn" rel="tooltip" title="删除" href="javascript:drop_confirm('您确定要删除吗?', '{php echo $this->createWeburl('app',array('op'=>'del','id'=>$row['id']))}');"><i class="icon-remove"></i></a>
+                                            <a class="btn" href="{php echo $this->createWeburl('app',array('op'=>'accredit','appid'=>$row['id']))}" rel="tooltip" title="微场景授权页面"><i class="icon-user"></i></a>
+
+
+                                        </td>
+                                    </tr>
+                                    {/loop}
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        {$pager}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function drop_confirm(msg, url){
+        if(confirm(msg)){
+            $.post(url, {},function(data){
+                if(data.type=='success'){
+                    window.location = data.redirect;
+                }else{
+                    G.ui.tips.info(data.message);
+                }
+            },'json');
+        }
+    }
+    window.document.onkeydown = function(e) {
+        if ('BODY' == event.target.tagName.toUpperCase()) {
+            var e=e || event;
+            var currKey=e.keyCode || e.which || e.charCode;
+            if (8 == currKey) {
+                return false;
+            }
+        }
+    };
+</script>
+{/if}
+{template 'common/footer'}

@@ -1,0 +1,18 @@
+<div class="control-group js_scene_style js_video hide">
+	<div class="control-group">
+		<label for="" class="control-label">视频背景：</label>
+		<div class="margin-top10 controls">
+            <div id="video_image_uploads" style="width:330px;">
+                {php echo tpl_form_field_image('video[vthumb]', $data['vthumb'])}
+            </div>
+            <div class="help-inline">（建议尺寸:宽640像素,高300像素或等比图片）</div>
+        </div>
+	</div>
+	<div class="control-group">
+		<label for="" class="control-label">视频链接：</label>
+		<div class="controls">
+			<input type="text" class="input-xxlarge" name="video[url]" value="{$data['url']}" placeholder="请输入链接地址" data-rule-required="true" data-rule-url="true"/>
+			<span class="help-block">暂时只支持MP4、ogv、webm格式的视频,视频链接格式为http://您的域名/视频文件名.mp4(或ogv/webm)</span>
+		</div>
+	</div>
+</div>

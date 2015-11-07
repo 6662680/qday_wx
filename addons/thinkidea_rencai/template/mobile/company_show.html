@@ -1,0 +1,76 @@
+{template 'common_header'}
+<style>
+    .amtxt {margin: 5px 0 0 0}
+</style>
+<div class="am-g" style="margin:-2px 0 10px 0">
+    <div class="col-xs-12" style="">
+        <img class="am-radius" alt="{$company['name']}（公司形象照待上传）" src="{$_W['attachurl']}/thinkidea_rencai/{$company['avatar']}" width="100%" height="180px"/>
+    </div>
+
+    <div  style="background-color:#FFF">
+        <div class="am-tabs" data-am-tabs="{noSwipe: 1}">
+            <div class="am-tabs-bd">
+                <!-- 公司信息 -->
+                <div class="am-tab-panel am-fade" id="tab2">
+                    <h4>
+                        <strong>{$company['name']}</strong>
+                        {if $company['isauth'] == 0}
+                        <span class="am-badge am-badge-default">未认证</span>
+                        {else}
+                        <span class="am-badge am-badge-success">已认证</span>
+                        {/if}
+                    </h4>
+                    <p class="am-text-default amtxt">{$company['address']}&nbsp;&nbsp;<a href="{php echo $this->createMobileUrl('ShowCompanyMap', array('companyid' => $company['id']));}">查看地图</a></p>
+                    <p class="am-text-default amtxt">行业：&nbsp;&nbsp;{$industry['name']}</p>
+                    <p class="am-text-default amtxt">性质：&nbsp;&nbsp;{$config['companytype'][$company['type']]}</p>
+                    <p class="am-text-default amtxt">规模：&nbsp;&nbsp;{$config['scale'][$company['scale']]}</p>
+                </div>
+            </div>
+        </div>
+        <h4 style="margin: 15px 0 0 5px;">
+            <span style="border-left: 4px #ff8000 solid;height: 25px;display: inline-block;vertical-align: middle;margin-right: 10px;float: left;"></span>
+            公司简介
+        </h4>
+        <p style="margin-left: 5px">{$company['description']}</p>
+
+        <h4 style="margin-left: 5px">{$company['contact']}</h4>
+        <p style="margin-left: 5px">
+            <font color="red">{$company['mobile']}</font>
+            <a href="tel:{$company['mobile']}"><img class="am-circle" src="../addons/thinkidea_rencai/template/static/images/phone.jpg" width="18px" height="18px"></a>
+        </p>
+
+        <h4 style="margin-left: 5px;">
+            <span style="border-left: 4px #ff8000 solid;height: 25px;display: inline-block;vertical-align: middle;margin-right: 10px;float: left;"></span>
+            相关职位
+        </h4>
+        <div class="col-xs-12">
+            <ul class="am-list" style="margin-left: 5px">
+                {loop $other_jobs  $job}
+                <li>
+                    <a href="{php echo $this->createMobileUrl('JobShow', array('job_id' => $job['id']));}">
+                        {$job['title']}
+                        <span style="float: right;margin-right: 5px;color: red;font-weight: bold">{$config['payroll'][$job['payroll']]}</span>
+                    </a>
+                </li>
+                {/loop}
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    wx.ready(function () {
+        sharedata = {
+            title: "{$company['name']}",
+            desc: "{$company['description']}",
+            link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('CompanyShow')}",
+            imgUrl: "{MODULE_URL}/template/static/images/share_img.jpg",
+            success: function(){
+            },
+            cancel: function(){
+            }
+        };
+        wx.onMenuShareAppMessage(sharedata);
+        wx.onMenuShareTimeline(sharedata);
+    });
+</script>
+{template 'common_footer'}

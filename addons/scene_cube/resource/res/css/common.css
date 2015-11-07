@@ -1,0 +1,254 @@
+/* 
+ *  云+轻App项目公共css（组件级）
+ * ----------------------------------
+ *  作者：Charles
+ *  时间：2014-03-31
+ *  准则：NEC CSS规范
+ *  联系：16295853（qq）
+ *****************************************************************************************/
+
+/*全局样式*/
+html{background: #fff;}
+body{background: #fff; height: 1000px; color: #333333; font-family: '微软雅黑', '宋体'; -webkit-user-select: none; -ms-user-select: none; -moz-user-select: none; -khtml-user-select: none; user-select: none; overflow: hidden;}
+a,button,input,select,textarea,form{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+/*更多设置请参考：http://malash.me/201207/css3-gmail-scrollbar/ */
+.android ::-webkit-scrollbar {
+    height:0px;
+    width:0px
+}
+.iphone ::-webkit-scrollbar {
+    height:0px;
+    width:0px
+}
+.ipad ::-webkit-scrollbar {
+    height:0px;
+    width:0px
+}
+/*全局样式 end*/
+
+
+/*布局样式*/
+.g-header{min-height: 20px; overflow: hidden; background: #fff;}
+
+.g-content{min-height: 50px; margin-bottom: 99px; background: #fff;}
+
+.g-footer{min-height: 20px; height: 98px; overflow: hidden; background: -webkit-gradient(linear, 0 0, 0 100%, from(#f5f5f7), to(#e8e8ea)); -moz-linear-gradient( top,#f5f5f7,#e8e8ea); -o-linear-gradient(top,#f5f5f7, #e8e8ea); border-top: 1px solid #c8c7cd;}
+
+.g-container{width: 640px; margin: 0px auto;}
+/*布局样式 end*/
+
+
+/*通用模块*/
+/*盒子模块*/
+.m-box,
+.m-box-header,
+.m-box-content{margin: 0px; padding: 0px;}
+.m-box{margin: 0px 10px 20px 10px; padding-bottom: 20px; border-bottom: 1px solid #d6d6d6;}
+.m-box-header{height: 40px; margin-bottom: 22px; padding: 0px 22px;}
+.m-box-header h1, .m-box-header h2, .m-box-header h3, .m-box-header h4, .m-box-header h5, .m-box-header h6{color: #333333; font-size: 28px; font-weight: normal; margin: 0px; float: left; line-height: 40px;}
+.m-box-header a{float: right; font-size: 24px; text-decoration: none; color: #666666; line-height: 40px;}
+.m-box-header a i{font-family: 'serif'; font-style: normal; font-weight: bold;}
+.m-box-content{overflow: hidden; margin: 0px -10px 0px -10px;}
+
+/*app横向列表模块*/
+.m-appHList{list-style-type: none; margin: 0px; padding: 0px;}
+.m-appHList td{padding: 0px 16px; vertical-align: top;}
+.m-appHList td img{width: 160px; height: 160px; border: 0px;border-radius:6px}
+.m-appHList td h3{font-size: 28px; font-weight: normal; margin: 5px 0px; white-space: nowrap; text-overflow: ellipsis; width: 164px; overflow: hidden;}
+.m-appHList td p{width: 164px; font-size: 24px; color: #999999; margin: 2px 0px;}
+.m-appHList td p::before{content:''; margin-right: 2px; background: url(img/icons.png) no-repeat; width: 32px; height: 19px; display: inline-block; background-position: -145px 0px;}
+
+/*app竖列表模块*/
+.m-appVList{list-style-type: none; margin: 0px; padding: 0px 10px;}
+.m-appVList li{border-bottom: 1px solid #c8c7cd;}
+.m-appVList li a{text-decoration: none; height: 160px; display: block; margin: 0px -10px; padding: 18px 22px; position: relative; overflow: hidden; }
+.m-appVList li a:hover{background: #f7f7f7;}
+.m-appVList li img{float: left; width: 160px; height: 160px;;border-radius:6px}
+.m-appVList li h3{margin: 0px 0px 0px 175px; font-size: 28px; color: #333333; font-weight: normal;}
+.m-appVList li p{margin: 0px 0px 0px 175px; line-height: 50px; font-size: 24px; color: #999999; position: absolute; bottom: 5px;}
+.m-appVList li p::before{content:''; margin-right: 2px; background: url(img/icons.png) no-repeat; width: 32px; height: 19px; display: inline-block; background-position: -145px 0px;}
+
+/*app评论列表*/
+.m-commentList{list-style-type: none; margin: 0px; padding: 0px;}
+.m-commentList li{}
+.m-commentList li{border-bottom: 1px solid #d6d6d6;}
+.m-commentList li a{text-decoration: none; min-height: 140px; display: block; padding: 20px 28px; position: relative; overflow: hidden; color: #6e6e6e; outline: none;}
+.m-commentList li a:hover{background: #f7f7f7;}
+.m-commentList li div{overflow: hidden; font-size: 26px; line-height: 28px; margin-bottom: 28px;}
+.m-commentList li h3{font-weight: normal; float: left; margin: 0px;}
+.m-commentList li span{float: right;}
+.m-commentList li p{color: #333333; margin: 0px; font-size: 28px;}
+
+/*评论条*/
+.m-commentBar{margin: 18px 0px;}
+.m-commentBar-buttonBox,
+.m-commentBar-commentBox{text-align: center;}
+.m-commentBar-buttonBox .u-btn{padding: 0px 85px;}
+.m-commentBar-commentBox{display: none;}
+.m-commentBar-commentBox .u-textbox{margin-right: 15px;}
+.m-commentBar.z-edit .m-commentBar-buttonBox{display: none;}
+.m-commentBar.z-edit .m-commentBar-commentBox{display: block;}
+
+/*app搜索条*/
+.m-appSearchBar{padding: 20px; border-bottom: 1px solid #c8c7cd; position: relative; z-index: 1;}
+.m-appSearchBar .u-textbox{width: 600px; transition: all 0.2s; -webkit-transition: all 0.2s; -moz-transition: all 0.2s;}
+.m-appSearchBar .u-btn{opacity: 0; display: none; transition: all 0.2s; -webkit-transition: all 0.2s; -moz-transition: all 0.2s; position: absolute; right: 20px; top: 20px;}
+
+/*滚动加载框*/
+.m-scrollLoading{overflow: hidden; box-sizing: border-box;}
+.m-scrollLoading .pullDown, .m-scrollLoading .pullUp{background:#fff; height:40px; line-height:40px; padding:20px 0px 20px 30%; border-bottom:1px solid #ccc; font-weight:normal; font-size:30px; color:#888;}
+.m-scrollLoading .pullDown i, .m-scrollLoading .pullUp i{ display:block; float:left; width:40px; height:40px; background:url(img/pull-icon.png) 0 0 no-repeat; -webkit-background-size:40px 80px; background-size:40px 80px; -webkit-transition-property:-webkit-transform; -webkit-transition-duration:0.25s; margin-right: 20px; text-indent: -9999px;}
+.m-scrollLoading .pullDown i{-webkit-transform:rotate(0deg) translateZ(0);}
+.m-scrollLoading .pullUp i{-webkit-transform:rotate(-180deg) translateZ(0);}
+.m-scrollLoading .pullDown.flip i{-webkit-transform:rotate(-180deg) translateZ(0);}
+.m-scrollLoading .pullUp.flip i{-webkit-transform:rotate(0deg) translateZ(0);}
+.m-scrollLoading .pullDown.loading i, .m-scrollLoading .pullUp.loading i{background-position:0 100%;-webkit-transform:rotate(0deg) translateZ(0);-webkit-transition-duration:0s;-webkit-animation-name:scrollLoading;-webkit-animation-duration:2s;-webkit-animation-iteration-count:infinite;-webkit-animation-timing-function:linear;}
+@-webkit-keyframes scrollLoading {
+    from { -webkit-transform:rotate(0deg) translateZ(0); }
+    to { -webkit-transform:rotate(360deg) translateZ(0); }
+}
+
+/*工具条*/
+.m-toolbar{list-style-type: none; width: auto; height: 100%; padding: 0px; margin: 0px; border-top: 1px solid #fff; overflow: auto;}
+.m-toolbar li{float: left; width: 33.3%; text-align: center;}
+.m-toolbar-btn{padding-top: 10px; color: #505960; font-weight: normal; font-size: 20px; text-shadow: 0px 0px 1px #1F1F1F; text-decoration: none; display: block;}
+.m-toolbar-btn:hover,
+.m-toolbar-btn.z-actived{color: #3eb812; text-shadow: 0px 0px 1px #2BA200;}
+.m-toolbar-btn::before{content: ''; margin: 0px auto; margin-bottom: 8px; background: url(img/icons.png) no-repeat; width: 48px; height: 48px; display: block;}
+.m-toolbar-btn-recommend::before{background-position: 0px 0px;}
+.m-toolbar-btn-recommend.z-actived::before,
+.m-toolbar-btn-recommend:hover::before{background-position: 0px -48px;}
+.m-toolbar-btn-discovery::before{background-position: -48px 0px;}
+.m-toolbar-btn-discovery.z-actived::before,
+.m-toolbar-btn-discovery:hover::before{background-position: -48px -48px;}
+.m-toolbar-btn-get::before{background-position: -96px 0px;}
+.m-toolbar-btn-get.z-actived::before,
+.m-toolbar-btn-get:hover::before{background-position: -96px -48px;}
+
+/*通用元件*/
+/*按钮*/
+.u-btn{background: #fff; border: 1px solid #727981; border-radius: 5px; font-size: 28px; height: 62px; color: #4e4e4e; padding: 0px 12px; outline: none; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+.u-btn:hover{background: #DBEBFF; border-color: #187FC5; box-shadow: 0px 0px 12px 0px #57C9FF;}
+.u-btn:focus{outline: none;}
+a.u-btn{padding: 12px; text-decoration: none;}
+/*文本框*/
+.u-textbox{background: #fff; border: 1px solid #727981; border-radius: 5px; font-size: 28px; height: 60px; color: #4e4e4e; padding: 0px 16px; width: 468px; outline: none; box-sizing: border-box; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+.u-textbox:focus{border-color: #187FC5; box-shadow: 0px 0px 12px 0px #57C9FF; outline: none;}
+/*搜索文本框*/
+.u-textbox-search{background: url(img/icons.png) no-repeat -178px 14px; padding-left: 60px;}
+/*分组选项框*/
+
+/*文本块列表*/
+.u-textLinkList{list-style-type: none; padding: 0px 10px; margin: 0px;}
+.u-textLinkList li{border-bottom: 1px solid #c8c7cd; font-size: 28px; color: #666666;}
+.u-textLinkList li a{font-size: 28px; color: #666666; text-decoration: none; display: block; padding: 26px; margin: 0px -10px;}
+.u-textLinkList li a:hover{background: #f7f7f7;}
+
+/* 开关组 */
+.u-switchGroup{overflow: hidden; display: inline;}
+.u-switchGroup label{border: 1px solid #cdcccc; border-left-width: 0px; padding: 0px 73px; background: #fff; height: 58px; line-height: 58px; font-size: 28px; color: #333333; display: block; float: left; cursor: pointer;}
+.u-switchGroup :first-child{border-radius: 5px 0px 0px 5px; border-left-width:1px;}
+.u-switchGroup :last-child{border-radius: 0px 5px 5px 0px;}
+.u-switchGroup label.z-actived{border-color: #37a50f; background: #65ba46; color: #fff;}
+.u-switchGroup label input{display: none;}
+
+/*列表文本提示项*/
+.u-listTextItem{height: 80px; line-height: 80px; text-align: center; font-size: 32px;}
+/*通用元件 end*/
+
+
+/*图标样式*/
+/*
+.i-icon{background: url(img/icons.png) no-repeat; width: 48px; height: 48px; display: block;}
+.i-eye{}
+.i-star{background-position: 0px 0px;}
+.i-star-over{background-position: 0px -48px;}
+.i-magnifier{background-position: -48px 0px;}
+.i-magnifier-over{background-position: -48px -48px;}
+.i-info{background-position: -96px 0px;}
+.i-info-over{background-position: -96px -48px;}
+*/
+/*图标样式 end*/
+
+
+/*功能类*/
+.f-mb-15{margin-bottom: 15px;}
+.f-mb-22{margin-bottom: 22px;}
+.f-hide{display: none;}
+
+/*固定*/
+.f-fixedTop{position: fixed; top: 0px; left: 0px; right: 0px; z-index: 1;}
+.f-fixedBottom{position: fixed; bottom: 0px; left: 0px; right: 0px; z-index: 1;}
+/*功能类 end*/
+
+
+/*动画类*/
+/* animation */
+.a-fadeinT,.a-fadeinB{-webkit-animation:0.8s ease-out backwards;-moz-animation:0.8s ease-out backwards;-ms-animation:0.8s ease-out backwards;animation:0.8s ease-out backwards;}
+.a-bouncein{-webkit-animation:0.8s ease-out backwards;-moz-animation:0.8s ease-out backwards;-ms-animation:0.8s ease-out backwards;animation:0.8s ease-out backwards;}
+/* 淡入-从上 */
+.a-fadeinT{-webkit-animation-name:fadeinT;-moz-animation-name:fadeinT;-ms-animation-name:fadeinT;animation-name:fadeinT;}
+/* 淡入-从下 */
+.a-fadeinB{-webkit-animation-name:fadeinB;-moz-animation-name:fadeinB;-ms-animation-name:fadeinB;animation-name:fadeinB;}
+/* 弹入 */
+.a-bouncein{-webkit-animation-name:bouncein;-moz-animation-name:bouncein;-ms-animation-name:bouncein;animation-name:bouncein;}
+/* 淡入-从上 */
+@-webkit-keyframes fadeinT{
+    0%{opacity:0;-webkit-transform:translateY(-100px);}
+    100%{opacity:1;-webkit-transform:translateY(0);}
+}
+@-moz-keyframes fadeinT{
+    0%{opacity:0;-moz-transform:translateY(-100px);}
+    100%{opacity:1;-moz-transform:translateY(0);}
+}
+@-ms-keyframes fadeinT{
+    0%{opacity:0;-ms-transform:translateY(-100px);}
+    100%{opacity:1;-ms-transform:translateY(0);}
+}
+@keyframes fadeinT{
+    0%{opacity:0;transform:translateY(-100px);}
+    100%{opacity:1;transform:translateY(0);}
+}
+/* 淡入-从下 */
+@-webkit-keyframes fadeinB{
+    0%{opacity:0;-webkit-transform:translateY(100px);}
+    100%{opacity:1;-webkit-transform:translateY(0);}
+}
+@-moz-keyframes fadeinB{
+    0%{opacity:0;-moz-transform:translateY(100px);}
+    100%{opacity:1;-moz-transform:translateY(0);}
+}
+@-ms-keyframes fadeinB{
+    0%{opacity:0;-ms-transform:translateY(100px);}
+    100%{opacity:1;-ms-transform:translateY(0);}
+}
+@keyframes fadeinB{
+    0%{opacity:0;transform:translateY(100px);}
+    100%{opacity:1;transform:translateY(0);}
+}
+/* 弹入 */
+@-webkit-keyframes bouncein{
+    0%{opacity:0;-webkit-transform:scale(0.3);}
+    50%{opacity:1;-webkit-transform:scale(1.05);}
+    70%{-webkit-transform:scale(0.9);}
+    100%{-webkit-transform:scale(1);}
+}
+@-moz-keyframes bouncein{
+    0%{opacity:0;-moz-transform:scale(0.3);}
+    50%{opacity:1;-moz-transform:scale(1.05);}
+    70%{-moz-transform:scale(0.9);}
+    100%{-moz-transform:scale(1);}
+}
+@-ms-keyframes bouncein{
+    0%{opacity:0;-ms-transform:scale(0.3);}
+    50%{opacity:1;-ms-transform:scale(1.05);}
+    70%{-ms-transform:scale(0.9);}
+    100%{-ms-transform:scale(1);}
+}
+@keyframes bouncein{
+    0%{opacity:0;transform:scale(0.3);}
+    50%{opacity:1;transform:scale(1.05);}
+    70%{transform:scale(0.9);}
+    100%{transform:scale(1);}
+}
+/*动画类 end*/

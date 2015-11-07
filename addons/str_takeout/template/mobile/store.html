@@ -1,0 +1,62 @@
+{template 'common/header'}
+<script src="../addons/str_takeout/template/resource/js/swipe_min.js"></script>
+<script src="../addons/str_takeout/template/resource/js/main.js"></script>
+<script src="../addons/str_takeout/template/resource/js/menu.js"></script>
+<link rel="stylesheet" type="text/css" href="../addons/str_takeout/template/resource/css/main.css">
+<div class="container">
+	<header class="nav menu">
+		<div>
+			<a href="{php echo $this->createMobileUrl('dish', array('sid' => $_GPC['sid']))}">菜单</a>
+			<a href="{php echo $this->createMobileUrl('store', array('sid' => $_GPC['sid']))}" class="on">门店详情</a>
+		</div>
+	</header>
+	<section>
+		{if !empty($store['thumbs'])}
+			<div id="imgSwipe" class="img_swipe" style="visibility: visible;">
+				<ul style="width: 0px;">
+					{loop $store['thumbs'] $li}
+						<li><a href=""><img src="{php echo tomedia($li);}" /></a></li>
+					{/loop}
+				</ul>
+				<ol id="swipeNum">
+					{loop $store['thumbs'] $li}
+						<li class=""></li>
+					{/loop}
+				</ol>
+			</div>
+		{/if}
+		<div class="store_info">
+			<span><strong>{$store['delivery_time']}</strong>送达/分钟</span>
+			<span><strong>{$store['send_price']}</strong>起送价/元</span>
+			<span><strong>{$store['delivery_price']}</strong>配送费/元</span>
+		</div>
+		<ul class="box">
+			<li>
+				<a href="tel:{$store['telephone']}">
+					<span><i class="ico_tel"></i></span>
+					<strong>电话：{$store['telephone']}</strong>
+					<span><i class="ico_arrow"></i></span>
+				</a>
+			</li>
+			<li>
+				<a href="http://api.map.baidu.com/marker?location={$store['location_x']},{$store['location_y']}&title={$store['address']}&output=html">
+					<span><i class="ico_addres1"></i></span>
+					<strong>{$store['address']}</strong>
+					<span><i class="ico_arrow"></i></span>
+				</a>
+			</li>
+		</ul>
+		<ul class="box">
+			<li>营业时间： {$hour_str}</li>
+			<li>服务半径：{$store['serve_radius']}公里</li>
+			<li>配送区域：{$store['delivery_area']}</li>
+			<li>餐厅特色：{$store['description']}</li>
+		</ul>
+	</section>
+	<footer class="go_menu">
+		<div class="fixed">
+			<a href="{php echo $this->createMobileUrl('dish', array('sid' => $_GPC['sid']))}">立即点餐</a>
+		</div>
+	</footer>
+</div>
+{template 'common/footer'}

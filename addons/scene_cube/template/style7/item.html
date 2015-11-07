@@ -1,0 +1,139 @@
+{template 'common/header'}
+<link href="../addons/scene_cube/style/css/global.css?&versin=12" rel="stylesheet" type="text/css" />
+
+<section class="p-store m-storeDetail">
+<div class="m-storeDetail-top s-bg-fff">
+<!--修改 by 场景应用-->
+<div class="top-con" style="margin-left:20px;">
+<div class="u-pathStore f-size16">
+<span class="path-icon icon-home css_sprite s-bg-pathH"></span>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">App Store</a>
+<span class="path-icon icon-arrow css_sprite s-bg-pathA"></span>
+<a href="" class="path-item s-col-txt01">{$app['title']}</a>
+</div>
+</div>
+</div>
+<!--修改 by 场景应用-->
+<div class="m-storeDetail-con f-mag-t-20" style="margin-left:20px;">
+<div class="con-left m-cardScan" style="left: 0;">
+<div class="u-listShow f-card">
+<div class="item-top">
+<img alt="{$app['title']}" src="{php echo toimage($app['thumb'])}" />
+<span></span>
+<p class='f-tc'><img src="{php echo toimage($app['qrcode'])}" alt="二维码" /></p>
+</div>
+<div class="item-bottom s-bg-fff">
+<div class="tit">
+<h4 title="{$app['title']}">{$app['title']}</h4>
+<p title="{$app['author']}">by {$app['author']}</p>
+<span class="css_sprite s-bg-qr_icon icon-qr f-cur"></span>
+</div>
+<div class="con">
+<div class="con">
+<p>
+</p>
+<strong class="f-tr">【{$app['series']}】</strong>
+</div>
+</div>
+</div>
+</div>
+<p class="u-btn01 f-flow222 f-tc opacity j-detail-buy" data-free="" data-msg="">
+{if $isallow['status']==1}
+	{if $leftnum==0}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">已使用完</span> 购买 </a>
+	{else}
+	<a href="{$create_url}" class="f-size18 s-col-fff dingzhi">
+	<span class="f-size18">制作场景</span>  </a>
+	{/if}
+{else}
+<a href="javascript:alert('请联系管理人员购买开通！')" class="f-size18 s-col-fff dingzhi">
+<span class="f-size18">{php echo $this->doFormatMoney($app['price'])}/年</span>购买 </a>
+{/if}
+</p>
+</div>
+<div class="con-right m-cardInfo s-bg-fff s-col-333">
+<div class="top">
+<h3 class="f-size24">{$app['title']}<span class="f-size16 s-col-999">by {$app['series']}</span></h3>
+<div class="u-share">
+<div class="jiathis_style_24x24 s-col-444 f-size14">
+分享到：
+<a class="jiathis_button_qzone css_sprite"></a>
+<a class="jiathis_button_tsina css_sprite"></a>
+<a class="jiathis_button_tqq css_sprite"></a>
+<a class="jiathis_button_weixin css_sprite"></a>
+</div>
+</div>
+</div>
+<div class="bd">
+<div class="bd-ui bd-txt">
+<h4 class="f-size18">界面预览<span class='s-col-666 f-size14'> / Preview</span></h4>
+<div class="imgBox">
+<ul style="width:1600px;">
+<li>
+<img src="http://www.liveapp.cn/userfiles/case4/PrtSc/35/1.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/case4/PrtSc/35/2.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/case4/PrtSc/35/3.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/case4/PrtSc/35/4.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/case4/PrtSc/35/5.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/case4/PrtSc/35/6.png" style="width:100%;height:auto;">
+</li>
+<li>
+<img src="http://www.liveapp.cn/userfiles/case4/PrtSc/35/7.png" style="width:100%;height:auto;">
+</li>
+</ul>
+</div>
+</div>
+<div class="bd-intro bd-txt">
+<h4 class="f-size18">基本介绍<span class='s-col-666 f-size14'> / Introduction</span></h4>
+<p>iPhone6，有些人认为它将可能成为又一个影响整个世界的产品，虽不知道苹果公司会如何设计改良新一代机器，但应该会带来不小变化。在iPhone6即将推出之际，云来团队为表示对Apple的崇敬之意，特以LiveApp来表达对此产品的期待，上线不到一个月时间，访问量达到200万。</p>
+</div>
+<div class="bd-detail bd-txt">
+<h4 class="f-size18">详情介绍<span class='s-col-666 f-size14'> / Details</span></h4>
+<div>
+<p><strong>首页采用互动渲染效果<br>
+</strong>iPhone6 LiveApp首页创新采用互动渲染界面，将流星效果加入整体效果，彰显了iPhone6的科技和未来感，充分诠释了Apple的理念；<br>
+<strong></strong><br>
+<strong>递进翻页效果<br>
+</strong>LiveApp创新加入页面递进翻页效果，让画面在翻页的过程中更加自然流畅，用户体验感更好，同时展现科技的力量；<br>
+<strong></strong><br>
+<strong>画面叠加效果</strong><br>
+LiveApp新场景加入画面叠加效果，画面逐个飞入，并叠放在一起，左右滑动手机屏幕，即可欣赏每个精美画面，让产品细节展示更加完整；<br>
+<strong></strong><br>
+<strong>动感视频配合</strong><br>
+视频往往能够更给人以冲击感，让人更直观的欣赏并了解产品的价值，视频跟LiveApp的结合让用户视觉再次感受到冲击；<br>
+<strong></strong><br>
+<strong>地图导航</strong><br>
+如果你觉得意犹未尽，想进一步了解有关iPhone6的相关信息，可以到离你最近的苹果体验店，一键地图导航就可以找到体验店地址，方便又省心；<br>
+<strong></strong></p>
+<strong>一键分享</strong><br>
+你身边一定有很多的果粉，这么前卫的有关iPhone6的信息，一定有很多的小伙伴还不知道吧，赶紧一键分享给他们吧！ </div>
+</div>
+{template 'contact'}
+</div>
+</div>
+</div>
+</section>
+ 
+<script>
+
+$(".icon-qr").hover(function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.addClass('show');
+},function(){
+	var qr_img = $(this).parents('.item-bottom').prev().find('p');
+	qr_img.removeClass('show');	
+});
+</script>
+ {template 'common/footer'}

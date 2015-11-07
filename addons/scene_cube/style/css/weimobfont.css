@@ -1,0 +1,92 @@
+
+@font-face {font-family: "wmfont";
+  src: url('../font/weimobfont.eot'); /* IE9*/
+  src: url('../font/weimobfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../font/weimobfont.woff') format('woff'), /* chrome、firefox */
+  url('../font/weimobfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../font/weimobfont.svg#weimobfont') format('svg'); /* iOS 4.1- */
+}
+
+.wmfont {
+  font-family:"wmfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wm-user:before { content: "\e602"; }
+.wm-user {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e602');
+}
+.wm-senior:before { content: "\e603"; }
+.wm-senior {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e603');
+}
+.wm-customer:before { content: "\e606"; }
+.wm-customer {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e606');
+}
+.wm-chart:before { content: "\e607"; }
+.wm-chart {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e607');
+}
+
+.wm-setting:before { content: "\e60a"; }
+.wm-setting {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e60a');
+}
+.wm-basis:before { content: "\e60b"; }
+.wm-basis {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e60b');
+}
+
+.wm-marketing:before { content: "\e600"; }
+.wm-marketing {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e600');
+}
+.wm-mobile:before { content: "\e601"; }
+.wm-mobile {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e601');
+}
+.wm-stores:before { content: "\e604"; }
+.wm-stores {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e604');
+}
+.wm-weimobpay:before { content: "\e605"; }
+.wm-weimobpay {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e605');
+}
+.wm-hardware:before { content: "\e608"; }
+.wm-hardware {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e608');
+}
+.wm-industry:before { content: "\e609"; }
+.wm-industry {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e609');
+}
+.wm-system:before { content: "\e60c"; }
+.wm-system {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e60c');
+}
+.wm-vip:before { content: "\e60e"; }
+.wm-vip {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e60e');
+}
+.wm-takeaway:before { content: "\e60d"; }
+.wm-takeaway {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e60d');
+}
+.wm-catering:before { content: "\e60f"; }
+.wm-catering {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e60f');
+}
+.wm-groupon:before { content: "\e610"; }
+.wm-groupon {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e610');
+}
+.wm-vshop:before { content: "\e611"; }
+.wm-vshop {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\e611');
+}

@@ -1,0 +1,118 @@
+{template 'common/header'}
+{template 'nav.inc'}
+<style>
+  .navbar{margin-bottom:5px}
+  .nav>li{margin-bottom:5px}
+  .nav>li>a{padding:5px 10px}
+</style>
+
+<div class="container" style="margin-top:10px">
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    {loop $siders $key $sider}
+    <div class="item{if $key == 0} active{/if} ">
+      <a href="{$sider[1]}"><img src="{$_W['attachurl']}{$sider[0]}"></a>
+    </div>
+    {/loop}
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+</div>
+
+<div class="container" style="margin-top:10px">
+<div class="row">
+<div class="col-xs-12">
+  {if $keyword}
+    <ol class="breadcrumb alert alert-success" >
+        <li>搜索结果</li>
+    </ol>
+  {else}
+        <ul class="nav nav-pills" role="tablist">
+          <li role="presentation"><a href="{php echo $this->createMobileUrl('list')}" class="btn btn-danger">全部</a></li>
+        {loop $categorys $category}
+            <li role="presentation"><a href="{php echo $this->createMobileUrl('list',array('pcate' => $category['id']))}" class="btn btn-primary">{$category['name']}</a></li>
+        {/loop}
+        </ul>
+{/if}
+</div>
+   </div>
+</div>
+<div class="container" style="margin-top:10px">
+  <!-- 图文 -->
+  <div class="row">
+  {loop $list $key $row}
+	  <div class="col-xs-6">
+	     <div class="thumbnail">
+         <a href="{php echo $this->createMobileUrl('detail', array('name' => 'detail', 'id' => $row['id'], 'weid' => $_W['weid']))}">
+           <img src="{$_W['attachurl']}{$row['thumb1']}" alt="{$row['title']}" class="img-rounded" style="width:140px;height:95px">
+         </a>
+         <div class="caption">
+           <h5>{$row['title']}</h5>
+           <span><font color="red">￥{$row['price']}</font></span>
+         </div>
+         </div>
+	   </div>
+   {/loop}
+   </div>
+   
+   <!-- <div class="row">
+   <div class="col-xs-12">
+	      {loop $list $key $row}
+	      {if $key > 3}
+	      <div class="panel panel-default">
+	        <div class="panel-heading" role="tab" id="zhao_{$key}">
+	          <h4 class="panel-title">
+	            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{$key}" aria-expanded="true" aria-controls="collapse{$key}">
+	             {$row['title']}
+	            </a>
+	            <a class="btn btn-default" href="{php echo $this->createMobileUrl('detail', array('name' => 'detail', 'id' => $row['id'], 'weid' => $_W['weid']))}">查看</a>
+	          </h4>
+	        </div>
+	        <div id="collapse{$key}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="zhao_{$key}">
+	          <div class="panel-body">
+	         ¥{$row['price']}  / 
+	         {if $row['rolex'] == 1}    9.9成新
+	         {elseif $row['rolex'] == 2}9.5成新
+	         {elseif $row['rolex'] == 3}9成新
+	         {elseif $row['rolex'] == 4}8成新
+	         {elseif $row['rolex'] == 5}7成新
+	         {elseif $row['rolex'] == 6}6成新
+	         {/if} / 
+	         {$row['realname']} {if $row['sex'] == 0}先生{else}女士{/if} / 
+	         {php echo date('Y-m-d', $row['createtime'])}
+	         </div>
+	        </div>
+	      </div>
+	      {/if}
+	     {/loop}
+  </div>
+  </div> -->
+</div>
+<script>
+sharedata = {
+    'title' : "二手市场 — {$_W['account']['name']}",
+    'desc' : "{$_W['account']['name']} — 二手市场 — 物品买卖，跳蚤市场。",
+    'link' : '',
+    'imgUrl' : "{$_W['siteroot']}addons/secondmarket/template/static/logo.jpg"
+}
+</script>
+{template 'common/footer'}

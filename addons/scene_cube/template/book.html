@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/bootstrap_min.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/bootstrap_responsive_min.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/todc_bootstrap.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/themes.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/inside.css" media="all" />
+<script type="text/javascript" src="../addons/scene_cube/style/src/jQuery.js"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/bootstrap_min.js"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/inside.js"></script>
+<link rel="stylesheet" type="text/css" href="../addons/scene_cube/style/css/smartpaginator.css" />
+<script type="text/javascript" src="../addons/scene_cube/style/src/smartpaginator.js"></script>
+<script type="text/javascript" src="../addons/scene_cube/style/src/tables.js"></script>
+<title>预定记录</title>
+    <!--[if lte IE 9]><script src="./addons/public/style/src/watermark.js"></script><![endif]-->
+    <!--[if IE 7]><link href="./addons/public/style/css/font_awesome_ie7.css" rel="stylesheet" /><![endif]-->
+<style type="text/css">
+    .sk {
+        line-height: 24px;
+        color: #646464;
+        font-weight: bold;
+    }
+    .sk span {
+        font-weight: normal;
+    }
+</style>
+</head>
+<body>
+    <div id="main">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <div class="box">
+                        <div class="box-title">
+                            <div class="span8">
+                                <h3><i class="icon-table"></i>用户预定记录<small>{$app['title']}</small></h3>
+                            </div>
+                            <div class="span4">
+                                <!--<form action="" method="post" class="form-horizontal">
+                                    <input type="text" id="keyword-input" name="keywords" class="input-small-z" placeholder="" data-rule-required="true" />
+                                    <button class="btn">查询</button>
+                                </form>-->
+                            </div>
+                        </div>
+
+                        <div class="box-content">
+                            <div class="row-fluid">
+                                <div class="span22 control-group">
+                                    <div class="span7">
+                                        <a class="btn" href="javascript:location.reload()"><i class="icon-refresh"></i>刷新</a>
+                                    </div>
+                                    <div class="span5 datatabletool">
+                                        <a class="btn"  attr="BatchDel" title="删除"><i class="icon-trash"></i>删除</a>
+                                    </div>    
+                                </div>
+                            </div>
+
+                            <div class="row-fluid dataTables_wrapper">
+                                <form action="" method="post" class="form-horizontal">
+                                    <table id="listTable" class="table table-bordered table-hover  dataTable ajax-checkbox" ajax-url="{php echo $this->createWebUrl('changedefault')}" ajax-length="0">
+                                        <thead>
+                                            <tr>
+                                                <th class='with-checkbox'>
+                                                    <input type="checkbox" class="check_all" /></th>
+                                                <th width="80">编号</th>
+                                                <th>字段1</th>
+                                                <th>字段2</th>
+                                                <th>字段3</th>
+                                                <th>其他</th>
+                                                <th width="160">提交时间</th>
+                                                <th>openid</th>
+												<th width="100">状态</th>
+                                                <th width="150" class="norightborder">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+											{loop $list $row}		                                      
+                                            <tr>
+                                                {php $setting = json_decode($row['setting'],true)}
+                                                <td class="with-checkbox">
+                                                    <input type="checkbox" name="check" value="{$row['id']}"></td>
+                                                <td>{$row['id']}</td>
+                                                <td>{$row['str1']}</td>
+                                                <td>{$row['str2']}</td>
+                                                <td>{$row['str3']}</td>
+                                                <td class="win">
+                                                    {php echo count($setting)}
+                                                    {if count($setting) > 0}
+                                                    <span class="temp" style="display:none;border-top:1px solid #cccccc;">
+                                                    {loop $setting $sk $se}
+                                                        <div class="sk"><span>{$sk}</span>:{$se}</div>
+                                                    {/loop}
+                                                    </span>
+                                                    {/if}
+                                                </td>
+                                                <td>{php echo date('Y-m-d H:i:s',$row['create_time'])}</td>
+                                                <td>{$row['from_user']}</td>
+												<td>{if $row['status']==0}<span class="label label-red">未处理</span>
+													{elseif $row['status']==1}<span class="label label-blue">已处理</span>
+													{elseif $row['status']==2}<span class="label label-satgreen">已完成</span>
+													{/if}
+                                                <td class="norightborder">
+													<a class="btn" rel="tooltip" href="javascript:drop_confirm('您确定要删除吗?', '{php echo create_url('site/module', array('do' => 'book', 'name' => 'scene_cube','id'=>$row['id'],'foo'=>'delete'))}');" title="删除"><i class="icon-remove"></i></a>
+													 <div class="btn-group">
+                                                        <a href="#" data-toggle="dropdown" class="btn dropdown-toggle"><i class="icon-cog"></i>状态 <span class="caret"></span></a>
+                                                        <ul class="dropdown-menu dropdown-primary">
+                                                            <li>
+                                                                <a href="{php echo $this->createWeburl('book', array('foo' => 'setstatus', 'status' => 1,'book_id'=>$row['id'],'id'=>$id))}">已处理</a>
+                                                            </li> 
+                                                            <li>
+                                                                 <a href="{php echo $this->createWeburl('book', array('foo' => 'setstatus', 'status' => 0,'book_id'=>$row['id'],'id'=>$id))}">未处理</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{php echo $this->createWeburl('book', array('foo' => 'setstatus', 'status' => 2,'book_id'=>$row['id'],'id'=>$id))}">已完成</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+												</td>
+                                            </tr>
+                                            {/loop} 
+                                            </tbody>
+                                    </table>
+                                 </form>
+                            </div>
+						{$pager}
+						</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<script>
+$(function(){
+	$("[attr='BatchDel']").click(function(){
+		var check = $("input:checked");
+		if(check.length<1){
+			alert('请选择删除项');
+			return false;
+		}
+		
+		var id = new Array();
+			check.each(function(i){
+			id[i] = $(this).val();
+		});
+		
+		$.post('{php echo create_url('site/entry', array('do' => 'book', 'm' => 'scene_cube','foo'=>'deleteall'))}', {idArr:id},function(data){
+			if (data.errno ==0)
+			{
+				location.reload();
+			} else {
+				alert(data.error);
+			}
+		},'json');
+	});
+
+
+    //
+    var x = 10;
+    var y = 20;
+    $("td.win").mouseover(function(e){
+        var _eve = $(this).find("span.temp");
+        if (!_eve) return;
+        var tooltip = "<div id='img-tooltip' style='position:absolute;border:1px solid #ccc;padding:10px; background: #FFFFFF;'>"+_eve.html()+"</div>"; //创建 div 元素
+        $("body").append(tooltip); //把它追加到文档中
+        $("#img-tooltip").css({
+            "top": (e.pageY+y) + "px",
+            "left":  (e.pageX+x)  + "px"
+        }).show("fast");   //设置x坐标和y坐标，并且显示
+    }).mouseout(function(){
+        $("#img-tooltip").remove();  //移除
+    }).mousemove(function(e){
+        $("#img-tooltip").css({
+            "top": (e.pageY+y) + "px",
+            "left":  (e.pageX+x)  + "px"
+        });
+    }).click(function(){
+        var _eve = $(this).find("span.temp");
+        if (!_eve) return;
+        if (_eve.css("display") == "none"){
+            _eve.css("display","block")
+        }else{
+            _eve.css("display","none")
+        }
+    });
+});
+</script>
+
+<script>
+function drop_confirm(msg, url){
+    if(confirm(msg)){
+        window.location = url;
+    }
+}
+</script>
+</body>
+</html>

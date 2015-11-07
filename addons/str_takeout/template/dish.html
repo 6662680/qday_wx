@@ -1,0 +1,247 @@
+{template 'common/header'}
+<style type="text/css">
+	.require{color:red;}
+	.info{padding:6px;width:400px;margin:-20px auto 3px auto;text-align:center;}
+</style>
+<div class="alert alert-info info">
+	<i class="fa fa-info-circle"></i>
+	当前门店名称: {$store['title']}
+</div>
+<ul class="nav nav-tabs">
+	<li><a href="{php echo $this->createWebUrl('store');}"><i class="fa fa-reply-all"></i> 返回门店列表</a></li>
+	<li {if $op == ''}class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'cate_list'));}">菜品分类</a></li>
+	<li {if $op == 'cate_list'}class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'cate_list'));}">菜品分类</a></li>
+	<li {if $op == 'cate_post' && !$id} class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'cate_post'));}">添加菜品分类</a></li>
+	<li {if $op == 'dish_list'}class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'dish_list'));}">菜品列表</a></li>
+	<li {if $op == 'dish_post' && !$id} class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'dish_post'));}">添加菜品</a></li>
+	{if $op == 'dish_post' && $id} <li class="active"><a href="{php echo $this->createWebUrl('manage', array('op' => 'dish_post', array('id' => $id)));}">编辑菜品</a></li>{/if}
+	<li {if $op == 'order'}class="active"{/if}><a href="{php echo $this->createWebUrl('manage', array('op' => 'order', array('id' => $id)));}">订单管理</a></li>
+</ul>
+{if $op == 'dish_post'}
+	<form class="form-horizontal form" id="form1" action="" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="sid" value="{$sid}">
+		<div class="main">
+			<div class="panel panel-default">
+				<div class="panel-heading">添加菜品</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="require">* </span>菜品名称</label>
+						<div class="col-sm-9 col-xs-12">
+							<input type="text" class="form-control" name="title" value="{$item['title']}">
+						</div>
+					</div>	
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="require">* </span>菜品价格</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<div class="input-group">
+								<input type="text" class="form-control" name="price" value="{$item['price']}">
+								<span class="input-group-addon">元</span>
+							</div>
+							<div class="help-block">菜品价格为整数</div>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="require">* </span>总库存</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<input type="text" class="form-control" name="total" value="{$item['total']}">
+							<div class="help-block">-1为不限制被预订的菜品数</div>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="require">* </span>已卖出</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<input type="text" class="form-control" name="sailed" value="{$item['sailed']}">
+							<div class="help-block">已卖出的份数默认会根据订单自动更新。您也可以手动设置</div>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="require">* </span>是否上架</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<label class="radio-inline"><input type="radio" name="is_display" value="1" {if $item['is_display'] == 1 || !$item['is_display']}checked{/if}> 上架</label>
+							<label class="radio-inline"><input type="radio" name="is_display" value="2" {if $item['is_display'] == 2}checked{/if}> 下架</label>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="require">* </span>菜品分类</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<select name="cid" id="cid" class="form-control">
+								{loop $category $li}
+									<option value="{$li['id']}" {if $item['cid'] == $li['id'] || $_GPC['cid'] == $li['id']}selected{/if}>{$li['title']}</option>
+								{/loop}
+							</select>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="require">* </span>菜品图片</label>
+						<div class="col-sm-9 col-xs-12">
+							{php echo tpl_form_field_image('thumb', $item['thumb']);}
+							<div class="help-block">推荐大小为720x400</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">分类排序</label>
+						<div class="col-sm-9 col-xs-12">
+							<input type="text" class="form-control" name="displayorder" value="{$item['displayorder']}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label">菜品详情</label>
+						<div class="col-sm-9 col-xs-12">
+							<textarea name="description" class="form-control" rows="4" placeholder="请将字数控制在200以内">{$item['description']}</textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-9 col-xs-9 col-md-9">
+					<input type="hidden" name="token" value="{$_W['token']}">
+					<input name="submit" id="submit" type="submit" value="提交" class="btn btn-primary col-lg-1">
+				</div>	
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		require(['util'], function(u){
+			$('#post-add').click(function(){
+				$('#tpl-container').append($('#tpl').html());
+			});
+			$('#form1').submit(function(){
+				if($.trim($(':text[name="title"]').val()) == '') {
+					u.message('请填写菜品名称');
+					return false;
+				}
+				var price = parseInt($.trim($(':text[name="price"]').val()));
+				if(isNaN(price)) {
+					u.message("菜品价格必须为整数");
+					return false;
+				}
+				var total = parseInt($.trim($(':text[name="total"]').val()));
+				if(isNaN(total)) {
+					u.message("总库存必须为整数");
+					return false;
+				}
+				if(!$('#cid').val()) {
+					u.message("请选择菜品分类");
+					return false;					
+				}
+				if($.trim($(':text[name="thumb"]').val()) == '') {
+					u.message('请添加菜品图片');
+					return false;
+				}
+
+
+			});
+
+		});
+	</script>
+{elseif $op == 'dish_list'}
+	<style type="text/css">
+		.status-toggle{cursor:pointer;}
+	</style>
+	<div class="main">
+		<div class="panel panel-info">
+			<div class="panel-heading">筛选</div>
+			<div class="panel-body">
+				<form action="./index.php" method="get" class="form-horizontal" role="form">
+					<input type="hidden" name="c" value="site">
+					<input type="hidden" name="a" value="entry">
+					<input type="hidden" name="m" value="str_takeout">
+					<input type="hidden" name="do" value="manage"/>
+					<input type="hidden" name="op" value="dish_list"/>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="require">* </span>菜品分类</label>
+						<div class="col-sm-9 col-xs-9 col-md-9">
+							<select name="cid" id="cid" class="form-control">
+								<option value="">不限</option>
+								{loop $category $li}
+									<option value="{$li['id']}" {if $li['id'] == $_GPC['cid']}selected{/if}>{$li['title']}</option>
+								{/loop}
+							</select>
+						</div>	
+					</div>
+					<div class="form-group clearfix">
+						<label class="col-xs-12 col-sm-2 col-md-2 control-label">菜品名称</label>
+						<div class="col-sm-7 col-lg-8 col-md-8 col-xs-12">
+							<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+						</div>
+						<div class="col-xs-12 col-sm-3 col-md-2 col-lg-1">
+							<button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<form class="form-horizontal" action="" method="post">
+			<div class="panel panel-default">
+				<div class="panel-body table-responsive">
+					<table class="table table-hover">
+						<thead class="navbar-inner">
+							<tr>
+								<th>菜品名称</th>
+								<th>所属分类</th>
+								<th>价格</th>
+								<th>总库存</th>
+								<th>已售出</th>
+								<th>是否上架</th>
+								<th style="width:150px; text-align:right;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							{loop $lists $item}
+							<tr>
+								<td>{$item['title']}</td>
+								<td>{$category[$item['cid']]['title']}</td>
+								<td>{$item['price']} 元</td>
+								<td>{if $item['total'] == -1}无限库存{else}{$item['total']}份{/if}</td>
+								<td>{$item['sailed']} 份</td>
+								<td>
+									{if $item['is_display'] == 1}
+										<span class="label label-success status-toggle" id="{$item['id']}" data-toggle="2" title="点击修改">已上架</span>
+									{else}
+										<span class="label label-warning status-toggle" id="{$item['id']}" data-toggle="1" title="点击修改">已下架</span>
+									{/if}
+								</td>
+
+								<td style="text-align:right;">
+									<a href="{php echo $this->createWebUrl('manage', array('op' => 'dish_post', 'id' => $item['id']))}" class="btn btn-default btn-sm" title="编辑" data-toggle="tooltip" data-placement="top"><i class="fa fa-edit"> </i></a>
+									<a href="{php echo $this->createWebUrl('manage', array('op' => 'cate_del', 'id' => $item['id']))}" class="btn btn-default btn-sm" title="删除" data-toggle="tooltip" data-placement="top" onclick="if(!confirm('删除后将不可恢复，确定删除吗?')) return false;"><i class="fa fa-times"> </i></a>
+								</td>
+							</tr>
+							{/loop}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<input name="token" type="hidden" value="{$_W['token']}" />
+					<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+				</div>
+			</div>
+			{$pager}
+		</form>
+	</div>
+	<script type="text/javascript">
+		require(['util'], function(u){
+			$('.btn').hover(function(){
+				$(this).tooltip('show');
+			},function(){
+				$(this).tooltip('hide');
+			});
+			$('.status-toggle').click(function(){
+				var id = $(this).attr('id');
+				var dvalue = $(this).attr('data-toggle');
+				$.post('{php echo $this->createWebUrl('ajax', array('op' => 'status_dish'))}', {'id':id, 'value':dvalue}, function(data){
+					if(data == 'success') {
+						location.reload();
+					} else {
+						u.message('编辑菜品显示状态失败');
+					}
+				});
+			});
+		});
+
+	</script>
+{/if}
+{template 'common'}
+{template 'common/footer'}

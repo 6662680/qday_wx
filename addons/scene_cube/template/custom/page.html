@@ -1,0 +1,423 @@
+{template 'page_header'}
+	<script type="text/javascript" src="../addons/scene_cube/style/src/spuotlet_map.js?v=2014-05-21"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=359042E5AC9ced07c553ebe2042aad73"></script>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+
+                    <div class="box">
+                        <div class="box-title">
+                            <div class="span12">
+                                <h3><i class="icon-edit"></i>{if $id}修改{else}新增{/if}画面 <small>{$app['title']}</small></h3>
+                            </div>
+                        </div>
+
+                        <form id="page_form" action="" method="post" class="form-horizontal form-validate">
+
+                            <div class="box-content">
+
+                                <div class="control-group">
+                                    <label for="listorder" class="control-label">排序：</label>
+                                    <div class="controls">
+                                        <input type="text" name="listorder" id="listorder" class="input-medium" data-rule-required="true" data-rule-maxlength="50" value="{$item['listorder']}">
+                                        <span class="maroon">*</span>
+                                        <span class="help-inline">越大越靠前</span>
+                                    </div>
+                                </div>
+                                <div class="js_scene_picture">
+                                    <div class="control-group">
+                                        <label for="m_type" class="control-label">画面样式：</label>
+                                        <div class="controls">
+                                            <select class="inpit-medium js_scene_style_select" name="m_type" data-rule-required="true">
+                                                <option value="1" data-type="first" {if $item['m_type']==1}selected{/if}>场景1(单图片)</option>
+                                                <option value="2" data-type="second" {if $item['m_type']==2}selected{/if}>场景2(自定义)</option>
+                                                <option value="3" data-type="third" {if $item['m_type']==3}selected{/if}>3D云标签</option>
+                                                <option value="4" data-type="map" {if $item['m_type']==4}selected{/if}>地图详细信息</option>
+                                                <option value="5" data-type="fifth" {if $item['m_type']==5}selected{/if}>表单提交</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group alert alert-success js_scene_style js_first hide">
+                                        场景1：纯背景图片
+                                    </div>
+
+                                    <div class="control-group alert alert-success js_scene_style js_second hide">
+                                        场景2：自定义效果(具体参考实例)
+                                    </div>
+
+                                    <div class="control-group alert alert-success js_scene_style js_third hide">
+                                        场景3：3D云标签效果
+                                    </div>
+
+                                    <div class="control-group alert alert-success js_scene_style js_map hide">
+                                        场景4：地图导航
+                                    </div>
+
+                                    <div class="control-group alert alert-success js_scene_style js_fifth hide">
+                                        场景5：提交表单
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label for="" class="control-label">画面内容：</label>
+                                        <div class="controls">
+                                            <!--纯图开始-->
+                                            <div>
+                                                <div id="firstimg_image_uploads" style="width:330px;">
+                                                    {php echo tpl_form_field_image('thumb', $item['thumb'])}
+                                                </div>
+                                                <div class="help-inline">（建议尺寸:宽640像素,高960像素或等比图片）</div>
+                                            </div>
+                                            <!--纯图结束-->
+                                        </div>
+                                    </div>
+                                    <div class="control-group js_scene_style js_second hide">
+                                        <label class="control-label">多图展示：</label>
+                                        <div class="controls">
+                                            <div class="span12" style="margin-bottom:10px">
+                                                <a class="btn addsucai" ><i class="icon-plus"></i>添加素材</a>
+                                            </div>
+                                            <table class="table table-bordered table-hover dataTable">
+                                                <thead>
+                                                <tr>
+                                                    <th>图片</th>
+                                                    <th>效果</th>
+                                                    <th>x</th>
+                                                    <th>y</th>
+                                                    <th class="norightborder">操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="listTable">
+                                                {if !empty($data['thumbs'])}
+                                                {loop $data['thumbs'] $key $row}
+                                                <tr class="copy_rows">
+                                                    <td>
+                                                        <div id="map_image_uploads" class="">
+                                                            <img upload="image-single" style="max-height:50px;" src="{php echo toimage($row)}" />
+                                                            <input type="hidden" value="{$row}" name="second[thumbs][]" id="mapimage" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="{$data['animations'][$key]}" name="second[animations][]">
+                                                        {$data['animations'][$key]}
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="{$data['x'][$key]}" name="second[x][]">{$data['x'][$key]}
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="{$data['y'][$key]}" name="second[y][]">{$data['y'][$key]}
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" value="{$data['itype'][$key]}" name="second[itype][]">
+                                                        <input type="hidden" value="{$data['url'][$key]}" name="second[url][]">
+                                                        <a href="javascript:;" class="del">删除</a>
+                                                    </td>
+                                                </tr>
+                                                {/loop}
+                                                {/if}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="control-group js_scene_style js_third hide">
+                                        <div class="control-group">
+                                            <label for="" class="control-label">第一张图：</label>
+                                            <div class="controls">
+                                                <div id="share_image_uploads" style="width:330px;">
+                                                    {php echo tpl_form_field_image('third[pic1]', $data['pic1'])}
+                                                </div>
+                                                <div class="help-inline">（建议尺寸:展示图片，大小看案例）</div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="" class="control-label">第二张图：</label>
+                                            <div class="controls">
+                                                <div id="share_image_uploads" style="width:330px;">
+                                                    {php echo tpl_form_field_image('third[pic2]', $data['pic2'])}
+                                                </div>
+                                                <div class="help-inline">（建议尺寸:展示图片，大小看案例）</div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="" class="control-label">第三张图：</label>
+                                            <div class="controls">
+                                                <div id="share_image_uploads" style="width:330px;">
+                                                    {php echo tpl_form_field_image('third[pic3]', $data['pic3'])}
+                                                </div>
+                                                <div class="help-inline">（建议尺寸:展示图片，大小看案例）</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group js_scene_style js_third hide">
+                                        <label class="control-label">3D云标签：</label>
+                                        <div class="controls">
+                                            <div class="span12" style="margin-bottom: 10px;">
+                                                <a href="javascript:void(0)" class="btn" id="add_menu2"><i class="icon-plus"></i>添加图片</a>
+                                            </div>
+                                            <table class="table table-bordered table-hover dataTable">
+                                                <thead>
+                                                <tr>
+                                                    <th style="width:350px;">图片地址</th>
+                                                    <th>标题</th>
+                                                    <th>简介</th>
+                                                    <th style="width:80px;">操作</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody id="listTable2">
+                                                {if empty($data['thumbs'])}
+                                                <tr class="copy_rows2">
+                                                    <td>
+                                                        <div id="map_image_uploads" style="width:330px;">
+                                                            {php echo tpl_form_field_image('third[thumbs][]', '')}
+                                                        </div>
+                                                        <div class="help-inline">（建议尺寸:宽64像素,高64像素或等比图片）</div>
+                                                    </td>
+                                                    <td><input type="text" name="third[title][]" class="form-control"></td>
+                                                    <td><input type="text" name="third[brief][]" class="form-control"></td>
+                                                    <td><a href="javascript:;" class="del">删除</a></td>
+                                                </tr>
+                                                {else}
+                                                {loop $data['thumbs'] $key $row}
+                                                <tr class="copy_rows2">
+                                                    <td>
+                                                        <div id="map_image_uploads" style="width:330px;">
+                                                            {php echo tpl_form_field_image('third[thumbs][]', $data['thumbs'][$key])}
+                                                        </div>
+                                                        <span class="help-inline">（建议尺寸:宽64像素,高64像素或等比图片）</span>
+                                                    </td>
+                                                    <td><input type="text" name="third[title][]" class="form-control" value="{$data['title'][$key]}"></td>
+                                                    <td><input type="text" name="third[brief][]" class="form-control" value="{$data['brief'][$key]}"></td>
+                                                    <td><a href="javascript:;" class="del">删除</a></td>
+                                                </tr>
+                                                {/loop}
+                                                {/if}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="control-group js_scene_style js_map hide">
+                                        <div class="control-group">
+                                            <label for="" class="control-label">地图背景：</label>
+                                            <div class="margin-top10 controls">
+                                                <div id="map_image_uploads" style="width:330px;">
+                                                    {php echo tpl_form_field_image('map[mthumb]', $data['mthumb'])}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="sname">名称</label>
+                                            <div class="controls">
+                                                <input type="text" id="sname" class="input-large" name="map[sname]" value="{$data['sname']}"/>
+                                                <span class="maroon">*</span><span class="help-inline">(导航显示名称)</span>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="suggestId">经纬度</label>
+                                            <div class="controls">
+                                                <div class="input-append">
+                                                    <input type="text" id="suggestId" class="input-xlarge" name="map[place]" data-rule-required="true"  value="{$data['place']}"/>
+                                                    <button class="btn" type="button" id="positioning">搜索</button>
+                                                </div>
+
+                                                <span class="maroon">注意：这个只是模糊定位，准确位置请地图上标注!</span>
+                                                <div id="l-map">
+                                                    <i class="icon-spinner icon-spin icon-large"></i>地图加载中...
+                                                </div>
+                                                <div id="r-result">
+                                                    <input type="hidden" id="lng" name="map[lng]" value="{$data['lng']}" />
+                                                    <input type="hidden" id="lat" name="map[lat]" value="{$data['lat']}"  />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group js_scene_style js_fifth hide">
+                                        <div class="control-group">
+                                            <label for="" class="control-label">表单背景：</label>
+                                            <div class="margin-top10 controls">
+                                                <div id="map_image_uploads" style="width:330px;">
+                                                    {php echo tpl_form_field_image('fifth[mthumb]', $data['mthumb'])}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="control-label">表单提交：</label>
+                                        <div class="controls">
+                                            <div class="span12" style="margin-bottom: 10px;">
+                                                <a href="javascript:void(0)" class="btn" id="add_menu3"><i class="icon-plus"></i>添加表单项</a>
+                                            </div>
+                                            <table class="table table-bordered table-hover dataTable">
+                                                <thead>
+                                                <tr>
+                                                    <th>项名称</th>
+                                                    <th style="width:40%;">操作</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody id="listTable3">
+                                                {if empty($data['title'])}
+                                                <tr class="copy_rows3">
+                                                    <td><input type="text" name="fifth[title][]" class="form-control"></td>
+                                                    <td><a href="javascript:;" class="del">删除</a></td>
+                                                </tr>
+                                                {else}
+                                                {loop $data['title'] $key $row}
+                                                <tr class="copy_rows3">
+                                                    <td><input type="text" name="fifth[title][]" class="form-control" value="{$data['title'][$key]}"></td>
+                                                    <td><a href="javascript:;" class="del">删除</a></td>
+                                                </tr>
+                                                {/loop}
+                                                {/if}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--分享开始-->
+
+                                <div class="form-actions" style="margin-left:167px;">
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                                    <button type="button" class="btn" onclick="window.history.go(-1)">取消</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<div id="modal" class="modal hide fade"
+     style="width:600px;height:630px;background-color:#ffffff;top:50%;margin-top:-315px;left:50%;margin-left:-300px;">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3 id="myModalLabel">设置动画元素</h3>
+	</div>
+	<div class="modal-body" style="max-height: 800px;">
+	</div>
+</div>
+    <script type="text/javascript">      
+	
+        $(function () {
+			$(".addsucai").click(function(){
+                $('#modal').removeClass('hide').addClass('in').modal('show');
+				$.get("{php echo $this->createWebUrl('page', array('op' =>'sucai','pid'=> $id, 'list_id' => $list['id'],'id'=>$id));}", function(data){
+					$(".modal-body").html(data);
+				});
+			});
+            $(".js_scene_picture").each(function(){
+                var type=$(this).find(".js_scene_style_select option:selected").data("type");
+                $(this).find(".js_scene_style").addClass('hide');
+                $(this).find(".js_"+type).removeClass('hide');
+				if(type=='map'){
+					{if !empty($data['lat'])&&!empty($data['lng'])}
+					   var op = { 
+							lat: {$data['lat']},
+							lng: {$data['lng']},
+							adr: "{$data['place']}"
+						}
+						baidu_map(op);
+					{else}
+						baidu_map();
+					{/if}
+				}
+            });
+			//删除门店实景
+			$("#listTable .del").click(function () {
+					var removeObj = $(this).parent('td').parent('tr');
+					//var className = removeObj.attr('class');
+					return removeObj.remove();
+				
+			});
+            $(document).on("change",".js_scene_style_select",function(){
+                var $p=$(this).parents(".js_scene_picture"),type=$(this).find("option:selected").data("type");
+                $p.find(".js_scene_style").addClass('hide');
+                $p.find(".js_"+type).removeClass('hide');
+				if(type=='map'){
+				   {if !empty($data['lat'])&&!empty($data['lng'])}
+					   var op = { 
+							lat: {$data['lat']},
+							lng: {$data['lng']},
+							adr: "{$data['place']}"
+						}
+						baidu_map(op);
+					{else}
+						baidu_map();
+					{/if}
+				}
+            });
+			
+        });
+
+		window.document.onkeydown = function(e) {
+			if ('BODY' == event.target.tagName.toUpperCase()) {
+				var e=e || event;
+                var currKey=e.keyCode || e.which || e.charCode;
+				if (8 == currKey) {
+					return false;
+				}
+			}
+		};
+		//页面事件监听
+		$(document).ready(function(){
+			//新增门店实景
+			$("#add_menu").click(function(){
+				$('.copy_rows:first').clone(true).appendTo('#listTable').find('input[type=text]').val('');
+				$('.copy_rows:last').find('img').attr({src:'',alt:'',title:''});
+				//$('.copy_rows:last').find('script').remove();
+			});
+
+			//删除门店实景
+			$("#listTable .del").click(function () {
+					var removeObj = $(this).parent('td').parent('tr');
+					var className = removeObj.attr('class');
+					if($("." + className).length <= 1){
+						removeObj.find('img').attr("src","");
+						return removeObj.find('input[type=text],input[type=hidden]').val('');
+					}
+					return removeObj.remove();
+			});
+
+            //新增门店实景
+            $("#add_menu2").click(function(){
+                $('.copy_rows2:first').clone(true).appendTo('#listTable2').find('input[type=text]').val('');
+                $('.copy_rows2:last').find('img').attr({src:'',alt:'',title:''});
+                //$('.copy_rows2:last').find('script').remove();
+            });
+
+            //删除门店实景
+            $("#listTable2 .del").click(function () {
+                var removeObj = $(this).parent('td').parent('tr');
+                var className = removeObj.attr('class');
+                if($("." + className).length <= 1){
+                    removeObj.find('img').attr("src","");
+                    return removeObj.find('input[type=text],input[type=hidden]').val('');
+                }
+                return removeObj.remove();
+            });
+
+            //新增门店实景
+            $("#add_menu3").click(function(){
+                $('.copy_rows3:first').clone(true).appendTo('#listTable3').find('input[type=text]').val('');
+                $('.copy_rows3:last').find('img').attr({src:'',alt:'',title:''});
+                //$('.copy_rows2:last').find('script').remove();
+            });
+
+            //删除门店实景
+            $("#listTable3 .del").click(function () {
+                var removeObj = $(this).parent('td').parent('tr');
+                var className = removeObj.attr('class');
+                if($("." + className).length <= 1){
+                    removeObj.find('img').attr("src","");
+                    return removeObj.find('input[type=text],input[type=hidden]').val('');
+                }
+                return removeObj.remove();
+            });
+
+		});
+
+
+	</script>
+{template 'common/footer'}
