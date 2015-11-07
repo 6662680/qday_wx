@@ -1,0 +1,111 @@
+
+  <script src="../addons/lxy_buscard/template/js/iscroll.js" type="text/javascript"></script>
+<link rel="stylesheet" href="../addons/lxy_buscard/template/css/nav.css">
+	<script>
+    $(function(){
+	$("#erwei").click(function(){
+	   $("#tcwcode").toggle();	
+       $("#linkmanimg").hide();
+    });
+	
+	$("#tcwcode").click(function(){
+		$(this).hide();
+	});
+    
+    $("#linkman").click(function(){
+       $("#linkmanimg").toggle();
+       $("#tcwcode").hide();	
+    });
+});    
+
+	function sharepoint()
+	{
+			document.getElementById('mcover').style.display='block';
+		}
+
+    </script>
+     {php $wxzf_url= $_W['siteroot']."app/".$this->createMobileUrl('viewcard',array('id'=>$item['id']));}
+     {php $wxtitle=$item['copname'].'微名片'}
+     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+     <script>
+	// jssdk config 对象
+	jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || { jsApiList:[] };
+	
+	// 是否启用调试
+	// jssdkconfig.debug = true;
+	
+	// 已经注册了 jssdk 文档中所有的接口
+	jssdkconfig.jsApiList = [
+		'checkJsApi',
+		'onMenuShareTimeline',
+		'onMenuShareAppMessage',
+		'onMenuShareQQ',
+		'onMenuShareWeibo',
+		'showOptionMenu',		
+	];
+	
+	wx.config(jssdkconfig);
+
+	sharedata = {
+		title : "{php echo $wxtitle}",
+		link : "{php echo $wxzf_url}",
+		desc : "{php echo $wxtitle}",
+		imgUrl :"{if $item['coplogo']}{php echo $_W['attachurl'].$item['coplogo']}{else}{php echo $_W['siteroot'].'addons/lxy_buscard/template/img/sharepic.png';}{/if}"
+	};
+	
+	wx.ready(function () {
+		wx.showOptionMenu();
+		wx.onMenuShareAppMessage(sharedata);
+		wx.onMenuShareTimeline(sharedata);
+		wx.onMenuShareQQ(sharedata);
+		wx.onMenuShareWeibo(sharedata);
+	});
+</script>
+
+ 
+
+	<div style="padding-bottom: 20%;"></div>
+	 <div class="erwei" id="tcwcode" style="display:none;text-align:center; width:80%;margin: 0px 10%;">
+             <p><img src="{$_W[attachurl]}/qrcode_{$uniacid}.jpg?uniacid={$weaccount}" alt=""></p>
+    	</div>
+    
+     <div class="erwei" id="linkmanimg" style="display:none;text-align:center; width:80%;margin: 0px 10%;">
+     <div style="text-align: center; font-size:1.8em;background:#fff">手机截取屏幕再用二维码扫描器，<br>或长按图片保存到本地再扫一扫</div>
+		<p><img src="./11_files/chart" alt=""></p>
+	</div>
+	
+	
+<div id="box_footerBody" style="bottom:0%;">
+		<div id="Toolbar" class="Toolbar">
+			<ul id="uldiv" class="footerWrap">
+				<li class="active">
+                                    <a href="{$item['website']}">
+										<span class="icon aten"></span>
+						<span class="text">官网</span>
+					</a>
+				</li>
+				<li class="active">
+					<a href="tel:{$item['mobile']}" id="mobile">
+						<span class="icon tel"></span>
+						<span class="text">电话</span>
+					</a>
+				</li>
+				<li class="active" id="erwei">
+					<div>
+						<span class="icon dobl"></span>
+						<span class="text">公众号</span>
+					</div>
+				</li>
+
+				<li class="active">
+					<a href="javascript:sharepoint();">
+						<div>
+							<span class="icon share"></span>
+							<span class="text">分享</span>
+						</div>	
+					</a>
+				</li>
+			</ul>	
+		</div> 
+		
+</div>

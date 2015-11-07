@@ -1,0 +1,97 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+<link href="{$_W['siteroot']}addons/hx_subscribe/template/style/css/style.css?v={TIMESTAMP}" rel="stylesheet" type="text/css">
+<body id="card" class="mode_webapp">
+<div class="head"><span class="title">加粉神器</span></div><div class="cardexplain" >
+<div class="cardcenter">
+	<div class="card">
+		<img src="{$_W['siteroot']}addons/hx_subscribe/template/style/img/card_bg08.png" class="cardbg" />
+		<div class="avater">
+			<img class="img-rounded" src="{$profile['avatar']}" style="width: 50px;">
+		</div>
+		<a href="{$_W['siteroot']}app/index.php?c=mc&a=home&i={$_W['uniacid']}&wxref=mp.weixin.qq.com#wechat_redirect">
+		<div class="info">
+			<div style="color:#000;font-size:18px;">{$profile['nickname']}</div>
+			<div style="color:#000;font-size:14px;">积分:{$log['shouyi']}</div>
+		</div>
+		</a>
+	</div>
+	<p class="explain">
+		{if !empty($apply)}<span><i class="fa fa-volume-up"></i> {$apply['realname']}刚刚兑换了红包，大家加油哦！</span>{/if}
+	</p>
+</div>
+<div style="text-align:center;margin-top:7px;margin-bottom:7px;">
+	<a href="{php echo $this->createMobileUrl('apply')}"><button class="btn btn-success btn-lg" type="submit" style="width:90%;">我要红包！</button></a>
+</div>
+
+
+
+	<div class="jifen-box">
+		<ul class="zongjifen">
+			<li>				
+				<div class="fengexian">
+					<p>活动积分</p>
+					<span>{$log['shouyi']}</span>
+				</div>
+			</li>
+			<li>
+				<div class="fengexian">
+					<p>直接连接</p>
+					<span>{$log['zjrs']}人</span>
+				</div>
+			</li>
+			<li>
+				<p>间接连接</p>
+				<span>{$log['jjrs']}人</span>
+			</li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+
+	<ul class="round" id="notice">
+		<li>
+			<a href="{php echo $this->createMobileUrl('list')}" style="float:left;border-right:1px solid #C6C6C6;">
+				<span>
+				    <i class="fa fa-list-ol"></i> 积分排行
+				</span>
+			</a>
+			<a href="{php echo $this->createMobileUrl('articlelist')}" style="float:right;">
+				<span>
+	    		    	<i class="fa fa-user"></i> 连接好友
+				</span>
+			</a>
+		</li>
+		
+		
+	</ul>
+
+</div>
+<div style="text-align:center;">共有<font color="red">1{php echo $start_num + $total}</font>人关注了{$_W['account']['name']}，您是第<font color="red">{php echo $start_num + $log['id']}</font>个</div>
+{php $from_user_info = mc_fetch($log['from_uid']);}
+<div style="text-align:center;">你的邀请人是：{if !empty($from_user_info['nickname'])}{$from_user_info['nickname']}{else}{$_W['account']['name']}{/if}</div>
+<!--滚动-->
+<marquee style="WIDTH: 100%; HEIGHT: 25px" scrollamount="1" direction="up" style="margin:0 auto;">
+<div align="left" >
+</div >
+<center ><font face="黑体" color="#008000" size="2" ></font ></center >
+<div align="left" >
+</div >
+<center  style="margin:0 auto; color:#ff6600; font-size:2;">
+<p ><font  >王健同學.......领取了红包</font ></p ></br>
+<p ><font  >光子.......领取了红包</font ></p ></br>
+<p ><font  >小屁孩....也领取了红包</font ></br>
+<p ><font  >笑抽了！.......领取了红包</font ></p ></br>
+<p ><font  >画乡、兔子.......领取了红包</font ></p ></br>
+<p ><font  >一个人的海....领取了红包</font ></br>
+<p ><font  >刘静.......领取了红包</font ></p ></br>
+<p ><font  >就是这么叼.......领取了红包</font ></p ></br>
+<p ><font  >小妞....领取了红包</font ></br>
+<p ><font  >艺术家.......领取了红包</font ></p ></br>
+<p ><font  >无名氏.......领取了红包</font ></p ></br>
+<p ><font  >子恒....领取了红包</font ></p ></br>
+</center >
+</marquee >
+<!--滚动-->
+</body>
+{template 'footer'}
+<br/>

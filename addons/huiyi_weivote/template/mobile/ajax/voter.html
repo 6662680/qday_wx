@@ -1,0 +1,122 @@
+<div id="ajax-main"></div>
+
+<script id="ajax-voter" type="text/html">
+<div class="container">
+<div class="row widget-container">
+
+  <!-- Header -->
+  <div id="div-header">
+    <div class="col-xs-12 padded" style="padding-top: 10px;">
+        <div class="widget-container fluid-height">
+            <img class="lazy" src="../addons/huiyi_weivote/template/mobile/assets/Lib/echo/images/load.gif" data-echo="{{pic}}" width="100%">
+        </div>
+
+        <!--活动顶部描述-->
+        <div class="widget-content padded">
+            {{#weivote_vote.intro}}
+        </div>
+
+    </div>
+  </div>
+  <!-- Header End -->
+    
+  <!-- Voter -->
+  <div id="div-vote">
+      <div class="col-xs-12">
+        <div class="widget-container fluid-height">
+
+          <div>
+              <img class="lazy" src="../addons/huiyi_weivote/template/mobile/assets/Lib/echo/images/load.gif" data-echo="{{attachurl}}{{weivote_option.picture}}" width="100%">
+          </div>
+            
+          <div class="padded">
+            <h3>
+              {{weivote_option.title}} <span style="font-size: 14px;">(票数:<span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{weivote_option.log_count}}&nbsp;</span>)</span>
+            </h3>
+            <p>
+              {{#weivote_option.description}}
+            </p>
+          </div>
+
+        </div>
+      </div>
+      
+      <div class="col-xs-12">
+          <button class="btn btn-primary widget-content" onclick="VoterSubmit({{weivote_option.id}})">投一票</button>
+          <button class="btn btn-info widget-content" onclick="sharePoint('show')">分享</button>
+          <button class="btn btn-default widget-content" onclick="showUrl()">返&nbsp;&nbsp;回</button>
+      </div>
+      
+      
+  </div>
+  <!-- Voter End -->
+    
+  <!-- Description -->
+  <div id="div-desc">
+      <div class="col-xs-12 padded">
+          <div class="widget-content fluid-height" style="border-left: 3px solid #1b809e; border-radius: 3px; padding: 5px;">
+              <h5>说明：</h5>
+              <p style="font-size: 12px;">1.投票时间:<br>
+                  <span class="btn-warning" style="border-radius: 3px;">&nbsp;{{start_time}}&nbsp;</span>
+                  至
+                  <span class="btn-warning" style="border-radius: 3px;">&nbsp;{{end_time}}&nbsp;</span>
+              </p>
+              <p style="font-size: 12px;">2.投票规则:<br>
+                  每个微信号每天可投<span class="btn-info" style="border-radius: 3px;">&nbsp;{{weivote_vote.max_vote_day}}&nbsp;</span>票；<br>
+                  本次投票活动每个微信号总投票上限<span class="btn-info" style="border-radius: 3px;">&nbsp;{{weivote_vote.max_vote_count}}&nbsp;</span>票; <br>
+                  每个微信号每天<span class="btn-danger" style="border-radius: 3px;">&nbsp;{{if weivote_vote.type_vote == 1}}不可{{else}}可以{{/if}}&nbsp;</span>重复投同一选项;
+              </p>
+          </div>
+      </div>
+  </div>
+  <!-- Description End -->
+    
+  <!-- Footer -->  
+  <div id="div-footer">
+    <!--活动底部描述-->
+    <div class="widget-content padded">
+        {{#weivote_vote.rule}}
+    </div>
+  </div>
+  <!-- Footer End -->
+
+    
+</div>
+</div>
+</script>
+<script>
+
+function initVoterPage() {
+    var data = {};
+
+    var aurl = 'AjaxVoter';
+    var oid = $('#voter-oid').val();
+
+    $.ajax({
+        mimeType: 'text/html; charset=utf-8',
+        url: mobile_url + aurl,
+        type: 'POST',
+        data: {oid: oid},
+        dataType: "json",
+        async: false,
+        success: function(adata) {
+            if (adata.rcode == 100) {
+                data = adata.rdata;
+            } else {
+                alertModal(adata.rmsg);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+    var html = template('ajax-voter', data);
+    document.getElementById('ajax-main').innerHTML = html;
+
+    lazyimg();
+}
+    
+$(document).ready(function() {
+	LoadVoterScript(initVoterPage);
+});
+</script>

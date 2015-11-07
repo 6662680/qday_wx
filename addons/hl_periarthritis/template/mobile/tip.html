@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>{$_W['account']['name']}提示页面</title>
+<script type="text/javascript">
+var url=window.location.href;
+</script>
+<style type="text/css">
+body
+{
+	font-size:24px;
+	}
+.background{
+	position:relative;
+	margin-top:10%;
+	
+	}
+.tips{
+	margin-top:10px;
+	}
+.code{
+	padding: 20px ;
+	}
+.footer{
+	margin-top: 90% auto;
+	width:100%;
+	font-size:16px;
+	
+	}
+.footer a{
+	color:lightgray}
+
+</style>
+</head>
+
+<body style="text-align:center; background:#465866; color:white">
+<div class="background">
+
+	<div class="tips">{$reply['content']}</div>
+	<hr>
+	<div class="tips">本游戏只支持在微信客户端运行 请使用微信扫描下方二维码</div>
+	<div class="code">
+		<script type="text/javascript">document.write('<img id="code" width="200" src=http://s.jiathis.com/qrcode.php?url='+ url +'?qrcode />');</script>
+	</div>
+</div>
+
+<br />
+<div style="text-align:center; "><span>复制链接到微信打开</span><br/>
+<script type="text/javascript">document.write('<input type="text" style="width:100%" value='+ url +'?qrcode />');
+</script>
+</div>
+<div class="footer"><p>
+本程序由 <a href="{$reply['gzurl']}">{$_W['account']['name']}</a> 提供 微信公众号 <a href="{$reply['gzurl']}">{$_W['account']['name']}</a></p>
+</div>
+
+</div>
+</body>
+</html>

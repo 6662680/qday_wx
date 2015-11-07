@@ -1,0 +1,245 @@
+<style type="text/css">
+.alert{width:80%;float:right;margin-right: 10%;}
+.row{margin-top: 5px;}
+</style>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h5 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">基本参数</a>
+      </h5>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <input type="hidden" name="reply_id" value="{$reply['id']}" />
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动标题</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" value="{$reply['title']}" class="span2" name="title">
+            <div class="help-block">活动的标题</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动图片</label>
+          <div class="col-sm-9">
+            {php load()->func('tpl');}
+            {php echo tpl_form_field_image('thumb',$reply['thumb'],'', $options);}
+            <div class="help-block">图文消息的缩略图</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动说明</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" name="description">{$reply['description']}</textarea>
+            <div class="help-block">图文消息的简介</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动时间</label>
+          <div class="col-sm-4">
+            {php echo tpl_form_field_daterange('time', array('start'=>date('Y-m-d H:i:s',$reply['starttime']),'end'=>date('Y-m-d H:i:s',$reply['endtime'])), true)}
+            <div class="help-block">输入活动的起止时间</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动状态</label>
+          <div class="col-sm-4" style="padding-top:6px;">
+            <label>
+              <input type="radio" value="0" name="status" {if $reply['status'] == 0 }checked{/if}>结束</label>
+            <label>
+              <input type="radio" value="1" name="status" {if $reply['status'] == 1 }checked{/if}>正常</label>
+            <label>
+              <input type="radio" value="2" name="status" {if $reply['status'] == 2 }checked{/if}>暂停</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动页面顶部图片</label>
+          <div class="col-sm-9">
+            {php echo tpl_form_field_image('topimg',$reply['topimg'],'', $options);}
+            <div class="help-block">活动页面顶部图片</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动页面背景色</label>
+          <div class="col-sm-9">
+            {php echo tpl_form_field_color('bgcolor', $reply['bgcolor']);}
+            <div class="help-block">活动页面背景色，建议与顶部图片背景颜色相同</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动页面设计</label>
+          <div class="col-sm-9">
+            <textarea class="form-control richtext" name="pagestyle">{$reply['pagestyle']}</textarea>
+            <div class="help-block">活动页面设计</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">兑奖规则</label>
+          <div class="col-sm-9">
+            <textarea class="form-control richtext" name="address">{$reply['address']}</textarea>
+            <div class="help-block">本次活动的兑奖地址，可以写分店的地址，多条数据请一行一条</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">备注</label>
+          <div class="col-sm-9">
+            <textarea class="form-control richtext" name="tips">{$reply['tips']}</textarea>
+            <div class="help-block">备注</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">引导关注链接</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" value="{$reply['linkurl']}" name="linkurl">
+            <div class="help-block">引导关注链接 <a href="./index.php?c=platform&a=url2qr">短链接</a></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动页面底部图片</label>
+          <div class="col-sm-9">
+            {php echo tpl_form_field_image('adimg',$reply['adimg'],'', $options);}
+            <div class="help-block">活动页面底部图片</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">一键拨号号码</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" value="{$reply['tel']}" name="tel">
+            <div class="help-block">一键拨号号码</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-xs-12 col-sm-3 col-md-2 control-label">版权信息</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" value="{if !empty($reply['copyright'])}{$reply['copyright']}{else}{$_W['account']['name']}{/if}" name="copyright">
+            <div class="help-block">版权信息，默认为公众号名称</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h5 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">奖项设置</a>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <div id="re-items">
+        {if !empty($data)}
+        {loop $data $row}
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <div class="row">
+                <div class="col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">奖品名称：</span>
+                    <input type="text" name="prizename[]" value="{$row['prizename']}" class="form-control"></div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">需要阅读数：</span>
+                    <input type="text" name="neednum[]" value="{$row['neednum']}" class="form-control"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">奖品数量：</span>
+                    <input type="text" name="prizenum[]" value="{$row['prizenum']}" class="form-control"></div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">奖品剩余数量：</span>
+                    <input type="text" name="prizesy[]" value="{$row['prizesy']}" class="form-control"></div>
+                </div>
+              </div>
+        </div>
+        {/loop}
+        {else}
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <div class="row">
+                <div class="col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">奖品名称：</span>
+                    <input type="text" name="prizename[]" class="form-control"></div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">需要阅读数：</span>
+                    <input type="text" name="neednum[]" class="form-control"></div>
+                </div>
+              </div>
+              <div class="row">  
+                <div class="col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">奖品数量：</span>
+                    <input type="text" name="prizenum[]" class="form-control"></div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="input-group">
+                    <span class="input-group-addon">奖品剩余数量：</span>
+                    <input type="text" name="prizesy[]" class="form-control"></div>
+                </div>
+              </div>
+            </div>
+        {/if}
+        </div>
+        <div class="form-group">
+          <div class="col-sm-8">
+            <a href="javascript:;" id="add-param" onclick="addItem()" title="添加奖项" style="margin-left:13%;">添加奖项 <i class="fa fa-plus"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script language='javascript'>
+  require(['jquery', 'util'], function($, u){
+    $(function(){
+      u.editor($('.richtext')[0]);
+      u.editor($('.richtext')[1]);
+    });
+  });
+function addItem() {
+    var html = '<div class="alert alert-success alert-dismissible" role="alert">' +
+              '<button type="button" class="close" data-dismiss="alert">' +
+                '<span aria-hidden="true">&times;</span>' + 
+                '<span class="sr-only">Close</span>' +
+              '</button>' + 
+              '<div class="row">' +
+                '<div class="col-lg-5">' +
+                  '<div class="input-group">' + 
+                    '<span class="input-group-addon">奖品名称：</span>' + 
+                    '<input type="text" name="prizename[]" class="form-control"></div>' + 
+                '</div>' + 
+                '<div class="col-lg-5">' + 
+                  '<div class="input-group">' +
+                    '<span class="input-group-addon">需要阅读数：</span>' +
+                    '<input type="text" name="neednum[]" class="form-control"></div>' +
+                '</div>' + 
+              '</div>' + 
+              '<div class="row">' +
+                '<div class="col-lg-5">' +
+                  '<div class="input-group">' + 
+                    '<span class="input-group-addon">奖品数量：</span>' + 
+                    '<input type="text" name="prizenum[]" class="form-control"></div>' + 
+                '</div>' + 
+                '<div class="col-lg-5">' + 
+                  '<div class="input-group">' +
+                    '<span class="input-group-addon">奖品剩余数量：</span>' +
+                    '<input type="text" name="prizesy[]" class="form-control"></div>' +
+                '</div>' + 
+              '</div>' +
+        '</div>';
+    $('#re-items').append(html);
+  }
+</script>
+</div>

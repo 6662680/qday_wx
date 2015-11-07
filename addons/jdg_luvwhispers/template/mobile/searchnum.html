@@ -1,0 +1,197 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <header>
+    <title>{$_W['account']['name']}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" charset="utf-8"  content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/qh.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/emoji.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery.mobile.icons.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery.mobile.structure-1.4.2.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/style.css">
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/jquery.mobile-1.4.2.min.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/WeixinApi.min.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/mymobile.js"></script>
+  </header>
+  <body ontouchmove="javascript:$('.searchnum-footer').attr('style','width: 60px;display:block!important');">
+  <div id="Searchnum_Home" data-role="page">
+      <div id="Searchnum_Content" data-role="content">
+        <div class="searchnum">
+          <form class="input-searchnum">
+          <input id="commonUrl" type="hidden" value="{MODULE_URL}" />
+          <input type="hidden" id ="search_urlnum" value="{$search_urlnum}">
+            <table>
+              <tr>
+                <td width="6px"><img src=".{MODULE_URL}/template/style/images/bgimg/bgimg-input-left.png" style="height: 35px;margin-right: -4px;margin-top: 0px;"/></td>
+                <td width="100%"><input type="text" id="search-3" value="" placeholder="我有没有被表白" onkeydown= "if(event.keyCode==13) toshowSwno()"/> </td>
+                <td width="47px"><img src=".{MODULE_URL}/template/style/images/bgimg/bgimg-input-right.png" onclick="showSwno()" style="height: 35px;margin-left: -4px;margin-top: 0px;" alt="搜索"/> </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+        <div class="searchnum-list">
+          <!-- <a id="list_One" data-role="button" data-ajax="false">
+            <div class="list-one">
+              <div id="name-co"> </div>
+              <div id="co"></div>
+              <div id="ci-co"></div>
+            </div>
+          </a> -->
+          <a id="list_Two" data-role="button" data-ajax="false">
+            <div class="list-two"> 
+              <span id="name-cos"> </span>
+              <span id="cos"></span>
+              <span id="ci-cos"></span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="searchnum-footer" data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="a" style="width: 60px;">
+        <table> 
+          <tr> 
+            <td class="searchnum-foot-ico"> 
+              <a href="{php echo $this->createMobileUrl('search')}" data-ajax="false">
+                <img src="{MODULE_URL}/template/style/images/bgimg/icon-reword-back.png" alt="" />
+              </a>
+            </td>
+            <!-- <td class="searchnum-foot-input"> 
+              <input class="inputtext" data-mini="true" type="text" id="swnocContent" data-theme="c" placeholder="我也对她/他说一句"/>
+            </td>
+            <td class="searchnum-foot-button"> 
+              <div class="inputbutton" onclick="addswno()">发 布</div>
+            </td> -->
+          </tr>
+        </table>
+      </div>
+      <!-- <div id="prompt" class="ui-content" data-role="popup" data-theme="b" data-overlay-theme="b">
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+        <p id="info" class="err_msg"></p>
+      </div> --><!-- popup #prompt -->
+    <script type="text/javascript" src=".{MODULE_URL}/template/style/js/hhSwipe.js"></script>
+  
+  <script type="text/javascript">
+    $(function(){
+    	getSwno();
+      $("#search-3").focus(function(){
+        $(".searchnum-footer").attr("style","width: 60px;display:none!important");
+      });
+       $("#search-3").blur(function(){
+        $(".searchnum-footer").attr("style","width: 60px;display:block!important");
+      });
+      
+    });
+    function getSwno(){
+    	var Request = new Object();
+      Request = GetRequestParam();
+		  var param={};
+      param.toUser=Request['content'];
+      param.fromUserName='';
+      param._url = $('#search_urlnum').val();
+      request(param, true, function(data){
+        if(data.retCode== 200){
+          $("#search-3").val(data.value.toUser);
+          $("#name-co").text(data.value.toUser);
+          $("#co").text("在" + data.value.univName);
+          $("#ci-co").text("被表白了" +data.value.collegeNum + "次");
+          $("#name-cos").text(data.value.toUser);
+          $("#cos").text("在情圈");
+          $("#ci-cos").text("被表白了" +data.value.collegesNum + "次");
+          $("#list_One").attr("href","index.jsp?toUserName="+param.toUser);
+          $("#list_Two").attr("href",'{php echo $this->createMobileUrl('myindex')}'+"&toUserName="+param.toUser);
+        }else{
+          alert(data.message);
+        }
+      });
+    }
+    function showSwno(){
+    	  var param={};
+	      param.toUser=$("#search-3").val();
+	      param.fromUserName='';
+        param._url = $('#search_urlnum').val();
+	      request(param, false,function(data){
+          if(data.retCode== 200){ 
+            $("#name-co").text(data.value.toUser);
+            $("#co").text("在" + data.value.univName);
+            $("#ci-co").text("被表白了" +data.value.collegeNum + "次");
+            $("#list_One").attr("href","index.jsp?toUserName="+param.toUser);
+            $("#name-cos").text(data.value.toUser);
+            $("#cos").text("在情圈");
+            $("#ci-cos").text("被表白了" + data.value.collegesNum + "次");
+            $("#list_Two").attr("href",'{php echo $this->createMobileUrl('myindex')}'+"&toUserName="+param.toUser);
+          }else{
+            //alert(data.message);
+            err_page_popup("数据库异常！");
+          }
+	      });
+    }
+    function toshowSwno(){
+    	window.location.href = encodeURI("searchnum.jsp?content="+$("#search-3").val());
+    }
+    function addswno(){
+      if (valueIsEmpty($("#swnocContent").val())) {
+        //alert("亲，说点什么吧？");
+        err_page_popup("亲，说点什么吧？");
+      } else if ( valueIsEmpty($("#search-3").val())) {
+        //alert("亲，对谁说呢？");
+        err_page_popup("亲，对谁说呢？");
+      } else {
+        var param={};
+        var limit = 0;
+        param.toUser = $("#search-3").val();
+        param.content = $("#swnocContent").val();
+        param.limit = limit;
+        param.nowColor = "#F0F0F0";
+        param.userId='';
+        param._url = "swno/addSwno";
+        request(param, true,function(data){
+          if(data.retCode== 200) {
+            //alert("发表成功！");
+            err_page_popup("发表成功！");
+            $("#swnocContent").val("");
+            showSwno();
+          } else {
+            //alert(data.message);
+            err_page_popup("数据库异常！");
+          }
+        });
+      }	
+    }
+    function geApp(){
+    	var appId="";
+      var param={};
+      param._url = "user/getApp";
+      request(param, true,function(data){
+      if(data.retCode== 200){
+    	  appId=data.value;
+        }else{
+          err_page_popup("数据库异常！");
+        }
+      });
+      return appId;
+    }
+    function err_page_popup( msg , callback ){
+          //hideLoading();
+          $(".err_msg").html( msg ? msg : "页面错误" );
+          $( "#prompt" ).popup( "open" );
+          if(callback){
+           callback();
+          }
+    }/*=========此处需要传一个appid========    */
+    </script>
+  </div>
+  </body>
+    <script type="text/javascript">
+  function getUrl(){
+    return $('#commonUrl').val();
+  }
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu'); //隐藏分享
+});
+  </script>
+</html>

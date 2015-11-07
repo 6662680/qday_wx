@@ -1,0 +1,96 @@
+/********** 全局 **********/
+body{padding:0;margin:0;color:#fff;font:16px/24px WenQuanYi Micro Hei, Hiragino Sans GB, Microsoft YaHei, sans-serif;}
+div, dl, dt, dd, ul, h1, h2, h3, p{padding:0;margin:0;}
+li{list-style:none;}
+img{border:0;}
+a{outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);color:#666;text-decoration:none;}
+a:active{color:#666;text-decoration:none;}
+
+/********** 其它 **********/
+.clearfix:after{height:0;display:block;visibility:hidden;content:".";clear:both;}
+.clearfix{display:inline-block;}
+*html .clearfix{height:1%;}
+.clearfix{display:block;}
+.clear{height:0;overflow:hidden;font:0/0 arial;visibility:hidden;clear:both;}
+
+/********** 全局结束 **********/
+
+.index,.result {width:100%;position:relative;}
+.index img.tug-background,.result img.result-background {width:100%;height:auto;display:block;z-index:1;}
+.container {width:100%;height:100%;position:absolute;top:0;left:0;}
+p.tug-title {padding:15.5% 10%;}
+p.tug-title span {height:32px;font-size:1.5em;color:#fff;line-height:32px;text-align:center;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 0 8px rgba(255,0,0,1);}
+.cont-team {width:100%;margin-top:14%;position:relative;}
+.cont-team img.contbg-team {width:100%;height:auto;}
+.cont-team .teamline {position:absolute;top:20%;text-align:center;display:inline-block;width:90%;left:5%;}
+.cont-team .teamline span,.cont-team .teamline img.team-vs {display:inline-block;vertical-align:middle;}
+.teamline img.team-vs {width:10.4%;height:auto;margin:0 2%;}
+.cont-team .teamline span {width:33%;height:33%;background-size:contain;background-repeat:no-repeat;position:relative;}
+.cont-team .teamline span img {width:100px;height:100px;display:block;border-radius:6px;margin:6px;}
+.cont-team .teamline span p {width:98px;padding:2px 0;font-size:20px;text-align:center;position:absolute;bottom:6px;left:6px;background:rgba(0,0,0,.5);text-shadow:0 0 4px rgba(255,0,0,1);border-bottom-left-radius:6px;border-bottom-right-radius:6px;}
+.cont-team .teamline span.team-red {background-image:url(redteam-bg.png);}
+.cont-team .teamline span.team-blue {background-image:url(blueteam-bg.png);}
+.cont-team .join-line {width:100%;position:absolute;top:52%;}
+.cont-team .join-line a {width:21%;display:block;position:absolute;top:0;background-size:contain;background-repeat:no-repeat;}
+.cont-team .join-line a img {width:100%;height:auto;display:block;}
+.cont-team .join-line a.join-red {left:18%;}
+.cont-team .join-line a.join-blue {right:16%;}
+.cont-team .join-line a.join-randrom {width:36%;margin-top:85px;left:32%;}
+.cont-team .cont-txt {width:82%;position:absolute;bottom:8%;left:9%;background:#3c3c3c;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,0.5) inset;}
+.cont-team .cont-txt p {padding:10px;line-height:1.5em;font-size:1.1em;}
+
+.result .prizeImg {width:84%;display:block;overflow:hidden;position:absolute;top:5%;left:8%;border-radius:8px;}
+.result .prizeImg img {width:100%;height:auto;display:block;}
+.result .player-box {width:84%;position:absolute;top:32%;left:8%;}
+.result .player-box .rst-box-bg {width:100%;height:auto;}
+.result .player-box .player-xinxi {width:100%;text-align:center;}
+.result .player-box .player-xinxi .pic-bg {width:20.5%;display:inline-block;background:url(pic-bg.png) no-repeat;background-size:contain;position:relative;z-index:9;}
+.result .player-box .player-xinxi .pic-bg img {display:block;border-radius:4px;margin:4px;}
+.result .player-box .player-xinxi .play-name {width:55%;display:inline-block;vertical-align:top;margin:0 0 0 -5%;position:relative;}
+.result .player-box .player-xinxi .play-name img {width:100%;height:auto;}
+.result .player-box .player-xinxi .play-name p {width:90%;padding-left:8%;position:absolute;top:0;left:0;font-size:1.2em;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.result .player-box .rst-team {width:100px;height:100px;position:absolute;top:60%;left:40%;background-size:contain;z-index:9;}
+.result .player-box .rst-team.win {background-image:url(team-win.png);}
+.result .player-box .rst-team.draw {background-image:url(team-draw.png);}
+.result .player-box .rst-team.lose {background-image:url(team-lose.png);}
+
+.result .result-box {width:80%;position:absolute;left:10%;bottom:4%;}
+.result .result-box ul {width:100%;}
+.result .result-box ul li {width:92%;padding:14px 4%;float:left;margin:6px 0;font-size:1.2em;background:#5f3c1c;border-radius:8px;box-shadow:0 2px 6px rgba(28,18,8,1) inset;}
+.result .result-box ul li .rst-left {color:#ffd94a;}
+.result .result-box ul li .rst-right {float:right;}
+.result .result-box .bottom-button {width:100%;margin-top:20px;}
+.result .result-box .bottom-button a {width:40.625%;display:block;}
+.result .result-box .bottom-button a img {width:100%;height:auto;}
+.result .result-box .bottom-button a.btn-share {float:left;}
+.result .result-box .bottom-button a.btn-replay {float:right;}
+
+@media screen and (max-width: 360px) {
+	.result .result-box ul li {padding:8px 4%;margin:4px 0;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

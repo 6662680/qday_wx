@@ -1,0 +1,57 @@
+{template 'headnav'}
+
+<div class="fullscreen">
+<div id="avatorimg" style="display: none; z-index: 100; width: 100%; margin: 0px auto; text-align: center; position: fixed; padding-top: 5%; background-color: rgba(0, 0, 0, 0.8); height: 1702px; background-position: initial initial; background-repeat: initial initial;">
+    <img style="width:80%;" src="./11_files/K2EpZX9PRPNPrrPVsnSx2CVp8YdeX8.jpg">
+</div>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="../addons/lxy_buscard/template/css/index.css">
+<script>
+function qie(){
+    $("#qian").toggle();
+    $("#hou").toggle();
+}
+</script>
+<div class="mar_box" id="qian">
+<div class="xila" onclick="qie()">切换背面</div>
+<div class="mar_car_border" style="background:url(../addons/lxy_buscard/template/img/bg_.png) repeat-y;background-size:100%;">
+    
+    <div class="car_logo">
+    <a href="{$item['copintro']}" class="no_unl db border-item border-radius isbtn">
+        <img src="{php echo $_W['attachurl'].$item['coplogo']}">
+        </a>
+    </div>
+    <div class="car_name">{$item['username']}<span>&nbsp;{$item['degree']}</span></div>
+    <div class="car_company">
+    <a href="{$item['conintro']}" class="no_unl db border-item border-radius isbtn">
+    {$item['copname']}    </a>
+    </div>
+    <div class="car_info">
+        <div>手机：<span><a href="tel: {$item['mobile']}"> {$item['mobile']}</a></span></div>
+        <div>电话：<span><a href="tel:{$item['tel']}">{$item['tel']}</a></span></div>
+        <div>Q&nbsp;&nbsp;Q：<span>{$item['qq']}</span></div>
+        <div>邮箱：<span><a href="mailto:{$item['email']}">{$item['email']}</a></span></div>
+    </div>
+    <div class="car_location"><a href="{$item['website']}">官网：{$item['website']}</a></div>
+    <div class="car_location">地址：<a href="http://api.map.baidu.com/marker?location={$item['lat']},{$item['lng']}&title={$item['jw_addr']}&content={$item['jw_addr']}&output=html&src=|">{$item['addr']} (百度地图)</a></div>
+</div>
+</div>
+
+<div class="mar_box" style="display: none;" id="hou">
+<div class="xila" onclick="qie()">切换正面</div>
+	<div class="padd" style="background:url(../addons/lxy_buscard/template/img/bg.png) no-repeat; background-size:100%;">
+		<div class="car_bank">
+        	<div>开户名：{$item['bankuser']}</div>
+            <div>开户行：{$item['bankname']}</div>
+            <div>账&nbsp;&nbsp;&nbsp;&nbsp;户：{$item['bankaccount']}<span class="banknum"></span></div>
+        </div>
+	</div>
+</div>
+
+ {template 'classlist'}
+ </div>
+{template 'footnav'}
+                
+
+
+</body></html>

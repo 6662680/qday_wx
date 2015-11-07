@@ -1,0 +1,183 @@
+{template 'common/header'}
+<style>
+	body{background:#d2e6e9; padding-bottom:63px; font-family:Helvetica, Arial, sans-serif;}
+	.panel{margin-bottom:0px; border:none;}
+	.panel.panel-default{color:#606366;}
+	.panel>.list-group:last-child .list-group-item:last-child{border-bottom:1px solid #dddddd;}
+	.panel.panel-default ul{background:-webkit-gradient(linear,0 0, 0 10%,from(rgba(90,197,212,1)), to(rgba(90,197,212,1))) center top; border-top:10px solid #e4e9e8; -webkit-background-size:100% 2px; padding-top:2px; background-repeat:no-repeat;}
+	.panel.panel-default:first-child ul{background:none; border-top:0; padding-top:0;}
+	.panel.panel-default ul .list-group-item{background-color:#e1ecee; height:48px; overflow:hidden;}
+	.panel.panel-default ul .list-group-item i{font-size:20px; display:inline-block; width:25px; margin-right:10px; color:#8dd1db; text-align:center; position:relative; top:3px;}
+	.panel.panel-default ul .list-group-item > .pull-right i{display:inline-block; font-size:22px; color:#888; position:absolute; right:0px; top:12px;}
+	.panel.panel-default ul .list-group-item > .pull-right .btn{background:#56c6d6; color:#FFF; border:0; border-radius:1px; margin-top:-5px; width:100px; height:32px; font-size:17px; white-space:pre-line;}
+	.btn-group-top-box{padding:10px 0; border-bottom:1px solid #a5d7de;}
+	.btn-group-top{margin:0 auto; overflow:hidden; width:200px; display:block;text-align:center;}
+	.btn-group-top .btn{width:100px; -webkit-box-shadow:none; box-shadow:none; border-color:#5ac5d4; color:#5ac5d4; background:#d1e5e9;}
+	.btn-group-top .btn:hover{color:#FFF; background:#addbe1;}
+	.btn-group-top .btn.active{color:#FFF; background:#5ac5d4;}
+	.btn.use{background:#56c6d6; color:#FFF; border:0; border-radius:4px;}
+	.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {color: #5ac5d4; background-color: #eee; border-color: #a5d7de;}
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{background-color:#5ac5d4; border-color:#5ac5d4;}
+	.pagination>li>a, .pagination>li>span{color:#5ac5d4; border:1px solid #a5d7de;}
+	/*消费记录*/
+	.consume .record-head{width:100%; height:100px; border-bottom:1px solid #a5d7de;margin-bottom:1px;}
+	.consume .record-head ul{margin:0 auto; list-style:none; padding:0px; }
+	.consume .record-head li{height:50px; line-height:50px; background-color:#ffffff;}
+	.consume .record-head .date{padding:0px 5px; text-align:center; }
+	.consume .record-head .money{width:46%; float:left; color:#999; height:50px; padding:0 4%; line-height:50px;}
+	.consume .record-head .income{margin-right:20px;}
+	.consume .record-head .money span{color:#333;}
+	.consume .record-box{background:transparent url('resource/images/home-bg.jpg') no-repeat; background-size:100% 100%;}
+	.consume .list-item{height:70px; padding:10px 5px; border-bottom:1px solid #dddddd;}
+	.consume .list-item>div{float:left;}
+	.consume .record-box .member-detail{width:15%; text-align:center;}
+	.consume .record-box .member-detail .img-rounded{width:30px; height:30px; line-height:30px; overflow:hidden; background:#5ac5d4; margin:0 auto; text-align:center;}
+	.consume .record-box .member-detail .img-rounded i{font-size:20px; margin-top:4px; display:inline-block; color:#FFF;}
+	.consume .record-box .member-detail .img-rounded img{width:20px;}
+	.consume .record-box .member-detail span{display:block; width:100%; text-align:center; font-size:12px; color:#999; margin-top:3px;}
+	.consume .record-box .record-detail{width:60%;}
+	.consume .record-box .record-detail > div{margin-top:4px; border-left:1px #DDD solid; padding-left:10px;}
+	.consume .record-box .record-detail > div span{display:block;}
+	.consume .record-box .record-detail > div .name{font-size:15px; width:160px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
+	.consume .record-box .record-detail > div .date{font-size:13px; margin-top:5px; color:#999;}
+	.consume .record-box .pay-detail{width:23%; text-align:right; margin-right:2%;}
+	.consume .record-box .pay-detail > div{margin-top:4px;}
+	.consume .record-box .pay-detail > div span{display:block; text-align:right;}
+	.consume .record-box .pay-detail > div .money{font-size:15px; font-weight:bold;}
+	.consume .record-box .pay-detail > div .state{font-size:13px; margin-top:5px; color:#999;}
+	.consume .list-group-item{background-color:#e1ecee;}
+	/*收货地址*/
+	.address,.address-edit{background:#FFF; padding:10px 15px;}
+	.address > a{text-decoration:none; margin-bottom:5px; border-bottom:1px #DDD solid; padding-bottom:5px; display:block;}
+	.address > a:last-child{border-bottom:0; margin-bottom:0;}
+	.address div{padding:0px; margin:0px;}
+	//@media screen and (max-width: 767px) {.tpl-calendar div,.tpl-district-container div{margin-bottom:10px;}
+</style>
+<script>
+	require(['jquery'],function($){
+		$(".list-coupon").delegate("li","click",function(){
+			$(this).find(".list-coupon-ft > div").slideToggle();
+		});
+	});
+</script>
+
+<div class="address-edit">
+	<div style="text-align: center;padding-bottom: 10px;">
+		<span class="label label-success">您的目前积分为：{$ff_log['shouyi']} 最低提现积分：{$minnum}</span>
+	</div>
+	<div class="info">
+	<form action="" method="post" class="form-horizontal" role="form" id="form1">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">真实姓名</label>
+			<div class="col-sm-8">
+				<input type="text" name="realname" class="form-control" value="{$profile['realname']}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">微信号</label>
+			<div class="col-sm-8">
+				<input type="text" name="qq" class="form-control" value="{$profile['qq']}" />
+			</div>
+		</div>
+		<div class="form-group hide">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">提现方式</label>
+			<div class="col-sm-8">
+				<label><input type="radio" name="type" value="1" onclick="$('#card').hide();$('#alipay').show();" checked> 支付宝</label>
+				<label><input type="radio" name="type" value="2" onclick="$('#card').show();$('#alipay').hide();"> 银行账户</label>
+			</div>
+		</div>
+		<div class="form-group" id="alipay">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">支付宝账号</label>
+			<div class="col-sm-8">
+				<input type="text" name="alipay" class="form-control" value="{$profile['alipay']}" />
+			</div>
+		</div>
+		<div id="card" style="display: none;">
+		<div class="form-group" >
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">银行卡账号</label>
+			<div class="col-sm-8">
+				<input type="text" name="cardid" class="form-control" value="" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">开户行</label>
+			<div class="col-sm-8">
+				<input type="text" name="cardfrom" class="form-control" value="" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">开户姓名</label>
+			<div class="col-sm-8">
+				<input type="text" name="cardname" class="form-control" value="" />
+			</div>
+		</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">提现积分</label>
+			<div class="col-sm-8">
+				<input type="text" name="credit_2" class="form-control" value="150" disabled />
+				<input type="hidden" name="credit2" class="form-control" value="150" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">手机号</label>
+			<div class="col-sm-8">
+				<input type="text" name="mobile" class="form-control" value="{$profile['mobile']}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+			<div class="col-sm-8">
+				<input name="submit" type="submit" value="提交" class="btn btn-primary btn-block use" />
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</div>
+		</div>
+	</form>
+	</div>
+</div>
+<script type="text/javascript">
+require(['util'], function(u){
+	$('#form1').submit(function(){
+		if({$yue['credit2']} < {$minnum}) {
+			u.message('您的余额不足，无法提现', '', 'error');
+			return false;
+		}
+		if($(":text[name='credit2']").val() < {$minnum}) {
+			u.message('您输入的提现金额小于限制的最低金额，无法提现', '', 'error');
+			return false;
+		}
+		if(!$(":text[name='realname']").val()) {
+			u.message('真实姓名必填', '', 'error');
+			return false;
+		}
+		if(!$(":text[name='qq']").val()) {
+			u.message('微信号必填', '', 'error');
+			return false;
+		}
+		if(!$(":text[name='mobile']").val()) {
+			u.message('手机号必填', '', 'error');
+			return false;
+		}
+		if($("input[name='type']:checked").val() == 1) {
+			if(!$(":text[name='alipay']").val()) {
+				u.message('支付宝账号必填', '', 'error');
+				return false;
+			}
+		}else{
+			if(!$(":text[name='cardid']").val()) {
+				u.message('银行卡账号必填', '', 'error');
+				return false;
+			}
+			if(!$(":text[name='cardfrom']").val()) {
+				u.message('银行卡开户行必填', '', 'error');
+				return false;
+			}
+			if(!$(":text[name='cardname']").val()) {
+				u.message('银行卡开户姓名必填', '', 'error');
+				return false;
+			}	
+		}
+	});
+});
+</script>
+{template 'common/footer'}

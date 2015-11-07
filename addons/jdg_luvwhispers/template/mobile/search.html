@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <header>
+    <title>{$_W['account']['name']}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/qh.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/emoji.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery.mobile.icons.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery.mobile.structure-1.4.2.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/style.css">
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/jquery.mobile-1.4.2.min.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/WeixinApi.min.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/mymobile.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/all.js"></script>
+<!--   /*      <script type="text/javascript"  >
+  $(function(){
+          EditBackImg();
+        });
+  function  EditBackImg(){
+    var img="";
+    var param={};
+    param._url = "copyright/getImg";
+    request(param, false,function(data){
+    if(data.retCode== 200){
+      img=data.value;
+    if(img!=null){
+        if(img.searchImg!=""){
+      $(".ui-content").css("backgroundImage","url("+img.searchImg+")");
+        }else{
+          $(".ui-content").css("backgroundImage","url({MODULE_URL}/template/style/images/bgimg/bgimg-search-flower.png)");
+        }
+        if(img.searchPartImg){
+      $(".search—wordimg").css("backgroundImage","url("+img.searchPartImg+")");
+        }else{
+          $(".search—wordimg").css("backgroundImage","url({MODULE_URL}/template/style/images/bgimg/bgimg-search-word.png)");
+        }
+    }else{
+      $(".ui-content").css("backgroundImage","url({MODULE_URL}/template/style/images/bgimg/bgimg-search-flower.png)");
+      $(".search—wordimg").css("backgroundImage","url({MODULE_URL}/template/style/images/bgimg/bgimg-search-word.png)");
+    }
+      }else{
+        alert("当前用户访问太过拥挤，请稍后刷新重试！");
+      }
+    });
+  }
+  </script>*/ -->
+  </header>
+  <body>
+  <input id="commonUrl" type="hidden" value="{MODULE_URL}" />
+    <div id="Search_Home" data-role="page">
+      <div id="Search_Content" data-role="content">
+        <div class="search">
+          <form class="input-search">
+          <input type="hidden" id ="search_url" value="{$search_url}">
+            <table> 
+              <tr> 
+                <td width="6px"><img src="{MODULE_URL}/template/style/images/bgimg/bgimg-input-left.png" style="height: 35px;margin-right: -4px;margin-top: 0px;"/></td>
+                <td width="100%"><input type="text" id="search-4" value="" placeholder="我有没有被表白" onkeydown= "if(event.keyCode==13)toshowSwno()"/> </td>
+                <td width="47px"><img src="{MODULE_URL}/template/style/images/bgimg/bgimg-input-right.png" onclick="toshowSwno()" style="height: 35px;margin-left: -4px;margin-top: 0px;" alt="搜索"/> </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+      <div class="search—wordimg"></div>
+        <div class="qh-footer center" data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+        <div class="navbar-qh" data-role="navbar" data-grid="d">
+          <ul>
+            <li><a class="nav-icon-qq" href="{php echo $this->createMobileUrl('myindex');}" data-ajax="false" data-transition="none" data-icon="custom">情圈</a></li>
+            <li><a class="nav-icon-search on" href="{php echo $this->createMobileUrl('search');}" data-ajax="false" data-transition="none" data-icon="custom">搜索</a></li>
+            <li><a class="nav-icon-add" href="{php echo $this->createMobileUrl('add');}" data-ajax="false" data-transition="slideup" data-icon="custom"></a></li>
+            <li><a class="nav-icon-benxiao" href="{php echo $this->createMobileUrl('myindex',array('key'=>'yes'));}" data-ajax="false" data-transition="none" data-icon="custom">热门</a></li>
+            <li><a class="nav-icon-my" href="{php echo $this->createMobileUrl('my');}" data-ajax="false" data-transition="none" data-icon="custom"><div id="remindpop"  class="remindpop2"></div>我的</a></li>
+          </ul>
+        </div><!-- /navbar -->
+      </div>
+      <script type="text/javascript" src="{MODULE_URL}/template/style/js/hhSwipe.js"></script>
+    </div>
+  </body>
+    <script type="text/javascript">
+  function getUrl(){
+    return $('#commonUrl').val();
+  }
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu'); //隐藏分享
+});
+  </script>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>普通话在线考试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link href="{$_W['siteroot']}addons/hx_voice/template/style/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{$_W['siteroot']}addons/hx_voice/template/style/css/css.css"/>
+    <script src="{$_W['siteroot']}addons/hx_voice/template/style/js/jquery.js"></script>
+</head>
+<body>
+    <div class="wxapi_container">
+        <div class="lbox_close wxapi_form">
+
+            <h3 id="menu-share" style="font-size:22px;color:#14ABF1;text-align:center;">你的普通话什么等级？</h3>
+            <center>
+                <span id="traffictip" style="color:red;font-size:10px;text-align:center;"></span>
+            </center>
+            <h3 id="menu-share" style="margin-top: 0px;color:#81817C;">
+                请朗读：下面一段话
+                <a href="">
+                    <span style="color:red;">换一段</span>
+                    (微信中操作)
+                </a>
+            </h3>
+            <br>
+            <p style="border:thin solid rgba(24, 195, 211, 0.17)">
+                <span style="color:rgb(14, 186, 219);" id="origintext">
+                    {$t}
+                </span>
+            </p>
+            <input  type="hidden" value="{$t}" id="originid"/>
+            <div id="divvoice" style="display:none;">
+                <h3 id="menu-share" style="margin-top: 0px;">你朗读的</h3>
+                <span  style="color:red" id="voicetext"></span>
+            </div>
+
+            <div id="divresult" style="display:none;">
+                <h3 id="menu-share" style="color:#81817C;" >你朗读与原文相似度:</h3>
+                <div id="percent" style="text-align:center;background-color:green;color:white;font-size:60px;"></div>
+
+                <div id="percentt" style="text-align:center;color:red;font-size:15px;"></div>
+                <section id="shareid" style="width:95%; margin:0px auto; display:none;">
+                    <div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+                        <img src="{$_W['siteroot']}addons/hx_voice/template/style/img/guide.png"></div>
+                    <div class="text" id="content">
+                        <div id="mess_share">
+                            <div id="share_1">
+                                <button class="button2" onclick="document.getElementById('mcover').style.display='block';">
+                                    <img src="{$_W['siteroot']}addons/hx_voice/template/style/img/icon_msg.png">&nbsp;转发给小伙伴</button>
+                            </div>
+                            <div id="share_2">
+                                <button class="button2" onclick="document.getElementById('mcover').style.display='block';">
+                                    <img src="{$_W['siteroot']}addons/hx_voice/template/style/img/icon_timeline.png">&nbsp;分享到朋友圈</button>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <h3 id="menu-voice" style="color:#81817C;">点击下面按钮考查你的普通话(60秒内读完)</h3>
+            <span class="desc" style="color:red;">开始朗读</span>
+            <button class="btn btn_primary" id="startRecord">开始朗读</button>
+            <span class="desc">停止录制</span>
+            <button class="btn btn_primary" id="stopRecord">结束</button>
+            <span class="desc" style="color:red;">提交测试</span>
+            <button class="btn btn_primary" id="translateVoice">提交测试</button>
+            <span class="desc">播放朗读</span>
+            <button class="btn btn_primary" id="playVoice">试播放</button>
+            <span class="desc">停止播放</span>
+            <button class="btn btn_primary" id="stopVoice">停止播放</button>
+
+            <br>
+
+            <div style="font-size: 13px;line-height: 20px;width: 100%;text-align: center;color: #999999;margin-top: -5px; font-weight:blod;">
+                <span>©2015 {$_W['account']['name']} 版权所有</span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+    // jssdk config 对象
+    jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || {};
+    
+    // 是否启用调试
+    jssdkconfig.debug = false;
+    
+    jssdkconfig.jsApiList = [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'hideMenuItems',
+        'showMenuItems',
+        'hideAllNonBaseMenuItem',
+        'showAllNonBaseMenuItem',
+        'translateVoice',
+        'startRecord',
+        'stopRecord',
+        'onRecordEnd',
+        'playVoice',
+        'pauseVoice',
+        'stopVoice',
+        'uploadVoice',
+        'downloadVoice',
+        'chooseImage',
+        'previewImage',
+        'uploadImage',
+        'downloadImage',
+        'getNetworkType',
+        'openLocation',
+        'getLocation',
+        'hideOptionMenu',
+        'showOptionMenu',
+        'closeWindow',
+        'scanQRCode',
+        'chooseWXPay',
+        'openProductSpecificView',
+        'addCard',
+        'chooseCard',
+        'openCard'
+    ];
+    wx.config(jssdkconfig);
+
+    wx.error(function(res) {
+        alert(res.errMsg);
+    });
+
+</script>
+    <script type="text/javascript">
+        wx.ready(function() {
+            var shareData = {
+                title: "{$s_title}",
+                desc: "{$s_content}",
+                link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('voice')}",
+                imgUrl: "{$s_img}"
+            };
+            wx.onMenuShareAppMessage(shareData);
+            wx.onMenuShareTimeline(shareData);
+            wx.onMenuShareQQ(shareData);
+            wx.onMenuShareWeibo(shareData);
+            
+            function enable(id)
+            {
+                var elem = document.querySelector("#" + id + "");
+                elem.style.backgroundColor = "#04be02";
+                elem.disabled = false;
+            }
+            function disable(id)
+            {
+                var elem = document.querySelector("#" + id + "");
+                elem.style.backgroundColor = "gray";
+                elem.disabled = true;
+            }
+
+             wx.getNetworkType({
+            success: function(res) {
+                if(res.networkType=="wifi")
+                {
+                    document.querySelector('#traffictip').innerHTML=('当前处于 ' + res.networkType + ' 环境'+",放心使用！");
+                    document.querySelector('#traffictip').style.color="green";
+                }
+                else
+                {
+                    document.querySelector('#traffictip').innerHTML=('你当前使用 ' + res.networkType + ' 上网'+",注意流量使用，土豪请随意！");
+                    document.querySelector('#traffictip').style.color="red";
+                }
+                
+            },
+            fail: function(res) {
+                alert(JSON.stringify(res));
+            }
+        });
+            // 3 智能接口
+            var voice = {
+                localId: '',
+                serverId: ''
+            };
+            // 3.1 识别音频并返回识别结果
+            document.querySelector('#translateVoice').onclick = function() {
+                if (voice.localId == '') {
+                    alert('请先使用 startRecord 接口录制一段声音');
+                    return;
+                }
+                disable("translateVoice");
+                disable("playVoice");
+                disable("stopVoice");
+                disable("stopRecord");
+                disable("startRecord");
+
+                wx.translateVoice({
+                    localId: voice.localId,
+                    complete: function(res) {
+                        if (res.hasOwnProperty('translateResult')) {
+                            var text = res.translateResult;
+                            
+                            var old=document.querySelector('#originid').value;
+                            document.querySelector('#voicetext').innerHTML = text;
+                            //alert(text);
+                            $.post("{php echo $this->createMobileUrl('postvoice')}", {"text": text, "old": old}, function(res) {
+                                var obj = JSON.parse(res);
+                                document.querySelector('#divvoice').style.display="block";
+                                document.querySelector('#divresult').style.display="block";
+                                document.querySelector('#shareid').style.display="block";
+                                document.querySelector('#percent').innerHTML = obj.percent+"%";
+                                document.querySelector('#percentt').innerHTML =obj.msg;
+
+                                var shareData = {
+                                    title: obj.msg + ",得分 "+obj.percent+" 你敢来试试吗？",
+                                    desc: "普通话测试得分:"+obj.percent+"，你敢来测试吗？",
+                                    link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('voice')}",
+                                    imgUrl: "{$s_img}"
+                                };
+                                wx.onMenuShareAppMessage(shareData);
+                                wx.onMenuShareTimeline(shareData);
+                                wx.onMenuShareQQ(shareData);
+                                wx.onMenuShareWeibo(shareData);
+                                alert("经鉴定，" + obj.msg + ",快去分享给好友吧！");
+                                disable("translateVoice");
+                                disable("playVoice");
+                                disable("stopVoice");
+                                disable("stopRecord");
+                                enable("startRecord");
+                            });
+
+                        } else {
+                            alert('无法识别');
+                        }
+                    }
+                });
+            };
+
+            // 4 音频接口
+            // 4.2 开始录音
+            document.querySelector('#startRecord').onclick = function() {
+                document.querySelector("#startRecord").innerHTML = "正在录音中";
+                disable("startRecord");
+                enable("stopRecord");
+                disable("translateVoice");
+                disable("playVoice");
+                disable("stopVoice");
+                wx.startRecord({
+                    cancel: function() {
+                        alert('用户拒绝授权录音');
+                    }
+
+                });
+            };
+
+            // 4.3 停止录音
+            document.querySelector('#stopRecord').onclick = function() {
+                wx.stopRecord({
+                    success: function(res) {
+                        voice.localId = res.localId;
+                        alert('录音成功,请点击提交按钮对比测试');
+                        document.querySelector("#playVoice").innerHTML = "播放我的朗读";
+                        document.querySelector("#startRecord").innerHTML = "开始朗读";
+                        disable("startRecord");
+                        disable("stopRecord");
+                        enable("translateVoice");
+                        enable("playVoice");
+                        disable("stopVoice");
+                    },
+                    fail: function(res) {
+                        alert(JSON.stringify(res));
+                    }
+                });
+            };
+
+            // 4.4 监听录音自动停止
+            wx.onVoiceRecordEnd({
+                complete: function(res) {
+                    voice.localId = res.localId;
+                    alert('录音时间已超过一分钟');
+                }
+            });
+
+            // 4.5 播放音频
+            document.querySelector('#playVoice').onclick = function() {
+                if (voice.localId == '') {
+                    alert('请先使用 startRecord 接口录制一段声音');
+
+                    return;
+                }
+                disable("startRecord");
+                disable("stopRecord");
+                enable("translateVoice");
+                disable("playVoice");
+                enable("stopVoice");
+                wx.playVoice({
+                    localId: voice.localId
+                });
+            };
+
+
+
+            // 4.7 停止播放音频
+            document.querySelector('#stopVoice').onclick = function() {
+                wx.stopVoice({
+                    localId: voice.localId
+                });
+                disable("startRecord");
+                disable("stopRecord");
+                enable("translateVoice");
+                enable("playVoice");
+                disable("stopVoice");
+            };
+
+            // 4.8 监听录音播放停止
+            wx.onVoicePlayEnd({
+                complete: function(res) {
+                    alert('录音（' + res.localId + '）播放结束');
+                }
+            });
+
+            disable("translateVoice");
+            disable("playVoice");
+            disable("stopVoice");
+            disable("stopRecord");
+
+
+        });
+
+        wx.error(function(res) {
+            alert(res.errMsg);
+        });
+
+    </script>
+</html>

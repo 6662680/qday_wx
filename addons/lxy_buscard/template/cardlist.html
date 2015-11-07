@@ -1,0 +1,71 @@
+{template 'common/header'}
+<div class="main">
+	<ul class="nav nav-tabs">
+		<li{if $_GPC['do'] == 'cardlist'} class="active"{/if}><a href="{php echo  $this->createWebUrl('cardlist');}">名片管理</a></li>
+		<li{if $_GPC['do'] == 'cardadd'} class="active"{/if}><a href="{php echo $this->createWebUrl('cardadd');}">添加名片</a></li>
+	</ul>
+    
+    <div class="panel panel-info">
+	<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="./index.php" method="get" class="form-horizontal" role="form">
+			<input type="hidden" name="c" value="site" />
+			<input type="hidden" name="a" value="entry" />
+        	<input type="hidden" name="m" value="lxy_buscard" />
+        	<input type="hidden" name="do" value="cardlist" />
+         
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">姓名</label>
+				<div class="col-sm-8 col-lg-9">
+					<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+				</div>  <div class=" col-xs-12 col-sm-2 col-lg-2">
+					<button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+				</div>
+                          
+			</div>
+			 
+ 			<div class="form-group">
+			</div>
+		</form>
+	</div>
+    </div>
+	<div style="padding:15px;">
+		<p>
+        <a href="{php echo $this->createWeburl('cardadd', array())}"  class="btn btn-default"><i class="icon-plus-sign-alt" ></i>新增名片</a>
+        </p>
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th  style='width:220px;'>姓名</th>
+					<th style="width:120px">职务</th>
+					<th style="width:120px">手机</th>
+					<th  style="width:120px">电话</th>
+					<th style="width:120px">QQ</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				<tr>
+                                    <td>{$item['username']}</td>
+					<td>{$item['degree']}</td>
+					<td>{$item['mobile']}</td>
+					<td>{$item['tel']}</td>
+					<td>{$item['qq']}</td>
+					<td style="text-align:left;">
+                      
+                    <a href="{$_W['siteroot']}app/{php echo $this->createMobileUrl('viewcard', array('id' => $item['id']))}" class="btn btn-small" title="预览" target="_blank"><i class="fa fa-search"></i> 预览</a>
+                      <a href="{php echo $this->createWebUrl('tplsetindex', array('id' => $item['id']))}" class="btn btn-small" title="模板设置"><i class="fa fa-user"></i> 模板</a>
+                    <a href="{php echo $this->createWebUrl('cardadd', array('id' => $item['id']))}" class="btn btn-small" title="编辑"><i class="fa fa-edit"></i> 编辑</a>
+						<a onclick="return confirm('确认删除该名片？');return false;" href="{php echo $this->createWebUrl('deletecard', array('id' => $item['id']))}" class="btn btn-small" title="删除"><i class="fa fa-remove"></i> 删除</a></td>
+				</tr>
+				{/loop}
+
+				<td colspan="6">
+					<input name="token" type="hidden" value="{$_W['token']}" /></td>
+			</tr>
+		</table>
+		{$pager}
+	</div>
+</div>
+{template 'common/footer'}

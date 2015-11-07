@@ -1,0 +1,127 @@
+@charset "utf-8";
+/* CSS Document */
+body,ul,li{margin:0;padding:0;}
+ul{list-style:none;}
+#box_footerBody {
+	width: 100%;
+	position: fixed;
+    _top: expression(documentElement.scrollTop + "px");
+	left: 0;
+	z-index: 99999;
+	text-align: center;
+	border-top: none;
+}
+
+.Toolbar li {
+    width:25%;
+    float: left;
+	border-top: 1px solid #666;
+	text-align: center;
+	-moz-box-flex: 1;
+	-webkit-box-flex: 1;
+    	background: -webkit-gradient(linear, 0 0, 0 100%, from(#333), to(#222));
+	background: -moz-linear-gradient(#333,#222);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333', endColorstr='#222');
+	box-flex: 1;
+}
+.Toolbar li:last-child a,.Toolbar li:last-child div {
+   border-right: none;
+}
+.Toolbar a, .Toolbar div {
+	border: 0px solid #333;
+	border-right: 1px solid #222;
+    height:50px;
+	display: block;
+	line-height: 48px;
+	text-align: center;
+	color: #fff;
+	border-bottom: none;
+	text-decoration: none;
+}
+
+.Toolbar .icon {
+	width: 40px;
+	height: 30px;
+	margin-top: 5px;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+	
+}
+
+.Toolbar span {
+	height: 20px;
+	line-height: 20px;
+	display: block;
+	margin: 0 auto;
+}
+
+.Toolbar .back {
+	background-position: 0px -120px;
+}
+
+.Toolbar .text {
+	height: 16px;
+	line-height: 16px;
+	font-size: 0.7em;
+	text-decoration: none;
+	text-align: center;
+	
+}
+
+.Toolbar .tel {
+	background-image: url('../img/tel.png');
+	background-position: 0px 0px;
+}
+
+
+
+.Toolbar .share {
+	background-image: url('../img/share.png');
+	background-position: 0px 0px;
+}
+
+.Toolbar .address {
+	background-image: url('../img/address.png');
+	background-position: 0px 0px;
+}
+
+.Toolbar .aten {
+	background-image: url('../img/home.png');
+	background-position: 0px 0px;
+}
+
+.Toolbar .dobl {
+	background-image: url('../img/double.png');
+	background-position: 0px 0px;
+}
+
+.erwei{
+	width: 100%;
+	position: fixed;
+    _top: expression(documentElement.scrollTop + "px");
+	bottom: 30%;
+	left: 0;
+	z-index: 99999;
+	text-align: center;
+	border-top: none;
+	margin:0px auto;
+
+}
+
+.erwei p{
+	width:100%;
+	text-align:center;
+	
+}
+
+.erwei img{
+
+	width:100%;
+	
+}
+#box_footerBody{
+    background:none;
+}
+
+#mcover{ position: fixed;	top:0;	left:0;	width:100%;	height:100%;background:rgba(0, 0, 0, 0.7);	display:none;z-index:20000;}
+#mcover img {position: fixed;right: 18px;top:5px;width: 260px;height: 180px;z-index:20001;}

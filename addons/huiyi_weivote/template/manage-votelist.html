@@ -1,0 +1,207 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $_GPC['do'] == 'ManageVoteList' || empty($_GPC['do'])}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageVoteList');}">投票管理</a></li>
+    <li {if $_GPC['do'] == 'ManageVoteAdd'}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageVoteAdd');}">添加投票</a></li>
+</ul>
+
+<style>
+    .page-nav {
+        margin:0;
+        width:100%;
+        min-width:800px;
+    }
+
+    .page-nav-tabs {
+        background:#EEE;
+    }
+
+    .page-nav > li > a {
+        display: block;
+    }
+
+    .page-nav-tabs > li > a{
+        padding-right: 12px;
+        padding-left: 12px;
+        margin-right: 2px;
+        line-height: 14px;
+    }
+    .page-nav-tabs > li > a {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        line-height: 20px;
+        border: 1px solid transparent;
+        border-bottom-width: 0px;
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
+    }
+    .page-nav-tabs > li > a {
+        padding: 0;
+        margin: 0;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+        font-size: 14px;
+        color: #666;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+
+    .page-nav-tabs>li {
+        line-height: 40px;
+        float: left;
+        list-style: none;
+        display: block;
+        text-align: -webkit-match-parent;
+    }
+
+    .page-nav-tabs>li>a,.page-nav-tabs>li>a:focus {
+        border-radius: 0 !important;
+        background-color: #f9f9f9;
+        color: #999;
+        margin-right: -1px;
+        position: relative;
+        z-index: 11;
+        border-color: #c5d0dc;
+        text-decoration: none;
+    }
+
+    .page-nav-tabs>li>a:hover
+    {
+        background-color: #FFF;
+    }
+
+    .page-nav-tabs>li.active>a, .page-nav-tabs>li.active>a:hover, .page-nav-tabs>li.active>a:focus {
+        color: #576373;
+        border-color: #c5d0dc;
+        border-top: 2px solid #4c8fbd;
+        border-bottom-color: transparent;
+        background-color: #FFF;
+        z-index: 12;
+        margin-top: -1px;
+        box-shadow: 0 -2px 3px 0 rgba(0,0,0,0.15);
+    }
+</style>
+<div class="main">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">筛选</div>
+        <div class="panel-body">
+            <form action="{php echo $this->createWeburl('ManageVoteList')}" class="form-horizontal" method="post">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">标题</label>
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6">
+                        <input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}" placeholder="投票活动标题">
+                    </div>
+                    <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">
+                        <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">活动列表</div>
+        <div class="table-responsive panel-body">
+
+            <form action="" method="post" class="form-horizontal form">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                    <tr>
+                        <th style="width:5%"><input type="checkbox" class="check_all" /></th>
+                        <th style="width:5%">编号</th>
+                        <th style="width:20%;">标题</th>
+                        <th style="width:20%;">开始时间&结束时间</th>
+                        <th style="width:8%;">总票数</th>
+                        <th style="width:8%;">状态</th>
+                        <th style="width:39%;text-align: right;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="level-list">
+                    {loop $list $item}
+                    <tr>
+                        <td class="with-checkbox"><input type="checkbox" name="check" value="{$item['id']}"></td>
+                        <td>{$item['id']}</td>
+                        <td>
+                            {$item['title']}
+                        </td>
+                        <td><span class="label" style="background:#a9a9b7;">开</span>{php echo date('Y-m-d H:i', $item['start_time'])}<br>
+                            <span class="label" style="background:#454848;">结</span>{php echo date('Y-m-d H:i', $item['end_time'])}</td>
+                        <td>
+                            {$item['log_count']}
+                        </td>
+                        <td>
+                            {if $item['state']==1}
+                            <span class="label" style="background:#ff0000;">关闭</span>
+                            {else}
+                            <span class="label" style="background:#56af45;">开启</span>
+                            {/if}
+                        </td>
+                        <td style="text-align: right;">
+                            <a class="btn btn-sm btn-default" href="{php echo $this->createWebUrl('ManageVoteAdd', array('id' => $item['id']))}" title="编辑"><i class="fa fa-pencil"></i>编辑</a>
+                            <a class="btn btn-sm btn-primary" href="{php echo $this->createWebUrl('ManageOptionList', array('id' => $item['id']))}" title="投票选项">投票选项</a>
+                            <a class="btn btn-sm btn-info" href="{php echo $this->createWebUrl('ManageLogCount', array('id' => $item['id']))}" title="票数管理">票数管理</a>
+                            <a class="btn btn-sm btn-warning" href="{php echo $this->createWebUrl('ManageLog', array('id' => $item['id']))}" title="记录">记录</a>
+                            <a class="btn btn-sm btn-warning" href="{php echo $this->createWebUrl('ManageResult', array('id' => $item['id']))}" title="结果">结果</a>
+                            <a class="btn btn-sm btn-danger" onclick="return confirm('确认删除吗？');return false;" href="{php echo $this->createWebUrl('ManageVoteDelete', array('id' => $item['id']))}" title="删除"><i class="fa fa-times"></i>删除</a>
+                        </td>
+                    </tr>
+                    {/loop}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <!--<input name="deleteall" type="button" class="btn btn-primary" value="批量删除">-->
+                            <input type="hidden" name="token" value="{$_W['token']}" />
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+    </div>
+    {$pager}
+</div>
+<script>
+    function drop_confirm(msg, url){
+        if(confirm(msg)){
+            window.location = url;
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(function(){
+        $(".check_all").click(function(){
+            var checked = $(this).get(0).checked;
+            $("input[type=checkbox]").attr("checked",checked);
+        });
+
+        $("input[name=deleteall]").click(function(){
+            var check = $("input[type=checkbox][class!=check_all]:checked");
+            if(check.length < 1){
+                alert('请选择要删除的投票活动!');
+                return false;
+            }
+            if(confirm("确认要删除选择的投票活动?")){
+                var id = new Array();
+                check.each(function(i){
+                    id[i] = $(this).val();
+                });
+                var url = "{php echo $this->createWebUrl('ManageVoteDeleteAll')}";
+                $.post(
+                        url,
+                        {idArr:id},
+                        function(data){
+                            alert(data.error);
+                            location.reload();
+                        },'json'
+                );
+            }
+        });
+
+    });
+</script>
+
+{template 'common/footer'}

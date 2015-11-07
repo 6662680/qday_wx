@@ -1,0 +1,142 @@
+
+<!doctype html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
+   <title>{$list['title']}</title>
+   <link href="{$_W['siteroot']}/addons/hx_alert/template/style/css/main.min.css" rel="stylesheet" type="text/css">
+   <script src="{$_W['siteroot']}/addons/hx_alert/template/style/js/main.m.js"></script>
+   <script src="{$_W['siteroot']}/addons/hx_alert/template/style/js/wxtools.min.js"></script>
+</head>
+   <script>var _host = "http://" + window.location.host;
+function attention_wx()
+{
+   //alert("关注微信“整蛊专家”，朋友圈整人利器！更多朋友圈整人游戏等你来玩！");
+   location.href='{$reply[gzurl]}';
+}
+var dataForWeixin = {
+      appId : "",
+      MsgImg : "{$_W['attachurl']}{$reply['picture']}",
+      TLImg : "{$_W['attachurl']}{$reply['picture']}",
+      shareurl : "{$_W['siteroot']}app/index.php?i={$list['uniacid']}&c=entry&do=alert&m=hx_alert&mid={$list['id']}",
+      title : "{$list['title']}",
+      desc : '',
+      fakeid : "",
+      before_share : function()
+      {
+         
+      },
+      callback : function() {
+           setTimeout(function(){
+            attention_wx();
+       },500);
+      }
+};
+</script>
+   <script>function HTMLDecode(strEncodeHTML)
+ {
+     var div = document.createElement('div');
+     div.innerHTML = strEncodeHTML;
+     return div.innerText;
+ }
+var _loop = {$list['loops']};
+var pop_string = '{$list[items]}';
+var pop_arry = JSON.parse(HTMLDecode (pop_string));
+while( _loop-- )
+{
+   for( i = 0; i < pop_arry.length; ++i )
+   {
+      alert(pop_arry[i]);
+   }
+}
+</script>
+<body>
+   <style>.ad_top {
+   text-align: center;
+   margin-left: -8px;
+   margin-right: -8px;
+}
+</style>
+   <div class="input-area">
+      <div class="left-icon">
+         <img src="{$_W['siteroot']}addons/hx_alert/template/style/img/bm_icon.gif"></div>
+      <div style="float:left">
+         <div class="banner-title">哈哈哈！终于出来了</div>
+         <div class="banner-intro">
+            刚才你体验到的是您的好友专为您精心设计的
+            <strong
+   style="color: #C60;">整游游戏“弹死你”</strong>
+            ，点击下面按钮，你也可以设计整蛊游戏弹死TA！
+         </div>
+      </div>
+      <div style="clear:both"></div>
+   </div>
+   <div class="margin-10"></div>
+   <button id="add_btn" class="btn btn-yellow"  onclick="location.href='{php echo $this->createMobileUrl('index',array('rid'=>$reply['rid']))}'">&nbsp;我也要定制“弹死你”整蛊好友</button>
+   <div class="margin-10"></div>
+   <style>.sbg {
+       display: none;
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       text-align: center;
+       color: #fff;
+       font-size: 22px;
+       line-height: 1.7em;
+       background: rgba(0,0,0,0.85);
+       z-index: 200;
+ }
+.sbg .arron {
+   position: absolute;
+   top: 8px;
+   right: 8px;
+   width: 100px;
+   height: 100px;
+   background: url({$_W['siteroot']}addons/hx_alert/template/style/img/arron.gif) no-repeat;
+   background-size: 100px 100px;
+}
+.sbg p {
+   padding-top: 78px;
+}
+.sbg .strong{
+   color: #ff1a27;
+   font-size: 26px;
+}
+</style>
+   <div class="margin-5"></div>
+   <button class="btn btn-white"  onclick="document.getElementById('sbg').style.display = 'block';">
+      <img src="{$_W['siteroot']}addons/hx_alert/template/style/img/icon_msg.gif">&nbsp;点这里发给好友整蛊TA ></button>
+   <div class="margin-10"></div>
+   <div id="sbg" class="sbg"  onclick="document.getElementById('sbg').style.display = 'none';">
+      <div class="arron"></div>
+      <p id="msg">
+         请点击右上角按钮
+         <br />
+         再点击【分享到朋友圈】或【发送给好友】
+         <br />
+         <span class="strong">好友点击进入就会中招！</span>
+      </p>
+      <div class="margin-10"></div>
+   </div>
+   <style>.ad_bottom {
+   text-align: center;
+   left:0px;
+   right:0px;
+   bottom: -5px;
+   position: fixed;
+   background-color:#FFF;
+   z-index:999;
+}
+#botBoxClose{z-index:20000;top:-20px;}
+#botBoxClose{position:absolute;text-align:center;right:2px;top:2px;width:20px;height:20px;line-height:18px;
+border-radius:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:16px;font-family:arial;cursor:pointer;
+}
+#ifr{height: 50px!important;}
+</style>
+   <div style="display:none">
+   </div>
+</body>
+</html>

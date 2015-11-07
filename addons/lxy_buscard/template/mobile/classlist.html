@@ -1,0 +1,19 @@
+<div style=" margin:1em 0.3em 1em 0.3em; height:10px;">
+  
+  {loop $classes $cls}
+    <div class="module border-radius ptb6" style="height:130px;overflow:hidden">
+       <a href="{if !empty($cls['outurl'])}{$cls['outurl']}{else}javascript:void(){/if}" class="no_unl">
+            <section class="product-info">
+                  <div class="product-title">{$cls['cname']}</div>
+                  <div class="product-pic">
+                    <img src="{php echo $_W['attachurl'].$cls['thumb']}" width="100%">
+                  </div>
+            </section>
+        </a>
+    </div>
+    {/loop}      
+   </div>
+   <link href="../addons/lxy_buscard/template/css/footer.css" rel="stylesheet" type="text/css">
+<footer>
+      
+        </footer>

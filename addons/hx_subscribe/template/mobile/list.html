@@ -1,0 +1,98 @@
+{template 'common/header'}
+
+<style>
+
+.category{display:block; overflow:hidden; background:#EEE; border-top:1px #DDD solid;}
+
+.category a{display:inline-block; overflow:hidden; height:30px; line-height:30px; width:33.33%; text-align:center; color:#666; font-size:14px; float:left; padding:0 5px;}
+
+.list li a{display:block; height:71px; padding:5px; border-bottom:1px #EEE solid; color:#333; overflow:hidden; text-decoration:none !important; position:relative;}
+
+.list li a .thumb{width:60px; height:60px;}
+
+.list li a .title{font-size:14px; padding-right:90px;}
+
+.list li a .shouyi{font-size:12px; color:#999; position:absolute; bottom:5px;}
+
+.list li a .createtime{font-size:12px; color:#999; position:absolute; bottom:20px;}
+
+.head{height:40px; line-height:40px; background:#22292C; padding:0 5px; color:#FFF;}
+
+.head .bn{display:inline-block; height:30px; line-height:30px; padding:0 10px; margin-top:4px; font-size:20px; background:transparent; color:#FFF; text-decoration:none;}
+
+.head .bn.pull-left{border-right:1px solid #000;}
+
+.head .bn.pull-right{position:absolute; right:5px; top:0; border-left:1px solid #000;}
+
+.head .title{font-size:14pt;display:block;padding-left:10px;font-weight:bolder;margin-right:49px;text-align:center;height:40px;line-height:40px;text-overflow:ellipsis;white-space:nowrap;overflow: hidden;}
+
+.head .order{background:#F9F9F9; position:absolute; z-index:9999; right:0;}
+
+.head .order li > a{display:block; padding:0 10px; min-width:100px; height:35px; line-height:35px; font-size:16px; color:#333; text-decoration:none; border-top:1px #EEE solid;}
+
+.head .order li.fa-caret-up{font-size:20px;color:#F9F9F9;position:absolute;top:-11px;right:16px;}
+
+.pager-position{width:100%;margin:0 auto;text-align:center;}
+.footer1{width:100%;bottom:20px;text-align:center;}
+
+</style>
+
+<div class="head">
+
+	<a href="javascript:history.go(-1);" class="bn pull-left"><i class="fa fa-reply"></i></a>
+
+	<span class="title">积分排行</span>
+
+</div>
+
+<ul class="list list-unstyled">
+
+	{if !empty($myinfo)}
+	<li style="background-color:rgb(16, 155, 33);">
+
+		<a href="">
+			{php $info = $this->get_user_info($myinfo['uid'],$myinfo['openid']);}
+			{if $info['avatar']}<img src="{$info['avatar']}" class="pull-right thumb img-thumbnail" onerror="this.parentNode.removeChild(this)" />{/if}
+
+			<div class="title" style="color:#fff;">{$info['nickname']}</div>
+
+			<div class="shouyi" style="color:#fff;">收益：{$myinfo['shouyi']}</div>
+
+			<div class="createtime" style="color:#fff;">第<span style="background-color: {if $mymc <= 3}#f54545{else}#C0C1C3{/if};color:#fff;">&nbsp;{$mymc}&nbsp;</span>名&nbsp;&nbsp;</div>
+
+		</a>
+
+	</li>
+	{/if}
+
+	{php $i = ($pindex - 1) * $psize + 1 ;}
+
+	{loop $list $row}
+
+	{php $info = $this->get_user_info($row['uid'],$row['openid']);}
+
+	<li>
+
+		<a href="">
+
+			{if $info['avatar']}<img src="{$info['avatar']}" class="pull-right thumb img-thumbnail" onerror="this.parentNode.removeChild(this)" />{/if}
+
+			<div class="title">{$info['nickname']}</div>
+
+			<div class="shouyi">收益：{$row['shouyi']}</div>
+
+			<div class="createtime">第<span style="background-color: {if $i <= 3}#f54545{else}#C0C1C3{/if};color:#fff;">&nbsp;{$i}&nbsp;</span>名&nbsp;&nbsp;</div>
+
+		</a>
+
+	</li>
+
+	{php $i++;}
+
+	{/loop}
+
+</ul>
+
+<div class="pager-position">{$pager}</div>
+<div class="pager-position"><span class="title">还没有积分排名？点击<a href="{php echo $this->createMobileUrl('articleList',array('id'=>$row['id']))}">引导关注列表</a>，分享给好友，好友关注了才有积分哦!</span></div>
+{template 'common/footer'}

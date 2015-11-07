@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<header>
+	<title>{$_W['account']['name']}</title>
+	{php echo register_jssdk(false);}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=7" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/qh.min.css">
+	<link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/emoji.css">
+	<link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery.mobile.icons.min.css">
+	<link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery.mobile.structure-1.4.2.min.css">
+	<link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery-mobile-fluid960.min.css">
+	<link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/style.css">
+	<script type="text/javascript" src="{MODULE_URL}/template/style/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="{MODULE_URL}/template/style/js/jquery.mobile-1.4.2.min.js"></script>
+  <script type="text/javascript" src="{MODULE_URL}/template/style/js/mymobile.js"></script>
+  <script type="text/javascript" src="{MODULE_URL}/template/style/js/all.js"></script>
+  <style type="text/css">
+.bigTxt-weixin { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; text-align: center; background: rgba(0,0,0,0.7); }
+.bigTxt-weixin img { max-width:100%; }
+.bigTxt-weixin.z-show { display: block; }
+</style>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('showOptionMenu'); //显示分享
+});
+</script>
+</header>
+<body  ontouchmove="clearmenu()">
+	<!-- *****************iscroll******************* \/-->
+	<div id="qh_detail" data-role="page">
+		<div id="content" data-role="content">
+		<input id="commonUrl" type="hidden" value="{MODULE_URL}" />
+	
+			<div id="scroller">
+      <input type="hidden" id="my_url_de" value='{$ajax_url}'>
+      <input type="hidden" id="my_url_de1" value='{$myajax_url}'>
+      <input type="hidden" id="swnoId_de" value='{$swnoId}'>
+      <input type="hidden" id="my_url_de2" value='{$addajax_url}'>
+      <input type="hidden" id="like" value='{$like}'>
+      <input type="hidden" id="unlike" value='{$unlike}'>
+      <input type="hidden" id="report_url" value='{$report_url}'>
+				<ul id="Oneqh" class="ui-listview" data-role="listview"
+					data-inset="false" data-icon="false">
+					<li class="mainqh" style="">
+						<input type="hidden" id="replay" />
+						<input type="hidden" id="replayswnocoId" /> 
+							<input type="hidden"   id="userID" >
+						<a href="#">
+							<div class="tosomeone">To：</div>
+							<div class="saywhat">
+								<table>
+									<tr>
+										<td id="swnoContent">
+										</td>
+									</tr>
+								</table>
+							</div>
+					</a>
+						<div class="bottom-area">
+							<div class="list-school"></div>
+							<div class="hudong">
+								<img class="heart-img" _src="{MODULE_URL}/template/style/images/bgimg/icon-hudong-heart-on.png"/> <span class="heart-span"></span>
+								<img src="{MODULE_URL}/template/style/images/bgimg/icon-hudong-chat.png" /> <span class="chat-span"></span>
+								<img src="{MODULE_URL}/template/style/images/bgimg/icon-hudong-more.png" onclick="menupop(this)" />
+                <span class="moremenu" style>
+                  <a data-role="button" onclick="share()">分享</a>
+                  <a data-role="button" onclick="report('{$userId}',{$swnoId})" >举报 </a> 
+                </span>
+							</div>
+						</div>
+					</li>
+          
+				</ul>
+<!--         <div id="nextListBtnDe" class="nextListBtn"> 
+    <a  id="refresh_ButtonDe" class="refresh_Button" style="width: 100%;" href="" data-role="button" onclick="NextPageActionDe() ">点击加载更多评论</a>
+</div> -->
+			</div>
+		</div>
+
+
+
+		<!-- *****************iscroll******************* /\-->
+		<div class="detail-footer" data-role="footer" data-position="fixed"
+			data-tap-toggle="false" data-theme="a">
+			<table>
+				<tr>
+					<td class="detail-foot-ico"><a href="" data-rel="back"
+						data-ajax="false"> <img
+							src="{MODULE_URL}/template/style/images/bgimg/icon-reword-back.png" alt="" />
+					</a></td>
+					<td class="detail-foot-input"><input class="inputtext"
+						data-mini="true" type="text" id="swnocContent" data-theme="c"
+						placeholder="我也对她/他说一句" /></td>
+					<td class="detail-foot-button"><a class="inputbutton" href=""
+						data-ajax="true" data-role="button" onclick="addswnoc()"><div>发布</div></a>
+					</td>
+				</tr>
+			</table>
+		</div>
+        <div class="bigTxt-weixin"><img src="{MODULE_URL}/template/style/images/bgimg/weixin-share-guide.png"></div>
+		<script type="text/javascript" src="{MODULE_URL}/template/style/js/hhSwipe.js"></script>
+	</div>
+</body>
+  <script type="text/javascript">
+	function getUrl(){
+		return $('#commonUrl').val();
+	}
+	wx.ready(function () {
+    sharedata = {
+      title: '【'+'{$_W['account']['name']}'+'】大家都在表白,你还等什么..',
+      desc: '大家都在表白,你还等什么..快来说点什么吧..',
+      link: document.URL,
+      imgUrl: '{php echo toimage($_W['account']['avatar'])}',
+      success: function(){
+      },
+      cancel: function(){
+      }
+    };
+    wx.onMenuShareAppMessage(sharedata);
+    wx.onMenuShareTimeline(sharedata);
+    wx.onMenuShareQQ(sharedata);
+    wx.onMenuShareWeibo(sharedata);
+  });
+  </script>
+</html>

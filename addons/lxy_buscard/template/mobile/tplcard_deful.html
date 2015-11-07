@@ -1,0 +1,42 @@
+
+{template 'headnav'}
+<div class="fullscreen">
+  <div id="avatorimg" style="display: none; z-index: 100; width: 100%; margin: 0px auto; text-align: center; position: fixed; padding-top: 5%; background-color: rgba(0, 0, 0, 0.8); height: 1211px; background-position: initial initial; background-repeat: initial initial;">
+    <img style="width:80%;" src="{php echo $_W['attachurl'].$item['thumb']}">
+</div>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<link href="../addons/lxy_buscard/template/css/qycc-phone.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" media="screen and (device-aspect-ratio: 2/3)" href="../addons/lxy_buscard/template/css/iphone.css" type="text/css"> 
+
+   <div class="main" style="background:rgb(224,224,224)">
+
+            <div class="main-card touch">
+                <div class="card-box">
+                    <div class="card-bg">
+                        <div class="name">{$item['username']}                                                <span style="font-size: 12px;">({$item['degree']})</span>
+                                              <img width="25" style="position: absolute; z-index:1;" id="avator" onerror="this.parentNode.removeChild(this)" height="25" src="{php echo $_W['attachurl'].$item['thumb']}"></div>
+                        <div class="position" style="font-size: 22px;">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="enter-info">
+                    <div class="name"><a style="color: cyan;" href="{$item['copintro']}">{$item['copname']}</a></div>
+                        <div>电&nbsp;&nbsp;&nbsp;&nbsp;话：<span><a href="tel:{$item['tel']}">{$item['tel']}</a></span></div>
+                        <div>手&nbsp;&nbsp;&nbsp;&nbsp;机：<span><a href="tel:{$item['mobile']}">{$item['mobile']}</a></span></div>
+                        <div>Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q：<span>{$item['qq']}</span></div>
+                        <div>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：<span><a href="mailto:{$item['email']}">{$item['email']}</a></span></div>
+                        {if 0}<div><a href="{$item['website']}">官&nbsp;&nbsp;&nbsp;&nbsp;网：{$item['website']}</a></div>{/if}
+                        <div>地&nbsp;&nbsp;&nbsp;&nbsp;址：<a href="http://api.map.baidu.com/marker?location={$item['lat']},{$item['lng']}&title={$item['jw_addr']}&content={$item['jw_addr']}&output=html&src=|">{$item['addr']} (百度地图)</a></div>
+                                                                                        </div>
+            </div>
+    </div>
+
+
+</div>
+
+   {template 'classlist'} 
+     
+	
+ {template 'footnav'}       
+
+
+</body></html>

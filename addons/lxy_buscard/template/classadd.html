@@ -1,0 +1,58 @@
+{template 'common/header'}
+{php load()->func('tpl')}
+<div class="main">
+<ul class="nav nav-tabs">
+  <li{if $_GPC['do'] == 'classlist'} class="active"{/if}><a href="{php echo  $this->createWebUrl('classlist', array());}">产品分类</a>
+  </li>
+  <li{if $_GPC['do'] == 'classadd'} class="active"{/if}><a href="{php echo $this->createWebUrl('classadd', array());}">添加分类</a>
+  </li>
+</ul>
+<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="{$item['id']}">
+        
+              <div class="panel panel-default">
+    <div class="panel-heading">
+       <h4>产品分类信息</h4>
+    </div>
+    <div class="panel-body">
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">分类标题</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="cname" name="cname" value="{$item['cname']}"  class="form-control" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">分类图片</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('thumb',$item['thumb'])}
+            </div>
+        </div>
+        
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">外链展示URL</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="outurl" name="outurl" value="{$item['outurl']}"  class="form-control" />
+            </div>
+        </div>
+        
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">是否显示</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class="radio-inline"><input type="radio" name="isshow" value="1" {if $item['isshow']==1} checked="true"{/if}> 是</label>
+                <label class="radio-inline"><input type="radio" name="isshow" value="0" {if $item['isshow']==0} checked="true"{/if}> 否</label>
+                                               
+            </div>
+        </div>
+        
+   
+    </div>
+</div> 
+        <div class="form-group col-sm-12">
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+</form>
+</div>
+{template 'common/footer'}

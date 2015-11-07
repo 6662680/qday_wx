@@ -1,0 +1,21 @@
+<div class="mobile-img">
+	{if !empty($foods['thumb'])}<img src="{$_W['attachurl']}{$foods['thumb']}" width="100%"/> {else}<img src="{$_W['attachurl']}/headimg_{$_W['uniacid']}.jpg" /">{/if}
+</div>
+<div class="mobile-div img-rounded" style="margin:10px 0;text-align:center;">
+	<div class="mobile-hd" style="text-align:center;margin-bottom:5px;">
+    {$foods['title']}
+    <span class="menu-list-button reduce" onclick="order.reduce({$foods['id']});"><img src="../addons/jufeng_wcy/images/reduce.png" height="30px" width="30px" /></span>
+	<span class="menu-list-num foodsnum_{$foods['id']}">{if $foodscart['total']}{$foodscart['total']}{else}0{/if}</span>
+    <span class="menu-list-button add" onclick="order.add({$foods['id']})"><img src="../addons/jufeng_wcy/images/add.png" height="30px" width="30px" /></span>
+
+    </div>
+    <div class="mobile-hd" style="margin:0 auto;">
+    单价：¥{$foods['preprice']}/{$foods['unit']}{if $foods['preprice'] < $foods['oriprice']} <span style="text-decoration:line-through;">¥{$foods['oriprice']}/{$foods['unit']}</span>{/if}
+    </div>
+    <div class="mobile-hd" style="margin:0 auto;">
+    热度：{$foods['hits']}人点过
+    </div>
+    <div class="mobile-hd" style="margin:0 auto;">
+    余量：充足
+    </div>
+</div>

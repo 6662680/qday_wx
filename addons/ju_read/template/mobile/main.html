@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="AngularApp">
+<head>
+	<title>{$reply['title']}</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <link charset="utf-8" rel="stylesheet" type="text/css" href="/addons/ju_read/template/style/css/style.css">
+</head>
+<body data-ad="true">
+<script type="text/javascript">
+// jssdk config 对象
+    var djurl = "{php echo $this->createMobileUrl('duijiang')}";
+    var replyId = "{$reply['id']}";
+    jssdkconfig = {php echo json_encode($_W['account']['jssdkconfig']);} || {};
+    
+    // 是否启用调试
+    jssdkconfig.debug = false;
+    
+    jssdkconfig.jsApiList = [
+        'checkJsApi',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'hideMenuItems',
+        'showMenuItems',
+        'hideAllNonBaseMenuItem',
+        'showAllNonBaseMenuItem',
+        'translateVoice',
+        'startRecord',
+        'stopRecord',
+        'onRecordEnd',
+        'playVoice',
+        'pauseVoice',
+        'stopVoice',
+        'uploadVoice',
+        'downloadVoice',
+        'chooseImage',
+        'previewImage',
+        'uploadImage',
+        'downloadImage',
+        'getNetworkType',
+        'openLocation',
+        'getLocation',
+        'hideOptionMenu',
+        'showOptionMenu',
+        'closeWindow',
+        'scanQRCode',
+        'chooseWXPay',
+        'openProductSpecificView',
+        'addCard',
+        'chooseCard',
+        'openCard'
+    ];
+    
+    </script>
+<script>
+
+    function setSB(v) {
+        var ie5 = (document.all && document.getElementsByTagName);
+        if (ie5 || document.readyState == "complete") {
+            document.getElementById("loadingword").innerText = v + "%";
+        }
+    }
+    function fakeProgress(v) {
+        if (v > 100) {
+            $("#loadingword").hide();
+            $("#loadingwords").hide();
+            document.getElementById("loadingshow").style.opacity = 0;
+            setTimeout(function () { $("#loadingshow").hide() }, 0);
+            $("#infoShow").fadeToggle("slow");
+        }
+        else {
+            setSB(v);
+            window.setTimeout("fakeProgress(" + (++v) + ")", 20);
+        }
+    }
+</script>
+<style>
+    .loadingImg1{
+width: 20%;
+position: absolute;
+bottom: 10%;
+left: 40%;
+background: url(../addons/ju_read/template/mobile/images/word.png) no-repeat;
+height: 55%;
+background-size: 100%;
+}
+    .loadingword {
+width:60px;
+height:60px;
+background: url(../addons/ju_read/template/mobile/images/loading.png) no-repeat;
+background-size: 100%;
+float: left;
+position: absolute;
+left: 41%;
+bottom: 67%;
+line-height: 60px;
+text-align: center;
+color: #EE652E;
+    }
+    #loadingshow{
+    opacity:1;
+    float: left;width: 100%;position: absolute;height: 100%;background-color: white;
+    transition:opacity 1s;
+-moz-transition:opacity 1s;
+-webkit-transition:opacity 1s;
+-o-transition:opacity 1s;
+    }
+    
+         .dh1 {
+    line-height: 30px;
+    }   
+    .dh2 {
+    line-height: 50px;
+    }
+        .wo2 {
+    line-height: 23px;
+    }
+</style>
+
+<script>
+
+    window.onload = function () {
+        fakeProgress(0);
+    }
+
+</script>
+<div id="loadingshow"  >
+     <div id="loadingword" class="loadingword"></div><a id="loadingwords" class="loadingImg1" ></a></div>
+<div ng-controller="TestShareCtrl.ctrl" class="app-content"id="infoShow" style="display:none" >
+       
+<div class="app-content">  
+   
+   		    <div class="readshare" id="readshare"style="background-color:{$reply['bgcolor']}" >
+                   <!--<img ng-src="{{listBusiness.IntrTopimg}}" style="width: 100%;" ng-click="infoHtml(1)" >-->
+                   <img ng-src="{php echo tomedia($reply['topimg'])}" style="width: 100%;" ng-click="infoHtml(1)" >
+				   
+                <div class="content" style="padding-bottom:150px;position:relative;width:90%;padding-left:5%;line-height:25px;font-size:12px">{$reply['pagestyle']}</div>
+                   
+                
+                    <img src="../addons/ju_read/template/mobile/images/start.png" ng-click="infoHtml(1)"class="guize">
+                    <img src="../addons/ju_read/template/mobile/images/ym.png"class="ym">
+               
+                <div class="guize_box"style="height: 88px;" >
+                        <img src="../addons/ju_read/template/mobile/images/tips.png" class="tips">
+                </div>
+		    </div>
+
+           <div id="back" class="hide back">
+               <div  style="top: 0px;position: relative;height: 14px;background-color:{$reply['bgcolor']};">
+                    <img src="../addons/ju_read/template/mobile/images/tips.png"class="tips2">
+               </div>
+                    
+                </div>
+                    <img src="../addons/ju_read/template/mobile/images/refresh.png"class="refresh"ng-click="refresh()"ng-show="flag" />
+                    <img src="../addons/ju_read/template/mobile/images/back.png"id="retun" class="read_top" ng-click="backHtml()">
+           </div>
+        
+                             
+                            
+                        
+                          <div class="ar_fade">
+                              <img src="../addons/ju_read/template/mobile/images/guide.png" style="width: 90%;margin-top: 5%;" onclick="$(this).parent().hide()"/>
+                        </div>     	   
+		  <div id="read1" class="hide read_share"style="margin-top: 86px;">
+                 <div class="m-img cardview">
+                     <div class="setToShare_box">
+                        {if time() < $reply['endtime']}
+                         <div>
+                               <div class="w1">您已收集了<span class="w2">{$log['hits']}</span>个阅读</div>
+                             <div class="time1" >活动剩余时间：<span style="font-size:10px;">{$sytime}</span></div>
+                            
+                     <img src="../addons/ju_read/template/mobile/images/share.png" class="share_gif orange" ng-click="showShare()">
+                             <div class="tips_b" >Tips:将本页面<span style="color:#E83F48;">发送</span>给好友，每有一位<span style="color:#E83F48;">好友点开阅读</span>，您即<span style="color:#E83F48;">收集到一个阅读</span>
+                        </div>
+                             </div>
+                        {else}
+                         <div class="flag2">
+                             <div style="padding-top:5px;color:#E74D4C;font-size: 25px;" >活动已结束</div>
+                              <div style="font-size:12px;color:#A6A6A6">您的好友共浏览了{$log['hits']}次</div>
+                         </div> 
+                        {/if}
+                         {if $log['status'] == 1}
+                         <div  class="item_list itemlist" ng-show="!isGetPrize"style=" padding-bottom:0px;">
+                            {loop $prizes $prize}
+                             <div class="list_cell" style="z-index:101;color:{if $log['hits'] >= $prize['neednum']}#E83F48{/if}">
+                                 <div style="width: 80%;float: left;">    
+                                     <div  class="item" style="top:{{9+35*($index)}}%;">（集满{$prize['neednum']}个阅读,共{$prize['prizenum']}份）</div>
+                                     <span style="font-size:13px;color:{if $log['hits'] >= $prize['neednum']}#22292C{/if}" >{$prize['prizename']}</span>(剩余{$prize['prizesy']}份)
+                                 </div>
+                                 <div class="dh1 dhbutton gray {if $log['hits'] >= $prize['neednum']}orange{/if}"style="float: right;padding: 15px 0px;border-radius: 0px 10px 10px 0px;margin-top: -8px;width: 51px;height: 100%;right: 0px;position: absolute;"  ng-click="{if $log['hits'] >= $prize['neednum']}showDuihuan('{$prize[id]}'){else}showDuihuannull(){/if}">{if $prize['prizesy'] == 0}已兑完{else}兑奖{/if}</div>
+                             </div>
+                             {/loop}
+                             
+                             <div style="position:relative;margin-left:-23px">
+                                 <div class="how_p" >如何得奖：</div>
+                                 <div class="gonggao">{$reply['address']}
+                                    <p style="white-space:normal;">
+                                        <span style="line-height:1.5;color:#E53333;">注：{$reply['tips']} &nbsp;&nbsp;</span> 
+                                    </p>
+                                 </div>
+                             </div>
+                            
+                         </div>
+                         {else if $log['status'] == 2}
+                         <!--已中奖 未领奖 起-->
+                         <div class="success">
+                             <img src="../addons/ju_read/template/mobile/images/ban.png"class="ban" />
+                             <div  class="gxhd">恭喜您<br></div>
+                             <div  class="wo1">获得<span>{$prizes[$log['prizeid']]['prizename']}</span></div>
+                             <div class="dhm duihuan_address">兑换码:
+                             <a href="{php echo $this->createMobileUrl('check',array('reply_id'=>$reply_id,'log_id'=>$log['id']))}"><span style="font-size:15px;height:20px;line-height:20px;padding-bottom:20px">{$log['sn']}</span></div></a>
+                            
+                         </div>
+                         <!--已中奖 未领奖 止-->
+                         {else if $log['status'] == 3}
+                         <!--已中奖 已领奖 起-->
+                         <div class="success">
+                             <img src="../addons/ju_read/template/mobile/images/ban.png"class="ban" />
+                             <div  class="gxhd">恭喜您<br></div>
+                             <div class="wo1">获得<span>{$prizes[$log['prizeid']]['prizename']}</span></div>
+                             <div class="duihuan_address"style="font-size:16px;height:20px;line-height:20px;">您已经领取过了</div>
+                         </div>
+                         <!--已中奖 已领奖 止-->
+                         {else}
+                         {/if}
+                             <div ng-show="isGetPrize">
+                                 <div class="how_p" >如何得奖：</div>
+                                 <div class="gonggao">{$reply['address']}
+                                    <p style="white-space:normal;">
+                                        <span style="line-height:1.5;color:#E53333;">注：{$reply['tips']} &nbsp;&nbsp;</span> 
+                                    </p>
+                                 </div>
+                             </div>
+                        <div class="for_tel" > 
+                            <a  href="tel:{$reply['tel']}"><img src="{php echo tomedia($reply['adimg'])}"class="for_gif"/> </a>
+                        </div>
+                         <div class="duihuan_fade"></div>
+                               	
+			    </div>
+            </div>   
+    </div>
+</div>
+<script>
+//jssdkconfig.debug = true;
+sharedata = {
+    'title' : "{$reply['title']}",
+    'desc' : "{$reply['description']}",
+    'link' : "{$_W['siteroot']}app/{php echo str_replace('./','',$this->createMobileUrl('main', array('id'=>$reply['id'],'parentopenid' => $_W['openid'])))}",
+    'imgUrl' : "{php echo tomedia($reply['thumb'])}",
+    success: function(){
+        alert('分享成功');
+    },
+    cancel: function(){
+        alert('分享是一种美德哦！');
+    }
+}
+</script>
+<script type="text/javascript">
+    
+    wx.config(jssdkconfig);
+    
+    var $_share = {php echo json_encode($_share);};
+    
+    if(typeof sharedata == 'undefined'){
+        sharedata = $_share;
+    } else {
+        sharedata['title'] = sharedata['title'] || $_share['title'];
+        sharedata['desc'] = sharedata['desc'] || $_share['desc'];
+        sharedata['link'] = sharedata['link'] || $_share['link'];
+        sharedata['imgUrl'] = sharedata['imgUrl'] || $_share['imgUrl'];
+    }
+    
+    function tomedia(src) {
+        if(typeof src != 'string')
+            return '';
+        if(src.indexOf('http://') == 0 || src.indexOf('https://') == 0) {
+            return src;
+        } else if(src.indexOf('../addons') == 0 || src.indexOf('../attachment') == 0) {
+            src=src.substr(3);
+            return window.sysinfo.siteroot + src;
+        } else if(src.indexOf('./resource') == 0) {
+            src=src.substr(2);
+            return window.sysinfo.siteroot + 'app/' + src;
+        } else if(src.indexOf('../addons/ju_read/template/mobile/images/') == 0) {
+            return window.sysinfo.attachurl+ src;
+        }
+    }
+    
+    if(sharedata.imgUrl == ''){
+        var _share_img = $('body img:eq(0)').attr("src");
+        if(_share_img == ""){
+            sharedata['imgUrl'] = window.sysinfo.attachurl + '../addons/ju_read/template/mobile/images/global/wechat_share.png';
+        } else {
+            sharedata['imgUrl'] = tomedia(_share_img);
+        }
+    }
+    
+    if(sharedata.desc == ''){
+        var _share_content = _removeHTMLTag($('body').html());
+        if(typeof _share_content == 'string'){
+            sharedata.desc = _share_content.replace($_share['title'], '')
+        }
+    }
+    
+    wx.ready(function () {
+        wx.onMenuShareAppMessage(sharedata);
+        wx.onMenuShareTimeline(sharedata);
+        wx.onMenuShareQQ(sharedata);
+        wx.onMenuShareWeibo(sharedata);
+    });
+    
+    </script>
+
+
+    <script src="../addons/ju_read/template/mobile/images/jquery.2.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/addons/ju_read/template/style/Js.js?v={TIMESTAMP}"></script>
+</body>
+</html>

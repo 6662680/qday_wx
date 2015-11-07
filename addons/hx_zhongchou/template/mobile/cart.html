@@ -1,0 +1,79 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+{template 'common'}
+<script type="text/javascript" src="../addons/hx_zhongchou/images/jquery.gcjs.js"></script>
+<link type="text/css" rel="stylesheet" href="../addons/hx_zhongchou/images/style.css?{TIMESTAMP}">
+<style>
+.shopcart-footer{margin-bottom:30px;}
+</style>
+<div class="head">
+	<a href="javascript:history.back();" class="bn pull-left"><i class="fa fa-angle-left"></i></a>
+	<span class="title">收藏夹</span>
+	<a href="javascript:void(0)" onclick="clearCart()" class="bn pull-right" style="font-size:18px;"><i class="fa fa-trash"></i> 清空</a>
+</div>
+<div class="shopcart-main img-rounded">
+	<div style='text-align:center;padding:50px 0 50px 0; {if count($list)>0}display:none{/if}' id='cartempty'>
+		<img src='../addons/hx_zhongchou/images/icon_cart_empty.png' /><br/><br/>
+		<span style='color:#adadad'>您的收藏夹空空如也，赶紧去添加几个吧~~</span>
+	</div>
+	{loop $list $item}
+	{php $project = $this->getproject($item['projectid']);}
+	<span id="stock_{$item['id']}" style='display:none'>{$project['id']}</span>
+	<div class="shopcart-item clearfix" id='item_{$item['id']}' style='height:120px;'>
+		<a href="{php echo $this->createMobileUrl('detail', array('id' => $project['id']))}">
+			<img src="{$_W['attachurl']}{$project['thumb']}">
+		</a>
+		<div class="shopcart-item-detail">
+			<a href="{php echo $this->createMobileUrl('detail', array('id' => $project['id']))}"><div class="name">{$project['title']}</div></a>
+			<div class="price">已筹资：<span id="singleprice_{$item['id']}">{$project['finish_price']}</span> 元({php echo floor($project['finish_price']*100/$project['limit_price'])}％)</div>
+			<div class="price">剩余：<span class='singletotalprice' id="goodsprice_{$item['id']}">{php echo $project['deal_days'] - floor((time() - $project['createtime'])/86400)}</span> 天</div>
+			<div class="clearfix">
+				<div style="height:35px; line-height:50px;">
+					<a href="javascript:;" onclick="removeCart({$item['id']})" class="shopcart-item-remove"><i class="fa fa-remove"></i> 删除</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	{/loop}
+</div>
+<div style='height:80px;width:100%;'>&nbsp;</div>
+<script type="text/javascript">
+
+function clearCart(){
+	if (confirm('确定要清空收藏夹吗？')) {
+		tip("正在处理数据...");
+		$.getJSON('{php echo $this->createMobileUrl('mycart',array('op'=>'clear'));}', function(s){
+			$(".shopcart-item").remove();
+			$("#cartempty").show();
+			$("#cartfooter").hide();
+			tip_close();
+		});
+	}
+}	
+function removeCart(id){
+	if (confirm('您确定要删除此项目吗？')) {
+		tip("正在处理数据...");
+		var url = "{php echo murl('entry//mycart',array('m'=>'hx_zhongchou','op'=>'remove'), true)}"+ "&id=" + id;
+		$.getJSON(url, function(s){
+			$("#item_" + s.cartid).remove();
+			if($(".shopcart-item").length<=0){
+				$("#cartempty").show();
+				$("#cartfooter").hide();
+			}
+			tip_close();
+			canculate();
+		});
+	}
+}
+function canculate(){
+	var total = 0;
+	$(".singletotalprice").each(function(){
+		total+=parseFloat( $(this).html() );
+	});
+
+	$("#pricetotal").html(total);
+}
+</script>
+{template 'footer'}
+{template 'footerbar'}

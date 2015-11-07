@@ -1,0 +1,117 @@
+{php $bootstrap_type = 3;}
+{if empty($_W['isajax'])}
+{template 'header'}
+<style>
+	.show-more {padding-bottom:30px;}
+</style>
+<link type="text/css" rel="stylesheet" href="../addons/hx_zhongchou/images/style.css?{TIMESTAMP}">
+<div class="head">
+	<a href="javascript:;" onclick="$('.head .order').toggleClass('hide');" class="bn pull-left"><i class="fa fa-reorder"></i></a>
+	<span class="title">
+		{if $_GPC['ishot']==1}热门项目{/if}
+		{if !empty($_GPC['keyword'])}搜索结果{/if}
+		{if $_GPC['pcate']}{$category[$_GPC['pcate']]['name']}{/if}
+		{if $_GPC['ccate']} - {$children[$_GPC['pcate']][$_GPC['ccate']]['name']}{/if}
+	</span>
+	<a href="{php echo $this->createMobileUrl('mycart')}" class="bn pull-right">
+	
+		<span class="buy-num img-circle" id="carttotal">{$carttotal}</span>
+	</a>
+	<ul class="unstyled order hide">
+		{loop $category $item}
+		<li>
+			<a href="{php echo $this->createMobileUrl('list2', array('pcate' => $item['id']))}" class="bigtype">
+				<i class="fa fa-folder-open"></i>  {$item['name']}
+			</a>
+			{loop $children[$item['id']] $child}
+			<a href="{php echo $this->createMobileUrl('list2', array('ccate' => $child['id']))}" class="smtype">
+				<i class="fa fa-folder"></i> {$child['name']}
+			</a>
+			{/loop}
+		</li>
+		{/loop}
+	</ul>
+</div>
+<style type='text/css'>
+	.sel { background:#33cdd6; color:#fff;}
+	.nosel { background:#fff;color:#000}
+</style>
+<div class="shopping-main">
+	<form action="index.php" method="get">
+		<input type="hidden" name="i" value="{$_W['weid']}" />
+		<input type="hidden" name="c" value="entry" />
+		<input type="hidden" name="m" value="hx_zhongchou" />
+		<input type="hidden" name="do" value="list2" />
+		 
+			{if $_GPC['ishot']==1}<input type="hidden" name="ishot" value="1" />{/if}
+			<input type="hidden" name="sort" value="{$sort}" />
+		<div class="input-group">
+			<input type="text" class="form-control input-lg" name="keyword" value="{$_GPC['keyword']}" placeholder="请输入{if $_GPC['isnew']==1}新品推荐{/if}{if $_GPC['ishot']==1}热卖商品{/if}{if $_GPC['isdiscount']==1}折扣商品{/if}{if $_GPC['istime']==1}限时卖{/if}关键字">
+			<span class="input-group-btn">
+				<button class="btn btn-info btn-lg" type="submit">搜索</button>
+			</span>
+		</div>
+	</form>
+	<div class="list" id="list">
+		<div style='float:left;height:30px;margin:auto;width:100%;margin-top:10px;'>
+   		<div {if $sort==0}class='sel'{else}class="nosel"{/if} style='border-top-left-radius: 5px;border-bottom-left-radius:5px;border:1px solid #33cdd6;text-align: center;float:left;width:25%' onclick="location.href='{$sorturl}&sort=0&sortb0={$sortb00}'">
+		按时间 {if $sort==0}{if $sortb0=="desc"}<i class="fa fa-arrow-down"></i>{else}<i class="fa fa-arrow-up"></i>{/if}{/if}
+		</div>
+		<div {if $sort==1}class='sel'{else}class="nosel"{/if} style='border:1px solid #33cdd6;margin-left:-1px;float:left;width:25%;text-align: center;' onclick="location.href='{$sorturl}&sort=1&sortb1={$sortb11}'">
+		按销量 {if $sort==1}{if $sortb1=="desc"}<i class="fa fa-arrow-down"></i>{else}<i class="fa fa-arrow-up"></i>{/if}{/if}
+		</div>
+		<div {if $sort==2}class='sel'{else}class="nosel"{/if} style='border:1px solid #33cdd6;margin-left:-1px;float:left;width:25%;text-align: center;' onclick="location.href='{$sorturl}&sort=2&sortb2={$sortb22}'">
+		按人气 {if $sort==2}{if $sortb2=="desc"}<i class="fa fa-arrow-down"></i>{else}<i class="fa fa-arrow-up"></i>{/if}{/if}
+		</div>
+</div>
+{/if}
+{loop $list $item}
+<div class="list-item img-rounded">
+	<div>
+		<a href="{php echo $this->createMobileUrl('detail', array('id' => $item['id']))}">
+			<img src="{$_W['attachurl']}{$item['thumb']}">
+		</a>
+		<span class="title"><a href="{php echo $this->createMobileUrl('detail', array('id' => $item['id']))}">{$item['title']}</a></span>
+	</div>
+	<span class="sold">
+		<span class="soldnum pull-left">已筹资￥{$item['finish_price']}</span>
+	</span>
+	<span class="sold">
+		<div class="progress">
+  			<div class="progress-bar" role="progressbar" aria-valuenow="{php echo $item['finish_price']*100/$item['limit_price']}" aria-valuemin="0" aria-valuemax="100" style="width: {php echo $item['finish_price']*100/$item['limit_price']}%;">
+    			<span class="sr-only">{php echo $item['finish_price']*100/$item['limit_price']}% Complete</span>
+  			</div>
+		</div>
+	</span>
+	<span class="sold">
+		<span class="soldnum pull-left">{php echo floor($item['finish_price']*100/$item['limit_price'])}%</span>
+		<span class="price pull-right">剩余{php echo $item['deal_days'] - floor((time() - $item['createtime'])/86400)}天</span>
+	</span>
+</div>
+{/loop}
+{if empty($_W['isajax'])}
+	</div>
+	<div class="show-more"><a href="javascript:;" onclick="loadPage('{$pindex}', 'list')" class="img-rounded" id="pager">浏览更多商品</a></div>
+</div>
+<script type="text/javascript">
+function loadPage(pindex, container) {
+	pindex = parseInt(pindex) + 1;
+	$('#pager').html('正在加载数据...');
+	$.get(location.href, {'page' : pindex}, function(html){
+		if (html.indexOf('list-item') > -1) {
+			$('#'+container).append(html);
+			$('#pager').get(0).onclick = function(){
+				loadPage(pindex, container);
+			}
+			$('#pager').html("浏览更多商品");
+		} else {
+			$('#pager').html('已经显示全部商品');
+		}
+	});
+}
+
+</script>
+
+{template 'footer'}
+{template 'footerbar'}
+{/if}

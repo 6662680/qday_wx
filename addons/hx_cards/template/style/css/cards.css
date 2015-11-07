@@ -1,0 +1,306 @@
+html,body {
+	height:100%
+}
+body {
+	font-family:Helvetica,'STHeiti STXihei','Microsoft JhengHei','Microsoft YaHei',Tohoma,Arial
+}
+.container {
+	height:100%
+}
+.apps-game {
+	width:320px;
+	margin:0 auto;
+	min-height:100%
+}
+ul.activity-info {
+	font-size:12px;
+	margin:0;
+	margin-top:5px
+}
+ul.activity-info li {
+	margin-bottom:5px;
+	line-height:1.5em
+}
+ul.activity-info li .activity-info-content {
+	margin-left:1em;
+	word-break:break-all
+}
+ul.activity-info .activity-note {
+	margin-top:10px
+}
+ul.activity-info .user-center {
+	color:#ffc73d
+}
+.info-area {
+	padding-top:10px;
+	width:275px;
+	margin:0 auto
+}
+.view-prize {
+	font-size:14px;
+	text-align:right;
+	color:#ffc73d
+}
+.view-prize a {
+	color:#ffc73d
+}
+.view-prize a:hover {
+	color:#ffc73d
+}
+.share-mp-info {
+	z-index:2000
+}
+.important {
+	color:#e03021
+}
+.footer {
+	position:relative;
+	z-index:1500;
+	margin-top:20px;
+	overflow:hidden;
+	width:100%;
+	background-color:#2d3132;
+	color:#aaa
+}
+.footer .copyright {
+	width:100%
+}
+.apps-mask {
+	position:fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	z-index:1000;
+	background:rgba(0,0,0,0.5);
+	color:#4d4c4c
+}
+.apps-mask.apps-mask-transparent {
+	background:rgba(0,0,0,0)
+}
+.apps-mask .apps-modal {
+	position:fixed;
+	display:table;
+	height:90px;
+	top:165px;
+	left:50%;
+	margin-left:-122px;
+	width:225px;
+	background:#fff;
+	border-radius:5px;
+	padding:10px;
+	z-index:100
+}
+.apps-mask .apps-modal .apps-modal-content-wrap {
+	display:table-cell;
+	vertical-align:middle
+}
+.apps-mask .apps-modal .apps-modal-content {
+	margin:5px 0 10px;
+	text-align:center;
+	line-height:1.5em
+}
+.apps-mask .apps-modal .apps-modal-action {
+	text-align:center
+}
+.apps-mask .apps-modal .apps-modal-action .apps-btn {
+	margin-left:20px
+}
+.apps-mask .apps-modal .apps-modal-action .apps-btn:first-child {
+	margin-left:0
+}
+.apps-mask .apps-btn {
+	background:#fff;
+	border:1px solid #666;
+	box-shadow:none;
+	font-size:13px;
+	line-height:13px;
+	width:80px;
+	height:35px;
+	border-radius:3px;
+	color:#4d4c4c
+}
+.apps-mask .apps-btn.apps-primary-btn {
+	color:#fff;
+	background:#ed203d;
+	border:none
+}
+.apps-mask .give-point {
+	color:#ed203d
+}
+body {
+	background-color:#f81213;
+	background-image:url('../img/stripe.png');
+	background-repeat:repeat-x
+}
+#wxcover {
+	display:none;
+	background-image:url('../img/cards_cover.png')
+}
+.apps-mask .apps-modal {
+	top:160px
+}
+.apps-game {
+	margin-top:10px
+}
+.apps-cards {
+	width:288px;
+	margin:0 auto
+}
+.apps-cards .logo {
+	width:285px;
+	height:111px;
+	background-size:285px 111px
+}
+@media only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (min--moz-device-pixel-ratio:1.5),only screen and (-o-min-device-pixel-ratio:3 / 2),only screen and (min-device-pixel-ratio:1.5) {
+	.apps-cards .logo {
+	background-size:285px 111px
+}
+}.apps-cards .scratch-wrap {
+	position:relative;
+	width:274px;
+	height:132px;
+	background:url('../img/bg.png') no-repeat;
+	background-size:274px 146px;
+	padding:7px 0;
+	margin:26px auto 0
+}
+@media only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (min--moz-device-pixel-ratio:1.5),only screen and (-o-min-device-pixel-ratio:3 / 2),only screen and (min-device-pixel-ratio:1.5) {
+	.apps-cards .scratch-wrap {
+	background-image:url('../img/bg@2x.png');
+	background-size:cover
+}
+}.apps-cards .result-area {
+	position:absolute;
+	display:table;
+	top:7px;
+	left:7px;
+	width:260px;
+	height:132px;
+	line-height:1.5em;
+	background:#b4b3b2;
+	color:#e03021;
+	text-align:center;
+	font-weight:bold
+}
+.apps-cards .result-area.ready {
+	background:#f1d183
+}
+.apps-cards .result-area.not-ready {
+	background-image:url('../img/cover.png')
+}
+.apps-cards .result-area .result-content-wap {
+	display:table-cell;
+	vertical-align:middle;
+	word-break:break-all;
+	padding:0 20px
+}
+.apps-cards .result-area .face-area {
+	position:absolute;
+	top:27px;
+	left:8px;
+	width:76px;
+	height:76px;
+	background-size:cover
+}
+.apps-cards .result-area .result-title {
+	font-size:18px
+}
+.apps-cards .result-area .result-content {
+	font-size:22px;
+	margin-top:5px
+}
+.apps-cards .result-area.suc .result-content-wap,.apps-cards .result-area.fail .result-content-wap {
+	width:150px;
+	text-align:left
+}
+.apps-cards .result-area.suc .face-area {
+	background-image:url('../img/face_smile.png')
+}
+.apps-cards .result-area.suc .result-title {
+	font-size:14px;
+	color:#4e3735
+}
+.apps-cards .result-area.suc .result-content {
+	font-size:18px;
+	color:#e03021
+}
+@media only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (min--moz-device-pixel-ratio:1.5),only screen and (-o-min-device-pixel-ratio:3 / 2),only screen and (min-device-pixel-ratio:1.5) {
+	.apps-cards .result-area.suc .face-area {
+	background-image:url('../img/face_smile@2x.png')
+}
+}.apps-cards .result-area.fail .face-area {
+	background-image:url('../img/face_cry.png')
+}
+.apps-cards .result-area.fail .result-title {
+	font-size:16px;
+	color:#372f2f
+}
+.apps-cards .result-area.fail .result-content {
+	font-size:14px;
+	color:#584c3c
+}
+@media only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (min--moz-device-pixel-ratio:1.5),only screen and (-o-min-device-pixel-ratio:3 / 2),only screen and (min-device-pixel-ratio:1.5) {
+	.apps-cards .result-area.fail .face-area {
+	background-image:url('../img/face_cry@2x.png')
+}
+}.apps-cards .scratch-area {
+	width:260px;
+	height:132px;
+	margin:0 auto
+}
+.apps-cards .opt-area {
+	margin-top:20px
+}
+.apps-cards .opt-area .opt-play-again-btn {
+	display:block;
+	position:relative;
+	width:190px;
+	height:44px;
+	line-height:40px;
+	font-size:16px;
+	text-align:center;
+	background-color:#ffdd3d;
+	margin:0 auto;
+	letter-spacing:2px;
+	cursor:pointer
+}
+.apps-cards .opt-area .opt-play-again-btn::after {
+	content:"";
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	height:4px;
+	background-color:#e5ad22;
+	color:#333
+}
+.apps-cards ul.activity-info {
+	color:#ffd8d0
+}
+.apps-cards .info-area {
+	margin-bottom:80px
+}
+.apps-cards .bottom-button-area {
+	position:fixed;
+	z-index:1100;
+	width:320px;
+	height:40px;
+	left:50%;
+	margin-left:-160px;
+	bottom:0
+}
+.apps-cards .bottom-button-area .bottom-button {
+	cursor:pointer;
+	font-size:14px;
+	display:inline-block;
+	background-color:#c81011;
+	height:40px;
+	line-height:40px;
+	width:159px;
+	text-align:center;
+	color:#fce292
+}
+.apps-cards .bottom-button-area .bottom-button:first-child {
+	margin-right:2px
+}

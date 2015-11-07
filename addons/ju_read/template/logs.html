@@ -1,0 +1,65 @@
+{template 'common/header'}
+<script type="text/javascript" src="{$_W['siteroot']}addons/hx_showcp/template/style/js/ToolTip.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/twitter-bootstrap/3.2.0/js/tooltip.min.js"></script>
+<div class="main">
+<ul class="nav nav-tabs">
+	<li class="active"><a href="">照片管理</a></li>
+</ul>
+	<div style="padding:15px;">
+		<form action="" method="post">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th align="center" style="width:20px;text-align:center;">ID</th>
+					<th align="center" style="width:40px;text-align:center;">SN</th>				
+                    <th align="center" style="width:40px;text-align:center;">姓名</th>
+					<th align="center" style="width:50px;text-align:center;">手机号</th>
+					<th align="center" style="width:30px;text-align:center;">阅读数</th>
+					<th align="center" style="width:40px;text-align:center;">参加时间</th>
+					<th align="center" style="width:40px;text-align:center;">状态</th>
+					<th align="center" style="width:40px;text-align:center;">奖品名称</th>
+					<th style="width:20px;text-align:center;">兑奖</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+				{php $profile = mc_fetch($row['openid']);}
+					<tr>		
+						<td align="center" style="text-align:center;">{$row['id']}</td>
+						<td align="center" style="text-align:center;">{if $row['status'] == 1}暂无{else}{$row['sn']}{/if}</td>
+                        <td align="center" style="text-align:center;">{if empty($profile['realname'])}暂无{else}{$profile['realname']}{/if}</td>
+						<td align="center" style="font-size:12px; color:#666; text-align:center;">{$profile['mobile']}</td>
+						<td align="center" style="font-size:12px; color:#666; text-align:center;">{$row['hits']}</td>
+						<td align="center" style="font-size:12px; color:#666; text-align:center;">{php echo date('Y/m/d H:i:s',$row['createtime'])}</td>
+						<td align="center" style="font-size:12px; color:#666; text-align:center;">
+							{if $row['status'] == 3}<span class="label label-success">已兑奖</span>{/if}
+							{if $row['status'] == 2}<span class="label label-info">已中奖</span>{/if}
+							{if $row['status'] == 1}<span class="label label-default">正常</span>{/if}
+						</td>
+						<td align="center" style="font-size:12px; color:#666; text-align:center;">{if $row['status'] == 1}暂无{else}{$prizes[$row['prizeid']]['prizename']}{/if}</td>
+						<td style="text-align:center;">
+							{if $row['status'] == 2}
+							<a href="{php echo $this->createWebUrl('logs',array('op'=>'setstatus','reply_id'=>$reply_id,'log_id'=>$row['id']))}"><button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="兑奖"><i class="fa fa-file"></i></button></a>
+							{else}
+							无
+							{/if}
+						</td>
+					</tr>
+				{/loop}
+			</tbody>
+		</table>
+	</form>
+		{$pager}
+	</div>
+</div>
+<script type="text/javascript">
+function drop_confirm(msg, url){
+    if(confirm(msg)){
+        window.location = url;
+    }
+}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+{template 'common/footer'}

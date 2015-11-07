@@ -1,0 +1,55 @@
+{template 'common/header'}
+<div class="main">
+<ul class="nav nav-tabs">
+	<li><a href="{php echo $this->createWebUrl('article');}">文章管理</a></li>
+	<li><a href="{php echo $this->createWebUrl('list');}">积分排行</a></li>
+	<li class="active"><a href="{php echo $this->createWebUrl('credit');}">红包管理</a></li>
+</ul>
+<div>
+	<a href="{php echo $this->createWebUrl('credit',array('s'=>0))}"><button type="button" class="btn btn-default btn-sm {if $_GPC['s'] == 0}active{/if}">所有记录</button></a>
+	<a href="{php echo $this->createWebUrl('credit',array('s'=>1))}"><button type="button" class="btn btn-default btn-sm {if $_GPC['s'] == 1}active{/if}">提现申请</button></a>
+	<a href="{php echo $this->createWebUrl('credit',array('s'=>2))}"><button type="button" class="btn btn-default btn-sm {if $_GPC['s'] == 2}active{/if}">已审核</button></a>
+	<a href="{php echo $this->createWebUrl('credit',array('s'=>-2))}"><button type="button" class="btn btn-default btn-sm {if $_GPC['s'] == -2}active{/if}">审核失败</button></a>
+	<a href="{php echo $this->createWebUrl('credit',array('s'=>3))}"><button type="button" class="btn btn-default btn-sm {if $_GPC['s'] == 3}active{/if}">审核通过待支付</button></a>
+	<a href="{php echo $this->createWebUrl('credit',array('s'=>4))}"><button type="button" class="btn btn-default btn-sm {if $_GPC['s'] == 4}active{/if}">已支付</button></a>
+</div>
+	<div style="padding:15px;">
+		<form action="" method="post">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th align="center" style="width:30px;text-align:center;">编号</th>						
+                    <th align="center" style="width:30px;text-align:center;">真实姓名</th>
+					<th align="center" style="width:40px;text-align:center;">微信号</th>
+					<th align="center" style="width:35px;text-align:center;">提现方式</th>
+					<th align="center" style="width:70px;text-align:center;">账号</th>
+					<th align="center" style="width:50px;text-align:center;">手机号</th>
+					<th align="center" style="width:40px;text-align:center;">状态</th>
+					<th align="center" style="width:50px;text-align:center;">动态</th>
+					<th style="width:40px;text-align:center;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+				{php $result = iunserializer($row['remark']);$r = $result[$row['status']];}
+					<tr>			
+						<td align="center" style="text-align:center;">{$row['id']}</td>
+						<td align="center" style="text-align:center;">{$row['realname']}</td>
+						<td align="center" style="font-size:12px;text-align:center;">{$row['qq']}</td>
+						<td align="center" style="font-size:12px;text-align:center;">{if $row['type'] == 1}支付宝{else}银行卡{/if}</td>
+						<td align="center" style="font-size:12px;text-align:center;">{if $row['type'] == 1}{$row['alipay']}{else}{$row['cardid']}{/if}</td>
+						<td align="center" style="font-size:12px;text-align:center;">{$row['mobile']}</td>
+						<td align="center" style="font-size:12px;text-align:center;">{if $row['status'] == 1}申请提现{else if $row['status'] == 2}已审核{else if $row['status'] == 3}审核通过待支付{else if $row['status'] == 4}已支付{else if $row['status'] == '-2'}审核失败{else}已关闭{/if}</td>
+						<td align="center" style="font-size:12px;text-align:left;">操作人:{$r['user']}<br />时间:{php echo date('m-d H:i',$r['time'])}</td>
+						<td style="text-align:center;">
+                        	{if $row['status'] == 4 || $row['status'] == '-2'}{else}<a href="{php echo $this->createWebUrl('Manager',array('id'=>$row['id']));}">处理</a> |{/if} <a href="{php echo $this->createWebUrl('Delete',array('id'=>$row['id']));}" onclick="return confirm('删除记录后不可恢复,确定要删除吗?')" >删除</a>
+                        </td>
+					</tr>
+				{/loop}
+			</tbody>
+		</table>
+	</form>
+		{$pager}
+	</div>
+</div>
+{template 'common/footer'}

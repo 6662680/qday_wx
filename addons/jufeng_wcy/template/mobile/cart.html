@@ -1,0 +1,185 @@
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/jufeng_wcy/images/common.css">
+<div class="dish-main">
+	
+	<div class="order-detail">
+    <div class="order-hd">
+		<span class="pcate2name"><a href="{php echo $this->createMobileUrl('list',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}">店家：{$pcate2[0]['name']}</a></span>
+	</div>
+		<div class="order-detail-hd">
+			<span class="pull-right">
+				<a class="btn btn-success btn-sm" href="{php echo $this->createMobileUrl('list',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}"><i class="glyphicon glyphicon-plus"></i> 再选选</a>
+				<a class="btn btn-danger btn-sm" href="{php echo $this->createMobileUrl('clear',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']));}" onclick="return confirm('此操作不可恢复，确认清空菜单吗？'); return false;"><i class="glyphicon glyphicon-trash"></i> 清空</a>
+			</span>
+			<span class="pull-left">请确认菜单：</span>
+		</div>
+		<div class="order-detail-list">
+			<ul class="list-unstyled">
+				{loop $foods $item}
+				<li>
+					<div class="pull-right">
+						<span class="menu-list-button reduce" onclick="order.reduce({$item['id']})"><i class="glyphicon glyphicon-minus-sign"></i></span>
+						<span class="menu-list-num">{$cart[$item['id']]['total']}</span>
+						<span class="menu-list-button add" onclick="order.add({$item['id']})"><i class="glyphicon glyphicon-plus-sign"></i></span>
+					</div>
+					<div class="pull-left">
+						<div class="title">{$item['title']}</div>
+						<div class="price"><span>
+                        
+                        {if $item['preprice']}{$item['preprice']}{else}{$item['oriprice']}{/if}</span>元{if $item['unit']} / {$item['unit']}{/if}
+                        </div>
+					</div>
+				</li>
+				{/loop}
+			</ul>
+		</div>
+	</div>
+	<div class="order-detail myinfo">
+		<div class="order-detail-hd">
+			<span class="pull-left">订单信息</span>
+		</div>
+		<form action="" method="post" onsubmit="return checkform(this); return false;">
+			<table class="table table1">
+				<tr>
+					<th><label for="">手机</label></th>
+					<td><input type="text" id="" class="form-control1" name="mobile" value="{$profile['mobile']}" /></td>
+                    <td>*</td>
+				</tr>
+                <tr>
+					<th><label for="">送餐地址</label></th>
+					<td><input type="text" id="" class="form-control1" name="address" value="{$profile['address']}" /></td>
+                    <td>*</td>
+				</tr>
+                 <tr>
+					<th><label for="">送餐时间</label></th>
+					<td class="datetime"><input type="text" class="form-control1" data-field="time" name="time" placeholder="请选择送餐时间" readonly /></td>
+                    <td>*</td>
+				</tr>
+                <tr>
+					<th><label for="">付款方式</label></th>
+					<td>
+						<select name="paytype" class="form-control1" >
+                        <option value="">请选择付款方式</option>
+							<option value="1">在线支付</option>
+							<option value="2">餐到付款</option>
+						</select>
+					</td>
+                     <td>*</td>
+				</tr>
+                <tr class="beizhutr">
+					<th><label for="">订单备注</label></th>
+					<td><input type="text" id="" class="form-control1" name="other" placeholder="您可备注忌口、口味等" /></td>
+				</tr>
+				
+                <tr>
+                					<th><label for=""></label></th>
+					<td>注：带*号的为必填项。</td>
+					
+				</tr>
+			</table>
+		<input type="hidden" name="token" value="{$_W['token']}" />
+	</div>
+    <div class="navbar1 navbar2">
+  <div class="nav3">
+            <a class="btn btn2 btn-default btn-sm" href="{php echo $this->createMobileUrl('list',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}"><i class="glyphicon glyphicon-chevron-left"></i>返回</a>
+           <input type="submit" value="{if !($pricetotal < $pcate2[0]['sendprice'])}去结算{else}差￥{$between}起送{/if}" name="submit" class="btn btn-success btn-sm">
+             <span class=""><i class="icon-shopping-cart"></i><b class="img-circle pcateimg"></b>份￥<b class="priceimg"></b></span>
+            </div>
+</div>
+
+	</form>
+    
+</div>
+<div id="dtBox"></div>
+<link rel="stylesheet" type="text/css" href="../addons/jufeng_wcy/images/DateTimePicker.css" />
+<script type="text/javascript" src="../addons/jufeng_wcy/images/DateTimePicker.js"></script>
+<script type="text/javascript">
+			$("#dtBox").DateTimePicker(
+				{
+					dateFormat: "yyyy-MM-dd"
+				});
+		$('.pcateimg').html('{$pcatetotal}');
+		$('.priceimg').html('{$pricetotal}');
+		$('.order-hd .total').html('{$pricetotal}');
+					
+$('.order-detail-list').delegate(".add", "click", function(){
+	var a = $(this).parent().parent();
+	a.find('.menu-list-num').html(function() {
+		return parseInt($(this).html()) + 1;
+	});
+});
+$('.order-detail-list').delegate(".reduce", "click", function(){
+	var a = $(this).parent().parent();
+	if(a.find('.menu-list-num').html() == 1 || a.find('.menu-list-num').html() < 0) {
+		if(confirm("确定要删除吗？")) {
+			a.remove();
+		} else {
+			return false;
+		}
+	}
+	a.find('.menu-list-num').html(function() {
+		return parseInt($(this).html()) - 1;
+	});
+});
+
+var order = {
+	'add' : function(foodsid) {
+		var $this = this;
+		$this.cart(foodsid, 'add');
+	},
+	'reduce' : function(foodsid) {
+		var $this = this;
+		$this.cart(foodsid, 'reduce');
+	},
+	'cart' : function(foodsid, operation) {
+		if (!foodsid) {
+			alert('请您先选择菜品。');
+			return;
+		}
+		operation = operation ? operation : 'add';
+		$.getJSON('{php echo $this->createMobileUrl('updatecart',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}', {'op' : operation, 'foodsid' : foodsid}, function(s){
+			if (s.message.status) {
+				$('#foodsnum_'+foodsid).html(s.message.total);
+						$('.pcateimg').html(s.message.pcatetotal);
+				$('.priceimg').html(s.message.pricetotal);
+				$('.order-hd .total').html(s.message.pricetotal);
+				$('.nav2 input').val(s.message.between);
+				if(s.message.target == "#")
+				$('.nav2 input').attr("disabled","disabled");
+				else if(s.message.target == "1") $('.btn-success').removeAttr("disabled");
+			} else {
+				alert(s.message.message);
+			}
+		});
+	}
+};
+
+function checkform(form) {
+	if (!form['mobile'].value) {
+		alert('请输入您的手机号码');
+		return false;
+	}
+	else{
+var mflag = /^1\d{10}$/ .test(form['mobile'].value);
+if(!mflag){
+	alert('请输入正确的手机号码');
+		return false;
+	}
+		}
+
+	if (!form['time'].value) {
+		alert('请输入送餐时间');
+		return false;
+	}	
+	if (!form['address'].value) {
+		alert('请输入送餐地址');
+		return false;
+	}
+			if (!form['paytype'].value) {
+		alert('请选择付款方式');
+		return false;
+	}
+	
+}
+</script>
+{template 'footer'}

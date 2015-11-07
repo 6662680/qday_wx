@@ -1,0 +1,218 @@
+{template 'common/header'}
+<link type="text/css" rel="stylesheet" href="../addons/jufeng_wcy/images/common.css">
+<link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<script type="text/javascript" src="http://cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.fancybox').fancybox();
+		$('.fancybox-skin').css("padding","0");
+	});
+</script>
+
+<div class="navbar3">
+            <div class="nav2">
+            <a class="btn btn2 btn-default" href="{php echo $this->createMobileUrl('dianjia')}"><i class="glyphicon glyphicon-chevron-left"></i>店铺</a>
+            {if $pricetotal >= $category['sendprice']}
+            <a class="btn btn-warning check" href="{php echo $this->createMobileUrl('mycart',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}">
+            {else}
+            <a class="btn btn-success check" href="#">
+            {/if}
+            <b class="between">{if $pricetotal >= $category['sendprice']}去结算
+            {else}差￥{$between}起送{/if}</b>
+            </a>
+             <span class=""><i class="icon-shopping-cart"></i><b class="img-circle pcateimg"></b><b class="centerimg">{if $pcatetotal > 0}份￥{/if}</b><b class="priceimg"></b></span>
+            </div>
+</div>
+
+         <div class="menu-button menu-button3">
+		<ul class="list-unstyled">
+			<li><a style="background-color:#F93;color:white;text-align:left; padding:0; padding-left:5px; font-weight:bold; font-size:14px;" class="active" href="#">店家介绍</a></li>
+<div class="menu-pic2">
+					<div class="dianjiadiv">{if $category['thumb']}<img src="{$_W['attachurl']}{$category['thumb']}" class="img-rounded dianjialist">
+                    {else}<img src="{$_W['attachurl']}/headimg_{$_W['uniacid']}.jpg" class="img-rounded dianjialist">
+                    {/if}</div>
+                    <div class="namelist dianjiadiv">{$category['name']}</div>
+				</div>
+<li class="dianjiali">起送价：{$category['sendprice']}</li>
+<li class="dianjiali">店家热度：{$category['total']}</li>
+<li class="dianjiali">店家手机：<br />{$category['shouji']}</li>
+<li class="dianjiali">店家简介：<br />{$category['description']}</li>
+<li class="dianjiali">中午送餐时间：<br />{$ptime1}至{$ptime2}</li>
+<li class="dianjiali">下午送餐时间：<br />{$ptime3}至{$ptime4}</li>
+
+		</ul>
+	</div>
+
+	<div class="menu-list menu-list2">
+    <div class="panel panel-default" style="margin-top:10px;margin-bottom:0;padding-bottom:10px;">
+						<div class="panel-heading">
+							<h4 class="panel-title">{$category['name']}</h4>
+						</div>
+    <a class="btn {if $_GPC['ccate'] == 0}btn-success{else}btn-default{/if}" style="margin: 5px 0 3px 5px;" href="{php echo $this->createMobileUrl('list', array('pcate' => $category['id'],'order' =>$_GPC['order']))}" role="button">全部菜系</a>
+    {loop $sort $citem}
+    <a class="btn {if $citem['id'] == $_GPC['ccate']}btn-success{else}btn-default{/if}" style="margin: 5px 0 3px 5px;" href="{php echo $this->createMobileUrl('list', array('ccate' => $citem['id'],'order' =>$_GPC['order']))}" role="button">{$citem['name']}&nbsp;<span class="badge ccatenum_{$citem['id']}"></span></a>
+    {/loop}
+	</div>
+		<ul class="list-unstyled">
+			{loop $list $item}
+			<li class="shopli">
+				<div class="pull-right">
+                {if $category['enabled'] == "0"}
+                <div>&nbsp;&nbsp;</div>
+                    <div><span class="label label-info">休息中</span></div>
+                    {else if $item['status'] == "1"}
+                    <div>&nbsp;&nbsp;</div>
+					<span class="menu-list-button reduce" id="foodsreduce_{$item['id']}" onclick="order.reduce({$item['id']});">{if $item['foodsid'][$item['id']]['total'] > 0}<img src="../addons/jufeng_wcy/images/reduce.png" height="30px" width="30px" />{/if}</span>
+					<span class="menu-list-num" id="foodsnum_{$item['id']}">{$item['foodsid'][$item['id']]['total']}</span>
+                    <span class="menu-list-button add" onclick="order.add({$item['id']})"><img src="../addons/jufeng_wcy/images/add.png" height="30px" width="30px" /></span>
+                    {else}
+                    <div>&nbsp;&nbsp;</div>
+                    <div><span class="label label-info">卖完了</span></div>
+                    {/if}
+				</div>
+				<div class="pull-left menu-pic">
+                <a class="fancybox fancybox.ajax" href="{php echo $this->createMobileUrl('detail', array('id' => $item['id']))}">
+                    {if $item['thumb']}<img src="{$_W['attachurl']}{$item['thumb']}" class="img-rounded">
+                    {else}<img src="" class="img-rounded">
+                    {/if}
+                    {if $item['ishot'] == 1}<img class="hot" src="../addons/jufeng_wcy/images/hot.png">{/if}
+                </a>
+				</div>
+				<div class="pull-left menu-detail">
+					<span class="title">{$item['title']}</span>
+					<span class="price">
+                   
+                    {if $item['preprice']}<i class="label label-success">优惠</i> {$item['preprice']}元
+                    {if $item['unit']}/{$item['unit']}{/if}
+                    {else}{$item['oriprice']}元
+                    {if $item['unit']}/{$item['unit']}
+                    {/if}
+                    {/if}</span>
+					{if $item['preprice']}<span class="oriprice">{$item['oriprice']}元
+                    {if $item['unit']}/{$item['unit']}
+                    {/if}</span>
+                    {/if}
+					<span class="click">{$item['hits']}人点过</span>
+				</div>
+			</li>
+            <div class="shopfoot"></div>
+			{/loop}
+		</ul>
+		{$pager}
+	</div>
+   
+<div class="navbar1 navbar2 btn-group btn-group-justified">
+     <div class="btn-group btn-group-lg dropup">
+        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{if $_GPC['order'] == 0}默认排序{elseif $_GPC['order'] == 1}按热度{elseif $_GPC['order'] == 2}按优惠{/if}<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li {if $_GPC['order'] == 0} class="active"{/if}><a href="{php echo $this->createMobileUrl('list', array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>0))}">默认排序</a></li>
+           <li class="divider"></li>
+          <li {if $_GPC['order'] == 1} class="active"{/if}><a href="{php echo $this->createMobileUrl('list', array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>1))}">按热度</a></li>
+           <li class="divider"></li>
+          <li {if $_GPC['order'] == 2} class="active"{/if}><a href="{php echo $this->createMobileUrl('list', array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>2))}">按优惠</a></li>
+        </ul>
+      </div>
+      <div class="btn-group btn-group-lg">
+      <a href="{php echo $this->createMobileUrl('myorder',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}" class="btn btn-default" role="button"><i class="glyphicon glyphicon-th-list"></i>&nbsp;我的订单</a>
+      </div>
+      <div class="btn-group btn-group-lg">
+      <a href="#" class="btn btn-default shopping-type3" role="button">店家介绍</a>
+      </div>
+    </div>
+    {loop $ccatenum $row}
+    <script>
+    $('.ccatenum_{$row["id"]}').html('{$row["num"]}');
+    </script>
+    {/loop}
+<script>
+function menuData(a) {
+	var a = $(a);
+	var e = 0;
+	var b = $('.menu-button li a').parent();
+	a.parent().parent().find('.menu-list-num').each(function(i) {
+		e = parseInt($(this).html()) + e;
+	});
+	if(b.find('.img-circle').html() == '') b.find('.img-circle').html(0);
+	e = 0;
+}
+if('{$pcatetotal}' != '0'){
+		$('.pcateimg').html('{$pcatetotal}');
+		$('.priceimg').html('{$pricetotal}');
+}
+$('.menu-button3').css({"display": "none"});
+$('.shopping-type3').click(function() {
+	var a = $(this).attr("switch");
+	if(a == 1) {
+		$('.menu-button3').css({"display": "none"});
+		$('.menu-list').css({"margin-left": "10px"});
+		$(this).attr("switch", 0);
+	} else {
+		$('.menu-button3').css({"display": "block"});
+		$('.menu-list').css({"margin-left": "10px"});
+		$(this).attr("switch", 1);
+	}
+	return false;
+});
+
+var order = {
+	'add' : function(foodsid) {
+		var $this = this;
+		$this.cart(foodsid, 'add');
+	},
+	'reduce' : function(foodsid) {
+		var $this = this;
+		$this.cart(foodsid, 'reduce');
+	},
+	'cart' : function(foodsid, operation) {
+		if (!foodsid) {
+			alert('请选择菜品!');
+			return;
+		}
+		operation = operation ? operation : 'add';
+		href ="{php echo $this->createMobileUrl('mycart',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}";
+		$.getJSON("{php echo $this->createMobileUrl('updatecart',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}", {'op' : operation, 'foodsid' : foodsid}, function(s){
+			if (s.message.status) {
+				if(s.message.total > 0){
+				$('#foodsnum_'+foodsid).html(s.message.total);
+				$('#foodsreduce_'+foodsid).html('<img src="../addons/jufeng_wcy/images/reduce.png" height="28px" width="28px" />');
+				}
+				else{
+					$('#foodsnum_'+foodsid).html('');
+					$('#foodsreduce_'+foodsid).html('');
+					}
+				$('.foodsnum_'+foodsid).html(s.message.total);
+				if(s.message.pcatetotal > 0){
+						$('.pcateimg').html(s.message.pcatetotal);
+						$('.priceimg').html(s.message.pricetotal);
+						$('.centerimg').html("份¥");
+				}
+				else{
+					$('.pcateimg').html("");
+					$('.priceimg').html("");
+					$('.centerimg').html("");
+					}
+				if(s.message.ccatenum > 0){
+					$('.ccatenum_'+s.message.ccate).html(s.message.ccatenum);
+					}
+					else{$('.ccatenum_'+s.message.ccate).html("");}
+				menuData('#foodsnum_'+foodsid);
+				$('.between').html(s.message.between);
+				if(s.message.target == "#"){
+				$('.check').attr("href","#");
+				$(".check").removeClass("btn-warning"); 
+				$(".check").addClass("btn-success");
+				}
+				else if(s.message.target == "1") {
+				$(".check").removeClass("btn-success"); 
+				$(".check").addClass("btn-warning");
+				}
+			} else {
+				alert(s.message.message);
+			}
+		});
+	}
+};
+</script>
+{php $footer_off = 0;}
+{template 'common/footer'}

@@ -1,0 +1,113 @@
+{template 'common/header'}
+{php load()->func('tpl')}
+<div class="main">
+<ul class="nav nav-tabs">	
+		<li{if $_GPC['do'] == 'cardlist'} class="active"{/if}><a href="{php echo  $this->createWebUrl('cardlist');}">名片管理</a></li>
+		<li{if $_GPC['do'] == 'cardadd'} class="active"{/if}><a href="{php echo $this->createWebUrl('cardadd');}">添加名片</a></li>	
+</ul>
+<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="{$item['id']}">
+     
+        <div class="panel panel-default">
+    <div class="panel-heading">
+       <h4>名片信息</h4>
+    </div>
+    <div class="panel-body">
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">姓名</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="username" name="username" value="{$item['username']}"  class="form-control" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">头像</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('thumb',$item['thumb'])}
+            </div>
+        </div>
+        
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">职务</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="degree" name="degree" value="{$item['degree']}"  class="form-control" />
+            </div>
+        </div>
+        
+           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">手机</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="mobile" name="mobile" value="{$item['mobile']}"  class="form-control" />
+            </div>
+        </div>
+        
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">电话</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="tel" name="tel" value="{$item['tel']}"  class="form-control" />
+            </div>
+        </div>
+        
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">QQ</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="qq" name="qq" value="{$item['qq']}"  class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">邮箱</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="email" name="email" value="{$item['email']}"  class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">官网</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="website" name="website" value="{$item['website']}"  class="form-control" />
+            </div>
+        </div>
+           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">使用模板中的的公司官网</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'><input type="radio" name="websiteswitch" value="1" {if $item['websiteswitch']} checked="checked"{/if}/> 开启</label>
+                <label class='radio-inline'><input type="radio" name="websiteswitch" value="0" {if empty($item['websiteswitch'])} checked="checked"{/if}/>关闭</label>
+            </div>
+        </div>
+        
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">地址</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="addr" name="addr" value="{$item['addr']}"  class="form-control" />
+            </div>
+        </div>
+           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">使用模板中的公司地址</label>
+            <div class="col-sm-9 col-xs-12">
+                <label class='radio-inline'><input type="radio" name="addrswitch" value="1" {if $item['addrswitch']} checked="checked"{/if}/> 开启</label>
+                <label class='radio-inline'><input type="radio" name="addrswitch" value="0" {if empty($item['addrswitch'])} checked="checked"{/if}/>关闭</label>
+            </div>
+        </div>
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">地区</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_district('district',array('province'=>$item['province'],'city'=>$item['city'],'dist'=>$item['dist']))}
+            </div>
+        </div>
+           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">地图标识</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_coordinate('baidumap',array('lng'=>$item['lat'],'lat'=>$item['lat']))}
+            </div>
+        </div>
+    </div>
+</div> 
+        <div class="form-group col-sm-12">
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+</form>
+</div>
+ 
+
+{template 'common/footer'}

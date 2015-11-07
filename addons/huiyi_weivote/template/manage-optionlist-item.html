@@ -1,0 +1,52 @@
+{if empty($item)}
+{php $namesuffix = '-new[(itemid)]';}
+{php $itemid = 'new-(itemid)';}
+{php $divid = '(itemid)';}
+{else}
+{php $namesuffix = '[' . $item['id'] . ']';}
+{php $itemid = 'option-item-' . $item['id'];}
+{php $divid = 'option-item-' . $item['id'];}
+{/if}
+
+<div class="panel panel-default">
+    <div style="border-top: 3px solid dodgerblue;">
+        <div style="margin: 5px;">
+            <span style="margin: 5px;">操作</span>
+            {if empty($item)}
+            <a class="btn btn-sm btn-danger pull-right" href="javascript:void(0);" onclick="return doDeleteItem('{$divid}');"><i class="fa fa-times"></i> 删除</a>
+            {else}
+            <a class="btn btn-sm btn-danger pull-right" href="{php echo $this->createWebUrl('ManageOptionDelete', array('id' => $item['id']))}" onclick="return doDeleteItem('{$divid}', this.href);"><i class="fa fa-times"></i> 删除</a>
+            {/if}
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">选项编号</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" value="{$item['code']}" name="option-code{$namesuffix}" placeholder="选项编号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">选项标题</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" value="{$item['title']}" name="option-title{$namesuffix}" placeholder="选项标题">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">选项图片</label>
+            <div class="col-sm-9">
+                {php echo tpl_form_field_image('option-picture'.$namesuffix, $item['picture']);}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">选项介绍</label>
+            <div class="col-sm-9">
+                <textarea id="item-description-{$itemid}" name="option-description{$namesuffix}">{$item['description']}</textarea>
+                <div class="help-block">选项介绍，可以加入图片视频等。</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

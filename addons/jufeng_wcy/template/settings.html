@@ -1,0 +1,104 @@
+{template 'header'}
+
+<ul class="nav nav-tabs">
+	<li {if $_GPC['op'] != 'transfer'}class="active"{/if}><a href="{php echo $this->createWebUrl('settings', array('op' => 'sms'))}">基本设置</a></li>
+    <li {if $_GPC['op'] == 'transfer'}class="active"{/if}><a href="{php echo $this->createWebUrl('settings', array('op' => 'transfer'))}">老用户数据搬迁</a></li>
+</ul>
+
+{if $_GPC['op'] != 'transfer'}
+<div class="main">
+
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+
+                基本设置
+
+            </div>
+
+            <div class="panel-body">
+                                
+                     <div class="form-group">
+                   <label class="col-xs-12 col-sm-3 col-md-2 control-label">邮箱</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="email" class="form-control" value="{$category['email']}" />
+                    </div> </div>
+                     <div class="form-group">
+                   <label class="col-xs-12 col-sm-3 col-md-2 control-label">邮箱密码</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="emailpsw" class="form-control" value="{$category['emailpsw']}" />
+                    </div> </div>
+                     <div class="form-group">
+                   <label class="col-xs-12 col-sm-3 col-md-2 control-label">SMTP服务器</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="smtp" class="form-control" value="{$category['smtp']}" />
+                        <p class="help-block">首先要在邮箱后台开启这个服务，然后一般地址都是smtp.qq.com,smtp.163.com</p>
+                     <p> <a href="{php echo $this->createWebUrl('settings', array('op' => 'emailsend'))}">发送测试邮件</a></p>
+                    </div> </div>
+                    
+                     <div class="form-group">
+                   <label class="col-xs-12 col-sm-3 col-md-2 control-label">短信接口账号</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="smsnum" class="form-control" value="{$category['smsnum']}" />
+                    </div> </div>
+                     <div class="form-group">
+                   <label class="col-xs-12 col-sm-3 col-md-2 control-label">短信接口密码</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="smspsw" class="form-control" value="{$category['smspsw']}" />
+                        <p class="help-block">账号可直接向情天客服购买，短信包有100元，200元，500元等等。</p>
+                    </div> </div>
+                     <div class="form-group">
+                   <label class="col-xs-12 col-sm-3 col-md-2 control-label">用于测试短信接口的手机号</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="smstest" class="form-control" value="{$category['smstest']}" />
+                        <p> <a href="{php echo $this->createWebUrl('settings', array('op' => 'smssend'))}">发送测试短信</a></p>
+                    </div> </div>
+              
+		<div class="form-group col-sm-12">
+
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+
+    </form>
+
+</div>
+{/if}
+{if $_GPC['op'] == 'transfer'}
+<div class="main">
+
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+
+                从旧版多店铺版微餐饮中迁移数据
+
+            </div>
+
+            <div class="panel-body">
+                                
+                     <div class="form-group">
+                   <label class="col-xs-12 col-sm-3 col-md-2 control-label">迁移说明</label>
+                    <div class="col-sm-9">
+                        <p>1：在旧版多店铺版微餐饮中数据较多的用户，可通过此处一键迁移数据。<br />
+                           2：迁移前请先备份好旧版模块的数据，以防意外发生。<br />
+                           3：迁移完成后，旧版模块的数据仍保留在数据库中，用户可选择是否删除。<br />
+                           4：请不要重复迁移，只需迁移一次即可。迁移一次后再迁移将报错。<br />
+                           5：若数据迁移出现问题，可联系情天客服帮忙迁移，情况特殊的可能需要费用。也可自行检查数据库解决。
+                        </p>
+                    </div> </div>
+              <input type="hidden" name="token" value="{$_W['token']}" />
+		<div class="form-group col-sm-12">
+
+			<input type="submit" name="submit" value="开始迁移" class="btn btn-primary col-lg-1" />
+<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+
+    </form>
+
+</div>
+{/if}
+{template 'footer'}
+

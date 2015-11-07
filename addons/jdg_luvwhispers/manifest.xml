@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.qdaygroup.com" versionCode="0.6">
+	<application setting="true">
+		<name><![CDATA[情话]]></name>
+		<identifie><![CDATA[jdg_luvwhispers]]></identifie>
+		<version><![CDATA[0.3]]></version>
+		<type><![CDATA[other]]></type>
+		<ability><![CDATA[情话]]></ability>
+		<description><![CDATA[情话.免费更新QQ群:455672593]]></description>
+		<author><![CDATA[免费更新QQ群:455672593]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+		<cover>
+			<entry title="情话入口设置" do="Myindex" state="" direct="false" />
+		</cover>
+		<menu>
+			<entry title="访问用户列表" do="Userlist" state="" direct="false" />
+			<entry title="情话记录列表" do="Talklist" state="" direct="false" />
+			<entry title="举报信息列表" do="Reportlist" state="" direct="false" />
+		</menu>
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_lw_fans` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `openid` varchar(100) NOT NULL,
+  `nickname` varchar(100) NOT NULL,
+  `headimgurl` varchar(300) NOT NULL DEFAULT '',
+  `createtime` varchar(100) NOT NULL,
+  `isblack` tinyint(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_lw_comments` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `parentid` int(10) unsigned NOT NULL DEFAULT 0,
+  `openid` varchar(50) NOT NULL,
+  `toUser` varchar(50) NOT NULL,
+  `content` varchar(300) NOT NULL DEFAULT '',
+  `createtime` varchar(100) NOT NULL,
+  `nowColor` varchar(50) NOT NULL,
+  `limit` tinyint(2) NOT NULL DEFAULT 0,
+  `isok` tinyint(2) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_lw_commentslike` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `swnoId` int(10) unsigned NOT NULL,
+  `openid` varchar(50) NOT NULL,
+  `createtime` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_lw_report` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uniacid` int(10) unsigned NOT NULL,
+  `swnoId` int(10) unsigned NOT NULL,
+  `openid` varchar(50) NOT NULL,
+  `reporter` varchar(50) NOT NULL,
+  `createtime` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+	]]></install>
+	<uninstall><![CDATA[
+DROP TABLE IF EXISTS `ims_lw_fans`;
+DROP TABLE IF EXISTS `ims_lw_comments`;
+DROP TABLE IF EXISTS `ims_lw_commentslike`;
+DROP TABLE IF EXISTS `ims_lw_report`;
+		]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

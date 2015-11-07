@@ -1,0 +1,70 @@
+{template 'common/header'}
+<link type="text/css" rel="stylesheet" href="../addons/lxy_buscard/template/css/fitment.css">
+ 
+<script>
+$(function(){
+   $("[name='model']").click(function(){
+	   var model=$(this).val();
+		var cardid=$("#cardid").val();
+		if( $(this).siblings("div").attr('class')=='phonebacon'){
+       	return;
+    	}
+	$("ul li .lab_mar div").attr('class','phonebac');
+    $(this).siblings("div").attr('class','phonebacon'); 
+       $.post('{php echo $this->createweburl('ajaxChangetpl')}',{'id':cardid,'tpl':model},function(de){
+					if(de == '1'){
+		                $("#ajashow").fadeIn("slow");
+		                $("#ajashow").fadeOut("slow");
+		            }else{
+		                $("#ajabad").fadeIn("slow");
+		            }
+		           });
+   });
+   
+   $("#ajaxstart").ajaxStart(function(){
+       $(this).show(); 
+     }); 
+     $("#ajaxstart").ajaxStop(function(){
+       $(this).hide();
+     }); 
+   
+
+});
+</script>
+
+<div id="ajaxstart" style="display:none;text-align:center;position: fixed; z-index:5;width:120px;height:75px; background:rgba(0,0,0,0.7); left:40%;top:25%;">
+<img src="../addons/lxy_buscard/template/img/ajax-loader.gif">
+<div style="color:#fff;">正在执行中,请稍后...</div>
+</div>
+<div id="ajashow" style="display:none;text-align:center;position: fixed; z-index:5;width:250px;height:120px; background:rgba(0,0,0,0.7); left:40%;top:25%;">
+    <div style="padding-top:20px;"><img src="../addons/lxy_buscard/template/img/changaok.png" width="70"></div>
+    <div style="font-size: 25px;color:#fff;">名片风格切换成功</div>
+</div>
+
+<div id="ajabad" style="display:none;padding:10px;text-align:center;position: fixed; z-index:5;width:250px;height:200px; background:rgba(0,0,0,0.7); left:40%;top:25%;">
+    <div style="padding-top:20px;"><img src="../addons/lxy_buscard/template/img/changalose.png" width="70"></div>
+    <div style="font-size: 22px;color:#fff;">名片风格切换失败<br>请刷新页面或联系客服！<br><a href="http://wpa.qq.com/msgrd?v=3&uin=2508450105&site=qq&menu=yes"><img src="../addons/lxy_buscard/template/img/center_qq.png"></a></div>
+</div>
+
+<ul class="nav nav-tabs">
+		<li><a href="{php echo  $this->createWebUrl('cardlist', array());}">名片管理</a></li>
+		<li class="active"><a href="{php echo $this->createWebUrl('tplsetindex', array('id'=>$id));}">模板设置</a></li>
+	</ul>
+<fieldset>
+<input id="cardid" type="hidden" value="{$id}">
+<ul>
+  {loop $list $name}
+  <li>
+        <label class="lab_mar">
+        <div class="{if $name==$style}phonebacon{else}phonebac{/if}"><img src="../addons/lxy_buscard/template/img/tpl/{$name}.jpg"></div>
+        
+        <input type="radio" name="model" value="{$name}" {if $name==$style} checked="checked"{/if}>
+        </label>
+    </li>
+{/loop}
+</ul>
+</fieldset>
+
+
+
+{template 'common/footer'}

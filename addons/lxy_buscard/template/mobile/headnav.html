@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>微名片</title>
+<link rel="stylesheet" href="../addons/lxy_buscard/template/css/base.css">
+<script src="../addons/lxy_buscard/template/js/jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="../addons/lxy_buscard/template/css/index.css">
+<script>
+$().ready(function(){
+    $("#avatorimg").height($("body").height());
+    $("#avator").click(function(){
+        $("#avatorimg").show();
+    });
+    $("#avatorimg").click(function(){
+       $(this).hide(); 
+    });
+    $("#overdate").height($("body").height());
+})
+</script>
+</head>
+
+<body style="">
+<div id="mcover" onClick="document.getElementById('mcover').style.display='';"><img src="{$_W['siteroot']}addons/lxy_buscard/template/img/sharepoint.png"></div>

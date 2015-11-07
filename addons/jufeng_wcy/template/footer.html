@@ -1,0 +1,20 @@
+			</div>
+		</div>
+	</div>
+	<script>
+		require(['bootstrap'], function($){
+			$.post("{url 'utility/subscribe'}");
+			$.post("{url 'utility/sync'}");
+		});
+	</script>
+	<div class="container-fluid footer" role="footer">
+		<div class="page-header"></div>
+		<span class="pull-left">
+			<p><a href="{$core['url']['owner']}"><b>{$core['owner']}</b></a> v{IMS_VERSION}<a href="{$core['url']['owner']}">{$core['host']}</a> {$core['beian']}</p>
+		</span>
+		<span class="pull-right">
+			<p><a href="{$core['url']['about']}">{$core['owner']}</a> &nbsp; &nbsp; <a href="{$core['url']['help']}">{$core['owner']}</a></p>
+		</span>
+	</div>
+</body>
+</html>

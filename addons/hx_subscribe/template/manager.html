@@ -1,0 +1,43 @@
+{template 'common/header'}
+<div class="main">
+<ul class="nav nav-tabs">
+	<li><a href="{php echo $this->createWebUrl('article');}">文章管理</a></li>
+	<li><a href="{php echo $this->createWebUrl('list');}">积分排行</a></li>
+	<li><a href="{php echo $this->createWebUrl('credit');}">提现列表</a></li>
+	<li class="active"><a href="">提现操作</a></li>
+</ul>
+	<div class="panel panel-info">
+		<div class="panel-heading">提现操作</div>
+		<div class="panel-body">
+			<form action="" method="post" class="form-horizontal" role="form">
+			<div class="alert alert-success" role="alert">编号：{$item['id']}&nbsp;&nbsp;&nbsp;&nbsp;姓名：{$item['realname']}&nbsp;&nbsp;&nbsp;&nbsp;微信号：{$item['qq']}&nbsp;&nbsp;&nbsp;&nbsp;电话号：{$item['mobile']}</div>
+			<div class="alert alert-info" role="alert">提现金额：{$item['credit2']}&nbsp;&nbsp;&nbsp;&nbsp;提现方式：{if $item['type'] == 1}支付宝{else}银行卡{/if}&nbsp;&nbsp;&nbsp;&nbsp;{if $item['type'] == 1}账户：{$item['alipay']}{else}卡号：{$item['cardid']}&nbsp;&nbsp;开户行：{$item['cardfrom']}&nbsp;&nbsp;开户人：{$item['cardname']}{/if}</div>
+			<div class="alert alert-warning" role="alert">当前状态：{if $item['status'] == 1}申请提现{else if $item['status'] == 2}已审核{else if $item['status'] == 3}审核通过待支付{else if $item['status'] == 4}已支付{else if $item['status'] == '-2'}审核失败{else}已关闭{/if}&nbsp;&nbsp;{if $item['status'] == '-2'}失败原因:{$r['reason']}{/if}&nbsp;&nbsp;操作人：{$r['user']}&nbsp;&nbsp;&nbsp;&nbsp;最后操作时间：{php echo date('Y-m-d H:i:s',$r['time'])}</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+				<div class="col-sm-4">
+					{if ($item['status'] > 0)&&($item['status'] < 2)}<label><input name="status" id="" type="radio" value="2" onclick="$('#reason').hide();"> 已审核</label>{/if}
+					{if ($item['status'] > 0)&&($item['status'] < 2)}<label><input name="status" id="" type="radio" value="-2" onclick="$('#reason').show();"> 审核失败</label>{/if}
+					{if ($item['status'] > 0)&&($item['status'] < 3)}<label><input name="status" id="" type="radio" value="3" onclick="$('#reason').hide();"> 审核通过待支付</label>{/if}
+					{if ($item['status'] > 0)&&($item['status'] < 4)}<label><input name="status" id="" type="radio" value="4" onclick="$('#reason').hide();"> 已支付</label>{/if}
+				</div>
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">操作员</label>
+				<div class="col-sm-4">
+					<input class="form-control" name="user" id="" type="text" value="{$_W['user']['username']}">
+				</div>				
+			</div>
+			<div class="form-group" id="reason" style="display: none;">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">失败原因</label>
+				<div class="col-sm-4">
+					<input class="form-control" name="reason" id="" type="text" value="">
+				</div>				
+			</div>
+			<div class="form_group">
+				<input name="token" type="hidden" value="{$_W['token']}" />
+				<input type="submit" class="btn btn-primary" name="submit" value="提交" />
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+{template 'common/footer'}

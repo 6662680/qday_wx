@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+{php $assets='../addons/huiyi_weivote/template/mobile/assets/'}
+<html>
+  <head>
+    <title>{php echo $title}</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="投票,微投票" />
+    <meta name="description" content="微投票" />
+
+    <!--不缓存-->
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0">
+
+    <link href="{php echo $assets}css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="{php echo $assets}css/font-awesome.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="{php echo $assets}css/se7en-font.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="{php echo $assets}css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{php echo $assets}js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="{php echo $assets}js/jquery-ui.js" type="text/javascript"></script>
+    <script src="{php echo $assets}js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="{php echo $assets}js/modernizr.custom.js" type="text/javascript"></script>
+    <script src="{php echo $assets}js/fitvids.js" type="text/javascript"></script>
+    <script src="{php echo $assets}js/respond.js" type="text/javascript"></script>
+
+      <!-- 图片加载 -->
+      <script src="{php echo $assets}Lib/echo/js/echo.min.js" type="text/javascript"></script>
+
+    <!--模板引擎-->
+    <script src="{php echo $assets}js/template.js" type="text/javascript"></script>
+
+
+      <script src="{php echo $assets}js/main-default.js?v=12092135" type="text/javascript" charset="UTF-8"></script>
+
+      <!-- All functions for this theme + document.ready processing -->
+      <script language="javascript" type="text/javascript">
+          var number = Math.floor(Math.random() * 3600 + 1);
+          document.write('<scr'+'ipt language="javascript" type="text/javascript" src="{php echo $assets}js/ajax.js?' + number + '"></scr'+'ipt>');
+      </script>
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  </head>
+
+
+  <body>
+    <!--默认分享-->
+    <div id="wx_share_title" style="display:none;">
+        {php echo $title}
+    </div>
+    <div id="wx_share_desc" style="display:none;">
+        {php echo $desc}
+    </div>
+    <div id="wx_share_img"
+         style="position: fixed;z-index: 9999;top: 0;left: 0;width: 100%;height: 100%;background: #dddddd;background: rgba(0, 0, 0, 0.5); display: none;">
+        <img src="{php echo $pic}" width="100%" >
+    </div>
+    <div id="wx_share_img_default"
+         style="position: fixed;z-index: 9998;top: 0;left: 0;width: 100%;height: 100%;background: #dddddd;background: rgba(0, 0, 0, 0.5); display: none;">
+        <img src="{php echo $assets}picture/share.png" width="100%" >
+    </div>
+    <!-- 分享引导图 -->
+    <div id="wx_share_cover" onclick="sharePoint('dissmiss');"
+         style="position: fixed;z-index: 9997;top: 0;left: 0;width: 100%;height: 100%;background: #dddddd;background: rgba(0, 0, 0, 0.5); display: none;">
+        <img src="{php echo $assets}picture/sharepoint.png" width="100%" >
+    </div>
+    <!--默认分享end-->
+
+    <div class="modal-shiftfix">
+
+      <!-- Navigation -->
+      <div class="navbar navbar-fixed-top scroll-hide">
+        <div class="container-fluid top-bar">
+            <!--<button id="navbar-btn" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>-->
+            <a class="title ajax-link" href="ajax/default.html">{php echo $title}</a>
+        </div>
+        <div class="container-fluid main-nav clearfix">
+          <div class="nav-collapse">
+            <ul class="nav">
+                <!--
+                <li><a id="nava-default" class="ajax-link current" href="ajax/default.html" onclick="closeBtn('default')">
+                  <span aria-hidden="true" class="se7en-home"></span>投票首页</a>
+                </li>
+                <li><a id="nava-screen" class="ajax-link" href="ajax/screen.html" onclick="closeBtn('screen')">
+                  <span aria-hidden="true" class="se7en-feed"></span>投票大屏幕</a>
+                </li>
+                <li><a id="nava-result" class="ajax-link" href="ajax/result.html" onclick="closeBtn('result')">
+                  <span aria-hidden="true" class="se7en-charts"></span>查看结果</a>
+                </li>
+                <li><a id="nava-reg" class="ajax-link" href="ajax/reg.html" onclick="closeBtn('reg')">
+                  <span aria-hidden="true" class="se7en-gallery"></span>登记信息</a>
+                </li>
+                -->
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- End Navigation -->
+
+
+      <div id="content" class="container-fluid main-content">
+          <div id="ajax-content"></div>
+      </div>
+
+      <!-- CopyWight -->
+      <div id="copywight" style="background: none repeat scroll 0 0 #fefefe; color: #555555;">
+          <div class="container">
+            <div class="row">
+                <p style="padding: 10px 0; margin: 0 0 0 10px; font-family: Arial,Verdana,sans-serif;">&copy; 2015 {$_W['account']['name']}</p>
+            </div>
+          </div>
+      </div>
+      <!-- CopyWight End -->
+    </div>
+
+    <!-- Bootstrap对话框 Start -->
+    <div class="row">
+      <div class="col-lg-12" style="margin-bottom: 0px">
+        <div class="widget-container fluid-height" style="display: none;">
+          <div class="widget-content padded text-center">
+            <a id="myModal-QQ125879930" class="btn btn-primary btn" data-toggle="modal" href="#myModal">作者情天</a>
+          </div>
+        </div>
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header" id="myModal-header">
+                <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+                <h4 class="modal-title" id="myModal-title">
+                    {php echo $title}
+                </h4>
+              </div>
+
+              <div class="modal-body" id="myModal-body">
+                <h1></h1>
+                <p></p>
+                <h4></h4>
+                <p></p>
+              </div>
+
+              <div class="modal-footer" id="myModal-footer">
+                <button class="btn btn-default-outline" data-dismiss="modal" type="button">关闭</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap对话框 End -->
+
+<div id="show-url" style="display: none;"></div>
+<script>
+
+var id = {php echo $id};
+var weid = {php echo $weid};
+var uniacid = {php echo $uniacid};
+var mobile_root = '../addons/huiyi_weivote/template/mobile/';
+var mobile_url = './index.php?c=entry&type=uids&m=huiyi_weivote&i=' + uniacid + '&id=' + id + '&do=';
+var _data = {};
+
+
+function closeBtn(nava) {
+    $('#navbar-btn').click();
+    $('.nav li a').removeClass("current");
+    $('#nava-' + nava).addClass("current");
+}
+
+function showUrl(url) {
+    if (url == null || url == '') {
+        url = "ajax/default.html";
+    } else {
+        url = "ajax/" + url + ".html";
+    }
+    var showUrlA = '<a id="main-a" href="' + url + '" class="ajax-link"></a>';
+    $('#show-url').append(showUrlA);
+    $('#main-a').click();
+    return false;
+}
+function alertModal(str) {
+    $("#myModal-title").html("温馨提示");
+    $("#myModal-body").html(str);
+    $("#myModal-QQ125879930").click();
+}
+
+function sharePoint(show) {
+    if (show != null && show == 'show') {
+        $('#wx_share_cover').show();
+    } else {
+        $('#wx_share_cover').hide();
+    }
+}
+</script>
+
+<script>
+    sharedata.title = "{php echo $title}";
+    sharedata.desc = "{php echo $desc}";
+    sharedata.imgUrl = "{php echo $pic}";
+    sharedata.link = "{php echo $share_link}";
+    wx.ready(function () {
+        wx.onMenuShareAppMessage(sharedata);
+        wx.onMenuShareQQ(sharedata);
+        wx.onMenuShareWeibo(sharedata);
+        wx.onMenuShareTimeline(sharedata);
+    });
+</script>
+
+  </body>
+</html>

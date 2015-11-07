@@ -1,0 +1,305 @@
+{template 'header'}
+
+<ul class="nav nav-tabs">
+
+	<li {if $operation == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('order', array('op' => 'display'))}">管理订单</a></li>
+
+</ul>
+
+{if $operation == 'display'}
+
+<div class="main">
+
+	<div style="padding:15px;">
+
+		<table class="table table-hover">
+
+			<thead class="navbar-inner">
+
+				<tr>
+
+					<th style="width:40px;">所属店家</th>
+
+					<th style="width:60px;">订单号</th>
+
+					<th style="width:60px;">电话</th>
+                    
+					<th style="width:100px;">地址</th>
+
+					<th style="width:50px;">付款方式</th>
+
+					<th style="width:50px;">总价</th>
+
+					<th style="width:40px;">状态</th>
+
+					<th style="width:90px;">下单时间</th>
+
+					<th style="width:40px; text-align:right;">操作</th>
+
+				</tr>
+
+			</thead>
+
+			<tbody>
+
+				{loop $list $item}
+
+				<tr>
+
+					<td>{$item['pcatename']}</td>
+
+					<td>{$item['ordersn']}</td>
+
+					<td>{$item['mobile']}</td>
+
+					<td>{$item['address']}</td>
+
+					<td>{if $item['paytype'] == 1}<span class="label label-success">在线支付</span>{elseif $item['paytype'] == 2}<span class="label label-info">餐到付款</span>{/if}</td>
+
+					<td>{$item['price']} 元</td>
+
+					<td>{if $item['status'] == 0}<span class="label label-info">已完成</span>{/if}
+                    {if $item['status'] == 1}<span class="label label-danger">等待支付</span>{/if}
+                    {if $item['status'] == 2}<span class="label label-success">已下单</span>{/if}
+                    {if $item['status'] == 3}<span class="label label-warning">已确认</span>{/if}
+                    {if $item['status'] == -1}<span class="label label-primary">已取消</span>{/if}
+                    {if $item['status'] == -2}<span class="label label-default">已删除</span>{/if}</td>
+
+					<td>{php echo date('Y-m-d H:i:s', $item['createtime'])}</td>
+
+					<td style="text-align:right;"><a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}">查看订单</a></td>
+
+				</tr>
+
+				{/loop}
+
+			</tbody>
+
+		</table>
+
+		{$pager}
+
+	</div>
+
+</div>
+
+{elseif $operation == 'detail'}
+
+<div class="main">
+<div class="panel panel-default">
+
+	<div class="panel-body table-responsive">
+	<form class="form-horizontal form" action="" method="post" enctype="multipart/form-data" onsubmit="return formcheck(this)">
+
+		<input type="hidden" name="id" value="{$item0[id]}">
+
+		<h4>订单信息</h4>
+
+		<table class="table table-hover">
+<tbody>
+<tr>
+				<th style="width:100px;"><label for="">所属店家</label></th>
+				<td>
+					{$pcate['name']}
+				</td>
+			</tr>
+            
+			<tr>
+				<th style="width:100px;"><label for="">订单号</label></th>
+				<td>
+					{$item0['ordersn']}
+				</td>
+			</tr>
+
+			<tr>
+
+				<th style="width:100px;"><label for="">总计</label></th>
+
+				<td>
+
+					{$item0['price']} 元
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<th style="width:100px;"><label for="">支付方式</label></th>
+
+				<td>
+
+					{if $item0['paytype'] == 1}在线支付{/if}
+
+					{if $item0['paytype'] == 2}餐到付款{/if}
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<th style="width:100px;"><label for="">订单状态</label></th>
+
+				<td>
+{if $item0['status'] == 3}<span class="label label-warning">已确认</span>{/if}
+{if $item0['status'] == 2}<span class="label label-success">已下单</span>{/if}
+					{if $item0['status'] == 1}<span class="label label-danger">等待支付</span>{/if}
+                    {if $item0['status'] == 0}<span class="label label-info">已完成</span>{/if}
+                    {if $item0['status'] == -1}<span class="label label-primary">已取消</span>{/if}
+                    {if $item0['status'] == -2}<span class="label label-default">已删除</span>{/if}
+
+				</td>
+
+			</tr>
+
+			<tr>
+
+				<th style="width:100px;"><label for="">下单日期</label></th>
+
+				<td>
+
+					{php echo date('Y-m-d H:i:s', $item0['createtime'])}
+
+				</td>
+
+			</tr>
+{if $item0['other']}
+			<tr>
+				<th style="width:100px;"><label for="">备注</label></th>
+				<td>
+					{$item0['other']}
+				</td>
+			</tr>
+{/if}
+</tbody>
+		</table>
+
+		<h4>用户信息</h4>
+
+		<table class="table table-hover">
+
+			<tr>
+
+				<th style="width:100px;"><label for="">手机</label></th>
+
+				<td>
+
+					{$item0['mobile']}
+
+				</td>
+
+			</tr>
+
+
+			<tr>
+				<th style="width:100px;"><label for="">地址</label></th>
+				<td>
+					{$item0['address']}
+				</td>
+			</tr>
+            <tr>
+				<th style="width:100px;"><label for="">送餐时间</label></th>
+				<td>
+					{$item0['time']}
+				</td>
+			</tr>
+            
+		</table>
+
+		<h4>菜品信息</h4>
+
+		<table class="table table-hover">
+
+			<thead class="navbar-inner">
+
+				<tr>
+
+					<th style="width:30px;">ID</th>
+
+					<th style="min-width:150px;">菜品名称</th>
+
+					<th style="width:100px;">优惠价/原价</th>
+
+					<th style="width:100px;">单位</th>
+
+					<th style="width:100px;">状态</th>
+
+					<th style="width:100px;">数量</th>
+				</tr>
+
+			</thead>
+
+			{loop $item['foods'] $item}
+
+			<tr>
+
+				<td>{$item['id']}</td>
+
+				<td>{if $category[$item['pcate']]['name']}<span class="text-error">[{$category[$item['pcate']]['name']}] </span>{/if}{if $children[$item['pcate']][$item['ccate']][1]}<span class="text-info">[{$children[$item['pcate']][$item['ccate']][1]}] </span>{/if}{$item['title']}</td>
+
+				<!--td>{$category[$item['pcate']]['name']} - {$children[$item['pcate']][$item['ccate']][1]}</td-->
+
+				<td style="background:#f2dede;">{$item['preprice']}元 / {$item['oriprice']}元</td>
+
+				<td>{$item['unit']}</td>
+
+				<td>{if $item['status']}<span class="label label-success">上架</span>{else}<span class="label label-danger">下架</span>{/if}</td>
+
+				<td>{$foodsid[$item['id']]['total']}</td>
+			</tr>
+
+			{/loop}
+
+		</table>
+
+		<table class="">
+
+			<tr>
+
+				<th></th>
+
+				<td>
+
+					{if $item0['status'] == -2}
+
+					 <button type="submit" class="btn btn-primary span2" name="delete" value="delete" onclick="return confirm('确认彻底删除订单吗？'); return false;">彻底删除</button>
+					{/if}
+                    {if $item0['status'] == -1}
+					 <button type="submit" class="btn btn-primary span2" name="delete" value="delete" onclick="return confirm('确认彻底删除订单吗？'); return false;">彻底删除</button>
+					{/if}
+					{if $item0['status'] == 0}
+					 <button type="submit" class="btn btn-primary span2" name="delete" value="delete" onclick="return confirm('确认彻底删除订单吗？'); return false;">彻底删除</button>
+					{/if}
+					{if $item0['status'] == 1}
+                     <button type="submit" class="btn btn-primary span2" name="quxiao" value="quxiao" onclick="return confirm('确认取消此订单吗？'); return false;">取消订单</button>
+                    <button type="submit" class="btn btn-primary span2" name="wancheng" value="wancheng" onclick="return confirm('确认转为已完成吗？'); return false;">转为已完成</button>
+                    <button type="submit" class="btn btn-primary span2" name="yixia" value="yixia" onclick="return confirm('确认转为已下单吗？'); return false;">转为已下单</button>
+                    <button type="submit" class="btn btn-primary span2" name="jieshou" value="jieshou" onclick="return confirm('确认接受此订单吗？'); return false;">接受订单</button>
+					{/if}
+                    {if $item0['status'] == 2}
+                     <button type="submit" class="btn btn-primary span2" name="quxiao" value="quxiao" onclick="return confirm('确认取消此订单吗？'); return false;">取消订单</button>
+                    <button type="submit" class="btn btn-primary span2" name="wancheng" value="wancheng" onclick="return confirm('确认转为已完成吗？'); return false;">转为已完成</button>
+                    <button type="submit" class="btn btn-primary span2" name="jieshou" value="jieshou" onclick="return confirm('确认接受此订单吗？'); return false;">接受订单</button>
+					{/if}
+                    {if $item0['status'] == 3}
+                     <button type="submit" class="btn btn-primary span2" name="quxiao" value="quxiao" onclick="return confirm('确认取消此订单吗？'); return false;">取消订单</button>
+                    <button type="submit" class="btn btn-primary span2" name="wancheng" value="wancheng" onclick="return confirm('确认转为已完成吗？'); return false;">转为已完成</button>
+					{/if}
+
+					<input type="hidden" name="token" value="{$_W['token']}" />
+
+				</td>
+
+			</tr>
+
+		</table>
+
+	</form>
+</div></div>
+</div>
+
+{/if}
+
+{template 'footer'}
+

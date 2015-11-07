@@ -1,0 +1,36 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/emoji.css">
+<div class="main">
+	<div style="padding:15px;">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th>用户昵称</th>
+					<th>openid</th>
+					<th>记录时间</th>
+					<th>状态</th>
+					<th class="norightborder">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+					<tr>
+						<td>{php echo emoji_unified_to_html($row['nickname'])}</td>
+						<td>{$row['openid']}</td>
+						<td>{php echo date('Y-m-d H:i:s',$row['createtime'])}</td>
+						<td>{if $row['isblack']==0}正常访问{else}禁止访问{/if}</td>
+						<td class="norightborder">
+						{if $row['isblack']==0}
+							<a class="btn" rel="tooltip"  href="{php echo $this->createWeburl('Userlist', array('id'=>$row['id'],'foo'=>'change','doit'=>1))}" onclick="return confirm('确认操作?');return false;"><i class="glyphicon glyphicon-lock"></i></a>
+							{else}
+							<a class="btn" rel="tooltip"  href="{php echo $this->createWeburl('Userlist', array('id'=>$row['id'],'foo'=>'change','doit'=>0))}" onclick="return confirm('确认操作?');return false;"><i class="glyphicon glyphicon-log-in"></i></a>
+ 						{/if}
+ 						</td>
+					</tr>
+					{/loop} 
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+{template 'common/footer'}

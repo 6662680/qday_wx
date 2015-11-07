@@ -1,0 +1,159 @@
+<div id="ajax-main"></div>
+
+<script id="ajax-reg" type="text/html">
+<div class="container">
+<div class="row">
+
+    <!-- Register -->
+    <div id="div-reg">
+
+      {{if member.realname}}
+      <div class="row">
+        <div class="span12">
+          <div class="well well-form txt-lefty">
+            <h3>您已经登记完成</h3>
+            <p>
+			  <br>
+              您已经登记完成，以后无需登记可直接参与微信投票！如果需要修改信息，请再次提交更改。
+            </p>
+          </div>
+        </div>  
+      </div>
+      {{else}}
+      <div class="row">
+        <div class="span12">
+          <div class="well well-form txt-lefty">
+            <h3>微信投票相关说明</h3>
+            <p>
+              尊敬的用户您好，欢迎使用微信投票，参与用户请务必认真填写您的个人信息，以便我们及时准确的将信息发送给您！谢谢！祝您工作顺利！
+            </p>      
+          </div>
+        </div>  
+      </div>    
+      {{/if}}
+
+      <hr/>
+
+      <div class="row">
+      <div class="span12">
+        <div class="well well-form txt-lefty">
+          <h3>信息登记</h3>
+
+            <iframe name='hidden_frame' id="hidden_frame" style="display:none"></iframe>
+            <form id="frm-reg" target="hidden_frame">
+                
+            <div class="control-group" style="margin-bottom: 10px;">
+              <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon">姓名</span>
+                  <input  type="text" name="realname" placeholder="姓名" class="form-control"
+                                        required=""
+                                        data-validation-required-message="请输入您的真实姓名！"
+                                        value="{{member.realname}}" />
+              </div>
+              </div>
+            </div>
+            
+            <div class="control-group" style="margin-bottom: 10px;"> 
+              <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon">手机</span>
+                <input  type="text" name="mobile" placeholder="手机" class="form-control" 
+                        required=""
+                        data-validation-required-message="请输入您的手机号码！"
+                        data-validation-uppercase-regex="^1[358]{1}[0-9]{9}" 
+                        data-validation-uppercase-message="请输入正确的手机号码！" 
+                        value="{{member.mobile}}" />
+              </div>
+              </div>      
+            </div>
+            
+            <div class="control-group" style="margin-bottom: 10px;"> 
+              <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon">Q&nbsp;&nbsp;Q</span>
+                <input  type="text" name="qq" placeholder="QQ" class="form-control" 
+                        required=""
+                        data-validation-required-message="请输入您的QQ号码！"
+                        value="{{member.qq}}" />
+              </div>
+              </div>      
+            </div>
+
+            <div class="control-group" style="margin-bottom: 10px;"> 
+              <div class="controls">
+              <div class="input-prepend input-group">
+                <span class="input-group-addon">微信</span>
+                <input  type="text" name="weixinno" placeholder="微信号" class="form-control" 
+                        required=""
+                        data-validation-required-message="请输入您的微信号！"
+                        value="{{member.msn}}" />
+              </div>
+              </div>      
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary widget-content">提交登记</button>
+            </div> 
+                
+          </form>       
+            
+        </div>  
+      </div>    
+      </div>
+
+    </div>
+    <!-- Register End -->
+    
+</div>
+</div>
+</script>
+<script>
+
+function regSubmit() {
+
+    var realname = $("input[name=realname]").val();
+    var mobile = $("input[name=mobile]").val();
+    var qq = $("input[name=qq]").val();
+    var weixinno = $("input[name=weixinno]").val();
+
+    if (realname != '' && mobile.length >= 11 && qq != '' && weixinno != '') {
+        RegSubmit(realname, mobile, qq, weixinno);
+        return false;
+    }
+}
+
+function initRegPage() {
+    var data = {};
+    var aurl = 'ajaxReg';
+    $.ajax({
+        mimeType: 'text/html; charset=utf-8',
+        url: mobile_url + aurl,
+        type: 'POST',
+        dataType: "json",
+        async: false,
+        success: function(adata) {
+            if (adata.rcode == 100) {
+                data = adata.rdata;
+            } else {
+                alertModal(adata.rmsg);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+	var html = template('ajax-reg', data);
+    document.getElementById('ajax-main').innerHTML = html;
+
+    $('#frm-reg').bind('submit', function(){
+        regSubmit();
+        return false;
+    });
+}
+    
+$(document).ready(function() {
+    initRegPage();
+	LoadRegScript();
+});
+</script>

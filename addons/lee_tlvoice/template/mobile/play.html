@@ -1,0 +1,456 @@
+<html><head>
+<meta charset="utf-8">
+<meta name="MobileOptimized" content="320">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" type="text/css" href="../addons/lee_tlvoice/template/mobile/css/base.css">
+	<script type="text/javascript" src="../addons/lee_tlvoice/template/mobile/js/zepto.js"></script>
+<title></title>
+	<script type="text/javascript">
+				var sUserAgent = navigator.userAgent.toLowerCase();
+				var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+				var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+				var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+				var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+				var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+				var bIsAndroid = sUserAgent.match(/android/i) == "android";
+				var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+				var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+				window.onload = function(){
+					var content = document.getElementById("content");
+					var pcContent = document.getElementById("pc-content");
+					var scan = document.getElementById("scan");
+					var qrcode = document.getElementById("qrcode");
+					if(!PCjudge()){
+						content.style.display = "none";
+						pcContent.style.display = "block";
+						document.body.style.background = "#F4F4F4";
+					}
+					else{
+						content.style.display = "block";
+						pcContent.style.display = "none";
+					}
+				};
+				function PCjudge(){
+					if (bIsIpad || bIsIphoneOs) {
+					} else if (bIsMidp || bIsUc7 || bIsUc || bIsAndroid) {
+					} else if (bIsCE || bIsWM) {
+					} else {
+						return false;
+					}
+					return true;
+				}
+			</script>
+			<style type="text/css">
+			#content {
+				width: 100%;
+				margin: 0 auto;
+				display: none;
+			}
+
+			.tit {
+				height: 60px;
+				line-height: 100px;
+				margin: 20px 0px;
+				text-align: center;
+				font-size: 16px;
+				letter-spacing: 1.2px;
+			}
+
+			#time {
+				margin: 10px auto;
+				font-size: 12px;
+				padding: 3px;
+				color: #fff;
+				text-align: center;
+				border-radius: 5px;
+				background: #cecece;
+				visibility: hidden;
+			}
+
+			#sound {
+				position: relative;
+				left: 60px;
+				height: 35px;
+				visibility: hidden;
+				line-height: 35px;
+				background: #fff;
+				border: 1px solid #eee;
+				border-radius: 4px;
+			}
+
+			#sound:before {
+				content: "∧";
+				font-size: 16px;
+				position: absolute;
+				top: 0px;
+				left: -10px;
+				background: #fff;
+				color: #eee;
+				-webkit-transform: rotate(-90deg);
+				-moz-transform: rotate(-90deg);
+				-ms-transform: rotate(-90deg);
+				-o-transform: rotate(-90deg);
+				transform: rotate(-90deg);
+			}
+
+			#sound span {
+				position: absolute;
+				right: -30px;
+				color: #ddd;
+			}
+
+			#sound img {
+				width: 13px;
+				position: absolute;
+				top: 8px;
+				left: 15px;
+			}
+
+			footer{
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				bottom: 53px;
+				width: 230px;
+				height: 35px;
+				line-height: 35px;
+				text-align: center;
+				font-size: 14px;
+				color: #0bbc0a;
+				border: 1px solid #0bbc0a;
+				border-radius: 5px;
+				letter-spacing: 5px;
+			}
+
+			#pc-content {
+				width: 250px;
+				height: 266px;
+				margin: 7% auto;
+				display: none;
+			}
+
+			#qrcode {
+				width: 250px;
+				height: 250px;
+				margin: auto;
+				margin-top: 15%;
+			}
+
+			#scan {
+				font-size: 25px;
+				text-align: center;
+				color: #504848;
+			}
+
+			#tip {
+				width: 230px;
+				height: 35px;
+				font-size: 16px;
+				margin: 20% auto;
+				line-height: 33px;
+				text-align: center;
+				color: #41F649;
+				background-color: #fff;
+				border-left: 3px #D9D9D9 solid;
+				border-top: 3px #D9D9D9 solid;
+				border-radius: 100px;
+			}
+			#dir{
+				position: absolute;
+				
+				bottom: 130px;
+				left: 0px;
+				
+				right: 0;
+				
+				text-align: center;
+				
+				letter-spacing: 2px;
+				
+				color: #ccc;
+
+
+
+			}
+			</style>
+			<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+			<script type="text/javascript">
+			var localId = '';
+			var startVoice = false;
+			var jsApiList = [
+			'checkJsApi',
+			'onMenuShareTimeline',
+			'onMenuShareAppMessage',
+			'onMenuShareQQ',
+			'onMenuShareWeibo',
+			'hideMenuItems',
+			'showMenuItems',
+			'hideAllNonBaseMenuItem',
+			'showAllNonBaseMenuItem',
+			'translateVoice',
+			'startRecord',
+			'stopRecord',
+			'onRecordEnd',
+			'playVoice',
+			'pauseVoice',
+			'stopVoice',
+			'uploadVoice',
+			'downloadVoice',
+			'chooseImage',
+			'previewImage',
+			'uploadImage',
+			'downloadImage',
+			'getNetworkType',
+			'openLocation',
+			'getLocation',
+			'hideOptionMenu',
+			'showOptionMenu',
+			'closeWindow',
+			'scanQRCode',
+			'chooseWXPay',
+			'openProductSpecificView',
+			'addCard',
+			'chooseCard',
+			'openCard'
+			];
+			wx.config({
+				debug: false,
+				appId: "{$wx['appId']}",
+				timestamp: "{$wx['timestamp']}",
+				nonceStr: "{$wx['nonceStr']}",
+				signature: "{$wx['signature']}",
+				jsApiList: jsApiList
+			});			
+			wx.ready(function() {
+				wx.onVoicePlayEnd({
+					complete: function(a) {
+						startVoice = false;
+						noSay()
+					}
+				});			
+				wx.downloadVoice({
+					serverId: '{$serverid}',
+					success: function(a) {
+						localId = a.localId;
+						sound.addEventListener("touchstart", startVoiceFunc, false);
+						//startVoiceFunc()
+					}
+				});						
+				wx.onMenuShareTimeline({
+					title: "{$recordtime}′′",
+					link: "{$_W['siteroot']}/app/{php echo $this->createMobileUrl('play',array(),true);}&serverId={$serverid}&date={$date}&recordtime={$recordtime}",
+					imgUrl: "{$_W['siteroot']}/addons/lee_tlvoice/template/mobile/images/sharetimeline.jpg",
+					trigger: function (res) {
+					},
+					success: function () { 
+						// 用户确认分享后执行的回调函数
+					},
+					cancel: function () { 
+						// 用户取消分享后执行的回调函数
+					},
+				    fail: function (res) {
+							alert(JSON.stringify(res));
+				    }					
+				});
+				wx.onMenuShareAppMessage({
+					title: '我给你发了一条语音！', // 分享标题
+					desc: "{$recordtime}′′", // 分享描述
+					link: "{$_W['siteroot']}/app/{php echo $this->createMobileUrl('play',array(),true);}&serverId={$serverid}&date={$date}&recordtime={$recordtime}", // 分享链接
+					imgUrl: "{$_W['siteroot']}/addons/lee_tlvoice/template/mobile/images/sharetimeline.jpg",
+					trigger: function (res) {
+					},					
+					success: function () { 
+						// 用户确认分享后执行的回调函数
+					},
+					cancel: function () { 
+						// 用户取消分享后执行的回调函数
+					},
+				    fail: function (res) {
+							alert(JSON.stringify(res));
+				    }					
+				});			
+				
+			});
+			$(document).ready(function() {
+				$(document).on('touchstart',
+				function(e) {
+					e.preventDefault()
+				});
+				$(document).on('touchmove',
+				function(e) {
+					e.preventDefault()
+				});
+				$(document).on('touchend',
+				function(e) {
+					e.preventDefault()
+				});
+				var b = '{$date}';
+				$('#time').text(parseDate(b)).css('visibility', 'visible');
+				var c = '{$recordtime}';
+				var w = 55;
+				var p = (115 / 60);
+				var e = parseInt(c);
+				var d = w + e * p;
+				$('#sound').css('width', d + 'px').css('visibility', 'visible');
+				$('#sound span').text(c + '′′');
+				$('footer').on('touchstart',
+				function() {
+					wx.showOptionMenu();
+					stopVoiceFunc();
+					window.location.href = "{$_W['siteroot']}/app/{php echo $this->createMobileUrl('index');}"
+				})
+			});
+			function parseDate(a) {
+				a += "";
+				var b = new Date();
+				var c = a.split(":");
+				var d = parseInt(c[0]) + 1;
+				var e = c[1];
+				var f = parseInt(c[2]);
+				var g = parseInt(c[3]);
+				var h = parseInt(c[4]);
+				h = h == 0 ? 7 : h;
+				var i = c[5];
+				var j = b.getDay();
+				j = j == 0 ? 7 : j;
+				var k = (f * 3600 + g) * 1000;
+				f = controlSize(f);
+				g = controlSize(g);
+				$("#time").css("width", "80px");
+				var l = f * 3600000 + g * 1000;
+				var m = b.getHours() * 3600000 + b.getMinutes() * 1000;
+				var n = Math.ceil(((b.getTime() - m) - (parseFloat(i) - l)) / 86400000);
+				if (n < 0) {
+					return d + '.' + e + ' ' + f + ':' + g
+				} else if (n > 7) {
+					return d + ' ' + e + ' ' + f + ':' + g
+				} else if (j == h) {
+					$("#time").css("width", "50px");
+					return f + ':' + g
+				} else if (Math.abs(j - h) == 1 || (j == 1 && h == 7)) {
+					return '昨天 ' + f + ':' + g
+				} else if (Math.abs(j - h) > 1) {
+					var o = ['', '一', '二', '三', '四', '五', '六', '日'];
+					return '星期' + o[h] + " " + f + ":" + g
+				} else {
+					return d + '.' + e + ' ' + f + ':' + g
+				}
+			}
+			function startVoiceFunc() {
+				var a = localId;
+				if (a == '') {
+					return
+				}
+				if (startVoice) {
+					stopVoiceFunc();
+					startVoice = false;
+					return
+				}
+				startVoice = true;
+				say();
+				wx.playVoice({
+					localId: a
+				})
+			}
+			function stopVoiceFunc() {
+				var a = localId;
+				if (a == '') {
+					return
+				}
+				wx.stopVoice({
+					localId: a
+				});
+				noSay()
+			}
+			function say() {
+				$('#sound img').attr('src', '../addons/lee_tlvoice/template/mobile/images/friendvc.gif')
+			}
+			function noSay() {
+				$('#sound img').attr('src', '../addons/lee_tlvoice/template/mobile/images/speech.png')
+			}
+			function controlSize(str) {
+				str = str + "";
+				var rge = new RegExp("[0-9]{2}", "gi");
+				if (str.match(rge) == null) {
+					return "0" + str
+				};
+				return str
+			};
+			function getDate(type) {
+				var dateObj = new Date();
+				var date = null;
+				if (type == "time") {
+					var hour = controlSize(dateObj.getHours());
+					var min = controlSize(dateObj.getMinutes());
+					date = hour + ":" + min
+				};
+				if (type == "url") {
+					var month = dateObj.getMonth();
+					var day = dateObj.getDate();
+					var week = dateObj.getDay();
+					var mill = dateObj.getTime();
+					var hour = dateObj.getHours();
+					var min = dateObj.getMinutes();
+					date = month + ":" + day + ":" + hour + ":" + min + ":" + week + ":" + mill
+				};
+				return date
+			}
+			</script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$('#dir').on('touchstart', function() {
+							stopVoiceFunc();
+							window.location.href = '{$_W['account']['subscribeurl']}';
+						}
+					);
+					$('footer').on('touchstart',function(){
+						urlDir();
+					});
+				});
+				function urlDir(){
+					var sUserAgent = navigator.userAgent.toLowerCase();
+					var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+					var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+					var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+					var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+					var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+					var bIsAndroid = sUserAgent.match(/android/i) == "android";
+					var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+					var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+							
+					if (bIsIpad || bIsIphoneOs) {
+						window.location.href = "{$_W['account']['subscribeurl']}";
+							}else if (bIsMidp || bIsUc7 || bIsUc || bIsAndroid){
+									window.location.href = "weixin://profile/{$_W['account']['original']}";
+							}else if (bIsCE || bIsWM)  {
+									window.location.href = "{$_W['account']['subscribeurl']}";
+							} else  {
+									window.location.href = "{$_W['account']['subscribeurl']}";
+							}
+				}
+			</script>
+
+</head>
+<body>
+	<div id="pc-content" style="display: none;">
+				<p id="scan">朋友圈语音</p>
+				<img id="qrcode" src="{$qr}">
+				<div id="tip">微信扫一扫发送朋友圈语音</div>
+	</div>
+	<div id="content" style="display: block;">
+		<nav class="tit">
+			来自朋友圈的语音
+		</nav>
+		<time id="time" style="width: 80px; visibility: visible;"></time>
+		<div id="sound" style="visibility: visible;">
+			<img src="../addons/lee_tlvoice/template/mobile/images/speech.png"> <span></span>
+		</div>
+		<p id='dir'> 我也要发 </p>
+		<footer> 收藏该功能 </footer>
+	</div>
+</body>
+</html>

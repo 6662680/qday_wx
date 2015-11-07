@@ -1,0 +1,22 @@
+<div class="list-item img-rounded">
+	<div>
+		<a href="{php echo $this->createMobileUrl('detail', array('id' => $item['id']))}">
+			<img src="{$_W['attachurl']}{$item['thumb']}">
+		</a>
+		<span class="title"><a href="{php echo $this->createMobileUrl('detail', array('id' => $item['id']))}">{$item['title']}</a></span>
+	</div>
+	<span class="sold">
+		<span class="soldnum pull-left">已筹资￥{$item['finish_price']}</span>
+	</span>
+	<span class="sold">
+		<div class="progress">
+  			<div class="progress-bar" role="progressbar" aria-valuenow="{php echo $item['finish_price']*100/$item['limit_price']}" aria-valuemin="0" aria-valuemax="100" style="width: {php echo $item['finish_price']*100/$item['limit_price']}%;">
+    			<span class="sr-only">{php echo $item['finish_price']*100/$item['limit_price']}% Complete</span>
+  			</div>
+		</div>
+	</span>
+	<span class="sold">
+		<span class="soldnum pull-left">{php echo floor($item['finish_price']*100/$item['limit_price'])}%</span>
+		<span class="price pull-right">剩余{php echo $item['deal_days'] - floor((time() - $item['createtime'])/86400)}天</span>
+	</span>
+</div>

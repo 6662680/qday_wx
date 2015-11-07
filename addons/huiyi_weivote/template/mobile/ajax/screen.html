@@ -1,0 +1,160 @@
+<div id="ajax-main"></div>
+
+<script id="ajax-screen" type="text/html">
+<div class="container">
+<div class="row widget-container">
+
+
+    <!-- Header -->
+    <div id="div-header">
+        <div class="col-xs-12 padded" style="padding-top: 10px;">
+            <div class="widget-container fluid-height">
+                <img alt="正在加载..." class="Jimgload" src="{{pic}}" width="100%" />
+            </div>
+
+            <!--活动顶部描述-->
+            <div class="widget-content padded">
+                {{#weivote_setting.intro}}
+            </div>
+
+            <div class="widget-container fluid-height padded">
+                <h5>当前已有 {{joiner_count}} 名用户参与此活动</h5>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+  <!-- Result -->
+  <div id="div-result">
+  <div class="widget-container fluid-height clearfix">
+
+    <div class="heading-top padded">
+      <h5><b>{{title}}</b></h5>
+
+      <ul style="margin-left: -20px;">
+          <li>实时参与人数：<b id="b-result-voter_count">{{joiner_count}}</b></li>
+          <li>实时总投票数：<b id="b-result-options_count">{{log_count}}</b></li>
+          <li>开始日期：<b>{{start_time}}</b></li>
+          <li>结束日期：<b>{{end_time}}</b></li>
+      </ul>
+    </div>
+  </div>
+
+
+
+  <!-- VoteResultList -->
+  <div class="col-xs-12">
+    <div class="widget-container fluid-height">
+
+      {{each option_objs as value index}}
+
+        {{if value.picture == ''}}
+          <div class="col-xs-12">
+              
+             <div style="font-size: 42px; color: #777; text-align: left;">
+                {{value.code}}号
+                {{value.title}}
+              </div>
+              <div style="font-size: 26px; color: #777; text-align: left;">
+                票数：{{value.total}}
+              </div>
+            <div class="clear"></div>
+               
+            
+              <div class="col-xs-3">
+                  <div style="font-size: 18px; color: #777; text-align: left;">
+                    占比：{{value.proportion}}%
+                  </div>
+              </div>
+              <div class="col-xs-9">
+                  <div class="progress progress-striped active" style="height: 30px;">
+                      <div class="progress-bar" style="width: {{value.proportion}}%; font-size:20px;">{{value.proportion}}%</div>
+                  </div>
+              </div>
+              
+          </div>
+
+        {{else}}
+
+          <div class="col-xs-3">
+            <a class="ajax-link">
+              <img src="{{attachurl}}{{value.picture}}" width="100%;">
+            </a>
+          </div>
+        
+          <div class="col-xs-9">
+           
+              <div style="font-size: 42px; color: #777; text-align: left;">
+                {{value.code}}号
+                {{value.title}}
+              </div>
+              <div style="font-size: 26px; color: #777; text-align: left;">
+                票数：{{value.total}}
+              </div>
+              <div style="font-size: 18px; color: #777; text-align: left;">
+                占比：{{value.proportion}}%
+              </div>
+            <div class="clear"></div>
+            <div class="progress progress-striped active" style="height: 30px;">
+                <div class="progress-bar" style="width: {{value.proportion}}%; font-size:20px;">{{value.proportion}}%</div>
+            </div>
+          </div>
+
+        {{/if}}
+
+        <div class="clear"></div>
+        
+      {{/each}}
+        
+    </div>
+  </div>
+
+  <div class="clear"></div>
+  <!-- VoteResultList End -->
+ 
+
+  </div>
+  <!-- Result End -->
+
+    <!-- Footer -->
+    <div id="div-footer">
+        <!--活动底部描述-->
+        <div class="widget-content padded">
+            {{#weivote_setting.rule}}
+        </div>
+    </div>
+    <!-- Footer End -->
+    
+</div>
+</div>
+</script>
+<script>
+function initScreenPage() {
+    var data = {};
+    var aurl = 'ajaxScreen';
+    $.ajax({
+        mimeType: 'text/html; charset=utf-8',
+        url: './mobile.php?act=module&name=weivote&do=' + aurl + '&weid=' + weid + '&id=' + id,
+        type: 'POST',
+        dataType: "json",
+        async: false,
+        success: function(adata) {
+            //'jcode' 'jnode' 'jurl' 'jmsg' 'jdata'
+            if (adata.jcode == 1) {
+                data = adata.jdata;
+            } else {
+                alertModal(adata.jmsg);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+	var html = template('ajax-screen', data);
+    document.getElementById('ajax-main').innerHTML = html;
+}
+    
+$(document).ready(function() {
+	LoadScreenScript(initScreenPage);
+});
+</script>

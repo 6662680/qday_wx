@@ -1,0 +1,87 @@
+{template 'common/header'}
+
+<script type="text/javascript" src="../../addons/huiyi_weivote/template/js/common.js"></script>
+<script type="text/javascript">
+    var weivoteHandler = {
+        'buildAddForm' : function(id, targetwrap) {
+            var obj = buildAddForm(id, targetwrap);
+
+            //obj.html(obj.html().replace(/\(wrapitemid\)/gm, obj.attr('id')));
+            //obj.html(obj.html().replace(/\(itemid\)/gm, obj.attr('id')));
+
+            //item-description-new-option-item-0//option-item-0
+            initedit('item-description-new-' + obj.attr('id'));
+        }
+    };
+
+    function initedit(id) {
+        require(['jquery','util'], function($, util){
+            util.editor($('#'+id)[0]);
+        });
+    }
+
+</script>
+
+<ul class="nav nav-tabs">
+    <li {if $_GPC['do'] == 'ManageVoteList' || empty($_GPC['do'])}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageVoteList');}">投票管理</a></li>
+    <li {if $_GPC['do'] == 'ManageOptionList' || empty($_GPC['do'])}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageOptionList', array('id' => $vote['id']));}">选项管理</a></li>
+</ul>
+
+<div class="main">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">投票活动</div>
+        <div class="panel-body">
+            <form action="{php echo $this->createWeburl('ManageVoteList')}" class="form-horizontal" method="post">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动名称</label>
+                    <div class="col-xs-12 col-sm-8 col-md-8 col-lg-6">
+                        <input class="form-control" name="keyword" id="" type="text" value="{$vote['title']}" readonly>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{$vote['id']}">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            选项列表 - (自动兼容文字图片设置，不上传图片自定识别为文字投票,支持加入视频) -当前总计:{php echo $total}条
+        </div>
+        <div class="table-responsive panel-body">
+            <div id="append-list" class="row col-md-12 form-horizontal form">
+                {if !empty($list)}
+                {php $index = 1;}
+                {loop $list $item}
+                <div class="item" id="option-item-{$item['id']}">
+                    <h4>序号 :{$item['id']}</h4>
+                    {php include $this->template('manage-optionlist-item');}
+                </div>
+                <script>
+                    initedit('item-description-option-item-{$item["id"]}');
+                </script>
+                {php $index++;}
+                {/loop}
+                {/if}
+            </div>
+            <div id="option-item-html" type="text/html" style="display: none;">
+                {php unset($item); include $this->template('manage-optionlist-item');}
+            </div>
+            <div class="row col-md-12">
+                <button type="button" class="btn btn-block btn-primary" onclick="weivoteHandler.buildAddForm('option-item-html', $('#append-list'))" >
+                    <i class="fa fa-plus"></i> 添加选项
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary span4" name="submit" value="提交">提交</button>
+    <input type="hidden" name="token" value="{$_W['token']}"/>
+
+    </form>
+</div>
+
+{template 'common/footer'}

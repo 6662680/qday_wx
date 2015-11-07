@@ -1,0 +1,147 @@
+<div id="ajax-main"></div>
+
+<script id="ajax-voterresult" type="text/html">
+<div class="container">
+<div class="row widget-container">
+
+    <!-- Header -->
+    <div id="div-header">
+        <div class="col-xs-12 padded" style="padding-top: 10px;">
+            <div class="widget-container fluid-height">
+                <img alt="正在加载..." class="Jimgload" src="{{pic}}" width="100%" />
+            </div>
+
+            <!--活动顶部描述-->
+            <div class="widget-content padded">
+                {{#weivote_setting.intro}}
+            </div>
+
+            <div class="widget-container fluid-height padded">
+                <h5>活动访问总人气 {{weivote_setting.click_count}}</h5>
+                <h5>参与选手总数 {{weivote_options_count}} 名</h5>
+                <h5>已有 {{joiner_count}} 名粉丝参与此活动 </h5>
+                <h5>活动累计总票数 {{log_count}}票</h5>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Result -->
+    <div id="div-result">
+
+    <!-- VoteResultList -->
+    <div class="col-xs-12">
+        <div class="widget-container fluid-height">
+
+
+            {{each option_objs as value index}}
+
+            {{if value.picture == ''}}
+
+            <div>
+                <span style="font-size: 18px; color: #777; text-align: left;">
+                    {{value.code}}号
+                    {{value.name}}<br>
+                    票数：{{value.total}}<br>
+                    占比：{{value.proportion}}%</span>
+            </div>
+            <div class="progress progress-striped active" style="height: 30px;">
+
+                <div class="progress-bar" style="width: {{value.proportion}}%; font-size:20px;">{{value.proportion}}%</div>
+
+            </div>
+
+            {{else}}
+
+            <div class="col-xs-6">
+                <a class="ajax-link">
+                    <img src="{{attachurl}}{{value.picture}}" width="100%;">
+                </a>
+            </div>
+            <div class="col-xs-6">
+                <span style="font-size: 18px; color: #777; text-align: left;">
+                    {{value.code}}号
+                    {{value.title}}<br>
+                    票数：{{value.total}}<br>
+                    占比：{{value.proportion}}%</span>
+            </div>
+            <div class="clear"></div>
+            <div class="progress progress-striped active" style="height: 30px;">
+
+                <div class="progress-bar" style="width: {{value.proportion}}%; font-size:20px;">{{value.proportion}}%</div>
+
+            </div>
+
+            {{/if}}
+            <div class="clear"></div>
+
+            {{/each}}
+
+
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <!-- VoteResultList End -->
+
+
+    <!--广告信息描述-->
+    <div class="col-xs-12 padded" style="padding-top: 10px;">
+        <div class="widget-content padded">
+            {{#weivote_setting.ad}}
+        </div>
+    </div>
+
+    </div>
+    <!-- Result End -->
+
+    <!-- Footer -->
+    <div id="div-footer">
+        <!--活动底部描述-->
+        <div class="widget-content padded">
+            {{#weivote_setting.rule}}
+        </div>
+    </div>
+    <!-- Footer End -->
+
+</div>
+</div>
+</script>
+<script>
+
+function initVoterResultPage() {
+    var data = {};
+
+    var aurl = 'AjaxVoterResult';
+    var oid = $('#voter-oid').val();
+
+    $.ajax({
+        mimeType: 'text/html; charset=utf-8',
+        url: './mobile.php?act=module&name=weivote&do=' + aurl + '&weid=' + weid + '&id=' + id,
+        type: 'POST',
+        data: {oid: oid},
+        dataType: "json",
+        async: false,
+        success: function(adata) {
+            //'jcode' 'jnode' 'jurl' 'jmsg' 'jdata'
+            if (adata.jcode == 1) {
+                data = adata.jdata;
+            } else {
+                alertModal(adata.jmsg);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+    var html = template('ajax-voterresult', data);
+    document.getElementById('ajax-main').innerHTML = html;
+
+    window.shareData.imgUrl = data.attachurl + data.weivote_option.picture;
+    window.shareData.link = location.href;
+}
+
+$(document).ready(function() {
+    LoadResultScript(initVoterResultPage);
+});
+</script>

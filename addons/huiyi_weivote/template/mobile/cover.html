@@ -1,0 +1,16 @@
+{template 'common/header'}
+<style type="text/css">
+.main{ padding:10px;}
+</style>
+<div class="main">
+可以引用文件中定义的变量 $title : {$title}<br />
+1.此文件位于“addons/weizan_demo/template/mobile/index1.html”<br />
+2.调用此文件的方法位于“addons/weizan_demo/template/site.php”中的 “doMobileIndex1”方法<br />
+
+<br /><br />
+<form action="{php echo $this->createMobileUrl('pay')}" method="post">
+支付金额：<input type="text" name="price" value=""  class="form-control" /><br />
+<input type="submit" class="btn btn-primary" value="支付测试" name="submit">
+</form>
+</div>
+{template 'common/footer'}

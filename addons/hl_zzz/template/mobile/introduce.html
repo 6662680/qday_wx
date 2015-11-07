@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="”apple-mobile-web-app-capable”" content="”yes”">
+	<meta content="telephone=no" name="format-detection">
+	<title>做粽子</title>
+	{php echo register_jssdk();}
+	<link href="../addons/hl_zzz/template/images/style.css" rel="stylesheet" type="text/css">
+	<style>
+		.introduce{ font-size:16px;color:#fff;padding:10px 10px;}
+		.introduce img{ width:100%;}
+	</style>
+</head>
+<body>
+<div class="page-load-container" style="opacity: 1;">
+	<div class="page-load-page ranking-page" >
+		<div class="ranking-body" style="padding-top:0px;">
+			<div class="ranking-banner">
+				<img src="../addons/hl_zzz/template/images/introduce.jpg" border="0" alt="">
+				<span class="ranking-banner-text">{$str}</span>
+				<span class="ranking-time"></span>
+				<a  class="to-index-button" href="{php echo $this->createMobileUrl('lottery', array('id' => $id))}">开始<br>游戏</a>
+			</div>
+			<div class="ranking-list" >
+				<div class="introduce">
+					{$zzz['rule']}
+				</div>
+			</div>
+		</div>
+		<div class="power-by">
+			@{$_W['account']['name']}
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	// 做粽子分享
+	wx.ready(function () {
+		sharedata = {
+			title: "{$zzz['title']}",
+			desc: '我在玩『做粽子』，抢头等奖。快进来助我一臂之力～么么哒～',
+			link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('introduce', array('id' => $id,'uid' => $myuser['id']))}",
+			imgUrl: "{$_W['siteroot']}addons/hl_zzz/icon.jpg"
+		};
+		wx.onMenuShareAppMessage(sharedata);
+		wx.onMenuShareTimeline(sharedata);
+	});
+</script>
+</body>
+</html>

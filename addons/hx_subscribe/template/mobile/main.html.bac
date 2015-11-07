@@ -1,0 +1,123 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+<link href="{$_W['siteroot']}addons/hx_subscribe/template/style/css/style.css?v={TIMESTAMP}" rel="stylesheet" type="text/css">
+<body id="card" class="mode_webapp">
+<div id="overlay"></div>
+<div class="cardcenter">
+	<div class="card">
+		<img src="{$_W['siteroot']}addons/hx_subscribe/template/style/img/card_bg08.png" class="cardbg" />
+		<img id="cardlogo" class="logo" src="{$_W['siteroot']}addons/hx_subscribe/template/style/img/logo-card.png">
+		<div class="right-top">
+			<div class="text">呼和浩特</div>
+			<div class="text">普通会员</div>
+			<div class="text">NO:123321123</div>
+		</div>
+		<div class="avater">
+			<img class="img-rounded" src="http://wx.imaumm.com/attachment/headimg_1.jpg?acid=1" style="width: 50px;">
+		</div>
+		<div class="info">
+			<div style="color:#fff;font-size:18px;">刘静同学</div>
+			<div style="color:#fff;font-size:14px;">余额:200</div>
+		</div>
+	</div>
+	<p class="explain">
+		<span><i class="fa fa-volume-up"></i> 微时代会员卡，方便携带收藏，永不挂失</span>
+	</p>
+</div>
+<div style="text-align:center;margin-bottom:10px;">
+	<button class="btn btn-success" type="submit" style="width:90%;">点击分享给好友！</button>
+</div>
+
+<div class="cardexplain" >
+
+	<div class="jifen-box">
+		<ul class="zongjifen">
+			<li>
+				<a href="">
+					<div class="fengexian">
+						<p>收益</p>
+						<span>0元</span>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<div class="fengexian">
+						<p>直接连接</p>
+						<span>0人</span>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<p>间接连接</p>
+					<span>0人</span>
+				</a>
+			</li>
+		</ul>
+		<div class="clr"></div>
+	</div>
+
+	<ul class="round" id="notice">
+		<li>
+			<a href="" style="float:left;border-right:1px solid #C6C6C6;">
+				<span>
+					<i class="fa fa-star"></i> VIP特权
+				</span>
+			</a>
+			<a href="" style="float:right;">
+				<span>
+					<i class="fa fa-list-ol"></i> 收益排行
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="" style="float:left;border-right:1px solid #C6C6C6;">
+				<span>
+					<i class="fa fa-reorder"></i> 我的订单
+				</span>
+			</a>
+			<a href="" style="float:right;">
+				<span>
+					<i class="fa fa-user"></i> 连接好友
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="" style="float:left;border-right:1px solid #C6C6C6;">
+				<span>
+					<i class="fa fa-sitemap"></i> 商家入驻
+				</span>
+			</a>
+			<a href="" style="float:right;">
+				<span>
+					<i class="fa fa-cog"></i> 我的设置
+				</span>
+			</a>
+		</li>
+	</ul>
+
+</div>
+<div style="text-align:center;">共有<font color="red">6219049</font>人领取了派卡，您是第<font color="red">621904</font>个</div>
+<div style="text-align:center;">你的邀请人是：王建</div>
+<div class="footermenu">
+	<ul>
+		<li>
+			<a  href="">
+				<p><i class="fa fa-circle"></i> 服务推荐</p>
+			</a>
+		</li>
+		<li>
+			<a  href="">
+				<p><i class="fa fa-circle"></i> 商家列表</p>
+			</a>
+		</li>
+		<li>
+			<a  href="">
+				<p><i class="fa fa-circle"></i> 我的派卡</p>
+			</a>
+		</li>
+	</ul>
+</div>
+</body>
+{template 'footer'}

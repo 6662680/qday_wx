@@ -1,0 +1,52 @@
+{template 'common/header'}
+<div class="main">
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{php echo $this->createWebUrl('list');}">活动列表</a></li>
+	<li><a href="./index.php?c=platform&a=reply&do=post&m=ju_read">添加活动</a></li>
+</ul>	
+	<div style="padding:15px;">
+		<form action="" method="post">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th align="center" style="width:20px;text-align:center;">ID</th>						
+                    <th align="center" style="width:80px;text-align:center;">活动名称</th>
+					<th align="center" style="width:50px;text-align:center;">活动时间</th>
+					<th align="center" style="width:80px;text-align:center;">有效参与人数</th>
+					<th align="center" style="width:60px;text-align:center;">总阅读数</th>
+					<th align="center" style="width:40px;text-align:center;">状态</th>
+					<th style="width:100px;text-align:center;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+					<tr>		
+						<td align="center" style="text-align:center;">{$row['id']}</td>
+                        <td align="center" style="text-align:center;{if $row['status'] == '0'}color:red;{/if}">{$row['title']}</td>
+						<td align="center" style="font-size:12px; color:#666text-align:center;">{php echo date('Y-m-d',$row['starttime'])}<br />{php echo date('Y-m-d',$row['endtime'])}</td>
+						<td align="center" style="font-size:12px; color:#666; text-align:center;">{php echo $this->getcynum($row['id'])}</td>
+						<td align="center" style="font-size:12px; color:#666; text-align:center;">{php echo $this->gethitsnum($row['id'])}</td>
+						<td align="center" style="font-size:12px; color:#666; text-align:center;">
+							{if $row['status'] == 1}<span class="label label-success">正常</span>{/if}
+							{if $row['status'] == 2}<span class="label label-info">暂停中</span>{/if}
+							{if $row['status'] == 0}<span class="label label-warming">已结束</span>{/if}
+						</td>
+						<td style="text-align:center;">
+							<a href="{php echo $this->createWebUrl('logs',array('reply_id'=>$row['id']))}"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-user"></i> 参与用户</button></a>
+                        	<a href="./index.php?c=platform&a=reply&do=post&m=ju_read&rid={$row['rid']}" title="编辑"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-edit"></i></button></a>
+                        	{if $row['status'] == 1}
+                        	<a href="{php echo $this->createWebUrl('playstatus',array('reply_id'=>$row['id']))}" title="暂停"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-pause"></i></button></a>
+                        	{/if}
+                        	{if $row['status'] == 2}
+                        	<a href="{php echo $this->createWebUrl('playstatus',array('reply_id'=>$row['id']))}" title="开始"><button type="button" class="btn btn-default btn-sm"><i class="fa fa-play"></i></button></a>
+                        	{/if}
+                        </td>
+					</tr>
+				{/loop}
+			</tbody>
+		</table>
+	</form>
+		{$pager}
+	</div>
+</div>
+{template 'common/footer'}

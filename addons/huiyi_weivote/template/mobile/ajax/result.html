@@ -1,0 +1,149 @@
+<div id="ajax-main"></div>
+
+<script id="ajax-result" type="text/html">
+<div class="container">
+<div class="row widget-container">
+
+    <!-- Header -->
+    <div id="div-header">
+        <div class="col-xs-12 padded" style="margin-bottom: 0px;">
+            <div class="widget-container fluid-height">
+                <img class="lazy" src="../addons/huiyi_weivote/template/mobile/assets/Lib/echo/images/load.gif" data-echo="{{pic}}" width="100%">
+            </div>
+
+            <!--活动顶部描述-->
+            <div class="widget-content">
+                {{#weivote_vote.intro}}
+            </div>
+
+        </div>
+    </div>
+    <!-- Header End -->
+
+  <!-- Result -->
+  <div id="div-result">
+  <div class="widget-container fluid-height padded">
+        <div class="widget-container fluid-height" style="border-left: 3px solid #1b809e; border-radius: 3px; padding: 5px;">
+          <h5 style="margin: 10px;">活动访问总人气 <span class="btn-danger-outline" style="border-radius: 3px;">&nbsp;{{weivote_vote.click_count}}&nbsp;</span></h5>
+          <h5 style="margin: 10px;">参与选手总数 <span class="btn-warning-outline" style="border-radius: 3px;">&nbsp;{{weivote_options_count}}&nbsp;</span> 名</h5>
+          <h5 style="margin: 10px;">活动累计总票数 <span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{weivote_vote.log_count}}&nbsp;</span> 票</h5>
+        </div>
+  </div>
+      
+  <!-- VoteResultList -->
+  <div class="col-xs-12">
+    <div class="widget-container fluid-height">
+
+        
+          {{each weivote_options_view as value index}}
+
+            {{if value.picture == ''}}
+
+              <div>
+                <span style="font-size: 18px; color: #777; text-align: left;">
+                    {{value.code}}号
+                    {{value.name}}<br>
+                    票数:<span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{value.log_count}}&nbsp;</span><br>
+                    占比:<span class="btn-primary-outline" style="border-radius: 3px;">&nbsp;{{value.proportion}}%&nbsp;</span></span>
+              </div>
+              <div class="progress progress-striped active" style="height: 20px;">
+                <div class="progress-bar" style="width: {{value.proportion}}%; font-size:14px;">{{value.proportion}}%</div>
+              </div>
+        
+            {{else}}
+
+              <div>
+                 <a class="ajax-link">
+                   <img class="lazy" src="../addons/huiyi_weivote/template/mobile/assets/Lib/echo/images/load.gif" data-echo="{{attachurl}}{{value.picture}}" width="100%">
+                 </a>
+              </div>
+              <div>
+                <span style="font-size: 18px; color: #777; text-align: left;">
+                    {{value.code}}号
+                    {{value.title}}<br>
+                    票数:<span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{value.log_count}}&nbsp;</span><br>
+                    占比:<span class="btn-primary-outline" style="border-radius: 3px;">&nbsp;{{value.proportion}}%&nbsp;</span></span>
+              </div>
+              <div class="progress progress-striped active" style="height: 20px;">
+                <div class="progress-bar" style="width: {{value.proportion}}%; font-size:14px;">{{value.proportion}}%</div>
+              </div>
+
+            {{/if}}
+
+          {{/each}}
+      
+     
+    </div>
+  </div>
+
+  <div class="clear"></div>
+  <!-- VoteResultList End -->
+
+  <!--广告信息描述-->
+  <div class="col-xs-12 padded" style="padding-top: 10px;">
+      <div class="widget-content padded">
+          {{#weivote_vote.ad}}
+      </div>
+  </div>
+
+  </div>
+  <!-- Result End -->
+
+    <!-- Footer -->
+    <div id="div-footer">
+        <!--活动底部描述-->
+        <div class="widget-content padded">
+            {{#weivote_vote.rule}}
+        </div>
+    </div>
+    <!-- Footer End -->
+
+</div>
+</div>
+</script>
+
+<script>
+
+function optionOrderResult(type, order) {
+    var weivote_options = _data.weivote_options_view;
+    bubbleSort(weivote_options, type, order);
+    _data.weivote_options_view = weivote_options;
+    var html = template('ajax-result', _data);
+    document.getElementById('ajax-main').innerHTML = html;
+
+    lazyimg();
+}
+
+
+function initResultPage() {
+    var data = {};
+    var aurl = 'ajaxResult';
+    $.ajax({
+        mimeType: 'text/html; charset=utf-8',
+        url: mobile_url + aurl,
+        type: 'POST',
+        dataType: "json",
+        async: false,
+        success: function(adata) {
+            if (adata.rcode == 100) {
+                data = adata.rdata;
+            } else {
+                alertModal(adata.rmsg);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+
+    _data = data;
+    var html = template('ajax-result', data);
+    document.getElementById('ajax-main').innerHTML = html;
+
+    optionOrderResult('log_count', 'desc');
+}
+    
+$(document).ready(function() {
+	LoadResultScript(initResultPage);
+});
+</script>

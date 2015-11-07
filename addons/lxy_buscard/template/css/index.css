@@ -1,0 +1,238 @@
+body {
+    background: #f0f0f0;
+    margin:0;
+    padding:0px;
+}
+
+.fullscreen {
+    background: #f0f0f0;
+}
+.header {
+    height: 44px;
+    border-bottom: 1px solid #d8d8d8;
+    background: #127bce;
+    background: url("header_bg.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/header_bg.png*/ top left repeat-x  #127bce;
+}
+.copyright{ font-size: 1.3em; color: #000;}
+.header.pf {
+    /*position: fixed;*/
+    top:0px;
+    left: 0px;
+    width: 100%;
+    height: 44px;
+    z-index: 2;
+    border-bottom: 1px solid #d8d8d8;
+    background: #127bce;
+    background: url("header_bg.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/header_bg.png*/ top left repeat-x  #127bce;
+}
+#down {
+    width:100px;
+    height: 44px;
+    line-height: 44px;
+    display: block;
+    margin-right: 10px;
+    text-decoration: none;
+    background: url("down_btn.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/down_btn.png*/ left center no-repeat;
+    text-indent: -99999px;
+}
+.module {
+    margin: 0.5em;
+    text-align: center;
+    margin-bottom: 10px;
+    border: 1px solid #eeeeee;
+    background: #ffffff;
+}
+
+.product-pic {
+    line-height: 0px;
+}
+
+#card_base_info {
+}
+
+#card_base_info .name {
+    font-size: 2em;
+    color: #000000;
+}
+
+#card_base_info .title {
+    font-size: 0.6em;
+    color: #000000;
+}
+
+#contact_info .border-item {
+    margin: 1em;
+    line-height: 3em;
+    font-size: 12px;
+}
+
+#contact_info .border-item.isbtn {
+    height: 3em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 65px;
+    position: relative;
+    z-index: 1;
+}
+
+#contact_info .border-item .btn {
+    background: #1b9bdc;
+    width: 65px;
+    height: 3em;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    position: absolute;
+    top:0px;
+    right: -2px;
+}
+
+#contact_info .btn#call_btn {
+    background: url("call.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/call.png*/ center center no-repeat #1b9bdc;
+    background-color: #1b9bdc;
+    background-size: 43px 14px;
+}
+
+#contact_info .btn#mailto_btn {
+    background: url("mailto.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/mailto.png*/ center center no-repeat #1b9bdc;
+    background-size: 43px 14px;
+}
+
+#contact_info .btn#search_btn {
+    background: url("search.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/search.png*/ center center no-repeat #1b9bdc;
+    background-size: 43px 14px;
+}
+
+.border-radius {
+    border: 1px solid #aaaaaa;
+    border-radius: 6px;
+}
+.border-bottom {
+    border-bottom: 1px solid #aaaaaa;
+}
+.text-bg {
+    background: url("text_bg.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/text_bg.png*/ top left no-repeat;
+    background-size: 60px auto;
+    height: 74px;
+}
+
+#contact_info .title {
+    font-size: 1.2em;
+    color: #433f40;
+    font-weight: 400;
+}
+
+#know_more {
+    margin: 20px;
+    color: #ffffff;
+    height: 33px;
+    line-height: 33px;
+    border: 1px solid #0e8bcb;
+    border-radius: 6px;
+    background: #0e8bcb;
+}
+.product-title {
+    color: #000000;
+    padding-left: 10px;
+    text-align: left;
+    line-height: 30px;
+}
+
+.ml1em {
+    margin-left: 1em;
+}
+.mlhalf1em {
+    margin-left: .5em;
+}
+.plhalf1em {
+    padding-left: .5em;
+}
+.footer {
+    padding: 20px 0px;
+    background: #ffffff;
+	clear:both;
+}
+.ptb6{
+	margin:0.8%;
+	width:47.6%;
+	float:left;
+}
+
+.list{
+	padding: 6px 0px;
+}
+
+a.up-hide-more-info{
+    display: block;
+    text-indent: -99999px;
+    height: 20px;
+    background: url("up.gif")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/up.gif*/ center center no-repeat;
+}
+
+ .icon_qq{
+    background: url("icon_qq.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_qq.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+ .icon_phone{
+    background: url("icon_phone2.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_phone2.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+ .icon_homesite{
+    background: url("icon_web.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_web.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+ .icon_bank{
+    background: url("icon_bank.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_bank.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+.icon_company{
+    background: url("icon_home.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_home.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+.icon_industry{
+    background: url("icon_industry.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_industry.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+.icon_address{
+    background: url("icon_address.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_address.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+.icon_email{
+    background: url("icon_email.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_email.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+.icon_bank_account{
+    background: url("icon_account.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_account.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+.icon_mobile{
+    background: url("icon_mobile.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_mobile.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+.icon_user{
+    background: url("icon_user.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/icon_user.png*/ left center no-repeat;
+    padding-left: 26px;
+}
+
+/*-------------new model index----------------------*/
+
+.mar_box{ margin:0 auto;padding-top:3%;  color:#000; padding-bottom:3%;}
+.mar_car_border{box-shadow:3px 3px 5px rgba(0,0,0,0.8); margin-left:3%; padding-left:10px;width:92%; border-radius:5px;padding:2% 0; padding-left:2%; margin-top:2%;}
+.mar_box a { text-decoration:none; color:#000; border:0;}
+.mar_box a:hover { text-decoration:none;color:#000;}
+.car_logo{ position:relative; float:left; left:10px; width:20%; display:inline-block;}
+.car_logo img{ width:100%;}
+.car_name{ position:relative; clear:both; display:inline-block; padding-top:10%; padding-left:15%;font-size:1.1em; font-weight:bold;}
+.car_name span{ font-size:0.6em;font-weight:100;}
+.car_company { clear:both; font-size:1.4em; font-weight:bold; padding-top:3%;}
+.car_info{ list-style:none; margin:0;padding:0;}
+.car_info div { float:left; width:100%; font-size:0.8em; margin:1% 0;}
+.car_info .poh{ width:40%;}
+.car_location { font-size:0.8em; clear: both;}
+.padd{padding:16.2% 0 16.2% 0;width:93%; margin-left:3%; border-radius:5px;box-shadow:3px 3px 5px rgba(0,0,0,0.8);margin-top:1.8%;}
+.car_bank{ font-size:0.8em; background:rgba(0,0,0,0.7);padding-top:1%; padding-bottom:1%;padding-left:5%; width:82%; color:#fff;}
+.car_bank div{ margin:3% 0;}
+.banknum{ color:#fff;}
+.banknum a { color:#fff}
+
+.xila{position: relative; font-size:0.8em;  width:25%;margin-right:7%; line-height:25px; float:right; text-align: center; background-position: center center; display:inline-block;  top:1px;cursor: pointer; background:url("../img/la.png")/*tpa=http://sp.zle.com/themes/default/business/card_web/index/images/la.png*/ no-repeat ;background-size: 100%; z-index:5;height:40px; }

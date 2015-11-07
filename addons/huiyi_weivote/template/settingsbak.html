@@ -1,0 +1,68 @@
+{template 'common/header'}
+<div class="main">
+    <form class="form-horizontal form" action="" method="post">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                模式配置
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">公众号模式</label>
+                    <div class="col-sm-9">
+                        <select id="uniac_type" name="uniac_type" class="form-control" onchange="uniacTypeChange();" >
+                            <option value="1" {if $this->module['config']['uniac_type']==1}selected="selected"{/if}>无网页授权模式</option>
+                            <option value="2" {if $this->module['config']['uniac_type']==2}selected="selected"{/if}>有网页授权模式</option>
+                            <option value="3" {if $this->module['config']['uniac_type']==3}selected="selected"{/if}>借用公众号模式</option>
+                        </select>
+                        <span class="help-block">
+                            认证过的服务号和部分订阅号，选择<b>有网页授权模式</b>，且以下内容可以不看。<br>
+                            如果当前的公众号没有认证过，那么：<br>
+                            1.<b>无网页授权模式</b>，必须使用关注投票模式。<br>
+                            2.<b>借用公众号模式</b>，必须要在微信投票模块的参数设置中，填写过借用公众号的appid和appsecret，且必须使用非关注投票模式。<br>
+                            无论选择哪项，粉丝投票完成后都会有引导用户关注公众号的提示(吸粉利器)。
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel panel-default" id="borrow-uniac_type">
+
+            <div class="panel-heading">
+                借用高级接口配置(填写拥有高级接口的微信号的appid和appsecret, 注意借用的公众号的<b>安全域名</b>必须和当前公众号相同)
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">appid</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" value="{php echo $this->module['config']['appid']}" name="appid" placeholder="appID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">appsecret</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" value="{php echo $this->module['config']['appsecret']}" name="appsecret" placeholder="appsecret">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <input name="token" type="hidden" value="{$_W['token']}" />
+            <input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+        </div>
+    </form>
+</div>
+<script>
+    $(function() {
+        uniacTypeChange();
+    });
+    function uniacTypeChange() {
+        if ($('#uniac_type').val() == 3) {
+            $('#borrow-uniac_type').show();
+        } else {
+            $('#borrow-uniac_type').hide();
+        }
+    }
+</script>
+{template 'common/footer'}

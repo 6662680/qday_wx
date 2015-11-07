@@ -1,0 +1,488 @@
+{template 'common/header'}
+{template 'common'}
+<script type="text/javascript" src="resource/js/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="resource/js/lib/jquery-ui-1.10.3.min.js"></script>
+<ul class="nav nav-tabs">
+	<li {if $operation == 'post'}class="active"{/if}>
+		<a href="{php echo $this->createWebUrl('project', array('op' => 'post'))}">添加项目</a>
+	</li>
+	<li {if $operation == 'display'}class="active"{/if}>
+		<a href="{php echo $this->createWebUrl('project', array('op' => 'display'))}">管理项目</a>
+	</li>
+</ul>
+{if $operation == 'post'}
+<ul class="nav nav-tabs nav-justified" role="tablist">
+	<li {if $_GPC['step']==1 || $_GPC['step']==''}class="active"{/if} role="presentation">
+		<a href="javascript:;">1. 项目基本信息</a>
+	</li>
+	<li {if $_GPC['step']==2}class="active"{/if} role="presentation">
+		<a href="javascript:;">2. 回报设置</a>
+	</li>
+	<li {if $_GPC['step']==3}class="active"{/if} role="presentation">
+		<a href="javascript:;">3. 完成</a>
+	</li>
+</ul>
+<div class="clearfix">
+	{if $_GPC['step'] == 1 || $_GPC['step'] == ''}
+	<form action="" method="post"  class="form-horizontal" role="form" enctype="multipart/form-data" id="form1">
+		<input type="hidden" name="step" value="2">
+		{if !empty($item['id'])}
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">项目地址</label>
+			<div class="col-sm-8 col-xs-12">
+				<input type="text" disabled class="form-control" value="{$_W['siteroot']}app/index.php?i={$_W['uniacid']}&c=entry&id={$item['id']}&do=detail&m=hx_zhongchou" />
+			</div>
+		</div>
+		{/if}
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">项目排序</label>
+			<div class="col-sm-2 col-xs-12">
+				<input type="text" name="displayorder" id="displayorder" class="form-control" value="{$item['displayorder']}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">
+				<span style='color:red'>*</span>
+				项目名称
+			</label>
+			<div class="col-sm-8 col-xs-12">
+				<input type="text" name="title" id="title" class="form-control" value="{$item['title']}" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>筹措资金</label>
+			<div class="col-sm-6 col-xs-6">
+				<input type="text" name="limit_price" id="limit_price" class="form-control" value="{$item['limit_price']}" />
+				<span class="help-block">单位：元 不少于500元</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>募集天数</label>
+			<div class="col-sm-6 col-xs-6">
+				<input type="text" name="deal_days" id="deal_days" class="form-control" value="{$item['deal_days']}" />
+				<span class="help-block">天数为10-90天</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">项目属性</label>
+			<div class="col-sm-9 col-xs-12" >
+				<label for="isrecommand" class="checkbox-inline">
+					<input type="checkbox" name="isrecommand" value="1" id="isrecommand" {if $item['isrecommand'] == 1}checked="true"{/if} />
+					首页推荐
+				</label>
+				<label for="ishot" class="checkbox-inline">
+					<input type="checkbox" name="ishot" value="1" id="ishot" {if $item['ishot'] == 1}checked="true"{/if} />
+					热门推荐
+				</label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">
+				<span style='color:red'>*</span>
+				项目分类
+			</label>
+			<div class="col-sm-4 col-xs-6">
+				<select class="form-control" style="margin-right:15px;" id="pcate" name="pcate" onchange="fetchChildCategory(this.options[this.selectedIndex].value)"  autocomplete="off">
+					<option value="0">请选择一级分类</option>
+					{loop $category $row}
+					{if $row['parentid'] == 0}
+					<option value="{$row['id']}" {if $row['id'] == $item['pcate']} selected="selected"{/if}>{$row['name']}</option>
+					{/if}
+					{/loop}
+				</select>
+			</div>
+			<div class="col-sm-4 col-xs-6">
+				<select class="form-control" id="cate_2" name="ccate" autocomplete="off">
+					<option value="0">请选择二级分类</option>
+					{if !empty($item['ccate']) && !empty($children[$item['pcate']])}
+					{loop $children[$item['pcate']] $row}
+					<option value="{$row[0]}" {if $row[0] == $item['ccate']} selected="selected"{/if}>{$row[1]}</option>
+					{/loop}
+					{/if}
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>项目封面</label>
+			<div class="col-sm-8 col-xs-12">
+				{php echo tpl_form_field_image('thumb', $item['thumb'], '', array('extras' => array('text' => 'readonly')))}
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>项目简介</label>
+			<div class="col-sm-8 col-xs-12">
+				<textarea name="brief" class="form-control richtext_brief" cols="70" rows="5">{$item['brief']}</textarea>
+				<span class="help-block">不超过75字</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>项目详情</label>
+			<div class="col-sm-8 col-xs-12">
+				<textarea name="content" class="form-control richtext_content" cols="70" rows="8">{$item['content']}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">详情外链</label>
+			<div class="col-sm-6 col-xs-6">
+				<input type="text" name="url" id="url" class="form-control" value="{$item['url']}" />
+				<span class="help-block">若填写此项，查看项目详情是将外链到次地址</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>非关注用户</label>
+			<div class="col-sm-8 col-xs-12">
+				<input type="radio" name="nosubuser" value="1"{if $item['nosubuser'] == 1}checked{/if} style="margin-top:10px;"> 关注 
+				<input type="radio" name="nosubuser" value="2"{if $item['nosubuser'] == 2 || empty($item['nosubuser'])}checked{/if} style="margin-top:10px;"> 注册
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<input name="submit" type="submit" value="下一步" class="btn btn-primary col-lg-1" />
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</div>
+		</div>
+	</form>
+	<script language='javascript'>
+	var category = {php echo json_encode($children)};
+	require(['jquery', 'util'], function($, u){
+		$(function(){
+			u.editor($('.richtext_brief')[0]);
+			u.editor($('.richtext_content')[0]);
+		});
+	});
+	</script>
+	<script type="text/javascript">
+	require(['jquery', 'util'], function($, u){
+		$("#form1").submit(function(){
+			if($(":text[name='title']").val() == '') {
+				u.message('抱歉，项目名称为必填项！', '', 'error');
+				return false;
+			}
+			if($(":text[name='limit_price']").val() == '') {
+				u.message('抱歉，筹措资金为必填项！', '', 'error');
+				return false;
+			}
+			if($(":text[name='limit_price']").val() < 500) {
+				u.message('抱歉，筹措资金不能小于500元！', '', 'error');
+				return false;
+			}
+			if($(":text[name='deal_days']").val() == '') {
+				u.message('抱歉，募集天数为必填项！', '', 'error');
+				return false;
+			}
+			if($(":text[name='deal_days']").val() < 10) {
+				u.message('抱歉，募集天数10-90天！', '', 'error');
+				return false;
+			}
+			if($(":text[name='deal_days']").val() > 90) {
+				u.message('抱歉，募集天数10-90天！', '', 'error');
+				return false;
+			}
+			if($("#pcate").val()=='0') {
+				u.message('抱歉，项目分类为必填项！', '', 'error');
+				return false;
+			}
+			if($(":text[name='thumb']").val() == '') {
+				u.message('抱歉，项目封面为必填项！', '', 'error');
+				return false;
+			}
+			return true;
+		});
+	});
+</script>
+
+	{elseif $_GPC['step']== 2}
+	<table class="table table-hover">
+		<thead>
+		<tr>
+			<th style='width:5%;'>ID</th>
+			<th style='width:10%;'>支持金额</th>
+			<th style='width:10%;'>名额</th>
+			<th>回报内容</th>
+			<th style='width:10%;'>回报时间</th>
+			<th style='width:10%;'>回报类型</th>
+			<th style='width:10%;'>操作</th>
+		</tr>
+		</thead>
+		<tbody id="param-items">
+			{loop $items $p}
+			<tr>
+				<td>{$p['id']}</td>
+				<td>{$p['price']}</td>
+				<td>{if $p['limit_num'] != 0}{$p['limit_num']}个{else}不限制{/if}</td>
+				<td>{php echo strip_tags(htmlspecialchars_decode($p['description']))}</td>
+				<td>{if $p['repaid_day'] != 0}{$p['repaid_day']}天{else}立即{/if}</td>
+				<td>{if $p['return_type'] == 1}实物{else}虚拟{/if}回报</td>
+				<td><a href="{php echo $this->createWebUrl('project',array('id'=>$id,'op'=>'post','step'=>'2','item_id' => $p['id']))}">修改</a> | 
+					<a href="{php echo $this->createWebUrl('project',array('id'=>$id,'op'=>'itemdelete','item_id' => $p['id']))}">删除</a></td>
+			</tr>
+			{/loop}
+		</tbody>
+	</table>
+	<form action="" method="post"  class="form-horizontal" role="form" enctype="multipart/form-data" id="form2">
+		<input type="hidden" name="step" value="3">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>支持金额</label>
+			<div class="col-sm-6 col-xs-6">
+				<div class="input-group">
+					<input type="text" name="price" id="price" class="form-control" value="{$item_info['price']}" />
+					<span class="input-group-addon">元</span>
+				</div>
+				<span class="help-block">不能为空</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>回报内容</label>
+			<div class="col-sm-6 col-xs-12">
+				<textarea name="description" class="form-control richtext_description" cols="70" rows="5">{php echo htmlspecialchars_decode($item_info['description'])}</textarea>
+				<span class="help-block">不超过500字</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>说明图片</label>
+			<div class="col-sm-6 col-xs-12">
+				{php echo tpl_form_field_image('thumb', $item_info['thumb'], '', array('extras' => array('text' => 'readonly')))}
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>限定名额</label>
+			<div class="col-sm-6 col-xs-6">
+				<div class="input-group">
+					<input type="text" name="limit_num" id="limit_num" class="form-control" value="{$item_info['limit_num']}" />
+					<span class="input-group-addon">个</span>
+				</div>
+				<span class="help-block">“0”为不限名额</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>回报时间</label>
+			<div class="col-sm-6 col-xs-6">
+				<div class="input-group">
+					<input type="text" name="repaid_day" id="repaid_day" class="form-control" value="{$item_info['repaid_day']}" />
+					<span class="input-group-addon">天</span>
+				</div>
+				<span class="help-block">“0”为项目结束后立即发送</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>回报类型</label>
+			<div class="col-sm-9 col-xs-12">
+				<input type="radio" onclick="$('#dp').show();$('#zl').show();" name="return_type" value="1"{if $item_info['return_type'] == 1}checked{/if} style="margin-top:10px;"> 实物回报(需要快递／邮寄的) 
+				<input type="radio" onclick="$('#dp').hide();$('#zl').hide();" name="return_type" value="2"{if $item_info['return_type'] == 2 || empty($item_info['return_type'])}checked{/if} style="margin-top:10px;"> 虚拟回报(不需要快递/邮寄的，电子照片等)
+			</div>
+		</div>
+		<div class="form-group" id="zl" {if $item_info['return_type'] == 2 || empty($item_info['return_type'])}style="display: none;"{/if}>
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">重量</label>
+			<div class="col-sm-6 col-xs-6">
+				<div class="input-group">
+					<input type="text" name="weight" id="weight" class="form-control" value="{$item['weight']}" />
+					<span class="input-group-addon">克</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group" id="dp" {if $item_info['return_type'] == 2 || empty($item_info['return_type'])}style="display: none;"{/if}>
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label">配送方式</label>
+			<div class="col-sm-6 col-xs-6">
+				<select id='dispatch' name="dispatch" class="form-control">
+	   			{loop $dispatch $d}
+					<option value="{$d['id']}" price='{$d['price']}'>{$d['dispatchname']} (首重{$d['firstprice']}元 超重每{$d['secondweight']}g {$d['secondprice']}元)</option>
+				{/loop}
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-12">
+				<a href="{php echo $this->createWebUrl('project',array('id'=>$id,'op'=>'post','step'=>'1'))}" class="btn btn-default">上一步</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input name="submit" type="submit" value="保存" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="{php echo $this->createWebUrl('project',array('id'=>$id,'op'=>'post','step'=>'3'))}" class="btn btn-default">下一步</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+	require(['jquery', 'util'], function($, u){
+		$("#form2").submit(function(){
+			if($(":text[name='price']").val() == '') {
+				u.message('抱歉，支持金额为必填项！', '', 'error');
+				return false;
+			}
+			if($(":text[name='thumb']").val() == '') {
+				u.message('抱歉，说明图片为必填项！', '', 'error');
+				return false;
+			}
+			return true;
+		});
+	});
+	require(['jquery', 'util'], function($, u){
+		$(function(){
+			u.editor($('.richtext_description')[0]);
+		});
+	});
+</script>
+{elseif $_GPC['step']==3}
+	<form action="" method="post"  class="form-horizontal" role="form" enctype="multipart/form-data" id="form2">
+		<input type="hidden" name="step" value="4">
+		<h3 style="margin-bottom:20px;">^_^恭喜您，只需最后一步您就可以开始众筹之路！</h3>
+		<div class="form-group">
+			<div class="col-sm-12">
+			<form action="" method="post"  class="form-horizontal" role="form" enctype="multipart/form-data" id="form3">
+				<a href="{php echo $this->createWebUrl('project',array('id'=>$id,'op'=>'post','step'=>'2'))}" class="btn btn-default">上一步</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input name="save" type="submit" value="保存为草稿" class="btn btn-primary" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input name="finish" type="submit" value="完成" class="btn btn-success" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</form>
+			</div>
+		</div>
+	</form>
+{/if}
+</div>
+{elseif $operation == 'display'}
+<div class="main">
+<div class="panel panel-info">
+	<div class="panel-heading">筛选</div>
+	<div class="panel-body">
+		<form action="./index.php" method="get" class="form-horizontal" role="form">
+			<input type="hidden" name="c" value="site" />
+			<input type="hidden" name="a" value="entry" />
+			<input type="hidden" name="m" value="hx_zhongchou" />
+			<input type="hidden" name="do" value="project" />
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+				<div class="col-xs-12 col-sm-8 col-lg-9">
+					<select name="status" class='form-control'>
+						<option value="1" {if !empty($_GPC['status'])} selected{/if}>开始</option>
+						<option value="0" {if empty($_GPC['status'])} selected{/if}>暂停</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">分类</label>
+				<div class="col-xs-6 col-sm-4">
+					<select class="form-control" style="margin-right:15px;" name="cate_1" onchange="fetchChildCategory(this.options[this.selectedIndex].value)">
+						<option value="0">请选择一级分类</option>
+						{loop $category $row}
+						{if $row['parentid'] == 0}
+						<option value="{$row['id']}" {if $row['id'] == $_GPC['cate_1']} selected="selected"{/if}>{$row['name']}</option>
+						{/if}
+						{/loop}
+					</select>
+				</div>
+				<div class="col-xs-6 col-sm-4">
+					<select class="form-control input-medium" id="cate_2" name="cate_2">
+						<option value="0">请选择二级分类</option>
+						{if !empty($_GPC['cate_1']) && !empty($children[$_GPC['cate_1']])}
+						{loop $children[$_GPC['cate_1']] $row}
+						<option value="{$row[0]}" {if $row[0] == $_GPC['cate_2']} selected="selected"{/if}>{$row[1]}</option>
+						{/loop}
+						{/if}
+					</select>
+				</div>
+				<div class=" col-xs-12 col-sm-2 col-lg-2">
+					<button class="btn btn-default"> <i class="fa fa-search"></i>
+						搜索
+					</button>
+				</div>
+			</div>
+			<div class="form-group"></div>
+		</form>
+	</div>
+</div>
+<style>.label{cursor:pointer;}</style>
+<div class="panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:50px;">ID</th>
+					<th style="min-width:150px;">项目名称</th>
+					<th>属性(点击修改)</th>
+					<th style="width:100px;">发布日期</th>
+					<th style="width:100px;">截至日期</th>
+					<th style="width:100px;">目标</th>
+					<th style="width:150px;">进度</th>
+					<th style="width:60px;">状态</th>
+					<th style="text-align:right; min-width:100px;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				<tr>
+					<td>{$item['id']}</td>
+					<td>
+						{if !empty($category[$item['pcate']])}
+						<span class="text-error">[{$category[$item['pcate']]['name']}]</span>
+						{/if}{if !empty($children[$item['pcate']])}
+						<span class="text-info">[{$children[$item['pcate']][$item['ccate']][1]}]</span>
+						{/if}<a href="{$_W['siteroot']}app/index.php?i={$_W['uniacid']}&c=entry&id={$item['id']}&do=detail&m=hx_zhongchou" target="_blank">{$item['title']}</a>
+					</td>
+					<td>
+						<label data='{$item['ishot']}' class='label label-default {if $item['ishot']==1}label-info{/if}' onclick="setProperty(this,{$item['id']},'hot')">热门</label>
+						<label data='{$item['isrecommand']}' class='label label-default {if $item['isrecommand']==1}label-info{/if}' onclick="setProperty(this,{$item['id']},'recommand')">首页</label>
+					</td>
+					<td>{php echo date('m-d H:i',$item['createtime'])}</td>
+					<td>{php echo date('m-d H:i',$item['createtime'] + $item['deal_days'] * 86400)}</td>
+					<td>{$item['limit_price']}元</td>
+					<td>{$item['finish_price']}元（{php echo $item['finish_price']/($item['limit_price'])*100}%）</td>
+					<td>
+						<label data='{$item['status']}' class='label  label-default {if $item['status']==1}label-info{/if}' onclick="setProperty(this,{$item['id']},'status')">{if $item['status']==1}开始{else}暂停{/if}</label>
+					</td>
+					<td style="text-align:right;">
+						<a href="{php echo $this->createWebUrl('project', array('id' => $item['id'], 'op' => 'post'))}"class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="编辑"> <i class="fa fa-pencil"></i>
+						</a>
+						&nbsp;&nbsp;
+						<a href="{php echo $this->createWebUrl('project', array('id' => $item['id'], 'op' => 'delete'))}" onclick="return confirm('此操作不可恢复，确认删除？');return false;" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="删除">
+							<i class="fa fa-times"></i>
+						</a>
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+			<tr>
+				<td></td>
+				<td colspan="6">
+					<input name="token" type="hidden" value="{$_W['token']}" />
+					<input type="submit" class="btn btn-primary" name="submit" value="提交" />
+				</td>
+			</tr>
+		</table>
+		{$pager}
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+	require(['bootstrap'],function($){
+		$('.btn').hover(function(){
+			$(this).tooltip('show');
+		},function(){
+			$(this).tooltip('hide');
+		});
+	});
+
+	var category = {php echo json_encode($children)};
+	function setProperty(obj,id,type){
+		$(obj).html($(obj).html() + "...");
+		$.post("{php echo $this->createWebUrl('setprojectproperty')}"
+			,{id:id,type:type, data: obj.getAttribute("data")}
+			,function(d){
+				$(obj).html($(obj).html().replace("...",""));
+				if(type=='status'){
+				 $(obj).html( d.data=='1'?'开始':'暂停');
+				}
+				$(obj).attr("data",d.data);
+				if(d.result==1){
+					$(obj).toggleClass("label-info");
+				}
+			}
+			,"json"
+		);
+	}
+
+</script>
+{/if}
+{template 'common/footer'}

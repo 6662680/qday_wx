@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta content="telephone=no" name="format-detection" />
+	<title>{$zzz['title']}</title>
+	{php echo register_jssdk();}
+	<link href="../addons/hl_zzz/template/images/style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript">
+		window.path = '';
+		window.isSubscribe = true;
+		var MIJI ='<br/>点击右上角发送到朋友圈<br/>或发送给朋友,朋友点开进来<br/>就可以给你送体力!';
+		var TILI ='没有体力了，<br/>您可以等待体力<br/>逐渐恢复，或者点击<br/>左下角求助好友送体力';
+		var introduceDes = "{$zzz['smallunit']}";
+		var helpDes = "{$zzz['title']}，抢头等奖。快进来助我一臂之力～～";
+		var rankingDes = "{$zzz['title']}，前十名能拿到粽子哦~你也来吧！~~";
+		var POWERUPURL="{php echo $this->createMobileUrl('powerup', array('id' => $id,'uid' => $myuser['id']))}";
+		var GETPLAYERURL ="{php echo $this->createMobileUrl('getplayer', array('id' => $id,'uid' => $myuser['id']))}";
+	</script>
+	{if $zzz['bgurl']}
+	<style>
+		.index-body{ background:url({php echo tomedia($zzz['bgurl']);}) center center;background-size: cover;}
+	</style>
+	{/if}
+</head>
+
+<body>
+<div class="page-load-container">
+	<div class="page-load-page index-page" data-id="indexPage" data-double="false" data-energycost="10" data-energylimit="{$energylimit}">
+		<div class="nav-type2 " onclick="pageLoad.changePage('{php echo $this->createMobileUrl('rank', array('id' => $id))}', false, false)">
+			<div class="user-head ellipsis">{$profile['nickname']} :</div>
+			<div class="gather-ranking">
+				<div class="gr-c1">
+					<div class="gather">
+						<span class="gather-icon1">总{$zzz['smallunit']}</span>
+					</div>
+					<div class="gather week">
+						<span class="gather-num" id="gatherNum">0</span>
+					</div>
+				</div>
+				<div class="gr-c2">
+					<div class="ranking">
+						<span class="ranking-icon1">可做{$zzz['bigunit']}</span>
+					</div>
+					<div class="ranking week">
+						<span class="ranking-num" id="zzNum">0</span>
+					</div>
+				</div>
+				<div class="gr-c2">
+					<div class="ranking">
+						<span class="ranking-icon1">当前排名</span>
+					</div>
+					<div class="ranking week">
+						<span class="ranking-num" id="rankingNum">{$myph}</span>
+					</div>
+				</div>
+				<div class="double-icon"></div>
+			</div>
+		</div>
+		<div class="power-bar"></div>
+		<div class="power-bar-percent" style="-webkit-transform:translateX(-99.0%) translateZ(0);"></div>
+		<div class="power-num-container">
+			体力 <span id="powerNum" class="power-num" data-power="1">0</span>
+		</div>
+		<div class="index-body">
+			<div class="soya-image"></div>
+			<div class="index-power-buttons">
+				{if $startgame}
+				<div class="index-power-button" id="powerButton" onclick="HL.COMMON.powerClick(this);">上一把{$zzz['smallunit']}</div>
+				{else}
+				<div class="index-power-button" id="powerButton" >{$str}</div>
+				{/if}
+			</div>
+			<div class="double-loop animated2 upanddown" onclick="HL.COMMON.showDoubleDialog()">
+				<span class="double-loop-line"></span>
+				秘籍
+			</div>
+			<div class="switch-audio on" onclick="HL.COMMON.switchAudio(this)"></div>
+		</div>
+		<div class="table index-buttons">
+			<div class="tr">
+				<a class="td b1 index-button" onclick="HL.COMMON.alert('<b>体力不够?</b><br/>快转发到朋友圈,让朋友来送体力!<br/>点击右上角发送到朋友圈,<br/>朋友点进来即可!');"><i class="icon index-help-icon"></i>求助好友</a>
+				<a data-page="false" data-ajax="false" class="td b2 index-button" href="{$zzz['guzhuurl']}"><i class="icon index-introduce-icon"></i>我也要玩</a>
+				<a data-page="false" data-ajax="false" class="td b3 index-button" href="{php echo $this->createMobileUrl('introduce', array('id' => $id))}"><i class="icon index-friend-icon"></i>活动说明</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="page-load-mask" style="display: block;">
+	<div style="display:table; width:100%; height:100%;">
+		<div style="display:table-row">
+			<div style="display:table-cell; vertical-align:middle;">
+				<span class="page-load-mask-img">&nbsp;</span><br/>
+				<span class="page-load-mask-text"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../addons/hl_zzz/template/js/util.js"></script>
+<script type="text/javascript" src="../addons/hl_zzz/template/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../addons/hl_zzz/template/js/fastclick.min.js"></script>
+<script type="text/javascript" src="../addons/hl_zzz/template/js/jquery.pageLoad.js"></script>
+<script type="text/javascript" src="../addons/hl_zzz/template/js/common.js"></script>
+
+<script type="text/javascript">
+	// 做粽子分享
+	wx.ready(function () {
+		sharedata = {
+			title: "{$zzz['title']}",
+			desc: "我在玩『{$zzz['title']}』，抢头等奖。快进来助我一臂之力～～",
+			link: "{$_W['siteroot']}app/{php echo $this->createMobileUrl('lottery', array('id' => $id, 'uid' => $myuser['id'], 'shareuid' => $_W['fans']['fanid']))}",
+			imgUrl: "{$_W['siteroot']}addons/hl_zzz/icon.jpg"
+		};
+		wx.onMenuShareAppMessage(sharedata);
+		wx.onMenuShareTimeline(sharedata);
+	});
+	$(document).ready(function(){
+		HL.COMMON.playAudio('open');
+	});
+</script>
+
+</body>
+</html>

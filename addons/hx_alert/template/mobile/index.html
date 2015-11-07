@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
+   <title>{$reply['title']}制作器</title>
+   <link href="{$_W['siteroot']}/addons/hx_alert/template/style/css/main.min.css" rel="stylesheet" type="text/css">
+   <script src="{$_W['siteroot']}/addons/hx_alert/template/style/js/main.m.js"></script>
+   <script src="{$_W['siteroot']}/addons/hx_alert/template/style/js/wxtools.min.js"></script>
+</head>
+   <style>.input-area select {
+   border: 0px;
+   font-size: 16px;
+   width: 100%;
+   background-color: #ffffff;
+   padding: 13px 0;
+   margin: -8px 0;
+}
+ .sbg {
+           display: none;
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           text-align: center;
+           color: #fff;
+           font-size: 22px;
+           line-height: 1.7em;
+           background: rgba(0,0,0,0.85);
+           z-index: 200;
+       }
+.sbg .arron {
+   position: absolute;
+   top: 8px;
+   right: 8px;
+   width: 100px;
+   height: 100px;
+   background: url({$_W['siteroot']}addons/hx_alert/template/style/img/arron.gif) no-repeat;
+   background-size: 100px 100px;
+}
+.sbg p {
+   padding-top: 78px;
+}
+.sbg .strong{
+   color: #ff1a27;
+   font-size: 26px;
+}
+</style>
+   <script>var _host = "http://" + window.location.host;
+function attention_wx()
+{
+   //alert("关注微信“整蛊专家”，朋友圈整人利器！更多朋友圈整人游戏等你来玩！");
+   location.href='{$reply[gzurl]}';
+}
+function attention_wx2()
+{
+   //alert("关注微信“整蛊之霸”，发现身边小伙伴的小心思！进阶的整人指南！");
+   location.href='{$reply[gzurl]}';
+}
+var dataForWeixin = {
+      appId : "",
+      MsgImg : "{$_W['attachurl']}{$reply['picture']}",
+      TLImg : "{$_W['attachurl']}{$reply['picture']}",
+      shareurl : "{$_W['siteurl']}",
+      title : "{$reply['title']}",
+      desc : "{$reply['description']}",
+      fakeid : "",
+      before_share : function()
+      {
+
+      },
+      callback : function() {
+         setTimeout(function(){
+            attention_wx();
+       },500);    }
+};
+</script>
+<body>
+   <div class="tip-area2">用一种TA无法拒绝的方式跟TA对话！定制“弹框整蛊”，发给好友，弹死TA！</div>
+   <div class="margin-10"></div>
+   <div class="tip-area2">
+      <div class="area-desc">第一步：填写一个吸引人的标题，该标题会显示在朋友圈，引TA上钩。</div>
+      <div class="input-area">
+         <input type="text" id="game_title" maxlength="70"
+   placeholder="填写测试名称…"></div>
+   </div>
+   <div class="margin-10"></div>
+   <div class="tip-area2">
+      <div class="area-desc">第二步：填写烦死TA又退不出来的弹出框文字（每一条对应一次弹出）。</div>
+      <div class="input-area"  id="item_options">
+         <input type="text" id="game_item_1" maxlength="70"
+   placeholder="弹出文字1">
+         <div class="line"></div>
+         <input type="text" id="game_item_2" maxlength="70"
+   placeholder="弹出文字2">
+         <div class="line"></div>
+         <input type="text" id="game_item_3" maxlength="70"
+   placeholder="弹出文字3">
+         <div class="line"></div>
+         <input type="text" id="game_item_4" maxlength="70"
+   placeholder="弹出文字4">
+         <div class="line"></div>
+         <input type="text" id="game_item_5" maxlength="70"
+   placeholder="弹出文字5">
+         <div class="line"></div>
+         <div id="item_add"  class="add-area" onClick="_model._add()">
+            <div class="add-icon">＋</div>
+            <div class="add-desc">点击增加更多字段</div>
+            <div style="clear:both;"></div>
+         </div>
+      </div>
+   </div>
+   <div class="margin-10"></div>
+   <div class="tip-area2">
+      <div class="area-desc">第三步：选择重复弹出次数（以上弹出文字会重复弹出所选次数）</div>
+      <div class="input-area">
+         <select id="loop_sel">
+            <option value="1" selected>重复1次</option>
+            <option value="2" >重复2次</option>
+            <option value="3">重复3次</option>
+            <option value="4">重复4次</option>
+            <option value="5" >重复5次</option>
+            <option value="6">重复6次</option>
+         </select>
+      </div>
+   </div>
+   <div class="margin-10"></div>
+   <button class="btn btn-yellow" onClick="_model._post();">立即去整TA</button>
+   <script>var _title;
+var _wxid = "{$_W['uinacid']}";
+var _model={
+   _n:5,_kind:0,
+   _add:function(){
+      if(this._n>=50){show_toast("最多只能添加50个字段");return;}
+      this._n++;
+      var _input=document.createElement("input"),_div=document.createElement("div");
+      _input.type="text";
+      _input.id="game_item_"+this._n;
+      _input.maxlength="70";
+      _input.placeholder="弹出文字"+(this._n);
+      _div.className="line";
+      $("item_options").insertBefore(_input,$("item_add"));
+      $("item_options").insertBefore(_div,$("item_add"));
+   },
+    _post:function(){
+      _title=$("game_title").value.trim();
+      if(_title==""){show_toast("测试名称不能为空");return;}
+      if(_title.len()>60){show_toast("标题请在30字以内");return;}
+      var _n_err=this._checkOptionsLen();
+      if(_n_err>0){show_toast("弹出文字"+_n_err+"写多了，请在50个汉字以内");return;}
+      var _items_arry=new Array();
+     var itv = "&";
+     var _loop_times = $("loop_sel").value;
+     var _item_num = 0;
+      for(var i=1;i<=this._n;i++){
+             
+          var _item=$("game_item_"+i).value.trim();
+          if(_item!=""){ 
+          ++_item_num
+          _items_arry.push(_item);
+       }
+      }
+      if(_item_num<5){show_toast("至少需要输入5段弹出文字");return;}
+     //console.log(_items_arry);
+     var post_data = "wxid="+_wxid + "&title="+_title + "&loop=" + _loop_times + "&items=" + encodeURI(JSON.stringify(_items_arry));
+     console.log(post_data);
+     $post("{php echo $this->createMobileUrl('get',array('rid'=>$reply['rid']))}",post_data,"请稍候","_model._ok");
+   
+   },
+    _checkOptionsLen:function(){
+      for(var i=1;i<=this._n;i++){
+         if($("game_item_"+i).value.trim().len()>100){return i;break;}
+      }
+      return 0;
+   },
+   _ok:function(json){
+      _mid = json.mid;
+      console.log(_mid);
+      dataForWeixin.title = _title;
+      dataForWeixin.shareurl = "{$_W['siteroot']}app/index.php?i={$_W['weid']}&c=entry&do=alert&m=hx_alert&mid=" + _mid;
+      document.getElementById('sbg').style.display = 'block';
+    }
+};
+</script>
+   <div class="toast-line">
+      <span id="toast"></span>
+   </div>
+   <div class="loading-line">
+      <span id="loading">
+         <span id="loading_text"></span>
+      </span>
+   </div>
+   <div id="sbg" class="sbg" onclick="document.getElementById('sbg').style.display = 'none';">
+      <div class="arron"></div>
+      <p id="msg">
+         请点击右上角按钮
+         <br />
+         再点击【分享到朋友圈】或【发送给好友】
+         <br />
+         <span class="strong">好友点击进入就会中招！</span>
+      </p>
+   </div>
+   <style>
+.ad_bottom {
+   text-align: center;
+   left:0px;
+   right:0px;
+   bottom: -5px;
+   position: fixed;
+   background-color:#FFF;
+   z-index:999;
+}
+#botBoxClose{z-index:20000;top:-20px;}
+#botBoxClose{position:absolute;text-align:center;right:2px;top:2px;width:20px;height:20px;line-height:18px;
+border-radius:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:16px;font-family:arial;cursor:pointer;
+}
+#ifr{height: 50px!important;}
+</style>
+   <div style="display:none">
+      <!--统计代码-->
+   </div>
+</body>
+</html>

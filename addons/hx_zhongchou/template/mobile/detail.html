@@ -1,0 +1,94 @@
+{php $bootstrap_type = 3;}
+{template 'header'}
+{template 'common'}
+<link type="text/css" rel="stylesheet" href="../addons/hx_zhongchou/images/style.css?{TIMESTAMP}">
+<div class="head">
+
+	<span class="title">　　{$item['title']}</span>
+	
+</div>
+<div class="detail-main">
+	<div class="detail-img">
+		<img src="{$_W['attachurl']}{$item['thumb']}" alt="" />	
+		
+	</div>
+	<div class="detail-div img-rounded">
+		<div class="detail-group title">{$item['title']}</div>
+		<div class="detail-group last">
+			<span style="color:#999;">已筹资 :</span><span class="text-info" style="font-size:14px; font-weight:bold;">¥{$item['finish_price']}({php echo floor($item['finish_price']*100/$item['limit_price'])}％) </span><span style="color:#999;">目标:¥{$item['limit_price']}</span>
+		</div>
+		<div class='detail-group progress_c'>
+			<div class="progress">
+  				<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="{php echo $item['finish_price']*100/$item['limit_price']}" aria-valuemin="0" aria-valuemax="100" style="width: {php echo $item['finish_price']*100/$item['limit_price']}%;">
+    				<span class="sr-only">{php echo $item['finish_price']*100/$item['limit_price']}% Complete</span>
+  				</div>
+			</div>
+		</div>
+		<div class='detail-group last-day'>
+			<span style="float:left";>{$item['donenum']} <span style="color:#999;">位支持者</span></span>
+			<span style="float:right";>剩余{php echo $item['deal_days'] - floor((time() - $item['createtime'])/86400)}天</span>
+		</div>
+		<div class='detail-group brief'>
+			{$item['brief']}
+		</div>
+		<hr class="detail-hr" />
+		<div class='detail-group' style="font-size:14px;">
+			<span class="col-xs-8" style="width:100%;">
+				<span style="float:right;";><a href="{if !empty($item['url'])}{$item['url']}{else}{php echo $this->createMobileUrl('detail_more',array('id'=>$item['id']))}{/if}" style="color:#33cdd6;">查看详情>></a></span>
+			</span>
+		</div>
+	</div>
+	<div class="detail-chooseback">选择回报</div>
+	{loop $items $row}
+	<div class="detail-div img-rounded detail-content" style="word-break:break-all">
+		<div class='detail-group top'>
+			<a href="{php echo $this->createMobileUrl('confirm',array('id'=>$item['id'], 'item_id'=>$row['id']));}">
+			<span class="col-xs-8" style="width:100%;">
+				<span style="color:#33cdd6;font-size:18px;font-weight:bold;">¥{$row['price']}</span> <span style="color:#999;">{$row['donenum']}人已支持 {if $row['limit_num'] != 0}限制{$row['limit_num']}个{else}不限制{/if}</span>
+				<span style="float:right;color:#33cdd6;"><i class="glyphicon glyphicon-chevron-right"></i></span>
+			</span>
+			</a>
+		</div>
+		<hr style="margin-top: 5px;margin-bottom: 5px;" />
+		<div class='detail-group' style="margin-top:10px;font-size:12px;">
+			<span class="col-xs-8" style="width:100%;">
+				{$row['description']}
+			</span>
+			<span class="col-xs-8" style="width:100%;">
+				<span style="color:#999;">配送费用</span>：包邮
+			</span>
+			<span class="col-xs-8" style="width:100%;">
+				<span style="color:#999;">预计回报发送时间：</span>项目成功结束后{if $row['repaid_day'] == 0}立即回报{else}{$row['repaid_day']}天{/if}
+			</span>
+		</div>
+	</div>
+	{/loop}
+</div>
+<script type="text/javascript">
+function addtocart(){
+	var url = "{php echo murl('entry//mycart',array('pid'=>$id,'op'=>'add','m'=>'hx_zhongchou'),true)}"
+	$.getJSON(url, function(s){
+		if(s.result==0){
+			tip("操作失败");
+		}else{
+			if (s.t == 'add') {
+				tip_close();tip("收藏成功");
+			}else{
+				tip_close();tip("取消收藏成功");
+			}
+			
+			$('#carttotal').css({'width':'50px', 'height':'50px', 'line-height':'50px'}).html(s.total).animate({'width':'20px', 'height':'20px', 'line-height':'20px'}, 'slow');
+			$('#deal_like_label').html(s.ptotal);
+		}
+	});
+}
+</script>
+{php $title = $goods['title'];}
+{template 'footer'}
+{template 'footerbar'}
+<script>
+$(function() {
+	$(".footerbar").hide();
+	$("#footer").hide();
+});
+</script>

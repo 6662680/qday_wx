@@ -1,0 +1,97 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+    <li {if $_GPC['do'] == 'ManageVoteList' || empty($_GPC['do'])}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageVoteList');}">投票管理</a></li>
+    <li {if $_GPC['do'] == 'ManageLogCount' || empty($_GPC['do'])}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageLogCount', array('id' => $vote['id']));}">票数管理</a></li>
+</ul>
+
+<div class="main">
+
+    <form action="" class="form-horizontal" method="post">
+    <input type="hidden" name="id" value="{$vote['id']}">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">投票活动</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动名称</label>
+                <div class="col-sm-4">
+                    <input class="form-control" name="keyword" id="" type="text" value="{$vote['title']}" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">总票数</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="{$vote['log_count']}" name="log_count" placeholder="总票数">
+                        <span class="input-group-addon">票</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">访问总次数</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="{$vote['click_count']}" name="click_count" placeholder="访问总次数">
+                        <span class="input-group-addon">人/次</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            选项列表
+        </div>
+        <div class="table-responsive panel-body">
+            <div id="append-list" class="row col-md-12 form-horizontal form">
+                {if !empty($list)}
+                {php $index = 1;}
+                {loop $list $item}
+                <div class="item" id="option-item-{$item['id']}">
+                    <h4>序号 :{$item['id']}</h4>
+
+                    <div class="panel panel-default">
+                        <div style="border-top: 3px solid dodgerblue;">
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-3 col-md-2 control-label">选项编号</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="{$item['code']}" name="option-code[{$item['id']}]" placeholder="选项编号" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-3 col-md-2 control-label">选项标题</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" value="{$item['title']}" name="option-title[{$item['id']}]" placeholder="选项标题" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-3 col-md-2 control-label">选项票数</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" value="{$item['log_count']}" name="option-log_count[{$item['id']}]" placeholder="选项票数">
+                                        <span class="input-group-addon">票</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {php $index++;}
+                {/loop}
+                {/if}
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary span4" name="submit" value="提交">提交</button>
+    <input type="hidden" name="token" value="{$_W['token']}"/>
+
+    </form>
+</div>
+
+{template 'common/footer'}

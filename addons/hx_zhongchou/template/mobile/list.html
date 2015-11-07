@@ -1,0 +1,70 @@
+{php $bootstrap_type = 3;}
+{if empty($_W['isajax'])}
+{template 'header'}
+{template 'common'}
+<script language="javascript" src="../addons/hx_zhongchou/images/touchslider.min.js"></script>
+<script language="javascript" src="../addons/hx_zhongchou/images/swipe.js"></script>
+<style>
+   .td_a { height:7em; text-align: center}
+</style>
+<link type="text/css" rel="stylesheet" href="../addons/hx_zhongchou/images/style.css?{TIMESTAMP}">
+<div class="head">
+	<a href="javascript:;" onclick="$('.head .order').toggleClass('hide');" class="bn pull-left"><i class="fa fa-reorder"></i></a>
+	<span class="title">众筹首页{if $_GPC['pcate']} - {$category[$_GPC['pcate']]['name']}{/if}{if $_GPC['ccate']} - {$children[$_GPC['pcate']][$_GPC['ccate']]['name']}{/if}</span>
+	
+	<ul class="unstyled order hide">
+		{loop $category $item}
+		<li>
+			<a href="{php echo $this->createMobileUrl('list2', array('pcate' => $item['id']))}" class="bigtype"><i class="fa fa-folder-open"></i> {$item['name']}</a>
+			{loop $children[$item['id']] $child}
+			<a href="{php echo $this->createMobileUrl('list2', array('ccate' => $child['id']))}" class="smtype"><i class="fa fa-folder"></i> {$child['name']}</a>
+			{/loop}
+		</li>
+		{/loop}
+	</ul>
+</div>
+
+<div id="banner_box" class="box_swipe" style='width:100%;float:left;'>
+	<ul>
+		{loop $advs $adv}
+		<li>
+			<a href="{if empty($adv['link'])}#{else}{$adv['link']}{/if}">
+				<img src="{php echo tomedia($adv['thumb']);}" title="{$adv['advname']}" height='200px'/>
+			</a>
+			<span class="title">{$adv['advname']}</span>
+		</li>
+		{/loop}
+	</ul>
+	<ol>
+	{php $slideNum = 1;}
+	{loop $advs $adv}
+		<li{if $slideNum == 1} class="on"{/if}></li>
+		{php $slideNum++;}
+	{/loop}
+	</ol>
+</div>
+<script>
+	$(function() {
+		new Swipe($('#banner_box')[0], {
+			speed:500,
+			auto:3000,
+			callback: function(){
+				var lis = $(this.element).next("ol").children();
+				lis.removeClass("on").eq(this.index).addClass("on");
+			}
+		});
+	});
+</script>
+
+<div class="shopping-main">
+	{/if}&nbsp;
+ <div class="list" id="list_rec">
+	 <div class="list-tips" style='float:left;width:100%;font-size:14px;color:#33cdd6;padding-left:10px;'>推荐项目</div>
+	  {loop $rlist $item}
+		 {template 'list_item'}
+	  {/loop}
+ </div>
+</div>
+
+{template 'footer'}
+{template 'footerbar'}

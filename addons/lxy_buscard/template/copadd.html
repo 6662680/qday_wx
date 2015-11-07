@@ -1,0 +1,91 @@
+{template 'common/header'}
+{php load()->func('tpl')}
+<div class="main">
+<ul class="nav nav-tabs">
+  <li{if $_GPC['do'] == 'copadd'} class="active"{/if}><a href="{php echo $this->createWeburl('copadd');}">公司设置</a>
+</ul>
+<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="id" value="{$item['id']}">
+        
+             
+        <div class="panel panel-default">
+    <div class="panel-heading">
+       <h4>公司基本信息</h4>
+    </div>
+    <div class="panel-body">
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">公司名称</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="corpname" name="copname" value="{$item['copname']}"  class="form-control" />
+            </div>
+        </div>
+          <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">公司介绍URL</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="copintro" name="copintro" value="{$item['copintro']}"  class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">公司LOGO</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_image('thumb',$item['thumb'])}
+            </div>
+        </div>
+ 
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">官网</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="website" name="website" value="{$item['website']}"  class="form-control" />
+            </div>
+        </div>
+        
+          
+         <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">开户姓名</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="bankuser" name="bankuser" value="{$item['bankuser']}"  class="form-control" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">开户行</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="bankname" name="bankname" value="{$item['bankname']}"  class="form-control" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">银行帐号</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="bankaccount" name="bankaccount" value="{$item['bankaccount']}"  class="form-control" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">地址</label>
+            <div class="col-sm-9 col-xs-12">
+                <input type="text" id="addr" name="addr" value="{$item['addr']}"  class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">地区</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_district('district',array('province'=>$item['province'],'city'=>$item['city'],'dist'=>$item['dist']))}
+            </div>
+        </div>
+           <div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label">地图标识</label>
+            <div class="col-sm-9 col-xs-12">
+                {php echo tpl_form_field_coordinate('baidumap',array('lng'=>$item['lat'],'lat'=>$item['lat']))}
+            </div>
+        </div>
+    </div>
+</div> 
+        <div class="form-group col-sm-12">
+			<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+			<input type="hidden" name="token" value="{$_W['token']}" />
+		</div>
+</form>
+</div>
+{template 'common/footer'}

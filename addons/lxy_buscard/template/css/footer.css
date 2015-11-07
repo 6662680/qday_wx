@@ -1,0 +1,12 @@
+/*页脚*/
+footer{ 
+font-size:0.8em;
+text-align:center;
+ clear:both;
+  height:30px;
+ background:rgb(239,239,239);
+  border-top:1px #CCCCCC solid;
+  padding-top:10px;}
+footer a { 
+color:#000;
+text-decoration:none;}

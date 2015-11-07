@@ -1,0 +1,323 @@
+<div id="ajax-main"></div>
+
+<script id="ajax-default" type="text/html">
+<div class="container">
+<div class="row widget-container">
+
+<!-- Header -->
+<div id="div-header">
+    <div class="col-xs-12 padded">
+        <div class="widget-container fluid-height">
+            <img class="lazy" src="../addons/huiyi_weivote/template/mobile/assets/Lib/echo/images/load.gif" data-echo="{{pic}}" width="100%">
+        </div>
+
+        <!--活动顶部描述-->
+        <div class="widget-content">
+            {{#weivote_vote.intro}}
+        </div>
+
+        <div class="widget-container fluid-height" style="border-left: 3px solid #1b809e; border-radius: 3px; padding: 5px;">
+            <h5 style="margin: 10px;">活动访问总人气 <span class="btn-danger-outline" style="border-radius: 3px;">&nbsp;{{weivote_vote.click_count}}&nbsp;</span></h5>
+            <h5 style="margin: 10px;">参与选手总数 <span class="btn-warning-outline" style="border-radius: 3px;">&nbsp;{{weivote_options_count}}&nbsp;</span> 名</h5>
+            <h5 style="margin: 10px;">活动累计总票数 <span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{weivote_vote.log_count}}&nbsp;</span> 票</h5>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Vote -->
+<div id="div-vote" class="text-center">
+
+    <!--搜索部分 Start-->
+    <div class="widget-container fluid-height">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <input class="form-control" placeholder="请输入名称或编号" type="text" id="vote-search-voteKey" name="voteKey">
+                    <span class="input-group-btn"><button class="btn btn-primary" type="button" onclick="VoteSearch()">搜索</button></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--搜索部分 End-->
+
+    <div class="col-xs-6">
+        <button class="btn btn-warning widget-content" onclick="optionOrderDefault('code', 'asc')">按编号排序</button>
+    </div>
+    <div class="col-xs-6">
+        <button class="btn btn-danger widget-content" onclick="optionOrderDefault('log_count', 'desc')">按热度排序</button>
+    </div>
+
+    {{if max_vote_day == 1}}
+
+    {{each weivote_options_view as value index}}
+
+    {{if value.picture == ''}}
+    <div class="clear"></div>
+    <div class="col-xs-12" style="clear: both;">
+        <div class="widget-container fluid-height">
+            <div style="text-align: left; padding: 20px 10px 10px 10px;">
+
+                <label class="radio">
+                    <input type="radio" name="option-choose" value="{{value.id}}">
+                          <span>
+                              {{value.code}}号
+                              {{value.title}}
+                              <span style="float: right;">票数:<span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{value.log_count}}&nbsp;</span></span>
+                          </span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    {{else}}
+
+    <div class="col-xs-6">
+        <div class="widget-container fluid-height">
+
+            <div>
+                <a class="ajax-link" href="ajax/voter.html?oid={{value.id}}" sbid="{{value.id}}">
+                    <img class="lazy" src="../addons/huiyi_weivote/template/mobile/assets/Lib/echo/images/load.gif" data-echo="{{attachurl}}{{value.picture}}" width="100%">
+                </a>
+            </div>
+            <div>
+
+                <label class="radio">
+                    <input type="radio" name="option-choose" value="{{value.id}}">
+                         <span>
+                             {{value.code}}号<br>
+                             {{value.title}}<br>
+                             票数:<span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{value.log_count}}&nbsp;</span>
+                         </span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+
+    {{/if}}
+
+    {{if index % 2 == 1}}
+    <div class="col-xs-12" style="clear: both;"></div>
+    {{/if}}
+
+    {{/each}}
+
+    {{else}}
+
+    {{each weivote_options_view as value index}}
+
+    {{if value.picture == ''}}
+    <div class="clear"></div>
+    <div class="col-xs-12" style="clear: both;">
+        <div class="widget-container fluid-height">
+            <div style="text-align: left; padding: 20px 10px 10px 10px;">
+
+                <label class="checkbox">
+                    <input type="checkbox" name="option-choose" value="{{value.id}}">
+                          <span>
+                              {{value.code}}号
+                              {{value.title}}
+                              <span style="float: right;">票数:<span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{value.log_count}}&nbsp;</span></span>
+                          </span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    {{else}}
+
+    <div class="col-xs-6">
+        <div class="widget-container fluid-height">
+
+            <div>
+                <a class="ajax-link" href="ajax/voter.html?oid={{value.id}}" sbid="{{value.id}}">
+                    <img class="lazy" src="../addons/huiyi_weivote/template/mobile/assets/Lib/echo/images/load.gif" data-echo="{{attachurl}}{{value.picture}}" width="100%">
+                </a>
+            </div>
+            <div>
+
+                <label class="checkbox">
+                    <input type="checkbox" name="option-choose" value="{{value.id}}">
+                         <span>
+                             {{value.code}}号<br>
+                             {{value.title}}<br>
+                             票数:<span class="btn-info-outline" style="border-radius: 3px;">&nbsp;{{value.log_count}}&nbsp;</span>
+                         </span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+
+    {{/if}}
+
+    {{if index % 2 == 1}}
+    <div class="col-xs-12" style="clear: both;"></div>
+    {{/if}}
+
+    {{/each}}
+
+    {{/if}}
+
+
+    <div class="clear"></div>
+
+    <div class="col-xs-12">
+        <button class="btn btn-primary widget-content" onclick="VoteSubmit()">提交</button>
+        <button class="btn btn-info widget-content" onclick="sharePoint('show')">分享</button>
+    </div>
+
+
+    <!--分页部分 Start-->
+    {{if (page_count != 1) && (page_switch != "1") }}
+    <div class="widget-container fluid-height">
+        <div class="widget-content text-center">
+            <ul class="pagination">
+                {{if 1 != page_no}}
+                <li>
+                    <a href="javascript:void(0);" onclick="VotePage(1)"><<</a>
+                </li>
+                {{/if}}
+
+                {{each page_nos as value index }}
+                <li {{if value == page_no }} class="active" {{/if}}>
+                <a href="javascript:void(0);" {{if value != page_no }} onclick="VotePage({{ value }})" {{/if}}>{{ value }}</a>
+                </li>
+                {{/each}}
+
+                {{if page_count != page_no }}
+                <li>
+                    <a href="javascript:void(0);" onclick="VotePage({{ page_count }})">>></a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+    {{/if}}
+    <!--分页部分 End-->
+
+</div>
+<!-- Vote End -->
+
+<!-- Description -->
+<div id="div-desc">
+    <div class="col-xs-12 padded">
+        <div class="widget-content fluid-height" style="border-left: 3px solid #1b809e; border-radius: 3px; padding: 5px;">
+            <h5>说明：</h5>
+            <p style="font-size: 12px;">1.投票时间:<br>
+                <span class="btn-warning" style="border-radius: 3px;">&nbsp;{{start_time}}&nbsp;</span>
+                至
+                <span class="btn-warning" style="border-radius: 3px;">&nbsp;{{end_time}}&nbsp;</span>
+            </p>
+            <p style="font-size: 12px;">2.投票规则:<br>
+            每个微信号每天可投<span class="btn-info" style="border-radius: 3px;">&nbsp;{{weivote_vote.max_vote_day}}&nbsp;</span>票；<br>
+            本次投票活动每个微信号总投票上限<span class="btn-info" style="border-radius: 3px;">&nbsp;{{weivote_vote.max_vote_count}}&nbsp;</span>票; <br>
+            每个微信号每天<span class="btn-danger" style="border-radius: 3px;">&nbsp;{{if weivote_vote.type_vote == 1}}不可{{else}}可以{{/if}}&nbsp;</span>重复投同一选项;
+            </p>
+        </div>
+    </div>
+</div>
+<!-- Description End -->
+
+<!-- Footer -->
+<div id="div-footer">
+    <!--活动底部描述-->
+    <div class="widget-content padded">
+        {{#weivote_vote.rule}}
+    </div>
+</div>
+<!-- Footer End -->
+</div>
+</div>
+</script>
+
+<script>
+
+    function optionOrderDefault(type, order) {
+        var weivote_options = _data.weivote_options_view;
+        bubbleSort(weivote_options, type, order);
+        _data.weivote_options_view = weivote_options;
+        var html = template('ajax-default', _data);
+        document.getElementById('ajax-main').innerHTML = html;
+
+        lazyimg();
+    }
+
+
+    function VoteSearch() {
+        var voteKey = $("#vote-search-voteKey").val();
+        if (voteKey == null || voteKey == '') {
+            alertModal("请输入要查询的选手编号或部分姓名！");
+            return false;
+        }
+        VoterSearch(voteKey);
+        return false;
+    }
+
+    function VotePage(pageNo) {
+        if (pageNo == null || pageNo == '') {
+            alertModal("呵呵");
+            return false;
+        }
+        VoterPage(pageNo);
+        return false;
+    }
+
+    function VoteSubmit() {
+
+        var selects = $("input[name=option-choose]:checked");
+        var oidStr = '';
+        if (selects.length > 0) {
+            $(selects).each(function() {
+                oidStr += this.value +',';
+            });
+            oidStr = oidStr.substr(0, oidStr.length - 1);
+        }
+        var oids = oidStr.split(",");
+        if (oids.length <= 1 && oids[0] == '') {
+            alertModal("请选择投票选项！");
+            return false;
+        }
+        VoterSubmit(oids);
+
+        return false;
+    }
+
+
+    function initDefaultPage() {
+        var data = {};
+        var aurl = 'ajaxDefault';
+        $.ajax({
+            mimeType: 'text/html; charset=utf-8',
+            url: mobile_url + aurl,
+            type: 'POST',
+            dataType: "json",
+            async: false,
+            success: function(adata) {
+                if (adata.rcode == 100) {
+                    data = adata.rdata;
+                } else {
+                    alertModal(adata.rmsg);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
+        _data = data;
+        var html = template('ajax-default', data);
+        document.getElementById('ajax-main').innerHTML = html;
+
+        optionOrderDefault('code', 'asc');
+    }
+
+    $(document).ready(function() {
+        LoadDefaultScript(initDefaultPage);
+    });
+
+</script>

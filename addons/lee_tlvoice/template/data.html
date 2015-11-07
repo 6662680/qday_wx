@@ -1,0 +1,36 @@
+{template 'common/header'}
+<script type="text/javascript" src="../addons/lee_tlvoice/template/sorttable.js"></script>
+<link type="text/css" rel="stylesheet" href="../addons/lee_tlvoice/template/tablestyle.css" />
+	<center>
+		<h3><i class="icon-table"></i>&nbsp;语音记录</h3>
+	 </center>
+	<table class="dt1 sortable table_1" rowclass=",bg1" border="0" cellpadding="0" cellspacing="0">
+
+		<tr class="th1">
+			<th class="w1 column_sortable">序号</th>
+			<th class="w2 column_sortable">识别ID</th>
+			<th class="w3 column_sortable">语音时长</th>
+			<th class="w4 column_sortable">服务器ID</th>
+			<th class="W5 column_sortable">提交时间</th>	
+			<th class="w6 column_sortable">操作</th>			
+			
+		</tr>
+		{loop $list $item}
+		<tr class="ln">
+			<td class="w1 txl bd0">{$item[id]}</td>
+			<td class="w2 txc">{$item['keyid']}</td>
+			<td class="w3">{$item['timelength']}</td>
+			<td class="w4">{$item['serverid']}</td>
+			<td class="w5">{php echo date('Y-m-d H:i',$item['createtime']);}</td>
+			<td class="w6" style="padding:5px">
+			<center>
+					<span>
+					<a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('datadelete', array('id' => $item['id']))}" data-toggle="tooltip" data-placement="top" title="删除" data-original-title="删除"><i class="fa fa-times"></i></a>
+					</span>
+			</center>
+			</td>
+		</tr>
+		{/loop}
+		<tfoot></tfoot>
+	</table>
+{$pager}

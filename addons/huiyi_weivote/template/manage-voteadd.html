@@ -1,0 +1,285 @@
+{template 'common/header'}
+<div class="main">
+    <ul class="nav nav-tabs">
+        <li {if $_GPC['do'] == 'ManageVoteList'}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageVoteList');}">投票管理</a></li>
+        {if empty($item['id'])}
+            <li {if $_GPC['do'] == 'ManageVoteAdd'}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageVoteAdd');}">添加投票</a></li>
+        {/if}
+        {if !empty($item['id'])}
+            <li {if $_GPC['do'] == 'ManageVoteAdd'}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageVoteAdd', array('id' => $item['id']));}">编辑投票</a></li>
+        {/if}
+
+    </ul>
+
+    <form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{$item['id']}">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            投票信息设置
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动标题</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" value="{$item['title']}" name="title" placeholder="投票活动标题">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动图片</label>
+                <div class="col-sm-9">
+                    {php echo tpl_form_field_image('picture', $item['picture']);}
+                    <span class="help-block">活动宣传顶部标图</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动简介</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" rows="5" name="description">{$item['description']}</textarea>
+                    <span class="help-block">活动宣传顶部介绍</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">顶部区域</label>
+                <div class="col-sm-9">
+                    <textarea id="intro" name="intro">{$item['intro']}</textarea>
+                    <div class="help-block">投票主页 顶部自定义封面及相关说明和介绍。<br>
+                        <span style="color: orangered">温馨提示：图片如果超出屏幕，请编辑html并设置宽度为100%。</span></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">底部区域</label>
+                <div class="col-sm-9">
+                    <textarea id="rule" name="rule">{$item['rule']}</textarea>
+                    <div class="help-block">投票主页 底部自定义封面及相关说明和介绍。<br>
+                        <span style="color: orangered">温馨提示：图片如果超出屏幕，请编辑html并设置宽度为100%。</span></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">结果页信息<label><br>(广告信息)</label></label>
+                <div class="col-sm-9">
+                    <textarea id="ad" name="ad">{$item['ad']}</textarea>
+                    <div class="help-block">粉丝投票完成，查看投票结果，用于投票结果页面底部区域显示信息，可填写广告信息等。<br>
+                        <span style="color: orangered">温馨提示：图片如果超出屏幕，请编辑html并设置宽度为100%。</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            投票条件设置
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">投票状态</label>
+                <div class="col-sm-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="state" value="0" id="state_0" {if $item['state'] == '0'|| empty($item['state'])}checked="true"{/if}> 开启
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="state" value="1" id="state_1"  {if $item['state'] == '1'}checked="true"{/if}>关闭
+                    </label>
+                    <span class="help-block">投票开关，开启才可进行投票。</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">投票时间</label>
+                <div class="col-sm-9">
+                    {php echo tpl_form_field_daterange('time', array('start' => date('Y-m-d H:i', $item['start_time']), 'end'   => date('Y-m-d H:i', $item['end_time'])), true);}
+                    <span class="help-block"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            投票票数设置<br>(自动兼容单选多选设置)
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动期间每个粉丝总共可投票数</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input type="text" name="max_vote_count" class="form-control" id="form-max-vote-count" value="{$item['max_vote_count']}" onchange="weivoteHandler.MaxVoteCount()" />
+                        <span class="input-group-addon">票</span>
+                    </div>
+                    <span class="help-block">(如:设置为1,则为一人只能投一票(可作为一次性活动且只能投一票))</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">每天每个粉丝可投出最大票数</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <input type="text" name="max_vote_day" class="form-control" id="form-max-vote-day" value="{$item['max_vote_day']}" onchange="weivoteHandler.MaxVoteDay()" />
+                        <span class="input-group-addon">票</span>
+                    </div>
+                    <span class="help-block">(如:设置为1,则为单选，当设置大于2时，则自动切换为多选)</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动期间一名粉丝是否仅限参与一次活动</label>
+                <div class="col-sm-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="once_vote" value="0" id="once_vote_0" {if $item['once_vote'] == '0'|| empty($item['once_vote'])}checked="true"{/if}> 不限
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="once_vote" value="1" id="once_vote_1"  {if $item['once_vote'] == '1'}checked="true"{/if}> 一次
+                    </label>
+                    <span class="help-block">(如:此选项是针对粉丝在活动期间可以多选投票，但只能参与一次的场景)</span>
+                </div>
+            </div>
+
+            <div class="help-block" style="color: orangered;">
+                以上三个功能组合使用，可应对多种场合。<br>
+                如：设置5天投票活动，每天限一人一票，则只需将总可投票数(第一个选项)设置为5，每天可投票数(第二个选项)设置为1, 最后选择不限(第三个选项)即可。<br>
+                如：设置6天投票活动，每人可投最多3票，但每人仅限参与一次，则只需将总可投票数(第一个选项)设置为3，每天可投票数(第二个选项)设置为3, 最后选择一次(第三个选项)即可。<br>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            投票方式
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">每个粉丝每天的票可否重复投同一选项(候选项)：</label>
+                <div class="col-sm-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="type_vote" value="0" id="type_vote_0" {if $item['type_vote'] == '0'|| empty($item['type_vote'])}checked="true"{/if}> 可以
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="type_vote" value="1" id="type_vote_1"  {if $item['type_vote'] == '1'}checked="true"{/if}> 不可
+                    </label>
+                    <span class="help-block">投票方式，有点绕，即是支持一个粉丝可以把当天的所有票都投A。若看不懂多看两遍，此处强大到作者不想解释。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            投票展现设置
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">分页开关</label>
+                <div class="col-sm-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="page_switch" value="0" id="page_switch_0" {if $item['page_switch'] == '0'|| empty($item['page_switch'])}checked="true"{/if}> 开启
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="page_switch" value="1" id="page_switch_1"  {if $item['page_switch'] == '1'}checked="true"{/if}> 关闭
+                    </label>
+                    <span class="help-block">分页开关，开启才会显示分页。</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">分页选项</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <span class="input-group-addon">每页显示选项个数</span>
+                        <input type="text" name="page_size" class="form-control" value="{$item['page_size']}" />
+                        <span class="input-group-addon">个</span>
+                    </div>
+                    <span class="help-block">分页适用于投票选项数有上百个，可以设置分页；如果不想显示，只需把分页数设置足够大超过选项数即可。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            投票高级设置
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">同一IP投票间隔</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <span class="input-group-addon">间隔时间：</span>
+                        <input type="text" name="interval_time" class="form-control" value="{$item['interval_time']}" />
+                        <span class="input-group-addon">分钟</span>
+                    </div>
+                    <span class="help-block">由于手机若使用Wifi参与投票都是同一IP，届时可以适当调整此选项。</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">实名登记</label>
+                <div class="col-sm-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="name_state" value="0" id="name_state_0" {if $item['name_state'] == '0'|| empty($item['name_state'])}checked="true"{/if}> 不登记
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="name_state" value="1" id="name_state_1"  {if $item['name_state'] == '1'}checked="true"{/if}> 登记
+
+                    </label>
+                    <span class="help-block">开启后可在投票时提示用户登记姓名，QQ，手机号，微信号等。</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-3 col-md-2 control-label">页面网址</label>
+                <div class="col-sm-9">
+                    <div class="input-group">
+                        <span class="input-group-addon">{$_W['siteroot']}{php echo $this->createMobileUrl('url', array('id' => $id))}</span>
+                    </div>
+                    <span class="help-block">仅可在微信中打开, 此链接可用于图文回复设置来源。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary span4" name="submit" value="提交">提交</button>
+    <input type="hidden" name="token" value="{$_W['token']}"/>
+
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+    });
+
+    require(['jquery','util'], function($, util){
+        var editor_intro = util.editor($('#intro')[0]);
+        var editor_rule = util.editor($('#rule')[0]);
+        var editor_ad = util.editor($('#ad')[0]);
+    });
+
+    var weivoteHandler = {
+        'MaxVoteDay' : function() {
+            if(parseInt($('#form-max-vote-day').val()) < 0) {
+                alert("每天投票最小设置为0, 表示禁止投票");
+                $('#form-max-vote-day').val(0);
+                return;
+            }
+            if(parseInt($('#form-max-vote-day').val())  > parseInt($('#form-max-vote-count').val()) ) {
+                alert("每天投票数不可超过个人投票总限制数");
+                $('#form-max-vote-day').val($('#form-max-vote-count').val());
+                return;
+            }
+        },
+        'MaxVoteCount' : function() {
+            if(parseInt($('#form-max-vote-count').val()) < 0) {
+                alert("个人总投票数最小设置为0");
+                $('#form-max-vote-count').val(0);
+                return;
+            }
+            if(parseInt($('#form-max-vote-day').val())  > parseInt($('#form-max-vote-count').val())) {
+                alert("每天投票数不可超过个人投票总限制数");
+                $('#form-max-vote-day').val($('#form-max-vote-count').val());
+                return;
+            }
+        }
+    };
+
+</script>
+
+{template 'common/footer'}

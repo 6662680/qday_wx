@@ -1,0 +1,151 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $_GPC['do'] == 'ManageResult' || empty($_GPC['do'])}class="active"{/if}><a href="{php echo $this->createWebUrl('ManageVoteList');}">返回列表</a></li>
+</ul>
+
+<style>
+    .page-nav {
+        margin:0;
+        width:100%;
+        min-width:800px;
+    }
+
+    .page-nav-tabs {
+        background:#EEE;
+    }
+
+    .page-nav > li > a {
+        display: block;
+    }
+
+    .page-nav-tabs > li > a{
+        padding-right: 12px;
+        padding-left: 12px;
+        margin-right: 2px;
+        line-height: 14px;
+    }
+    .page-nav-tabs > li > a {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        line-height: 20px;
+        border: 1px solid transparent;
+        border-bottom-width: 0px;
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
+    }
+    .page-nav-tabs > li > a {
+        padding: 0;
+        margin: 0;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 10px;
+        font-size: 14px;
+        color: #666;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+
+    .page-nav-tabs>li {
+        line-height: 40px;
+        float: left;
+        list-style: none;
+        display: block;
+        text-align: -webkit-match-parent;
+    }
+
+    .page-nav-tabs>li>a,.page-nav-tabs>li>a:focus {
+        border-radius: 0 !important;
+        background-color: #f9f9f9;
+        color: #999;
+        margin-right: -1px;
+        position: relative;
+        z-index: 11;
+        border-color: #c5d0dc;
+        text-decoration: none;
+    }
+
+    .page-nav-tabs>li>a:hover
+    {
+        background-color: #FFF;
+    }
+
+    .page-nav-tabs>li.active>a, .page-nav-tabs>li.active>a:hover, .page-nav-tabs>li.active>a:focus {
+        color: #576373;
+        border-color: #c5d0dc;
+        border-top: 2px solid #4c8fbd;
+        border-bottom-color: transparent;
+        background-color: #FFF;
+        z-index: 12;
+        margin-top: -1px;
+        box-shadow: 0 -2px 3px 0 rgba(0,0,0,0.15);
+    }
+</style>
+<div class="main">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">投票活动</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动名称</label>
+                <div class="col-sm-4">
+                    <input class="form-control" name="keyword" id="" type="text" value="{$vote['title']}" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">投票结果</div>
+        <div class="table-responsive panel-body">
+            <h5 class="sub-title">
+                [总票数：{php echo $log_count}票] (活动访问次数：{php echo $vote['click_count']}次)
+            </h5>
+            <hr>
+
+            <div style="font-size: 14px;font-weight: normal;font-family: Microsoft YaHei,SimHei,Arial,sans-serif;">
+                <div class="col-xs-12">
+                    {php $option_index = 0;}
+                    {loop $weivote_options_view $weivote_option}
+
+                    <div class="row" style="margin-bottom:20px;margin-left: 0px;">
+
+                        {if $weivote_option['picture'] != ''}
+                        <div class="col-md-2 center">
+
+                            <a class="thumbnail">
+                                <img alt="image" style="max-height: 150px;" src="{php echo $_W['attachurl'].$weivote_option['picture']}" />
+                            </a>
+
+                        </div>
+                        {/if}
+
+                        <div class="col-md-10 center" style="font-size: 14px;font-weight: normal;font-family: Microsoft YaHei,SimHei,Arial,sans-serif;">
+
+                            选项： {php echo $weivote_option['title']}<br>
+                            排名： 第{php echo $option_index+1;}名<br>
+
+                            票数： {php echo $weivote_option['log_count']}<br>
+                            占比： {php echo $weivote_option['proportion']}%<br>
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar"
+                                     aria-valuenow="{php echo $weivote_option['proportion']}"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: {php echo $weivote_option['proportion']}%">
+                                    <span class="sr-only">{php echo $weivote_option['proportion']}%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /row-fluid -->
+                    <hr>
+                    {php $option_index++;}
+                    {/loop}
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+        </div>
+    </div>
+</div>
+{template 'common/footer'}

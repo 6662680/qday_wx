@@ -1,0 +1,44 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/emoji.css">
+<div class="main">
+	<div style="padding:15px;">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th>举报人</th>
+					<th>被举报人</th>
+					<th>发表时间</th>
+					<th>审核状态</th>
+					<th>内容</th>
+					<th class="norightborder">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+					<tr>
+						<td>{$row['reporter']}</td>
+						<td>{$row['openid']}</td>
+						<td>{php echo date('Y-m-d H:i:s',$row['createtime'])}</td>
+						{php $config = $this->module['config'];$config['ischeck'] = $config['ischeck']?$config['ischeck']:0}
+						<td>
+						{if $config['ischeck']==0}无需审核
+						{else if $row['isok']==0}未被审核{else}已被审核{/if}</td>
+						<td>{if empty($row['content'])}已被删除{else}{php echo emoji_unified_to_html($row['content'])}{/if}</td>
+						<td class="norightborder">
+						{if !empty($row['content'])}
+							<a class="btn" rel="tooltip"  href="{php echo $this->createWeburl('Talklist', array('id'=>$row['swnoId'],'foo'=>'delete'))}" onclick="return confirm('此操作不可恢复，确认删除？');return false;" title="删除该条表白"><i class="glyphicon glyphicon-remove"></i></a>
+						{if $row['isok']==0}
+							<a class="btn" rel="tooltip"  href="{php echo $this->createWeburl('Talklist', array('id'=>$row['swnoId'],'foo'=>'change','doit'=>1))}" onclick="return confirm('确认操作?');return false;" title="通过"><i class="glyphicon glyphicon-lock"></i></a>
+							{else}
+							<a class="btn" rel="tooltip"  href="{php echo $this->createWeburl('Talklist', array('id'=>$row['swnoId'],'foo'=>'change','doit'=>0))}" onclick="return confirm('确认操作?');return false;" title="禁止"><i class="glyphicon glyphicon-log-in"></i></a>
+ 						{/if}
+ 						{/if}
+ 						</td>
+					</tr>
+					{/loop} 
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+{template 'common/footer'}

@@ -1,0 +1,99 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <header>
+    <title>{$_W['account']['name']}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/qh.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/emoji.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery.mobile.icons.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery.mobile.structure-1.4.2.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/jquery-mobile-fluid960.min.css">
+    <link rel="stylesheet" type="text/css" media="all" href="{MODULE_URL}/template/style/css/style.css">
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/jquery.mobile-1.4.2.min.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/mymobile.js"></script>
+    <script type="text/javascript" src="{MODULE_URL}/template/style/js/all.js"></script>
+  </header>
+  <body>
+    <div id="Add_Home" data-role="page">
+      <div id="Add_Content" data-role="content">
+        <div class="write">
+        <input type="hidden" id="myurl_add" value='{$ajax_url}'>
+        <input type="hidden" id="nexturl_add" value='{$nexturl}'>
+        <input id="commonUrl" type="hidden" value="{MODULE_URL}" />
+          <table> 
+            <tr class="add-to">
+              <td class="title-to">To:</td> 
+              <td class="conten-to" id="conten_To"><input id="input_To" type="text" value="" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;"/></td>
+              <td></td>
+              <td class="islimit">
+                <input type="checkbox" id="limit" name="limit" value="1" /><span>匿名</span>
+              </td>
+
+            </tr>
+            <tr class="add-conten">
+              <td colspan="4">
+                <textarea id="text-content" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对Ta说些什么&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"  maxlength="120" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;"></textarea>
+              </td>
+            </tr>
+            <tr > 
+              <td colspan="4" style="position: relative;"> 
+                <img class="bottom-shadow" src="{MODULE_URL}/template/style/images/bgimg/bgimg-add-shadow.png" alt="" /><span style="position: absolute; top: -25px ;right: 5px;" class="wordless" id="wordLess">120/120</span> 
+              </td>
+            </tr>
+            <tr> 
+              <td colspan="4"> 
+                <table id="color_List"> 
+                  <tr style="width: 100%"> 
+                    <td width="20%"><div class="choose-color radom coloron" data-role="button" onclick="changecolor('random',this)"> </div></td>
+                    <td width="10%"><div class="choose-color F0F0F0" data-role="button" onclick="changecolor('#F0F0F0',this)"> </div></td>
+                    <td width="10%"><div class="choose-color F5D475" data-role="button" onclick="changecolor('#F5D475',this)"> </div></td>
+                    <td width="10%"><div class="choose-color F59694" data-role="button" onclick="changecolor('#F59694',this)"> </div></td>
+                    <td width="10%"><div class="choose-color EAD5AA" data-role="button" onclick="changecolor('#EAD5AA',this)"> </div></td>
+                    <td width="10%"><div class="choose-color DBA6A2" data-role="button" onclick="changecolor('#DBA6A2',this)"> </div></td>
+                    <td width="10%"><div class="choose-color C7A6C1" data-role="button" onclick="changecolor('#C7A6C1',this)"> </div></td>
+                    <td width="10%"><div class="choose-color c8FCBE3" data-role="button" onclick="changecolor('#8FCBE3',this)"> </div></td>
+                    <td width="10%"><div class="choose-color c6E7E8E" data-role="button" onclick="changecolor('#6E7E8E',this)"> </div></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr class="add-button"> 
+              <td colspan="4">
+                <hr style="height:1px;border:1px solid rgb(231,179,198) ;border-bottom:1px solid rgb(214,141,169);"/>
+                <a  id="submit_Button" data-role="button">发 布</a>
+              </td>
+            </tr>
+          </table>
+          <div> 
+            <br /><br /><br />
+          </div>
+        </div>
+      <div class="qh-footer center" data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+        <div class="navbar-qh" data-role="navbar" data-grid="d">
+          <ul>
+            <li><a class="nav-icon-qq" href="{php echo $this->createMobileUrl('myindex');}" data-ajax="false" data-transition="none" data-icon="custom">情圈</a></li>
+            <li><a class="nav-icon-search" href="{php echo $this->createMobileUrl('search');}" data-ajax="false" data-transition="none" data-icon="custom">搜索</a></li>
+            <li><a class="nav-icon-add on" href="{php echo $this->createMobileUrl('add');}" data-ajax="false" data-transition="slideup" data-icon="custom"></a></li>
+            <li><a class="nav-icon-benxiao" href="{php echo $this->createMobileUrl('myindex',array('key'=>'yes'));}" data-ajax="false" data-transition="none" data-icon="custom">热门</a></li>
+            <li><a class="nav-icon-my" href="{php echo $this->createMobileUrl('my');}" data-ajax="false" data-transition="none" data-icon="custom"><div id="remindpop"  class="remindpop2"></div>我的</a></li>
+          </ul>
+        </div><!-- /navbar -->
+      </div>
+      </div>
+    </div>
+  </body>
+    <script type="text/javascript">
+  function getUrl(){
+    return $('#commonUrl').val();
+  }
+  document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu'); //隐藏分享
+});
+  </script>
+</html>

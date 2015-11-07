@@ -1,0 +1,159 @@
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="../addons/jufeng_wcy/images/common.css">
+<link type="text/css" rel="stylesheet" href="http://cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.css">
+<script type="text/javascript" src="http://cdn.staticfile.org/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.fancybox').fancybox();
+		$('.fancybox-skin').css("padding","0");
+	});
+</script>
+
+<div class="navbar3">
+            <div class="nav2"  style="text-align:center;">
+             <div class="btn-group">
+            {if $category1[0]['enabled'] == "1"}
+   <a class="btn btn-warning disabled" href="">营业中</a>
+   <a class="btn btn-default" href="{php echo $this->createMobileUrl('listctr',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>$_GPC['order'],'page'=>$_GPC['page'],'dianjiactr'=>'1','enabled'=>'0','id'=>$category1[0]['id']))}" onclick="return confirm('确定将店铺转为休息状态吗？'); return false;">转为休息</a>
+   {else}
+   <a class="btn btn-default" href="{php echo $this->createMobileUrl('listctr',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>$_GPC['order'],'page'=>$_GPC['page'],'dianjiactr'=>'1','enabled'=>'1','id'=>$category1[0]['id']))}" onclick="return confirm('确认将店铺转为营业状态吗？'); return false;">转为营业</a>
+   <a class="btn btn-warning disabled" href="">休息中</a>
+            {/if}
+</div>
+            </div>
+</div>
+
+         <div class="menu-button menu-button3">
+		<ul class="list-unstyled">
+			
+			<li><a style="background-color:#F93;color:white;text-align:left; padding:0; padding-left:5px; font-weight:bold; font-size:14px;" class="active" href="#">店家介绍</a></li>
+<div class="menu-pic2">
+					<div class="dianjiadiv">{if $category1[0]['thumb']}<img src="{$_W['attachurl']}{$category1[0]['thumb']}" class="img-rounded dianjialist">
+                    {else}<img src="{$_W['attachurl']}/headimg_{$_W['weid']}.jpg" class="img-rounded dianjialist">
+                    {/if}</div>
+                    <div class="namelist dianjiadiv">{$category1[0]['name']}</div>
+				</div>
+<li class="dianjiali">起送价：{$category1[0]['sendprice']}</li>
+<li class="dianjiali">店家热度：{$category1[0]['total']}</li>
+<li class="dianjiali">店家手机：<br />{$category1[0]['shouji']}</li>
+<li class="dianjiali">店家简介：<br />{$category1[0]['description']}</li>
+<li class="dianjiali">中午送餐时间：<br />{$ptime1}至{$ptime2}</li>
+<li class="dianjiali">下午送餐时间：<br />{$ptime3}至{$ptime4}</li>
+
+		</ul>
+	</div>
+
+	<div class="menu-list menu-list2">
+    <div class="panel panel-default" style="margin-top:10px;margin-bottom:0;padding-bottom:10px;">
+						<div class="panel-heading">
+							<h4 class="panel-title">选择菜系</h4>
+						</div>
+    <a class="btn {if $_GPC['ccate'] == 0}btn-success{else}btn-default{/if}" style="margin: 5px 0 3px 5px;" href="{php echo $this->createMobileUrl('listctr', array('pcate' => $category1[0]['id'],'order' =>$_GPC['order']))}" role="button">全部菜系</a>
+    {loop $category1 $item}
+    {loop $children[$item['id']] $citem}
+    <a class="btn {if $citem['id'] == $_GPC['ccate']}btn-success{else}btn-default{/if}" style="margin: 5px 0 3px 5px;" href="{php echo $this->createMobileUrl('listctr', array('ccate' => $citem['id'],'order' =>$_GPC['order']))}" role="button">{$citem['name']}</a>
+    {/loop}{/loop}
+	</div>
+		<ul class="list-unstyled">
+			{loop $list $item}
+			<li class="shopli">
+				<div class="pull-right">
+{if $item['status'] == "1"}
+                <div>&nbsp;&nbsp;</div>
+					<div class="btn-group">
+   <a class="btn btn-success disabled" href="">上架</a>
+   <a class="btn btn-default" href="{php echo $this->createMobileUrl('listctr',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>$_GPC['order'],'page'=>$_GPC['page'],'foodctr'=>'1','status'=>'0','id'=>$item['id']))}">下架</a>
+</div>
+                    {else}
+                    <div>&nbsp;&nbsp;</div>
+					<div class="btn-group">
+  <a class="btn btn-default" href="{php echo $this->createMobileUrl('listctr',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>$_GPC['order'],'page'=>$_GPC['page'],'foodctr'=>'1','status'=>'1','id'=>$item['id']))}">上架</a>
+  <a class="btn btn-success disabled" href="">下架</a>
+  </div>
+                    {/if}
+  				</div>
+				<div class="pull-left menu-pic">
+                    {if $item['thumb']}<img src="{$_W['attachurl']}{$item['thumb']}" class="img-rounded">
+                    {else}<img src="{$_W['attachurl']}/headimg_{$_W['weid']}.jpg" class="img-rounded">
+                    {/if}
+                    {if $item['ishot'] == 1}<img class="hot" src="../addons/jufeng_wcy/images/hot.png">{/if}
+				</div>
+				<div class="pull-left menu-detail">
+					<span class="title">{$item['title']}</span>
+					<span class="price">
+                   
+                    {if $item['preprice']}<i class="label label-success">优惠</i> {$item['preprice']}元
+                    {if $item['unit']}/{$item['unit']}{/if}
+                    {else}{$item['oriprice']}元
+                    {if $item['unit']}/{$item['unit']}
+                    {/if}
+                    {/if}</span>
+					{if $item['preprice']}<span class="oriprice">{$item['oriprice']}元
+                    {if $item['unit']}/{$item['unit']}
+                    {/if}</span>
+                    {/if}
+					<span class="click">{$item['hits']}人点过</span>
+				</div>
+			</li>
+            <div class="shopfoot"></div>
+			{/loop}
+		</ul>
+		{$pager}
+	</div>
+   
+<div class="navbar1 navbar2 btn-group btn-group-justified">
+     <div class="btn-group btn-group-lg dropup">
+        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{if $_GPC['order'] == 0}默认排序{elseif $_GPC['order'] == 1}按热度{elseif $_GPC['order'] == 2}按优惠{/if}<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li {if $_GPC['order'] == 0} class="active"{/if}><a href="{php echo $this->createMobileUrl('listctr', array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>0))}">默认排序</a></li>
+           <li class="divider"></li>
+          <li {if $_GPC['order'] == 1} class="active"{/if}><a href="{php echo $this->createMobileUrl('listctr', array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>1))}">按热度</a></li>
+           <li class="divider"></li>
+          <li {if $_GPC['order'] == 2} class="active"{/if}><a href="{php echo $this->createMobileUrl('listctr', array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate'],'order' =>2))}">按优惠</a></li>
+        </ul>
+      </div>
+      <div class="btn-group btn-group-lg">
+      <a href="{php echo $this->createMobileUrl('orderctr',array('pcate'=>$_GPC['pcate'],'ccate'=>$_GPC['ccate']))}" class="btn btn-default" role="button"><i class="glyphicon glyphicon-th-list"></i>&nbsp;处理订单</a>
+      </div>
+      <div class="btn-group btn-group-lg">
+      <a href="#" class="btn btn-default shopping-type3" role="button"><i class="icon-star"></i>店家介绍</a>
+      </div>
+    </div>
+<script>
+function menuData(a) {
+	var a = $(a);
+	var e = 0;
+	var b = $('.menu-button li a').parent();
+	a.parent().parent().find('.menu-list-num').each(function(i) {
+		e = parseInt($(this).html()) + e;
+	});
+	if(b.find('.img-circle').html() == '') b.find('.img-circle').html(0);
+	e = 0;
+}
+		$('.pcateimg').html('{$pcatetotal}');
+		$('.priceimg').html('{$pricetotal}');
+$('.menu-button3').css({"display": "none"});
+$('.shopping-type3').click(function() {
+	var a = $(this).attr("switch");
+	if(a == 1) {
+		$('.menu-button3').css({"display": "none"});
+		$('.menu-list').css({"margin-left": "10px"});
+		$(this).attr("switch", 0);
+	} else {
+		$('.menu-button3').css({"display": "block"});
+		$('.menu-button1').css({"display": "none"});
+		$('.shopping-type').attr("switch", 0);
+		$('.shopping-type').find("span").html("菜系");
+		$('.menu-button2').css({"display": "none"});
+		$('.shopping-type2').attr("switch", 0);
+		$('.menu-list').css({"margin-left": "10px"});
+		$(this).attr("switch", 1);
+	}
+	return false;
+});
+
+
+</script>
+{php $footer_off = 1;}
+{template 'footer'}

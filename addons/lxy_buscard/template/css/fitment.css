@@ -1,0 +1,56 @@
+/*模板切换样式*/
+fieldset{margin: 10px;}
+fieldset ul { list-style:none;}
+fieldset li { float:left; margin:5px 25px;}
+fieldset label ,fieldset input[type="radio"] {margin:0px;padding:0;}
+fieldset label{ text-align: center;}
+fieldset .phonebac{    background:url('../img/iphoneoff.png') no-repeat;
+    background-size:200px 370px;
+    width:200px;
+    height:370px;
+}
+
+fieldset label div:hover{    background:url('../img/iphoneon.png') no-repeat;
+    background-size:200px 370px;
+    width:200px;
+    height:370px;
+}
+fieldset .phonebacon{
+       background:url('../img/iphoneon.png') no-repeat;
+    background-size:200px 370px;
+    width:200px;
+    height:370px;
+}
+
+
+fieldset .lab_mar img { width: 163px;
+padding-top: 76px;}
+
+
+
+
+/*web手机端模板切换*/
+.webindex{width:100%;}
+.webindex ul { list-style:none;}
+.webindex li { float:left; margin:5px 5%;}
+.webindex label ,.webindex input[type="radio"] {margin:0px;padding:0;}
+.webindex label{ text-align: center;}
+.webindex .phonebac{    background:url('../img/iphoneoff.png') no-repeat;
+    background-size:110px 215px;
+    width:110px;
+    height:215px;
+}
+
+.webindex label div:hover{    background:url('../img/iphoneon.png') no-repeat;
+  background-size:110px 215px;
+    width:110px;
+    height:215px;
+}
+.webindex .phonebacon{
+    background:url('../img/iphoneon.png') no-repeat;
+    background-size:110px 215px;
+    width:110px;
+    height:215px;
+}
+.webindex .lab_mar img { width: 90px;
+padding-top: 46px;}
